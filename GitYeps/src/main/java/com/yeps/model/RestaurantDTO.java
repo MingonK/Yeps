@@ -9,27 +9,27 @@ public class RestaurantDTO {
 	private String hp3;
 	private int avgprice;
 	private String foodstyle;
-	private String mon;			// �����ð�( oo:oo ~ oo:oo ) / �������� ( close )
+	private String mon;			// 영업시간( oo:oo ~ oo:oo ) / 정기휴일 ( close )
 	private String tue;
 	private String wed;
 	private String thr;
 	private String fri;
 	private String sat;
 	private String sun;
-	private String reststyle;	// �¼�/���̺�/�߿ܼ�
-	private String reserv;		// ���డ�ɿ���
-	private String delivery;	// ��ް��ɿ���
-	private	String takeout;		// ����ũ�ƿ����ɿ���
-	private String parking;		// �����庸������
-	private String kidzone;		// ���̹溸������
-	private String groupreserv;		// ��ü���డ�ɿ���
-	private String noise;		//��������
-	private String alcohol;		// �ַ��Ǹſ���
-	private String waiting;		// ��⼮ ����
-	private String wifi;		// ������������
-	private String toilet;		// ȭ��� ����и�������
-	private String tablecount;	// ���̺� �� ����
-	private String busytime;	// �ٻ۽ð�
+	private String reststyle;	// 좌석/테이블/야외석
+	private String reserv;		// 예약가능여부
+	private String delivery;	// 배달가능여부
+	private	String takeout;		// 테이크아웃가능여부
+	private String parking;		// 주차장보유여부
+	private String kidzone;		// 놀이방보유여부
+	private String groupreserv;		// 단체예약가능여부
+	private String noise;		//소음정도
+	private String alcohol;		// 주류판매여부
+	private String waiting;		// 대기석 유무
+	private String wifi;		// 와이파이유무
+	private String toilet;		// 화장실 남녀분리형인지
+	private String tablecount;	// 테이블 총 갯수
+	private String busytime;	// 바쁜시간
 	public int getRnum() {
 		return rnum;
 	}

@@ -12,6 +12,9 @@
 		<a href="yreview_list">리뷰 목록</a>
 		<a href="member_list">회원 목록</a>
 		<a href="yeps_message">message page</a>
+		<a href="restaurant_insert">레스토랑 등록</a>
+		<a href="restaurant_list">레스토랑 리스트</a>
+		<a href="restaurant_sample">도로명 주소</a>
 	</div>
 </body>
 </html>
