@@ -11,6 +11,7 @@
 		<a href="menu_list">메뉴 목록</a>
 		<a href="yreview_list">리뷰 목록</a>
 		<a href="member_list">회원 목록</a>
+		<a href="yeps_message">message page</a>
 	</div>
 </body>
 </html>
