@@ -10,6 +10,7 @@
 		<a href="category_list">카테고리 목록</a>
 		<a href="menu_list">메뉴 목록</a>
 		<a href="yreview_list">리뷰</a>
+		<a href="member_list">회원 목록</a>
 	</div>
 </body>
 </html>
