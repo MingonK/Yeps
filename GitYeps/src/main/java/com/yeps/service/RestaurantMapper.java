@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.web.model.RestaurantDTO;
+import com.yeps.model.RestaurantDTO;
 
 /**
  * This is not a best practices class.  It's just an example
