@@ -4,19 +4,18 @@
 <%@ include file="../top.jsp"%>
 <html>
 <head>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.js">
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-1.10.2.js">
 	function uncheckAll() {
 		for (i = 0; i < ch.length; i++) {
 			ch[i].checked = false;
 		}
 	}
 
-	function checkAll() {
-		if ($("#th_checkAll").is(':checked')) {
-			$("input[name=checkRow]").prop("checked", true);
-		} else {
-			$("input[name=checkRow]").prop("checked", false);
-		}
+	function deleteCheck() {
+		$("input[name=ch]:checked").each(function() {
+			var test = $(this).val();
+		});
 	}
 </script>
 
@@ -51,15 +50,16 @@ input[id="ipt"] {
 			<table border="1" width="80%" height="70%" align="center">
 				<tr valign="center">
 					<td align="center" rowspan="2">전체선택<br> <input
-						type="checkbox" value="" id="checkAll" onclik="checkAll();">
+						type="checkbox" value="" id="checkAll"
+						onclick="$('[name=table] [type=checkbox]:gt(0)').prop('checked', $(this).is(':checked'));checkOn(this.form);">
 						<input type="checkbox" id="ipt" disabled> <label for="ipt"></label></td>
-					<td align="left" colspan="5">
-					<input type="button" value="전체해제" onclick="uncheckAll();"> 
-					<input type="button" value="선택삭제" onclick="deleteCheck();"> 
-					<input type="button" value="답장" onclick="reply();"> 
-					<input type="button" value="전체답장" onclick="allReply();"> 
-					<input type="button" value="쪽지함" onclick="window.location='yeps_message'"> 
-					<select name="filter">
+					<td align="left" colspan="5"><input type="button" value="전체해제"
+						onclick="uncheckAll();"> <input type="button" value="선택삭제"
+						onclick="deleteCheck();"> <input type="button" value="답장"
+						onclick="reply();"> <input type="button" value="전체답장"
+						onclick="allReply();"> <input type="button" value="쪽지함"
+						onclick="window.location='yeps_message'"> <select
+						name="filter">
 							<option type="button" value="">:: 필터 ::</option>
 							<option value="">모든 쪽지</option>
 							<option value="">안읽은 쪽지</option>

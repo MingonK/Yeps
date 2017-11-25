@@ -10,12 +10,18 @@ public class YepsMessageDBBean {
 	private String content;
 	private String reg_date;
 	private String readDate;
-
-	public int getMsgnum() {
+	
+	public int getMsgNum() {
 		return msgNum;
 	}
-	public void setMsgnum(int msgnum) {
-		this.msgNum = msgnum;
+	public void setMsgNum(int msgNum) {
+		this.msgNum = msgNum;
+	}
+	public int getmNum() {
+		return mNum;
+	}
+	public void setmNum(int mNum) {
+		this.mNum = mNum;
 	}
 	public String getTitle() {
 		return title;
@@ -23,11 +29,17 @@ public class YepsMessageDBBean {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getreceiver() {
+	public String getReceiver() {
 		return receiver;
 	}
-	public void setreceiver(String receiver) {
+	public void setReceiver(String receiver) {
 		this.receiver = receiver;
+	}
+	public String getSender() {
+		return sender;
+	}
+	public void setSender(String sender) {
+		this.sender = sender;
 	}
 	public String getContent() {
 		return content;
@@ -41,6 +53,15 @@ public class YepsMessageDBBean {
 	public void setReg_date(String reg_date) {
 		this.reg_date = reg_date;
 	}
+	public String getReadDate() {
+		return readDate;
+	}
+	public void setReadDate(String readDate) {
+		this.readDate = readDate;
+	}
+	
+	
+
 
 
 }
