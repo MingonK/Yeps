@@ -10,7 +10,7 @@
 		<a href="category_list">카테고리 목록</a>
 		<a href="menu_list">메뉴 목록</a>
 		<a href="yreview_list">리뷰 목록</a>
-		<a href="member_list">회원 목록</a>
+		<a href="member_index">회원 관리</a>
 		<a href="yeps_message">message page</a>
 		<a href="restaurant_insert">레스토랑 등록</a>
 		<a href="restaurant_list">레스토랑 리스트</a>
