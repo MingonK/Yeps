@@ -2,58 +2,25 @@ package com.yeps.model;
 
 public class MemberDTO {
 	private int mnum;
-	private String name;
+	private String name;	
 	private String email;
 	private String passwd;
 	private String birth;
-	private int reviewCount;
-	private int imageCount;
-	private String isManager;
-	private String controlCate;
-	private String controlEvent;
-	private String controlMember;
-	private String controlRestaurant;
-	private String controlReview;
-	
+	private String joindate;
+	private int reviewcount;
+	private int imagecount;
+	private String ismanager;
+	private String controlcate;
+	private String controlevent;
+	private String controlmember;
+	private String controlstore;
+	private String controlreview;
 	
 	public int getMnum() {
 		return mnum;
 	}
-	public String getIsManager() {
-		return isManager;
-	}
-	public void setIsManager(String isManager) {
-		this.isManager = isManager;
-	}
-	public String getControlCate() {
-		return controlCate;
-	}
-	public String getControlEvent() {
-		return controlEvent;
-	}
-	public String getControlMember() {
-		return controlMember;
-	}
-	public String getControlRestaurant() {
-		return controlRestaurant;
-	}
-	public String getControlReview() {
-		return controlReview;
-	}
 	public void setMnum(int mnum) {
 		this.mnum = mnum;
-	}
-	public int getReviewCount() {
-		return reviewCount;
-	}
-	public void setReviewCount(int reviewCount) {
-		this.reviewCount = reviewCount;
-	}
-	public int getImageCount() {
-		return imageCount;
-	}
-	public void setImageCount(int imageCount) {
-		this.imageCount = imageCount;
 	}
 	public String getName() {
 		return name;
@@ -79,42 +46,61 @@ public class MemberDTO {
 	public void setBirth(String birth) {
 		this.birth = birth;
 	}
-	public String isManager() {
-		return isManager;
+	public String getJoindate() {
+		return joindate;
 	}
-	public void setManager(String isManager) {
-		this.isManager = isManager;
+	public void setJoindate(String joindate) {
+		this.joindate = joindate;
 	}
-	public String isControlCate() {
-		return controlCate;
+	public int getReviewcount() {
+		return reviewcount;
 	}
-	public void setControlCate(String controlCate) {
-		this.controlCate = controlCate;
+	public void setReviewcount(int reviewcount) {
+		this.reviewcount = reviewcount;
 	}
-	public String isControlEvent() {
-		return controlEvent;
+	public int getImagecount() {
+		return imagecount;
 	}
-	public void setControlEvent(String controlEvent) {
-		this.controlEvent = controlEvent;
+	public void setImagecount(int imagecount) {
+		this.imagecount = imagecount;
 	}
-	public String isControlMember() {
-		return controlMember;
+	public String getIsmanager() {
+		return ismanager;
 	}
-	public void setControlMember(String controlMember) {
-		this.controlMember = controlMember;
+	public void setIsmanager(String ismanager) {
+		this.ismanager = ismanager;
 	}
-	public String isControlRestaurant() {
-		return controlRestaurant;
+	public String getControlcate() {
+		return controlcate;
 	}
-	public void setControlRestaurant(String controlRestaurant) {
-		this.controlRestaurant = controlRestaurant;
+	public void setControlcate(String controlcate) {
+		this.controlcate = controlcate;
 	}
-	public String isControlReview() {
-		return controlReview;
+	public String getControlevent() {
+		return controlevent;
 	}
-	public void setControlReview(String controlReview) {
-		this.controlReview = controlReview;
+	public void setControlevent(String controlevent) {
+		this.controlevent = controlevent;
 	}
+	public String getControlmember() {
+		return controlmember;
+	}
+	public void setControlmember(String controlmember) {
+		this.controlmember = controlmember;
+	}
+	public String getControlstore() {
+		return controlstore;
+	}
+	public void setControlstore(String controlstore) {
+		this.controlstore = controlstore;
+	}
+	public String getControlreview() {
+		return controlreview;
+	}
+	public void setControlreview(String controlreview) {
+		this.controlreview = controlreview;
+	}
+	
 	
 	
 }
