@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="../top.jsp"%>
 
@@ -16,20 +16,20 @@
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-1.10.2.js">
     /* function sel_open(e){ 
-	¡¡  $("#s_menu option").each(function(){ 
-	¡¡¡¡if(e==$(this).val()) $(this).attr("selected",true); 
-	     ¡¡}); 
+	ã€€  $("#s_menu option").each(function(){ 
+	ã€€ã€€if(e==$(this).val()) $(this).attr("selected",true); 
+	     ã€€}); 
 	  } */
 
 	
-   //Ã¼Å©¹Ú½º ´©¸¦½Ã ¹öÆ° È°¼ºÈ­ , ºñÈ°¼ºÈ­ ±â´É ±¸ÇöÇÏ·Á ÇßÀ¸³ª ÇöÀç Àû¿ë¾ÈµÊ
+   //ì²´í¬ë°•ìŠ¤ ëˆ„ë¥¼ì‹œ ë²„íŠ¼ í™œì„±í™” , ë¹„í™œì„±í™” ê¸°ëŠ¥ êµ¬í˜„í•˜ë ¤ í–ˆìœ¼ë‚˜ í˜„ìž¬ ì ìš©ì•ˆë¨
 	function checkOn(form) {
 		if (form.Button.disabled == true)
 			form.Button.disabled = false
 		else
 			form.Button.disabled = true
 	}
-	//¼±ÅÃ»èÁ¦ ¹öÆ° ´©¸¦½Ã Ã¼Å©µÈ °ª °¡Á®¿À´Â ±â´É ±¸ÇöÁß..¾ÆÁ÷ ¹Ì ±¸Çö..
+	//ì„ íƒì‚­ì œ ë²„íŠ¼ ëˆ„ë¥¼ì‹œ ì²´í¬ëœ ê°’ ê°€ì ¸ì˜¤ëŠ” ê¸°ëŠ¥ êµ¬í˜„ì¤‘..ì•„ì§ ë¯¸ êµ¬í˜„..
 	function deleteCheck() {
 		$("input[name=]:checked").each(function() {
 			var test = $(this).val();
@@ -44,67 +44,67 @@
 		<caption>
 			<c:choose>
 				<c:when test="${mode eq 'send'}">
-					<h2>º¸³½ ÂÊÁöÇÔ</h2>
+					<h2>ë³´ë‚¸ ìª½ì§€í•¨</h2>
 				</c:when>
 				<c:when test="${mode eq 'receive'}">
-					<h2>¹ÞÀº ÂÊÁöÇÔ</h2>
+					<h2>ë°›ì€ ìª½ì§€í•¨</h2>
 				</c:when>
 			</c:choose>
 		</caption>
 		<hr color="green" width="70%">
-		<!-- ¼¿·ºÆ®¹Ú½º ±â´É ±¸Çö½Ã ¾Æ·¡ ¼¼ °³ÀÇ ¹öÆ°Àº »ç¶óÁý´Ï´Ù. -->
+		<!-- ì…€ë ‰íŠ¸ë°•ìŠ¤ ê¸°ëŠ¥ êµ¬í˜„ì‹œ ì•„ëž˜ ì„¸ ê°œì˜ ë²„íŠ¼ì€ ì‚¬ë¼ì§‘ë‹ˆë‹¤. -->
 		<tr align="left">
-			<td align="left"><input type="button" name="send" value="º¸³½ ÂÊÁöÇÔ"
+			<td align="left"><input type="button" name="send" value="ë³´ë‚¸ ìª½ì§€í•¨"
 				onclick="window.location='message_send?mode=send'"> <input
-				type="button" name="receive" value="¹ÞÀº ÂÊÁöÇÔ"
+				type="button" name="receive" value="ë°›ì€ ìª½ì§€í•¨"
 				onclick="window.location='message_receive?mode=receive'"> <input
-				type="button" name="" value="º¸°üÇÔ"
+				type="button" name="" value="ë³´ê´€í•¨"
 				onclick="window.location='message_locker'"> <br></td>
 		</tr>
 		<br>
 		<form name="form">
 			<table border="1" width="80%" align="center" name="table">
 				<tr valign="center">
-					<td align="center" rowspan="2"><label>ÀüÃ¼¼±ÅÃ</label><br> <input
+					<td align="center" rowspan="2"><label>ì „ì²´ì„ íƒ</label><br> <input
 						type="checkbox"
 						onclick="$('[name=table] [type=checkbox]:gt(0)').prop('checked', $(this).is(':checked'));checkOn(this.form);">
 						<input type="checkbox" id="ipt"> <label for="ipt"></label></td>
 					<td align="left" colspan="5"><input type="button" name="del"
-						value="¼±ÅÃ»èÁ¦" onclick="window.location=message_delete"> <input
-						type="button" name="button" value="´äÀå"
+						value="ì„ íƒì‚­ì œ" onclick="window.location=message_delete"> <input
+						type="button" name="button" value="ë‹µìž¥"
 						onclick="window.location='message_reply'"> <input
-						type="button" name="button" value="ÂÊÁö¾²±â"
+						type="button" name="button" value="ìª½ì§€ì“°ê¸°"
 						onclick="window.location='message_sendForm'"> <input
-						type="button" name="button" value="ÀüÃ¼´äÀå"
+						type="button" name="button" value="ì „ì²´ë‹µìž¥"
 						onclick="window.location='message_allReply'"> <select
 						name="filter">
-							<option value="">:: ÇÊÅÍ ::</option>
-							<option value="allMsg">¸ðµç ÂÊÁö</option>
-							<option value="noneMsg">¾ÈÀÐÀº ÂÊÁö</option>
-							<option value="impMsg">Áß¿ä ÂÊÁö</option>
-						</select><input type="button" name="button" value="°Ë»ö"
+							<option value="">:: í•„í„° ::</option>
+							<option value="allMsg">ëª¨ë“  ìª½ì§€</option>
+							<option value="noneMsg">ì•ˆì½ì€ ìª½ì§€</option>
+							<option value="impMsg">ì¤‘ìš” ìª½ì§€</option>
+						</select><input type="button" name="button" value="ê²€ìƒ‰"
 						onclick="searching();"> <select name="messageBox">
-						    <option value="">::ÇÊÅÍ::</option>
-							<option value="">º¸°üÇÔ</option>
-							<option value="">¹ÞÀº ÂÊÁöÇÔ</option>
-							<option value="">º¸³½ ÂÊÁöÇÔ</option>
-					</select><input type="button" value="ÀÌµ¿" onclick="move();"></td>
+						    <option value="">::í•„í„°::</option>
+							<option value="">ë³´ê´€í•¨</option>
+							<option value="">ë°›ì€ ìª½ì§€í•¨</option>
+							<option value="">ë³´ë‚¸ ìª½ì§€í•¨</option>
+					</select><input type="button" value="ì´ë™" onclick="move();"></td>
 				</tr>
 				<tr>
-					<th bgcolor="green" width="10%"><label>¹øÈ£</label></th>
-					<th bgcolor="green" width="10%"><label>º¸³½ÀÌ</label></th>
-					<th bgcolor="green" width="40%"><label>Á¦¸ñ</label></th>
-					<th bgcolor="green" width="20%"><label>¹ÞÀº½Ã°¢</label></th>
-					<th bgcolor="green" width="10%"><label>ÆÄÀÏ</label></th>
+					<th bgcolor="green" width="10%"><label>ë²ˆí˜¸</label></th>
+					<th bgcolor="green" width="10%"><label>ë³´ë‚¸ì´</label></th>
+					<th bgcolor="green" width="40%"><label>ì œëª©</label></th>
+					<th bgcolor="green" width="20%"><label>ë°›ì€ì‹œê°</label></th>
+					<th bgcolor="green" width="10%"><label>íŒŒì¼</label></th>
 				</tr>
 				<c:if test="${empty messageList}">
 					<tr>
 						<c:choose>
 							<c:when test="${mode eq 'send'}">
-								<td colspan="6" align="center">º¸³½ ÂÊÁöÇÔÀÌ ºñ¾ú½À´Ï´Ù.</td>
+								<td colspan="6" align="center">ë³´ë‚¸ ìª½ì§€í•¨ì´ ë¹„ì—ˆìŠµë‹ˆë‹¤.</td>
 							</c:when>
 							<c:when test="${mode eq 'receive'}">
-								<td colspan="6" align="center">¹ÞÀº ÂÊÁöÇÔÀÌ ºñ¾ú½À´Ï´Ù.</td>
+								<td colspan="6" align="center">ë°›ì€ ìª½ì§€í•¨ì´ ë¹„ì—ˆìŠµë‹ˆë‹¤.</td>
 							</c:when>
 						</c:choose>
 
@@ -118,12 +118,12 @@
 						<td>${dto.msgNum}</td>
 						<td><a href="sel_open();"><label>${dto.sender}</label></a></td>
 						<!-- <select id="s_menu">
-						<option value="1">¸ÞÀÏ¾²±â</option>
-						<option value="2">ÁÖ¼Ò·Ï¿¡ Ãß°¡</option>
-						<option value="3">º¸°üÇÔÀ¸·Î ÀÌµ¿</option>
-						<option value="4">º¸³½ »ç¶÷À¸·Î °Ë»ö</option>
-						<option value="5">¹ÞÀº »ç¶÷À¸·Î °Ë»ö</option>
-						<option value="6">ÀÌ »ç¶÷ÀÌ º¸³½ ¸ÞÀÏ ¸ðµÎ °Ë»ö</option>
+						<option value="1">ë©”ì¼ì“°ê¸°</option>
+						<option value="2">ì£¼ì†Œë¡ì— ì¶”ê°€</option>
+						<option value="3">ë³´ê´€í•¨ìœ¼ë¡œ ì´ë™</option>
+						<option value="4">ë³´ë‚¸ ì‚¬ëžŒìœ¼ë¡œ ê²€ìƒ‰</option>
+						<option value="5">ë°›ì€ ì‚¬ëžŒìœ¼ë¡œ ê²€ìƒ‰</option>
+						<option value="6">ì´ ì‚¬ëžŒì´ ë³´ë‚¸ ë©”ì¼ ëª¨ë‘ ê²€ìƒ‰</option>
 						</select> -->
 						<td><a href="message_content?msgNum=${dto.msgNum}"><label>${dto.title}</label></a></td>
 						<td><label>${dto.reg_date}</label></td>

@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <div align="center">
-	<h3>©╘╠Б╢б topют╢о╢ы.</h3>
+	<h3>Л≈╛Й╦╟К┼■ topЛ·┘К▀┬К▀╓.</h3>
 	<table border="1" width="70%" align="center"> 
 		<tr>
-			<td width="30%" align="center"><a href="yeps_home"> цЁю╫ю╦╥н </a></td>
+			<td width="30%" align="center"><a href="yeps_home"> Л╡≤Л²▄Л°╪К║° </a></td>
 			<td width="30%" align="center"><a href="yeps_message"> message </a></td>
 			<td width="30%" align="center"><a href="yeps_event"> event </a></td>
 		</tr>

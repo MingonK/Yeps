@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="../top.jsp"%>
 <html>
@@ -12,18 +12,18 @@
 		<br>
 		<table border="1" width="70%" align="center">
 			<tr>
-				<th bgcolor="green" width="20%">º¸³½ÀÌ</th>
+				<th bgcolor="green" width="20%">ë³´ë‚¸ì´</th>
 				<td>${getContent.sender}</td>
-				<th bgcolor="green" width="20%">¹ŞÀº½Ã°¢</th>
+				<th bgcolor="green" width="20%">ë°›ì€ì‹œê°</th>
 				<td>${getContent.reg_date}</td>
 			<tr align="center">
-				<th bgcolor="green" colspan="4">Á¦¸ñ</th>
+				<th bgcolor="green" colspan="4">ì œëª©</th>
 			</tr>
 			<tr>
 				<td colspan="4" align="center">${getContent.title}</td>
 			</tr>
 			<tr align="center">
-				<th bgcolor="green" colspan="4">³»¿ë</th>
+				<th bgcolor="green" colspan="4">ë‚´ìš©</th>
 			</tr>
 			<tr>
 				<td height="40%" colspan="4" align="center"><textarea
@@ -31,15 +31,15 @@
 			</tr>
 			<tr>
 				<td colspan="4" align="center"><input type="button"
-					name="reply" value="´äÀå" onclick="window.location='message_reply?msgNum=${getContent.msgNum}'">
-					<input type="button" name="delete" value="»èÁ¦"
+					name="reply" value="ë‹µì¥" onclick="window.location='message_reply?msgNum=${getContent.msgNum}'">
+					<input type="button" name="delete" value="ì‚­ì œ"
 					onclick="window.location='message_delete'"> <input
-					type="button" value="ÂÊÁöÇÔ" onclick="window.location='yeps_message'">
+					type="button" value="ìª½ì§€í•¨" onclick="window.location='yeps_message'">
 				</td>
 			</tr>
 
 
-			<h2>¿©±â´Â ¸Ş½ÃÁöº¸±â ÀÔ´Ï´Ù.!!</h2>
+			<h2>ì—¬ê¸°ëŠ” ë©”ì‹œì§€ë³´ê¸° ì…ë‹ˆë‹¤.!!</h2>
 		</table>
 
 	</div>

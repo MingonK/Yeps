@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="../top.jsp"%>
 <html>
@@ -11,7 +11,7 @@
 			ch[i].checked = false;
 		}
 	}
-//¼±ÅÃµÈ Ã¼Å©¹Ú½ºÀÇ °ªÀ» °¡Á®¿Â ÈÄ ...
+//ì„ íƒëœ ì²´í¬ë°•ìŠ¤ì˜ ê°’ì„ ê°€ì ¸ì˜¨ í›„ ...
 	function deleteCheck() {
 		$("input[name=ch]:checked").each(function() {
 			var test = $(this).val();
@@ -54,54 +54,54 @@ input[id="ipt"] {
 
 		<hr color="green" width="70%">
 		<caption>
-			<h2>ÂÊÁö º¸°üÇÔ</h2>
+			<h2>ìª½ì§€ ë³´ê´€í•¨</h2>
 		</caption>
 		<hr color="green" width="70%">
-		<!-- ¼¿·ºÆ®¹Ú½º ±â´É ±¸Çö½Ã ¾Æ·¡ ¼¼ °³ÀÇ ¹öÆ°Àº »ç¶óÁý´Ï´Ù. -->
+		<!-- ì…€ë ‰íŠ¸ë°•ìŠ¤ ê¸°ëŠ¥ êµ¬í˜„ì‹œ ì•„ëž˜ ì„¸ ê°œì˜ ë²„íŠ¼ì€ ì‚¬ë¼ì§‘ë‹ˆë‹¤. -->
 		<tr>
-			<td align="left"><input type="button" name="send" value="º¸³½ ÂÊÁöÇÔ"
+			<td align="left"><input type="button" name="send" value="ë³´ë‚¸ ìª½ì§€í•¨"
 				onclick="window.location='message_send?mode=send'"> <input
-				type="button" name="receive" value="¹ÞÀº ÂÊÁöÇÔ"
+				type="button" name="receive" value="ë°›ì€ ìª½ì§€í•¨"
 				onclick="window.location='message_receive?mode=receive'"> <input
-				type="button" value="ÂÊÁöÇÔ" onclick="window.location='yeps_message'">
+				type="button" value="ìª½ì§€í•¨" onclick="window.location='yeps_message'">
 				<br></td>
 		</tr>
 		<br>
 		<table border="1" width="80%" align="center">
 			<tr valign="center">
-				<td align="center" rowspan="2">ÀüÃ¼¼±ÅÃ<br> <input
+				<td align="center" rowspan="2">ì „ì²´ì„ íƒ<br> <input
 					type="checkbox" value="" id="checkAll"
 					onclick="$('[name=table] [type=checkbox]:gt(0)').prop('checked', $(this).is(':checked'));checkOn(this.form);">
 					<input type="checkbox" id="ipt" disabled> <label for="ipt"></label></td>
-				<td align="left" colspan="5"><input type="button" value="ÀüÃ¼ÇØÁ¦"
-					onclick="uncheckAll();"> <input type="button" value="¼±ÅÃ»èÁ¦"
-					onclick="deleteCheck();"> <input type="button" value="´äÀå"
+				<td align="left" colspan="5"><input type="button" value="ì „ì²´í•´ì œ"
+					onclick="uncheckAll();"> <input type="button" value="ì„ íƒì‚­ì œ"
+					onclick="deleteCheck();"> <input type="button" value="ë‹µìž¥"
 					onclick="window.location='message_reply'"> <input
-					type="button" value="ÀüÃ¼´äÀå" onclick="allReply();"> <select
+					type="button" value="ì „ì²´ë‹µìž¥" onclick="allReply();"> <select
 					name="filter" id="message" onchange="javascript:Onfunction select();">
-						<option value="0">:: ÇÊÅÍ ::</option>
-						<option value="1">¸ðµç ÂÊÁö</option>
-						<option value="2">¾ÈÀÐÀº ÂÊÁö</option>
-						<option value="3">Áß¿ä ÂÊÁö</option>
-				</select><input type="button" name="button" value="ÀÌµ¿"
+						<option value="0">:: í•„í„° ::</option>
+						<option value="1">ëª¨ë“  ìª½ì§€</option>
+						<option value="2">ì•ˆì½ì€ ìª½ì§€</option>
+						<option value="3">ì¤‘ìš” ìª½ì§€</option>
+				</select><input type="button" name="button" value="ì´ë™"
 					onclick="select();'"><select name="messageBox" id="box" onchange="move();">
-						<option value="0">::ÇÊÅÍ::</option>
-						<option value="1">ÂÊÁöÇÔ</option>
-						<option value="2">¹ÞÀº ÂÊÁöÇÔ</option>
-						<option value="3">º¸³½ ÂÊÁöÇÔ</option>
-				</select><input type="button" value="ÀÌµ¿" onclick="move();"></td>
+						<option value="0">::í•„í„°::</option>
+						<option value="1">ìª½ì§€í•¨</option>
+						<option value="2">ë°›ì€ ìª½ì§€í•¨</option>
+						<option value="3">ë³´ë‚¸ ìª½ì§€í•¨</option>
+				</select><input type="button" value="ì´ë™" onclick="move();"></td>
 
 			</tr>
 			<tr>
-				<th bgcolor="green" width="10%"><label>¹øÈ£</label></th>
-				<th bgcolor="green" width="10%"><label>º¸³½ÀÌ</label></th>
-				<th bgcolor="green" width="40%"><label>Á¦¸ñ</label></th>
-				<th bgcolor="green" width="20%"><label>¹ÞÀº½Ã°¢</label></th>
-				<th bgcolor="green" width="10%"><label>ÆÄÀÏ</label></th>
+				<th bgcolor="green" width="10%"><label>ë²ˆí˜¸</label></th>
+				<th bgcolor="green" width="10%"><label>ë³´ë‚¸ì´</label></th>
+				<th bgcolor="green" width="40%"><label>ì œëª©</label></th>
+				<th bgcolor="green" width="20%"><label>ë°›ì€ì‹œê°</label></th>
+				<th bgcolor="green" width="10%"><label>íŒŒì¼</label></th>
 			</tr>
 			<c:if test="${empty messageList}">
 				<tr>
-					<td colspan="6" align="center">º¸°üÇÔÀÌ ºñ¾ú½À´Ï´Ù.</td>
+					<td colspan="6" align="center">ë³´ê´€í•¨ì´ ë¹„ì—ˆìŠµë‹ˆë‹¤.</td>
 				</tr>
 			</c:if>
 			<c:forEach var="dto" items="${messageList}">
