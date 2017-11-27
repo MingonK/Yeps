@@ -30,6 +30,10 @@ public class YepsMessageMapper {
 		return sqlSession.selectList("messageList");
 	}
 	
+	public List<YepsMessageDBBean> sendList(String sender){
+		return sqlSession.selectList("sendList");
+	}
+	
 
 	
 }

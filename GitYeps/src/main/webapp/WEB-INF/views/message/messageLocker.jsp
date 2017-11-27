@@ -11,12 +11,22 @@
 			ch[i].checked = false;
 		}
 	}
-
+//선택된 체크박스의 값을 가져온 후 ...
 	function deleteCheck() {
 		$("input[name=ch]:checked").each(function() {
 			var test = $(this).val();
 		});
 	}
+	function select() {
+		 var value = $("#message option:selected").val();
+		alert("value");
+
+	}
+	
+    function move(){
+		  var value = $("#box option:selected").val(); 
+		    alert('value');
+	} 
 </script>
 
 <title>Message Locker</title>
@@ -41,12 +51,23 @@ input[id="ipt"] {
 </head>
 <body>
 	<div align="center">
+
 		<hr color="green" width="70%">
 		<caption>
 			<h2>쪽지 보관함</h2>
 		</caption>
 		<hr color="green" width="70%">
-		<table border="1" width="80%" height="70%" align="center">
+		<!-- 셀렉트박스 기능 구현시 아래 세 개의 버튼은 사라집니다. -->
+		<tr>
+			<td align="left"><input type="button" name="send" value="보낸 쪽지함"
+				onclick="window.location='message_send?mode=send'"> <input
+				type="button" name="receive" value="받은 쪽지함"
+				onclick="window.location='message_receive?mode=receive'"> <input
+				type="button" value="쪽지함" onclick="window.location='yeps_message'">
+				<br></td>
+		</tr>
+		<br>
+		<table border="1" width="80%" align="center">
 			<tr valign="center">
 				<td align="center" rowspan="2">전체선택<br> <input
 					type="checkbox" value="" id="checkAll"
@@ -55,68 +76,46 @@ input[id="ipt"] {
 				<td align="left" colspan="5"><input type="button" value="전체해제"
 					onclick="uncheckAll();"> <input type="button" value="선택삭제"
 					onclick="deleteCheck();"> <input type="button" value="답장"
-					onclick="reply();"> <input type="button" value="전체답장"
-					onclick="allReply();"> <input type="button" value="쪽지함"
-					onclick="window.location='yeps_message'"> <select
-					name="filter">
-						<option type="button" value="">:: 필터 ::</option>
-						<option value="">모든 쪽지</option>
-						<option value="">안읽은 쪽지</option>
-						<option value="">중요 쪽지</option>
-				</select></td>
+					onclick="window.location='message_reply'"> <input
+					type="button" value="전체답장" onclick="allReply();"> <select
+					name="filter" id="message" onchange="javascript:Onfunction select();">
+						<option value="0">:: 필터 ::</option>
+						<option value="1">모든 쪽지</option>
+						<option value="2">안읽은 쪽지</option>
+						<option value="3">중요 쪽지</option>
+				</select><input type="button" name="button" value="이동"
+					onclick="select();'"><select name="messageBox" id="box" onchange="move();">
+						<option value="0">::필터::</option>
+						<option value="1">쪽지함</option>
+						<option value="2">받은 쪽지함</option>
+						<option value="3">보낸 쪽지함</option>
+				</select><input type="button" value="이동" onclick="move();"></td>
+
 			</tr>
 			<tr>
-				<th width="10%">번호</th>
-				<th width="10%">보낸이</th>
-				<th width="40%">제목</th>
-				<th width="20%">받은시각</th>
-				<th width="10%">파일</th>
+				<th bgcolor="green" width="10%"><label>번호</label></th>
+				<th bgcolor="green" width="10%"><label>보낸이</label></th>
+				<th bgcolor="green" width="40%"><label>제목</label></th>
+				<th bgcolor="green" width="20%"><label>받은시각</label></th>
+				<th bgcolor="green" width="10%"><label>파일</label></th>
 			</tr>
-			<tr align="center">
-				<td><input type="checkbox" name="ch"> <input
-					type="checkbox" id="ipt"><label for="ipt"></label></td>
-				<td>1</td>
-				<td><a href="javascript:onfunction">sender</a></td>
-				<td><a href="message_content">subject</a></td>
-				<td>reg_time</td>
-				<td><img src="../img/folder.gif"></td>
-			</tr>
-			<tr align="center">
-				<td><input type="checkbox" name="ch"> <input
-					type="checkbox" id="ipt"> <label for="ipt"></label></td>
-				<td>2</td>
-				<td>sender</td>
-				<td>subject</td>
-				<td>reg_time</td>
-				<td>file</td>
-			</tr>
-			<tr align="center">
-				<td><input type="checkbox" name="ch"> <input
-					type="checkbox" id="ipt"> <label for="ipt"></label></td>
-				<td>3</td>
-				<td>sender</td>
-				<td>subject</td>
-				<td>reg_time</td>
-				<td>file</td>
-			</tr>
-			<tr align="center">
-				<td><input type="checkbox" name="ch"> <input
-					type="checkbox" id="ipt"> <label for="ipt"></label></td>
-				<td>4</td>
-				<td>sender</td>
-				<td>subject</td>
-				<td>reg_time</td>
-				<td>file</td>
-			</tr>
-			<tr align="center">
-				<td><input type="checkbox" name="ch"> <input
-					type="checkbox" id="ipt"> <label for="ipt"></label></td>
-				<td>5</td>
-				<td>sender</td>
-				<td>subject</td>
-				<td>reg_time</td>
-				<td>file</td>
-			</tr>
+			<c:if test="${empty messageList}">
+				<tr>
+					<td colspan="6" align="center">보관함이 비었습니다.</td>
+				</tr>
+			</c:if>
+			<c:forEach var="dto" items="${messageList}">
+				<tr align="center">
+					<td><input type="checkbox" name="ch" value="${dto.msgNum}"
+						id="${dto.msgNum}"> <input type="checkbox" id="ipt">
+						<label for="ipt"></label></td>
+					<td>${dto.msgNum}</td>
+					<td><a href="javascript:onfunction"><label>${dto.sender}</label></a></td>
+					<td><a href="message_content?msgNum=${dto.msgNum}"><label>${dto.title }</label></a></td>
+					<td><label>${dto.reg_date}</label></td>
+					<td><label><img src="../img/folder.gif"></label></td>
+				</tr>
+			</c:forEach>
 		</table>
 		<%@ include file="../bottom.jsp"%>
 	</div>

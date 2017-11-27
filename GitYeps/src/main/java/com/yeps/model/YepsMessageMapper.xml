@@ -21,6 +21,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="messageList" resultType="YepsMessageDBBean">
 		select * from yeps_message
 	</select>
+
+	<select id="sendList" resultType="YepsMessageDBBean">
+		select * from yeps_message where sender=#{sender}
+	</select>
 </mapper>
 
 
