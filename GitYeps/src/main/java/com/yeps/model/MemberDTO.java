@@ -9,12 +9,14 @@ public class MemberDTO {
 	private String joindate;
 	private int reviewcount;
 	private int imagecount;
+	private String ismaster;
 	private String ismanager;
 	private String controlcate;
 	private String controlevent;
 	private String controlmember;
 	private String controlstore;
 	private String controlreview;
+	private String salt;
 	
 	public int getMnum() {
 		return mnum;
@@ -64,6 +66,12 @@ public class MemberDTO {
 	public void setImagecount(int imagecount) {
 		this.imagecount = imagecount;
 	}
+	public String getIsmaster() {
+		return ismaster;
+	}
+	public void setIsmaster(String ismaster) {
+		this.ismaster = ismaster;
+	}
 	public String getIsmanager() {
 		return ismanager;
 	}
@@ -99,6 +107,12 @@ public class MemberDTO {
 	}
 	public void setControlreview(String controlreview) {
 		this.controlreview = controlreview;
+	}
+	public String getSalt() {
+		return salt;
+	}
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 	
 	

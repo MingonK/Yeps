@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
@@ -10,34 +10,35 @@
    		
 	function checkPw(){
 		if(join.passwd.value == join.passwd2.value){
-			join.result.value="ÀÏÄ¡ÇÕ´Ï´Ù"
+			join.result.value="ì¼ì¹˜í•©ë‹ˆë‹¤"
 		}else{
-			join.result.value="ÀÏÄ¡ÇÏÁö¾Ê½À´Ï´Ù"
+			join.result.value="ì¼ì¹˜í•˜ì§€ì•ŠìŠµë‹ˆë‹¤"
 		}
 	}
 	
 	function change_email(){
-	if(join.email3.options[join.email3.selectedIndex].value == '0'){
-		join.email2.readOnly = false;
-		join.email2.value = "";
-		join.email2.focus();
-	} else{
-		join.email2.readOnly = true;
-		join.email2.value = document.join.email3.options[join.email3.selectedIndex].value;
+		if(join.email3.options[join.email3.selectedIndex].value == '0'){
+			join.email2.readOnly = false;
+			join.email2.value = "";
+			join.email2.focus();
+		} else{
+			join.email2.readOnly = true;
+			join.email2.value = document.join.email3.options[join.email3.selectedIndex].value;
 		}
+		inputEmailChk();
 	}
 	
 	function openConfirmEmail(inputEmail){
 		if(join.email1.value=="" || join.email2.value==""){
- 			alert("ÀÌ¸ŞÀÏÁÖ¼Ò¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä")
+ 			alert("ì´ë©”ì¼ì£¼ì†Œë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”")
  			join.email1.focus()
  			return
  		}
 		var email = join.email1.value+"@"+join.email2.value;
 		var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 		if(exptext.test(email)==false){
-			//ÀÌ¸ŞÀÏ Çü½ÄÀÌ ¾ËÆÄºª+¼ıÀÚ@¾ËÆÄºª+¼ıÀÚ.¾ËÆÄºª+¼ıÀÚ Çü½ÄÀÌ ¾Æ´Ò°æ¿ì			
-			alert("ÀÌ¸ŞÀÏÇü½ÄÀÌ ¿Ã¹Ù¸£Áö ¾Ê½À´Ï´Ù.");
+			//ì´ë©”ì¼ í˜•ì‹ì´ ì•ŒíŒŒë²³+ìˆ«ì@ì•ŒíŒŒë²³+ìˆ«ì.ì•ŒíŒŒë²³+ìˆ«ì í˜•ì‹ì´ ì•„ë‹ê²½ìš°			
+			alert("ì´ë©”ì¼í˜•ì‹ì´ ì˜¬ë°”ë¥´ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 			document.join.email2.focus();
 			return
 		}
@@ -53,44 +54,44 @@
    	 function check(){
    			
    			if(join.name.value==""){
-	 			alert("ÀÌ¸§À» ÀÔ·ÂÇØÁÖ¼¼¿ä")
+	 			alert("ì´ë¦„ì„ ì…ë ¥í•´ì£¼ì„¸ìš”")
 	 			join.name.focus()
 	 			return
 	 		}
    			if(join.email1.value=="" || join.email2.value==""){
-	 			alert("ÀÌ¸ŞÀÏÁÖ¼Ò¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä")
+	 			alert("ì´ë©”ì¼ì£¼ì†Œë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”")
 	 			join.email1.focus()
 	 			return
 	 		}
    			var email = join.email1.value+"@"+join.email2.value;
    			var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
    			if(exptext.test(email)==false){
-   				//ÀÌ¸ŞÀÏ Çü½ÄÀÌ ¾ËÆÄºª+¼ıÀÚ@¾ËÆÄºª+¼ıÀÚ.¾ËÆÄºª+¼ıÀÚ Çü½ÄÀÌ ¾Æ´Ò°æ¿ì			
-   				alert("ÀÌ¸ŞÀÏÇü½ÄÀÌ ¿Ã¹Ù¸£Áö ¾Ê½À´Ï´Ù.");
+   				//ì´ë©”ì¼ í˜•ì‹ì´ ì•ŒíŒŒë²³+ìˆ«ì@ì•ŒíŒŒë²³+ìˆ«ì.ì•ŒíŒŒë²³+ìˆ«ì í˜•ì‹ì´ ì•„ë‹ê²½ìš°			
+   				alert("ì´ë©”ì¼í˜•ì‹ì´ ì˜¬ë°”ë¥´ì§€ ì•ŠìŠµë‹ˆë‹¤.");
    				document.join.email2.focus();
    				return
    			}
    			if(join.idDuplication.value!="idCheck"){
-	 			alert("ÀÌ¸ŞÀÏ Áßº¹Ã¼Å©¸¦ ÇØÁÖ¼¼¿ä")
+	 			alert("ì´ë©”ì¼ ì¤‘ë³µì²´í¬ë¥¼ í•´ì£¼ì„¸ìš”")
 	 			join.email1.focus()
 	 			return
 	 		}
    	 		if(join.passwd.value==""){
-   	 			alert("ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä")
+   	 			alert("ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”")
    	 			join.passwd.focus()
    	 			return
    	 		}
    	 		if(join.passwd.value != join.passwd2.value)
    	 	  	 {
-   	 	     	alert("ÀÔ·ÂÇÏ½Å ºñ¹Ğ¹øÈ£¿Í ºñ¹Ğ¹øÈ£È®ÀÎÀÌ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù")
+   	 	     	alert("ì…ë ¥í•˜ì‹  ë¹„ë°€ë²ˆí˜¸ì™€ ë¹„ë°€ë²ˆí˜¸í™•ì¸ì´ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤")
    	 	    	return
    	 	   	}
    	 		if(join.passwd.value.length<6) {
-  		    	alert("ºñ¹Ğ¹øÈ£´Â ¿µ¹®,¼ıÀÚ,Æ¯¼ö¹®ÀÚ(!@$%^&* ¸¸ Çã¿ë)¸¦ »ç¿ëÇÏ¿© 6~16ÀÚ±îÁö ÀÔ·ÂÇØÁÖ¼¼¿ä")
+  		    	alert("ë¹„ë°€ë²ˆí˜¸ëŠ” ì˜ë¬¸,ìˆ«ì,íŠ¹ìˆ˜ë¬¸ì(!@$%^&* ë§Œ í—ˆìš©)ë¥¼ ì‚¬ìš©í•˜ì—¬ 6~16ìê¹Œì§€ ì…ë ¥í•´ì£¼ì„¸ìš”")
   		    	return
   		   	}
   			if(!join.passwd.value.match(/([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9])/)) {
-  		    	alert("ºñ¹Ğ¹øÈ£´Â ¿µ¹®,¼ıÀÚ,Æ¯¼ö¹®ÀÚ(!@$%^&* ¸¸ Çã¿ë)¸¦ »ç¿ëÇÏ¿© 6~16ÀÚ±îÁö ÀÔ·ÂÇØÁÖ¼¼¿ä")
+  		    	alert("ë¹„ë°€ë²ˆí˜¸ëŠ” ì˜ë¬¸,ìˆ«ì,íŠ¹ìˆ˜ë¬¸ì(!@$%^&* ë§Œ í—ˆìš©)ë¥¼ ì‚¬ìš©í•˜ì—¬ 6~16ìê¹Œì§€ ì…ë ¥í•´ì£¼ì„¸ìš”")
   		    	return
   		   	}
    	 		document.join.submit()
@@ -102,21 +103,21 @@
 		<form name="join" method="POST" action="member_join">
 			<table width="800" align="center" class="outline">
   				<tr>
-					<td colspan="2" align=center class="m2">È¸¿ø°¡ÀÔ</td>
+					<td colspan="2" align=center class="m2">íšŒì›ê°€ì…</td>
  				</tr>
 				<tr>
-					<td width="150" class="m3">*ÀÌ¸§(´Ğ³×ÀÓ)</td>
+					<td width="150" class="m3">*ì´ë¦„(ë‹‰ë„¤ì„)</td>
 					<td class="m3">
 						<input type="text" name="name" class="box" maxlength="20">
 					</td>
 				</tr>
 				<tr>
-					<td width="150" class="m3">*ÀÌ¸ŞÀÏ(¾ÆÀÌµğ)</td>
+					<td width="150" class="m3">*ì´ë©”ì¼(ì•„ì´ë””)</td>
 					<td class="m3">
 						<input type="text" name="email1" class="box" maxlength="20" size="20" onkeydown="inputEmailChk()">@
 						<input type="text" name="email2" maxlength="20" class="box" onkeydown="inputEmailChk()">
-						<select name="email3" onchange="change_email()">
-							<option value="0">Á÷Á¢ÀÔ·Â</option>
+						<select name="email3" onchange="change_email()" onchange="change_email()">
+							<option value="0">ì§ì ‘ì…ë ¥</option>
 							<option value="gmail.com">gmail.com</option>
 							<option value="hanmail.net">hanmail.net</option>
 							<option value="naver.com">naver.com</option>
@@ -129,47 +130,47 @@
 							<option value="dreamwiz.com">dreamwiz.com</option>
 							<option value="live.com">live.com</option>
 						</select>
-						<input type="button" name="confirm_email" value="Áßº¹È®ÀÎ" onclick="openConfirmEmail(this.form)">
+						<input type="button" name="confirm_email" value="ì¤‘ë³µí™•ì¸" onclick="openConfirmEmail(this.form)">
 						<input type="hidden" name="idDuplication" value="idUncheck">
 					</td>
   				</tr>
   				<tr>
-					<td width="150" class="m3">*ºñ¹Ğ¹øÈ£</td>
+					<td width="150" class="m3">*ë¹„ë°€ë²ˆí˜¸</td>
 					<td class="m3">
 						<input type="password" name="passwd" class="box" maxlength="20" onkeyup="checkPw()">
 					</td>
   				</tr>
   				<tr>
-					<td width="150" class="m3">*ºñ¹Ğ¹øÈ£ È®ÀÎ</td>
+					<td width="150" class="m3">*ë¹„ë°€ë²ˆí˜¸ í™•ì¸</td>
 					<td class="m3">
 						<input type="password" name="passwd2" class="box" maxlength="20" onkeyup="checkPw()">
 						<input type="text" name="result" readOnly>
 					</td>
   				</tr>
   				<tr>
-					<td width="150" class="m3">*»ı³â¿ùÀÏ</td>
+					<td width="150" class="m3">*ìƒë…„ì›”ì¼</td>
 					<td class="m3">
 						<select name="year">
 							<c:forEach var="i" begin="1930" end="2017" step="1">
 								<option value="${i}">${i}</option>
 							</c:forEach>
-						</select>³â
+						</select>ë…„
 						<select name="month">
 							<c:forEach var="i" begin="1" end="12" step="1">
 								<option value="${i}">${i}</option>
 							</c:forEach>
-						</select>¿ù
+						</select>ì›”
 						<select name="day">
 							<c:forEach var="i" begin="1" end="31" step="1">
 								<option value="${i}">${i}</option>
 							</c:forEach>
-						</select>ÀÏ
+						</select>ì¼
 					</td>
   				</tr>
   				<tr>
 					<td colspan="2" align="center">
-						<a href="javascript:check()">[Àü¼Û]</a>
-						<a href="#">[Ãë¼Ò]</a>
+						<a href="javascript:check()">[ì „ì†¡]</a>
+						<a href="#">[ì·¨ì†Œ]</a>
 					</td>
   				</tr>
   			</table>

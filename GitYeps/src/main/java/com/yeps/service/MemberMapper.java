@@ -23,7 +23,7 @@ public class MemberMapper {
 	public List<MemberDTO> listMember() {
 		return sqlSession.selectList("listMember");
 	}
-	
+
 	public List<MemberDTO> findMember(String sql){
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("sql", sql);
@@ -45,11 +45,11 @@ public class MemberMapper {
 			return null;
 		}
 	}
-	
+
 	public int deleteMember(int mnum) {
 		return sqlSession.delete("deleteMember",mnum);
 	}
-	
+
 	public MemberDTO loginMember(MemberDTO dto) {
 		try {
 			return sqlSession.selectOne("loginMember", dto);
@@ -57,7 +57,15 @@ public class MemberMapper {
 			return null;
 		}
 	}
-	
+
+	public String getSaltByEmail(MemberDTO dto) {
+		try {
+			return sqlSession.selectOne("getSaltByEmail", dto);
+		}catch(Exception e) {
+			return null;
+		}
+	}
+
 	/*
 
 	 public static MemberDTO checkMember(HashMap map) {

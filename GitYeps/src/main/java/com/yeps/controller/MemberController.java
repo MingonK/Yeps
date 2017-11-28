@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.yeps.model.MemberDTO;
 import com.yeps.service.MemberMapper;
+import com.yeps.service.SHA256Util;
 
 @Controller
 public class MemberController {
@@ -30,9 +31,9 @@ public class MemberController {
 
 	@RequestMapping(value="/member_manager")
 	public ModelAndView listMember(HttpServletRequest arg0) {
-		
+
 		List<MemberDTO> list = null;
-		
+
 		String search = arg0.getParameter("search");
 		String searchString = arg0.getParameter("searchString"); 
 		if(searchString == null || searchString.trim().equals("")) {
@@ -62,22 +63,6 @@ public class MemberController {
 			dto.setImagecount(0);
 		}
 
-		dto.setIsmanager("n");
-		dto.setControlcate("n");
-		dto.setControlevent("n");
-		dto.setControlmember("n");
-		dto.setControlstore("n");
-		dto.setControlreview("n");
-		dto.setEmail(arg0.getParameter("email1")+"@"+arg0.getParameter("email2"));
-		String month = arg0.getParameter("month");
-		String day = arg0.getParameter("day");
-		if(month.length()<2) {
-			month = "0" + month;
-		}
-		if(day.length()<2) {
-			day = "0" + day;
-		}
-		dto.setBirth(arg0.getParameter("year")+month+day);
 		ModelAndView mav = new ModelAndView();
 		String msg = null, url = null;
 		if(dto.getName()==null || dto.getName().trim().equals("") ) {
@@ -89,6 +74,25 @@ public class MemberController {
 			return mav;
 		}
 
+		dto.setEmail(arg0.getParameter("email1")+"@"+arg0.getParameter("email2"));
+		String month = arg0.getParameter("month");
+		String day = arg0.getParameter("day");
+		if(month.length()<2) {
+			month = "0" + month;
+		}
+		if(day.length()<2) {
+			day = "0" + day;
+		}
+		dto.setBirth(arg0.getParameter("year")+month+day);
+
+		String salt = SHA256Util.generateSalt();
+		dto.setSalt(salt);
+
+		String passwd = dto.getPasswd();
+		passwd = SHA256Util.getEncrypt(passwd, salt);
+
+		dto.setPasswd(passwd);
+		System.out.println(salt);
 		int res = memberMapper.insertMember(dto);
 
 		if (res>0){
@@ -154,30 +158,62 @@ public class MemberController {
 		mav.addObject("url",url);
 		return mav;
 	}
-	
+
 	@RequestMapping(value="/member_login", method=RequestMethod.GET)
 	public ModelAndView loginMemberForm() {
 		return new ModelAndView("member/memberLogin");
 	}
-	
+
 	@RequestMapping(value="/member_login", method=RequestMethod.POST)
 	public ModelAndView loginMemberPro(@ModelAttribute MemberDTO dto, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		String msg = null , url = null;
+		if (dto.getEmail().trim().equals("") || dto.getPasswd().trim().equals("")){
+			msg = "로그인페이지로 이동합니다.";
+			url = "member_login";
+			mav.setViewName("message");
+			mav.addObject("msg",msg);
+			mav.addObject("url",url);
+			return mav;
+		}
+		String salt = memberMapper.getSaltByEmail(dto);
+		if(salt == null) {
+			msg = "존재하지 않는 이메일 입니다.";
+			url = "member_login";
+			mav.setViewName("message");
+			mav.addObject("msg",msg);
+			mav.addObject("url",url);
+			return mav;
+		}
+		String passwd = dto.getPasswd();
+
+		passwd = SHA256Util.getEncrypt(passwd, salt);
+		dto.setPasswd(passwd);
+
 		MemberDTO dto2 = memberMapper.loginMember(dto);
 		if (dto2 != null){
-			if(dto2.getIsmanager().equals("y")) {
+			if(dto2.getIsmaster().equals("y")) {
+				session.setAttribute("memberNum", "0");
+				session.setAttribute("memberEmail", "YEPSMaster");
+				session.setAttribute("memberName", "YEPSMaster");
+				msg = "마스터 아이디로 로그인 하셨습니다";
+				url = "member_index";
+			}else if(dto2.getIsmanager().equals("y")) {
+				session.setAttribute("memberNum", "0");
 				session.setAttribute("memberEmail", "YEPSManager");
 				session.setAttribute("memberName", "YEPSManager");
-			}else { 
-			session.setAttribute("memberNum", dto2.getMnum());
-			session.setAttribute("memberEmail", dto2.getEmail());
-			session.setAttribute("memberName", dto2.getName());
+				msg = "관리자 아이디로 로그인 하셨습니다";
+				url = "member_index";
+			}else {
+				session.setAttribute("memberNum", dto2.getMnum());
+				session.setAttribute("memberEmail", dto2.getEmail());
+				session.setAttribute("memberName", dto2.getName());
+				msg = "로그인 성공";
+				url = "member_index";
 			}
-			msg = "로그인 성공";
-			url = "member_index";
+			
 		}else{
-			msg = "아이디 또는 비밀번호를 확인해주세요.";
+			msg = "비밀번호를 확인해주세요.";
 			url = "member_login";
 		}
 		mav.setViewName("message");
@@ -185,7 +221,7 @@ public class MemberController {
 		mav.addObject("url",url);
 		return mav;
 	}
-	
+
 	/*
 
 	@RequestMapping(value="/edit.member")
@@ -238,6 +274,6 @@ public class MemberController {
 		return mav;
 	}
 
-	
-*/
+
+	 */
 }

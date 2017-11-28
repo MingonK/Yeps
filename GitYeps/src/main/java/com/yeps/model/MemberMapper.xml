@@ -16,7 +16,7 @@
 
 	<insert id="insertMember" parameterType="MemberDTO">
 		insert into yeps_member values
-		(yeps_member_seq.nextval,#{name},#{email},#{passwd},#{birth},sysdate,0,0,#{ismanager},#{controlcate},#{controlevent},#{controlmember},#{controlstore},#{controlreview})
+		(yeps_member_seq.nextval,#{name},#{email},#{passwd},#{birth},sysdate,0,0,'n','n','n','n','n','n','n',#{salt})
 	</insert>
 	
 	<select id="confirmEmail" parameterType="java.util.HashMap" resultType="MemberDTO">
@@ -28,7 +28,11 @@
 	</delete>
 	
 	<select id="loginMember" parameterType="MemberDTO" resultType="MemberDTO">
-        select * from yeps_member where email = #{email} and passwd = #{passwd}
+        select mnum,email,name,ismaster,ismanager from yeps_member where email = #{email} and passwd = #{passwd}
+    </select>
+    
+    <select id="getSaltByEmail" parameterType="MemberDTO" resultType="String">
+    	select salt from yeps_member where email=#{email}
     </select>
     
 	<!-- 

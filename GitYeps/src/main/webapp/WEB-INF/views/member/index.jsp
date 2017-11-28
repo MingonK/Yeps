@@ -1,22 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <html>
 <head>
-	<title>YEPSÈ¸¿ø°ü¸®</title>
+	<title>YEPSíšŒì›ê´€ë¦¬</title>
 </head>
 <body>
 	<div align="center">
 		<hr color="green" width="300">
-		<h2>YEPS È¸¿ø°ü¸® ÇÁ·Î±×·¥</h2>
+		<h2>YEPS íšŒì›ê´€ë¦¬ í”„ë¡œê·¸ëž¨</h2>
 		<hr color="green" width="300">
 		<table border="1" width="600" height="400">
 			<tr height="50">
-				<th><a href="member_join">È¸¿ø°¡ÀÔ</a></th>
-				<th><a href="member_manager">È¸¿ø°ü¸®</a></th>
-				<th><a href="member_login">·Î±×ÀÎ</a></th>
+				<th><a href="member_join">íšŒì›ê°€ìž…</a></th>
+				<th><a href="member_manager">íšŒì›ê´€ë¦¬</a></th>
+				<th><a href="member_login">ë¡œê·¸ì¸</a></th>
 			</tr>
 			<tr>
-				<td colspan="4">¾Æ¹« »çÁøÀÌ³ª ³Ö¾îÁÖ¼¼¿ä!!</td>
+				<td colspan="4">ì•„ë¬´ ì‚¬ì§„ì´ë‚˜ ë„£ì–´ì£¼ì„¸ìš”!!</td>
 			</tr>
 			<tr height="50">
 				<td colspan="4" align="center">
