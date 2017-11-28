@@ -12,7 +12,7 @@
 		<h2>쪽지 쓰기</h2>
 		<hr width="70%" color="green">
 
-		<form name="f" action="message_send" method="post">
+		<form name="f" action="message_send?mode=send" method="post">
 			<table border="1" width="60%" height="300">
 				<tr>
 					<th width="30%" bgcolor="yellow" height="10">받는사람</th>

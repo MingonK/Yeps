@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.yeps.model.YepsMessageDBBean;
+import com.yeps.model.MessageDTO;
 import com.yeps.service.YepsMessageMapper;
 
 @Controller
@@ -41,18 +41,18 @@ public class YepsMessageController {
 	public ModelAndView yeps_message(Locale locale, Model model,HttpServletRequest req) {
 		yeps_date(locale, model);
 		ModelAndView mav = new ModelAndView();
-		List<YepsMessageDBBean> list = yepsMessageMapper.messageList();
+		List<MessageDTO> list = yepsMessageMapper.messageList();
 		req.setAttribute("messageList", list);
 		req.setAttribute("mode", "receive");
 		return new ModelAndView("message/yepsMessage");
 	}
 
 	@RequestMapping(value = "message_content")
-	public ModelAndView message_insert(HttpServletRequest req, @ModelAttribute YepsMessageDBBean dto, Locale locale, Model model) {
+	public ModelAndView message_insert(HttpServletRequest req, @ModelAttribute MessageDTO dto, Locale locale, Model model) {
 		ModelAndView mav = new ModelAndView();
 		yeps_date(locale, model);
 		String msgNum = req.getParameter("msgNum");
-		YepsMessageDBBean content = yepsMessageMapper.getContent(Integer.parseInt(msgNum));
+		MessageDTO content = yepsMessageMapper.getContent(Integer.parseInt(msgNum));
 		mav.addObject("getContent", content);
 		mav.setViewName("message/contentMessage");
 		return mav;
@@ -67,16 +67,27 @@ public class YepsMessageController {
 	}
 
 	@RequestMapping(value = "message_delete", method=RequestMethod.POST)
-	public ModelAndView message_getMessage(HttpServletRequest req, @ModelAttribute YepsMessageDBBean dto, @RequestParam int mnum) {
+	public ModelAndView message_getMessage(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
 		int msgNum = Integer.parseInt(req.getParameter("msgNum"));
+		/*if(msgNum)*/
+		System.out.println(msgNum);
 		int res = yepsMessageMapper.deleteMessage(msgNum);
 		String msg = null;
 		if(res>0) {
 			msg = "메시지가 삭제 되었습니다.";
+			/*List<MessageDTO> list = yepsMessageMapper.messageList();
+			req.setAttribute("messageList", list);
+			req.setAttribute("mode", "receive");*/
 		}else {
 			msg = "메시지 삭제에 실패하였습니다.";
+			/*List<MessageDTO> list = yepsMessageMapper.messageList();
+			req.setAttribute("messageList", list);
+			req.setAttribute("mode", "receive");*/
 		}
+		List<MessageDTO> list = yepsMessageMapper.messageList();
+		req.setAttribute("messageList", list);
+		req.setAttribute("mode", "receive");
 		mav.addObject("msg",msg);
 		mav.setViewName("message/yepsMessage");
 		return mav;
@@ -99,32 +110,33 @@ public class YepsMessageController {
 	}
 
 	@RequestMapping(value = "message_send")
-	public ModelAndView message_send(Locale locale, Model model, HttpServletRequest req,@ModelAttribute YepsMessageDBBean dto) {
+	public ModelAndView message_send(Locale locale, Model model, HttpServletRequest req,@ModelAttribute MessageDTO dto) {
 		yeps_date(locale, model);
 		/*		if (result.hasErrors()) {
 			dto.setMsgnum(0);
 		}*/
 		ModelAndView mav = new ModelAndView();
-		String mode = req.getParameter("mode");
+		String sender = null;
+		 /*if(mnum!=null) {
+        int mnum = Integer.parseInt(req.getParameter("mnum"));
+        sender = yepsMessageMapper.getSender(mnum);
+        }*///로그인 되어있는 회원이 보낸사람으로 보낸쪽지함 목록 생성
 		String msg = null;
-		if(mode.equals("send")) {
-			req.setAttribute("mode",mode);
+		int res = yepsMessageMapper.writeMessage(dto);
+
+		if(res>0) {
+			msg = "쪽지를 보냈습니다.보낸 쪽지함으로 이동합니다.";
+			sender = req.getParameter("sender");
+			List<MessageDTO> list = yepsMessageMapper.sendList(sender);
+			req.setAttribute("messageList", list);
+			req.setAttribute("mode", "send");
+
 		}else {
-			int res = yepsMessageMapper.writeMessage(dto);
-
-			if(res>0) {
-				msg = "쪽지를 보냈습니다.보낸 쪽지함으로 이동합니다.";
-				String sender = req.getParameter("sender");
-				List<YepsMessageDBBean> list = yepsMessageMapper.sendList(sender);
-				req.setAttribute("messageList", list);
-				req.setAttribute("mode", mode);
-
-			}else {
-				msg = "쪽지 보내기에 실패하였습니다.쪽지쓰기 페이지로 이동합니다.";
-				mav.setViewName("message/sendMessageForm");
-                return mav;
-			}
+			msg = "쪽지 보내기에 실패하였습니다.쪽지쓰기 페이지로 이동합니다.";
+			mav.setViewName("message/sendMessageForm");
+			return mav;
 		}
+
 		req.setAttribute("msg", msg);
 		mav.setViewName("message/yepsMessage");
 		return mav;
@@ -133,9 +145,9 @@ public class YepsMessageController {
 	@RequestMapping(value = "message_receive")
 	public ModelAndView message_receive(HttpServletRequest req,Locale locale, Model model) {
 		yeps_date(locale, model);
-		String mode = req.getParameter("mode");
+		
 		ModelAndView mav = new ModelAndView();
-		req.setAttribute("mode", mode);
+		req.setAttribute("mode", "receive");
 		mav.setViewName("message/yepsMessage");
 		return mav;
 	}

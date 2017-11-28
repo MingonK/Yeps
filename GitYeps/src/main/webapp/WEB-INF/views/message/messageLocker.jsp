@@ -14,7 +14,7 @@
 //선택된 체크박스의 값을 가져온 후 ...
 	function deleteCheck() {
 		$("input[name=ch]:checked").each(function() {
-			var test = $(this).val();
+			var checkVal = $(this).val();
 		});
 	}
 	function select() {
@@ -73,11 +73,10 @@ input[id="ipt"] {
 					type="checkbox" value="" id="checkAll"
 					onclick="$('[name=table] [type=checkbox]:gt(0)').prop('checked', $(this).is(':checked'));checkOn(this.form);">
 					<input type="checkbox" id="ipt" disabled> <label for="ipt"></label></td>
-				<td align="left" colspan="5"><input type="button" value="전체해제"
-					onclick="uncheckAll();"> <input type="button" value="선택삭제"
+				<td align="left" colspan="5"> <input type="button" value="선택삭제"
 					onclick="deleteCheck();"> <input type="button" value="답장"
-					onclick="window.location='message_reply'"> <input
-					type="button" value="전체답장" onclick="allReply();"> <select
+					onclick="window.location='message_reply'"><input type="button" value="쪽지쓰기"
+					onclick="uncheckAll();"> <input type="button" value="전체답장" onclick="allReply();"> <select
 					name="filter" id="message" onchange="javascript:Onfunction select();">
 						<option value="0">:: 필터 ::</option>
 						<option value="1">모든 쪽지</option>

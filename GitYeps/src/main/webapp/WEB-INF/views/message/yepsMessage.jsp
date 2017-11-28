@@ -14,28 +14,42 @@
 <title>Yeps Message</title>
 
 <script type="text/javascript"
-	src="https://code.jquery.com/jquery-1.10.2.js">
-    /* function sel_open(e){ 
-	　  $("#s_menu option").each(function(){ 
-	　　if(e==$(this).val()) $(this).attr("selected",true); 
-	     　}); 
-	  } */
-
-	
+	src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script>
    //체크박스 누를시 버튼 활성화 , 비활성화 기능 구현하려 했으나 현재 적용안됨
-	function checkOn(form) {
+/* 	function checkOn(form) {
 		if (form.Button.disabled == true)
 			form.Button.disabled = false
 		else
 			form.Button.disabled = true
-	}
+	} */
 	//선택삭제 버튼 누를시 체크된 값 가져오는 기능 구현중..아직 미 구현..
 	function deleteCheck() {
-		$("input[name=]:checked").each(function() {
-			var test = $(this).val();
+		$("input[name=ch]:checked").each(function() {
+			var checkVal = $(this).val();
+			alert(checkVal);
+			for (var i = 0; i < checkVal.length; i++) {
+		         if (checkVal[i].checked) {
+		            txt += checkVal[i].value + " ";
+		         }
+		      }
+	          document.msgform.submit()
 		});
-		alert(test)
-	}
+    }
+	
+	/* function reply(){
+		$("input[name=reply]:checked").each(function(){
+			var checkVal = $(this).val();
+			alert(checkVal);
+			for(var i = 0 ;i <checkVal.length; i++){
+				if(checkVal[i].checked){
+					txt +=checkVal[i].value + " ";
+				}
+			}
+			location.href = "message_reply";
+		});
+	} */
+
 </script>
 </head>
 <body>
@@ -55,14 +69,14 @@
 		<!-- 셀렉트박스 기능 구현시 아래 세 개의 버튼은 사라집니다. -->
 		<tr align="left">
 			<td align="left"><input type="button" name="send" value="보낸 쪽지함"
-				onclick="window.location='message_send?mode=send'"> <input
+				<%-- onclick="window.location='message_send?mnum=${sessionScope.memberNum}'" --%>> <input
 				type="button" name="receive" value="받은 쪽지함"
-				onclick="window.location='message_receive?mode=receive'"> <input
+				<%-- onclick="window.location='message_receive?mnum=${sessionScope.memberNum}'" --%>> <input
 				type="button" name="" value="보관함"
 				onclick="window.location='message_locker'"> <br></td>
 		</tr>
 		<br>
-		<form name="form">
+		<form name="msgform" action="message_delete" method="post">
 			<table border="1" width="80%" align="center" name="table">
 				<tr valign="center">
 					<td align="center" rowspan="2"><label>전체선택</label><br> <input
@@ -70,12 +84,11 @@
 						onclick="$('[name=table] [type=checkbox]:gt(0)').prop('checked', $(this).is(':checked'));checkOn(this.form);">
 						<input type="checkbox" id="ipt"> <label for="ipt"></label></td>
 					<td align="left" colspan="5"><input type="button" name="del"
-						value="선택삭제" onclick="window.location=message_delete"> <input
-						type="button" name="button" value="답장"
-						onclick="window.location='message_reply'"> <input
-						type="button" name="button" value="쪽지쓰기"
+						value="선택삭제" onclick="deleteCheck()"> <input
+						type="button" name="reply" value="답장"
+						onclick="reply()"> <input type="button" name="write" value="쪽지쓰기"
 						onclick="window.location='message_sendForm'"> <input
-						type="button" name="button" value="전체답장"
+						type="button" name="allReply" value="전체답장"
 						onclick="window.location='message_allReply'"> <select
 						name="filter">
 							<option value="">:: 필터 ::</option>
@@ -107,12 +120,11 @@
 								<td colspan="6" align="center">받은 쪽지함이 비었습니다.</td>
 							</c:when>
 						</c:choose>
-
 					</tr>
 				</c:if>
 				<c:forEach var="dto" items="${messageList}">
 					<tr align="center">
-						<td><input type="checkbox" name="ch" value="${dto.msgNum}"
+						<td><input type="checkbox" name="msgNum" value="${dto.msgNum}"
 							id="${dto.msgNum}"> <input type="checkbox" id="ipt">
 							<label for="ipt"></label></td>
 						<td>${dto.msgNum}</td>

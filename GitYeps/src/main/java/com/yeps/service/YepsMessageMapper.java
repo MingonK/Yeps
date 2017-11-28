@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.yeps.model.YepsMessageDBBean;
+import com.yeps.model.MessageDTO;
 
 @Service
 public class YepsMessageMapper {
@@ -14,7 +14,7 @@ public class YepsMessageMapper {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public YepsMessageDBBean getContent(int msgnum) {
+	public MessageDTO getContent(int msgnum) {
 		return sqlSession.selectOne("getContent", msgnum);
 	}
 	
@@ -22,16 +22,16 @@ public class YepsMessageMapper {
 		return sqlSession.delete("deleteMessage", msgnum);
 	}
 	
-	public int writeMessage(YepsMessageDBBean dto) {
+	public int writeMessage(MessageDTO dto) {
 		return sqlSession.insert("writeMessage", dto);
 	}
 	
-	public List<YepsMessageDBBean> messageList(){
+	public List<MessageDTO> messageList(){
 		return sqlSession.selectList("messageList");
 	}
 	
-	public List<YepsMessageDBBean> sendList(String sender){
-		return sqlSession.selectList("sendList");
+	public List<MessageDTO> sendList(String sender){
+		return sqlSession.selectList("sendList",sender);
 	}
 	
 

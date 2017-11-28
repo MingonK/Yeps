@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.yeps.model">
 
-	<select id="getContent" parameterType="int" resultType="YepsMessageDBBean">
+	<select id="getContent" parameterType="int" resultType="MessageDTO">
 		select * from yeps_message where msgnum=#{msgnum}
 	</select>
 
@@ -14,17 +14,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from yeps_message where msgnum=#{msgnum}
 	</delete>
 
-	<insert id="writeMessage" parameterType="YepsMessageDBBean">
+	<insert id="writeMessage" parameterType="MessageDTO">
 		insert into yeps_message values(yeps_message_seq.nextval, #{title}, #{receiver}, #{sender}, #{content}, sysdate)
 	</insert>
 
-	<select id="messageList" resultType="YepsMessageDBBean">
+	<select id="messageList" resultType="MessageDTO">
 		select * from yeps_message
 	</select>
 
-	<select id="sendList" resultType="YepsMessageDBBean">
+	<select id="sendList" resultType="MessageDTO">
 		select * from yeps_message where sender=#{sender}
 	</select>
+	
+	<select id="receiveList" resultType="MessageDTO">
+	    select * from yeps_message where receiver=#{receiver}
+	</select>
+	
 </mapper>
 
 

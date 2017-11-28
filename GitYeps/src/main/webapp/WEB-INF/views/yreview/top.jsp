@@ -6,7 +6,7 @@
 		<tr>
 			<td width="30%" align="center"><a href="yeps_home"> 처음으로 </a></td>
 			<td width="30%" align="center"><a href="yeps_message"> message </a></td>
-			<td width="30%" align="center"><a href="yeps_event"> event </a></td>
+			<td width="30%" align="center"><a href="event_list"> event </a></td>
 		</tr>
  	</table> 
 </div>

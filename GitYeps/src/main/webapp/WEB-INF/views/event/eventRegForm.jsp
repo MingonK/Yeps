@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ include file="../top.jsp"%>
 <html>
 <head>
 <title>이벤트 등록 페이지</title>
@@ -10,13 +12,13 @@
 		<h2>이벤트 등록하기</h2>
 		<hr color="green" width="70%">
 		<br>
-		<form name="form" action="event_insert" method="post"
+		<form name="eventRegform" action="event_insert" method="post"
 			enctype="multipart/form-data" onsubmit="return check()">
 			<table border="1" width="80%" name="regTable" align="center">
 				<tr>
 					<th bgcolor="green">이벤트 제목</th>
 					<td bgcolor="green"><input type="text"
-						name="subject" style="width: 100%;"></td>
+						name="title" style="width: 100%;"></td>
 						<th bgcolor="green">할인가격</th><td><input type="text"
 						name="discount" style="width: 100%;"></td> 
 				</tr>
@@ -27,7 +29,7 @@
 				</tr>
 				<tr>
 					<th bgcolor="green" width="20%">이벤트 장소</th>
-					<td><input type="text" name="restaurant" style="width: 100%;"></td>
+					<td><input type="text" name="place" style="width: 100%;"></td>
 					<th bgcolor="green" width="20%">사진</th>
 					<td><input type="file" name="filename" style="width: 100%;"></td>
 				</tr>
@@ -37,7 +39,7 @@
 				<tr>
 					<td colspan="4" width="100%" align="center"><textarea
 							style="width: 100%;" cols="100%" rows="10" name="content"
-							placeholder="여기에 내용을 입력하세요"></textarea></td>
+							placeholder="여기에 내용을 입력하세요.20자 이상 입력하셔야 합니다."></textarea></td>
 				</tr>
 				<tr>
 					<td align="center" colspan="4"><label>패스워드:</label><input type="password" name="passwd">
@@ -47,6 +49,7 @@
 				</tr>
 			</table>
 		</form>
+		<%@ include file="../bottom.jsp"%>
 	</div>
 </body>
 </html>
