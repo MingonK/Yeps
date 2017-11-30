@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="UTF-8"%>
-
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <html>
@@ -35,28 +33,32 @@
 		return true;
 	}
 	
-	function setEmail(email1,email2){
-		opener.document.join.email1.value=email1;
-		opener.document.join.email2.value=email2;
-		opener.document.join.idDuplication.value="idCheck";
-		self.close();
-	}
-	
 	function resetEmail(){
+		opener.inputEmailChk()
 		opener.document.join.email1.value="";
 		opener.document.join.email2.value="";
 		self.close();
 	}
+	
+	function openEmailAuthCheck(){
+		window.open("", "emailAuth", "toolbar=no, location=no, status=no, menubar=no, scrollbars=no, resizable=no, width=300, height=300");
+	 	frm = document.emailauthf;
+	 	frm.action = "member_emailAuth";
+	 	frm.target = "emailAuth";
+	 	frm.method = "POST";
+	 	frm.submit;
+	}
+	
 </script>
 </head>
 <body>
 <c:choose>
 		<c:when test="${isMember==1}">
 			<b><font color="red">${email}</font>는 이미 사용중인 이메일입니다.</b>
-			<form name="checkForm" action="member_confirmEmail" onsubmit="return confirmEmail()">
+			<form name="checkForm" action="member_confirmEmail" onsubmit="confirmEmail()">
 				<b>다른 이메일을 입력해주세요.</b><br /><br />
-				<input type="text" name="email1" class="box" maxlength="15" size="20">@
-						<input type="text" name="email2" maxlength="20" class="box">
+				<input type="text" name="email1" class="box" maxlength="15" size="20" onkeypress="if(event.keyCode==13){return false;}">@
+						<input type="text" name="email2" maxlength="20" class="box" onkeypress="if(event.keyCode==13){return false;}">
 						<select name="email3" onchange="change_email()">
 							<option value="0">직접입력</option>
 							<option value="gmail.com">gmail.com</option>
@@ -76,10 +78,14 @@
 		</c:when>
 		<c:otherwise>
 			<center>
+			<form name="emailauthf" method="POST" onsubmit="return openEmailAuthCheck()">
 			<b>입력하신 <font color="red">${email}</font>는<br />
 			사용하실 수 있는 Email입니다. </b><br /><br />
-			<input type="button" value="인증하기" onclick="setEmail('${email1}','${email2}')">
-			<input type="button" value="취소" onclick="resetEmail()"></center>
+			<input type="hidden" name="email" value="${email}">
+			<input type="submit" value="인증메일 받기">
+			<input type="button" value="취소" onclick="resetEmail()">
+			</form>
+			</center>
 		</c:otherwise>
 	</c:choose>	
 </body>

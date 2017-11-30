@@ -16,7 +16,7 @@
 
 	<insert id="insertMember" parameterType="MemberDTO">
 		insert into yeps_member values
-		(yeps_member_seq.nextval,#{name},#{email},#{passwd},#{birth},sysdate,0,0,'n','n','n','n','n','n','n',#{salt})
+		(yeps_member_seq.nextval,#{name},#{ssn1},#{ssn2},#{email},#{passwd},sysdate,0,0,'y','y','n','n','n','n','n',#{salt})
 	</insert>
 	
 	<select id="confirmEmail" parameterType="java.util.HashMap" resultType="MemberDTO">
@@ -35,6 +35,17 @@
     	select salt from yeps_member where email=#{email}
     </select>
     
+    <select id="findMemberEmail" parameterType="MemberDTO" resultType="String">
+        select email from yeps_member where name = #{name} and ssn1 = #{ssn1} and ssn2 = #{ssn2}
+    </select>
+    
+    <select id="findMemberPasswd" parameterType="MemberDTO" resultType="int">
+        select count(*) from yeps_member where name = #{name} and ssn1 = #{ssn1} and ssn2 = #{ssn2} and email = #{email}
+    </select>
+    
+    <update id="temporaryPasswd" parameterType="MemberDTO">
+    	update yeps_member set passwd=#{passwd} where name = #{name} and ssn1 = #{ssn1} and ssn2 = #{ssn2} and email = #{email}
+    </update>
 	<!-- 
 	
 	<select id="checkMember" parameterType="java.util.HashMap" resultType="MemberDTO">

@@ -65,7 +65,26 @@ public class MemberMapper {
 			return null;
 		}
 	}
-
+	
+	public String findMemberEmail(MemberDTO dto) {
+		try {
+			return sqlSession.selectOne("findMemberEmail", dto);
+		}catch(Exception e) {
+			return null;
+		}
+	}
+	
+	public int findMemberPasswd(MemberDTO dto) {
+		try {
+			return sqlSession.selectOne("findMemberPasswd", dto);
+		}catch(Exception e) {
+			return 0;
+		}
+	}
+	
+	public int temporaryPasswd(MemberDTO dto) {
+		return sqlSession.update("temporaryPasswd", dto);
+	}
 	/*
 
 	 public static MemberDTO checkMember(HashMap map) {
