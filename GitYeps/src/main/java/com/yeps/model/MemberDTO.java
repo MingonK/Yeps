@@ -2,10 +2,11 @@ package com.yeps.model;
 
 public class MemberDTO {
 	private int mnum;
-	private String name;	
+	private String name;
+	private String ssn1;
+	private String ssn2;
 	private String email;
 	private String passwd;
-	private String birth;
 	private String joindate;
 	private int reviewcount;
 	private int imagecount;
@@ -30,6 +31,18 @@ public class MemberDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getSsn1() {
+		return ssn1;
+	}
+	public void setSsn1(String ssn1) {
+		this.ssn1 = ssn1;
+	}
+	public String getSsn2() {
+		return ssn2;
+	}
+	public void setSsn2(String ssn2) {
+		this.ssn2 = ssn2;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -41,12 +54,6 @@ public class MemberDTO {
 	}
 	public void setPasswd(String passwd) {
 		this.passwd = passwd;
-	}
-	public String getBirth() {
-		return birth;
-	}
-	public void setBirth(String birth) {
-		this.birth = birth;
 	}
 	public String getJoindate() {
 		return joindate;

@@ -52,7 +52,7 @@
 				<td align="center">${dto.mnum}</td>
 				<td align="center">${dto.name}</td>
 				<td align="center">${dto.email}</td>
-				<td align="center">${dto.birth}</td>
+				<td align="center">${dto.ssn1}</td>
 				<td align="center">${dto.joindate}</td>
 				<td align="center">${dto.reviewcount}</td>
 				<td align="center">${dto.imagecount}</td>
