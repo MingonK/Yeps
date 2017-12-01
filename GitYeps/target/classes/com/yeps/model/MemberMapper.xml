@@ -16,7 +16,7 @@
 
 	<insert id="insertMember" parameterType="MemberDTO">
 		insert into yeps_member values
-		(yeps_member_seq.nextval,#{name},#{ssn1},#{ssn2},#{email},#{passwd},sysdate,0,0,'y','y','n','n','n','n','n',#{salt})
+		(yeps_member_seq.nextval,#{name},#{ssn1},#{ssn2},#{email},#{passwd},sysdate,0,0,'n','n','n','n','n','n','n',#{salt})
 	</insert>
 	
 	<select id="confirmEmail" parameterType="java.util.HashMap" resultType="MemberDTO">
