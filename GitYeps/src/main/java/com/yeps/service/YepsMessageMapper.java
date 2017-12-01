@@ -34,6 +34,39 @@ public class YepsMessageMapper {
 		return sqlSession.selectList("sendList",sender);
 	}
 	
+	public List<MessageDTO> receiveList(String receiver){
+		return sqlSession.selectList("receiveList", receiver);
+	}
 
+	public String getReceiver(int msgnum){
+		return sqlSession.selectOne("receiver", msgnum);
+	}
 	
+	public int updateReadDate(int msgNum) {
+		return sqlSession.update("updateReadDate", msgNum);
+	}
+	
+	public int updateReadNum1(int msgNum) {
+		return sqlSession.update("updateReadNum1",msgNum);
+	}
+	
+	public int updateReadNum0(int msgNum) {
+		return sqlSession.update("updateReadNum0",msgNum);
+	}
+	
+	public int updateImptNum(int msgNum) {
+		return sqlSession.update("updateImptNum",msgNum);
+	}
+	
+	public List<MessageDTO> noReadMessage(){
+	    return sqlSession.selectList("noReadMessage");	
+	}
+	
+	public List<MessageDTO> importantMessage(){
+		return sqlSession.selectList("importantMessage");
+	}
+	
+	/*public int getCount() {
+		return sqlSession.selectOne("getCount");
+	}*/
 }

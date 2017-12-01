@@ -3,14 +3,43 @@ package com.yeps.model;
 public class MessageDTO {
 
 	private int msgNum;
-	private int mNum;
+	private int mNum;//맴버 로그인시 회원정보 가져올 외래키
 	private String title;
-	private String receiver;
-	private String sender;
+	private String receiver;//받은 사람(로그인 회원과 연동되게)
+	private String sender;//보낸사람(로그인 회원과 연동되게)
 	private String content;
-	private String reg_date;
-	private String readDate;
+	private String reg_date;//받은 시각 표시
+	private String readDate;//읽은 시각 표시
+	private int readNum;//읽음, 안읽음 표시 위한 옵션
+	private String filename;
+	private int filesize;
+	private int imptNum;//중요쪽지 가져올 옵션
 	
+	
+	public int getImptNum() {
+		return imptNum;
+	}
+	public void setImptNum(int imptNum) {
+		this.imptNum = imptNum;
+	}
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+	public int getFilesize() {
+		return filesize;
+	}
+	public void setFilesize(int filesize) {
+		this.filesize = filesize;
+	}
+	public int getReadNum() {
+		return readNum;
+	}
+	public void setReadNum(int readNum) {
+		this.readNum = readNum;
+	}
 	public int getMsgNum() {
 		return msgNum;
 	}

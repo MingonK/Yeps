@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 
 	<insert id="writeMessage" parameterType="MessageDTO">
-		insert into yeps_message values(yeps_message_seq.nextval, #{title}, #{receiver}, #{sender}, #{content}, sysdate)
+		insert into yeps_message values(yeps_message_seq.nextval, #{title}, #{receiver}, #{sender}, #{content}, sysdate, 0, 0, #{filename}, #{filesize},0)
 	</insert>
 
 	<select id="messageList" resultType="MessageDTO">
@@ -30,6 +30,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    select * from yeps_message where receiver=#{receiver}
 	</select>
 	
+	<select id="noReadMessage" resultType="MessageDTO">
+	    select * from yeps_message where readnum=0
+	</select>
+	
+	<select id="importantMessage" resultType="MessageDTO">
+	    select * from yeps_message where imptNum=1
+	</select>
+	
+	<select id="receiver" resultType="String">
+	    select sender from yeps_message where msgnum=#{msgnum} 
+	</select>
+	
+	<!-- <select id="getCount" resultType="int">
+	    select count(*) from yeps_message 
+	</select> -->
+	
+	<update id="updateReadDate" parameterType="int">
+	    update yeps_message set readdate=sysdate where msgnum=#{msgnum}
+    </update>
+    
+    <update id="updateReadNum1" parameterType="int">
+        update yeps_message set readnum=1 where msgnum=#{msgnum}
+    </update>
+    
+     <update id="updateReadNum0" parameterType="int">
+        update yeps_message set readnum=0 where msgnum=#{msgnum}
+    </update>
+    
+     <update id="updateImptNum" parameterType="int">
+        update yeps_message set imptnum=1 where msgnum=#{msgnum}
+    </update>
+    
 </mapper>
 
 

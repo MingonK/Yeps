@@ -16,8 +16,8 @@
 				<tr>
 					<th bgcolor="green" width="20%">보낸이</th>
 					<td>${getContent.sender}</td>
-					<th bgcolor="green" width="20%">받은시각</th>
-					<td>${getContent.reg_date}</td>
+					<th bgcolor="green" width="20%">읽은 시각</th>
+					<td>${getContent.readDate}</td>
 				<tr align="center">
 					<th bgcolor="green" colspan="4">제목</th>
 				</tr>
@@ -34,7 +34,7 @@
 				<tr>
 					<td colspan="4" align="center"><input type="button"
 						name="reply" value="답장"
-						onclick="window.location='message_reply?msgNum=${getContent.msgNum}'">
+						onclick="window.location='message_reply?receiver=${getContent.sender}'">
 						<input type="submit" name="delete" value="삭제"> <input
 						type="button" value="쪽지함" onclick="window.location='yeps_message'">
 					</td>

@@ -12,45 +12,114 @@
 <html>
 <head>
 <title>Yeps Message</title>
-
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-1.10.2.js"></script>
-	<script>
-   //체크박스 누를시 버튼 활성화 , 비활성화 기능 구현하려 했으나 현재 적용안됨
-/* 	function checkOn(form) {
-		if (form.Button.disabled == true)
-			form.Button.disabled = false
-		else
-			form.Button.disabled = true
-	} */
-	//선택삭제 버튼 누를시 체크된 값 가져오는 기능 구현중..아직 미 구현..
-	function deleteCheck() {
-		$("input[name=ch]:checked").each(function() {
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"
+	type="text/javascript"></script>
+<script>
+    function searching(){
+	   var value1 = $("select[name=filter]").val();
+	    alert(value1);
+	    document.msgform.action = "message_search";
+	    document.msgform.submit();
+    }
+    function moving(){
+	    var value2 = $("select[name=messageBox]").val(); 
+	    alert(value2);
+	    document.msgform.action = "message_move";
+	    document.msgform.submit();
+    }
+    
+    function readMessage(){
+    	var msgNum = $("input[name=readed]").val();
+    	document.msgform.action = "message_read";
+    	document.msgform.submit();
+    }
+	  
+    function msgformSubmit(index) {
+    	$("input[name=check]:checked").each(function() {
 			var checkVal = $(this).val();
 			alert(checkVal);
-			for (var i = 0; i < checkVal.length; i++) {
+		for (var i = 0; i < checkVal.length; i++) {
 		         if (checkVal[i].checked) {
 		            txt += checkVal[i].value + " ";
-		         }
-		      }
-	          document.msgform.submit()
-		});
+	    }}});
+    	
+		if(index == 1){
+	         document.msgform.action = "message_delete";
+		}
+		if(index == 2){
+		     document.msgform.action = "message_reply";
+		}
+		document.msgform.submit()
     }
-	
-	/* function reply(){
-		$("input[name=reply]:checked").each(function(){
-			var checkVal = $(this).val();
-			alert(checkVal);
-			for(var i = 0 ;i <checkVal.length; i++){
-				if(checkVal[i].checked){
-					txt +=checkVal[i].value + " ";
-				}
-			}
-			location.href = "message_reply";
-		});
-	} */
-
+	 
+    $(document).ready(function(){
+        var tbl = $("#table");
+       // 테이블 헤더에 있는 checkbox 클릭시
+        $(":checkbox:first", tbl).click(function(){
+            // 클릭한 체크박스가 체크상태인지 체크해제상태인지 판단
+            if( $(this).is(":checked") ){
+                $(":checkbox", tbl).attr("checked", "checked");
+            }
+            else{
+                $(":checkbox", tbl).removeAttr("checked");
+            }
+            // 모든 체크박스에 change 이벤트 발생시키기               
+            $(":checkbox", tbl).trigger("change");
+        });
+         
+        // 헤더에 있는 체크박스외 다른 체크박스 클릭시
+        $(":checkbox:not(:first)", tbl).click(function(){
+            var allCnt = $(":checkbox:not(:first)", tbl).length;
+            var checkedCnt = $(":checkbox:not(:first)", tbl).filter(":checked").length;
+             
+            // 전체 체크박스 갯수와 현재 체크된 체크박스 갯수를 비교해서 헤더에 있는 체크박스 체크할지 말지 판단
+            if( allCnt==checkedCnt ){
+                $(":checkbox:first", tbl).attr("checked", "checked");
+            }
+            else{
+                $(":checkbox:first", tbl).removeAttr("checked");
+            }
+        }).change(function(){
+            if( $(this).is(":checked") ){
+                // 체크박스의  부모 > 부모니까  tr이 되고 tr에  selected 라는  class 를 추가한다.
+                $(this).parent().parent().addClass("selected");
+            }
+            else{
+                $(this).parent().parent().removeClass("selected");
+            }
+        });
+    });
+    
 </script>
+<style>
+#table th {
+	background-color: #ccc;
+}
+
+#table tr.selected {
+	background-color: pink;
+	color: #fff;
+	font-weight: bold;
+}
+
+input[id="ipt"]+label {
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	background-color: #bcbcbc;
+	border-radius: 7px;
+	cursor: pointer;
+}
+
+input[id="ipt"]:checked+label {
+	background-color: blue;
+}
+
+input[id="ipt"] {
+	display: none;
+}
+</style>
 </head>
 <body>
 	<div align="center">
@@ -66,80 +135,89 @@
 			</c:choose>
 		</caption>
 		<hr color="green" width="70%">
-		<!-- 셀렉트박스 기능 구현시 아래 세 개의 버튼은 사라집니다. -->
-		<tr align="left">
-			<td align="left"><input type="button" name="send" value="보낸 쪽지함"
-				<%-- onclick="window.location='message_send?mnum=${sessionScope.memberNum}'" --%>> <input
-				type="button" name="receive" value="받은 쪽지함"
-				<%-- onclick="window.location='message_receive?mnum=${sessionScope.memberNum}'" --%>> <input
-				type="button" name="" value="보관함"
-				onclick="window.location='message_locker'"> <br></td>
-		</tr>
 		<br>
-		<form name="msgform" action="message_delete" method="post">
-			<table border="1" width="80%" align="center" name="table">
+		<form name="msgform" id="msgform" method="post">
+            <table border="1" width="80%" align="center" id="table">
 				<tr valign="center">
-					<td align="center" rowspan="2"><label>전체선택</label><br> <input
-						type="checkbox"
-						onclick="$('[name=table] [type=checkbox]:gt(0)').prop('checked', $(this).is(':checked'));checkOn(this.form);">
-						<input type="checkbox" id="ipt"> <label for="ipt"></label></td>
-					<td align="left" colspan="5"><input type="button" name="del"
-						value="선택삭제" onclick="deleteCheck()"> <input
-						type="button" name="reply" value="답장"
-						onclick="reply()"> <input type="button" name="write" value="쪽지쓰기"
-						onclick="window.location='message_sendForm'"> <input
-						type="button" name="allReply" value="전체답장"
-						onclick="window.location='message_allReply'"> <select
-						name="filter">
+					<th align="center" rowspan="2"><label>전체선택</label><br> 
+					<input type="checkbox" name="first"> <input type="checkbox" id="ipt"> 
+					<label for="ipt"></label></th>
+					<th align="left" colspan="6">
+					<input type="button" name="del" value="선택삭제" onclick="msgformSubmit(1);"> 
+					<input type="button" name="reply" value="답장" onclick="msgformSubmit(2);">
+					<input type="button" name="write" value="쪽지쓰기" onclick="window.location='message_sendForm'"> 
+					<select name="filter">
 							<option value="">:: 필터 ::</option>
 							<option value="allMsg">모든 쪽지</option>
 							<option value="noneMsg">안읽은 쪽지</option>
 							<option value="impMsg">중요 쪽지</option>
-						</select><input type="button" name="button" value="검색"
-						onclick="searching();"> <select name="messageBox">
-						    <option value="">::필터::</option>
-							<option value="">보관함</option>
-							<option value="">받은 쪽지함</option>
-							<option value="">보낸 쪽지함</option>
-					</select><input type="button" value="이동" onclick="move();"></td>
+					</select><input type="button" id="search" value="검색" onclick="searching();">
+					<select name="messageBox">
+							<option value="">:: 필터 ::</option>
+							<option value="locker">보관함</option>
+							<option value="receive">받은 쪽지함</option>
+							<option value="send">보낸 쪽지함</option>
+					</select><input type="button" id="move" value="이동" onclick="moving();"></th>
 				</tr>
 				<tr>
-					<th bgcolor="green" width="10%"><label>번호</label></th>
-					<th bgcolor="green" width="10%"><label>보낸이</label></th>
-					<th bgcolor="green" width="40%"><label>제목</label></th>
-					<th bgcolor="green" width="20%"><label>받은시각</label></th>
-					<th bgcolor="green" width="10%"><label>파일</label></th>
+					<th width="7%"><label>읽음</label></th>
+					<th width="7%"><label>번호</label></th>
+					<th width="10%"><label>보낸이</label></th>
+					<th width="43%"><label>제목</label></th>
+					<c:choose>
+						<c:when test="${mode eq 'send'}">
+							<th width="18%"><label>보낸시간</label></th>
+						</c:when>
+						<c:when test="${mode eq 'receive'}">
+							<th width="18%"><label>받은시간</label></th>
+						</c:when>
+					</c:choose>
+                    <th width="6%"><label>파일</label></th>
 				</tr>
 				<c:if test="${empty messageList}">
 					<tr>
 						<c:choose>
 							<c:when test="${mode eq 'send'}">
-								<td colspan="6" align="center">보낸 쪽지함이 비었습니다.</td>
+								<td colspan="7" align="center">보낸 쪽지함이 비었습니다.</td>
 							</c:when>
 							<c:when test="${mode eq 'receive'}">
-								<td colspan="6" align="center">받은 쪽지함이 비었습니다.</td>
+								<td colspan="7" align="center">받은 쪽지함이 비었습니다.</td>
 							</c:when>
 						</c:choose>
 					</tr>
 				</c:if>
 				<c:forEach var="dto" items="${messageList}">
-					<tr align="center">
-						<td><input type="checkbox" name="msgNum" value="${dto.msgNum}"
-							id="${dto.msgNum}"> <input type="checkbox" id="ipt">
-							<label for="ipt"></label></td>
+					<tr align="center" >
+						<td><input type="checkbox" name="check" value="${dto.msgNum}">
+							<input type="checkbox" id="ipt" name="impt" value="${dto.msgNum}"><label
+							for="ipt"></label></td>
+						<!--  중요메일 표시하기위해 작업중 -->
+						<td>
+						<c:choose>
+							<c:when test="${dto.readNum == 1}">
+								<label><input type="image" src="resources/img/open.jpg" name="read" value="${dto.msgNum}"
+								onclick="readMessage();"></label>
+							</c:when>
+							<c:when test="${dto.readNum == 0}">
+								<label><input type="image" src="resources/img/close.jpg" name="read" value="${dto.msgNum}"
+								onclick="readMessage();"></label>
+							</c:when>
+						</c:choose></td>
 						<td>${dto.msgNum}</td>
-						<td><a href="sel_open();"><label>${dto.sender}</label></a></td>
-						<!-- <select id="s_menu">
-						<option value="1">메일쓰기</option>
-						<option value="2">주소록에 추가</option>
-						<option value="3">보관함으로 이동</option>
-						<option value="4">보낸 사람으로 검색</option>
-						<option value="5">받은 사람으로 검색</option>
-						<option value="6">이 사람이 보낸 메일 모두 검색</option>
-						</select> -->
-						<td><a href="message_content?msgNum=${dto.msgNum}"><label>${dto.title}</label></a></td>
+						<td><a href="message_reply?receiver=${dto.sender}"><label>${dto.sender}</label></a></td>
+						<td><a href="message_content?msgNum=${dto.msgNum}&readDate=${dto.readDate}"><label>${dto.title}</label></a></td>
 						<td><label>${dto.reg_date}</label></td>
-						<td><label><img src="../img/folder.gif"></label></td>
+						<td>
+						<c:choose>
+							<c:when test="${ empty dto.filename}">
+								<label><input type="image" src="resources/img/level.gif" name="file" value="${dto.msgNum}"
+								onclick="readMessage();"></label>
+							</c:when>
+							<c:when test="${not empty dto.filename}">
+								<label><input type="image" src="resources/img/folder.gif" name="file" value="${dto.msgNum}"
+								onclick="readMessage();"></label>
+							</c:when>
+						</c:choose></td>
 					</tr>
 				</c:forEach>
 			</table>
