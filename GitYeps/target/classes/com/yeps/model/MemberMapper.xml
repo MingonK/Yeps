@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.yeps.model">
+
+	<select id="listMember" resultType="MemberDTO">
+		select * from yeps_member
+	</select>
+	
+	<select id="findMember" parameterType="java.util.HashMap" resultType="MemberDTO">
+		${sql}
+	</select>
+
+	<insert id="insertMember" parameterType="MemberDTO">
+		insert into yeps_member values
+		(yeps_member_seq.nextval,#{name},#{email},#{passwd},#{birth},sysdate,0,0,#{ismanager},#{controlcate},#{controlevent},#{controlmember},#{controlstore},#{controlreview})
+	</insert>
+	
+	<select id="confirmEmail" parameterType="java.util.HashMap" resultType="MemberDTO">
+		select * from yeps_member where email=#{email}
+	</select>
+	
+	<delete id="deleteMember" parameterType="int">
+		delete from yeps_member where mnum = #{mnum}
+	</delete>
+	
+	<select id="loginMember" parameterType="MemberDTO" resultType="MemberDTO">
+        select * from yeps_member where email = #{email} and passwd = #{passwd}
+    </select>
+    
+	<!-- 
+	
+	<select id="checkMember" parameterType="java.util.HashMap" resultType="MemberDTO">
+		select * from jsp_member where ssn1=#{ssn1} and ssn2=#{ssn2}
+	</select>
+	
+	<select id="getMember" parameterType="int" resultType="MemberDTO">
+		select * from jsp_member where no=#{no}
+	</select>
+	
+	<update id="updateMember" parameterType="MemberDTO">
+		update jsp_member set passwd=#{passwd} , email=#{email}, hp1=#{hp1}, hp2=#{hp2}, hp3=#{hp3} where no=#{no}
+	</update>
+	 -->
+
+</mapper>
