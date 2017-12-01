@@ -1,13 +1,27 @@
 body {
 	padding: 0;
 	margin: 0;
-	 overflow-x: hidden;
+	overflow-x: hidden;
 }
 
+ul {
+	font-size: 100%;
+	list-style: none;
+}
+
+.footer_ul {
+	padding: 0;
+}
+
+a {
+	color: #0073bb;
+	font: inherit;
+	text-decoration: none;
+}
 #container {
-	 width: 100%;
-	 margin: auto;
-	 border: 1px solid;
+	width: 100%;
+	margin: auto;
+	border: 1px solid;
 }
 
 #header {
@@ -114,7 +128,7 @@ body {
 }
 
 #header_center #header_center_top {
-	border : 1px solid white;
+	border: 1px solid white;
 	margin: auto;
 }
 
@@ -141,60 +155,6 @@ body {
 	vertical-align: middle;
 }
 
-
-
-
-
-/* input[type="text"]{
-      width:200px;
-      height:100%;
-      border:none;
-      font-size:1em;
-      padding-left: 5px;
-      font-style: oblique;
-      display:inline;
-      outline:none;
-      box-sizing: border-box;
-      color:black;
-}
-
-label {
-	background-color: white;
-	width:100px;
-    height:100%;
-    border:none;
-    font-size:1em;
-    padding-left: 5px;
-    font-style: oblique;
-    display:inline;
-    outline:none;
-    box-sizing: border-box;
-    color:black;
-}
-    
-
-
-input[type=button]{
-      width: 30px;
-      height:100%;
-      background-color: lightgray;
-      border:none;
-      background-color: white;
-      font-size:1em;
-      color:#042AaC;
-      outline:none;
-      display:inline;
-      margin-left: -10px;
-      box-sizing: border-box;
-}
-
-input[type=button]:hover{
-      background-color: lightgray;
-} */
-
-
-
-
 #header_bottom {
 	width: 100px;
 	position: absolute;
@@ -206,7 +166,6 @@ input[type=button]:hover{
 	float: left;
 }
 
-
 #content {
 	width: 100%;
 	margin-bottom: 20px;
@@ -215,15 +174,106 @@ input[type=button]:hover{
 }
 
 #bottom {
-	clear:both;
+	clear: both;
 	padding: 20px;
 	border: 1px solid;
 }
 
+<!-- =================================== EVENT =================================== -->
+#super-container {
+	padding-top: 5px;
+	padding-left: 10px;
+}
+
+#Eventcontainer {
+	padding: 0;
+	margin: 0;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+#Eventcontainer ul {
+	margin: 0;
+	width: 960px;
+	overflow: hidden;
+}
+
+li {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	padding-left: 0px;
+}
+
+.return_event {
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.return_event:hover {
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+.return_event:visit {
+	font-weight: bold;
+}
+
+#Eventcontainer #header {
+	margin-left: 40px;
+	width: 960px;
+	height: 40px;
+	border-top: 0px solid;
+	border-left: 0px solid;
+	border-right: 0px solid;
+	border-bottom: 1px solid #e6e6e6;
+	margin-bottom: 10px;
+}
+
+h2, h3{
+	margin: 0;
+	padding: 0;
+	color: #d32323;
+}
+
+#body {
+	width: 660px;
+	height: 734px;
+	left: 40px;
+	margin-left: 40px;
+	font-weight: bold;
+}
+
+#body a {
+	text-decoration: none; font-size: 12px; line-height: 1.5em; color: #0073bb;
+}
 
 
+#body a:hober {
+	text-decoration: underline;
+}
 
+.footer_item {
+	width: 25%;
+	height: auto;
+	float: left;
+	padding: 0 15px; 
+	min-height: 1px; 
+	box-sizing: border-box; 
+	
+}
 
+.footer_ul_li {
+	margin-bottom: 6px; 
+	font-weight: normal;
+}
 
+.footer_ul_li:hover {
+	font-weight: normal;
+	text-decoration: underline;
+}
 
+.footer_ul_li:visit {
+	font-weight: normal;
+}
 
