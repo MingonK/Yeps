@@ -1,16 +1,14 @@
 package com.yeps.service;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.web.model.RestaurantDTO;
-import com.web.model.uploadFileVO;
+import com.yeps.model.RestaurantDTO;
+
 
 /**
  * This is not a best practices class.  It's just an example
