@@ -2,19 +2,22 @@ package com.yeps.model;
 
 public class MemberDTO {
 	private int mnum;
-	private String name;	
+	private String name;
+	private String ssn1;
+	private String ssn2;
 	private String email;
 	private String passwd;
-	private String birth;
 	private String joindate;
 	private int reviewcount;
 	private int imagecount;
+	private String ismaster;
 	private String ismanager;
 	private String controlcate;
 	private String controlevent;
 	private String controlmember;
 	private String controlstore;
 	private String controlreview;
+	private String salt;
 	
 	public int getMnum() {
 		return mnum;
@@ -28,6 +31,18 @@ public class MemberDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getSsn1() {
+		return ssn1;
+	}
+	public void setSsn1(String ssn1) {
+		this.ssn1 = ssn1;
+	}
+	public String getSsn2() {
+		return ssn2;
+	}
+	public void setSsn2(String ssn2) {
+		this.ssn2 = ssn2;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -39,12 +54,6 @@ public class MemberDTO {
 	}
 	public void setPasswd(String passwd) {
 		this.passwd = passwd;
-	}
-	public String getBirth() {
-		return birth;
-	}
-	public void setBirth(String birth) {
-		this.birth = birth;
 	}
 	public String getJoindate() {
 		return joindate;
@@ -63,6 +72,12 @@ public class MemberDTO {
 	}
 	public void setImagecount(int imagecount) {
 		this.imagecount = imagecount;
+	}
+	public String getIsmaster() {
+		return ismaster;
+	}
+	public void setIsmaster(String ismaster) {
+		this.ismaster = ismaster;
 	}
 	public String getIsmanager() {
 		return ismanager;
@@ -99,6 +114,12 @@ public class MemberDTO {
 	}
 	public void setControlreview(String controlreview) {
 		this.controlreview = controlreview;
+	}
+	public String getSalt() {
+		return salt;
+	}
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 	
 	

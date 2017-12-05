@@ -1,49 +1,49 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <html>
 <head>
-	<title>mvc¸â¹ö</title>
+	<title>mvcë©¤ë²„</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
  <body>
 	<div align="center">
 		<hr color="green" width="300">
-		<h2>È¸ ¿ø °ü ¸®</h2>
+		<h2>íšŒ ì› ê´€ ë¦¬</h2>
 		
 		<form name="f" method="post">
 		<select name="search">
-			<option value="email">ÀÌ¸ÞÀÏ</option>
-			<option value="name">ÀÌ¸§</option>
+			<option value="email">ì´ë©”ì¼</option>
+			<option value="name">ì´ë¦„</option>
 		</select>
 		<input type="text" name="searchString" class="box">
-		<input type="submit" value="°Ë»ö">
+		<input type="submit" value="ê²€ìƒ‰">
 		</form>
 		<hr color="green" width="300">
 		<table width="100%" class="outline">
 			<tr>
-				<th class="m3">È¸¿ø¹øÈ£</th>
-				<th class="m3">ÀÌ¸§</th>
-				<th class="m3">ÀÌ¸ÞÀÏ</th>
-				<th class="m3">ºñ¹Ð¹øÈ£</th>
-				<th class="m3">»ý³â¿ùÀÏ</th>
-				<th class="m3">°¡ÀÔÀÔ</th>
-				<th class="m3">¸®ºä°¹¼ö</th>
-				<th class="m3">»çÁø°¹¼ö</th>
-				<th class="m3">°ü¸®ÀÚ</th>
-				<th class="m3">Ä«Å×°í¸®°ü¸®±ÇÇÑ</th>
-				<th class="m3">ÀÌº¥Æ®°ü¸®±ÇÇÑ</th>
-				<th class="m3">À¯Àú°ü¸®±ÇÇÑ</th>
-				<th class="m3">°¡°Ô°ü¸®±ÇÇÑ</th>
-				<th class="m3">¸®ºä°ü¸®±ÇÇÑ</th>
-				<th class="m3">»èÁ¦</th>
+				<th class="m3">íšŒì›ë²ˆí˜¸</th>
+				<th class="m3">ì´ë¦„</th>
+				<th class="m3">ì´ë©”ì¼</th>
+				<th class="m3">ìƒë…„ì›”ì¼</th>
+				<th class="m3">ê°€ìž…ìž…</th>
+				<th class="m3">ë¦¬ë·°ê°¯ìˆ˜</th>
+				<th class="m3">ì‚¬ì§„ê°¯ìˆ˜</th>
+				<th class="m3">ë§ˆìŠ¤í„°</th>
+				<th class="m3">ê´€ë¦¬ìž</th>
+				<th class="m3">ì¹´í…Œê³ ë¦¬ê´€ë¦¬ê¶Œí•œ</th>
+				<th class="m3">ì´ë²¤íŠ¸ê´€ë¦¬ê¶Œí•œ</th>
+				<th class="m3">ìœ ì €ê´€ë¦¬ê¶Œí•œ</th>
+				<th class="m3">ê°€ê²Œê´€ë¦¬ê¶Œí•œ</th>
+				<th class="m3">ë¦¬ë·°ê´€ë¦¬ê¶Œí•œ</th>
+				<th class="m3">ì‚­ì œ</th>
 			</tr>
 	<c:choose>
 		<c:when test="${listMember==null}">
 			<tr>
-				<td colspan="15">µî·ÏµÈ È¸¿øÀÌ ¾ø½À´Ï´Ù.</td>
+				<td colspan="15">ë“±ë¡ëœ íšŒì›ì´ ì—†ìŠµë‹ˆë‹¤.</td>
 			</tr>
 		</c:when>
 		<c:otherwise>
@@ -52,25 +52,29 @@
 				<td align="center">${dto.mnum}</td>
 				<td align="center">${dto.name}</td>
 				<td align="center">${dto.email}</td>
-				<td align="center">${dto.passwd}</td>
-				<td align="center">${dto.birth}</td>
+				<td align="center">${dto.ssn1}</td>
 				<td align="center">${dto.joindate}</td>
 				<td align="center">${dto.reviewcount}</td>
 				<td align="center">${dto.imagecount}</td>
+				<td align="center">${dto.ismaster}</td>
 				<td align="center">${dto.ismanager}</td>
 				<td align="center">${dto.controlcate}</td>
 				<td align="center">${dto.controlevent}</td>
 				<td align="center">${dto.controlmember}</td>
 				<td align="center">${dto.controlstore}</td>
 				<td align="center">${dto.controlreview}</td>
-				<td><a href="member_delete?num=${dto.mnum}">È¸¿ø»èÁ¦</a></td>
+				<c:if test="${dto.ismaster!='y'}">
+					<c:if test="${dto.ismanager!='y'}">
+						<td><a href="member_delete?num=${dto.mnum}">íšŒì›ì‚­ì œ</a></td>
+					</c:if>
+				</c:if>
 			</tr>	
 			</c:forEach>
 		</c:otherwise>
 	</c:choose>	
 		</table>
 		<br>
-		<a href="member_manager">È¸¿ø°ü¸®ÆäÀÌÁö·Î ÀÌµ¿</a>
+		<a href="member_index">ë©”ì¸íŽ˜ì´ì§€ë¡œ ì´ë™</a>
 	</div>
 </body>
 </html>

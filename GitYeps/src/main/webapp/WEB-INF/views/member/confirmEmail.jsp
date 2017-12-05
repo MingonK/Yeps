@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-
-
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <html>
 <head>
-<title>Email Áßº¹È®ÀÎ</title>
+<title>Email ì¤‘ë³µí™•ì¸</title>
 <script type="text/javascript">
 	function change_email(){
 		if(checkForm.email3.options[checkForm.email3.selectedIndex].value == '0'){
@@ -20,45 +18,49 @@
 	}
 	function confirmEmail(){
 		if(checkForm.email1.value=="" || checkForm.email2.value==""){
- 			alert("ÀÌ¸ŞÀÏÁÖ¼Ò¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä")
+ 			alert("ì´ë©”ì¼ì£¼ì†Œë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”")
  			checkForm.email1.focus()
  			return false;
  		}
 		var email = checkForm.email1.value+"@"+checkForm.email2.value;
 		var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 		if(exptext.test(email)==false){
-			//ÀÌ¸ŞÀÏ Çü½ÄÀÌ ¾ËÆÄºª+¼ıÀÚ@¾ËÆÄºª+¼ıÀÚ.¾ËÆÄºª+¼ıÀÚ Çü½ÄÀÌ ¾Æ´Ò°æ¿ì			
-			alert("ÀÌ¸ŞÀÏÇü½ÄÀÌ ¿Ã¹Ù¸£Áö ¾Ê½À´Ï´Ù.");
+			//ì´ë©”ì¼ í˜•ì‹ì´ ì•ŒíŒŒë²³+ìˆ«ì@ì•ŒíŒŒë²³+ìˆ«ì.ì•ŒíŒŒë²³+ìˆ«ì í˜•ì‹ì´ ì•„ë‹ê²½ìš°			
+			alert("ì´ë©”ì¼í˜•ì‹ì´ ì˜¬ë°”ë¥´ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 			document.checkForm.email2.focus();
 			return false;
 		}
 		return true;
 	}
 	
-	function setEmail(email1,email2){
-		opener.document.join.email1.value=email1;
-		opener.document.join.email2.value=email2;
-		opener.document.join.idDuplication.value="idCheck";
-		self.close();
-	}
-	
 	function resetEmail(){
+		opener.inputEmailChk()
 		opener.document.join.email1.value="";
 		opener.document.join.email2.value="";
 		self.close();
 	}
+	
+	function openEmailAuthCheck(){
+		window.open("", "emailAuth", "toolbar=no, location=no, status=no, menubar=no, scrollbars=no, resizable=no, width=300, height=300");
+	 	frm = document.emailauthf;
+	 	frm.action = "member_emailAuth";
+	 	frm.target = "emailAuth";
+	 	frm.method = "POST";
+	 	frm.submit;
+	}
+	
 </script>
 </head>
 <body>
 <c:choose>
 		<c:when test="${isMember==1}">
-			<b><font color="red">${email}</font>´Â ÀÌ¹Ì »ç¿ëÁßÀÎ ÀÌ¸ŞÀÏÀÔ´Ï´Ù.</b>
-			<form name="checkForm" action="member_confirmEmail" onsubmit="return confirmEmail()">
-				<b>´Ù¸¥ ÀÌ¸ŞÀÏÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä.</b><br /><br />
-				<input type="text" name="email1" class="box" maxlength="15" size="20">@
-						<input type="text" name="email2" maxlength="20" class="box">
+			<b><font color="red">${email}</font>ëŠ” ì´ë¯¸ ì‚¬ìš©ì¤‘ì¸ ì´ë©”ì¼ì…ë‹ˆë‹¤.</b>
+			<form name="checkForm" action="member_confirmEmail" onsubmit="confirmEmail()">
+				<b>ë‹¤ë¥¸ ì´ë©”ì¼ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.</b><br /><br />
+				<input type="text" name="email1" class="box" maxlength="15" size="20" onkeypress="if(event.keyCode==13){return false;}">@
+						<input type="text" name="email2" maxlength="20" class="box" onkeypress="if(event.keyCode==13){return false;}">
 						<select name="email3" onchange="change_email()">
-							<option value="0">Á÷Á¢ÀÔ·Â</option>
+							<option value="0">ì§ì ‘ì…ë ¥</option>
 							<option value="gmail.com">gmail.com</option>
 							<option value="hanmail.net">hanmail.net</option>
 							<option value="naver.com">naver.com</option>
@@ -71,15 +73,19 @@
 							<option value="dreamwiz.com">dreamwiz.com</option>
 							<option value="live.com">live.com</option>
 						</select> </b><br /><br />
-					<input type="submit" name="confirm_email" value="Áßº¹È®ÀÎ" >
+					<input type="submit" name="confirm_email" value="ì¤‘ë³µí™•ì¸" >
 			</form>
 		</c:when>
 		<c:otherwise>
 			<center>
-			<b>ÀÔ·ÂÇÏ½Å <font color="red">${email}</font>´Â<br />
-			»ç¿ëÇÏ½Ç ¼ö ÀÖ´Â EmailÀÔ´Ï´Ù. </b><br /><br />
-			<input type="button" value="ÀÎÁõÇÏ±â" onclick="setEmail('${email1}','${email2}')">
-			<input type="button" value="Ãë¼Ò" onclick="resetEmail()"></center>
+			<form name="emailauthf" method="POST" onsubmit="return openEmailAuthCheck()">
+			<b>ì…ë ¥í•˜ì‹  <font color="red">${email}</font>ëŠ”<br />
+			ì‚¬ìš©í•˜ì‹¤ ìˆ˜ ìˆëŠ” Emailì…ë‹ˆë‹¤. </b><br /><br />
+			<input type="hidden" name="email" value="${email}">
+			<input type="submit" value="ì¸ì¦ë©”ì¼ ë°›ê¸°">
+			<input type="button" value="ì·¨ì†Œ" onclick="resetEmail()">
+			</form>
+			</center>
 		</c:otherwise>
 	</c:choose>	
 </body>

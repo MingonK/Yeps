@@ -29,19 +29,10 @@
 				<a href="#"><img src="<c:url value="/resources/images/Yelp_Logo.png"/>"></a>
 			</div>
 			<form name="f" action="post">
-				<div id="header_ceter_footer">
-					<div id="search_cate">
-						<input type="text" name="category">
-					</div>
-					<div id="search_location">
-						<input type="text" name="location">
-					</div>
-					<div id="search_name">
-						<input type="text" name="name">
-					</div>
-					<div id="search_button">
-						<input type="submit" value="돋보기">
-					</div>
+				<div id="header_center_footer">
+					<label>
+						<span>Find</span>
+					</label>
 				</div>
 			</form>
 		</div>
@@ -69,3 +60,73 @@
 </div>	
 </body>
 </html>
+
+
+
+
+
+
+
+<%-- 
+<div id="wrap">
+		<img src="<c:url value="/resources/images/MyPhoto_1151871583_0302.jpg"/>" style="opacity:0.7">
+		<div id="top">
+			<div id="Write">
+				<a href="#" id="onbglink">Write a Review</a>
+			</div>
+			<div id="Events">
+				<a href="#" id="onbglink">Events</a>
+			</div>
+			
+			<div id="signup">
+				<a href="#" id="onbglink">Sign Up</a>
+			</div>
+			<div id="login">
+				<a href="#" id="onbglink">Log in</a>
+			</div>
+		</div>
+		<div id="center">
+			CENTER
+		</div>
+		<div id="bottom">
+			BOTTOM
+		</div>
+	</div> --%>
+
+
+
+
+
+
+
+<%-- 	<div id="wrap">
+		<img src="<c:url value="/resources/images/MyPhoto_1151871583_0302.jpg"/>" style="opacity:0.7">
+		<div id="top">
+			<div id="rink1">
+				<div id="Write">
+					<a href="#" id="onbglink">Write a Review</a>
+				</div>
+				<div id="Events">
+					<a href="#" id="onbglink">Events</a>
+				</div>
+			</div>
+			<div id="rink2">
+				<div>
+					<div id="signup">
+						<a href="#" id="onbglink">Sign Up</a>
+					</div>
+				</div>
+<!-- 			<div id="signup" style="border:1px solid white;">
+				<span style="border-radius:10px white;"><a href="#" id="onbglink">Sign Up</a></span>
+			</div> -->
+				<div id="login">
+					<a href="#" id="onbglink">Log in</a>
+				</div>
+				</div>
+		</div>
+		
+		<div id="center">
+			<a href="#"><img src="<c:url value="/resources/images/yep.png"/>" width="100px" height="70px"></a>
+		</div>
+	</div> --%>
+	

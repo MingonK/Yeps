@@ -32,7 +32,7 @@ public class RestaurantController {
 	}
 	@RequestMapping(value="/restaurant_jusoPopup")
 	public String jusoRest() throws Exception{
-		return "restaurant/jusoPopup";
+		return "jusoPopup";
 	}
 	@RequestMapping(value="/result")
 	public String result() throws Exception{
