@@ -277,3 +277,195 @@ h2, h3{
 	font-weight: normal;
 }
 
+<!-- =================================== MEMBER =================================== -->
+
+p {
+    margin-bottom: 12px;
+}
+
+small {
+    font-size: 12px;
+    line-height: 1.5em;
+}
+
+#super-container {
+   padding-top: 5px;
+   padding-left: 10px;
+}
+
+#Membercontainer {
+   width: auto;
+   padding: 0;
+   margin: 0;
+   font: inherit;
+   vertical-align: baseline;
+}
+
+#lbody {
+   width: 960;
+   height: 80%;
+   margin: 40px auto;
+   font-weight: bold;
+}
+
+#login-wrapper{
+	width: 480;
+   height: 100%;
+   margin: 70px auto;
+   float: left;
+}
+#login{
+   width: 300;
+   height: 100%;
+   margin: auto;
+}
+
+#login_img{
+	width: 480;
+   height: 100%;
+   margin: 70px auto;
+   float: left;
+}
+
+#login_header{
+	margin-bottom: 30px;
+}
+
+#login_header p.subheading {
+	font-size: 15px;
+    font-weight: bold;
+}
+
+#login_header .legal-copy {
+    margin-top: 10px;
+}
+.legal-copy {
+    color: #666;
+    font-size: 12px;
+    line-height: 1.5em;
+}
+
+.loginf [type="text"], .loginf [type="number"], .loginf [type="password"], .loginf [type="email"], .loginf [type="url"], .loginf [type="tel"], .loginf [type="date"], .loginf textarea, .loginf select, .loginf .pseudo-input{
+	
+	display: block;
+	box-sizing: border-box;
+    width: 100%;
+    margin: 0 0 9px;
+    padding: 5px 9px;
+    background: #fff;
+    border: 1px solid #999;
+    border-radius: 3px;
+    font-size: 14px;
+    line-height: 1.28571em;
+    line-height: 1.29em;
+}
+
+.sub-text-box {
+    margin: 12px auto 0;
+    text-align: right;
+}
+
+.signup-link {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: none !important;
+    border: 0 !important;
+    outline: 0 !important;
+    color: #0073bb !important;
+    cursor: pointer !important;
+    font-family: inherit !important;
+    font-size: inherit !important;
+    webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.u-pseudo-link:hover, .u-pseudo-link:focus {
+    text-decoration: underline !important;
+}
+
+.legal-link:hover, .legal-link:focus {
+    text-decoration: underline !important;
+}
+
+.subtle-text {
+    color: #999;
+    font-weight: normal;
+}
+
+.forgot-password {
+    text-align: right;
+    margin-bottom: 12px;
+    margin-top: -12px;
+}
+.forgot-email {
+    text-align: right;
+    margin-bottom: 12px;
+    margin-top: -12px;
+}
+
+.forgot-password:hover, .forgot-password:focus {
+	 cursor: pointer !important;
+    text-decoration: underline !important;
+}
+
+.forgot-email:hover, .forgot-email:focus {
+	 cursor: pointer !important;
+    text-decoration: underline !important;
+}
+
+.ybtn-primary {
+    color: white;
+    border-color: #8d0005;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+    background-color: #d90007;
+    background: -webkit-linear-gradient(#d90007, #c91400);
+    background: linear-gradient(#d90007, #c91400);
+}
+
+.ybtn-primary:hover {
+    background-color: #ed0008;
+    background: -webkit-linear-gradient(#ed0008, #dd1600);
+    background: linear-gradient(#ed0008, #dd1600);
+}
+
+.ybtn--social {
+    padding-right: 5px;
+}
+
+.ybtn-big:not(.ybtn--social) {
+    padding: 12px 18px 13px;
+    font-size: 16px;
+    line-height: 1.3125em;
+}
+
+.ybtn-full{
+    width: 100%;
+    webkit-box-sizing: border-box;
+   	moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.ybtn {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+    cursor: pointer;
+    border: 1px solid;
+    font-weight: bold;
+    text-align: center;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-size: 14px;
+    line-height: 1.28571em;
+    border-color: #000000;
+    color: #ffffff;
+    background-color: #ff8080;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    padding: 8px 19px 9px;
+    border-radius: 3px;
+}
