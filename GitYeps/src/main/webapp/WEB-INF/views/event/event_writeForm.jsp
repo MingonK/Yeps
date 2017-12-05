@@ -90,7 +90,6 @@
 			$('#input_file_label').mouseleave(function() {
 				$(this).css('background-color', 'white');
 			})
-			
 			$('#input_file_cancel').hover(function() {
 				$(this).css('background-color', '#e6e6e6');
 			})
@@ -99,6 +98,12 @@
 			})
 			$('#input_file_cancel').click(function() {
 				$('.upload-name').val('선택된 파일 없음');
+			})
+			$('#event_send').hover(function() {
+				$(this).css('background-color', 'red');
+			})
+			$('#event_send').mouseleave(function() {
+				$(this).css('background-color', '#d32323');
 			})
 			
 			var fileTarget = $('.filebox .upload-hidden');
@@ -424,10 +429,11 @@
 					</div>
 					
 					<div>
-						<input type="submit" value="이벤트 등록" style="backgrount-color: #d32323; width: 150px; height: 40px; margin-right: 10px; border-radius: 3px;">
+						<button type="submit" id="event_send" style="box-shadow: 0 1px 1px rgba(0,0,0,0.3); cursor: pointer; border: 1px solid #8d0005; background: #d90007; width: 120px; height: 40px; margin-right: 10px; border-radius: 3px;">
+							<span style="color: white; font-weight: bold;">이벤트 등록</span>
+						</button>
 						<a href="event_list" style="font-size: 14px;">취소</a>
 					</div>
-	
 				</div>
 				</form>
 			</div>	
