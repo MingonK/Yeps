@@ -17,4 +17,12 @@ public class EventMapper {
 	public List<EventDTO> listEvent() {
 		return sqlSession.selectList("listEvent");
 	}
+	
+	public int insertEvent(EventDTO dto) {
+		return sqlSession.insert("insertEvent", dto);
+	}
+	
+	public EventDTO getEventContent(int evnum) {
+		return sqlSession.selectOne("getEventContent", evnum);
+	}
 }
