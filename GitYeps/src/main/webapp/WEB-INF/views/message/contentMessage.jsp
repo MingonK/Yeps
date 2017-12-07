@@ -12,7 +12,7 @@
 		<br>
 		<form name="contentForm" action="message_delete" method="post">
 			<input type="hidden" name="msgNum" value="${getContent.msgNum }">
-			<table border="1" width="70%" align="center">
+			<table border="0" width="70%" align="center">
 				<tr>
 					<th bgcolor="green" width="20%">보낸이</th>
 					<td>${getContent.sender}</td>

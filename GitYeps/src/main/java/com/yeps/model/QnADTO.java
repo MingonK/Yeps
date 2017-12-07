@@ -2,24 +2,27 @@ package com.yeps.model;
 
 public class QnADTO {
 	private int qnum;
-	private String question;
+	private int mnum;
 	private String title;
 	private String writer;
 	private String content;
-	private String date;
+	private String secret;
+	private String regdate;
 	private int readcount;
-	private String lock;
+	private String ip;
+	private String answered;
+	
 	public int getQnum() {
 		return qnum;
 	}
 	public void setQnum(int qnum) {
 		this.qnum = qnum;
 	}
-	public String getQuestion() {
-		return question;
+	public int getMnum() {
+		return mnum;
 	}
-	public void setQuestion(String question) {
-		this.question = question;
+	public void setMnum(int mnum) {
+		this.mnum = mnum;
 	}
 	public String getTitle() {
 		return title;
@@ -39,11 +42,17 @@ public class QnADTO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getDate() {
-		return date;
+	public String getSecret() {
+		return secret;
 	}
-	public void setDate(String date) {
-		this.date = date;
+	public void setSecret(String secret) {
+		this.secret = secret;
+	}
+	public String getRegdate() {
+		return regdate;
+	}
+	public void setRegdate(String regdate) {
+		this.regdate = regdate;
 	}
 	public int getReadcount() {
 		return readcount;
@@ -51,10 +60,18 @@ public class QnADTO {
 	public void setReadcount(int readcount) {
 		this.readcount = readcount;
 	}
-	public String getLock() {
-		return lock;
+	public String getIp() {
+		return ip;
 	}
-	public void setLock(String lock) {
-		this.lock = lock;
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
+	public String getAnswered() {
+		return answered;
+	}
+	public void setAnswered(String answered) {
+		this.answered = answered;
+	}
+	
+	
 }

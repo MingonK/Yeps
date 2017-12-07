@@ -8,4 +8,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="listEvent" resultType="EventDTO">
 		select * from yeps_event
 	</select>
+	
+	<insert id="insertEvent" parameterType="EventDTO">
+		insert into yeps_event values (yeps_event_seq.nextval, #{cnum}, #{eventname}, #{start_date},
+		 #{start_time}, #{end_date, jdbcType=VARCHAR}, #{end_time, jdbcType=VARCHAR}, #{store_address}, #{content}, #{discount}, #{category}, #{ip})
+	</insert>
+	
+	<select id="getEventContent" parameterType="int">
+		select * from yeps_event where evnum = #{evnum}
+	</select>
 </mapper>
