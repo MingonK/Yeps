@@ -38,8 +38,13 @@ public class EventController {
 
 	@RequestMapping(value = "/event_list")
 	public ModelAndView listEvent() {
-		List<EventDTO> list = eventMapper.listEvent();
-		return new ModelAndView("event/event_list", "eventList", list);
+		ModelAndView mav = new ModelAndView();
+		List<CategoryDTO> list = categoryMapper.listCategory();
+		mav.addObject("set", "events");
+		mav.addObject("categoryList", list);
+		mav.setViewName("event/event_writeForm");
+		
+		return mav;
 	}
 
 	@RequestMapping(value = "/event_write")
