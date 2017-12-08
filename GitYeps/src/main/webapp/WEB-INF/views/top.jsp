@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="style.jsp"%>
+<body>
 <input type="hidden" id="set" value="${set}">
 <div id="page_header">
 	<div id="header_main_content_wrap">
@@ -8,7 +9,7 @@
 			<div id="content_container">
 				<div id="content_container_arrange">
 					<div id="yeps_img">
-						<a href="main_page">Yeps</a>
+						<a href="main">Yeps</a>
 					</div>
 						<div id="yeps_search_arrange_wrap">
 						<form name="page_header_form" method="post" style="margin: 0; padding: 0; width: 100%;">
@@ -160,7 +161,7 @@
 								</div>
 							</div>
 							<div id="yeps_search_arrange" style="float: left;">
-								<label id="yeps_search_arrange_label">
+								<label id="near_label">
 									<span id="label_span">Near</span>
 									<span id="label_input_span">
 										<input type="text" maxlength="80" id="page_header_location_inputs" class="page_header_location_inputs" autocomplete="off" placeholder="지역별 검색" 
@@ -363,12 +364,6 @@
 			$('#footer_list_li_message').css('background', '#9b1a1a');
 		}
 		
-		$('#header_searchbutton').hover(function() {
-			$(this).css('background', '#9b1a1a');
-		})
-		$('#header_searchbutton').mouseleave(function() {
-			$(this).css('background', '#bd1f1f');
-		})
 		$('#footer_list_block').hover(function() {
 			$('#header_page_footer_dropdown').attr('id', 'header_page_footer_dropdown_view');
 			$('#footer_list_li_unit_after').attr('id', 'footer_list_li_unit_after_active');

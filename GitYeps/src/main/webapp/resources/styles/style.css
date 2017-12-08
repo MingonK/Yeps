@@ -173,8 +173,7 @@ h2, h3{
 	line-height: 1.5em; 
 	color: #0073bb;
 }
-
-
+	
 #body a:hober {
 	text-decoration: underline;
 }
@@ -253,13 +252,13 @@ h2, h3{
     font-size: 100%; font: inherit; vertical-align: baseline;
 }
 
-#yeps_search_arrange_label {
+#yeps_search_arrange_label, #near_label {
     border-radius: 0; position: relative; box-shadow: none; padding: 8px 12px;
     border: none; background: #fff; margin: 0; overflow: hidden; cursor: text;
     display: block; font-weight: bold;
 }
 
-#find_label:after, #yeps_search_arrange_label:after {
+#find_label:after, #near_label:after {
 	content: "";
     position: absolute;
     top: 8px;
@@ -299,6 +298,10 @@ h2, h3{
 #header_searchbutton {
 	background: #bd1f1f; border: 0; text-align: center; vertical-align: middle;  display: inline-block; box-shadow: none; border-radius: 0 4px 4px 0; 
 	margin: 0; outline: 0; cursor: pointer; font-weight: bold; width: 54px; height: 37px; padding: 0 15px; user-select: none; font-size: 14px; font: inherit;
+}
+
+#header_searchbutton:hover {
+	background: #9b1a1a;
 }
 
 #header_searchbutton_span {
@@ -507,7 +510,7 @@ h2, h3{
 }
 
 #fork_knife, #breakfast_brunch, #breakfast_brunch, #takeout, #delivery, #coffee_tea, #reservations, #food, #Bars, #location{
-	border-right: 6px solid transparent; border-left: none;
+	border-right: 6px solid transparent; border-left: none; 
 }
 
 #fork_knife_icon, #breakfast_brunch_icon, #coffee_tea_icon, #delivery_icon, #takeout_icon, #reservations_icon, #Bars_icon, #food_icon, #location_icon {
@@ -527,4 +530,4 @@ h2, h3{
 	100%{ display: block; opacity: 1; }
 }
 
-<!-- ================================================================================================================ -->
+<!--================================================================================================================-->
