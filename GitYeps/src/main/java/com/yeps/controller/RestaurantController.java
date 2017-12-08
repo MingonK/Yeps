@@ -3,6 +3,8 @@ package com.yeps.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -30,6 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.yeps.model.RestaurantDTO;
 import com.yeps.model.uploadFileVO;
+import com.yeps.service.BoardPager;
 import com.yeps.service.RestaurantMapper;
 
 /**
@@ -47,7 +50,12 @@ public class RestaurantController {
 
 
 //	private static final Logger logger = LoggerFactory.getLogger(RestaurantController.class);
-
+	
+	
+	@RequestMapping(value="/test")
+	public String test(){
+		return "restaurant/test";
+	}
 
 	@RequestMapping(value="/jusoPopup")
 	public String jusoRest() throws Exception{
@@ -63,9 +71,25 @@ public class RestaurantController {
 		return "restaurant/restaurant_insert";
 	}
 	@RequestMapping(value="/restaurant_insert", method=RequestMethod.POST)
-	public ModelAndView insertRest(HttpServletRequest req,@ModelAttribute RestaurantDTO dto,BindingResult result) throws Exception {
+	public ModelAndView insertRest(HttpServletRequest req,@ModelAttribute RestaurantDTO dto,BindingResult result,MultipartHttpServletRequest mhsq) throws Exception {
 		String msg=null,url=null;
+		String upPath = "D:/spring02/upload/";
+		MultipartHttpServletRequest mr = (MultipartHttpServletRequest) req;
+		Iterator<String> it = mr.getFileNames();
+		String fileName = null;
 
+		while(it.hasNext()) {
+			it.next();
+			MultipartFile mf = mr.getFile("filename");
+			fileName = mf.getOriginalFilename();
+			File file = new File(upPath, fileName);
+			if(mf.getSize() != 0) {
+				mf.transferTo(file);
+				dto.setFilename(fileName);
+			}else {
+				dto.setFilename("");
+			}
+		}
 		int res=restaurantMapper.insertRest(dto);
 		if(res>0) {
 			msg="레스토랑 등록 성공";
@@ -89,8 +113,6 @@ public class RestaurantController {
 		String msg=null,url=null;
 		String rnum=req.getParameter("rnum");
 		String realFolder = "D:/spring02/upload/";
-		//	         HttpSession session = req.getSession();
-		//	         String upPath = session.getServletContext().getRealPath("/resources/files/");
 
 		File dir = new File(realFolder);
 		if (!dir.isDirectory()) {
@@ -132,10 +154,22 @@ public class RestaurantController {
 
 
 	@RequestMapping(value="/restaurant_list")
-	public ModelAndView listRest() throws Exception{
-		List<RestaurantDTO> list = restaurantMapper.listRest();
-		ModelAndView mav=new ModelAndView();
-		mav.addObject("restList",list);
+	public ModelAndView listRest(@RequestParam(defaultValue="1") int curPage) throws Exception{
+	    int count = restaurantMapper.getCount();
+	    // 페이지 나누기 관련 처리
+	    BoardPager boardPager = new BoardPager(count, curPage);
+	    int start = boardPager.getPageBegin();
+	    int end = boardPager.getPageEnd();
+	    
+		List<RestaurantDTO> list = restaurantMapper.listRest(start, end);
+		
+	    Map<String, Object> map = new HashMap<String, Object>();
+	    map.put("list", list); // list
+	    map.put("count", count); // 레코드의 갯수
+	    map.put("boardPager", boardPager);
+	    
+	    ModelAndView mav = new ModelAndView();
+	    mav.addObject("map", map); 
 		mav.setViewName("restaurant/restaurant_list");
 		return mav;
 	}
