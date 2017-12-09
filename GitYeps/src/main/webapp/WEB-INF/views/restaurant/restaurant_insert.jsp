@@ -60,9 +60,7 @@ function removeChar(event) {
 			
 		}
 	}
-	function test3() {
 
-	}
 
 	function add() {
 		var div = document.createElement("DIV");
@@ -83,9 +81,10 @@ function removeChar(event) {
 		}
 		document.getElementById("day").value = d.options[d.selectedIndex + 1].value;
 		
+		
+		
 		document.getElementById("output").appendChild(document.createElement('div')).innerHTML = "<span>"+day[day2]+"    "+"</span>"+"<span>"+start+"</span>"+"<span>"+"&nbsp-&nbsp"+"</span>"+"<span>"+end+"</span>"+
-		"<input type='hidden' name='"+week[day2]+"' value='"+day[day2]+" - "+start+" "+end+"'/>";
-// 		document.getElementsByName('hours')[k++].value=day[day2]+" - "+start+" "+end
+		"<input type='hidden' name='"+week[day2]+"' value='"+start+" - "+end+"'/>";
 	}
 
 	function remove() {
@@ -101,7 +100,7 @@ function removeChar(event) {
 				"width=570,height=420, scrollbars=yes, resizable=yes");
 	}
 	function jusoCallBack(roadAddrPart1, addrDetail, roadAddrPart2, zipNo) {
-		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다
 		document.restForm.roadAddrPart1.value = roadAddrPart1;
 		document.restForm.roadAddrPart2.value = roadAddrPart2;
 		document.restForm.addrDetail.value = addrDetail;
@@ -126,6 +125,7 @@ function removeChar(event) {
 			}
 		}
 		document.getElementById("alcohol").value = txt;
+		
 		alert("실행")
 		return true;
 	}
@@ -136,12 +136,18 @@ function removeChar(event) {
 </head>
 <body>
 	<div align="center" >
-	<form name="restForm" id="restForm" method="post" action="restaurant_insert" onsubmit="return test();">
+	<form name="restForm" id="restForm" enctype="multipart/form-data" method="post" action="restaurant_insert" onsubmit="return test();">
 		<table border="1" width="600">
 		<tr>
 			<td>레스토랑 이름</td>		
 			<td>
 				<input type="text" name="rname" value="지원의 집">
+			</td>
+		<tr>
+		
+					<td>레스토랑 사진</td>
+			<td>
+				<input type="file" name="filename">
 			</td>
 		</tr>
 				<tr>
@@ -346,45 +352,45 @@ function removeChar(event) {
 		<tr>
 			<td>예약</td>		
 			<td>
-				<input type="radio" id="reserv" name="reserv" value="1" checked>
+				<input type="radio" id="reserv" name="reserv" value="가능" checked>
 				<label for="reserv">가능</label>
-				<input type="radio" id="reserv2" name="reserv" value="0">
+				<input type="radio" id="reserv2" name="reserv" value="불가능">
 				<label for="reserv2">불가능</label>
 			</td>
 		</tr>
 		<tr>
 			<td>배달</td>		
 			<td>
-				<input type="radio" id="delivery" name="delivery" value="1" checked>
+				<input type="radio" id="delivery" name="delivery" value="가능" checked>
 				<label for="delivery">가능</label>
-				<input type="radio" id="delivery2" name="delivery" value="0">
+				<input type="radio" id="delivery2" name="delivery" value="불가능">
 				<label for="delivery2">불가능</label>
 			</td>
 		</tr>
 		<tr>
 			<td>TAKEOUT</td>		
 			<td>
-				<input type="radio" id="takeout" name="takeout" value="1" checked>
+				<input type="radio" id="takeout" name="takeout" value="가능" checked>
 				<label for="takeout">가능</label>
-				<input type="radio" id="takeout2" name="takeout" value="0">
+				<input type="radio" id="takeout2" name="takeout" value="불가능">
 				<label for="takeout2">불가능</label>
 			</td>
 		</tr>
 		<tr>
 			<td>주차장</td>		
 			<td>
-				<input type="radio" id="parking" name="parking" value="1" checked>
+				<input type="radio" id="parking" name="parking" value="있음" checked>
 				<label for="parking">있음</label>
-				<input type="radio" id="parking2" name="parking" value="0">
+				<input type="radio" id="parking2" name="parking" value="없음">
 				<label for="parking2">없음</label>
 			</td>
 		</tr>
 		<tr>
 			<td>단체예약</td>		
 			<td>
-				<input type="radio" id="groupreserv" name="groupreserv" value="1" checked>
+				<input type="radio" id="groupreserv" name="groupreserv" value="가능" checked>
 				<label for="groupreserv">가능</label>
-				<input type="radio" id="groupreserv2" name="groupreserv" value="0">
+				<input type="radio" id="groupreserv2" name="groupreserv" value="불가능">
 				<label for="groupreserv2">불가능</label>
 			</td>
 		</tr>
@@ -401,9 +407,9 @@ function removeChar(event) {
 		<tr>
 			<td>키드존</td>		
 				<td>
-					<input type="radio" id="kidzone" name="kidzone" value="1" checked>
+					<input type="radio" id="kidzone" name="kidzone" value="있음" checked>
 					<label for="kidzone">있음</label>
-					<input type="radio" id="kidzone2" name="kidzone" value="0">
+					<input type="radio" id="kidzone2" name="kidzone" value="없음">
 					<label for="kidzone2">없음</label>
 				</td>
 		</tr>
@@ -423,27 +429,27 @@ function removeChar(event) {
 		<tr>
 			<td>대기실</td>		
 			<td>
-				<input type="radio" id="waiting" name="waiting" value="1" checked>
+				<input type="radio" id="waiting" name="waiting" value="있음" checked>
 				<label for="waiting">있음</label>
-				<input type="radio" id="waiting2" name="waiting" value="0">
+				<input type="radio" id="waiting2" name="waiting" value="없음">
 				<label for="waiting2">없음</label>
 			</td>
 		</tr>
 		<tr>
 			<td>WIFI</td>		
 			<td>
-				<input type="radio" id="wifi" name="wifi" value="1" checked>
-				<label for="wifi">가능</label>
-				<input type="radio" id="wifi2" name="wifi" value="0">
-				<label for="wifi2">불가능</label>
+				<input type="radio" id="wifi" name="wifi" value="있음" checked>
+				<label for="wifi">있음</label>
+				<input type="radio" id="wifi2" name="wifi" value="없음">
+				<label for="wifi2">없음</label>
 			</td>
 		</tr>
 		<tr>
 			<td>화장실</td>		
 			<td>
-				<input type="radio" id="toilet" name="toilet" value="1" checked>
+				<input type="radio" id="toilet" name="toilet" value="있음" checked>
 				<label for="toilet">있음</label>
-				<input type="radio" id="toilet2" name="toilet" value="0">
+				<input type="radio" id="toilet2" name="toilet" value="없음">
 				<label for="toilet2">없음</label>
 			</td>
 		</tr>

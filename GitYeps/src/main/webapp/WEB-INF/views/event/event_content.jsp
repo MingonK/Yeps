@@ -7,8 +7,8 @@
 	<%@ include file="../style.jsp"%>
 </head>
 <body>
-	<div id="">
-		<%@ include file="../top.jsp"%>
-		
-	</div>
+	<%@ include file="../top.jsp"%>
+	<h2>${eventDTO.eventname}</h2><br>	
+	<h2>${eventDTO.evnum}</h2>
+	<h3><a href="event_insert_photo?evnum=${eventDTO.evnum}">${eventDTO.eventname}</a></h3>
 <%@ include file="../bottom.jsp"%>

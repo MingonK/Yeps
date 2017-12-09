@@ -1,7 +1,6 @@
 package com.yeps.model;
 
 public class EventDTO {
-<<<<<<< HEAD
 
 	private int evnum;			// EventDTO ���� �ѹ�
 	private int rnum;			// 외래키

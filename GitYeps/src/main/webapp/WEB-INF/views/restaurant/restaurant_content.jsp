@@ -1,72 +1,175 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js" ></script>
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=jD9qGVpvZh7Zobclojwp&submodules=geocoder"></script>
+<%@include file="../top.jsp" %>
+<script type="text/javascript">
+function today1(){
+	var day=new Array("mon","tue","wed","thu","fri","sat","sun");
+	var mon="mon"
+	var d = new Date();
+	var day2=d.getDay();
+	
+	/* alert("${getRest.mon}"); */
+	
+}
+</script>
 
 <html>
 <head>
-<title>·¹½ºÅä¶û</title>
+<title>ë ˆìŠ¤í† ë‘</title>
+
 </head>
-<body>
-	<div align="center" width="900">
-		<b>·¹½ºÅä¶û º¸±â</b>
-		<h1>${getRest.rname }</h1>
-		<a href="restaurant_uploadForm2?rnum=${getRest.rnum}">»çÁø Ãß°¡</a><br>
-		<c:forEach var="dto" items="${uploadFileList}">
-		<img width="100" height="100" src="getImage/${dto.file_name }">
-		</c:forEach>
-	</div>
-	<div id="in">
-	    <div id="map" style="width:250px;height:250px;"></div>
-	    <span>${getRest.roadAddrPart1}</span><br>
-	    <span>${getRest.roadAddrPart2}</span><br>
-	    <span>${getRest.addrDetail}</span>
-	</div>
-	    
-	    
-	    
-	    
+<body onload="today1()">
+
+	<div id="super-container">
+	<div id="map" style="width:300px;height:150px;"></div>
     <script>
-      var map = new naver.maps.Map('map',{
-    	  mapTypeControl : true 
-      });
-      var myaddress = 'ºÀ¿À´ë·Î 463¹ø±æ 12'// µµ·Î¸í ÁÖ¼Ò³ª Áö¹ø ÁÖ¼Ò¸¸ °¡´É (°Ç¹°¸í ºÒ°¡!!!!)
-      
+      var map = new naver.maps.Map('map');
+      var myaddress = '${getRest.roadAddrPart1}';// ë„ë¡œëª… ì£¼ì†Œë‚˜ ì§€ë²ˆ ì£¼ì†Œë§Œ ê°€ëŠ¥ (ê±´ë¬¼ëª… ë¶ˆê°€!!!!)
       naver.maps.Service.geocode({address: myaddress}, function(status, response) {
           if (status !== naver.maps.Service.Status.OK) {
-              return alert(myaddress + 'ÀÇ °Ë»ö °á°ú°¡ ¾ø°Å³ª ±âÅ¸ ³×Æ®¿öÅ© ¿¡·¯');
+              return alert(myaddress + 'ì˜ ê²€ìƒ‰ ê²°ê³¼ê°€ ì—†ê±°ë‚˜ ê¸°íƒ€ ë„¤íŠ¸ì›Œí¬ ì—ëŸ¬');
           }
           var result = response.result;
-          // °Ë»ö °á°ú °¹¼ö: result.total
-          // Ã¹¹øÂ° °á°ú °á°ú ÁÖ¼Ò: result.items[0].address
-          // Ã¹¹øÂ° °Ë»ö °á°ú ÁÂÇ¥: result.items[0].point.y, result.items[0].point.x
+          // ê²€ìƒ‰ ê²°ê³¼ ê°¯ìˆ˜: result.total
+          // ì²«ë²ˆì§¸ ê²°ê³¼ ê²°ê³¼ ì£¼ì†Œ: result.items[0].address
+          // ì²«ë²ˆì§¸ ê²€ìƒ‰ ê²°ê³¼ ì¢Œí‘œ: result.items[0].point.y, result.items[0].point.x
           var myaddr = new naver.maps.Point(result.items[0].point.x, result.items[0].point.y);
-          map.setCenter(myaddr); // °Ë»öµÈ ÁÂÇ¥·Î Áöµµ ÀÌµ¿
-          //¸¶Ä¿ Ç¥½Ã
-          
+          map.setCenter(myaddr); // ê²€ìƒ‰ëœ ì¢Œí‘œë¡œ ì§€ë„ ì´ë™
+          // ë§ˆì»¤ í‘œì‹œ
           var marker = new naver.maps.Marker({
             position: myaddr,
             map: map
           });
-          
-//           // ¸¶Ä¿ Å¬¸¯ ÀÌº¥Æ® Ã³¸®
-//           naver.maps.Event.addListener(marker, "click", function(e) {
-//             if (infowindow.getMap()) {
-//                 infowindow.close();
-//             } else {
-//                 infowindow.open(map, marker);
-//             }
-//           });
-//           // ¸¶Å© Å¬¸¯½Ã ÀÎÆ÷À©µµ¿ì ¿ÀÇÂ
-//           var infowindow = new naver.maps.InfoWindow({
-//               content: '<h4> [³×ÀÌ¹ö °³¹ßÀÚ¼¾ÅÍ]</h4><a href="https://developers.naver.com" target="_blank"><img src="https://developers.naver.com/inc/devcenter/images/nd_img.png"></a>'
-//           });
+          // ë§ˆì»¤ í´ë¦­ ì´ë²¤íŠ¸ ì²˜ë¦¬
+          naver.maps.Event.addListener(marker, "click", function(e) {
+            if (infowindow.getMap()) {
+                infowindow.close();
+            } else {
+                infowindow.open(map, marker);
+            }
+          });
+          // ë§ˆí¬ í´ë¦­ì‹œ ì¸í¬ìœˆë„ìš° ì˜¤í”ˆ
       });
       </script>
+	    <span>${getRest.roadAddrPart1}</span><br>
+	    <span>${getRest.roadAddrPart2}</span><br>
+	    <span>${getRest.addrDetail}</span>
+	    </div>
+	    <table style=width:300px border="1">
+	    		<tr>
+	    			<th>ì˜¤ëŠ˜</th>
+	    			<td id="today1"></td>
+
+	    		</tr>
+	    		<tr>
+	    			<th>ëª¨ë“ ë©”ë‰´</th>
+	    			<td><a href="#">ëª¨ë“ ë©”ë‰´</a></td>
+	    		</tr>
+	    		<tr>
+	    			<th>í‰ê· ê°€ê²©</th>
+	    			<td>??</td>
+	    		</tr>
+	    </table>
+	    <div id="hours">
+	    <h1>ì˜ì—…ì‹œê°„</h1>
+	    <table style=width:300px>
+	    	<tbody>
+	    		<tr>
+	    		<th>ì›”ìš”ì¼</th>
+	    			<td><span>${getRest.mon}</span></td><td></td>
+	    		</tr>
+	    		<tr>
+	    		<th>í™”ìš”ì¼</th>
+	    			<td>${getRest.tue}</td>
+	    		</tr>
+	    		<tr>
+	    		<th>ìˆ˜ìš”ì¼</th>
+	    			<td>${getRest.wed}</td>
+	    		</tr>
+	    		<tr>
+	    		<th>ëª©ìš”ì¼</th>
+	    			<td>${getRest.thu}</td>
+	    		</tr>
+	    		<tr>
+	    		<th>ê¸ˆìš”ì¼</th>
+	    			<td>${getRest.fri}</td>
+	    		</tr>
+	    		<tr>
+	    		<th>í† ìš”ì¼</th>
+	    			<td>${getRest.sat}</td>
+	    		</tr>
+	    		<tr>
+	    		<th>ì¼ìš”ì¼</th>
+	    			<td>${getRest.sun}</td>
+	    		</tr>
+	    	</tbody>
+	    </table>
+	    <h1>ê°€ê²Œì •ë³´</h1>
+			<table style=width:300px>
+				<tbody>
+					<tr>
+						<th>ì•‰ëŠ”ë°©ì‹</th>
+						<td>${getRest.reststyle }</td>
+					</tr>
+					<tr>
+						<th>ì˜ˆì•½</th>
+						<td>${getRest.reserv }</td>
+					</tr>
+					<tr>
+						<th>ë°°ë‹¬</th>
+						<td>${getRest.delivery }</td>
+					</tr>
+					<tr>
+						<th>TAKEOUT</th>
+						<td>${getRest.takeout }</td>
+					</tr>
+					<tr>
+						<th>ì£¼ì°¨ì¥</th>
+						<td>${getRest.parking }</td>
+					</tr>
+					<tr>
+						<th>í‚¤ë“œì¡´</th>
+						<td>${getRest.kidzone }</td>
+					</tr>
+					<tr>
+						<th>ì†ŒìŒ</th>
+						<td>${getRest.noise }</td>
+					</tr>
+					<tr>
+						<th>ì£¼ë¥˜</th>
+						<td>${getRest.alcohol }</td>
+					</tr>
+					<tr>
+						<th>ëŒ€ê¸°ì‹¤</th>
+						<td>${getRest.waiting }</td>
+					</tr>
+					<tr>
+						<th>ì™€ì´íŒŒì´</th>
+						<td>${getRest.wifi }</td>
+					</tr>
+					<tr>
+						<th>í™”ì¥ì‹¤</th>
+						<td>${getRest.toilet }</td>
+					</tr>
+					<tr>
+						<th>í…Œì´ë¸” ê°¯ìˆ˜</th>
+						<td>${getRest.tablecount } ${getRest.standard}ê°œ ê¸°ì¤€</td>
+					</tr>
+					<tr>
+						<th>ë°”ìœì‹œê°„</th>
+						<td>${getRest.busytime }</td>
+					</tr>
+				</tbody>
+			</table>
+	    		</div>
 </body>
 </html>
-
-
+<script>
+</script>
+<%@include file="../bottom.jsp" %>
 
 
 

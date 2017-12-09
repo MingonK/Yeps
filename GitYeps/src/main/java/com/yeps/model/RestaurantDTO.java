@@ -1,14 +1,20 @@
 package com.yeps.model;
 
-import java.util.List;
 
 public class RestaurantDTO {
-	private List<RestaurantDTO> list;
 	private int rnum;		// primary Key
 	private int cnum;
 	private String rname;
 	private String zipno;
-
+	
+	private String filename;
+	
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
 	private String roadAddrPart1;
 	private String addrDetail;
 	private String roadAddrPart2;
@@ -40,13 +46,6 @@ public class RestaurantDTO {
 	private String standard;
 	private String busytime;	// 바쁜시간
 	
-	
-	public List<RestaurantDTO> getList() {
-		return list;
-	}
-	public void setList(List<RestaurantDTO> list) {
-		this.list = list;
-	}
 	
 	public int getRnum() {
 		return rnum;
