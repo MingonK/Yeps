@@ -15,11 +15,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 
 	<insert id="writeMessage" parameterType="MessageDTO">
-		insert into yeps_message values(yeps_message_seq.nextval, #{title}, #{receiver}, #{sender}, #{content}, sysdate, 0, 0, #{filename}, #{filesize},0)
+		insert into yeps_message values(yeps_message_seq.nextval, #{title}, #{receiver}, 0,#{content}, sysdate, 0, 0,0,0,0)
 	</insert>
 
-	<select id="messageList" resultType="MessageDTO">
-		select * from yeps_message
+	<select id="messageList" parameterType="java.util.HashMap" resultType="MessageDTO">
+		select * from(select rownum rn,A.* from (select * from yeps_message order by msgnum asc)A) where islocker!=1 and rn between #{start} and #{end} 
+	</select>
+	
+	<select id="lockerList" resultType="MessageDTO">
+	    select * from yeps_message where islocker=1
 	</select>
 
 	<select id="sendList" resultType="MessageDTO">
@@ -31,20 +35,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="noReadMessage" resultType="MessageDTO">
-	    select * from yeps_message where readnum=0
+	    select * from yeps_message where readnum=0 and islocker=0
 	</select>
 	
-	<select id="importantMessage" resultType="MessageDTO">
-	    select * from yeps_message where imptNum=1
+	<select id="noReadLocker" resultType="MessageDTO">
+	    select * from yeps_message where readnum=0 and islocker=1
 	</select>
 	
 	<select id="receiver" resultType="String">
 	    select sender from yeps_message where msgnum=#{msgnum} 
 	</select>
 	
-	<!-- <select id="getCount" resultType="int">
+	<select id="sender" resultType="String">
+	    select name from yeps_member where mnum=#{mnum} 
+	</select>
+	
+	<select id="getMember" resultType="MemberDTO">
+	    select * from yeps_member where name=#{name}
+	</select>
+
+	 <select id="getMessageCount" resultType="int">
 	    select count(*) from yeps_message 
-	</select> -->
+	</select>   
 	
 	<update id="updateReadDate" parameterType="int">
 	    update yeps_message set readdate=sysdate where msgnum=#{msgnum}
@@ -58,9 +70,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         update yeps_message set readnum=0 where msgnum=#{msgnum}
     </update>
     
-     <update id="updateImptNum" parameterType="int">
-        update yeps_message set imptnum=1 where msgnum=#{msgnum}
+    <update id="moveToLocker" parameterType="int">
+        update yeps_message set islocker=1 where msgnum=#{msgnum}
     </update>
+    
+     <update id="moveToMsgBox" parameterType="int">
+        update yeps_message set islocker=0 where msgnum=#{msgnum}
+    </update>
+    
     
 </mapper>
 
