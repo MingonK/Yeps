@@ -1,6 +1,7 @@
 package com.yeps.model;
 
 public class EventDTO {
+	
 	private int evnum;
 	private int cnum;				// foreign key
 	private String eventname;		// 150byte
