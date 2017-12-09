@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../top.jsp"%>
 <%@ include file="../style.jsp"%>
 <html>
 <head>
@@ -43,43 +44,6 @@
    	 </script>
 </head>
 <body>
-	<div id="page_header">
-   <div id="header_main_content_wrap">
-      <div id="main_content_wrap">
-         <div id="content_container">
-            <div id="content_container_arrange">
-               <div id="yeps_img">
-                  <a href="main_page"><img src="getYelp_Logo" style="width: 80px; height: 40px;"></a>
-               </div>
-               <div id="yeps_search_arrange_wrap">
-                  <div id="yeps_search_arrange">
-                     <form name="" action="search" method="post">
-                        <div id="yeps_search_find_arrange">
-                           <label id="find_label">
-                              <span id="find_label_span">Find</span>
-                              <span id="find_label_input_span">
-                                 <input type="text" maxlength="64" id="find_input" autocomplete="off" value="" placeholder="">
-                              </span>
-                           </label>
-                        </div>
-                        <div id="yeps_search_near_arrange">
-                        
-                        </div>
-                        <div id="yeps_search_name_arrange">
-                        
-                        </div>
-                     </form>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-   <div id="header_main_content_footer_wrap">
-      하단
-      
-   </div>
-</div>
 
 <div id="super-container">
 	<div id="Membercontainer">
@@ -121,9 +85,8 @@
 		</div>
 	</div>
 </div>
-</body>
-</html>
 
+<%@ include file="../bottom.jsp"%>
 
 
 
