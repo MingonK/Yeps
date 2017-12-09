@@ -222,8 +222,8 @@ public class MemberController {
 				session.setAttribute("memberNum", dto2.getMnum());
 				session.setAttribute("memberEmail", dto2.getEmail());
 				session.setAttribute("memberName", dto2.getName());
-				msg = "로그인 성공";
-				url = "member_index";
+				mav.setViewName("member/index");
+				return mav;
 			}
 			
 		}else{
@@ -279,10 +279,10 @@ public class MemberController {
 		String ssn2 = dto.getSsn2();
 		ssn2 = SHA256Util.getEncrypt(ssn2, "yeps");
 		dto.setSsn2(ssn2);
-
-		String email = memberMapper.findMemberEmail(dto);
-		if (email != null){
-			mav.addObject("email", email);
+		
+		List<String> emailList = memberMapper.findMemberEmail(dto);
+		if (emailList != null){
+			mav.addObject("emailList", emailList);
 		}
 		mav.setViewName("member/findEmailOK");
 		return mav;

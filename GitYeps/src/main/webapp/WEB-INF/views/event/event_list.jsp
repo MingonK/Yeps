@@ -4,8 +4,12 @@
 <html>
 <head>
 	<title>Yeps 이벤트 리스트</title>
+	<link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
+	<script src="//code.jquery.com/jquery.min.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 </head>
-<body>
+<%@ include file="../top.jsp"%>
 <div align="center">
 	<table border="1" width="100%">
 		<caption>이 벤 트 목 록</caption>

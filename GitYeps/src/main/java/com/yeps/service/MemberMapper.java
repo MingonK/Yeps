@@ -66,9 +66,9 @@ public class MemberMapper {
 		}
 	}
 	
-	public String findMemberEmail(MemberDTO dto) {
+	public List<String> findMemberEmail(MemberDTO dto) {
 		try {
-			return sqlSession.selectOne("findMemberEmail", dto);
+			return sqlSession.selectList("findMemberEmail", dto);
 		}catch(Exception e) {
 			return null;
 		}

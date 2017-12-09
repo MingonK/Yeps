@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+
+<%@include file="../style.jsp"%>
+<link rel="stylesheet" type="text/css"
+	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css?ver=1" />
+<script src="//code.jquery.com/jquery.min.js?ver=1"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js?ver=1"></script>
 <script type="text/javascript">
 	function numCheck(authNum,email1,email2){
- 
 		if(!authenform.authnum.value){
 			alert("인증번호를 입력하세요");
 			return false;
@@ -19,22 +24,28 @@
 	}
 	
 	function setEmail(email1,email2){
-		opener.opener.document.join.email1.value=email1;
-		opener.opener.document.join.email2.value=email2;
-		opener.opener.document.join.idDuplication.value="idCheck";
-		opener.opener.document.join.mailCheck.value="이메일 인증완료";
+		opener.opener.document.joinf.email1.value=email1;
+		opener.opener.document.joinf.email2.value=email2;
+		opener.opener.document.joinf.idDuplication.value="idCheck";
+		opener.opener.document.joinf.mailCheck.value="이메일 인증완료";
 		opener.close();
+		self.close();
 	}
-	
 </script>
 
-<center>
-<br /><br />
-<h5>인증번호 7자리를 입력하세요</h5>
-<div class="container">
-	<form method="post" name="authenform">
-		<input type="text" name="authnum" onkeypress="if(event.keyCode==13){return false;}"><br /><br />
-		<input type="button" value="인증번호 확인" onclick="numCheck('${authNum}','${email1}','${email2}');">
-	</form>
-</div>
-</center>
+<body>
+	<div id="email_auth">
+		<div id="email_auth_top">
+			<p class="auth_top">인증번호 7자리를 입력하세요.</p>
+		</div>
+		<form id="email_auth_middle" method="post" name="authenform">
+			<ul class="inline-layout">
+				<li style="width: 70%"><input type="text" name="authnum" placeholder="인증번호 입력" onkeypress="if(event.keyCode==13){return false;}"></li>
+			</ul>
+		</form>
+		<div id="email_auth_bottom">
+			<input type="button" value="인증번호 확인" class="confirmemailbtn confirmbtn-primary confirmbtn-big confirmbtn-full" onclick="numCheck('${authNum}','${email1}','${email2}');"> 
+			<input type="button" class="confirmemailbtn confirmbtn-primary confirmbtn-big confirmbtn-full" value="취소" onclick='self.close()' style="margin-top: -10px;">
+		</div>
+	</div>
+</body>

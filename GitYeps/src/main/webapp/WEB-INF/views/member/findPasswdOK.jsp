@@ -1,14 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@include file="../style.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-<title>findID</title>
-<script type="text/javascript">
-	function closeForm(){
-		self.close();
-	}
-</script>
+<title>findPw</title>
 </head>
 <body>
 	<c:choose>
@@ -23,13 +19,13 @@
 		<c:when test="${temporaryPw==-1}">
 			<center>
 				<b>회원정보가 존재하지 않습니다.</b><br /><br />
-				<input type="button" value="확인" onclick="closeForm()">
+				<input type="button" value="확인" onclick='self.close()'>
 			</center>
 		</c:when>
 		<c:otherwise>
 			<center>
 				<b>잠시후 다시 시도해주세요.</b><br /><br />
-				<input type="button" value="확인" onclick="closeForm()">
+				<input type="button" value="확인" onclick='self.close()'>
 			</center>
 		</c:otherwise>
 	</c:choose>

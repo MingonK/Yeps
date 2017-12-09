@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ include file="../top.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ include file="../top.jsp"%>
 <html>
 <head>
-	<title>YEPS회원관리</title>
+<title>YEPS회원관리</title>
 </head>
 <body>
 	<div align="center">
@@ -21,8 +21,7 @@
 				<td colspan="4">아무 사진이나 넣어주세요!!</td>
 			</tr>
 			<tr height="50">
-				<td colspan="4" align="center">
-					<a href="qna_index">QnA로 가기</a>
+				<td colspan="4" align="center"><a href="qna_index">QnA로 가기</a>
 				</td>
 			</tr>
 		</table>

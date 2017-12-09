@@ -5,12 +5,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.web.model">
-	<select id="listRestaurant" resultType="RestaurantDTO">
-		select * from restaurant
+	<select id="listRestaurant" resultType="RestaurantDTO" parameterType="RestaurantDTO">
+		select * from (select rownum rn, A.* from (select * from restaurant order by rnum desc)A) where rn between #{start} and #{end}
 	</select>
 
 	<insert id="insertRestaurant" parameterType="RestaurantDTO">
-		insert into restaurant values(restaurant_seq.nextval,0,#{rname},#{zipno},#{roadAddrPart1},#{addrDetail},#{roadAddrPart2},
+		insert into restaurant values(restaurant_seq.nextval,0,#{rname},#{filename},#{zipno},#{roadAddrPart1},#{addrDetail},#{roadAddrPart2},
 		#{raddress},#{hp2},#{hp3},#{foodstyle},#{mon},#{tue},#{wed},#{thu},#{fri},#{sat},#{sun},
 		#{reststyle},#{reserv},#{delivery},#{takeout},#{parking},#{kidzone},#{groupreserv},#{noise},#{alcohol},#{waiting},
 		#{wifi},#{toilet},#{tablecount},#{standard},#{busytime})
@@ -20,13 +20,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from restaurant where rnum=#{rnum}
 	</select>
 	<insert id="uploadFile" parameterType="HashMap">
-    INSERT INTO
-    "FILE_TABLE" (FILE_NUM, O_NAME, FILE_NAME, FILE_SIZE,RNUM) VALUES (file_seq.nextval, #{originalfileName}, #{saveFileName}, #{fileSize}, #{rnum})
-</insert>
+   		 INSERT INTO
+    	"FILE_TABLE" (FILE_NUM, O_NAME, FILE_NAME, FILE_SIZE,RNUM) VALUES (file_seq.nextval, #{originalfileName}, #{saveFileName}, #{fileSize}, #{rnum})
+	</insert>
 	<select id="uploadFileList" resultType="uploadFileVO">
 		select * from file_table where rnum=#{rnum}
 	</select>
-
+	
+	<select id="getCount" resultType="int">
+		select count(*) from restaurant
+	</select>
+	
 
 
 

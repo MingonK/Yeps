@@ -6,237 +6,15 @@
 	<title>이벤트 등록 - yeps</title>
 	<link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
-	<script src="<c:url value="/resources/js/jquery-3.2.1.min.js"/>"></script>
-	<script src="<c:url value="/resources/js/custom-file-input.js"/>"></script>
-	<script src="<c:url value="/resources/js/jquery.custom-file-input.js"/>"></script>
-	<script src="<c:url value="/resources/js/jquery-v1.min.js"/>"></script>
 	<script src="//code.jquery.com/jquery.min.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-
-	<script>
-		$(function() {
-			$.datepicker.regional['ko'] = {
-				closeText: '닫기',
-				prevText: '이전달',
-		        nextText: '다음달',
-		        currentText: '오늘',
-		        monthNames: ['1월(JAN)','2월(FEB)','3월(MAR)','4월(APR)','5월(MAY)','6월(JUN)','7월(JUL)','8월(AUG)','9월(SEP)','10월(OCT)','11월(NOV)','12월(DEC)'],
-		        monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-		        dayNames: ['일','월','화','수','목','금','토'],
-		        dayNamesShort: ['일','월','화','수','목','금','토'],
-		        dayNamesMin: ['일','월','화','수','목','금','토'],
-		        weekHeader: 'Wk',
-		        dateFormat: 'yy-mm-dd',
-		        firstDay: 0,
-		        isRTL: false,
-		        showMonthAfterYear: true,
-		        showOn: 'focus',
-		        changeMonth: true,
-		        changeYear: true,
-		        showButtonPanel: true,
-		        yearRange: 'c-0:c+30'
-			};
-			$.datepicker._gotoToday = function(id) { 
-			    $(id).datepicker('setDate', new Date()).datepicker('hide').blur(); 
-			};
-			$.datepicker.setDefaults($.datepicker.regional['ko']);
-			$('#start_date').datepicker();
-			$('#start_date').datepicker('setDate', new Date());
-			$('#start_date').datepicker("option", "maxDate", $("#end_date").val());
-			$('#start_date').datepicker("option", "onClose", function (selectedDate) {
-				$("#end_date").datepicker("option", "minDate", selectedDate);
-			});
-			
-			$("#end_date").datepicker();
-			$("#end_date").datepicker('setDate', new Date());
-			$('#end_date').datepicker("option", "minDate", $("#start_date").val());
-			$('#end_date').datepicker("option", "onClose");
-			
-		});
-		
-		$(document).on('click', '.start_icon', function(event) {
-			var iconclick = $(event.target).parents('.start_date');
-			var c = iconclick.children('#start_date');
-			c.datepicker().datepicker('show');
-		});
-		$(document).on('click', '.end_icon', function(event) {
-			var iconclick = $(event.target).parents('.end_date');
-			var c = iconclick.children('#end_date');
-			c.datepicker().datepicker('show');
-		});
-
-		
-		$(document).ready(function() {
-			$('.endtime').hover(function() {
-				$(this).css('cursor', 'pointer');
-				$(this).css('text-decoration', 'underline');
-			})
-			$('.endtime').mouseleave(function() {
-				$(this).css('text-decoration', 'none');
-			})
-			$('.endtime').click(function() {
-				if($(this).html() == '마감일 등록') {
-					$(this).html('마감일 삭제');
-				} else {
-					$(this).html('마감일 등록');
-				}
-				$('.to').toggle();
-				$('.end_date').toggle();
-				$('.select_end_time').toggle();
-			})
-			$('#input_file_label').hover(function() {
-				$(this).css('background-color', '#e6e6e6');
-			})
-			$('#input_file_label').mouseleave(function() {
-				$(this).css('background-color', 'white');
-			})
-			$('#input_file_cancel').hover(function() {
-				$(this).css('background-color', '#e6e6e6');
-			})
-			$('#input_file_cancel').mouseleave(function() {
-				$(this).css('background-color', 'white');
-			})
-			$('#input_file_cancel').click(function() {
-				$('.upload-name').val('선택된 파일 없음');
-			})
-			$('#event_send').hover(function() {
-				$(this).css('background-color', 'red');
-			})
-			$('#event_send').mouseleave(function() {
-				$(this).css('background-color', '#d32323');
-			})
-			
-			var fileTarget = $('.filebox .upload-hidden');
-			fileTarget.on('change', function() {
-				if(window.FileReader){
-		            // 파일명 추출
-					var filename = $(this)[0].files[0].name;
-				} else {
-	            // Old IE 파일명 추출
-					var filename = $(this).val().split('/').pop().split('\\').pop();
-				}
-				$(this).siblings('.upload-name').val(filename);
-			});
-			
-			var imgTarget = $('.preview-image .upload-hidden');
-			imgTarget.on('change', function() {
-		        var parent = $(this).parent();
-		        parent.children('.upload-display').remove();
-		        if(window.FileReader){
-		            //image 파일만
-					if (!$(this)[0].files[0].type.match(/image/)) return;
-		            var reader = new FileReader();
-		            reader.onload = function(e) {
-		            	 var src = e.target.result;
-		            	 parent.prepend('<div class="upload-display"><div class="upload-thumb-wrap"><img src="'+src+'" class="upload-thumb"></div></div>');
-		            }
-		            reader.readAsDataURL($(this)[0].files[0]);
-		        } else {
-		        	$(this)[0].select();
-		            $(this)[0].blur();
-		            var imgSrc = document.selection.createRange().text;
-		            parent.prepend('<div class="upload-display"><div class="upload-thumb-wrap"><img class="upload-thumb"></div></div>');
-		            var img = $(this).siblings('.upload-display').find('img');
-		            img[0].style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enable='true',sizingMethod='scale',src=\""+imgSrc+"\")";
-		        }
-			})
-		});
-	
-	</script>
-	<script type="text/javascript">
-		function jusoPop() {
-			var pop = window.open("event_jusoPopup","pop","width=300, height=300, scrollbars=yes, resizable=no");
-		}
-		
-		function jusoCallBack(roadAddrPart1, addrDetail, roadAddrPart2, zipNo) {
-			document.event_register.store_address.value = zipNo + roadAddrPart1 + addrDetail + roadAddrPart2
-		}
-		
-		function check() {
-			if(event_register.eventname.value=="") {
-				alert("이벤트 제목을 입력해주세요.")
-				event_register.eventname.focus()
-				return false
-			}
-			if(event_register.start_date.value=="") {
-				alert("이벤트 시작일을 설정해주세요.")
-				event_register.start_date.focus()
-				return false
-			}
-			if(event_register.store_address.value=="") {
-				alert("주소를 입력해주세요.")
-				event_register.store_address.focus()
-				return false
-			}
-			if(event_register.store_address.value.length >= 65) {
-				alert("입력한 주소가 너무 깁니다.")
-				event_register.store_address.focus()
-				return false
-			}
-			if(event_register.content.value=="") {
-				alert("이벤트 내용을 상세하게 작성해주세요.")
-				event_register.content.focus()
-				return false
-			}
-	
-			var content = event_register.content.value;
-			var content_len = content.length;
-			var one_char = "";
-			var content_byte = 0;
-			for(i = 0; i < content_len; i++) {
-				one_char = content.charAt(i);
-				if(escape(one_char).length > 4) {
-					content_byte += 2;
-				} else {
-					content_byte ++;
-				}
-			}
-			if(content_byte > 4000) {
-				alert("글자수를 초과할 수 없습니다.");
-				return false;
-			}
-			if(content_byte < 60) {
-				alert("이벤트 내용을 상세하게 작성해주세요.");
-				return false;
-			}
-			
-			if(event_register.discount.value=="") {
-				alert("할인율을 입력해주세요.")
-				event_register.discount.focus()
-				return false
-			}
-			
-			var discount = event_register.discount.value;
-			var discount_len = discount.length;
-			var discount_byte = 0;
-			for(i = 0; i < discount_len; i++) {
-				one_char = discount.charAt(i);
-				if(escape(one_char).length > 4) {
-					discount_byte += 2;
-				} else {
-					discount_byte ++;
-				}
-			}
-			if(discount_byte > 4000) {
-				alert("글자수를 초과할 수 없습니다.");
-				return false;
-			}
-			if(discount_byte < 60) {
-				alert("할인 내용을 상세하게 작성해주세요.");
-				return false;
-			}
-			return true
-		}
-
-	</script>
 </head>
-<body>
 	<%@ include file="../top.jsp"%>
 	<div id="super-container">
 		<div id="Eventcontainer">
 			<ul>
-				<li class="return_event">
-					<a href="event_list">Return to Events</a>
+				<li>
+					<a href="event_list" class="return_event">Return to Events</a>
 				</li>
 			</ul>
 			<div id="header">
@@ -260,7 +38,7 @@
 					<div style="margin: 6px 0 18px; width: 100%; height: 30px; display: block; text-align: left;">
 						 <!-- Start Event Periode -->
 						 <div id="start_time" style="width: 38%; float: left;">
-						 	<div class="start_date"style="float: left; margin-right: 5px; vertical-align: middle;">
+						 	<div class="start_date" style="float: left; margin-right: 5px; vertical-align: middle;">
 						 	<span class="start_icon" aria-hidden="true" style="position: relative; text-indent: -999em; cursor: pointer; vertical-align: middle;">
 								<svg class="icon_svg" viewBox="0 0 18 18" style="margin: 7px 0 0 10px; diplay: block; width: 18px; height: 18px; position: absolute;">
 									<path d="M13.6 16H4.4C3.077 16 2 14.88 2 13.5v-9C2 3.12 3.077 2 4.4 2H5a1 1 0 0 1 2 0h4a1 1 0 0 1 2 0h.6C14.923 2 16 3.12 16 4.5v9c0 1.38-1.077 2.5-2.4 2.5zM15 7H3v6.5c0 .828.627 1.5 1.4 1.5h9.2c.773 0 1.4-.672 1.4-1.5V7zm-5 3h3v3h-3v-3z"></path>
@@ -405,12 +183,12 @@
 					
 					<label>이벤트 내용</label>
 					<div style="margin-top: 6px;">
-						<textarea name="content" rows="7" cols="89" maxlength="1200" placeholder="이벤트의 내용을 상세하게 설명해주세요." style="border-radius: 3px; font-size: 14px; padding: 5px 10px 0 10px; border: 1px solid #999; resize: none;"></textarea>
+						<textarea name="content" rows="7" cols="89" maxlength="1200" placeholder="이벤트의 내용을 상세하게 설명해주세요." style="border-radius: 3px; font-size: 14px; padding: 5px 10px 0 10px; border: 1px solid #999; resize: vertical;"></textarea>
 					</div>
 					
 					<div style="margin-top: 20px; margin-bottom: 20px">
 						<label>할인율</label>
-						<textarea name="discount" rows="5" cols="89" maxlength="650" placeholder="할인 내역을 상세하게 설명해주세요. &#10; &#10;예) 메인메뉴 30%할인, 디저트류 10%할인" style="margin-top: 6px; border-radius: 3px; font-size: 14px; padding: 5px 10px 0 10px; border: 1px solid #999; resize: none;"></textarea>
+						<textarea name="discount" rows="5" cols="89" maxlength="650" placeholder="할인 내역을 상세하게 설명해주세요. &#10; &#10;예) 메인메뉴 30%할인, 디저트류 10%할인" style="margin-top: 6px; border-radius: 3px; font-size: 14px; padding: 5px 10px 0 10px; border: 1px solid #999; resize: vertical;"></textarea>
 					</div>
 					
 					<div style="margin-bottom: 18px;">
@@ -430,7 +208,7 @@
 					
 					<div>
 						<button type="submit" id="event_send" style="box-shadow: 0 1px 1px rgba(0,0,0,0.3); cursor: pointer; border: 1px solid #8d0005; background: #d90007; width: 120px; height: 40px; margin-right: 10px; border-radius: 3px;">
-							<span style="color: white; font-weight: bold;">이벤트 등록</span>
+							<span style="color: white; font-weight: bold; ">이벤트 등록</span>
 						</button>
 						<a href="event_list" style="font-size: 14px;">취소</a>
 					</div>
@@ -438,5 +216,172 @@
 				</form>
 			</div>	
 		</div>			
-	</div>			
-<%@ include file="../bottom.jsp"%>					
+	</div>
+	<script>
+		$(function() {
+			$.datepicker.regional['ko'] = {
+				closeText: '닫기',
+				prevText: '이전달',
+		        nextText: '다음달',
+		        currentText: '오늘',
+		        monthNames: ['1월(JAN)','2월(FEB)','3월(MAR)','4월(APR)','5월(MAY)','6월(JUN)','7월(JUL)','8월(AUG)','9월(SEP)','10월(OCT)','11월(NOV)','12월(DEC)'],
+		        monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		        dayNames: ['일','월','화','수','목','금','토'],
+		        dayNamesShort: ['일','월','화','수','목','금','토'],
+		        dayNamesMin: ['일','월','화','수','목','금','토'],
+		        weekHeader: 'Wk',
+		        dateFormat: 'yy-mm-dd',
+		        firstDay: 0,
+		        isRTL: false,
+		        showMonthAfterYear: true,
+		        showOn: 'focus',
+		        changeMonth: true,
+		        changeYear: true,
+		        showButtonPanel: true,
+		        yearRange: 'c-0:c+30'
+			};
+			$.datepicker._gotoToday = function(id) { 
+			    $(id).datepicker('setDate', new Date()).datepicker('hide').blur(); 
+			};
+			$.datepicker.setDefaults($.datepicker.regional['ko']);
+			$('#start_date').datepicker();
+			$('#start_date').datepicker('setDate', new Date());
+			$('#start_date').datepicker("option", "maxDate", $("#end_date").val());
+			$('#start_date').datepicker("option", "onClose", function (selectedDate) {
+				$("#end_date").datepicker("option", "minDate", selectedDate);
+			});
+			
+			$("#end_date").datepicker();
+			$("#end_date").datepicker('setDate', new Date());
+			$('#end_date').datepicker("option", "minDate", $("#start_date").val());
+			$('#end_date').datepicker("option", "onClose");
+			
+		});
+		
+		$(document).on('click', '.start_icon', function(event) {
+			var iconclick = $(event.target).parents('.start_date');
+			var c = iconclick.children('#start_date');
+			c.datepicker().datepicker('show');
+		});
+		$(document).on('click', '.end_icon', function(event) {
+			var iconclick = $(event.target).parents('.end_date');
+			var c = iconclick.children('#end_date');
+			c.datepicker().datepicker('show');
+		});
+
+		
+		$(document).ready(function() {
+			$('.endtime').hover(function() {
+				$(this).css('cursor', 'pointer');
+				$(this).css('text-decoration', 'underline');
+			})
+			$('.endtime').mouseleave(function() {
+				$(this).css('text-decoration', 'none');
+			})
+			$('.endtime').click(function() {
+				if($(this).html() == '마감일 등록') {
+					$(this).html('마감일 삭제');
+				} else {
+					$(this).html('마감일 등록');
+				}
+				$('.to').toggle();
+				$('.end_date').toggle();
+				$('.select_end_time').toggle();
+			})
+
+			$('#event_send').hover(function() {
+				$(this).css('background-color', 'red');
+			})
+			$('#event_send').mouseleave(function() {
+				$(this).css('background-color', '#d32323');
+			})
+		});
+	
+	</script>
+	<script type="text/javascript">
+		function jusoPop() {
+			var pop = window.open("event_jusoPopup","pop","width=300, height=300, scrollbars=yes, resizable=no");
+		}
+		
+		function jusoCallBack(roadAddrPart1, addrDetail, roadAddrPart2, zipNo) {
+			document.event_register.store_address.value = zipNo + roadAddrPart1 + addrDetail + roadAddrPart2
+		}
+		
+		function check() {
+			if(event_register.eventname.value=="") {
+				alert("이벤트 제목을 입력해주세요.")
+				event_register.eventname.focus()
+				return false
+			}
+			if(event_register.start_date.value=="") {
+				alert("이벤트 시작일을 설정해주세요.")
+				event_register.start_date.focus()
+				return false
+			}
+			if(event_register.store_address.value=="") {
+				alert("주소를 입력해주세요.")
+				event_register.store_address.focus()
+				return false
+			}
+			if(event_register.store_address.value.length >= 65) {
+				alert("입력한 주소가 너무 깁니다.")
+				event_register.store_address.focus()
+				return false
+			}
+			if(event_register.content.value=="") {
+				alert("이벤트 내용을 상세하게 작성해주세요.")
+				event_register.content.focus()
+				return false
+			}
+	
+			var content = event_register.content.value;
+			var content_len = content.length;
+			var one_char = "";
+			var content_byte = 0;
+			for(i = 0; i < content_len; i++) {
+				one_char = content.charAt(i);
+				if(escape(one_char).length > 4) {
+					content_byte += 2;
+				} else {
+					content_byte ++;
+				}
+			}
+			if(content_byte > 4000) {
+				alert("글자수를 초과할 수 없습니다.");
+				return false;
+			}
+			if(content_byte < 60) {
+				alert("이벤트 내용을 상세하게 작성해주세요.");
+				return false;
+			}
+			
+			if(event_register.discount.value=="") {
+				alert("할인율을 입력해주세요.")
+				event_register.discount.focus()
+				return false
+			}
+			
+			var discount = event_register.discount.value;
+			var discount_len = discount.length;
+			var discount_byte = 0;
+			for(i = 0; i < discount_len; i++) {
+				one_char = discount.charAt(i);
+				if(escape(one_char).length > 4) {
+					discount_byte += 2;
+				} else {
+					discount_byte ++;
+				}
+			}
+			if(discount_byte > 4000) {
+				alert("글자수를 초과할 수 없습니다.");
+				return false;
+			}
+			if(discount_byte < 30) {
+				alert("할인 내용을 상세하게 작성해주세요.");
+				return false;
+			}
+			return true
+		}
+
+	</script>
+<%@ include file="../bottom.jsp"%>

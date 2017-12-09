@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,13 +40,21 @@ public class EventController {
 	@RequestMapping(value = "/event_list")
 	public ModelAndView listEvent() {
 		List<EventDTO> list = eventMapper.listEvent();
-		return new ModelAndView("event/event_list", "eventList", list);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("set", "events");
+		mav.addObject("eventList", list);
+		mav.setViewName("event/event_list");
+		return mav;
 	}
 
 	@RequestMapping(value = "/event_write")
-	public ModelAndView writeEvent() {
-		List<CategoryDTO> list = categoryMapper.listCategory();
-		return new ModelAndView("event/event_writeForm", "categoryList", list);
+	public ModelAndView writeEvent(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();
+		List<CategoryDTO> category_list = categoryMapper.listCategory();
+		mav.addObject("set", "events");
+		mav.addObject("categoryList", category_list);
+		mav.setViewName("event/event_writeForm");
+		return mav;
 	}
 
 	@RequestMapping(value = "/event_jusoPopup")
@@ -61,15 +70,6 @@ public class EventController {
 		dto.setCnum(Integer.parseInt(category[1]));
 		dto.setIp(req.getRemoteAddr());
 
-		/*
-		 * MultipartHttpServletRequest mr = (MultipartHttpServletRequest) req;
-		 * MultipartFile mf = mr.getFile("filename"); String fileName =
-		 * mf.getOriginalFilename(); int fileSize = (int) mf.getSize(); File file = new
-		 * File(uploadPath, fileName); try { mf.transferTo(file); } catch (Exception e)
-		 * { fileSize = 0; file = null; }
-		 */
-		// FileDTO불러와서 fileName이랑 fileSize 입력해야 함.
-
 		ModelAndView mav = new ModelAndView();
 		if (dto.getCategory().equals("cateEmpty")) {
 			mav.addObject("msg", "카테고리를 먼저 등록해야 합니다. 관리자에게 문의하시기 바랍니다.");
@@ -78,25 +78,51 @@ public class EventController {
 			return mav;
 		}
 
-		/*
-		 * FileDTO file_dto = new FileDTO(); file_dto.setEvnum(dto.getEvnum());
-		 * file_dto.setOrigin_filename(fileName);
-		 * file_dto.setFilename(String.valueOf(UUID.randomUUID()));
-		 * file_dto.setFilesize(fileSize); int file_upload =
-		 * fileMapper.insertFile(file_dto);
-		 */
-		int res = eventMapper.insertEvent(dto);
-		if (res > 0) {
-			mav.addObject("msg", "이벤트를 등록하였습니다.");
-			mav.addObject("url", "event_list");
-			mav.setViewName("message");
-			return mav;
+		boolean check = eventMapper.RedundancyCheck(dto.getEventname(), dto.getStore_address());
+		if(check) {
+			int res = eventMapper.insertEvent(dto);
+			if (res > 0) {
+				int evnum = eventMapper.getEvnum(dto.getEventname(), dto.getStore_address());
+				mav.addObject("url", "event_insert_photo?evnum=" + evnum);
+				mav.setViewName("usingOnlyURL");
+				return mav;
+			} else {
+				mav.addObject("msg", "이벤트 등록에 실패했습니다.");
+				mav.addObject("url", "event_list");
+				mav.setViewName("message");
+				return mav;
+			}
 		} else {
-			mav.addObject("msg", "이벤트 등록에 실패했습니다.");
-			mav.addObject("url", "event_list");
-			mav.setViewName("message");
+			mav.addObject("msg", "이미 등록된 이벤트입니다.");
+			mav.setViewName("historyBack");
 			return mav;
 		}
+		
+		
+		
+	}
+	
+	@RequestMapping(value = "/event_insert_photo")
+	public ModelAndView insertPhoto_Event(HttpServletRequest req) {
+		String evnum = req.getParameter("evnum");
+		String mode = req.getParameter("mode");
+		
+		if(evnum == null || evnum.trim().equals("")) {
+			return new ModelAndView("redirect: event_list");
+		}
+		
+		EventDTO dto = eventMapper.getEventContent(Integer.parseInt(evnum));
+		ModelAndView mav = new ModelAndView();
+		if(dto == null) {
+			mav.setViewName("redirect: event_write");
+			return mav;
+		}
+		
+		mav.addObject("eventDTO", dto);
+		mav.addObject("set", "events");
+		mav.addObject("mode", mode);
+		mav.setViewName("event/event_insert_photo");
+		return mav;
 	}
 
 	@RequestMapping(value = "/event_content")
