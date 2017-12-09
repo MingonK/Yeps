@@ -108,6 +108,7 @@
 		</div>
 		<br>
 	</div>
+	<%@ include file="../bottom.jsp"%>
 	<script>
 	function windowOpen() {
 		var left1, top1;
@@ -211,9 +212,7 @@
 			});
 		});
 </script>
-	<%@ include file="../bottom.jsp"%>
-	<script type="text/javascript" src="js\bootstrap.js"></script>
-	
+	<!-- <script type="text/javascript" src="js\bootstrap.js"></script>  부트스트랩 내부 적용하려했으나 경로 못 찾아 실패-->
 </body>
 
 </html>

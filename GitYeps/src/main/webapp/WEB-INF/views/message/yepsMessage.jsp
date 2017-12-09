@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ include file="../top.jsp"%>
 <html>
 <head>
@@ -11,126 +12,7 @@
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"
 	type="text/javascript"></script>
-<script>
 
-    function windowOpen(){
-        var left1,top1;
-            left1=(screen.width-300)/2;
-            top1=(screen.height-300)/2;
-        window.open("message_sendForm","addr", "left="+left1+", top="+top1+",width=600,height=400,resizable=no,scrollbars=yes");
-    }
-    
-    function searching(){
-	   var value1 = $("select[name=filter]").val();
-	    if(value1==0){
-	    	alert("검색키를 선택하세요.");
-	        msgform.filter.focus()
-	        return false
-	    }
-	    document.msgform.action = "message_search";
-	    document.msgform.submit();
-    }
-		  
-    function moving(){
-	    var value2 = $("select[name=filter2]").val(); 
-	    if(value2==0){
-	    	alert("원하는 키를 선택하세요.");
-	        msgform.filter2.focus()
-	        return false
-	    }
-	    document.msgform.action = "message_move";
-	    document.msgform.submit();
-    }
-    
-    function moveToLocker(){
-    	$("input[name=check]:checked").each(function() {
-			var checkVal = $(this).val();
-			if(checkVal==null){
-	    		alert("선택된 쪽지가 없습니다. 다시 확인 하세요.");
-	    	}
-			alert(checkVal);
-			
-		for (var i = 0; i < checkVal.length; i++) {
-		         if (checkVal[i].checked) {
-		            txt += checkVal[i].value + " ";
-	    }}});
-    	document.msgform.action = "message_moveToLocker";
-    	document.msgform.submit();
-    }
-    
-    function readMessage(){
-    	var msgNum = $("input[name=readed]").val();
-    	document.msgform.action = "message_read";
-    	document.msgform.submit();
-    }
-	  
-    function msgformSubmit(index) {
-    	$("input[name=check]:checked").each(function() {
-			var checkVal = $(this).val();
-			if(checkVal==null){
-	    		alert("선택된 쪽지가 없습니다. 다시 확인 하세요.");
-	    		
-	    	}
-			alert(checkVal);
-	        
-		for (var i = 0; i < checkVal.length; i++) {
-		         if (checkVal[i].checked) {
-		            txt += checkVal[i].value + " ";
-	    }}});
-    	
-    	
-		if(index == 1){
-	         document.msgform.action = "message_delete";
-		}
-		if(index == 2){
-			 var left1,top1;
-	         left1=(screen.width-300)/2;
-	         top1=(screen.height-300)/2;
-	         openWin = window.open("message_reply","addr", "left="+left1+", location=no, toolbar=no, resizable=no, top="+top1+",width=600,height=400,scrollbars=yes");
-	         openWin.document.getElementById("msgNum").value()=document.getElementById("msgNum").value(); 
-	   }
-		document.msgform.submit()
-    }
-	 
-    $(document).ready(function(){
-        var tbl = $("#table");
-       // 테이블 헤더에 있는 checkbox 클릭시
-        $(":checkbox:first", tbl).click(function(){
-            // 클릭한 체크박스가 체크상태인지 체크해제상태인지 판단
-            if( $(this).is(":checked") ){
-                $(":checkbox", tbl).attr("checked", "checked");
-            }
-            else{
-                $(":checkbox", tbl).removeAttr("checked");
-            }
-            // 모든 체크박스에 change 이벤트 발생시키기               
-            $(":checkbox", tbl).trigger("change");
-        });
-         
-        // 헤더에 있는 체크박스외 다른 체크박스 클릭시
-        $(":checkbox:not(:first)", tbl).click(function(){
-            var allCnt = $(":checkbox:not(:first)", tbl).length;
-            var checkedCnt = $(":checkbox:not(:first)", tbl).filter(":checked").length;
-             
-            // 전체 체크박스 갯수와 현재 체크된 체크박스 갯수를 비교해서 헤더에 있는 체크박스 체크할지 말지 판단
-            if( allCnt==checkedCnt ){
-                $(":checkbox:first", tbl).attr("checked", "checked");
-            }
-            else{
-                $(":checkbox:first", tbl).removeAttr("checked");
-            }
-        }).change(function(){
-            if( $(this).is(":checked") ){
-                // 체크박스의  부모 > 부모니까  tr이 되고 tr에  selected 라는  class 를 추가한다.
-                $(this).parent().parent().addClass("selected");
-            }
-            else{
-                $(this).parent().parent().removeClass("selected");
-            }
-        });
-    });
-    
-</script>
 <style>
 #table tr[id="list"].selected {
 	background-color: navy;
@@ -235,14 +117,168 @@
 							<td><a href="#">차단</a></td>
 						</tr>
 					</c:forEach>
-				</table>
+					<tr>
+					<td colspan="7" align="center">
+					<c:if test="${ count > 0 }">
+					
+       <fmt:parseNumber var="pageCount" integerOnly="true" value="${(count + pageSize - 1) / pageSize}" />
+            <c:set var="pageBlock" value="5"/>
+       <fmt:parseNumber var="startPage" integerOnly="true" value="${(currentPage -1) / pageBlock * pageBlock + 1}" />
+            <c:set var="endPage" value="${startPage + pageBlock - 1}"/>
+            <c:if test="${endPage > pageCount}"> 
+            <c:set var="endPage" value="${pageCount}"></c:set></c:if>
+       <c:if test="${startPage > pageBlock}">
+                <a href="yeps_message?pageNum=${startPage - pageBlock}">[이전]</a></c:if>
+       <c:forEach var="i" begin="1" end="${endPage}">
+                <a href="yeps_message?pageNum=${i} ">[${i}]</a>
+            </c:forEach>
+            <c:if test="${endPage < pageCount}">
+                <a href="yeps_message?pageNum=${startPage + pageBlock}">[다음]</a>
+            </c:if>
+         </c:if>
+					
+<%-- 				<c:if test="${ count > 0 }">
+				<c:set var="pageCount" value="${(count + pageSize -1)/pageSize}"></c:set>
+				<c:set var="pageBlock" value="5"></c:set>
+				<c:set var="startPage" value="${(currentPage - 1)/pageBlock*pageBlock + 1 }"></c:set>
+				<c:set var="endPage" value="${startPage + pageBlock - 1 }"></c:set>
+				<c:if test="${endPage > pageCount }"> 
+				<c:set var="endPage" value="${pageCount }"></c:set></c:if>
+				<c:if test="${startPage > 1}">
+				    <a href="yeps_message?pageNum=${startPage - pageBlock}">[이전]</a></c:if>
+				<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
+				    <a href="yeps_message?pageNum=${i} ">[${i}]</a>
+				</c:forEach>
+				<c:if test="${endPage < pageCount}">
+				    <a href="yeps_message?pageNum=${startPage + pageBlock}">[다음]</a>
+				</c:if>
+			</c:if>  --%>
+		            </td></tr>
+                  </table>
 				<br>
 			</form>
 		</div>
 		<br>
 	</div>
-	<%@ include file="../bottom.jsp"%>
 	<script type="text/javascript" src="js\bootstrap.js"></script>
+	<script>
+
+    function windowOpen(){
+        var left1,top1;
+            left1=(screen.width-300)/2;
+            top1=(screen.height-300)/2;
+        window.open("message_sendForm","addr", "left="+left1+", top="+top1+",width=600,height=400,resizable=no,scrollbars=yes");
+    }
+    
+    function searching(){
+	   var value1 = $("select[name=filter]").val();
+	    if(value1==0){
+	    	alert("검색키를 선택하세요.");
+	        msgform.filter.focus()
+	        return false
+	    }
+	    document.msgform.action = "message_search";
+	    document.msgform.submit();
+    }
+		  
+    function moving(){
+	    var value2 = $("select[name=filter2]").val(); 
+	    if(value2==0){
+	    	alert("원하는 키를 선택하세요.");
+	        msgform.filter2.focus()
+	        return false
+	    }
+	    document.msgform.action = "message_move";
+	    document.msgform.submit();
+    }
+    
+    function moveToLocker(){
+    	$("input[name=check]:checked").each(function() {
+			var checkVal = $(this).val();
+			if(checkVal==null){
+	    		alert("선택된 쪽지가 없습니다. 다시 확인 하세요.");
+	    	}
+			alert(checkVal);
+			
+		for (var i = 0; i < checkVal.length; i++) {
+		         if (checkVal[i].checked) {
+		            txt += checkVal[i].value + " ";
+	    }}});
+    	document.msgform.action = "message_moveToLocker";
+    	document.msgform.submit();
+    }
+    
+    function readMessage(){
+    	var msgNum = $("input[name=readed]").val();
+    	document.msgform.action = "message_read";
+    	document.msgform.submit();
+    }
+	  
+    function msgformSubmit(index) {
+    	$("input[name=check]:checked").each(function() {
+			var checkVal = $(this).val();
+			if(checkVal==null){
+	    		alert("선택된 쪽지가 없습니다. 다시 확인 하세요.");
+	    	}
+			alert(checkVal);
+	        
+		for (var i = 0; i < checkVal.length; i++) {
+		         if (checkVal[i].checked) {
+		            txt += checkVal[i].value + " ";
+	    }}});
+    	
+    	if(index == 1){
+	         document.msgform.action = "message_delete";
+		}
+		if(index == 2){
+			 var left1,top1;
+	         left1=(screen.width-300)/2;
+	         top1=(screen.height-300)/2;
+	         openWin = window.open("message_reply","addr", "left="+left1+", location=no, toolbar=no, resizable=no, top="+top1+",width=600,height=400,scrollbars=yes");
+	         openWin.document.getElementById("msgNum").value()=document.getElementById("msgNum").value(); 
+	   }
+		document.msgform.submit()
+    }
+	 
+    $(document).ready(function(){
+        var tbl = $("#table");
+       // 테이블 헤더에 있는 checkbox 클릭시
+        $(":checkbox:first", tbl).click(function(){
+            // 클릭한 체크박스가 체크상태인지 체크해제상태인지 판단
+            if( $(this).is(":checked") ){
+                $(":checkbox", tbl).attr("checked", "checked");
+            }
+            else{
+                $(":checkbox", tbl).removeAttr("checked");
+            }
+            // 모든 체크박스에 change 이벤트 발생시키기               
+            $(":checkbox", tbl).trigger("change");
+        });
+         
+        // 헤더에 있는 체크박스외 다른 체크박스 클릭시
+        $(":checkbox:not(:first)", tbl).click(function(){
+            var allCnt = $(":checkbox:not(:first)", tbl).length;
+            var checkedCnt = $(":checkbox:not(:first)", tbl).filter(":checked").length;
+             
+            // 전체 체크박스 갯수와 현재 체크된 체크박스 갯수를 비교해서 헤더에 있는 체크박스 체크할지 말지 판단
+            if( allCnt==checkedCnt ){
+                $(":checkbox:first", tbl).attr("checked", "checked");
+            }
+            else{
+                $(":checkbox:first", tbl).removeAttr("checked");
+            }
+        }).change(function(){
+            if( $(this).is(":checked") ){
+                // 체크박스의  부모 > 부모니까  tr이 되고 tr에  selected 라는  class 를 추가한다.
+                $(this).parent().parent().addClass("selected");
+            }
+            else{
+                $(this).parent().parent().removeClass("selected");
+            }
+        });
+    });
+    <%@ include file="../bottom.jsp"%>
+</script>
 </body>
 
 </html>

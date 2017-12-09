@@ -11,7 +11,6 @@ public class MessageDTO {
 	private String reg_date;//받은 시각 표시
 	private String readDate;//읽은 시각 표시
 	private int readNum;//읽음, 안읽음 표시 위한 옵션
-	private int imptNum;//중요쪽지 가져올 옵션
 	private int isLocker;//보관함쪽지 확인 옵션
 
 	
@@ -20,12 +19,6 @@ public class MessageDTO {
 	}
 	public void setIsLocker(int isLocker) {
 		this.isLocker = isLocker;
-	}
-	public int getImptNum() {
-		return imptNum;
-	}
-	public void setImptNum(int imptNum) {
-		this.imptNum = imptNum;
 	}
 	
 	public int getReadNum() {

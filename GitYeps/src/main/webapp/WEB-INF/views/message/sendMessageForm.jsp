@@ -9,40 +9,14 @@
 </c:if>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
-<script>
 
-    function check(){
-		
-		if (sendform.receiver.value==""){
-			alert("받는 사람을 입력하세요")
-			sendform.receiver.focus()
-			return
-		}
-		
-		if (sendform.title.value==""){
-			alert("제목을 입력하세요")
-			sendform.title.focus()
-			return
-		}
-		if (sendform.content.value==""){
-			alert("내용을 입력하세요")
-			sendform.content.focus()
-			return
-		}
-		 document.sendform.target = "message_form";
-		 document.sendform.action = "message_send?mode=send";
-		 document.sendform.submit();
-		 self.close();
-	    };
-	
-</script>
 <html>
 <head>
 <title>send MessageForm</title>
 </head>
 <body>
 
-<%-- <div class="modal fade" id="layerpop">
+<%--  부트스트랩 코드 아직 미적용 <div class="modal fade" id="layerpop">
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<!-- header -->
@@ -104,5 +78,32 @@
 				</table>
 		</form>
 	</div> 
+	<script>
+
+    function check(){
+		
+		if (sendform.receiver.value==""){
+			alert("받는 사람을 입력하세요")
+			sendform.receiver.focus()
+			return
+		}
+		
+		if (sendform.title.value==""){
+			alert("제목을 입력하세요")
+			sendform.title.focus()
+			return
+		}
+		if (sendform.content.value==""){
+			alert("내용을 입력하세요")
+			sendform.content.focus()
+			return
+		}
+		 document.sendform.target = "message_form";
+		 document.sendform.action = "message_send?mode=send";
+		 document.sendform.submit();
+		 self.close();
+	    };
+	
+</script>
 </body>
 </html>
