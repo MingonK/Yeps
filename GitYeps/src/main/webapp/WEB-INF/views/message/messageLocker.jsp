@@ -11,7 +11,104 @@
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"
 	type="text/javascript"></script>
-<script>
+
+<style>
+#table tr[id="list"].selected {
+	background-color: yellow;
+	color: #fff;
+	font-weight: bold;
+}
+</style>
+</head>
+<c:if test="${not empty requestScope.msg}">
+	<script type="text/javascript">
+		alert("${requestScope.msg}")
+	</script>
+</c:if>
+<body>
+   <div id="container" style="height:80%;" align="center">
+		<caption>
+			<h1 style="font-family: consolas; color: #d32323;">yeps Message</h1>
+		</caption>
+		<hr color="green" width="70%">
+		<br>
+		<div id="menu" style="background-color: #ffffff; height: 60%; width: 25%; float: left; font-weight: bold; font-family: consolas; font-size:17px;">
+			<h3 style="font-family: consolas; font-weight: bold; font-size: 26px; color: #d32323;">Menu</h3>
+			<br> <input type="button" value="쪽지쓰기" style="width: 100; height: 40; color: #ffffff; background: #d32323; border-radius: 9px; font-weight: bold; font-family: consolas;" onclick="windowOpen();">
+				 <input type="button" value="내게쓰기" style="width: 100; height: 40; color: #ffffff; background: #d32323; border-radius: 9px; font-weight: bold; font-family: consolas;" onclick="windowOpen();"><br> <br>
+			<div align="center" id="tag">
+				<a href="message_move?filter2=receive"><label>받은 쪽지 </label></a><a href="#"><label> ${count}</label></a><br> <br> 
+				<a href="message_move?filter2=send"><label>보낸 쪽지 </label></a><a href="#"><label> ${count}</label></a><br> <br> 
+				<a href="yeps_message"><label>쪽지함 </label></a><a href="#"><label> ${count}</label></a><br> <br> 
+				<a href="message_move?filter2=trash"><label>휴지통 </label></a><a href="#"><label> ${count}</label></a><br> <br> 
+			</div>
+		</div>
+		<br><br>
+		<div id="messageList"  align="left" style="height: 60%; width: 75%; float: left;  padding:1;">
+			<form name="lockerform" id="lockerform" method="post">
+				<table border="0" id="table">
+					<tr valign="middle">
+						<td width="60px" align="center" rowspan="3" valign="middle"><br> 
+						<input type="checkbox" name="first"></td>
+						<th align="left" colspan="6">
+						<input type="button" name="del" value="삭제" style="color: #ffffff; background: #d32323; border-radius: 5px; font-weight: bold; font-family: consolas;" onclick="msgformSubmit(1);"> 
+						<input type="button" name="reply" value="답장" style="color: #ffffff; background: #d32323; border-radius: 5px; font-weight: bold; font-family: consolas;" onclick="msgformSubmit(2);"> 
+						<input type="button" name="locker" value="쪽지함" style="color: #ffffff; background: #d32323; border-radius: 5px; font-weight: bold; font-family: consolas;" onclick="moveToMsgBox();"> 
+						<select name="filter" style="border-radius: 4px;">
+								<option value="0">:: 필터 ::</option>
+								<option value="allMsg">모든 쪽지</option>
+								<option value="noneMsg">안읽은 쪽지</option>
+						</select> 
+						<input type="button" id="search" value="검색" style="color: #ffffff; background: #d32323; border-radius: 5px; font-weight: bold; font-family: consolas;" onclick="searching();"> 
+						<select name="filter2" style="border-radius: 4px;">
+								<option value="0">:: 필터 ::</option>
+								<option value="msgBox">쪽지함</option>
+								<option value="receive">받은 쪽지</option>
+								<option value="send">보낸 쪽지</option>
+						</select> 
+						<input type="button" id="move" value="이동" style="color: #ffffff; background: #d32323; border-radius: 5px; font-weight: bold; font-family: consolas;" onclick="moving();"></th>
+				</tr>
+				<tr><td><br></tr>
+                    <tr align="center">
+						<td width="60px"><label>읽음</label></td>
+						<td width="60px"><label>번호</label></td>
+						<td width="60px"><label>보낸이</label></td>
+						<td width="500px"><label>제목</label></td>
+						<th width="120px"><label>받은시각</label></th>
+						<td width="60px"><label>차단</label>
+					</tr>
+					<c:if test="${empty messageList}">
+						<tr>
+							<td colspan="6" align="center">보관함이 비었습니다.</td>
+						</tr>
+					</c:if>
+					<c:forEach var="dto" items="${messageList}">
+						<tr align="center" id="list">
+							<td><input type="checkbox" name="check" value="${dto.msgNum}"></td>
+							<td><c:choose>
+									<c:when test="${dto.readNum == 1}">
+										<label><input type="image" src="resources/img/open.jpg" name="read" value="${dto.msgNum}" onclick="readMessage();"></label>
+									</c:when>
+									<c:when test="${dto.readNum == 0}">
+										<label><input type="image" src="resources/img/close.jpg" name="read" value="${dto.msgNum}" onclick="readMessage();"></label>
+									</c:when>
+								</c:choose></td>
+							<td style="font-weight: bold;">${dto.msgNum}</td>
+							<td><a href="javascript:windowOpen();"><label>${dto.sender}</label></a>
+								<input type="hidden" id="receiver" value="${dto.sender}"></td>
+							<td><a
+								href="message_content?msgNum=${dto.msgNum}&readDate=${dto.readDate}"><label>${dto.title}</label></a></td>
+							<td><label>${dto.reg_date}</label></td>
+							<td><a href="#">차단</a></td>
+						</tr>
+					</c:forEach>
+				</table>
+				<br>
+			</form>
+		</div>
+		<br>
+	</div>
+	<script>
 	function windowOpen() {
 		var left1, top1;
 		left1 = (screen.width - 300) / 2;
@@ -114,104 +211,9 @@
 			});
 		});
 </script>
-<style>
-#table tr[id="list"].selected {
-	background-color: yellow;
-	color: #fff;
-	font-weight: bold;
-}
-</style>
-</head>
-<c:if test="${not empty requestScope.msg}">
-	<script type="text/javascript">
-		alert("${requestScope.msg}")
-	</script>
-</c:if>
-<body>
-   <div id="container" style="height:80%;" align="center">
-		<caption>
-			<h1 style="font-family: consolas; color: #d32323;">yeps Message</h1>
-		</caption>
-		<hr color="green" width="70%">
-		<br>
-		<div id="menu" style="background-color: #ffffff; height: 60%; width: 25%; float: left; font-weight: bold; font-family: consolas; font-size:17px;">
-			<h3 style="font-family: consolas; font-weight: bold; font-size: 26px; color: #d32323;">Menu</h3>
-			<br> <input type="button" value="쪽지쓰기" style="width: 100; height: 40; color: #ffffff; background: #d32323; border-radius: 9px; font-weight: bold; font-family: consolas;" onclick="windowOpen();">
-				 <input type="button" value="내게쓰기" style="width: 100; height: 40; color: #ffffff; background: #d32323; border-radius: 9px; font-weight: bold; font-family: consolas;" onclick="windowOpen();"><br> <br>
-			<div align="center" id="tag">
-				<a href="message_move?filter2=receive"><label>받은 쪽지 </label></a><a href="#"><label> ${count}</label></a><br> <br> 
-				<a href="message_move?filter2=send"><label>보낸 쪽지 </label></a><a href="#"><label> ${count}</label></a><br> <br> 
-				<a href="yeps_message"><label>쪽지함 </label></a><a href="#"><label> ${count}</label></a><br> <br> 
-				<a href="message_move?filter2=trash"><label>휴지통 </label></a><a href="#"><label> ${count}</label></a><br> <br> 
-			</div>
-		</div>
-		<br><br>
-		<div id="messageList"  align="left" style="height: 60%; width: 75%; float: left;  padding:1;">
-			<form name="lockerform" id="lockerform" method="post">
-				<table border="0" id="table">
-					<tr valign="middle">
-						<td width="60px" align="center" rowspan="3" valign="middle"><br> 
-						<input type="checkbox" name="first"></td>
-						<th align="left" colspan="6">
-						<input type="button" name="del" value="삭제" style="color: #ffffff; background: #d32323; border-radius: 5px; font-weight: bold; font-family: consolas;" onclick="msgformSubmit(1);"> 
-						<input type="button" name="reply" value="답장" style="color: #ffffff; background: #d32323; border-radius: 5px; font-weight: bold; font-family: consolas;" onclick="msgformSubmit(2);"> 
-						<input type="button" name="locker" value="쪽지함" style="color: #ffffff; background: #d32323; border-radius: 5px; font-weight: bold; font-family: consolas;" onclick="moveToMsgBox();"> 
-						<select name="filter" style="border-radius: 4px;">
-								<option value="0">:: 필터 ::</option>
-								<option value="allMsg">모든 쪽지</option>
-								<option value="noneMsg">안읽은 쪽지</option>
-						</select> 
-						<input type="button" id="search" value="검색" style="color: #ffffff; background: #d32323; border-radius: 5px; font-weight: bold; font-family: consolas;" onclick="searching();"> 
-						<select name="filter2" style="border-radius: 4px;">
-								<option value="0">:: 필터 ::</option>
-								<option value="msgBox">쪽지함</option>
-								<option value="receive">받은 쪽지</option>
-								<option value="send">보낸 쪽지</option>
-						</select> 
-						<input type="button" id="move" value="이동" style="color: #ffffff; background: #d32323; border-radius: 5px; font-weight: bold; font-family: consolas;" onclick="moving();"></th>
-				</tr>
-				<tr><td><br></tr>
-                    <tr align="center">
-						<td width="60px"><label>읽음</label></td>
-						<td width="60px"><label>번호</label></td>
-						<td width="60px"><label>보낸이</label></td>
-						<td width="500px"><label>제목</label></td>
-						<th width="120px"><label>받은시각</label></th>
-						<td width="60px"><label>차단</label>
-					</tr>
-					<c:if test="${empty messageList}">
-						<tr>
-							<td colspan="6" align="center">보관함이 비었습니다.</td>
-						</tr>
-					</c:if>
-					<c:forEach var="dto" items="${messageList}">
-						<tr align="center" id="list">
-							<td><input type="checkbox" name="check" value="${dto.msgNum}"></td>
-							<td><c:choose>
-									<c:when test="${dto.readNum == 1}">
-										<label><input type="image" src="resources/img/open.jpg" name="read" value="${dto.msgNum}" onclick="readMessage();"></label>
-									</c:when>
-									<c:when test="${dto.readNum == 0}">
-										<label><input type="image" src="resources/img/close.jpg" name="read" value="${dto.msgNum}" onclick="readMessage();"></label>
-									</c:when>
-								</c:choose></td>
-							<td style="font-weight: bold;">${dto.msgNum}</td>
-							<td><a href="javascript:windowOpen();"><label>${dto.sender}</label></a>
-								<input type="hidden" id="receiver" value="${dto.sender}"></td>
-							<td><a
-								href="message_content?msgNum=${dto.msgNum}&readDate=${dto.readDate}"><label>${dto.title}</label></a></td>
-							<td><label>${dto.reg_date}</label></td>
-							<td><a href="#">차단</a></td>
-						</tr>
-					</c:forEach>
-				</table>
-				<br>
-			</form>
-		</div>
-		<br>
-	</div>
 	<%@ include file="../bottom.jsp"%>
 	<script type="text/javascript" src="js\bootstrap.js"></script>
+	
 </body>
 
 </html>
