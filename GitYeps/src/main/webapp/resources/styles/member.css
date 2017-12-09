@@ -1,0 +1,506 @@
+
+<!-- ============================================= MEMBER ======================================================= -->
+
+p {
+    margin-bottom: 12px;
+}
+
+small {
+    font-size: 12px;
+    line-height: 1.5em;
+}
+
+#super-container {
+   padding-top: 5px;
+   padding-left: 10px;
+}
+
+#Membercontainer {
+   width: auto;
+   padding: 0;
+   margin: 0;
+   font: inherit;
+   vertical-align: baseline;
+}
+
+#Memberbody {
+   width: 960;
+   height: 80%;
+   margin: 40px auto;
+   font-weight: bold;
+}
+
+#member-wrapper{
+	width: 480;
+   height: 100%;
+   margin: 70px auto;
+   float: left;
+}
+#login{
+   width: 300;
+   height: 100%;
+   margin: auto;
+}
+
+#join{
+	display : none;
+   width: 300;
+   height: 100%;
+   margin: auto;
+}
+
+#find_email{
+	display : none;
+   width: 350;
+   height: 100%;
+   margin: auto;
+}
+
+#find_passwd{
+	display : none;
+   width: 350;
+   height: 100%;
+   margin: auto;
+}
+
+#find_passwd, #find_email p{
+	font-size: 14px;
+}
+
+#login_img{
+	width: 480;
+   height: 100%;
+   margin: 70px auto;
+   float: left;
+}
+
+#member_header{
+	margin-bottom: 30px;
+}
+
+#member_header p.subheading {
+	font-size: 15px;
+    font-weight: bold;
+}
+
+#member_header .legal-copy {
+    margin-top: 10px;
+}
+.legal-copy {
+    color: #666;
+    font-size: 12px;
+    line-height: 1.5em;
+}
+
+.memberf [type="text"], .memberf [type="number"], .memberf [type="password"], .memberf [type="email"], .memberf [type="url"], .memberf [type="tel"], .memberf [type="date"], .memberf textarea, .memberf select, .memberf .pseudo-input,
+.findpasswdf [type="text"], .findpasswdf [type="number"], .findpasswdf [type="password"], .findpasswdf [type="email"], .findpasswdf [type="url"], .findpasswdf [type="tel"], .findpasswdf [type="date"], .findpasswdf textarea, .findpasswdf select, .findpasswdf .pseudo-input,
+.findemailf [type="text"], .findemailf [type="number"], .findemailf [type="password"], .findemailf [type="email"], .findemailf [type="url"], .findemailf [type="tel"], .findemailf [type="date"], .findemailf textarea, .findemailf select, .findemailf .pseudo-input{
+	
+	display: block;
+	box-sizing: border-box;
+    width: 100%;
+    margin: 0 0 9px;
+    padding: 5px 9px;
+    background: #fff;
+    border: 1px solid #999;
+    border-radius: 3px;
+    font-size: 14px;
+    line-height: 1.28571em;
+    line-height: 1.29em;
+}
+
+.sub-text-box {
+    margin: 12px auto 0;
+    text-align: right;
+}
+
+.signup-link , .login-link{
+    margin: 0 ;
+    padding: 0 ;
+    background: none ;
+    border: 0 ;
+    outline: 0 ;
+    color: #0073bb ;
+    cursor: pointer ;
+    font-family: inherit ;
+    font-size: inherit ;
+    webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.u-pseudo-link:hover, .u-pseudo-link:focus {
+    text-decoration: underline ;
+}
+
+.legal-link:hover, .legal-link:focus {
+    text-decoration: underline ;
+}
+
+.subtle-text {
+    color: #999;
+    font-weight: normal;
+}
+
+#forgot-passwd {
+    text-align: right;
+    margin-bottom: 12px;
+    margin-top: -12px;
+}
+#forgot-email {
+    text-align: right;
+    margin-bottom: 12px;
+    margin-top: -12px;
+}
+
+.forgot-passwd-link:hover, .forgot-passwd-link:focus {
+	 cursor: pointer ;
+    text-decoration: underline ;
+}
+
+.forgot-email-link:hover, .forgot-email-link:focus {
+	 cursor: pointer ;
+    text-decoration: underline ;
+}
+
+.ybtn-primary {
+    color: white;
+    border-color: #8d0005;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+    background-color: #d90007;
+    background: -webkit-linear-gradient(#d90007, #c91400);
+    background: linear-gradient(#d90007, #c91400);
+}
+
+.ybtn-primary:hover {
+    background-color: #ed0008;
+    background: -webkit-linear-gradient(#ed0008, #dd1600);
+    background: linear-gradient(#ed0008, #dd1600);
+}
+
+.ybtn--social {
+    padding-right: 5px;
+}
+
+.ybtn-big:not(.ybtn--social) {
+    padding: 12px 18px 13px;
+    font-size: 16px;
+    line-height: 1.3125em;
+}
+
+.ybtn-full{
+    width: 100%;
+    webkit-box-sizing: border-box;
+   	moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.ybtn {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+    cursor: pointer;
+    border: 1px solid;
+    font-weight: bold;
+    text-align: center;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-size: 14px;
+    line-height: 1.28571em;
+    border-color: #000000;
+    color: #ffffff;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    padding: 8px 19px 9px;
+    border-radius: 3px;
+}
+
+.memberssn1{
+	IME-MODE: disabled
+}
+.memberssn2{
+	IME-MODE: disabled
+}
+
+.inline-layout {
+    display: block;
+    font-size: 0px;
+    line-height: 1;
+    text-align: left;
+    margin: -3px;
+}
+
+.inline-layout > li {
+    box-sizing: border-box;
+    display: inline-block;
+    zoom: 1;
+    vertical-align: top;
+    font-size: 14px;
+    line-height: 1.28571em;
+    width: 50%;
+    padding: 0px 3px;
+    margin: 3px 0px;
+}
+
+
+#emailpicker-div{
+ position: absolute; 
+ z-index: 1; 
+ display: none;
+ top: 260px;
+ right: 0px;
+ width: 50%;
+ background: #fff;
+ font-size: 14px;
+}
+
+
+#emailpicker-div ul{
+    background: #fff;
+    border: 1px solid #999;
+    border-radius: 3px;
+}
+
+#emailpicker-div li {
+	
+	padding: 0px 0px 0px 20px;
+	display:block;
+	text-align:left;
+}
+
+#email3{
+	font-weight:bold;
+}
+
+#email3:hover {
+	cursor: pointer;
+	 background: #0073bb;
+	 color: #ffffff;
+}
+
+#passwdcheck{
+	background-color:transparent;
+	border:0;
+	text-align:right;
+	font-weight: bold;
+	font-size: 12px;
+	margin-top: -8px;
+}
+
+#mailCheck{
+	text-align: left;
+    background-color:transparent;
+    border: 0;
+    text-align: right;
+    font-weight: bold;
+    margin-top: 5px;
+    font-size: 12px;
+
+}
+
+#signup-button{
+	 margin-top: -10px;
+}
+
+.confirmbtn-primary {
+    background-color: #d90007;
+    background: linear-gradient(#d90007, #c91400);
+}
+
+.confirmbtn-primary:hover {
+    background-color: #ed0008;
+    background: -webkit-linear-gradient(#ed0008, #dd1600);
+    background: linear-gradient(#ed0008, #dd1600);
+}
+
+
+.confirmbtn-full{
+    width: 100%;
+    webkit-box-sizing: border-box;
+   	moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.confirmbtn {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+    cursor: pointer;
+    border: 1px solid;
+    font-weight: bold;
+    text-align: center;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-size: 12px;
+    line-height: 1.28571em;
+    border-color: #000000;
+    color: #ffffff;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    padding: 3px 3px;
+    border-radius: 3px;
+}
+
+#confirmemail{
+	position: relative;
+	width: 360px;
+	height: 420px;
+   padding: 0;
+   font: inherit;
+   vertical-align: baseline;
+   margin: 10px auto;
+   border: 2px solid #999;
+}
+
+#confirmemail #emailpicker-div{
+	position: absolute; 
+ 	z-index: 1; 
+ 	display: border;
+ 	top: 200px;
+ 	right: 10px;
+ 	width: 50%;
+ 	background: #fff;
+ 	font-size: 14px;
+}
+
+#confirmemail .inline-layout {
+    margin-left: 5px;
+    margin-top: 30px;
+}
+
+#confirmemail [type="text"], #confirmemail [type="number"], #confirmemail [type="password"], #confirmemail [type="email"], #confirmemail [type="url"], #confirmemail [type="tel"], #confirmemail [type="date"], #confirmemail textarea, #confirmemail select, #confirmemail .pseudo-input{
+	
+	display: block;
+	box-sizing: border-box;
+    width: 100%;
+    margin: 0 0 9px;
+    padding: 5px 9px;
+    background: #fff;
+    border: 1px solid #999;
+    border-radius: 3px;
+    font-size: 14px;
+    line-height: 1.28571em;
+    line-height: 1.29em;
+}
+
+#confirmemail_yes_head{
+	position: relative;
+	width: 350px;
+	height: 160px;
+	text-align: left;
+	margin-top: 50px;
+}
+
+#confirmemail_yes_body{
+	width: 280px;
+	height: 150px;
+	margin: 30px auto;
+}
+
+#confirmemail_no_head{
+	width: 350px;
+	height: 120px;
+	margin-top: 50px;
+}
+
+#confirmemail_no_body{
+	width: 280px;
+	height: 150px;
+	margin: 30px auto;
+}
+
+.confirmemailbtn {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 20px auto;
+    cursor: pointer;
+    border: 1px solid;
+    font-weight: bold;
+    text-align: center;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-size: 13px;
+    line-height: 2em;
+    border-color: #000000;
+    color: #ffffff;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    padding: 3px 3px;
+    border-radius: 3px;
+}
+
+#confirmemail_yes_head p, #confirmemail_no_head p{
+    margin: 10px;
+}
+
+#confirmemail_yes_head .subemail, #confirmemail_no_head .subemail {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ff0000;
+}
+
+#confirmemail_yes_head .subused, #confirmemail_no_head .subused {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#email_auth{
+    width: 260px;
+    height: 260px;
+    padding: 0;
+    font: inherit;
+    vertical-align: baseline;
+    margin: 15px auto ;
+    border: 2px solid #999;
+}
+
+#email_auth_top{
+	width: 260px;
+	height: 30px;
+	text-align: center;
+	margin-top: 40px;
+	font-size: 14px;
+}
+
+.auth_top{
+	font-size: 15px;
+    font-weight: bold;
+}
+
+#email_auth_middle{
+	width: 260px;
+	height: 40px;
+}
+
+#email_auth_bottom{
+	width: 180px;
+	height: 50px;
+	margin: 0px auto;
+}
+
+#email_auth_middle [type="text"], #email_auth_middle [type="number"], #email_auth_middle [type="password"], #email_auth_middle [type="email"], #email_auth_middle [type="url"], #email_auth_middle [type="tel"], #email_auth_middle [type="date"], #email_auth_middle textarea, #email_auth_middle select, #email_auth_middle .pseudo-input{
+	
+	display: block;
+	box-sizing: border-box;
+    width: 100%;
+    margin: 0 0 9px;
+    padding: 5px 9px;
+    background: #fff;
+    border: 1px solid #999;
+    border-radius: 3px;
+    font-size: 14px;
+    line-height: 1.28571em;
+    line-height: 1.29em;
+}
+
+#email_auth_middle .inline-layout {
+	margin: 0px auto;
+	text-align: center;
+}
