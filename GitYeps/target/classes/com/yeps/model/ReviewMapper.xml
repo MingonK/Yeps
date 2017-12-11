@@ -6,12 +6,100 @@
 		
 <mapper namespace="com.yeps.model">
 
-	<select id="listReview" resultType="ReviewDBBean">
+	<select id="listReview" resultType="ReviewDTO">
 		select * from yeps_review order by rvnum desc
 	</select>
+	
+	<select id="getReview" resultType="ReviewDTO" parameterType="int">
+  		select * from yeps_review where rvnum = #{rvnum}
+  	</select>
  	
-	<insert id="insertReview" parameterType="ReviewDBBean">
-  		insert into yeps_review values (yeps_review_seq.nextval, #{no1}, #{no2}, #{writer}, #{content}, sysdate, #{gradepoint}, #{filenum}, #{ip})
+	<insert id="insertReview" parameterType="ReviewDTO">
+  		insert into yeps_review values (yeps_review_seq.nextval, #{rnum}, #{mnum}, #{content}, sysdate, #{gradepoint}, #{filenum}, #{ip}, #{recentreview})
   	</insert>
+  	
+  	<delete id="deleteReview" parameterType="int">
+  		delete from yeps_review where rvnum = #{rvnum}
+  	</delete>
+  	
+  	<update id="updateReview" parameterType="ReviewDTO">
+  		update yeps_review set content=#{content}, gradepoint=#{gradepoint} where rvnum=#{rvnum}
+  	</update>		
 
+  	<select id="new_BestGradePoint" resultType="int">
+  		select mnum from yeps_review where rvnum=(select max(rvnum) from yeps_review where gradepoint=(select max(gradepoint) from yeps_review))
+  	</select>	
+  	
+  	<select id="getgetSelectedRestaurant_Rname" resultType="String" parameterType="int">
+  		select rname from yeps_restaurant where rnum = #{rnum}
+  	</select>
+  	
+  	<select id="getSelectedRestaurant_Rv" resultType="ReviewDTO" parameterType="int">
+  		select *from yeps_review where rnum = #{rnum}
+  	</select>
+  	
+  	<select id="getSelectedRestaurant_Rv_M" resultType="int" parameterType="int">
+  		select mnum from yeps_review where rnum = #{rnum}
+  	</select>
+  	
+  	<!--  
+  	<select id="getSelectedRestaurant_M" resultType="MemberDTO" parameterType="int">
+  		select *from yeps_member where mnum=(select mnum from yeps_review where rnum = #{rnum})
+  	</select>
+  	-->
+  	
+  	<!--  
+  	mnum => 4개 List<Integer> list
+  	for(int i = 0; i < list.size();) {
+  		int mnum = list.get(i);
+  		List<MemberDTO> memberList = null;
+  		memberList.put(mapper(mnum));
+  	}
+  	-->
+  	
+  	<!--  
+  	<select id="mylist_info1" resultType="MemberDTO" parameterType="int" >
+  		select *from yeps_member where mnum = #{NBPmnum}
+  	</select>
+  	-->
+  	
+  	<select id="review_mylist_info2" resultType="ReviewDTO" parameterType="int">
+  		select *from yeps_review where rvnum = #{NBPmnum}
+  	</select>
+  	
+  	<!--  
+  	<select id="review_mylist_info3" resultType="FileDTO" parameterType="int">
+  		select *from yeps_file where filenum = #{NBPmnum}
+  	</select>
+  	-->
+  	
+  	<update id="review_mylist_updatedata" parameterType="int">
+  		update yeps_review set recentreview='y' where mnum=#{NBPmnum}
+  	</update>
+  	
+  	<select id="GetRestaurantName_Rv" resultType="int" parameterType="int">
+  		select rnum from yeps_review where mnum = #{NBPmnum}
+  	</select>
+  	
+  	<select id="recentReviewInfo" resultType="ReviewDTO">
+  		select rvnum, gradepoint, content from yeps_review order by rvnum desc 
+  	</select>
+  	
+  	<select id="numList" resultType="ReviewDTO" parameterType="int">
+  		select rnum, mnum from yeps_review where rnum= #{reviewIntList}
+  	</select>
+  	
+  	<select id="previous_reviews_Num" resultType="ReviewDTO">
+  		select rnum, mnum from yeps_review where recentreview='y'
+  	</select>
+  	
+  	<select id="previous_Rv" resultType="ReviewDTO">
+  		select *from yeps_review where recentreview= 'y'
+  	</select>
+  	
+  	
+  	
+  	
+  	
+  	
 </mapper>		
