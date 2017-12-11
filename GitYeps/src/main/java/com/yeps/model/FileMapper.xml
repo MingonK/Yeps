@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.yeps.model">
 	<insert id="insertFile" parameterType="FileDTO">
-		insert into yeps_file values (yeps_file_seq, #{mnum, jdbcType=VARCHAR}, #{rnum, jdbcType=VARCHAR}, #{rvnum, jdbcType=VARCHAR}, #{evnum, jdbcType=VARCHAR}, 
-				#{filename}, #{origin_filename}, #{filesize})
+		insert into yeps_files values (yeps_files_seq.nextval, #{mnum, jdbcType=INTEGER}, #{rnum, jdbcType=INTEGER}, #{rvnum, jdbcType=INTEGER}, 
+										#{evnum, jdbcType=INTEGER}, #{filename}, #{origin_filename}, #{filesize})
 	</insert>
 </mapper>
