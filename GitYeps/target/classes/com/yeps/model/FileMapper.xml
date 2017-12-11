@@ -7,6 +7,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.yeps.model">
 	<insert id="insertFile" parameterType="FileDTO">
 		insert into yeps_files values (yeps_files_seq.nextval, #{mnum, jdbcType=INTEGER}, #{rnum, jdbcType=INTEGER}, #{rvnum, jdbcType=INTEGER}, 
-										#{evnum, jdbcType=INTEGER}, #{filename}, #{origin_filename}, #{filesize})
+										#{evnum, jdbcType=INTEGER}, #{filename}, #{origin_filename}, #{filesize}, #{filecontent, jdbcType=VARCHAR})
 	</insert>
+	
+	<update id="updateFileContent" parameterType="java.util.HashMap">
+		update yeps_files set filecontent = #{filecontent, jdbcType=VARCHAR} where filenum = #{filenum} 
+	</update>
+	
+	<select id="getFile" parameterType="String" resultType="FileDTO">
+		select * from yeps_files where filename = #{filename} 
+	</select>
+	
+	<delete id="deleteFile" parameterType="int">
+		delete yeps_files where filenum = #{filenum}
+	</delete>
 </mapper>

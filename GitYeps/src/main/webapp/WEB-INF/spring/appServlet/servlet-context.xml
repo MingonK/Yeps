@@ -31,6 +31,11 @@
 		<beans:constructor-arg value="c:\\SpringWorkSpace\\files"/>
 	</beans:bean>
 	
+	<beans:bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView"/>  
+	<beans:bean id="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">  
+		<beans:property name="order" value="1"/>
+	</beans:bean>
+	
 	<context:component-scan base-package="com.yeps.controller" />
 	<context:component-scan base-package="com.yeps.model" />
 	<context:component-scan base-package="com.yeps.service" />
