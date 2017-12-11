@@ -1,14 +1,19 @@
 package com.yeps.model;
 
 public class ReviewDTO {
+	
 	private int rvnum;
-	private int rnum;		// �ܷ�Ű (�Ĵ� ��ȣ�� ����ص״ٰ� �ش� �Ĵ��� ����� ã�ư����ֵ���)
-	private int mnum;		// � ������ �� �������� Ȯ�ΰ���
+	private int rnum;         
+	private int mnum;         
 	private String writer;
 	private String content;
-	private String date;
-	private int gradePoint;	// ����
-	private String image;
+	private String joindate;
+	private int gradepoint;
+	private int filenum;	
+	private String ip;
+	private String recentreview;
+	
+	
 	public int getRvnum() {
 		return rvnum;
 	}
@@ -39,24 +44,41 @@ public class ReviewDTO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getDate() {
-		return date;
+	public String getJoindate() {
+		return joindate;
 	}
-	public void setDate(String date) {
-		this.date = date;
+	public void setJoindate(String joindate) {
+		this.joindate = joindate;
 	}
-	public int getGradePoint() {
-		return gradePoint;
+	public int getGradepoint() {
+		return gradepoint;
 	}
-	public void setGradePoint(int gradePoint) {
-		this.gradePoint = gradePoint;
+	public void setGradepoint(int gradepoint) {
+		this.gradepoint = gradepoint;
 	}
-	public String getImage() {
-		return image;
+	public int getFilenum() {
+		return filenum;
 	}
-	public void setImage(String image) {
-		this.image = image;
+	public void setFilenum(int filenum) {
+		this.filenum = filenum;
 	}
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+	public String getRecentreview() {
+		return recentreview;
+	}
+	public void setRecentreview(String recentreview) {
+		this.recentreview = recentreview;
+	}
+	
+	
+
+	
+	
 	
 	
 }

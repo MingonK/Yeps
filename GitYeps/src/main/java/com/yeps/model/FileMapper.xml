@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yeps.model">
+	<insert id="insertFile" parameterType="FileDTO">
+		insert into yeps_files values (yeps_files_seq.nextval, #{mnum, jdbcType=INTEGER}, #{rnum, jdbcType=INTEGER}, #{rvnum, jdbcType=INTEGER}, 
+										#{evnum, jdbcType=INTEGER}, #{filename}, #{origin_filename}, #{filesize})
+	</insert>
+</mapper>

@@ -7,7 +7,9 @@ public class FileDTO {
 	private int rvnum;
 	private int evnum;
 	private String filename;
+	private String origin_filename;
 	private int filesize;
+	
 	public int getFilenum() {
 		return filenum;
 	}
@@ -43,6 +45,12 @@ public class FileDTO {
 	}
 	public void setFilename(String filename) {
 		this.filename = filename;
+	}
+	public String getOrigin_filename() {
+		return origin_filename;
+	}
+	public void setOrigin_filename(String origin_filename) {
+		this.origin_filename = origin_filename;
 	}
 	public int getFilesize() {
 		return filesize;

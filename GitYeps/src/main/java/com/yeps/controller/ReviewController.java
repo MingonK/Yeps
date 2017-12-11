@@ -1,6 +1,9 @@
 package com.yeps.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -20,51 +23,230 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.yeps.model.ReviewDBBean;
+import com.yeps.model.MemberDTO;
+import com.yeps.model.RestaurantDTO;
+import com.yeps.model.ReviewDTO;
+import com.yeps.service.MemberMapper;
+import com.yeps.service.RestaurantMapper;
 import com.yeps.service.ReviewMapper;
 
 @Controller
 public class ReviewController {
-
 	
 		@Autowired
 		private ReviewMapper reviewMapper;
+		@Autowired
+		private MemberMapper memberMapper;
+		@Autowired
+		private RestaurantMapper restaurantMapper;
 		
-		@RequestMapping(value="/yreview_list")
-		public ModelAndView yreview_list() {
-			List<ReviewDBBean> list = reviewMapper.listReview(); 
+		
+		@RequestMapping(value="/review_list")
+		public ModelAndView review_list() {
+			List<ReviewDTO> list = reviewMapper.listReview(); 
+			
 			ModelAndView mav = new ModelAndView();
-			mav.addObject("yreviewList", list);
-			mav.setViewName("yreview/list");
+			mav.addObject("reviewList", list);
+			mav.setViewName("review/list");
 			return mav;
 	}
-		@RequestMapping(value="/yreview_write")
-		public ModelAndView yreview_write() {
-			ModelAndView mav = new ModelAndView();
-			mav.setViewName("yreview/write");
-			return mav;
+		
+		
+		@RequestMapping(value="/review_write")
+		public String review_write(HttpServletRequest req) {
+			return "review/write";
 		}
 		
-		@RequestMapping(value="/yreview_insert")
-		public ModelAndView yreview_insert(HttpServletRequest req){
-			ReviewDBBean dto = new ReviewDBBean();
-			dto.setNo1(1);
-			dto.setNo2(2);
-			dto.setWriter("writer");
+		@RequestMapping(value="/review_insert")
+		public ModelAndView review_insert(HttpServletRequest req){
+			//dto에 값 입력 내가 하는부분은 나중에 수정해야 할 부분임
+			
+			//★작성자는 인서트쿼리문에 넣을 필요가 없음//작성한 사람은 mnum을 통해서 누구인지 name을 꺼낼 수 있기때문에!!
+			ReviewDTO dto = new ReviewDTO();
+			dto.setRvnum(1);
+			dto.setRnum(2);
+			//dto.setWriter("writer");
 			dto.setContent(req.getParameter("content"));
 			dto.setGradepoint(1);
 			dto.setFilenum(3);
 			dto.setIp(req.getRemoteAddr());
+			dto.setRecentreview("n");
 			
 			int res = reviewMapper.insertReview(dto);
-			if(res==1) {
-				
+			ModelAndView mav = new ModelAndView();
+			String msg;
+			String url;
+			
+			if(res > 0) {
+				return new ModelAndView("redirect:review_list");
 			}else {
-				ModelAndView mav = new ModelAndView();
-				
+				msg = "리뷰 등록성공!!";
+				url = "review_write";
+				mav.addObject("msg", msg);
+				mav.addObject("url", url);
+				mav.setViewName("message");
+				return mav;
 			}
 			
-			return new ModelAndView("redirect:yreview_list");
 		}
 		
+		@RequestMapping(value="/review_delete")
+		public ModelAndView review_delete(HttpServletRequest req) {
+			String rvnum = req.getParameter("rvnum");
+			int res = reviewMapper.deleteReview(rvnum);
+			ModelAndView mav = new ModelAndView();
+			String msg;
+			String url;
+
+			if(res > 0) {
+				msg = "리뷰 삭제성공!!";
+				url = "review_list";
+				mav.addObject("msg", msg);
+				mav.addObject("url", url);
+				mav.setViewName("message");
+			}else{
+				msg = "리뷰 삭제실패!!";
+				url = "review_list";
+				mav.addObject("msg", msg);
+				mav.addObject("url", url);
+				mav.setViewName("message");
+			}
+			return mav;
+		}
+		
+
+		@RequestMapping(value="review_update", method=RequestMethod.GET)
+		public String review_updatePro(HttpServletRequest req, @RequestParam String rvnum) {
+			ReviewDTO dto = reviewMapper.getReview(Integer.parseInt(rvnum));
+			req.setAttribute("getReview", dto);
+			return "review/update";
+		}
+		
+		@RequestMapping(value="review_update", method=RequestMethod.POST)
+		public ModelAndView updateForm(HttpServletRequest req, @ModelAttribute ReviewDTO dto, BindingResult result) {
+			if(result.hasErrors()) {
+				dto.setRvnum(0);
+			}
+			int res= reviewMapper.updateReview(dto);
+			
+			return new ModelAndView("redirect:review_list");
+		}
+		
+		@RequestMapping(value="review_mylist")
+		public ModelAndView review_mylist(HttpServletRequest req) {
+			String NBPmnum = req.getParameter("NBPmnum");
+			//NBPmnum = NewBestGradepoint
+			
+			MemberDTO mylist_member = memberMapper.mylist_info1(Integer.parseInt(NBPmnum));
+			ReviewDTO mylist_review = reviewMapper.review_mylist_info2(Integer.parseInt(NBPmnum));
+			//★ 미구현 : FileDTO mylist_file = reviewMapper.review_info3(Integer.parseInt());
+			
+			//여기에 올라오는 글들은 recentreview칼럼의 데이터값이 y로 변경되게 쿼리문 작성해주기 
+			int res = reviewMapper.review_mylist_updatedata(Integer.parseInt(NBPmnum));
+			
+			//여기에 올라오는 식당명을 출력해주기
+			int GETrnum = reviewMapper.GetRestaurantName_Rv(Integer.parseInt(NBPmnum));
+			//String RestaurantName = restaurantMapper.GetRestaurantName_R(GETrnum);
+			List<RestaurantDTO> getRnameAndRnum = new ArrayList<RestaurantDTO>();
+			getRnameAndRnum = restaurantMapper.GetRestaurantName_R(GETrnum);
+			
+			//System.out.println("받아온 getRnameAndRnum값 출력:" + getRnameAndRnum);
+			
+			int i;
+			for(i=0; i<getRnameAndRnum.size(); i++) {
+				//System.out.println("getRnameAndRnum 출력:" + getRnameAndRnum.get(i));
+			}
+			
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("NBPmnum", NBPmnum);
+			mav.addObject("getRnameAndRnum", getRnameAndRnum);
+			mav.addObject("mylist_member", mylist_member);
+			mav.addObject("mylist_review", mylist_review);
+			//★ 미구현 : mav.addObject("mylist_file", mylist_file);
+			mav.setViewName("review/mylist");
+			return mav;
+		}
+		
+		@RequestMapping(value="guidelines")
+		public String review_guideview(){
+			return "review/guidelines";
+		}
+		
+		@RequestMapping(value="restaurant_restaurantIMG")
+		public ModelAndView restaurant_restaurantIMG(){
+			//rnum을 가지고 가서 식당 목록을 뿌려주기 //최근 식당으로 등록된것 가져오기 쿼리문 작성해서 갖고오기 
+			//★최근 식당목록으로 뽑아온것이 아니라, 일단은 식당등록이 먼저된것에서부터 19개의 식당목록을 가져왔음! ->20개로 바꿀예정임 
+			
+			List<RestaurantDTO> rlist = restaurantMapper.restaurant_restaurantIMG();
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("rlist", rlist);
+			mav.setViewName("restaurant/restaurantIMG");
+			return mav;
+		}
+		
+		@RequestMapping(value="review_selectedres")
+		public ModelAndView review_selectedres(HttpServletRequest req){
+			
+			//받아온 rnum을 가지고 가서 rnum과 같은 식당의 리뷰들을 뿌려주기  
+			String rnum = req.getParameter("rnum");
+			//★ 미구현 : List<FileDTO> fileList = fileMapper.getSelectedRestaurant_f(Integer.parseInt(rnum));
+			//file은 위에서 받아온 rnum과 fileDTO안에 있는 rnum이 일치할때에 파일정보들을 가져와서 뿌려주게 해주면됨.(Mapper부분 구현만 하면됨.)
+			
+			String Rname = reviewMapper.getgetSelectedRestaurant_Rname(Integer.parseInt(rnum));
+			
+			List<ReviewDTO> reviewList = reviewMapper.getSelectedRestaurant_Rv(Integer.parseInt(rnum));
+			List<Integer> rvmnumList = reviewMapper.getSelectedRestaurant_Rv_M(Integer.parseInt(rnum));
+			
+			List<MemberDTO> memberList = new ArrayList<MemberDTO>();
+			for(int i=0; i<rvmnumList.size(); i++) {
+				int mnum = rvmnumList.get(i);
+				memberList.addAll(memberMapper.getSelectedRestaurant_M(mnum));
+			}
+
+			//선택된 식당에 리뷰를 작성한 member의 정보 가져오기 
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("Rname", Rname);
+			mav.addObject("selectedDataM", memberList);
+			mav.addObject("selectedDataRV", reviewList);
+			mav.setViewName("review/selectedres");
+			return mav;
+		}
+		
+		@RequestMapping(value="/previous_reviews")
+		public ModelAndView previous_reviews() {
+			//rnum,mnum값을 뽑아서 각각의 Mapper를 통해 값을 받아와서 previous_review.jsp페이지에 출력
+			
+			List<ReviewDTO> numList = reviewMapper.previous_reviews_Num();
+			for(int i=0; i<numList.size(); i++) {
+//				System.out.println("numList Size 출력:" + numList.size());
+//				System.out.println("getMnum 출력:"+numList.get(i).getMnum());
+//				System.out.println("getRnum 출력:"+numList.get(i).getRnum());
+			}
+			//recentreview가 y인 reviewDTO를 꺼내왔음 
+			List<ReviewDTO> rvdto_y = reviewMapper.previous_Rv();
+			
+			List<MemberDTO> mdto_y = new ArrayList<MemberDTO>();
+			for(int i=0; i<numList.size(); i++) {
+				int mnum = numList.get(i).getMnum();
+				mdto_y.addAll(memberMapper.previous_M(mnum));	//rvnum 이 일치할때 restaurantDTO를 한줄씩 꺼내와서 저장함.
+			}
+			
+			List<RestaurantDTO> rdto_y = new ArrayList<RestaurantDTO>();
+			for(int i=0; i<numList.size(); i++) {
+				int rnum = numList.get(i).getRnum();
+				rdto_y.addAll(restaurantMapper.previous_R(rnum));
+			}
+			
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("rvdto_y", rvdto_y);
+			mav.addObject("mdto_y", mdto_y);
+			mav.addObject("rdto_y", rdto_y);
+			mav.setViewName("review/previous_reviews");
+			return mav;
+		}
+		
+		@RequestMapping(value="restaurant_qna")
+		public String restaurant_qna() {
+			return "/qna/restaurant_qna";
+		}
 }
