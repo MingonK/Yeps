@@ -4,12 +4,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.IOUtils;
@@ -30,18 +28,27 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.yeps.model.FileDTO;
-import com.yeps.model.RestaurantDTO;
-import com.yeps.service.BoardPager;
-import com.yeps.service.RestaurantMapper;
+import com.web.model.FileDTO;
+import com.web.model.RestaurantDTO;
+import com.web.service.BoardPager;
+import com.web.service.RestaurantMapper;
 
+/**
+ * Handles requests for the application home page.
+ */
 @Controller
 public class RestaurantController {
 	@Resource(name = "uploadPath")
 	private String uploadPath;
-		
+	
+	
 	@Autowired
 	private RestaurantMapper restaurantMapper;
+	
+
+
+//	private static final Logger logger = LoggerFactory.getLogger(RestaurantController.class);
+	
 	
 	@RequestMapping(value="/test")
 	public String test(){
@@ -64,23 +71,18 @@ public class RestaurantController {
 	@RequestMapping(value="/restaurant_insert", method=RequestMethod.POST)
 	public ModelAndView insertRest(HttpServletRequest req,@ModelAttribute RestaurantDTO dto,BindingResult result,MultipartHttpServletRequest mhsq) throws Exception {
 		String msg=null,url=null;
-		String upPath = "D:/spring02/upload/";
-		MultipartHttpServletRequest mr = (MultipartHttpServletRequest) req;
-		Iterator<String> it = mr.getFileNames();
-		String fileName = null;
-
-		while(it.hasNext()) {
-			it.next();
-			MultipartFile mf = mr.getFile("filename");
-			fileName = mf.getOriginalFilename();
-			File file = new File(upPath, fileName);
-			if(mf.getSize() != 0) {
-				mf.transferTo(file);
-				dto.setFilename(fileName);
-			}else {
-				dto.setFilename("");
-			}
+		String upPath = "D:/spring/upload/";
+	
+		Map<String, MultipartFile> fileMap = mhsq.getFileMap();
+		for (MultipartFile multipartFile : fileMap.values()) {
+			String genId = UUID.randomUUID().toString();
+			String originalfileName=multipartFile.getOriginalFilename();
+			String saveFileName = genId + "." + getExtension(originalfileName);
+			String savePath = upPath + saveFileName; // 저장 될 파일 경로
+			multipartFile.transferTo(new File(savePath));
+			dto.setFilename(saveFileName);
 		}
+		
 		int res=restaurantMapper.insertRest(dto);
 		if(res>0) {
 			msg="레스토랑 등록 성공";
@@ -91,7 +93,7 @@ public class RestaurantController {
 		}
 		req.setAttribute("msg", msg);
 		req.setAttribute("url", url);
-		return new ModelAndView("restaurant/message");
+		return new ModelAndView("message");
 	}
 
 	@RequestMapping(value="/restaurant_uploadForm2")
@@ -100,10 +102,10 @@ public class RestaurantController {
 	}
 
 	@RequestMapping(value="/restaurant_upload")
-	public ModelAndView uploadRest(HttpServletRequest req,@ModelAttribute RestaurantDTO dto, MultipartHttpServletRequest mhsq) throws IllegalStateException,IOException{
+	public ModelAndView uploadRest(HttpServletRequest req,@ModelAttribute FileDTO dto, MultipartHttpServletRequest mhsq) throws IllegalStateException,IOException{
 		String msg=null,url=null;
 		String rnum=req.getParameter("rnum");
-		String realFolder = "D:/spring02/upload/";
+		String realFolder = "D:/spring/upload/";
 
 		File dir = new File(realFolder);
 		if (!dir.isDirectory()) {
@@ -111,7 +113,6 @@ public class RestaurantController {
 		}
 
 		Map<String, MultipartFile> fileMap = mhsq.getFileMap();
-
 		for (MultipartFile multipartFile : fileMap.values()) {
 			String genId = UUID.randomUUID().toString();
 			String originalfileName=multipartFile.getOriginalFilename();
@@ -119,7 +120,8 @@ public class RestaurantController {
 			String savePath = realFolder + saveFileName; // 저장 될 파일 경로
 			long fileSize = multipartFile.getSize();
 			multipartFile.transferTo(new File(savePath));
-			int res=restaurantMapper.fileUpload(originalfileName, saveFileName, fileSize,Integer.parseInt(rnum));
+			dto.setRnum(Integer.parseInt(rnum));
+			int res=restaurantMapper.insertFile(dto);
 			if(res>0) {
 				msg="사진 등록 성공";
 				url="restaurant_content?rnum="+rnum;
@@ -168,11 +170,11 @@ public class RestaurantController {
 	@RequestMapping(value="/restaurant_content")
 	public ModelAndView contentRest(@RequestParam int rnum){
 		RestaurantDTO dto = restaurantMapper.getRest(rnum);
-		List<FileDTO> uploadFileList = restaurantMapper.getFileList(rnum);
+//		List<uploadFileVO> uploadFileList = restaurantMapper.getFileList(rnum);
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("getRest", dto);
-		mav.addObject("uploadFileList", uploadFileList);
+//		mav.addObject("uploadFileList", uploadFileList);
 		mav.setViewName("restaurant/restaurant_content");
 		return mav; 
 	}
@@ -181,7 +183,7 @@ public class RestaurantController {
 	@ResponseBody
 	    public ResponseEntity<byte[]> profileImage(@PathVariable("name") String name) throws IOException {
 	        HttpHeaders header = new HttpHeaders();
-	        header.setContentType(MediaType.IMAGE_JPEG);
+	        header.setContentType(MediaType.IMAGE_PNG);
 	        return new ResponseEntity<byte[]>(IOUtils.toByteArray(new FileInputStream(new File(uploadPath+name))), header, HttpStatus.CREATED);
 	    }
 
@@ -191,18 +193,7 @@ public class RestaurantController {
 
 
 
-	    
-	    
-//	    //추가함(상우) 
-//	    @RequestMapping(value="/restaurant_list")
-//		public ModelAndView restaurant_list() {
-//			List<RestaurantDTO> list = restaurantMapper.listrestaurant();
-//			
-//			ModelAndView mav = new ModelAndView();
-//			mav.addObject("restaurantlist", list);
-//			mav.setViewName("restaurant/list");
-//			return mav;
-//		}
+
 
 
 

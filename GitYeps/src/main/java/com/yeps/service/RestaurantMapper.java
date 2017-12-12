@@ -8,9 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.yeps.model.FileDTO;
-import com.yeps.model.RestaurantDTO;
-
+import com.web.model.FileDTO;
+import com.web.model.RestaurantDTO;
 
 /**
  * This is not a best practices class.  It's just an example
@@ -38,13 +37,8 @@ public class RestaurantMapper {
 		return dto;
 	}
 
-	public int fileUpload(String originalfileName, String saveFileName, long fileSize,int rnum) {
-	    HashMap<String, Object> hm = new HashMap<String, Object>();
-	    hm.put("originalfileName", originalfileName);
-	    hm.put("saveFileName", saveFileName);
-	    hm.put("fileSize", fileSize);
-	    hm.put("rnum", rnum);
-	    return sqlSession.update("uploadFile",hm);
+	public int insertFile(FileDTO dto) {
+		return sqlSession.insert("insertFile", dto);
 	}
 	
 	public int getCount() {
@@ -53,32 +47,6 @@ public class RestaurantMapper {
 	public List<FileDTO> getFileList(int rnum) {
 		return sqlSession.selectList("uploadFileList",rnum);
 	}
-	
-
-
-	
-	
-	
-	
-	//
-	
-	public List<RestaurantDTO> GetRestaurantName_R(int GETrnum) {
-		return sqlSession.selectList("GetRestaurantName_R", GETrnum);
-	}
-	
-	public RestaurantDTO restaurantRName(int rnumList) {
-			return sqlSession.selectOne("restaurantRName", rnumList);
-	}
-	
-	public List<RestaurantDTO> restaurant_restaurantIMG() {
-		return sqlSession.selectList("restaurant_restaurantIMG");
-	}
-	
-	public List<RestaurantDTO> previous_R(int rnum){
-		return sqlSession.selectList("previous_R", rnum);
-	}
-
-
 
 }
 
