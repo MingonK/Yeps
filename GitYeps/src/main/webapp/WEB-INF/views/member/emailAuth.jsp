@@ -40,7 +40,7 @@
 		</div>
 		<form id="email_auth_middle" method="post" name="authenform">
 			<ul class="inline-layout">
-				<li style="width: 70%"><input type="text" name="authnum" placeholder="인증번호 입력" onkeypress="if(event.keyCode==13){return false;}"></li>
+				<li style="width: 70%"><input type="text" name="authnum" placeholder="인증번호 입력" autocomplete=off onkeypress="if(event.keyCode==13){return false;}"></li>
 			</ul>
 		</form>
 		<div id="email_auth_bottom">

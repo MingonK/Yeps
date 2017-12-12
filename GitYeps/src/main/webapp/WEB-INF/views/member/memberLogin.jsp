@@ -230,7 +230,11 @@
 				findemailf.ssn1.focus();
 				return false;
 			}
-			window.open("", "findEmail", "toolbar=no, location=no, status=no, menubar=no, scrollbars=no, resizable=no, width=500, height=180");
+			var popupX = (window.screen.width/2)-(400/2);
+			// 만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
+			var popupY= (window.screen.height/2)-(340/2);
+			// 만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
+			window.open("", "findEmail", 'status=no, toolbar=no, location=no, status=no, menubar=no, scrollbars=no, resizable=no, width=400, height=340, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY);
 			frm = document.findemailf;
 			frm.action = "member_findEmail";
 			frm.target = "findEmail";
@@ -255,7 +259,11 @@
 				findpasswdf.email.focus();
 				return false;
 			}
-			window.open("", "findPasswd", "toolbar=no, location=no, status=no, menubar=no, scrollbars=no, resizable=no, width=500, height=180");
+			var popupX = (window.screen.width/2)-(400/2);
+			// 만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
+			var popupY= (window.screen.height/2)-(340/2);
+			// 만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
+			window.open("", "findPasswd", 'status=no, toolbar=no, location=no, status=no, menubar=no, scrollbars=no, resizable=no, width=400, height=340, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY);
 			frm = document.findpasswdf;
 			frm.action = "member_findPasswd";
 			frm.target = "findPasswd";
@@ -281,8 +289,8 @@
 
 						<div id="member_body">
 							<form name="loginf" class="memberf" action="member_login" method="POST" onsubmit="return loginCheck()">
-								<input id="email" name="email" placeholder="Email" required="required" type="email" value=""> 
-								<input id="passwd" name="passwd" placeholder="Password" required="required" type="password" value="">
+								<input id="email" name="email" placeholder="Email" required="required" type="email" autocomplete=off value=""> 
+								<input id="passwd" name="passwd" placeholder="Password" required="required" type="password" autocomplete=off value="">
 								<div id="forgot-email">
 									<small><a class="forgot-email-link">Forgot e-mail?</a></small>
 								</div>
@@ -312,13 +320,13 @@
 						
 						<div id="member_body">
 							<form name="joinf" class="memberf" method="POST" action="member_join">
-								<input name="name" placeholder="이름" required="required" type="text" value="">
+								<input name="name" placeholder="이름" required="required" type="text" autocomplete=off value="">
 								<ul class="inline-layout">
-									<li><input id="memberssn1"onkeypress="return numberOnly();" onkeyup="focusSsn2('join')" maxlength="6" placeholder="주민번호 앞자리" required="required" type="text" name="ssn1" value="" /></li>
+									<li><input id="memberssn1"onkeypress="return numberOnly();" onkeyup="focusSsn2('join')" maxlength="6" placeholder="주민번호 앞자리" required="required" type="text" name="ssn1" autocomplete=off value="" /></li>
 									<li><input id="memberssn2" onkeypress="return numberOnly();" maxlength="7" placeholder="주민번호 뒷자리" required="required" type="password" name="ssn2" value="" /></li>
 								</ul>
 								<ul class="inline-layout">
-									<li style="width: 45%"><input name="email1" maxlength="20" placeholder="이메일" required="required" onkeydown="inputEmailChk()" type="text" value=""></li>
+									<li style="width: 45%"><input name="email1" maxlength="20" placeholder="이메일" required="required" onkeydown="inputEmailChk()" type="text" autocomplete=off value=""></li>
 									<li style="width: 55%">
 										<div id="member_email2">
 											<div class="member_email2_input" style="position: relative; float: left; vertical-align: middle;">
@@ -374,9 +382,9 @@
 						</div>
 						<div id="member_body">
 							<form name="findemailf" class="findemailf" method="POST" onsubmit="return findEmailCheck()">
-								<input id="name" name="name" placeholder="이름" required="required" type="text" value="">
+								<input id="name" name="name" placeholder="이름" required="required" type="text" autocomplete=off value="">
 								<ul class="inline-layout">
-									<li><input id="memberssn1" onkeypress="return numberOnly();" onkeyup="focusSsn2('findemail')" maxlength="6" placeholder="주민번호 앞자리" required="required" type="text" name="ssn1" value="" /></li>
+									<li><input id="memberssn1" onkeypress="return numberOnly();" onkeyup="focusSsn2('findemail')" maxlength="6" placeholder="주민번호 앞자리" required="required" type="text" name="ssn1" autocomplete=off value="" /></li>
 									<li><input id="memberssn2" onkeypress="return numberOnly();" maxlength="7" placeholder="주민번호 뒷자리" required="required" type="password" name="ssn2" value="" /></li>
 								</ul>
 								<div id="forgot-email">
@@ -402,10 +410,10 @@
 							<form name="findpasswdf" class="findpasswdf" method="POST" onsubmit="return findPasswdCheck()">
 								<input id="name" name="name" placeholder="이름" required="required" type="text" value="">
 								<ul class="inline-layout">
-									<li><input id="memberssn1" onkeypress="return numberOnly();" onkeyup="focusSsn2('findpasswd')" maxlength="6" placeholder="주민번호 앞자리" required="required" type="text" name="ssn1" value="" /></li>
+									<li><input id="memberssn1" onkeypress="return numberOnly();" onkeyup="focusSsn2('findpasswd')" maxlength="6" placeholder="주민번호 앞자리" required="required" type="text" name="ssn1" autocomplete=off value="" /></li>
 									<li><input id="memberssn2" onkeypress="return numberOnly();" maxlength="7" placeholder="주민번호 뒷자리" required="required" type="password" name="ssn2" value="" /></li>
 								</ul>
-								<input id="email" name="email" placeholder="이메일" required="required" type="email" value="">
+								<input id="email" name="email" placeholder="이메일" required="required" type="email" autocomplete=off value="">
 								<div id="forgot-email">
 									<small><a class="forgot-email-link">Forgot e-mail?</a></small>
 								</div>

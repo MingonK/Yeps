@@ -80,15 +80,14 @@
 <body>
 	<c:choose>
 		<c:when test="${isMember==1}">
-			<form id="confirmemail" name="checkForm" action="member_confirmEmail"
-				onsubmit="confirmEmail()">
+			<form id="confirmemail" name="checkForm" action="member_confirmEmail" onsubmit="confirmEmail()">
 				<div id="confirmemail_yes_head">
 					<p class="subemail">${email}</p>
 					<p class="subused">은 이미 사용중인 이메일입니다.</p>
 					<p class="subused">다른 이메일을 입력해주세요.</p>
 					<ul class="inline-layout">
 						<li style="width: 45%">
-							<input name="email1" maxlength="20" placeholder="이메일" required="required" onkeydown="inputEmailChk()" type="text" value=""></li>
+							<input name="email1" maxlength="20" placeholder="이메일" required="required" onkeydown="inputEmailChk()" autocomplete=off type="text" value=""></li>
 						<li style="width: 55%">
 							<div id="member_email2">
 								<div class="member_email2_input" style="position: relative; float: left; vertical-align: middle;">

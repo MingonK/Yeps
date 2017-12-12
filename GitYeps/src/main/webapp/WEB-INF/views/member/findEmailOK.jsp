@@ -9,22 +9,31 @@
 </head>
 <body>
 	<c:choose>
-		<c:when test="${emailList==null}">
-			<center>
-				<b>회원정보가 존재하지 않습니다.</b><br />
-				<br /> <input type="button" value="확인" onclick='self.close()'>
-			</center>
+		<c:when test="${empty emailList}">
+			<div id="member_popup">
+				<div id="member_popup_empty_head">
+				<p class="subused">회원정보가 존재하지 않습니다.</p>
+				</div>
+				<div id="member_popup_body">
+					<input type="button" class="confirmemailbtn confirmbtn-primary confirmbtn-big confirmbtn-full" value="확인" onclick='self.close()'>
+				</div>
+			</div>
 		</c:when>
 		<c:otherwise>
-			<center>
-				<b>회원님의 ID는<br /> <c:forEach var="email" items="${emailList}">
-						<tr>
-							<td><font color="red">${email}</font><br /></td>
-						</tr>
-					</c:forEach> 총 ${fn:length(emailList)} 개 입니다.
-				</b><br />
-				<br /> <input type="button" value="확인" onclick='self.close()'>
-			</center>
+			<div id="member_popup">
+				<div id="member_popup_head">
+					<p class="subused">회원님의 Email은</p>
+					<c:forEach var="email" items="${emailList}">
+						<p class="subemail">${email}</p>
+					</c:forEach>
+					<div id="member_popup_head_len">
+						<p class="subused">입니다.</p>
+					</div>
+				</div>
+				<div id="member_popup_body">
+					<input type="button" class="confirmemailbtn confirmbtn-primary confirmbtn-big confirmbtn-full" value="확인" onclick='self.close()'>
+				</div>
+			</div>
 		</c:otherwise>
 	</c:choose>
 </body>
