@@ -5,9 +5,10 @@
 <html>
 <head>
 <title>Message Locker</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"
 	type="text/javascript"></script>
@@ -34,16 +35,20 @@
 		<br>
 		<div id="menu" style="background-color: #ffffff; height: 60%; width: 25%; float: left; font-weight: bold; font-family: consolas; font-size:17px;">
 			<h3 style="font-family: consolas; font-weight: bold; font-size: 26px; color: #d32323;">Menu</h3>
-			<br> <input type="button" value="쪽지쓰기" style="width: 100; height: 40; color: #ffffff; background: #d32323; border-radius: 9px; font-weight: bold; font-family: consolas;" onclick="windowOpen();">
-				 <input type="button" value="내게쓰기" style="width: 100; height: 40; color: #ffffff; background: #d32323; border-radius: 9px; font-weight: bold; font-family: consolas;" onclick="windowOpen();"><br> <br>
+			<br>  <div class="btn group" align="left">
+		<button class="btn btn-danger" data-target="#layerpop" data-toggle="modal" id="write"
+		style="width:120px; height:40px; border-radius:7px; font-weight: bold; font-family: consolas; font-size:17px;">쪽지쓰기</button>
+		<button class="btn btn-default" data-target="#sendform" data-toggle="modal" id="writeToMe"
+		style="width:120px; height: 40px; border-radius: 7px; color: #ffffff; background: #d32323;font-weight: bold; font-family: consolas; font-size:17px;">내게쓰기</button>
+		</div><br><br> 
 			<div align="center" id="tag">
-				<a href="message_move?filter2=receive"><label>받은 쪽지 </label></a><a href="#"><label> ${count}</label></a><br> <br> 
-				<a href="message_move?filter2=send"><label>보낸 쪽지 </label></a><a href="#"><label> ${count}</label></a><br> <br> 
-				<a href="yeps_message"><label>쪽지함 </label></a><a href="#"><label> ${count}</label></a><br> <br> 
-				<a href="message_move?filter2=trash"><label>휴지통 </label></a><a href="#"><label> ${count}</label></a><br> <br> 
+				<a href="message_move?filter2=receive"><label>받은 쪽지 </label></a><a href="#"><label>:: ${count}</label></a><br> <br> 
+				<a href="message_move?filter2=send"><label>보낸 쪽지 </label></a><a href="#"><label>:: ${sCount}</label></a><br> <br> 
+				<a href="message_move?filter2=msgBox"><label>쪽지함 </label></a><a href="#"><label>:: ${mCount}</label></a><br> <br> 
+				<a href="message_move?filter2=trash"><label>휴지통 </label></a><a href="#"><label>:: ${tCount}</label></a><br> <br> 
 			</div>
 		</div>
-		<br><br>
+		
 		<div id="messageList"  align="left" style="height: 60%; width: 75%; float: left;  padding:1;">
 			<form name="lockerform" id="lockerform" method="post">
 				<table border="0" id="table">
@@ -63,8 +68,7 @@
 						<select name="filter2" style="border-radius: 4px;">
 								<option value="0">:: 필터 ::</option>
 								<option value="msgBox">쪽지함</option>
-								<option value="receive">받은 쪽지</option>
-								<option value="send">보낸 쪽지</option>
+								<option value="trash">휴지통</option>
 						</select> 
 						<input type="button" id="move" value="이동" style="color: #ffffff; background: #d32323; border-radius: 5px; font-weight: bold; font-family: consolas;" onclick="moving();"></th>
 				</tr>
@@ -75,14 +79,13 @@
 						<td width="60px"><label>보낸이</label></td>
 						<td width="500px"><label>제목</label></td>
 						<th width="120px"><label>받은시각</label></th>
-						<td width="60px"><label>차단</label>
 					</tr>
-					<c:if test="${empty messageList}">
+					<c:if test="${empty lockerList}">
 						<tr>
 							<td colspan="6" align="center">보관함이 비었습니다.</td>
 						</tr>
 					</c:if>
-					<c:forEach var="dto" items="${messageList}">
+					<c:forEach var="dto" items="${lockerList}">
 						<tr align="center" id="list">
 							<td><input type="checkbox" name="check" value="${dto.msgNum}"></td>
 							<td><c:choose>
@@ -93,15 +96,40 @@
 										<label><input type="image" src="resources/img/close.jpg" name="read" value="${dto.msgNum}" onclick="readMessage();"></label>
 									</c:when>
 								</c:choose></td>
-							<td style="font-weight: bold;">${dto.msgNum}</td>
-							<td><a href="javascript:windowOpen();"><label>${dto.sender}</label></a>
-								<input type="hidden" id="receiver" value="${dto.sender}"></td>
-							<td><a
-								href="message_content?msgNum=${dto.msgNum}&readDate=${dto.readDate}"><label>${dto.title}</label></a></td>
+						<td style="font-weight: bold;" >	
+							<c:set var="num" value="${num-1}"/>
+				            <c:out value="${num}"/></td>
+							 <td><button type="button" name="sender" value="${dto.sender}" class="btn btn-default" data-target="#sendform" data-toggle="modal" 
+						    style="background: #00ff0000; border: 0; font-weight: bold; font-family: consolas; color:#0073bb; font-size:17px;" >${dto.sender}</button>
+						    <td><button type="button" name="title" value="${dto.msgNum}" class="btn btn-default" data-target="#messageView" data-toggle="modal" 
+						    style="background: #00ff0000; border: 0; font-weight: bold; font-family: consolas; color:#0073bb; font-size:17px;" >${dto.title}</button></td>
 							<td><label>${dto.reg_date}</label></td>
-							<td><a href="#">차단</a></td>
 						</tr>
 					</c:forEach>
+						<tr>
+					<td colspan="7" align="center">
+                <!-- **이전페이지 블록으로 이동 : 현재 페이지 블럭이 1보다 크면 [이전]하이퍼링크를 화면에 출력 -->
+                <c:if test="${map.boardPager.curBlock > 1}">
+                    <a href="javascript:list('${map.boardPager.prevPage}')">[이전]</a>
+                </c:if>
+                
+                <!-- **하나의 블럭에서 반복문 수행 시작페이지부터 끝페이지까지 -->
+                <c:forEach var="num" begin="${map.boardPager.blockBegin}" end="${map.boardPager.blockEnd}">
+                    <!-- **현재페이지이면 하이퍼링크 제거 -->
+                    <c:choose>
+                        <c:when test="${num == map.boardPager.curPage}">
+                            <span style="color: red">  [${num}]  </span>&nbsp;
+                        </c:when>
+                        <c:otherwise>
+                            <a href="javascript:list('${num}')">  [${num}] </a>&nbsp;
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+                
+                <!-- **다음페이지 블록으로 이동 : 현재 페이지 블럭이 전체 페이지 블럭보다 작거나 같으면 [다음]하이퍼링크를 화면에 출력 -->
+                <c:if test="${map.boardPager.curBlock <= map.boardPager.totBlock}">
+                    <a href="javascript:list('${map.boardPager.nextPage}')">[다음]</a>
+                </c:if>
 				</table>
 				<br>
 			</form>
@@ -110,13 +138,13 @@
 	</div>
 	<%@ include file="../bottom.jsp"%>
 	<script>
-	function windowOpen() {
+	/* function windowOpen() {
 		var left1, top1;
 		left1 = (screen.width - 300) / 2;
 		top1 = (screen.height - 300) / 2;
 		window.open("message_sendForm", "addr", "left=" + left1 + ", top="+ top1 + ",width=600,height=400,resizable=no,scrollbars=yes");
 	}
-
+ */
 	function searching() {
 		var value1 = $("select[name=filter]").val();
 		if (value1 == 0) {
@@ -176,6 +204,12 @@
 		}
 		document.lockerform.submit()
 	}
+	
+	function contentView(){
+		document.lockerform.action = "message_content";
+		document.lockerform.submit();
+		$("#view").modal();
+	}
 
 	$(document).ready(function() {
 		var tbl = $("#table");
@@ -212,7 +246,5 @@
 			});
 		});
 </script>
-	<!-- <script type="text/javascript" src="js\bootstrap.js"></script>  부트스트랩 내부 적용하려했으나 경로 못 찾아 실패-->
 </body>
-
 </html>

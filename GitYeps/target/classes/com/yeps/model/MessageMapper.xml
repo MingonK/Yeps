@@ -18,9 +18,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into yeps_message values(yeps_message_seq.nextval, #{title}, #{receiver}, 0,#{content}, sysdate, 0, 0,0,0,0)
 	</insert>
 
-	<select id="messageList" parameterType="java.util.HashMap" resultType="MessageDTO">
-		select * from(select rownum rn,A.* from (select * from yeps_message order by msgnum asc)A) where islocker!=1 and rn between #{start} and #{end} 
+<!-- 	<select id="messageList" parameterType="java.util.HashMap" resultType="MessageDTO"> -->
+<!-- 		select * from(select rownum rn,A.* from (select * from yeps_message order by msgnum asc)A) where islocker!=1 and rn between #{start} and #{end}  -->
+<!-- 	</select> -->
+		<select id="messageList" resultType="MessageDTO" parameterType="MessageDTO">
+		select * from (select rownum rn, A.* from (select * from yeps_message order by msgNum desc)A) where rn between #{start} and #{end}
 	</select>
+	
+	<select id="msgBoxList" resultType="MessageDTO" parameterType="MessageDTO">
+	    select * from (select rownum rn, A.* from (select * from yeps_message order by msgNum desc)A) where islocker !=1 and rn between #{start} and #{end}</select>
 	
 	<select id="lockerList" resultType="MessageDTO">
 	    select * from yeps_message where islocker=1
@@ -56,7 +62,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	 <select id="getMessageCount" resultType="int">
 	    select count(*) from yeps_message 
-	</select>   
+	</select> 
+	
+	<select id="getSendCount" resultType="int">
+	    select count(*) from yeps_message where sender=#{sender}
+	    </select> 
+	    
+	<select id="getReceiveCount" resultType="int">
+	    select count(*) from yeps_message where receive=#{receive}
+	</select>  
+	
+	<select id="getLockerCount" resultType="int">
+	    select count(*) from yeps_message where islocker=1
+	</select>    
 	
 	<update id="updateReadDate" parameterType="int">
 	    update yeps_message set readdate=sysdate where msgnum=#{msgnum}

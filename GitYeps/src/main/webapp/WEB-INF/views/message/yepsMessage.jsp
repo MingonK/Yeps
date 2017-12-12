@@ -6,20 +6,24 @@
 <html>
 <head>
 <title>Yeps Message</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> 
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<!-- Latest compiled and minified JavaScript -->
+ <script src="//code.jquery.com/jquery-1.11.0.min.js"></script> 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"
 	type="text/javascript"></script>
 
-<style>
+ <style>
 #table tr[id="list"].selected {
-	background-color: navy;
+	background-color: yellow;
 	color: #fff;
 	font-weight: bold;
 }
-</style>
+</style> 
 </head>
 <c:if test="${not empty requestScope.msg}">
 	<script type="text/javascript">
@@ -35,25 +39,82 @@
 		<br>
 		<div id="menu" style="background-color: #ffffff; height: 60%; width: 25%; float: left; font-weight: bold; font-family: consolas; font-size:17px;">
 			<h3 style="font-family: consolas; font-weight: bold; font-size: 26px; color: #d32323;">Menu</h3>
-			<br> <input type="button" value="쪽지쓰기" style="width: 100; height: 40; color: #ffffff; background: #d32323; border-radius: 9px; font-weight: bold; font-family: consolas;" onclick="windowOpen();">
-				 <input type="button" value="내게쓰기" style="width: 100; height: 40; color: #ffffff; background: #d32323; border-radius: 9px; font-weight: bold; font-family: consolas;" onclick="windowOpen();"><br> <br>
+		<br>
+        <div class="btn group" align="left">
+		<button class="btn btn-default" data-target="#sendform" data-toggle="modal" id="write"
+		style="width:120px; height: 40px; border-radius: 7px; color: #ffffff; background: #d32323;font-weight: bold; font-family: consolas; font-size:17px;">쪽지쓰기</button>
+		<button class="btn btn-default" data-target="#sendform" data-toggle="modal" id="writeToMe"
+		style="width:120px; height: 40px; border-radius: 7px; color: #ffffff; background: #d32323;font-weight: bold; font-family: consolas; font-size:17px;">내게쓰기</button>
+        </div><br><br>
 			<div align="center" id="tag">
-				<a href="message_move?filter2=receive"><label>받은 쪽지 </label></a><a href="#"><label> ${count}</label></a><br> <br> 
-				<a href="message_move?filter2=send"><label>보낸 쪽지 </label></a><a href="#"><label> ${count}</label></a><br> <br> 
-				<a href="message_move?filter2=locker"><label>쪽지보관함 </label></a><a href="#"><label> ${count}</label></a><br> <br> 
-				<a href="message_move?filter2=trash"><label>휴지통 </label></a><a href="#"><label> ${count}</label></a><br> <br> 
+				<a href="message_move?filter2=receive"><label>받은 쪽지 </label></a><a href="#"><label>:: ${count}</label></a><br> <br> 
+				<a href="message_move?filter2=send"><label>보낸 쪽지 </label></a><a href="#"><label>:: ${sCount}</label></a><br> <br> 
+				<a href="message_move?filter2=locker"><label>쪽지보관함 </label></a><a href="#"><label>:: ${lCount}</label></a><br> <br> 
+				<a href="message_move?filter2=trash"><label>휴지통 </label></a><a href="#"><label>:: ${0}</label></a><br> <br> 
 			</div>
 		</div>
-		<br><br>
-		<div id="messageList"  align="left" style="height: 60%; width: 75%; float: left;  padding:1;">
+		
+		<div id="messageList"  align="left" style="height: 70%; width: 75%; float: left;  padding:1;">
 			<form name="msgform" id="msgform" method="post">
+			 <div class="modal fade" id="sendform" >
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                   <!-- header -->
+                   <div class="modal-header">
+                     <!-- 닫기(x) 버튼 -->
+                     <button type="button" class="close" data-dismiss="modal">×</button>
+                     <!-- header title -->
+                     <h3 class="modal-title" align="left">To</h3>
+                     <input type="text" style="width: 100%; height: 40; border-radius: 7px; font-family: consolas;" name="receiver" id="receiver">    
+                   </div>
+                   <!-- body -->
+                   <div class="modal-body">
+                       <h3 align="left">Subject</h3>
+                       <input type="text" style="width: 100%; height: 40; border-radius: 7px; font-family: consolas;" name="title" id="title"> 
+                   </div>
+                   <!-- Footer -->
+                   <div class="modal-footer" align="left">
+                    <h3 align="left" style="font-weitht: bold;">Message</h3>
+                    <textarea style="width: 100%; border-radius: 7px; font-size:16px;" cols="100%"
+									rows="5" name="content" id="content" placeholder=" 여기에 내용을 입력하세요."></textarea>
+								<br><br>
+				    <button type="button" class="btn btn-danger" onclick="check()">SendMessage</button>
+				     <button type="reset" name="cancel" value="cancel" style="background: #00ff0000; border: 0;">cancel</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+                <div class="modal fade" id="messageView" >
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header" >
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h3 style="font-family: consolas; font-weight: bold; font-size: 26px; color: #d32323;" >from</h3>
+					<h4 style="font-family: consolas; font-weight: bold; font-size: 23px;" >${getContent.sender}</h4><br><br>
+					<h3 style="font-family: consolas; font-weight: bold; font-size: 26px; color: #d32323;">open time</h3>
+					<h4 style="font-family: consolas; font-weight: bold; font-size: 23px;" >${getContent.readDate}</h4><br>
+                    </div>
+                  <div class="modal-body">
+                   <h3 style="font-family: consolas; font-weight: bold; font-size: 26px; color: #d32323;" >subject</h3><br>
+                   <h4 style="font-family: consolas; font-weight: bold; font-size: 23px;">${getContent.title}</h4>   
+                   </div>
+                   <div class="modal-footer">
+                    <h3 align="left" style="font-weitht: bold; font-size: 26px; font-family: consolas;">Message</h3>
+                    <textarea style="width: 100%; border-radius: 9px; font-weitht: bold; font-size: 20px; color:000000; font-family: consolas;" 
+                    cols="100%" rows="6" name="content"  disabled >여기로 내용을 불러온다.</textarea><br><br>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" style="background: #00ff0000; border: 0; color:000000;">close</button>
+                   </div>
+                  </div>
+                 </div>
+                </div>
 				<table border="0" id="table">
 					<tr valign="middle">
-						<td width="60px" align="center" rowspan="3" valign="middle"><br> 
+						<td width="60px" align="center" rowspan="3" valign="middle"> 
 						<input type="checkbox" name="first"></td>
 						<th align="left" colspan="6">
 						<input type="button" name="del" value="삭제" style="color: #ffffff; background: #d32323; border-radius: 5px; font-weight: bold; font-family: consolas;" onclick="msgformSubmit(1);"> 
-						<input type="button" name="reply" value="답장" style="color: #ffffff; background: #d32323; border-radius: 5px; font-weight: bold; font-family: consolas;" onclick="msgformSubmit(2);"> 
+						<button type="button" style="color: #ffffff; background: #d32323; border-radius: 5px; font-weight: bold; font-family: consolas;" onclick="msgformSubmit(2)">답장</button>
 						<input type="button" name="locker" value="보관" style="color: #ffffff; background: #d32323; border-radius: 5px; font-weight: bold; font-family: consolas;" onclick="moveToLocker();"> 
 						<select name="filter" style="border-radius: 4px;">
 								<option value="0">:: 필터 ::</option>
@@ -64,8 +125,7 @@
 						<select name="filter2" style="border-radius: 4px;">
 								<option value="0">:: 필터 ::</option>
 								<option value="locker">보관함</option>
-								<option value="receive">받은 쪽지</option>
-								<option value="send">보낸 쪽지</option>
+								<option value="trash">휴지통</option>
 						</select> 
 						<input type="button" id="move" value="이동" style="color: #ffffff; background: #d32323; border-radius: 5px; font-weight: bold; font-family: consolas;" onclick="moving();"></th>
 				</tr>
@@ -74,18 +134,18 @@
 						<td width="60px"><label>읽음</label></td>
 						<td width="60px"><label>번호</label></td>
 						<td width="60px"><label>보낸이</label></td>
-						<td width="500px"><label>제목</label></td>
+						<td width="450px"><label>제목</label></td>
 						<c:choose>
 							<c:when test="${mode eq 'send'}">
-								<td width="120px"><label>보낸 시각</label></td>
+								<td width="130px"><label>보낸 시각</label></td>
 							</c:when>
 							<c:when test="${mode eq 'receive'}">
-								<td width="120px"><label>받은 시각</label></td>
+								<td width="130px"><label>받은 시각</label></td>
 							</c:when>
 						</c:choose>
-						<td width="60px"><label>차단</label>
+						
 					<br></tr>
-					<c:if test="${empty messageList}">
+					 <c:if test="${empty map.list}">
 						<tr>
 							<c:choose>
 								<c:when test="${mode eq 'send'}">
@@ -96,9 +156,9 @@
 								</c:when>
 							</c:choose>
 						</tr>
-					</c:if>
-					<c:forEach var="dto" items="${messageList}">
-						<tr align="center" id="list">
+					</c:if> 
+					<c:forEach var="dto" items="${map.list}">
+					    <tr align="center" id="list">
 							<td><input type="checkbox" name="check" value="${dto.msgNum}"></td>
 							<td><c:choose>
 									<c:when test="${dto.readNum == 1}">
@@ -108,66 +168,70 @@
 										<label><input type="image" src="resources/img/close.jpg" name="read" value="${dto.msgNum}" onclick="readMessage();"></label>
 									</c:when>
 								</c:choose></td>
-							<td style="font-weight: bold;">${dto.msgNum}</td>
-							<td><a href="javascript:windowOpen();"><label>${dto.sender}</label></a>
-								<input type="hidden" id="receiver" value="${dto.sender}"></td>
-							<td><a
-								href="message_content?msgNum=${dto.msgNum}&readDate=${dto.readDate}"><label>${dto.title}</label></a></td>
+							<td style="font-weight: bold;" >	
+							<c:set var="num" value="${num-1}"/>
+				            <c:out value="${num}"/></td>
+				            <!--  보낸이 클릭시 답장 보낼 수 있도록 창 열리며 받는이에  바로 보낸이 추가 . 
+				                                    원래 a태그 사용하였으나  부트스트랩 적용을 용이하게 하기위해 부트스트랩 버튼 형식으로 바꿈. 
+				                  'title' 클릭시 내용바로 보기 부트스트랩 이용하여 구현하기 위해 역시 버튼 형식 적용 -->
+						    <td><button type="button" name="sender" value="${dto.sender}" class="btn btn-default" data-target="#sendform" data-toggle="modal" 
+						    style="background: #00ff0000; border: 0; font-weight: bold; font-family: consolas; color:#0073bb; font-size:17px;" >${dto.sender}</button>
+						    <td><button type="button" name="title" value="${dto.msgNum}" class="btn btn-default" data-target="#messageView" data-toggle="modal" 
+						    style="background: #00ff0000; border: 0; font-weight: bold; font-family: consolas; color:#0073bb; font-size:17px;" >${dto.title}</button></td>
 							<td><label>${dto.reg_date}</label></td>
-							<td><a href="#">차단</a></td>
+							
 						</tr>
 					</c:forEach>
 					<tr>
 					<td colspan="7" align="center">
-					<c:if test="${ count > 0 }">
-					
-       <fmt:parseNumber var="pageCount" integerOnly="true" value="${(count + pageSize - 1) / pageSize}" />
-            <c:set var="pageBlock" value="5"/>
-       <fmt:parseNumber var="startPage" integerOnly="true" value="${(currentPage -1) / pageBlock * pageBlock + 1}" />
-            <c:set var="endPage" value="${startPage + pageBlock - 1}"/>
-            <c:if test="${endPage > pageCount}"> 
-            <c:set var="endPage" value="${pageCount}"></c:set></c:if>
-       <c:if test="${startPage > pageBlock}">
-                <a href="yeps_message?pageNum=${startPage - pageBlock}">[이전]</a></c:if>
-       <c:forEach var="i" begin="1" end="${endPage}">
-                <a href="yeps_message?pageNum=${i} ">[${i}]</a>
-            </c:forEach>
-            <c:if test="${endPage < pageCount}">
-                <a href="yeps_message?pageNum=${startPage + pageBlock}">[다음]</a>
-            </c:if>
-         </c:if>
-					
-<%-- 				<c:if test="${ count > 0 }">
-				<c:set var="pageCount" value="${(count + pageSize -1)/pageSize}"></c:set>
-				<c:set var="pageBlock" value="5"></c:set>
-				<c:set var="startPage" value="${(currentPage - 1)/pageBlock*pageBlock + 1 }"></c:set>
-				<c:set var="endPage" value="${startPage + pageBlock - 1 }"></c:set>
-				<c:if test="${endPage > pageCount }"> 
-				<c:set var="endPage" value="${pageCount }"></c:set></c:if>
-				<c:if test="${startPage > 1}">
-				    <a href="yeps_message?pageNum=${startPage - pageBlock}">[이전]</a></c:if>
-				<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
-				    <a href="yeps_message?pageNum=${i} ">[${i}]</a>
-				</c:forEach>
-				<c:if test="${endPage < pageCount}">
-				    <a href="yeps_message?pageNum=${startPage + pageBlock}">[다음]</a>
-				</c:if>
-			</c:if>  --%>
-		            </td></tr>
+                <!-- **이전페이지 블록으로 이동 : 현재 페이지 블럭이 1보다 크면 [이전]하이퍼링크를 화면에 출력 -->
+                <c:if test="${map.boardPager.curBlock > 1}">
+                    <a href="javascript:list('${map.boardPager.prevPage}')">[이전]</a>
+                </c:if>
+                
+                <!-- **하나의 블럭에서 반복문 수행 시작페이지부터 끝페이지까지 -->
+                <c:forEach var="num" begin="${map.boardPager.blockBegin}" end="${map.boardPager.blockEnd}">
+                    <!-- **현재페이지이면 하이퍼링크 제거 -->
+                    <c:choose>
+                        <c:when test="${num == map.boardPager.curPage}">
+                            <span style="color: red">  [${num}]  </span>&nbsp;
+                        </c:when>
+                        <c:otherwise>
+                            <a href="javascript:list('${num}')">  [${num}] </a>&nbsp;
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+                
+                <!-- **다음페이지 블록으로 이동 : 현재 페이지 블럭이 전체 페이지 블럭보다 작거나 같으면 [다음]하이퍼링크를 화면에 출력 -->
+                <c:if test="${map.boardPager.curBlock <= map.boardPager.totBlock}">
+                    <a href="javascript:list('${map.boardPager.nextPage}')">[다음]</a>
+                </c:if>
+                
+                <!-- **끝페이지로 이동 : 현재 페이지가 전체 페이지보다 작거나 같으면 [끝]하이퍼링크를 화면에 출력 -->
+               <%--  <c:if test="${map.boardPager.curPage <= map.boardPager.totPage}">
+                    <a href="javascript:list('${map.boardPager.totPage}')">[끝]</a>
+                </c:if> --%>
+				   </td></tr>
                   </table>
 				<br>
 			</form>
 		</div>
 		<br>
 	</div>
-	<script type="text/javascript" src="js\bootstrap.js"></script>
 	<script>
+	
+    function list(page){
+        location.href="yeps_message?curPage=" + page;
+    }
 
-    function windowOpen(){
-        var left1,top1;
-            left1=(screen.width-300)/2;
-            top1=(screen.height-300)/2;
-        window.open("message_sendForm","addr", "left="+left1+", top="+top1+",width=600,height=400,resizable=no,scrollbars=yes");
+   /*  function windowOpen(){
+        document.msgform.action = "message_send";
+        document.msgform.submit();
+    } */
+    
+    function reply(){
+    	document.msgform.action = "message_reply";
+    	document.msgform.submit();
     }
     
     function searching(){
@@ -231,15 +295,41 @@
 	         document.msgform.action = "message_delete";
 		}
 		if(index == 2){
-			 var left1,top1;
-	         left1=(screen.width-300)/2;
-	         top1=(screen.height-300)/2;
-	         openWin = window.open("message_reply","addr", "left="+left1+", location=no, toolbar=no, resizable=no, top="+top1+",width=600,height=400,scrollbars=yes");
-	         openWin.document.getElementById("msgNum").value()=document.getElementById("msgNum").value(); 
-	   }
-		document.msgform.submit()
+			document.msgform.action = "message_reply";
+			/* $("#sendform").modal(); */
+		}
+		document.msgform.submit();
     }
-	 
+    
+    $(document).ready(function(){
+        $("#reply").click(function(){
+            $("#sendform").modal();
+        });
+    });
+    
+    function check(){
+		
+		if (("#sendform #receiver").value()==""){
+			alert("받는 사람을 입력하세요")
+			("#reciever").focus()
+			return
+		}
+		
+		if ($("input[name=title]").val()==""){
+			alert("제목을 입력하세요")
+			("#title").focus()
+			return
+		}
+		if ((".modal-footer #content").val()==""){
+			alert("내용을 입력하세요")
+			("#content").focus()
+			return
+		}
+		 document.msgform.action = "message_send?mode=send";
+		 document.msgform.submit();
+		 self.close();
+	    };
+
     $(document).ready(function(){
         var tbl = $("#table");
        // 테이블 헤더에 있는 checkbox 클릭시
@@ -277,9 +367,6 @@
             }
         });
     });
-    <%@ include file="../bottom.jsp"%>
+    
 </script>
-</body>
-
-</html>
-
+<%@ include file="../bottom.jsp"%>

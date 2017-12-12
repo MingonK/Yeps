@@ -13,7 +13,7 @@
 		<br>
 		<form name="contentForm" action="message_delete" method="post">
 			<input type="hidden" name="msgNum" value="${getContent.msgNum }">
-			<table border="0" width="60%" align="center">
+			<table border="0" width="60%" >
 				<tr>
 					<td style="font-family: consolas; font-weight: bold; font-size: 26px; color: #d32323; align="left" width="17%">from</td>
 					<td style="font-family: consolas; font-weight: bold; font-size: 23px;" width="19%">${getContent.sender}<br></td>

@@ -1,12 +1,12 @@
 package com.yeps.controller;
 
-import java.io.File;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,14 +21,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.yeps.model.MemberDTO;
 import com.yeps.model.MessageDTO;
+import com.yeps.service.YepsPager;
 import com.yeps.service.MessageMapper;
-
 
 @Controller
 public class MessageController {
@@ -39,59 +36,28 @@ public class MessageController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	public ModelAndView pagingMessageList(HttpServletRequest req) {
-		ModelAndView mav = new ModelAndView();
-		int pageSize = 10;
-		String pageNum = req.getParameter("pageNum");
-		if (pageNum == null) {
-			pageNum = "1";
-		}
-       
-		int currentPage = Integer.parseInt(pageNum);
-		/* int prevBlock = (int)Math.floor((currentPage-1)/pageBlock)*pageBlock;   페이지 적용 코딩중...*/
-		int startRow = (currentPage - 1) * pageSize + 1;
-		int endRow = startRow + pageSize - 1;
-		int count = yepsMessageMapper.getMessageCount();
-		int pageCount = (count + pageSize - 1) / pageSize;
-		int pageBlock = 5;
-		int num = count - pageSize * (currentPage - 1);   
-		if(endRow > count) {
-			endRow = count;
-		}
 
-		List<MessageDTO> list = yepsMessageMapper.messageList(startRow, endRow);
-		mav.addObject("pageSize", pageSize);
-		mav.addObject("currentPage", currentPage);
-		mav.addObject("num", num);
-		mav.addObject("messageList", list);
+		int count = yepsMessageMapper.getMessageCount();
+		int curPage = req.getParameter("curPage")!=null?Integer.parseInt(req.getParameter("curPage")): 1 ;
+		YepsPager boardPager = new YepsPager(count, curPage);
+		int start = boardPager.getPageBegin();
+		int end = boardPager.getPageEnd();
+		int pageSize = boardPager.PAGE_SCALE;
+		int num = count - pageSize * (curPage - 1) + 1;   
+		List<MessageDTO> list = yepsMessageMapper.messageList(start, end);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list); // list
+		map.put("count", count); 
+		map.put("boardPager", boardPager);
+		ModelAndView mav = new ModelAndView();
+		int lCount = yepsMessageMapper.getLockerCount();
+		mav.addObject("lCount",lCount);
 		mav.addObject("count", count);
+		mav.addObject("num", num);
+		mav.addObject("map", map); 
+		mav.addObject("mode", "receive");
 		mav.setViewName("message/yepsMessage");
 		return mav;
-		/*		페이지적용 코딩중 아직 미완성  ModelAndView mav = new ModelAndView();
-        int pageSize = 10;
-        String pageNum = req.getParameter("pageNum");
-        if (pageNum == null) {
-            pageNum = "1";
-           }
-        double pnum = Double.parseDouble(pageNum); 
-        if(pnum < 1 ) {
-        	pnum = 1;
-        }
-        int cPage = (int)pnum;
-        int endRow = pageSize*cPage ;
-        int startRow = endRow - pageSize + 1;
-        int count = yepsMessageMapper.getMessageCount();
-        if (endRow > count)
-        	endRow = count;
-        int num = count - pageSize * (cPage - 1);
-        List<MessageDTO> list = yepsMessageMapper.messageList(startRow, endRow);
-        mav.addObject("pageSize", pageSize);
-        mav.addObject("currentPage", cPage);
-        mav.addObject("num", num);
-        mav.addObject("messageList", list);
-        mav.addObject("count", count);
-        mav.addObject("num", num);
-        mav.setViewName("message/yepsMessage");
-        return mav;*/
 	}
 
 	public void yeps_date(Locale locale, Model model) {
@@ -103,7 +69,6 @@ public class MessageController {
 
 	@RequestMapping(value = "yeps_message")
 	public ModelAndView yeps_message(Locale locale, Model model,HttpServletRequest req) throws Exception {
-
 		ModelAndView mav = new ModelAndView();
 		req.setAttribute("mode", "receive");
 		mav = pagingMessageList(req);
@@ -114,6 +79,7 @@ public class MessageController {
 	public ModelAndView message_insert(HttpServletRequest req, Locale locale, Model model) {
 		ModelAndView mav = new ModelAndView();
 		int msgNum = Integer.parseInt(req.getParameter("msgNum"));
+		System.out.println(msgNum);
 		int	rNum = 0 ;int rDate = 0;
 		int readNum = yepsMessageMapper.getContent(msgNum).getReadNum();
 		if(readNum==0) {
@@ -137,7 +103,6 @@ public class MessageController {
 		String msg = null;
 		int res = 0;
 		if(msgNum==null) {
-
 			if(check == null) {
 				msg = "선택된 메시지가 없습니다. 다시 확인하세요.";
 				req.setAttribute("mode", "receive");
@@ -162,8 +127,6 @@ public class MessageController {
 			msg = "메시지가 삭제 되었습니다.";
 			mav.addObject("msg",msg);
 		}
-		/*List<MessageDTO> list = yepsMessageMapper.messageList();*/
-		/*req.setAttribute("messageList", list);*/
 		req.setAttribute("mode", "receive");
 		mav = pagingMessageList(req);
 		return mav;
@@ -178,28 +141,26 @@ public class MessageController {
 
 	@RequestMapping(value = "message_send")
 	public ModelAndView message_send
-	(Locale locale, Model model, HttpServletRequest req,@ModelAttribute MessageDTO dto,BindingResult result)
+	(HttpServletRequest req,@ModelAttribute MessageDTO dto, HttpSession session, BindingResult result)
 			throws Exception {
 		if (result.hasErrors()) {
 			dto.setMsgNum(0);
 		}
 		ModelAndView mav = new ModelAndView();
 		String msg = null;
-		/*int mnum = yepsMessageMapper.getMember(name).getMnum();
-		String sender = yepsMessageMapper.getSender(mnum);*///로그인시 로그인한 회원의 정보로 보내는 사람을 구한다.
+
+		/*	int mnum = session.getAttribute("mnum");
+		String sender = yepsMessageMapper.getSender(mnum);//로그인시 로그인한 회원의 정보로 보내는 사람을 구한다.*/
 		int res = yepsMessageMapper.writeMessage(dto);
 		if(res>0) {
-			msg = "쪽지를 보냈습니다.보낸 쪽지함으로 이동합니다.";
+			msg = "쪽지를 보냈습니다.쪽지함으로 이동합니다.";
 			String receiver = req.getParameter("receiver");
-
-			/*	List<MessageDTO> list = yepsMessageMapper.sendList(sender);*/
-			List<MessageDTO> list = yepsMessageMapper.receiveList(receiver);
-			req.setAttribute("messageList", list);
-			req.setAttribute("mode", "receiver");
-			mav.setViewName("message/yepsMessage");
+			int sCount = yepsMessageMapper.getSendCount("");
+			req.setAttribute("mode", "receive");
+			mav = pagingMessageList(req);
 		}else {
-			msg = "쪽지 보내기에 실패하였습니다.쪽지쓰기 페이지로 이동합니다.";
-			mav.setViewName("message/sendMessageForm");
+			msg = "쪽지 보내기에 실패하였습니다.";
+			mav = pagingMessageList(req);
 		}
 		req.setAttribute("msg", msg);
 		return mav;
@@ -238,7 +199,7 @@ public class MessageController {
 		}else {
 			req.setAttribute("receiver", receiver);
 		}
-		mav.setViewName("message/sendMessageForm");
+		mav.setViewName("message/yepsMessage.reply();");
 		return mav;
 	}
 
@@ -248,21 +209,43 @@ public class MessageController {
 		String mode = req.getParameter("filter2");
 		String msg = null;
 		String sender = null;
-		if(mode.equals("locker")) {
-			List<MessageDTO> list = yepsMessageMapper.lockerList();
-			mav.addObject("messageList", list);
-			mav.setViewName("message/messageLocker");
-		}else if(mode.equals("receive") || mode.equals("msgBox")) {
+		if(sender == null || sender.trim().equals("")) {
+			msg = "로그인을 먼저 하세요.";
+			mav.addObject("msg", msg);
+			mav.setViewName("member_index");
+		}
+		if(mode.equals("receive")) {
 			mav = pagingMessageList(req);
-			req.setAttribute("mode", "receive");
-			return mav;
-		}else if(mode.equals("send")) {
-			/*int mnum = session.
-			sender = yepsMessageMapper.getSender(mnum); 
-			로그인을 한다면 로그인 정보로 sender를 구한후 리스트를 가져와 페이지를 이동한다
+			msg = "받은 쪽지함으로 이동합니다.";
+			mav.addObject("msg", msg);
+		}else if(mode.equals("send")){
+			msg = "보낸 쪽지함으로 이동합니다.";
 			List<MessageDTO> list = yepsMessageMapper.sendList(sender);
-			req.setAttribute("messageList", list);*/
-			req.setAttribute("mode", "send");
+			mav.addObject("messageList", list);
+			mav.addObject("msg",msg);
+			mav.addObject("mode",mode);
+		}else if(mode.equals("locker")) {
+			int lCount = yepsMessageMapper.getLockerCount();
+			int count = yepsMessageMapper.getMessageCount();
+			int mCount = count - lCount;
+			System.out.println(mCount);
+			mav.addObject("mCount", mCount);
+			mav.addObject("count", count);
+			List<MessageDTO> list = yepsMessageMapper.lockerList();
+			mav = pagingMessageList(req);
+			mav.addObject("lockerList", list);
+			mav.setViewName("message/messageLocker");
+		}else if(mode.equals("trash")) {
+			mav.setViewName("message/trashMessage");
+		}else if(mode.equals("msgBox")) {
+			int count = yepsMessageMapper.getMessageCount();
+			int curPage = req.getParameter("curPage")!=null?Integer.parseInt(req.getParameter("curPage")): 1 ;
+			YepsPager boardPager = new YepsPager(count, curPage);
+			int start = boardPager.getPageBegin();
+			int end = boardPager.getPageEnd();
+			List<MessageDTO> list = yepsMessageMapper.msgBoxList(start, end);
+			mav.addObject("msgList", list);
+			mav.addObject("mode", "receive");
 			mav.setViewName("message/yepsMessage");
 		}else {
 			msg = "error code:4007; 관리자에게 문의 하십시오.";
@@ -381,11 +364,15 @@ public class MessageController {
 			}
 		}
 		List<MessageDTO> list = yepsMessageMapper.lockerList();
+		int lCount = yepsMessageMapper.getLockerCount();
+		int count = yepsMessageMapper.getMessageCount();
+		int mCount = count - lCount;
+		mav.addObject("mCount", mCount);
+		mav.addObject("count", count);
 		mav.addObject("messageList", list);
 		mav.setViewName("message/messageLocker");
 		return mav;
 	}
-
 
 }
 

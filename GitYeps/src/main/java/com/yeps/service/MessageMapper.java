@@ -2,6 +2,7 @@ package com.yeps.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +33,19 @@ public class MessageMapper {
 		return sqlSession.insert("writeMessage", dto);
 	}
 	
-	public List<MessageDTO> messageList(int start, int end){
-		HashMap<String ,Integer> map = new HashMap();
-	      map.put("start", start);
-	      map.put("end", end);
+//	public List<MessageDTO> messageList(int start, int end){
+//		HashMap<String ,Integer> map = new HashMap();
+//	      map.put("start", start);
+//	      map.put("end", end);
+//		return sqlSession.selectList("messageList",map);
+//	}
+	public List<MessageDTO> messageList(int start,int end){
+	    Map<String, Object> map = new HashMap<String, Object>();
+	    map.put("start", start);
+	    map.put("end", end);
 		return sqlSession.selectList("messageList",map);
 	}
+
 	
 	public List<MessageDTO> lockerList() {
 		return sqlSession.selectList("lockerList");
@@ -49,6 +57,13 @@ public class MessageMapper {
 	
 	public List<MessageDTO> receiveList(String receiver){
 		return sqlSession.selectList("receiveList", receiver);
+	}
+	
+	public List<MessageDTO> msgBoxList(int start, int end) {
+		Map<String, Object> map = new HashMap<String, Object>();
+	    map.put("start", start);
+	    map.put("end", end);
+		return sqlSession.selectList("msgBoxList", map);
 	}
 
 	public String getReceiver(int msgnum){
@@ -115,7 +130,7 @@ public class MessageMapper {
 		}
 	}
 	
-	public int getSendCount() {
+	public int getSendCount(String sender) {
 		try {
 			return sqlSession.selectOne("getSendCount");
 		}catch(Exception e) {
@@ -138,6 +153,5 @@ public class MessageMapper {
 			return null;
 		}
 	}
-	
 	
 }
