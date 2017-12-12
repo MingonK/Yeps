@@ -368,12 +368,24 @@ small {
  	font-size: 14px;
 }
 
-#confirmemail .inline-layout {
+#member_popup{
+	position: relative;
+	width: 360px;
+	height: 300px;
+   padding: 0;
+   font: inherit;
+   vertical-align: baseline;
+   margin: 15px auto;
+   border: 2px solid #999;
+}
+
+#member_popup .inline-layout, #confirmemail .inline-layout {
     margin-left: 5px;
     margin-top: 30px;
 }
 
-#confirmemail [type="text"], #confirmemail [type="number"], #confirmemail [type="password"], #confirmemail [type="email"], #confirmemail [type="url"], #confirmemail [type="tel"], #confirmemail [type="date"], #confirmemail textarea, #confirmemail select, #confirmemail .pseudo-input{
+#confirmemail [type="text"], #confirmemail [type="number"], #confirmemail [type="password"], #confirmemail [type="email"], #member_popup [type="url"], #confirmemail [type="tel"], #member_popup [type="date"], #confirmemail textarea, #confirmemail select, #confirmemail .pseudo-input,
+#member_popup [type="text"], #member_popup [type="number"], #member_popup [type="password"], #member_popup [type="email"], #member_popup [type="url"], #member_popup [type="tel"], #member_popup [type="date"], #member_popup textarea, #member_popup select, #member_popup .pseudo-input{
 	
 	display: block;
 	box-sizing: border-box;
@@ -436,19 +448,34 @@ small {
     border-radius: 3px;
 }
 
-#confirmemail_yes_head p, #confirmemail_no_head p{
+#confirmemail_yes_head p, #confirmemail_no_head p,
+#member_popup_head p{
     margin: 10px;
 }
 
-#confirmemail_yes_head .subemail, #confirmemail_no_head .subemail {
+#confirmemail_yes_head .subemail, #confirmemail_no_head .subemail ,
+#member_popup_head .subemail{
     font-size: 20px;
     font-weight: bold;
     color: #ff0000;
 }
 
-#confirmemail_yes_head .subused, #confirmemail_no_head .subused {
-    font-size: 15px;
+#confirmemail_yes_head .subused, #confirmemail_no_head .subused,
+#member_popup_head .subused{
+    font-size: 17px;
     font-weight: bold;
+}
+
+#member_popup_head .subused_pw_change{
+	font-size: 15px;
+	font-weight: bold;
+}
+
+#member_popup_empty_head .subused{
+	font-size: 17px;
+    font-weight: bold;
+    margin: auto;
+    padding-top: 70px;
 }
 
 #email_auth{
@@ -503,4 +530,25 @@ small {
 #email_auth_middle .inline-layout {
 	margin: 0px auto;
 	text-align: center;
+}
+
+#member_popup_head, #member_popup_empty_head{
+	position: relative;
+	width: 360px;
+	height: 180px;
+	text-align: center;
+	margin-top: 30px;
+}
+
+#member_popup_head_len{
+	width: 360px;
+	height: 50px;
+	text-align: center;
+	margin-top: 30px;
+}
+
+#member_popup_body{
+	width: 280px;
+	height: 90px;
+	margin: 0px auto;
 }

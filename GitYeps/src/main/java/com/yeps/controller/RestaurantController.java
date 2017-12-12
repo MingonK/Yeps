@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.IOUtils;
@@ -28,14 +29,15 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.web.model.FileDTO;
-import com.web.model.RestaurantDTO;
-import com.web.service.BoardPager;
-import com.web.service.RestaurantMapper;
+import com.yeps.model.FileDTO;
+import com.yeps.model.RestaurantDTO;
+import com.yeps.service.BoardPager;
+import com.yeps.service.RestaurantMapper;
 
 /**
  * Handles requests for the application home page.
  */
+
 @Controller
 public class RestaurantController {
 	@Resource(name = "uploadPath")
