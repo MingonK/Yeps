@@ -200,7 +200,18 @@ public class RestaurantController {
 
 
 
-
+	    
+	    
+//	    //추가함(상우) 
+//	    @RequestMapping(value="/restaurant_list")
+//		public ModelAndView restaurant_list() {
+//			List<RestaurantDTO> list = restaurantMapper.listrestaurant();
+//			
+//			ModelAndView mav = new ModelAndView();
+//			mav.addObject("restaurantlist", list);
+//			mav.setViewName("restaurant/list");
+//			return mav;
+//		}
 
 
 
