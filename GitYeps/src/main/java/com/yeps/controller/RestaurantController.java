@@ -35,22 +35,13 @@ import com.yeps.model.uploadFileVO;
 import com.yeps.service.BoardPager;
 import com.yeps.service.RestaurantMapper;
 
-/**
- * Handles requests for the application home page.
- */
 @Controller
 public class RestaurantController {
 	@Resource(name = "uploadPath")
 	private String uploadPath;
-	
-	
+		
 	@Autowired
 	private RestaurantMapper restaurantMapper;
-	
-
-
-//	private static final Logger logger = LoggerFactory.getLogger(RestaurantController.class);
-	
 	
 	@RequestMapping(value="/test")
 	public String test(){
@@ -200,7 +191,18 @@ public class RestaurantController {
 
 
 
-
+	    
+	    
+//	    //추가함(상우) 
+//	    @RequestMapping(value="/restaurant_list")
+//		public ModelAndView restaurant_list() {
+//			List<RestaurantDTO> list = restaurantMapper.listrestaurant();
+//			
+//			ModelAndView mav = new ModelAndView();
+//			mav.addObject("restaurantlist", list);
+//			mav.setViewName("restaurant/list");
+//			return mav;
+//		}
 
 
 

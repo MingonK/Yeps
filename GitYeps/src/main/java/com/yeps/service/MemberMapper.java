@@ -119,4 +119,26 @@ public class MemberMapper {
 	 }
 
 	 */
+	
+	
+	public MemberDTO mylist_info1(int NBPmnum) {
+		try {
+			return sqlSession.selectOne("mylist_info1", NBPmnum);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public List<MemberDTO> getSelectedRestaurant_M(int mnum){
+		return sqlSession.selectList("getSelectedRestaurant_M", mnum);
+	}
+
+	public MemberDTO memberName(int mnumList) {
+		return sqlSession.selectOne("memberName", mnumList);
+	}
+	
+	public List<MemberDTO> previous_M(int mnum) {
+		return sqlSession.selectList("previous_M", mnum);
+	}
 }
