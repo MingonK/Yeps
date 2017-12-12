@@ -8,8 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yeps.model.FileDTO;
 import com.yeps.model.RestaurantDTO;
-import com.yeps.model.uploadFileVO;
 
 
 /**
@@ -50,7 +50,7 @@ public class RestaurantMapper {
 	public int getCount() {
 		return sqlSession.selectOne("getCount");
 	}
-	public List<uploadFileVO> getFileList(int rnum) {
+	public List<FileDTO> getFileList(int rnum) {
 		return sqlSession.selectList("uploadFileList",rnum);
 	}
 	

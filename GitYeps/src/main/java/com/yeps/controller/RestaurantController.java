@@ -30,8 +30,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yeps.model.FileDTO;
 import com.yeps.model.RestaurantDTO;
-import com.yeps.model.uploadFileVO;
 import com.yeps.service.BoardPager;
 import com.yeps.service.RestaurantMapper;
 
@@ -168,7 +168,7 @@ public class RestaurantController {
 	@RequestMapping(value="/restaurant_content")
 	public ModelAndView contentRest(@RequestParam int rnum){
 		RestaurantDTO dto = restaurantMapper.getRest(rnum);
-		List<uploadFileVO> uploadFileList = restaurantMapper.getFileList(rnum);
+		List<FileDTO> uploadFileList = restaurantMapper.getFileList(rnum);
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("getRest", dto);
