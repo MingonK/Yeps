@@ -9,6 +9,7 @@ public class FileDTO {
 	private String filename;
 	private String origin_filename;
 	private int filesize;
+	private String filecontent;
 	
 	public int getFilenum() {
 		return filenum;
@@ -57,6 +58,12 @@ public class FileDTO {
 	}
 	public void setFilesize(int filesize) {
 		this.filesize = filesize;
+	}
+	public String getFilecontent() {
+		return filecontent;
+	}
+	public void setFilecontent(String filecontent) {
+		this.filecontent = filecontent;
 	}
 	
 }
