@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <body>
 <input type="hidden" id="set" value="${set}">
 <div id="page_header">
@@ -215,11 +217,53 @@
 							</div>
 							</form>
 						</div>
-						<div id="page_header_signup_wrap">
-							<ul style="display: inline-block;">
-								<li style="display: list-item; text-align: -webkit-match-parent;"><a href="#" id="page_header_signup">Sign Up</a></li>
-							</ul>
-						</div>
+						
+						<c:choose>
+							<c:when test="${empty sessionScope.memberNum || empty sessionScope.memberEmail|| empty sessionScope.memberName}">
+								<div id="page_header_signup_wrap">
+									<ul style="display: inline-block;">
+										<li style="display: list-item; text-align: -webkit-match-parent;"><a href="member_login?mode=signup" id="page_header_signup">Sign Up</a></li>
+									</ul>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div id="page_header_notifications_wrap">
+									<div id="page_header_notifications">
+										<a href="/mail" class="header-nav_link" id="messages-icon" data-analytics-label="messages_icon">
+											<span aria-label="Messages" style="width: 24px; height: 24px;" class="icon icon--24-speech icon--size-24 icon--white icon--fallback-inverted">
+											<svg class="icon_svg">
+												<path d="M18 3H6C4.34 3 3 4.34 3 6v7c0 1.66 1.34 3 3 3h2v5l5-5h5c1.66 0 3-1.34 3-3V6c0-1.66-1.34-3-3-3z"></path>
+											</svg>
+											</span>
+										</a>
+										<a href="/user_details" class="header-nav_link show-tooltip js-analytics-click" id="notifications-icon" data-analytics-label="notifications_icon">
+											<span aria-label="Notifications" style="width: 24px; height: 24px;" class="icon icon--24-notification icon--size-24 icon--white icon--fallback-inverted">
+												<svg class="icon_svg">
+													<path d="M20.984 17.177A1 1 0 0 1 20 18H4a1 1 0 0 1-.348-1.938c2.43-.9 3.74-4.605 3.74-7.634 0-1.75 1.07-3.253 2.608-3.97V4a2 2 0 0 1 4 0v.457c1.538.718 2.61 2.22 2.61 3.97 0 3.03 1.31 6.734 3.738 7.635a1 1 0 0 1 .636 1.115zM12 22a3 3 0 0 1-3-3h6a3 3 0 0 1-3 3z"></path>
+												</svg>
+											</span>
+										</a>
+									</div>
+								</div>
+								
+								<div id="page_header_notifications_wrap">
+									<div id="page_header_acount_notifications">
+										<div id="page_header_account">
+											<div id="topbar-account-item" class="drop-menu-origin" data-component-bound="true">
+												<a class="drop-menu-link user-account_button drop-menu-highlighted" href="javascript:;" id="topbar-account-link" data-component-bound="true">
+													<span class="user-account_avatar responsive-visible-large-block"><img alt="Smile08908 .." class="photo-box-img" height="90" src="https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/90s.jpg" srcset="https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/180s.jpg 2.00x,https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/ms.jpg 1.11x,https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/120s.jpg 1.33x,https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/168s.jpg 1.87x,https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/ls.jpg 2.78x,https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/258s.jpg 2.87x" width="90"></span>
+													<span aria-hidden="true" style="width: 14px; height: 14px;" class="icon icon-triangle-down">
+														<svg class="icon_svg">
+															<path d="M7 9L3.5 5h7L7 9z"></path>
+														</svg>
+													</span>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
 			</div>
@@ -339,9 +383,11 @@
 								</li>
 							</ul>
 						</div>
-						<div id="footer_list_login_box">
-							<a href="#" id="footer_list_li_unit" style="color: white; font-weight: bold;">Log In</a>
-						</div>
+						<c:if test="${empty sessionScope.memberNum || empty sessionScope.memberEmail|| empty sessionScope.memberName}">
+								<div id="footer_list_login_box">
+									<a href="member_login?mode=login" id="footer_list_li_unit" style="color: white; font-weight: bold;">Log In</a>
+								</div>
+						</c:if>
 					</div>
 				</div>
 			</div>
