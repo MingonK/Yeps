@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="style.jsp"%>
 <body>
 <input type="hidden" id="set" value="${set}">
 <div id="page_header">
@@ -21,7 +20,6 @@
 										<input type="hidden" maxlength="64" data-component-bound="true" name="find_input" value>		
 									</span>
 								</label>
-								
 								
 								<div id="main_search_suggestion_container">
 									<ul id="suggestion_container_list">
@@ -191,10 +189,6 @@
 										</li>
 									</ul>
 								</div>
-								
-								
-								
-								
 								
 							</div>
 							<div id="yeps_search_arrange" style="width: 32%; float: left;">
@@ -390,7 +384,6 @@
 		}
 		if(!$(e.target).hasClass("page_header_location_inputs")) {
 			$('#main_location_suggestion_container').hide();
-			//지역검색 div 닫아야함
 		} 
 	});
 </script>
