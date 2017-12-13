@@ -30,6 +30,20 @@ public class MemberMapper {
 		return sqlSession.selectList("findMember",map);
 	}
 
+	public boolean checkJumin(MemberDTO dto) {
+		int count = 0;
+		try {
+			count = sqlSession.selectOne("checkJumin",dto);
+			if(count>0) {
+				return true;
+			}else {
+				return false;
+			}
+		}catch(Exception e){
+			return false;
+		}
+	}
+	
 	public int insertMember(MemberDTO dto) {
 		int res = sqlSession.insert("insertMember",dto);
 		return res;
@@ -119,7 +133,6 @@ public class MemberMapper {
 	 }
 
 	 */
-	
 	
 	public MemberDTO mylist_info1(int NBPmnum) {
 		try {

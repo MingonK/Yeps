@@ -213,11 +213,11 @@ h2, h3{
 }
 
 #content_container {
-	width: 1000px; margin: 0 auto; padding: 0 15px; display: block;
+	width: 1050px; margin: 0 auto; padding: 0 15px; display: block;
 }
 
 #content_container_arrange {
-	margin-left: -18px; margin-right: -18px; width: 1000px;
+	margin-left: -18px; margin-right: -18px; width: 1050px;
     border-collapse: separate; border-spacing: 18px 0;
     display: table; min-width: 100%; table-layout: auto;
 }
@@ -324,6 +324,147 @@ h2, h3{
 	vertical-align: bottom; display:table-cell; box-sizing: border-box; margin-left: -6px; margin-right: -6px; border-collapse: collapse; border-spacing: 0 0;
 }
 
+#page_header_notifications_wrap {
+	margin-left: 9px;
+    margin-right: 9px;
+    border-collapse: collapse;
+    border-spacing: 0 0;
+    vertical-align: middle;
+    display: table-cell;
+    box-sizing: border-box;
+}	
+
+#page_header_notifications {
+	vertical-align: bottom; display:table-cell; box-sizing: border-box; margin-left: -6px; margin-right: -6px; border-collapse: collapse; border-spacing: 0 0;
+}
+
+#page_header_notifications .header-nav_link {
+    display: inline-block;
+    padding: 6px;
+    position: relative;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 21px;
+}
+
+.icon--white, .icon--hover-white:hover, .icon--hover-white:focus {
+    fill: #fff;
+}
+
+.icon {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    overflow: hidden;
+    top: -.1em;
+}
+
+#page_header_notifications svg:not(:root) {
+    overflow: hidden;
+}
+
+#page_header_notifications .icon_svg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.icon_svg, .icon_amp-svg {
+    fill: inherit;
+    display: block;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+#page_header_acount_notifications{
+	margin-left: -6px;
+    margin-right: -6px;
+    border-collapse: separate;
+    border-spacing: 6px 0;
+    display: table;
+    min-width: 100%;
+    table-layout: auto;
+}
+
+#page_header_account {
+	margin-left: 3px;
+    margin-right: 3px;
+    border-collapse: collapse;
+    border-spacing: 0 0;
+    float: right;
+}
+
+.drop-menu-origin {
+    position: relative;
+}
+
+#page_header_account .user-account_button {
+    width: 58px;
+    box-shadow: none;
+    vertical-align: middle;
+    margin: 0;
+    outline: 0;
+    border: none;
+    border-radius: 4px;
+    background: #bd1f1f;
+    line-height: 24px;
+    padding: 0;
+    color: white;
+    display: inline-block;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+    user-select: none;
+    font-size: 14px;
+}
+
+.user-account_avatar {
+    overflow: hidden;
+    float: left;
+    width: 36px;
+    height: 36px;
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+}
+
+#page_header_account span{
+	margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+}
+
+.user-account_avatar img {
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+}
+
+#page_header_account .icon-triangle-down {
+    margin: 6px 0;
+    top: 6px;
+    transform: rotate(0deg);
+    fill: #fff;
+    vertical-align: middle;
+}
+
+.icon_svg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    fill: inherit;
+    display: block;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
 #page_header_signup {
 	color: white; padding-left: 12px; padding-right: 12px; min-width: 80px; text-align: center; box-shadow: none;
 	vertical-align: middle; margin: 0; outline: 0; border: none; border-radius: 3px; background: #bd1f1f;
@@ -341,7 +482,7 @@ h2, h3{
 }
 
 #footer_content_container {
-	width: 960px; display: block;
+	width: 990px; display: block;
     margin: 0 auto; padding: 0 15px;
 }
 
