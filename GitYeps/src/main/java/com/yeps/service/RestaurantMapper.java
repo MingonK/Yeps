@@ -36,10 +36,6 @@ public class RestaurantMapper {
 		RestaurantDTO dto=sqlSession.selectOne("getRest",rnum);
 		return dto;
 	}
-
-	public int insertFile(FileDTO dto) {
-		return sqlSession.insert("insertFile", dto);
-	}
 	
 	public int getCount() {
 		return sqlSession.selectOne("getCount");
