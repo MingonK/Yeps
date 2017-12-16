@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yeps.model.MemberDTO;
 import com.yeps.model.QnADTO;
 import com.yeps.service.QnAMapper;
 
@@ -70,18 +71,7 @@ public class QnAController {
 	}
 
 	@RequestMapping(value="/qna_write",  method=RequestMethod.GET)
-	public ModelAndView writeQnAForm(HttpSession session) {
-		String msg = null , url = null;
-		ModelAndView mav = new ModelAndView();
-		String user = (String) session.getAttribute("memberEmail");
-		if(user == null) {
-			msg = "로그인페이지로 이동합니다.";
-			url = "member_login";
-			mav.setViewName("message");
-			mav.addObject("msg",msg);
-			mav.addObject("url",url);
-			return mav;
-		}
+	public ModelAndView writeQnAForm() {
 		return new ModelAndView("qna/qnaWriteForm");
 	}
 
@@ -165,13 +155,13 @@ public class QnAController {
 			return mav;
 		}
 
-		String user = (String) session.getAttribute("memberEmail");
+		MemberDTO dto2 = (MemberDTO) session.getAttribute("memberinfo");
 		if(dto.getSecret().equals("y")) {
-			if (user ==null) {
+			if (dto2 ==null) {
 				dto.setContent("비밀글입니다.");
 				dto.setTitle("비밀글입니다.");
 			}else {
-				if(!user.equals(dto.getWriter()) && !user.equals("YEPSMaster") && !user.equals("YEPSManager")) {
+				if(!dto2.getEmail().equals(dto.getWriter()) && !dto2.getIsmanager().equals("y")) {
 					dto.setContent("비밀글입니다.");
 					dto.setTitle("비밀글입니다.");
 				}
@@ -196,16 +186,16 @@ public class QnAController {
 			return mav; 
 		}
 
-		String user = (String) session.getAttribute("memberEmail");
+		MemberDTO dto2 = (MemberDTO) session.getAttribute("memberinfo");
 		QnADTO dto = qnaMapper.getQnAInfo(Integer.parseInt(qnum));
-		if(user == null || dto == null) {
-			msg = "삭제 권한이 없습니다.";
+		if(dto == null) {
+			msg = "해당 글이 존재하지 않습니다.";
 			url = "qna_list";
 		}else {
 			boolean isDelete = false;
-			if(user.equals("YEPSMaster") || user.equals("YEPSManager")) {
+			if(dto2.getIsmanager().equals("y")) {
 				isDelete = true;
-			}else if(dto.getWriter().equals(user)){
+			}else if(dto.getWriter().equals(dto2.getEmail())){
 				if(dto.getAnswered().equals("n")) {
 					isDelete = true;
 				}else {
@@ -252,14 +242,10 @@ public class QnAController {
 			return mav; 
 		}
 
-		String user = (String) session.getAttribute("memberEmail");
+		MemberDTO dto2 = (MemberDTO) session.getAttribute("memberinfo");
 		QnADTO dto = qnaMapper.getQnA(Integer.parseInt(qnum),"update");
 		
-		if(user == null) {
-			msg = "게시글 수정 권한이 없습니다";
-			url = "qna_list"; 
-		}else {
-			if(dto.getWriter().equals(user)) {
+			if(dto.getWriter().equals(dto2.getEmail())) {
 				if(dto.getAnswered().equals("n")) {
 					mav.setViewName("qna/qnaUpdateForm");
 					mav.addObject("getQnA", dto);
@@ -272,7 +258,6 @@ public class QnAController {
 				msg = "게시글 수정 권한이 없습니다";
 				url = "qna_list";
 			}
-		}
 		
 		mav.setViewName("message");
 		mav.addObject("msg",msg);
@@ -297,13 +282,9 @@ public class QnAController {
 			dto.setSecret("n");
 		}
 		
-		String user = (String) session.getAttribute("memberEmail");
+		MemberDTO dto2 = (MemberDTO) session.getAttribute("memberinfo");
 		
-		if(user == null) {
-			msg = "게시글 수정 권한이 없습니다";
-			url = "qna_list"; 
-		}else {
-			if(dto.getWriter().equals(user)) {
+			if(dto.getWriter().equals(dto2.getEmail())) {
 				if(dto.getAnswered().equals("n")) {
 					int res = qnaMapper.updateQnA(dto);
 					if(res >0) {
@@ -321,7 +302,7 @@ public class QnAController {
 				msg = "게시글 수정 권한이 없습니다";
 				url = "qna_list";
 			}
-		}
+		
 		mav.setViewName("message");
 		mav.addObject("msg",msg);
 		mav.addObject("url",url);
@@ -333,9 +314,9 @@ public class QnAController {
 		String qnum = req.getParameter("qnum");
 		String msg = null , url = null;
 		ModelAndView mav = new ModelAndView();
-		String user = (String) session.getAttribute("memberEmail");
+		MemberDTO dto2 = (MemberDTO) session.getAttribute("memberinfo");
 		
-		if(user.equals("YEPSManager") || user.equals("YEPSMaster")) {
+		if(dto2.getIsmanager().equals("y")) {
 			QnADTO dto = qnaMapper.getQnA(Integer.parseInt(qnum),"update");
 			mav.addObject("getQnA",dto);
 			mav.setViewName("qna/qnaReplyForm");
@@ -362,9 +343,9 @@ public class QnAController {
 			return mav; 
 		}
 		
-		String user = (String) session.getAttribute("memberEmail");
+		MemberDTO dto2 = (MemberDTO) session.getAttribute("memberinfo");
 		
-		if(user.equals("YEPSManager") || user.equals("YEPSMaster")) {
+		if(dto2.getIsmanager().equals("y")) {
 			int res = qnaMapper.replyQnA(dto);
 			if(res >0) {
 				msg = "답변 작성 성공";

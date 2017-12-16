@@ -1,7 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css?ver=3"/>"/>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css?ver=1" />
+<script src="//code.jquery.com/jquery.min.js?ver=1"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js?ver=2"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.drop-menu-link').click(function() {
+			$('#topbar-account-wrap').toggle();
+		});
+	});
+</script>
+
 <body>
 <input type="hidden" id="set" value="${set}">
 <div id="page_header">
@@ -219,7 +231,7 @@
 						</div>
 						
 						<c:choose>
-							<c:when test="${empty sessionScope.memberNum || empty sessionScope.memberEmail|| empty sessionScope.memberName}">
+							<c:when test="${empty sessionScope.memberinfo}">
 								<div id="page_header_signup_wrap">
 									<ul style="display: inline-block;">
 										<li style="display: list-item; text-align: -webkit-match-parent;"><a href="member_login?mode=signup" id="page_header_signup">Sign Up</a></li>
@@ -236,7 +248,7 @@
 											</svg>
 											</span>
 										</a>
-										<a href="/user_details" class="header-nav_link show-tooltip js-analytics-click" id="notifications-icon" data-analytics-label="notifications_icon">
+										<a href="#" class="header-nav_link show-tooltip js-analytics-click" id="notifications-icon" data-analytics-label="notifications_icon">
 											<span aria-label="Notifications" style="width: 24px; height: 24px;" class="icon icon--24-notification icon--size-24 icon--white icon--fallback-inverted">
 												<svg class="icon_svg">
 													<path d="M20.984 17.177A1 1 0 0 1 20 18H4a1 1 0 0 1-.348-1.938c2.43-.9 3.74-4.605 3.74-7.634 0-1.75 1.07-3.253 2.608-3.97V4a2 2 0 0 1 4 0v.457c1.538.718 2.61 2.22 2.61 3.97 0 3.03 1.31 6.734 3.738 7.635a1 1 0 0 1 .636 1.115zM12 22a3 3 0 0 1-3-3h6a3 3 0 0 1-3 3z"></path>
@@ -258,21 +270,144 @@
 														</svg>
 													</span>
 												</a>
+												<div id="topbar-account-wrap" class="drop-menu drop-menu-has-arrow" data-component-bound="true">
+													<div class="drop-menu-arrow responsive-hidden-small"></div>
+														<div class="drop-menu-group responsive-visible-large-block">
+															<div class="ypassport ypassport-notext media-block">
+																<div class="media-avatar responsive-photo-box js-analytics-click" data-analytics-label="about_me">
+																	<div class="photo-box pb-60s" data-hovercard-id="mNnbq24hI6DxMOQ0JLFrnQ">
+																		<a href="#" class="js-analytics-click" data-analytics-label="user-photo">
+																			<img alt="Smile08908 .." class="photo-box-img" height="60" src="https://s3-media4.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/60s.jpg" srcset="https://s3-media4.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/90s.jpg 1.50x,https://s3-media4.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/168s.jpg 2.80x,https://s3-media4.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/ms.jpg 1.67x,https://s3-media4.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/180s.jpg 3.00x,https://s3-media4.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/120s.jpg 2.00x" width="60">
+																		</a>
+																	</div>
+																</div>
+																<div class="media-story">
+																	<ul class="user-passport-info">
+																		<li class="user-name">
+																			<a class="user-display-name js-analytics-click" href="#" data-hovercard-id="mNnbq24hI6DxMOQ0JLFrnQ" data-analytics-label="about_me" id="dropdown_user-name">
+																				<strong class="unit_hover">
+																					<c:set value="${sessionScope.memberinfo.name}" var="memberName"/>
+                    																	<c:choose>
+                    																		<c:when test="${fn:length(memberName) > 7}">
+												                    							<c:out value="${fn:substring(memberName,0,6)}"/>..
+                    																		</c:when>
+                    																		<c:otherwise>
+                    																			<c:out value="${memberName}"/>
+                    																		</c:otherwise> 
+                    																	</c:choose>
+																				</strong>
+																			</a>
+																		</li>
+																		<li class="user-location responsive-hidden-small">
+																			<b>Korea, seoul</b>
+																		</li>
+																	</ul>
+																	<ul class="user-passport-stats">
+																		<li class="friend-count">
+																			<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-friends icon--size-18">
+																				<svg class="icon_svg">
+																					<path d="M7.904 9.43l-2.098 4.697a.9.9 0 0 1-1.612 0L2.096 9.43a.902.902 0 0 1 .806-1.305h4.196c.67 0 1.105.705.806 1.305zM5 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path>
+																					<path d="M15.904 9.43l-2.098 4.697a.89.89 0 0 1-.806.498.89.89 0 0 1-.806-.498L10.096 9.43a.902.902 0 0 1 .806-1.305h4.195c.67 0 1.106.705.807 1.305zM13 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" opacity=".502"></path>
+																				</svg>
+																			</span>
+																			<b>0</b>	<!-- 친구 수 -->
+																		</li>
+																		<li class="review-count">
+																			<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-review icon--size-18">
+																				<svg class="icon_svg">
+																					<path d="M13 3H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1.505 9.643l-2.526-1.55L6.526 12.7 7 9.934 5 7.977l2.766-.404L8.97 4.7l1.264 2.873L13 7.977l-2 1.957.495 2.71z"></path>
+																				</svg>
+																			</span>
+																			<b>${sessionScope.memberinfo.reviewcount}</b> <!-- 리뷰 수 -->
+																		</li>
+																	</ul>
+																</div>
+															</div>
+																		</div>
+														<ul class="drop-menu-group--nav drop-menu-group">
+															<li class="drop-down-menu-link">
+																<a class="js-analytics-click arrange arrange--middle arrange--6" href="#" data-analytics-label="dropdown_about-me">
+																	<strong class="arrange_unit">
+																		<span aria-hidden="true" style="width: 24px; height: 24px;" class="icon icon--24-profile icon--size-24 u-space-r1">
+																			<svg class="icon_svg">
+																				<path d="M4.37 22c.278-4.762 3.587-8 7.63-8 4.043 0 7.352 3.238 7.63 8H4.37zM12 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"></path>
+																			</svg>
+																		</span><strong class="unit_hover">About Me</strong>
+																	</strong>
+																</a>
+															</li>
+															<li class="drop-down-menu-link">
+																<a class="js-analytics-click arrange arrange--middle arrange--6" href="#" data-analytics-label="dropdown_find-friends">
+																	<strong class="arrange_unit">
+																		<span aria-hidden="true" style="width: 24px; height: 24px;" class="icon icon--24-friends icon--size-24 u-space-r1">
+																			<svg class="icon_svg">
+																				<path d="M10.824 13.817l-2.482 5.946c-.69 1.65-2.995 1.65-3.684 0l-2.482-5.946C1.618 12.48 2.586 11 4.018 11h4.964c1.432 0 2.4 1.48 1.842 2.817zM6.5 9a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"></path>
+																				<path d="M21.824 13.817l-2.482 5.946c-.69 1.65-2.995 1.65-3.684 0l-2.482-5.946c-.558-1.337.41-2.817 1.842-2.817h4.964c1.432 0 2.4 1.48 1.842 2.817zM17.5 9a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" opacity=".502"></path>
+																			</svg>
+																		</span><strong class="unit_hover">Find Friend</strong>
+																	</strong>
+																</a>
+															</li>
+															<li class="drop-down-menu-link hidden-non-responsive-block responsive-visible-medium-block">
+																<a class="js-analytics-click arrange arrange--middle arrange--6" href="#" data-analytics-label="">
+																	<strong class="arrange_unit">
+																		<span aria-hidden="true" style="width: 24px; height: 24px;" class="icon icon--24-talk icon--size-24 u-space-r1">
+																			<svg class="icon_svg">
+																				<path d="M20 17.326V21l-3-3c-2.715 0-5.006-1.504-5.746-3.566C14.047 13.42 16 11.144 16 8.5c0-.142-.015-.282-.026-.422A7.19 7.19 0 0 1 17 8c3.314 0 6 2.24 6 5 0 1.85-1.208 3.46-3 4.326zM8 14c-.08 0-.158-.007-.238-.01L4 17v-3.99c-1.812-.994-3-2.642-3-4.51C1 5.462 4.134 3 8 3s7 2.462 7 5.5S11.866 14 8 14z"></path>
+																			</svg>
+																		</span><strong class="unit_hover">Message</strong>
+																	</strong>
+																</a>
+															</li>
+															<li class="drop-down-menu-link">
+																<a class="js-analytics-click arrange arrange--middle arrange--6" href="#" data-analytics-label="dropdown_rewards-inactive">
+																	<strong class="arrange_unit">
+																		<span aria-hidden="true" style="width: 24px; height: 24px;" class="icon icon--24-cash-back icon--size-24 u-space-r1">
+																			<svg class="icon_svg">
+																				<path d="M13.632 11.153c1.49.283 2.765 1.012 2.765 2.752 0 1.683-1.296 2.78-3.402 2.978l.008.89H11.75v-.883c-2.547-.17-3.453-1.584-3.476-2.886h2.113c.03.616.502 1.146 1.41 1.267v-2.495l-.66-.133c-1.44-.29-2.668-1.13-2.668-2.75 0-1.713 1.443-2.66 3.294-2.823v-.91h1.26v.913c1.948.204 3.154 1.35 3.176 2.815h-2.05c-.016-.53-.42-1.083-1.163-1.21v2.34l.645.135zm-.645 4.11c.727-.057 1.252-.495 1.252-1.146 0-.56-.37-.927-1.12-1.125-.045-.006-.09-.02-.135-.028v2.3zm-1.19-6.592c-.66.074-1.148.46-1.148 1.057 0 .494.335.85.98 1.04.052.02.104.036.164.05V8.67zm9.13 4.12l-3.062-3.95h2.06c-1.27-2.854-4.193-4.862-7.603-4.862-4.57 0-8.29 3.6-8.29 8.024 0 4.426 3.72 8.026 8.29 8.026 3.566 0 6.604-2.195 7.772-5.26h2.148C21 18.936 17.026 22 12.322 22c-5.696 0-10.33-4.486-10.33-10S6.626 2 12.322 2c4.554 0 8.418 2.872 9.788 6.84h1.877l-3.06 3.95z"></path>
+																			</svg>
+																		</span><strong class="unit_hover">Cash Back</strong>
+																	</strong>
+																	<span class="arrange_unit">
+																		<span class="ybadge ybadge-notification drop-down-menu-link_new-label">NEW</span>
+																	</span>
+																</a>
+															</li>
+															<li class="drop-down-menu-link">
+																<a class="js-analytics-click arrange arrange--middle arrange--6" href="member_profile" data-analytics-label="Zprofile">
+																	<strong class="arrange_unit">
+																		<span aria-hidden="true" style="width: 24px; height: 24px;" class="icon icon--24-settings icon--size-24 u-space-r1">
+																			<svg class="icon_svg">
+																				<path d="M21.872 10.48c.076.497.128 1.002.128 1.52s-.05 1.022-.127 1.518l-3.165.475c-.14.47-.323.92-.552 1.343l1.9 2.57c-.3.408-.62.8-.976 1.156l-.018.018a10.05 10.05 0 0 1-1.154.975l-2.57-1.9a7 7 0 0 1-1.344.553l-.475 3.165a9.94 9.94 0 0 1-1.506.127h-.034c-.51 0-1.01-.052-1.5-.127l-.475-3.165a7 7 0 0 1-1.343-.553l-2.57 1.9c-.408-.3-.798-.62-1.155-.975l-.018-.018a10.068 10.068 0 0 1-.978-1.155l1.9-2.57a6.97 6.97 0 0 1-.552-1.344l-3.164-.475C2.052 13.022 2 12.518 2 12s.052-1.023.128-1.52l3.164-.475a7 7 0 0 1 .553-1.342l-1.9-2.57a10.035 10.035 0 0 1 2.148-2.15l2.57 1.9a7.015 7.015 0 0 1 1.343-.55l.475-3.166C10.98 2.052 11.486 2 12 2s1.023.052 1.52.127l.474 3.165c.47.14.92.323 1.342.552l2.57-1.9a10.044 10.044 0 0 1 2.15 2.148l-1.9 2.57c.23.424.412.874.552 1.343l3.164.475zM12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z"></path>
+																			</svg>
+																		</span><strong class="unit_hover">Account Settings</strong>
+																	</strong>
+																</a>
+															</li>
+														</ul>
+														<ul class="drop-menu-group">
+															<li class="drop-down-menu-link drop-down-menu-link--logout">
+																<form action="member_logout" id="logout-form" name="logout-form">
+																	<button type="submit" class="u-pseudo-link" id="header-log-out" data-analytics-label="logout">Log Out</button>
+																</form>
+															</li>
+														</ul>
+													</div>			
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-							</c:otherwise>
-						</c:choose>
+								</c:otherwise>
+							</c:choose>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 		<div id="header_main_content_footer_wrap">
 			<div id="footer_content_container">
 				<div id="footer_container_arrange">
 					<div id="footer_container_list">
-						<div id="footer_list" style="width: 86%; display: inline-block;">
+						<div id="footer_list" style="width: 854px; display: inline-block;">
 							<ul style="display: inline-block;">
 								<li id="footer_list_li">
 									<div>
@@ -383,7 +518,7 @@
 								</li>
 							</ul>
 						</div>
-						<c:if test="${empty sessionScope.memberNum || empty sessionScope.memberEmail|| empty sessionScope.memberName}">
+						<c:if test="${empty sessionScope.memberinfo}">
 								<div id="footer_list_login_box">
 									<a href="member_login?mode=login" id="footer_list_li_unit" style="color: white; font-weight: bold;">Log In</a>
 								</div>

@@ -63,7 +63,7 @@ public class MemberController {
 	public ModelAndView joinMemberForm(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		String msg = null, url = null;
-		if(session.getAttribute("memberNum")!= null || session.getAttribute("memberEmail")!= null || session.getAttribute("memberName")!= null) {
+		if(session.getAttribute("memberinfo")!= null) {
 			msg = "로그아웃을 먼저 해주세요.";
 			url = "member_index";
 			mav.setViewName("message");
@@ -86,7 +86,7 @@ public class MemberController {
 		String msg = null, url = null;
 		if(dto.getName()==null || dto.getName().trim().equals("") ) {
 			msg = "회원가입페이지로 이동합니다";
-			url = "member_join";
+			url = "member_login?mode=signup";
 			mav.setViewName("message");
 			mav.addObject("msg",msg);
 			mav.addObject("url",url);
@@ -117,23 +117,21 @@ public class MemberController {
 
 				MemberDTO dto2 = memberMapper.loginMember(dto);
 				if(dto2.getIsmaster().equals("y")) {
-					session.setAttribute("memberNum", "-1");
-					session.setAttribute("memberEmail", "YEPSMaster");
-					session.setAttribute("memberName", "YEPSMaster");
+					session.setAttribute("memberinfo", dto2);
+					msg = "마스터 아이디로 로그인 하셨습니다";
+					url = "member_index";
 				}else if(dto2.getIsmanager().equals("y")) {
-					session.setAttribute("memberNum", "-2");
-					session.setAttribute("memberEmail", "YEPSManager");
-					session.setAttribute("memberName", "YEPSManager");
+					session.setAttribute("memberinfo", dto2);
+					msg = "관리자 아이디로 로그인 하셨습니다";
+					url = "member_index";
 				}else {
-					session.setAttribute("memberNum", dto2.getMnum());
-					session.setAttribute("memberEmail", dto2.getEmail());
-					session.setAttribute("memberName", dto2.getName());
+					session.setAttribute("memberinfo", dto2);
 				}
 
 
 			}else { 
 				msg = "회원등록실패!! 회원가입페이지로 이동합니다";
-				url = "member_login";
+				url = "member_login?mode=signup";
 			}
 		}
 			mav.setViewName("message");
@@ -161,11 +159,20 @@ public class MemberController {
 		}
 
 		@RequestMapping(value="/member_delete")
-		public ModelAndView deleteMember(@RequestParam String num) throws Exception {
-
-			int mnum =  Integer.parseInt(num);
+		public ModelAndView deleteMember(@RequestParam String num,HttpSession session) throws Exception {
 			ModelAndView mav = new ModelAndView();
 			String msg = null , url = null;
+			
+			MemberDTO dto = (MemberDTO) session.getAttribute("memberInfo");
+			if(!dto.getIsmanager().equals("y")) {
+				msg = "회원관리권한이 없습니다.";
+				url = "member_index";
+				mav.setViewName("message");
+				mav.addObject("msg",msg);
+				mav.addObject("url",url);
+				return mav;
+			}
+			int mnum =  Integer.parseInt(num);
 			if (mnum==0){
 				msg = "회원관리페이지로 이동합니다.";
 				url = "member_manager";
@@ -192,7 +199,7 @@ public class MemberController {
 		public ModelAndView loginMemberForm(HttpSession session) {
 			ModelAndView mav = new ModelAndView();
 			String msg = null, url = null;
-			if(session.getAttribute("memberNum")!= null || session.getAttribute("memberEmail")!= null || session.getAttribute("memberName")!= null) {
+			if(session.getAttribute("memberinfo")!= null) {
 				msg = "로그아웃을 먼저 해주세요.";
 				url = "member_index";
 				mav.setViewName("message");
@@ -232,21 +239,15 @@ public class MemberController {
 			MemberDTO dto2 = memberMapper.loginMember(dto);
 			if (dto2 != null){
 				if(dto2.getIsmaster().equals("y")) {
-					session.setAttribute("memberNum", "-1");
-					session.setAttribute("memberEmail", "YEPSMaster");
-					session.setAttribute("memberName", "YEPSMaster");
+					session.setAttribute("memberinfo", dto2);
 					msg = "마스터 아이디로 로그인 하셨습니다";
 					url = "member_index";
 				}else if(dto2.getIsmanager().equals("y")) {
-					session.setAttribute("memberNum", "-2");
-					session.setAttribute("memberEmail", "YEPSManager");
-					session.setAttribute("memberName", "YEPSManager");
+					session.setAttribute("memberinfo", dto2);
 					msg = "관리자 아이디로 로그인 하셨습니다";
 					url = "member_index";
 				}else {
-					session.setAttribute("memberNum", dto2.getMnum());
-					session.setAttribute("memberEmail", dto2.getEmail());
-					session.setAttribute("memberName", dto2.getName());
+					session.setAttribute("memberinfo", dto2);
 					mav.setViewName("member/index");
 					return mav;
 				}
@@ -369,6 +370,61 @@ public class MemberController {
 		public ModelAndView logoutMemberForm(HttpSession session) {
 			session.invalidate();
 			return new ModelAndView("redirect:/member_index");
+		}
+		
+		@RequestMapping(value="/member_profile", method=RequestMethod.GET)
+		public ModelAndView profileMemberForm() {
+			return new ModelAndView("member/memberProfile");
+		}
+		
+		@RequestMapping(value="/member_profile", method=RequestMethod.POST)
+		public ModelAndView profileMemberPro(HttpSession session, HttpServletRequest req) {
+			String mnum = req.getParameter("mnum");
+			String name = req.getParameter("name");
+			if(name == null || name.trim().equals("")) {
+				return new ModelAndView("member/memberProfile");
+			}
+			
+			ModelAndView mav = new ModelAndView();
+			String msg= null, url = null;
+			MemberDTO dto = (MemberDTO) session.getAttribute("memberinfo");
+			int res = 0;
+			if(mnum != null){
+				if(!dto.getIsmanager().equals("y")) {
+					msg = "회원관리권한이 없습니다.";
+					url = "member_index";
+					mav.setViewName("message");
+					mav.addObject("msg",msg);
+					mav.addObject("url",url);
+					return mav;
+				}else {
+					res = memberMapper.updateMemberProfile(Integer.parseInt(mnum), name);
+					if (res>0){
+						msg = "회원 프로필 정보 수정 성공!";
+						url = "member_manager";
+					}else{
+						msg = "회원 프로필 정보 수정 실패!";
+						url = "member_manager";
+					}
+				}
+			}else {
+				int memberNum = dto.getMnum();
+				res = memberMapper.updateMemberProfile(memberNum, name);
+				if (res>0){
+					msg = "프로필 정보 수정 성공!";
+					url = "member_profile";
+					dto.setName(name);;
+					session.setAttribute("memberinfo", dto);
+				}else{
+					msg = "프로필 정보 수정 실패!";
+					url = "member_profile";
+				}
+			}
+			mav.setViewName("message");
+			mav.addObject("msg",msg);
+			mav.addObject("url",url);
+			
+			return mav;
 		}
 		/*
 

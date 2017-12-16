@@ -3,6 +3,7 @@ package com.yeps.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -26,10 +27,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.yeps.model.CategoryDTO;
 import com.yeps.model.EventDTO;
 import com.yeps.model.FileDTO;
-import com.yeps.service.CategoryMapper;
 import com.yeps.service.EventMapper;
 import com.yeps.service.FileMapper;
 
@@ -38,8 +37,6 @@ public class EventController {
 
 	@Autowired
 	private EventMapper eventMapper;
-	@Autowired
-	private CategoryMapper categoryMapper;
 	@Autowired
 	private FileMapper fileMapper;
 	@Resource(name = "uploadPath")
@@ -57,10 +54,9 @@ public class EventController {
 
 	@RequestMapping(value = "/event_write")
 	public ModelAndView writeEvent(HttpServletRequest req) {
+		// 로그인 했을 때만 이동해야함.
+		
 		ModelAndView mav = new ModelAndView();
-		List<CategoryDTO> category_list = categoryMapper.listCategory();
-		mav.addObject("set", "events");
-		mav.addObject("categoryList", category_list);
 		mav.setViewName("event/event_writeForm");
 		return mav;
 	}
@@ -72,21 +68,15 @@ public class EventController {
 
 	@RequestMapping(value = "/event_insert")
 	public ModelAndView insertEvent(HttpServletRequest req, @ModelAttribute EventDTO dto, BindingResult result) {
-		String categorySet = req.getParameter("categorySet");
-		String[] category = categorySet.split("\\+");
-		dto.setCategory(category[0]);
-		dto.setCnum(Integer.parseInt(category[1]));
 		dto.setIp(req.getRemoteAddr());
 
-		ModelAndView mav = new ModelAndView();
-		if (dto.getCategory().equals("cateEmpty")) {
-			mav.addObject("msg", "카테고리를 먼저 등록해야 합니다. 관리자에게 문의하시기 바랍니다.");
-			mav.addObject("url", "event_list");
-			mav.setViewName("message");
-			return mav;
+		if(dto.getEventname() == null || dto.getEventname().trim().equals("") || dto.getEvent_content() == null 
+				|| dto.getEvent_content().trim().equals("") || dto.getDiscount() == null || dto.getDiscount().trim().equals("")) {
+			return new ModelAndView("redirect: event_list");
 		}
-
-		boolean check = eventMapper.RedundancyCheck(dto.getEventname(), dto.getStore_address());
+		
+		ModelAndView mav = new ModelAndView();		
+		boolean check = eventMapper.RedundancyCheck(dto.getEventname());
 		if (check) {
 			int res = eventMapper.insertEvent(dto);
 			if (res > 0) {
@@ -121,7 +111,7 @@ public class EventController {
 		}
 		
 		if(filename != null) {
-			FileDTO dto = fileMapper.getFile(filename);
+			FileDTO dto = fileMapper.getFile(filename, 0);
 			if(dto != null) {
 				File file = new File(uploadPath, dto.getOrigin_filename());
 				fileMapper.deleteFile(dto.getFilenum());
@@ -155,6 +145,7 @@ public class EventController {
 			// 404페이지 띄워야함.. jsp페이지에서 처리해주자
 			return null;
 		}
+		
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest) req;
 		
 		MultipartFile mf = mr.getFile("filename");
@@ -184,13 +175,15 @@ public class EventController {
 		
 		int result = fileMapper.insertFile(dto);
 		HashMap<String, Object> map = new HashMap<String, Object>();
+		dto = fileMapper.getFile(saveFileName, 0);
 		if(result > 0) {
-			dto = fileMapper.getFile(saveFileName);
+			eventMapper.updateFilenum(dto.getFilenum(), Integer.parseInt(evnum));
 			map.put("filenum", dto.getFilenum());
 			map.put("uploadPath", uploadPath);
 			map.put("origin_filename", origin_fileName);
 			map.put("filename", saveFileName);
 		} else {
+			fileMapper.deleteFile(dto.getFilenum());
 			map.put("failed", "failed");
 			file.delete();
 		}
@@ -210,16 +203,26 @@ public class EventController {
 	@RequestMapping(value = "/event_content")
 	public ModelAndView contentEvent(HttpServletRequest req) {
 		String evnum = req.getParameter("evnum");
-
 		if (evnum == null || evnum.trim().equals("")) {
 			return new ModelAndView("redirect: event_list");
 		}
 		
 		ModelAndView mav = new ModelAndView();
-		EventDTO dto = eventMapper.getEventContent(Integer.parseInt(evnum));
-		mav.addObject("eventDTO", dto);
+		EventDTO eventDTO = eventMapper.getEventContent(Integer.parseInt(evnum));
+		List<FileDTO> fileList = fileMapper.getTargetEventFiles(Integer.parseInt(evnum));
+		List<EventDTO> thisWeek_EventList = eventMapper.getThisWeek_EventList();
+
+		List<FileDTO> thisWeek_EventFileList = new ArrayList<FileDTO>();
+		for(int i = 0; i < thisWeek_EventList.size(); i++) {
+			thisWeek_EventFileList.add(fileMapper.getFile(null, thisWeek_EventList.get(i).getFilenum()));
+		}
+		
+		mav.addObject("fileList", fileList);
+		mav.addObject("eventDTO", eventDTO);
+		mav.addObject("thisWeek_EventList", thisWeek_EventList);
+		mav.addObject("thisWeek_EventFileList", thisWeek_EventFileList);
 		mav.addObject("set", "events");
-		mav.setViewName("event/event_content");
+		mav.setViewName("event/event_contentForm");
 		return mav;
 	}
 	
@@ -237,10 +240,22 @@ public class EventController {
 		ModelAndView mav = new ModelAndView();
 		int result = fileMapper.updateFileContent(Integer.parseInt(filenum), filecontent);
 		if(result > 0) {
-			EventDTO dto = eventMapper.getEventContent(Integer.parseInt(evnum));
-			mav.addObject("eventDTO", dto);
+			EventDTO eventDTO = eventMapper.getEventContent(Integer.parseInt(evnum));
+			List<FileDTO> fileList = fileMapper.getTargetEventFiles(Integer.parseInt(evnum));
+			
+			List<EventDTO> thisWeek_EventList = eventMapper.getThisWeek_EventList();
+
+			List<FileDTO> thisWeek_EventFileList = new ArrayList<FileDTO>();
+			for(int i = 0; i < thisWeek_EventList.size(); i++) {
+				thisWeek_EventFileList.add(fileMapper.getFile(null, thisWeek_EventList.get(i).getFilenum()));
+			}
+			
+			mav.addObject("thisWeek_EventList", thisWeek_EventList);
+			mav.addObject("thisWeek_EventFileList", thisWeek_EventFileList);
+			mav.addObject("fileList", fileList);
+			mav.addObject("eventDTO", eventDTO);
 			mav.addObject("set", "events");
-			mav.setViewName("event/event_content");
+			mav.setViewName("event/event_contentForm");
 		} else {
 			mav.addObject("msg", "사진 등록 오류발생.");
 			mav.addObject("url", "event_update_photo?evnum=" + evnum);
@@ -250,7 +265,18 @@ public class EventController {
 	}
 	
 	
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@RequestMapping(value = "/getImage/{name:.+}")
 	@ResponseBody
 	public ResponseEntity<byte[]> profileImage(@PathVariable("name") String name) throws IOException {

@@ -99,6 +99,13 @@ public class MemberMapper {
 	public int temporaryPasswd(MemberDTO dto) {
 		return sqlSession.update("temporaryPasswd", dto);
 	}
+	
+	public int updateMemberProfile(int mnum, String name) {
+		MemberDTO dto = new MemberDTO();
+		dto.setMnum(mnum);
+		dto.setName(name);
+		return sqlSession.update("updateMemberProfile",dto);
+	}
 	/*
 
 	 public static MemberDTO checkMember(HashMap map) {

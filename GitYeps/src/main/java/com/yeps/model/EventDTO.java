@@ -2,34 +2,29 @@ package com.yeps.model;
 
 public class EventDTO {
 	private int evnum;
-	private int cnum;				// foreign key
 	private String eventname;		// 150byte
 	private String start_date;		// 15byte
 	private String start_time;		// 15byte
 	private String end_date;		// 15byte
 	private String end_time;		// 15byte
 	private String store_address;	// 200byte
-	private String content;			// 4000byte
+	private String event_content;	// 4000byte
 	private String discount;		// 2000byte
-	private String category;		// 60byte
+	private String event_category;	// 60byte
 	private String ip;				// 20byte
 	private int filenum;			// foreign key
-	private String zipno;
+	private String zipNo;
 	private String roadAddrPart1;
-	private String addrDetail;
 	private String roadAddrPart2;
+	private String addrDetail;
+	private String event_register_date;
+	private int event_review_num;
 	
 	public int getEvnum() {
 		return evnum;
 	}
 	public void setEvnum(int evnum) {
 		this.evnum = evnum;
-	}
-	public int getCnum() {
-		return cnum;
-	}
-	public void setCnum(int cnum) {
-		this.cnum = cnum;
 	}
 	public String getEventname() {
 		return eventname;
@@ -67,11 +62,11 @@ public class EventDTO {
 	public void setStore_address(String store_address) {
 		this.store_address = store_address;
 	}
-	public String getContent() {
-		return content;
+	public String getEvent_content() {
+		return event_content;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setEvent_content(String event_content) {
+		this.event_content = event_content;
 	}
 	public String getDiscount() {
 		return discount;
@@ -79,11 +74,11 @@ public class EventDTO {
 	public void setDiscount(String discount) {
 		this.discount = discount;
 	}
-	public String getCategory() {
-		return category;
+	public String getEvent_category() {
+		return event_category;
 	}
-	public void setCategory(String category) {
-		this.category = category;
+	public void setEvent_category(String event_category) {
+		this.event_category = event_category;
 	}
 	public String getIp() {
 		return ip;
@@ -97,11 +92,11 @@ public class EventDTO {
 	public void setFilenum(int filenum) {
 		this.filenum = filenum;
 	}
-	public String getZipno() {
-		return zipno;
+	public String getZipNo() {
+		return zipNo;
 	}
-	public void setZipno(String zipno) {
-		this.zipno = zipno;
+	public void setZipNo(String zipNo) {
+		this.zipNo = zipNo;
 	}
 	public String getRoadAddrPart1() {
 		return roadAddrPart1;
@@ -121,6 +116,16 @@ public class EventDTO {
 	public void setRoadAddrPart2(String roadAddrPart2) {
 		this.roadAddrPart2 = roadAddrPart2;
 	}
-	
+	public String getEvent_register_date() {
+		return event_register_date;
+	}
+	public void setEvent_register_date(String event_register_date) {
+		this.event_register_date = event_register_date;
+	}
+	public int getEvent_review_num() {
+		return event_review_num;
+	}
+	public void setEvent_review_num(int event_review_num) {
+		this.event_review_num = event_review_num;
+	}
 }
-
