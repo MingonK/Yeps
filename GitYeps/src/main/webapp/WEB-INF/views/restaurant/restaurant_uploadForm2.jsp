@@ -15,18 +15,19 @@ Dropzone.options.myDropzone = {
 		
 		    submitButton.addEventListener("click", function() {
 		      myDropzone.processQueue(); // Tell Dropzone to process all queued files.
+		      
 		    });
 
 		    // You might want to show the submit button only when 
 		    // files are dropped here:
 		    this.on("addedfile", function() {
 		      // Show submit button here and/or inform user to click it.
+		      
 		    });
-
 		  }
 		};
 
-</script>
+</script>s
 <body>
 					<form id="myDropzone" class="dropzone" enctype="multipart/form-data" accept="" method="post" action="restaurant_upload">
 						<input type="hidden" name="rnum" value="<%=rnum%>">

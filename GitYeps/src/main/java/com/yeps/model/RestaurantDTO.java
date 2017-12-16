@@ -5,7 +5,7 @@ public class RestaurantDTO {
 	private int rnum;		// primary Key
 	private int cnum;
 	private String rname;
-	private String zipno;
+	private String zipNo ;
 	
 	private String filename;
 	
@@ -240,11 +240,11 @@ public class RestaurantDTO {
 	public void setSun(String sun) {
 		this.sun = sun;
 	}
-	public String getZipno() {
-		return zipno;
+	public String getZipNo() {
+		return zipNo;
 	}
-	public void setZipno(String zipno) {
-		this.zipno = zipno;
+	public void setZipNo(String zipNo) {
+		this.zipNo = zipNo;
 	}
-		
+
 }

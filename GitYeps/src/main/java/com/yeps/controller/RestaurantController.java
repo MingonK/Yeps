@@ -32,12 +32,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.yeps.model.FileDTO;
 import com.yeps.model.RestaurantDTO;
 import com.yeps.service.BoardPager;
+import com.yeps.service.FileMapper;
 import com.yeps.service.RestaurantMapper;
 
 /**
  * Handles requests for the application home page.
  */
-
 @Controller
 public class RestaurantController {
 	@Resource(name = "uploadPath")
@@ -46,7 +46,8 @@ public class RestaurantController {
 	
 	@Autowired
 	private RestaurantMapper restaurantMapper;
-	
+	@Autowired
+	private FileMapper fileMapper;
 
 
 //	private static final Logger logger = LoggerFactory.getLogger(RestaurantController.class);
@@ -61,7 +62,7 @@ public class RestaurantController {
 	public String jusoRest() throws Exception{
 		return "restaurant/jusoPopup";
 	}
-	@RequestMapping(value="/view")
+	@RequestMapping(value="/result",method=RequestMethod.POST)
 	public String view() throws Exception{
 		return "restaurant/result";
 	}
@@ -73,7 +74,7 @@ public class RestaurantController {
 	@RequestMapping(value="/restaurant_insert", method=RequestMethod.POST)
 	public ModelAndView insertRest(HttpServletRequest req,@ModelAttribute RestaurantDTO dto,BindingResult result,MultipartHttpServletRequest mhsq) throws Exception {
 		String msg=null,url=null;
-		String upPath = "D:/spring/upload/";
+		String upPath = "C:\\SpringWorkSpace\\files\\";
 	
 		Map<String, MultipartFile> fileMap = mhsq.getFileMap();
 		for (MultipartFile multipartFile : fileMap.values()) {
@@ -107,7 +108,7 @@ public class RestaurantController {
 	public ModelAndView uploadRest(HttpServletRequest req,@ModelAttribute FileDTO dto, MultipartHttpServletRequest mhsq) throws IllegalStateException,IOException{
 		String msg=null,url=null;
 		String rnum=req.getParameter("rnum");
-		String realFolder = "D:/spring/upload/";
+		String realFolder =  "C:\\SpringWorkSpace\\files\\";
 
 		File dir = new File(realFolder);
 		if (!dir.isDirectory()) {
@@ -123,7 +124,7 @@ public class RestaurantController {
 			long fileSize = multipartFile.getSize();
 			multipartFile.transferTo(new File(savePath));
 			dto.setRnum(Integer.parseInt(rnum));
-			int res=restaurantMapper.insertFile(dto);
+			int res=fileMapper.insertFile(dto);
 			if(res>0) {
 				msg="사진 등록 성공";
 				url="restaurant_content?rnum="+rnum;
