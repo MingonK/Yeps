@@ -21,11 +21,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from restaurant where rnum=#{rnum}
 	</select>
 	
-	<insert id="insertFile" parameterType="FileDTO">
-		insert into yeps_files values (yep_file_seq, #{mnum, jdbcType=INTEGER}, #{rnum, jdbcType=INTEGER}, #{rvnum, jdbcType=INTEGER}, #{evnum, jdbcType=INTEGER}, 
-				#{filename}, #{origin_filename}, #{filesize})
-	</insert>
-	
 	<select id="uploadFileList" resultType="FileDTO">
 		select * from yeps_file where rnum=#{rnum}
 	</select>

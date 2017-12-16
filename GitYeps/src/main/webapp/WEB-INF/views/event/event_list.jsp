@@ -206,7 +206,7 @@
 	</style>
 </head>
 <%@ include file="../top.jsp"%>
-<div class="event_list_main_content_wrap event_list_main_content_wrap_full" style="height: 1000px;">
+<div class="event_list_main_content_wrap event_list_main_content_wrap_full">
 	<div class="event_list_main_super_container">
 		<div class="event_list_main_section_header">
 			<div class="event_list_main_section_location_bar">
@@ -325,10 +325,10 @@
 	</div>
 </div>
 
-
-
-
-
+<a href="event_write">이벤트 등록</a> <br><br>
+<c:forEach var="dto" items="${eventList}">
+<a href="event_content?evnum=${dto.evnum}">${dto.eventname}</a><br>
+</c:forEach>
 
 
 <script>

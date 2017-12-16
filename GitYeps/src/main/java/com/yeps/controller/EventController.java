@@ -150,6 +150,7 @@ public class EventController {
 		
 		MultipartFile mf = mr.getFile("filename");
 		String origin_fileName = mf.getOriginalFilename();
+		System.out.println(origin_fileName);
 		int fileSize = (int) mf.getSize();
 		
 		File file = new File(uploadPath, origin_fileName);
@@ -283,7 +284,7 @@ public class EventController {
 		HttpHeaders header = new HttpHeaders();
 		header.setContentType(MediaType.IMAGE_JPEG);
 		return new ResponseEntity<byte[]>(
-				IOUtils.toByteArray(new FileInputStream(new File(uploadPath + "/" + name))), header,
+				IOUtils.toByteArray(new FileInputStream(new File(uploadPath + name))), header,
 				HttpStatus.CREATED);
 	}
 }

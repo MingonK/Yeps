@@ -32,7 +32,7 @@
 	</delete>
 	
 	<select id="loginMember" parameterType="MemberDTO" resultType="MemberDTO">
-        select mnum,email,name,ismaster,ismanager from yeps_member where email = #{email} and passwd = #{passwd}
+        select mnum,email,name,ismaster,ismanager,imagecount,reviewcount from yeps_member where email = #{email} and passwd = #{passwd}
     </select>
     
     <select id="getSaltByEmail" parameterType="MemberDTO" resultType="String">
@@ -49,6 +49,10 @@
     
     <update id="temporaryPasswd" parameterType="MemberDTO">
     	update yeps_member set passwd=#{passwd} where name = #{name} and ssn1 = #{ssn1} and ssn2 = #{ssn2} and email = #{email}
+    </update>
+    
+    <update id="updateMemberProfile" parameterType="MemberDTO">
+    	update yeps_member set name=#{name} where mnum=#{mnum}
     </update>
 	<!-- 
 	
