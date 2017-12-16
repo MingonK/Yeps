@@ -7,7 +7,6 @@
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css?ver=1"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_update_photo.css"/>"/>
 	<script src="//code.jquery.com/jquery.min.js"></script>
-	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 </head>
 <body ondragstart="return false">
@@ -72,41 +71,21 @@
 								</div>
 								
 								<form id="photo_description" method="post" style="margin-bottom: 18px; display: block;" enctype="multipart/form-data">
-									<input type="hidden" name="filecontent" id="filecontent">
 									<input type="hidden" name="evnum" id="evnum">
 									<input type="hidden" name="mnum" id="mnum">
 									<input type="hidden" name="filenum" id="filenum">
 									<label>Description</label>
 									<div id="description_container">
-										<textarea rows="4"></textarea>
+										<textarea rows="4" name="file_content"></textarea>
 									</div>
 									<button type="submit" id="Save_button">
 										<span>Save</span>
 									</button>
 								</form>
-								
-								
 							</div>
 						</div>
-						
-						
-						
-						
-						
-						
-						
-						
 					</div>
-				
-				
 				</div>
-				
-				
-				
-				
-				
-				
-				
 			</div>
 		</div>
 	</div>
@@ -210,34 +189,32 @@
 				}
 				
 				(F_FileMultiUpload = function(file, objDragAndDrop) {
-		 		    if(confirm("파일을 업로드 하시겠습니까?") ) {
-						var data = new FormData();
-						data.append('filename', file);
+					var data = new FormData();
+					data.append('filename', file);
 						
-						var url = "event_fileUpLoad?evnum=${eventDTO.evnum}";
-						$.ajax({
-							url: url,
-							method: 'post',
-							data: data,
-							dataType: 'json',
-							processData: false,
-							contentType: false,
-							success: function(responseData) {
-								if(responseData.failed) {
-									alert("잠시후 다시 시도해주세요.");
-									return false;
-								}
-								
-								$('#result_photo_status_text').hide();
-								$('#sucess_file_upload_header').show();
-								$('#user_photo_edit_cotainer').show();
-								$('#filenum').val(responseData.filenum);
-								$('#photoname').val(responseData.filename);
-								var url = "getImage/" + responseData.origin_filename;
-								$('#photo_box_img').attr('src', url);
+					var url = "event_fileUpLoad?evnum=${eventDTO.evnum}";
+					$.ajax({
+						url: url,
+						method: 'post',
+						data: data,
+						dataType: 'json',
+						processData: false,
+						contentType: false,
+						success: function(responseData) {
+							if(responseData.failed) {
+								alert("잠시후 다시 시도해주세요.");
+								return false;
 							}
-						});
-					}  
+							
+							$('#result_photo_status_text').hide();
+							$('#sucess_file_upload_header').show();
+							$('#user_photo_edit_cotainer').show();
+							$('#filenum').val(responseData.filenum);
+							$('#photoname').val(responseData.filename);
+							var url = "getImage/" + responseData.origin_filename;
+							$('#photo_box_img').attr('src', url);
+						}
+					});
 				});
 				F_FileMultiUpload(files[0], objDragAndDrop);
 			});
@@ -278,7 +255,6 @@
 			$('#evnum').val('${eventDTO.evnum}');
 			//$('#mnum')val('${sessionScope.mnum}');
 			$('#photo_description').attr('action', 'event_updatePro_photo');
-			$('#photo_description').submit();
 		})
 	</script>
 <%@ include file="../bottom.jsp"%>

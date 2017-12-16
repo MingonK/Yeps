@@ -1,6 +1,7 @@
 package com.yeps.service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,11 @@ public class FileMapper {
 		return sqlSession.insert("insertFile", dto);
 	}
 	
-	public FileDTO getFile(String filename) {
-		return sqlSession.selectOne("getFile", filename);
+	public FileDTO getFile(String filename, int filenum) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("filename", filename);
+		map.put("filenum", filenum);
+		return sqlSession.selectOne("getFile", map);
 	}
 	
 	public int deleteFile(int filenum) {
@@ -31,5 +35,9 @@ public class FileMapper {
 		map.put("filenum", filenum);
 		map.put("filecontent", filecontent);
 		return sqlSession.update("updateFileContent", map);
+	}
+	
+	public List<FileDTO> getTargetEventFiles(int evnum) {
+		return sqlSession.selectList("getTargetEventFiles", evnum);
 	}
 }
