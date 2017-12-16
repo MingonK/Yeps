@@ -32,12 +32,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.yeps.model.FileDTO;
 import com.yeps.model.RestaurantDTO;
 import com.yeps.service.BoardPager;
+import com.yeps.service.FileMapper;
 import com.yeps.service.RestaurantMapper;
 
 /**
  * Handles requests for the application home page.
  */
-
 @Controller
 public class RestaurantController {
 	@Resource(name = "uploadPath")
@@ -46,7 +46,11 @@ public class RestaurantController {
 	
 	@Autowired
 	private RestaurantMapper restaurantMapper;
-	
+<<<<<<< HEAD
+=======
+	@Autowired
+	private FileMapper fileMapper;
+>>>>>>> branch 'master' of http://github.com/MingonK/Yeps.git
 
 
 //	private static final Logger logger = LoggerFactory.getLogger(RestaurantController.class);
@@ -61,7 +65,7 @@ public class RestaurantController {
 	public String jusoRest() throws Exception{
 		return "restaurant/jusoPopup";
 	}
-	@RequestMapping(value="/view")
+	@RequestMapping(value="/result",method=RequestMethod.POST)
 	public String view() throws Exception{
 		return "restaurant/result";
 	}
@@ -123,7 +127,7 @@ public class RestaurantController {
 			long fileSize = multipartFile.getSize();
 			multipartFile.transferTo(new File(savePath));
 			dto.setRnum(Integer.parseInt(rnum));
-			int res=restaurantMapper.insertFile(dto);
+			int res=fileMapper.insertFile(dto);
 			if(res>0) {
 				msg="사진 등록 성공";
 				url="restaurant_content?rnum="+rnum;

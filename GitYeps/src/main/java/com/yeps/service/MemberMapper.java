@@ -30,6 +30,20 @@ public class MemberMapper {
 		return sqlSession.selectList("findMember",map);
 	}
 
+	public boolean checkJumin(MemberDTO dto) {
+		int count = 0;
+		try {
+			count = sqlSession.selectOne("checkJumin",dto);
+			if(count>0) {
+				return true;
+			}else {
+				return false;
+			}
+		}catch(Exception e){
+			return false;
+		}
+	}
+	
 	public int insertMember(MemberDTO dto) {
 		int res = sqlSession.insert("insertMember",dto);
 		return res;
@@ -85,6 +99,13 @@ public class MemberMapper {
 	public int temporaryPasswd(MemberDTO dto) {
 		return sqlSession.update("temporaryPasswd", dto);
 	}
+	
+	public int updateMemberProfile(int mnum, String name) {
+		MemberDTO dto = new MemberDTO();
+		dto.setMnum(mnum);
+		dto.setName(name);
+		return sqlSession.update("updateMemberProfile",dto);
+	}
 	/*
 
 	 public static MemberDTO checkMember(HashMap map) {
@@ -119,7 +140,6 @@ public class MemberMapper {
 	 }
 
 	 */
-	
 	
 	public MemberDTO mylist_info1(int NBPmnum) {
 		try {

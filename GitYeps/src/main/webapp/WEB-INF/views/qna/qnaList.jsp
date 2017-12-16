@@ -2,9 +2,59 @@
     pageEncoding="UTF-8"%>  
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <%@ include file="../style.jsp"%>
+
+<link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css?ver=1" />
+<script src="//code.jquery.com/jquery.min.js?ver=1"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js?ver=1"></script>
+
 <html>
 <head>
 	<title>QnA</title>
+	<script type="text/javascript">
+		
+	$(document).ready(function(){
+        $(".greenTab").each(function(){
+        	var tab = $(this).children("ul");
+            var tabBtn = tab.children("li").children("a");
+            var content = tabBtn.nextAll();
+            
+            // 탭버튼을 클릭했을때
+            tabBtn.click(function(){
+                // 이미 on 상태면 pass
+                if( $(this).hasClass("Ycurrent") ) return;
+ 
+                // 모든 컨텐츠 부분을 안보이게 한뒤
+                content.hide();
+ 
+                // 클릭한 tab 버튼(a태그) 옆의 모든 태그들은 보이도록
+                $(this).nextAll().show();
+                 
+                // 모든탭 버튼에 있던 on 클래스를 빼고
+                // 현재 클릭한 탭메뉴 버튼에 on 클래스 추가
+                tabBtn.removeClass("Ycurrent");
+                $(this).addClass("Ycurrent");
+                 
+                // 탭버튼를 쭉 돌면서 on 클래스가 있는 버튼만 on 이미지로 바꾸고
+                // 나머지 버튼들은 off 이미지로 바꾼다.
+                tabBtn.each(function(){
+                    var src;
+                    var img = $(this).children("img");
+                    if( $(this).hasClass("Ycurrent") ){
+                        src = img.attr("src").replace("_off.", "_on.");
+                    }else{
+                        src = img.attr("src").replace("_on.", "_off.");
+                    }
+                     
+                    img.attr("src", src);
+                });
+            });
+             
+            // 맨첫번째 탭버튼 클릭처리
+            tabBtn.eq(0).click();
+        });
+    });
+	
+	</script>
 </head>
 <body>
 <div class="qna-container">
@@ -29,7 +79,7 @@
 					<div class="main-header_nav text-right">
 						<ul class="header-nav">
 							<li class="header-nav_item">
-								<a class="header-nav_link" href="member_index">Return to <strong>yelp.com</strong></a>
+								<a class="header-nav_link" href="member_index">Return to <strong>yeps.com</strong></a>
 							</li>
 						</ul>
 					</div>
@@ -70,251 +120,73 @@
 	</div>
 		
 	<div class="qna-content-container">
-		
-		
 		<div class="container">
-                <div class="clearfix layout-block layout-n column--responsive">
-                    <div class="column column-alpha column--responsive">
-                        
-                        <div class="titled-nav js-titled-nav">
-                            <input class="titled-nav-dropdown_handler" id="titled-nav-aea849eb-e635-459e-8595-36b9e3314f07" role="presentation" type="checkbox">
-                            <div class="titled-nav-dropdown hidden-non-responsive-block responsive-hidden-large">
-                                <label class="titled-nav-dropdown_trigger" for="titled-nav-aea849eb-e635-459e-8595-36b9e3314f07">
-                                    <span class="arrange arrange--middle titled-nav-dropdown_content">
-                                        <span class="arrange_unit arrange_unit--fill titled-nav-dropdown_shadow">
-                                            <span class="titled-nav-dropdown_faded-title">
-                                                <strong>Menu</strong>
-                                            </span>
-                                        </span>
-                                        <span class="arrange_unit titled-nav-dropdown_icon">
-                                            <i class="i ig-common_sprite i-24x24_ios_chevron_down-common_sprite titled-nav-dropdown_expand"></i>
-                                            <i class="i ig-common_sprite i-24x24_ios_chevron_up-common_sprite titled-nav-dropdown_collapse"></i>
-                                        </span>
-                                    </span>
-                                </label>
-                            </div>
-                            <div class="titled-nav_menus">
-                                <div class="titled-nav_menu titled-nav-list--responsive">
-                                    <div class="titled-nav-header arrange arrange--top">
-                                    </div>
-                                    <ul class="titled-nav_items">
-                                        <li class="titled-nav_item">
-                                            <a class="titled-nav_link" href="/?l=en_US">
-                                                <div class="titled-nav_link-content arrange arrange--middle">
-                                                    <div class="arrange_unit arrange_unit--fill">
-                                                        <span class="titled-nav_link-label">Support Center</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                                <li class="titled-nav_item">
-                                                    <a class="titled-nav_link is-active" href="/Using_Yelp?l=en_US" target="">
-                                                        <div class="titled-nav_link-content arrange arrange--middle">
-                                                            <div class="arrange_unit arrange_unit--fill">
-                                                                <span class="titled-nav_link-label">Using Yelp</span>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li class="titled-nav_item">
-                                                    <a class="titled-nav_link" href="/Reviews_Photos?l=en_US" target="">
-                                                        <div class="titled-nav_link-content arrange arrange--middle">
-                                                            <div class="arrange_unit arrange_unit--fill">
-                                                                <span class="titled-nav_link-label">Reviews &amp; Photos</span>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li class="titled-nav_item">
-                                                    <a class="titled-nav_link" href="/Updating_Business_Information?l=en_US" target="">
-                                                        <div class="titled-nav_link-content arrange arrange--middle">
-                                                            <div class="arrange_unit arrange_unit--fill">
-                                                                <span class="titled-nav_link-label">Updating Business Information</span>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li class="titled-nav_item">
-                                                    <a class="titled-nav_link" href="/Yelp_for_Business_Owners?l=en_US" target="">
-                                                        <div class="titled-nav_link-content arrange arrange--middle">
-                                                            <div class="arrange_unit arrange_unit--fill">
-                                                                <span class="titled-nav_link-label">Yelp for Business Owners</span>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li class="titled-nav_item">
-                                                    <a class="titled-nav_link" href="/Advertising_on_Yelp?l=en_US" target="">
-                                                        <div class="titled-nav_link-content arrange arrange--middle">
-                                                            <div class="arrange_unit arrange_unit--fill">
-                                                                <span class="titled-nav_link-label">Advertising on Yelp</span>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li class="titled-nav_item">
-                                                    <a class="titled-nav_link" href="/Claiming_your_Business_Page?l=en_US" target="">
-                                                        <div class="titled-nav_link-content arrange arrange--middle">
-                                                            <div class="arrange_unit arrange_unit--fill">
-                                                                <span class="titled-nav_link-label">Claiming your Business Page</span>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li class="titled-nav_item">
-                                                    <a class="titled-nav_link" href="/Recommended_Reviews?l=en_US" target="">
-                                                        <div class="titled-nav_link-content arrange arrange--middle">
-                                                            <div class="arrange_unit arrange_unit--fill">
-                                                                <span class="titled-nav_link-label">Recommended Reviews</span>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li class="titled-nav_item">
-                                                    <a class="titled-nav_link" href="/Yelp_Elite_Squad?l=en_US" target="">
-                                                        <div class="titled-nav_link-content arrange arrange--middle">
-                                                            <div class="arrange_unit arrange_unit--fill">
-                                                                <span class="titled-nav_link-label">Yelp Elite Squad</span>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li class="titled-nav_item">
-                                                    <a class="titled-nav_link" href="/Legal_Questions?l=en_US" target="">
-                                                        <div class="titled-nav_link-content arrange arrange--middle">
-                                                            <div class="arrange_unit arrange_unit--fill">
-                                                                <span class="titled-nav_link-label">Legal Questions</span>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li class="titled-nav_item">
-                                                    <a class="titled-nav_link" href="/Searching_Yelp?l=en_US" target="">
-                                                        <div class="titled-nav_link-content arrange arrange--middle">
-                                                            <div class="arrange_unit arrange_unit--fill">
-                                                                <span class="titled-nav_link-label">Searching Yelp</span>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li class="titled-nav_item">
-                                                    <a class="titled-nav_link" href="/Yelp_Reservations?l=en_US" target="">
-                                                        <div class="titled-nav_link-content arrange arrange--middle">
-                                                            <div class="arrange_unit arrange_unit--fill">
-                                                                <span class="titled-nav_link-label">Yelp Reservations</span>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li class="titled-nav_item">
-                                                    <a class="titled-nav_link" href="http://www.yelp.com/developers" target="_blank">
-                                                        <div class="titled-nav_link-content arrange arrange--middle">
-                                                            <div class="arrange_unit arrange_unit--fill">
-                                                                <span class="titled-nav_link-label">Yelp for Developers</span>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li class="titled-nav_item">
-                                                    <a class="titled-nav_link" href="http://www.yelp.com/static?p=tos" target="_blank">
-                                                        <div class="titled-nav_link-content arrange arrange--middle">
-                                                            <div class="arrange_unit arrange_unit--fill">
-                                                                <span class="titled-nav_link-label">Terms of Service</span>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li class="titled-nav_item">
-                                                    <a class="titled-nav_link" href="http://www.yelp.com/guidelines" target="_blank">
-                                                        <div class="titled-nav_link-content arrange arrange--middle">
-                                                            <div class="arrange_unit arrange_unit--fill">
-                                                                <span class="titled-nav_link-label">Content Guidelines</span>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div>
-
-                    <div class="column column-beta column--responsive">
-                        
-                        <div class="sat-content clearfix">
-                        </div><span id="j_id0:topicGroup">
-                            <div class="sat-topic-group"><span id="j_id0:j_id32">
-
-    <ul class="breadcrumbs">
-        <li>
-            <a href="/?l=en_US">Support Center
-            </a>
-        </li><span id="j_id0:j_id32:j_id33:j_id37"><span id="j_id0:j_id32:j_id33:j_id37:j_id38:j_id39:1:j_id42">
-        <li>
-                <span class="i-wrap ig-wrap-common i-breadcrumb-arrow-common-wrap">
-                    <i class="i ig-common i-breadcrumb-arrow-common"></i>Using Yelp
-                </span>
-        </li></span></span>
-    </ul></span>
-                                <h1>Using Yelp</h1>
-
-                                <p class="sat-description" style="">Learn how to take full advantage of Yelp from resetting your password to joining the Yelp Elite Squad and everything in between.
-                                </p>
-                                    <div class="sat-topic-group-category">
-                                        <a href="/Getting_Started?l=en_US">Getting Started</a>
-                                        <p>Signing up, verifying and updating your account, resetting your password - everything you need to know to join the ever-growing ranks of Yelpers in your community and beyond.
-                                        </p>
-                                    </div>
-                                    <div class="sat-topic-group-category">
-                                        <a href="/Friends_and_Followers?l=en_US">Friends &amp; Followers</a>
-                                        <p>Learn how to connect with your friends and follow your favorite contributors.
-                                        </p>
-                                    </div>
-                                    <div class="sat-topic-group-category">
-                                        <a href="/Using_the_Yelp_App?l=en_US">Using the Yelp App</a>
-                                        <p>Learn how the Yelp app works to improve the mobile experience.
-                                        </p>
-                                    </div>
-                                    <div class="sat-topic-group-category">
-                                        <a href="/Yelp_Deals_Gift_Certificates?l=en_US">Yelp Deals &amp; Gift Certificates</a>
-                                        <p>How to buy and redeem Yelp Deals and Gift Certificates at great local businesses in your neighborhood.
-                                        </p>
-                                    </div>
-                                    <div class="sat-topic-group-category">
-                                        <a href="/Ordering_Food_on_Yelp?l=en_US">Ordering Food on Yelp</a>
-                                        <p>Hungry but can't pull yourself away from your smartphone? Don't worry - you can order food on Yelp from restaurants nearby.
-                                        </p>
-                                    </div>
-                                    <div class="sat-topic-group-category">
-                                        <a href="/Yelp_Elite_Squad?l=en_US">Yelp Elite Squad</a>
-                                        <p>Everything you need to know about the people we recognize as the most active evangelists and role models for their Yelp communities.
-                                        </p>
-                                    </div>
-                                    <div class="sat-topic-group-category">
-                                        <a href="/Events?l=en_US">Events</a>
-                                        <p>Learn how to use Yelp to post and attend offline events.
-                                        </p>
-                                    </div>
-                                    <div class="sat-topic-group-category">
-                                        <a href="/Yelp_Talk?l=en_US">Yelp Talk</a>
-                                        <p>Discuss your favorite craft breweries, where to go on date night, or ask other Yelpers questions about their own cities.
-                                        </p>
-                                    </div>
-                                    <div class="sat-topic-group-category">
-                                        <a href="/Privacy?l=en_US">Privacy</a>
-                                        <p>We take your privacy seriously and hate spam even more than you do. Learn more about our privacy practices here.
-                                        </p>
-                                    </div>
-                            </div></span>
-                        
-                    </div>
-                </div>
-            </div>
-		
-		
-		
-		
+			<div class="YblockContentMain">
+				<div class="qna_view not_list">
+					<h1>자주 묻는 질문</h1>
+					<div class="qna_location">
+						<div class="location_list">
+							<span><a href="#"><small>홈</small></a></span>
+							<span class="end"><a href="#"><strong><small>자주 묻는 질문</small></strong></a></span>
+						</div>
+					</div>
+				</div>
+				
+				<div class="YblockPageMenu">
+					<ul>
+						<li class="Yfirst Ycurrent" style="width: 50%;"><a href="/app/faq/RetrieveFaq.rpi">자주 묻는 질문</a></li>
+						<li class="Ylast" style="width: 50%;"><a href="/app/inquery/Retrieve1to1Inquery.rpi">Q&A</a></li>
+					</ul>
+				</div>
+				
+				<h2 class="Yhide">자주 묻는 질문</h2>
+				<div class="Yinformation">
+					<p>원하시는 답변을 찾을 수 없다면 <a href="#" id="lik1to1Inquery">Q&A</a>를 활용해 주세요!</p>
+				</div>
+				<div class="YblockTab greenTab">
+					<ul>
+						<li class="Yfirst Ycurrent" ontab="dui.Calendar.close();"><a href="#" onclick="$.fTabFaqList();">전체</a></li>
+						<li ontab="dui.Calendar.close();"><a href="#" onclick="$.fTabFaqList('F01');">채용절차</a></li>
+						<li ontab="dui.Calendar.close();"><a href="#" onclick="$.fTabFaqList('F02');">지원서작성</a></li>
+						<li class="Ylast" ontab="dui.Calendar.close();"><a href="#" onclick="$.fTabFaqList('F03');">기타</a></li>
+					</ul>
+				</div>
+				<div id="faqList">
+					<div class="YblockTabContent">
+						<div class="YaccordionList">
+							<dl>
+								<dt>
+									<a href="#" title="내용 펼치기">
+									<strong><span class="Yhide">Q.</span>채용절차</strong>
+									<span>각 사별 자세한 인사 제도 및 인사 관련 정보가 궁금합니다. </span>
+									</a>
+								</dt>
+								<dd style="display: none;">
+								<span class="Yhide">A.</span>
+								각 사별 자세한 정보는 각 사의 채용 사이트에서 확인하실 수 있습니다. 지원한 회사의 채용 사이트를 참고하세요.
+								</dd>
+							</dl>		
+							<dl>
+								<dt>
+									<a href="#" title="내용 펼치기">
+									<strong><span class="Yhide">Q.</span>채용절차</strong>
+									<span>LG는 계열사간 중복지원이 가능한가요?</span>
+									</a>
+								</dt>
+								<dd style="display: none;">
+								<span class="Yhide">A.</span>
+									LG는 계열사별로 채용을 하기 때문에 중복지원이 가능합니다. 단, 신입사원 공채의 경우에는 중복 지원이 가능한 계열사 수를 3개사로 제한합니다.
+								</dd>
+							</dl>
+						</div>
+					</div>
+				</div>
+			</div>
+				
+			<!--	<div class="qna_not_box">
+						<p>등록된 Q&A가 없습니다.</p>
+					</div>    -->
+		</div>
 	</div>
 </div>
 

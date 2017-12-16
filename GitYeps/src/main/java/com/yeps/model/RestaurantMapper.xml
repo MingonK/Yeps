@@ -10,8 +10,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<insert id="insertRestaurant" parameterType="RestaurantDTO">
-		insert into restaurant values(restaurant_seq.nextval,0,#{rname},#{filename},#{zipno},#{roadAddrPart1},#{addrDetail},#{roadAddrPart2},
-		#{raddress},#{hp2},#{hp3},#{foodstyle},#{mon},#{tue},#{wed},#{thu},#{fri},#{sat},#{sun},
+		insert into restaurant values(restaurant_seq.nextval,0,#{rname},#{filename},#{zipNo},#{roadAddrPart1},#{addrDetail},#{roadAddrPart2},
+		#{raddress},#{hp2},#{hp3},#{foodstyle},#{mon, jdbcType=VARCHAR},#{tue, jdbcType=VARCHAR},#{wed, jdbcType=VARCHAR},#{thu, jdbcType=VARCHAR},
+		#{fri, jdbcType=VARCHAR},#{sat, jdbcType=VARCHAR},#{sun,jdbcType=VARCHAR},
 		#{reststyle},#{reserv},#{delivery},#{takeout},#{parking},#{kidzone},#{groupreserv},#{noise},#{alcohol},#{waiting},
 		#{wifi},#{toilet},#{tablecount},#{standard},#{busytime})
 	</insert>
@@ -19,11 +20,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getRest" resultType="RestaurantDTO" parameterType="int">
 		select * from restaurant where rnum=#{rnum}
 	</select>
-	
-	<insert id="insertFile" parameterType="FileDTO">
-		insert into yeps_files values (yep_file_seq, #{mnum, jdbcType=INTEGER}, #{rnum, jdbcType=INTEGER}, #{rvnum, jdbcType=INTEGER}, #{evnum, jdbcType=INTEGER}, 
-				#{filename}, #{origin_filename}, #{filesize})
-	</insert>
 	
 	<select id="uploadFileList" resultType="FileDTO">
 		select * from yeps_file where rnum=#{rnum}
@@ -33,36 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from restaurant
 	</select>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	<select id="listrestaurant" resultType="RestaurantDTO">
-		select * from restaurant order by rnum desc
-	</select>
-	
-	<select id="GetRestaurantName_R" resultType="RestaurantDTO" parameterType="int">
-		select * from yeps_restaurant where rnum = #{GETrnum}
-	</select>
 
-	<select id="restaurantRName" resultType="RestaurantDTO" parameterType="int">
-		select * from yeps_restaurant where rnum= #{rnumList}
-	</select>
-	
-	<select id="restaurant_restaurantIMG" resultType="RestaurantDTO">
-  		select * from yeps_restaurant where 19 >= rownum 
-  	</select>
-  	
-  	<select id="previous_R" resultType="RestaurantDTO" parameterType="int">
-  		select *from yeps_restaurant where rnum= #{rnum}
-  	</select>
-
-	
-	
 
 
 </mapper>

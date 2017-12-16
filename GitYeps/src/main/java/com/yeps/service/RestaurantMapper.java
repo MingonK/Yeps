@@ -36,10 +36,6 @@ public class RestaurantMapper {
 		RestaurantDTO dto=sqlSession.selectOne("getRest",rnum);
 		return dto;
 	}
-
-	public int insertFile(FileDTO dto) {
-		return sqlSession.insert("insertFile", dto);
-	}
 	
 	public int getCount() {
 		return sqlSession.selectOne("getCount");
@@ -48,36 +44,6 @@ public class RestaurantMapper {
 		return sqlSession.selectList("uploadFileList",rnum);
 	}
 
-	
-	
-	
-	///
-	
-	
-	public List<RestaurantDTO> listrestaurant(){
-		return sqlSession.selectList("listrestaurant");
-	}
-
-//	public String GetRestaurantName_R(int GETrnum) {
-//		return sqlSession.selectOne("GetRestaurantName_R", GETrnum);
-//	}
-	
-	public List<RestaurantDTO> GetRestaurantName_R(int GETrnum) {
-		return sqlSession.selectList("GetRestaurantName_R", GETrnum);
-	}
-	
-	public RestaurantDTO restaurantRName(int rnumList) {
-			return sqlSession.selectOne("restaurantRName", rnumList);
-	}
-	
-	public List<RestaurantDTO> restaurant_restaurantIMG() {
-		return sqlSession.selectList("restaurant_restaurantIMG");
-	}
-	
-	public List<RestaurantDTO> previous_R(int rnum){
-		return sqlSession.selectList("previous_R", rnum);
-	}
-	
 }
 
 

@@ -6,15 +6,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.yeps.model">
 	<select id="listEvent" resultType="EventDTO">
-		select * from yeps_event
+		select * from yeps_event order by evnum asc
 	</select>
 	
 	<insert id="insertEvent" parameterType="EventDTO">
-		insert into yeps_event values (yeps_event_seq.nextval, #{cnum}, #{eventname}, #{start_date},
-		 #{start_time}, #{end_date, jdbcType=VARCHAR}, #{end_time, jdbcType=VARCHAR}, #{store_address}, #{content}, #{discount}, #{category}, #{ip})
+		insert into yeps_event values (yeps_event_seq.nextval, #{eventname}, #{start_date},
+		 #{start_time}, #{end_date, jdbcType=VARCHAR}, #{end_time, jdbcType=VARCHAR}, #{store_address}, #{event_content}, #{discount}, #{event_category}, #{ip}, 
+		 #{filenum, jdbcType=INTEGER}, #{zipNo}, #{roadAddrPart1}, #{roadAddrPart2}, #{addrDetail}, sysdate)
 	</insert>
 	
-	<select id="getEventContent" parameterType="int">
+	<select id="getEventContent" parameterType="int" resultType="EventDTO">
 		select * from yeps_event where evnum = #{evnum}
 	</select>
+	
+	<select id="getEvnum" parameterType="java.util.HashMap" resultType="int">
+		select evnum from yeps_event where eventname = #{eventname} and store_address = #{store_address}
+	</select>
+	
+	<select id="RedundancyCheck" parameterType="String" resultType="EventDTO">
+		select * from yeps_event where eventname = #{eventname}
+	</select>
+	
+	<update id="updateFilenum" parameterType="java.util.HashMap">
+		update yeps_event set filenum = ${filenum} where evnum = ${evnum}
+	</update>
+	
+	<select id="getThisWeek_EventList" resultType="EventDTO">
+		select * from yeps_event where to_char(sysdate+7, 'yyyymmdd') >= end_date and 5 >= rownum order by event_register_date asc
+ 	</select>
 </mapper>

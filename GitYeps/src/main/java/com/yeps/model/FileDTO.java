@@ -9,7 +9,8 @@ public class FileDTO {
 	private String filename;
 	private String origin_filename;
 	private int filesize;
-	private String filecontent;
+	private String file_content;
+	private String file_upload_date;
 	
 	public int getFilenum() {
 		return filenum;
@@ -59,11 +60,17 @@ public class FileDTO {
 	public void setFilesize(int filesize) {
 		this.filesize = filesize;
 	}
-	public String getFilecontent() {
-		return filecontent;
+	public String getFile_content() {
+		return file_content;
 	}
-	public void setFilecontent(String filecontent) {
-		this.filecontent = filecontent;
+	public void setFile_content(String file_content) {
+		this.file_content = file_content;
+	}
+	public String getFile_upload_date() {
+		return file_upload_date;
+	}
+	public void setFile_upload_date(String file_upload_date) {
+		this.file_upload_date = file_upload_date;
 	}
 	
 }

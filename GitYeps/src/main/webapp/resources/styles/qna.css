@@ -1,5 +1,21 @@
-a:-webkit-any-link {
-    cursor: auto;
+
+body {
+	padding: 0; margin: 0; overflow-x: hidden; font-size: 14px;
+}
+div,span,li,ul {
+	margin: 0; padding: 0; border: 0; font: inherit; vertical-align: baseline; font-size: 100%;
+}
+
+div {
+	diplay: block; color: #333;
+}
+
+ul {
+	font-size: 100%; list-style: none;
+}
+
+a {
+	color: #0073bb; font: inherit; text-decoration: none;
 }
 
 .main-content-wrap {
@@ -238,10 +254,6 @@ a:-webkit-any-link {
     margin-left: 20px;
 }
 
-img {
-    max-width: 100%;
-}
-
 .layout-n .column-beta {
     float: left;
     padding: 0 15px;
@@ -376,105 +388,227 @@ img {
 }
 
 .qna-content-container {
-    padding-top: 15px;
-    padding-bottom: 36px;
-}
-
-.qna-content-container {
-    width: 960px;
+    padding: 15px 15px 36px;
     margin: 0 auto;
+    width: 960px;
+    font: 75%/1.5em 'Malgun Gothic','맑은 고딕',sans-serif;
+    color: #1a1d1e;
+    background: #fff;
 }
 
-.layout-block {
-    margin: 0 -15px;
+
+.YblockContentMain, .YblockPopupMain {
+    clear: both;
+    margin-top: 20px;
 }
 
-.layout-n .column-alpha {
+.YblockPageMenu {
+	height: 40px;
+    padding-bottom: 3px;
+    background: url(http://apply-cdn.lg.com/common/images/bdr_shadow.gif) repeat-x left bottom;
+    margin: 0 0 12px 0;
+}
+
+.YblockPageMenu li {
     float: left;
-    padding: 0 15px;
-    min-height: 1px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    width: 25%;
 }
 
-.titled-nav_menu {
-    border: 1px solid #ccccc8;
-    border-radius: 5px;
+.YblockPageMenu li.Yfirst.Ycurrent a {
+    border-left: 1px solid #d80546;
+    background: #c91400;
 }
 
-.titled-nav-header {
-    padding: 11px;
+.YblockPageMenu li.Ycurrent a {
+    color: #fff;
 }
 
-.arrange {
-    display: table;
-    min-width: 100%;
-    table-layout: auto;
+.greenTab ul {
+    display: inline-block;
+    padding-bottom: 3px;
+    background: url(http://apply-cdn.lg.com/common/images/bdr_shadow.gif) repeat-x left bottom;
+    margin: 0 0 25px 0;
 }
 
-.titled-nav_items {
-    border-top: 1px solid #ccccc8;
-    background: #f5f5f1;
-    border-radius: 0 0 5px 5px;
+.greenTab li.Yfirst.Ycurrent {
+    border-left: 1px solid #92b955;
 }
 
-.titled-nav_items ol, ul {
-    list-style: none;
+.greenTab li.Ycurrent {
+    border: 1px solid #92b955;
+    border-left: none;
+    background: #3f8600;
 }
 
-.titled-nav_items li {
-    display: list-item;
-    text-align: -webkit-match-parent;
-}
-
-.layout-n .column-beta {
+.greenTab li {
     float: left;
-    padding: 0 15px;
-    min-height: 1px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    width: 75%;
+    border: 1px solid #e0dcd2;
+    border-left: none;
 }
 
-.sat-article, .sat-topic, .sat-topic-group {
-    padding-top: 9px;
+.greenTab li.Ycurrent a {
+    color: #fff;
 }
 
-.sat-article .breadcrumbs, .sat-topic .breadcrumbs, .sat-topic-group .breadcrumbs {
-    margin-bottom: 6px;
-}
-
-.breadcrumbs li {
-    display: inline;
-    margin-right: 5px;
-}
-
-.breadcrumbs a {
-    font-weight: bold;
-}
-
-.sat-description {
-    line-height: 20px;
-    margin: 12px 0 18px;
-}
-
-.ig-wrap-common .ig-common {
+.greenTab li a {
     display: block;
+    width: 129px;
+    line-height: 33px;
+    color: #313131;
+    font-weight: bold;
+    text-align: center;
+    font-size: 15px;
+}
+
+.greenTab li:not(.Ycurrent) a:hover {
+    background: #b4ff6f;
+}
+
+.YaccordionList dl {
+    margin-bottom: 2px;
+}
+
+.YaccordionList dl dt {
+    background: #f1eeee url(http://apply-cdn.lg.com/common/images/btn_accord_plus.png) no-repeat right center;
+    height: 45px;
+    line-height: 45px;
+    cursor: pointer;
+}
+
+.YaccordionList dl dt a {
+    display: block;
+    padding-right: 20px;
+}
+
+.YaccordionList dl dt strong {
+    padding-left: 65px;
+    min-width: 80px;
+    background: url(http://apply-cdn.lg.com/common/images/ico_accord_question.png) no-repeat 28px 14px;
+    display: inline-block;
+    font-size: 13px;
+}
+
+.YaccordionList dl dt span {
+    display: inline-block;
+}
+
+.YaccordionList dl dd {
+    padding: 24px 45px 24px 65px;
+    background: url(http://apply-cdn.lg.com/common/images/ico_accord_answer.png) no-repeat 29px 25px;
+}
+
+
+
+.qna_view.not_list {
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.YblockPageMenu li a {
+    display: block;
+    border: 1px solid #e0dcd2;
+    border-left: none;
+    box-sizing: border-box;
+    line-height: 38px;
+    color: #313131;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.Yhide {
     position: absolute;
-    left: 0;
+    width: 0;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+    overflow: hidden;
+    visibility: hidden;
 }
 
-.i-breadcrumb-arrow-common {
-    background-position: -4.0px -3466.0px;
-    width: 8px;
-    height: 14px;
-    top: 1px;
+.Yinformation {
+    margin-bottom: 18px;
 }
 
-.ig-common {
-    background-image: url(/assets/2/www/img/2796870a82eb/sprites/common.png);
-    background-repeat: no-repeat;
+.Yinformation > p {
+    font-size: 13px;
+    background: url(http://apply-cdn.lg.com/common/images/bul_info.png) no-repeat left 5px;
+    padding-left: 20px;
+    line-height: 24px;
+}
+
+.Yinformation > p > a {
+    color: #c91400;
+    font-weight: bold;
+    font-color: #d80546;
+    border-bottom: 1px solid #d80546;
+}
+
+
+
+.qna_view {
+    position: relative;
+}
+
+.qna_view h2 {
+    width: 450px;
+    padding-bottom: 9px;
+    font-weight: bold;
+    font-size: 17px;
+    font-family: "맑은 고딕", "Malgun Gothic", "돋움", dotum, sans-serif;
+    color: #000;
+    overflow: hidden;
+}
+
+.qna_view .qna_location {
+    overflow: hidden;
+    zoom: 1;
+}
+
+.qna_view .qna_location .location_list {
+    position: absolute;
+    top: 5px;
+    right: 0;
+    padding: 0;
+    text-align: right;
+    letter-spacing: -1px;
+    margin-top: 10px;
+}
+
+.qna_view .qna_location .location_list span {
+    display: inline-block;
+    zoom: 1;
+    margin-right: 4px;
+    padding-right: 11px;
+    background: url(//pics.auction.co.kr/newStore/bg/bg_next.gif) no-repeat 100% 1px;
+}
+
+.qna_view .qna_not_box {
+    overflow: hidden;
+    padding: 72px 0 81px;
+    border: 1px solid #e1e1e1;
+    font-weight: bold;
+    font-size: 12px;
+    color: #919191;
+    letter-spacing: 0;
+    text-align: center;
+    zoom: 1;
+}
+
+.qna_view .qna_not_box p {
+    color: inherit;
+}
+
+.YaccordionList a:link, .YaccordionList a:visited,
+.location_list a:link, .location_list a:visited{
+    color: #434343;
+    text-decoration: none;
+}
+
+.qna_view .qna_location .location_list span.end {
+    margin-right: 0;
+    padding-right: 0;
+    background: none;
+}
+
+.location_list strong {
+    font-weight: bold;
 }

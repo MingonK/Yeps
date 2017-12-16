@@ -10,6 +10,16 @@
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js?ver=1"></script>
 	
 <script type="text/javascript">
+	var mode = "${param.mode}";
+	$(function() { 
+		if(mode == 'signup'){
+			$("#login").hide();
+			$('#join').show();
+		}else{
+			$("#login").show();
+			$('#join').hide();
+		}
+	});
 		//------------------------------------회원가입
 		function focusSsn2(mode){
 			if(mode=='join'){
@@ -356,22 +366,23 @@
 								<small class="subtle-text">Already on Yelp? 
 								<a class="signup-link u-pseudo-link">Log in</a></small>
 							</div>
-						</div>
-						<div id="emailpicker-div">
-							<ul>
-								<li id="email3" onclick="change_email('0')">직접 입력</li>
-								<li id="email3" onclick="change_email('gmail.com')">gmail.com</li>
-								<li id="email3" onclick="change_email('hanmail.net')">hanmail.net</li>
-								<li id="email3" onclick="change_email('naver.com')">naver.com</li>
-								<li id="email3" onclick="change_email('nate.com')">nate.com</li>
-								<li id="email3" onclick="change_email('korea.com')">korea.com</li>
-								<li id="email3" onclick="change_email('yahoo.com')">yahoo.com</li>
-								<li id="email3" onclick="change_email('hotmail.com')">hotmail.com</li>
-								<li id="email3" onclick="change_email('chol.com')">chol.com</li>
-								<li id="email3" onclick="change_email('netian.com')">netian.com</li>
-								<li id="email3" onclick="change_email('dreamwiz.com')">dreamwiz.co</li>
-								<li id="email3" onclick="change_email('live.com')">live.com</li>
-							</ul>
+							
+							<div id="emailpicker-div">
+								<ul>
+									<li id="email3" onclick="change_email('0')">직접 입력</li>
+									<li id="email3" onclick="change_email('gmail.com')">gmail.com</li>
+									<li id="email3" onclick="change_email('hanmail.net')">hanmail.net</li>
+									<li id="email3" onclick="change_email('naver.com')">naver.com</li>
+									<li id="email3" onclick="change_email('nate.com')">nate.com</li>
+									<li id="email3" onclick="change_email('korea.com')">korea.com</li>
+									<li id="email3" onclick="change_email('yahoo.com')">yahoo.com</li>
+									<li id="email3" onclick="change_email('hotmail.com')">hotmail.com</li>
+									<li id="email3" onclick="change_email('chol.com')">chol.com</li>
+									<li id="email3" onclick="change_email('netian.com')">netian.com</li>
+									<li id="email3" onclick="change_email('dreamwiz.com')">dreamwiz.co</li>
+									<li id="email3" onclick="change_email('live.com')">live.com</li>
+								</ul>
+							</div>
 						</div>
 					</div>
 					

@@ -31,19 +31,26 @@ public class EventMapper {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("eventname", eventName);
 		map.put("store_address", store_address);
-		int evnum = sqlSession.selectOne("getEvnum", map);
-		return evnum;
+		return sqlSession.selectOne("getEvnum", map);
 	}
 	
-	public boolean RedundancyCheck(String eventName, String store_address) {
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("eventname", eventName);
-		map.put("store_address", store_address);
-		EventDTO dto = sqlSession.selectOne("RedundancyCheck", map);
+	public boolean RedundancyCheck(String eventName) {
+		EventDTO dto = sqlSession.selectOne("RedundancyCheck", eventName);
 		if(dto == null) {
 			return true;
 		} else {
 			return false; 
 		}
+	}
+	
+	public int updateFilenum(int filenum, int evnum) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("filenum", filenum);
+		map.put("evnum", evnum);
+		return sqlSession.update("updateFilenum", map);
+	}
+	
+	public List<EventDTO> getThisWeek_EventList() {
+		return sqlSession.selectList("getThisWeek_EventList");
 	}
 }

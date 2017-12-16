@@ -15,24 +15,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 
 	<insert id="writeMessage" parameterType="MessageDTO">
-		insert into yeps_message values(yeps_message_seq.nextval, #{title}, #{receiver}, 0,#{content}, sysdate, 0, 0,0,0,0)
+		insert into yeps_message values(yeps_message_seq.nextval, #{title}, #{receiver}, #{sender}, #{content}, sysdate, 0, 0, 0, 0, 0)
 	</insert>
 
-<!-- 	<select id="messageList" parameterType="java.util.HashMap" resultType="MessageDTO"> -->
-<!-- 		select * from(select rownum rn,A.* from (select * from yeps_message order by msgnum asc)A) where islocker!=1 and rn between #{start} and #{end}  -->
-<!-- 	</select> -->
-		<select id="messageList" resultType="MessageDTO" parameterType="MessageDTO">
-		select * from (select rownum rn, A.* from (select * from yeps_message order by msgNum desc)A) where rn between #{start} and #{end}
+	<select id="messageList" resultType="MessageDTO" parameterType="MessageDTO">
+		${sql}
 	</select>
 	
-	<select id="msgBoxList" resultType="MessageDTO" parameterType="MessageDTO">
-	    select * from (select rownum rn, A.* from (select * from yeps_message order by msgNum desc)A) where islocker !=1 and rn between #{start} and #{end}</select>
-	
-	<select id="lockerList" resultType="MessageDTO">
-	    select * from yeps_message where islocker=1
-	</select>
-
-	<select id="sendList" resultType="MessageDTO">
+	<!-- <select id="sendList" resultType="MessageDTO">
 		select * from yeps_message where sender=#{sender}
 	</select>
 	
@@ -46,7 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="noReadLocker" resultType="MessageDTO">
 	    select * from yeps_message where readnum=0 and islocker=1
-	</select>
+	</select> -->
 	
 	<select id="receiver" resultType="String">
 	    select sender from yeps_message where msgnum=#{msgnum} 
@@ -92,7 +82,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         update yeps_message set islocker=1 where msgnum=#{msgnum}
     </update>
     
-     <update id="moveToMsgBox" parameterType="int">
+     <update id="lockerToMsgBox" parameterType="int">
         update yeps_message set islocker=0 where msgnum=#{msgnum}
     </update>
     

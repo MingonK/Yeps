@@ -45,59 +45,59 @@
 								</svg>
 							</span>
 								<input type="text" id="start_date" name="start_date"
-								style="width: 150px; padding-left: 30px; height: 30px; border: 1px solid #999; border-radius: 3px; font-size: 14px; vertical-align: middle; ">
+								style="width: 140px; padding-left: 30px; height: 30px; border: 1px solid #999; border-radius: 3px; font-size: 14px; vertical-align: middle; ">
 							</div>
 							<div style="float: left;">
 								<select name="start_time"
-								style="width: 90px; margin: 0; height: 30px; border: 1px solid #999; border-radius: 3px; font-size: 14px;">
-									<option value="0.0">오전 12:00</option>
-									<option value="0.5">오전 12:30</option>
-									<option value="1.0">오전 1:00</option>
-									<option value="1.5">오전 1:30</option>
-									<option value="2.0">오전 2:00</option>
-									<option value="2.5">오전 2:30</option>
-									<option value="3.0">오전 3:00</option>
-									<option value="3.5">오전 3:30</option>
-									<option value="4.0">오전 4:00</option>
-									<option value="4.5">오전 4:30</option>
-									<option value="5.0">오전 5:00</option>
-									<option value="5.5">오전 5:30</option>
-									<option value="6.0">오전 6:00</option>
-									<option value="6.5">오전 6:30</option>
-									<option value="7.0" selected>오전 7:00</option>
-									<option value="7.5">오전 7:30</option>
-									<option value="8.0">오전 8:00</option>
-									<option value="8.5">오전 8:30</option>
-									<option value="9.0">오전 9:00</option>
-									<option value="9.5">오전 9:30</option>
-									<option value="10.0">오전 10:00</option>
-									<option value="10.5">오전 10:30</option>
-									<option value="11.0">오전 11:00</option>
-									<option value="11.5">오전 11:30</option>
-									<option value="12.0">오후 12:00</option>
-									<option value="12.5">오후 12:30</option>
-									<option value="13.0">오후 1:00</option>
-									<option value="13.5">오후 1:30</option>
-									<option value="14.0">오후 2:00</option>
-									<option value="14.5">오후 2:30</option>
-									<option value="15.0">오후 3:00</option>
-									<option value="15.5">오후 3:30</option>
-									<option value="16.0">오후 4:00</option>
-									<option value="16.5">오후 4:30</option>
-									<option value="17.0">오후 5:00</option>
-									<option value="17.5">오후 5:30</option>
-									<option value="18.0">오후 6:00</option>
-									<option value="18.5">오후 6:30</option>
-									<option value="19.0">오후 7:00</option>
-									<option value="19.5">오후 7:30</option>
-									<option value="20.0">오후 8:00</option>
-									<option value="20.5">오후 8:30</option>
-									<option value="21.0">오후 9:00</option>
-									<option value="21.5">오후 9:30</option>
-									<option value="22.0">오후 10:00</option>
-									<option value="22.5">오후 10:30</option>
-									<option value="23.0">오후 11:00</option>
-									<option value="23.5">오후 11:30</option>
+								style="width: 100px; margin: 0; height: 30px; border: 1px solid #999; border-radius: 3px; font-size: 14px;">
+									<option value="오전 12:00">오전 12:00</option>
+									<option value="오전 12:30">오전 12:30</option>
+									<option value="오전 1:00">오전 1:00</option>
+									<option value="오전 1:30">오전 1:30</option>
+									<option value="오전 2:00">오전 2:00</option>
+									<option value="오전 2:30">오전 2:30</option>
+									<option value="오전 3:00">오전 3:00</option>
+									<option value="오전 3:30">오전 3:30</option>
+									<option value="오전 4:00">오전 4:00</option>
+									<option value="오전 4:30">오전 4:30</option>
+									<option value="오전 5:00">오전 5:00</option>
+									<option value="오전 5:30">오전 5:30</option>
+									<option value="오전 6:00">오전 6:00</option>
+									<option value="오전 6:30">오전 6:30</option>
+									<option value="오전 7:00" selected>오전 7:00</option>
+									<option value="오전 7:30">오전 7:30</option>
+									<option value="오전 8:00">오전 8:00</option>
+									<option value="오전 8:30">오전 8:30</option>
+									<option value="오전 9:00">오전 9:00</option>
+									<option value="오전 9:30">오전 9:30</option>
+									<option value="오전 10:00">오전 10:00</option>
+									<option value="오전 10:30">오전 10:30</option>
+									<option value="오전 11:00">오전 11:00</option>
+									<option value="오전 11:30">오전 11:30</option>
+									<option value="오후 12:00">오후 12:00</option>
+									<option value="오후 12:30">오후 12:30</option>
+									<option value="오후 1:00">오후 1:00</option>
+									<option value="오후 1:30">오후 1:30</option>
+									<option value="오후 2:00">오후 2:00</option>
+									<option value="오후 2:30">오후 2:30</option>
+									<option value="오후 3:00">오후 3:00</option>
+									<option value="오후 3:30">오후 3:30</option>
+									<option value="오후 4:00">오후 4:00</option>
+									<option value="오후 4:30">오후 4:30</option>
+									<option value="오후 5:00">오후 5:00</option>
+									<option value="오후 5:30">오후 5:30</option>
+									<option value="오후 6:00">오후 6:00</option>
+									<option value="오후 6:30">오후 6:30</option>
+									<option value="오후 7:00">오후 7:00</option>
+									<option value="오후 7:30">오후 7:30</option>
+									<option value="오후 8:00">오후 8:00</option>
+									<option value="오후 8:30">오후 8:30</option>
+									<option value="오후 9:00">오후 9:00</option>
+									<option value="오후 9:30">오후 9:30</option>
+									<option value="오후 10:00">오후 10:00</option>
+									<option value="오후 10:30">오후 10:30</option>
+									<option value="오후 11:00">오후 11:00</option>
+									<option value="오후 11:30">오후 11:30</option>
 								</select>
 							</div>
 						</div>
@@ -114,59 +114,59 @@
 								</svg>
 							</span>
 								<input type="text" name="end_date" id="end_date"
-								style="width: 150px; padding-left: 30px; height: 30px; border: 1px solid #999; border-radius: 3px; font-size: 14px; vertical-align: middle;">
+								style="width: 140px; padding-left: 30px; height: 30px; border: 1px solid #999; border-radius: 3px; font-size: 14px; vertical-align: middle;">
 							</div>
 							<div class="select_end_time" style="display: none; float: left; display: none;">
 								<select name="end_time"
-								style="width: 90px; margin: 0; height: 30px; border: 1px solid #999; border-radius: 3px; font-size: 14px;">
-									<option value="0.0">오전 12:00</option>
-									<option value="0.5">오전 12:30</option>
-									<option value="1.0">오전 1:00</option>
-									<option value="1.5">오전 1:30</option>
-									<option value="2.0">오전 2:00</option>
-									<option value="2.5">오전 2:30</option>
-									<option value="3.0">오전 3:00</option>
-									<option value="3.5">오전 3:30</option>
-									<option value="4.0">오전 4:00</option>
-									<option value="4.5">오전 4:30</option>
-									<option value="5.0">오전 5:00</option>
-									<option value="5.5">오전 5:30</option>
-									<option value="6.0">오전 6:00</option>
-									<option value="6.5">오전 6:30</option>
-									<option value="7.0" selected>오전 7:00</option>
-									<option value="7.5">오전 7:30</option>
-									<option value="8.0">오전 8:00</option>
-									<option value="8.5">오전 8:30</option>
-									<option value="9.0">오전 9:00</option>
-									<option value="9.5">오전 9:30</option>
-									<option value="10.0">오전 10:00</option>
-									<option value="10.5">오전 10:30</option>
-									<option value="11.0">오전 11:00</option>
-									<option value="11.5">오전 11:30</option>
-									<option value="12.0">오후 12:00</option>
-									<option value="12.5">오후 12:30</option>
-									<option value="13.0">오후 1:00</option>
-									<option value="13.5">오후 1:30</option>
-									<option value="14.0">오후 2:00</option>
-									<option value="14.5">오후 2:30</option>
-									<option value="15.0">오후 3:00</option>
-									<option value="15.5">오후 3:30</option>
-									<option value="16.0">오후 4:00</option>
-									<option value="16.5">오후 4:30</option>
-									<option value="17.0">오후 5:00</option>
-									<option value="17.5">오후 5:30</option>
-									<option value="18.0">오후 6:00</option>
-									<option value="18.5">오후 6:30</option>
-									<option value="19.0">오후 7:00</option>
-									<option value="19.5">오후 7:30</option>
-									<option value="20.0">오후 8:00</option>
-									<option value="20.5">오후 8:30</option>
-									<option value="21.0">오후 9:00</option>
-									<option value="21.5">오후 9:30</option>
-									<option value="22.0">오후 10:00</option>
-									<option value="22.5">오후 10:30</option>
-									<option value="23.0">오후 11:00</option>
-									<option value="23.5">오후 11:30</option>
+								style="width: 100px; margin: 0; height: 30px; border: 1px solid #999; border-radius: 3px; font-size: 14px;">
+									<option value="오전 12:00">오전 12:00</option>
+									<option value="오전 12:30">오전 12:30</option>
+									<option value="오전 1:00">오전 1:00</option>
+									<option value="오전 1:30">오전 1:30</option>
+									<option value="오전 2:00">오전 2:00</option>
+									<option value="오전 2:30">오전 2:30</option>
+									<option value="오전 3:00">오전 3:00</option>
+									<option value="오전 3:30">오전 3:30</option>
+									<option value="오전 4:00">오전 4:00</option>
+									<option value="오전 4:30">오전 4:30</option>
+									<option value="오전 5:00">오전 5:00</option>
+									<option value="오전 5:30">오전 5:30</option>
+									<option value="오전 6:00">오전 6:00</option>
+									<option value="오전 6:30">오전 6:30</option>
+									<option value="오전 7:00" selected>오전 7:00</option>
+									<option value="오전 7:30">오전 7:30</option>
+									<option value="오전 8:00">오전 8:00</option>
+									<option value="오전 8:30">오전 8:30</option>
+									<option value="오전 9:00">오전 9:00</option>
+									<option value="오전 9:30">오전 9:30</option>
+									<option value="오전 10:00">오전 10:00</option>
+									<option value="오전 10:30">오전 10:30</option>
+									<option value="오전 11:00">오전 11:00</option>
+									<option value="오전 11:30">오전 11:30</option>
+									<option value="오후 12:00">오후 12:00</option>
+									<option value="오후 12:30">오후 12:30</option>
+									<option value="오후 1:00">오후 1:00</option>
+									<option value="오후 1:30">오후 1:30</option>
+									<option value="오후 2:00">오후 2:00</option>
+									<option value="오후 2:30">오후 2:30</option>
+									<option value="오후 3:00">오후 3:00</option>
+									<option value="오후 3:30">오후 3:30</option>
+									<option value="오후 4:00">오후 4:00</option>
+									<option value="오후 4:30">오후 4:30</option>
+									<option value="오후 5:00">오후 5:00</option>
+									<option value="오후 5:30">오후 5:30</option>
+									<option value="오후 6:00">오후 6:00</option>
+									<option value="오후 6:30">오후 6:30</option>
+									<option value="오후 7:00">오후 7:00</option>
+									<option value="오후 7:30">오후 7:30</option>
+									<option value="오후 8:00">오후 8:00</option>
+									<option value="오후 8:30">오후 8:30</option>
+									<option value="오후 9:00">오후 9:00</option>
+									<option value="오후 9:30">오후 9:30</option>
+									<option value="오후 10:00">오후 10:00</option>
+									<option value="오후 10:30">오후 10:30</option>
+									<option value="오후 11:00">오후 11:00</option>
+									<option value="오후 11:30">오후 11:30</option>
 								</select>
 							</div>
 						</div>
@@ -177,31 +177,38 @@
 					<div style="width: 100%; border-bottom: 1px solid #e6e6e6; margin-bottom: 10px;">
 						<label>매장 주소</label>
 						<div style="margin: 6px 0 18px;">
-							<input type="text" name="store_address" placeholder="주소를 입력하세요." onclick="javascript:jusoPop()"style="width: 100%; padding-left: 10px; height: 30px; border: 1px solid #999; border-radius: 3px; font-size: 14px;">
+							<input type="text" name="store_address" placeholder="주소를 입력하세요." onclick="javascript:jusoPop()" style="width: 100%; padding-left: 10px; height: 30px; border: 1px solid #999; border-radius: 3px; font-size: 14px;">
+							<input type="hidden" name="zipNo">
+							<input type="hidden" name="roadAddrPart1">
+							<input type="hidden" name="roadAddrPart2">
+							<input type="hidden" name="addrDetail">
 						</div>
 					</div>
 					
 					<label>이벤트 내용</label>
 					<div style="margin-top: 6px;">
-						<textarea name="content" rows="7" cols="89" maxlength="1200" placeholder="이벤트의 내용을 상세하게 설명해주세요." style="border-radius: 3px; font-size: 14px; padding: 5px 10px 0 10px; border: 1px solid #999; resize: vertical;"></textarea>
+						<textarea name="event_content" rows="7" cols="89" maxlength="1200" placeholder="이벤트의 내용을 상세하게 설명해주세요." style="border-radius: 3px; font-size: 14px; padding: 5px 10px 0 10px; border: 1px solid #999; resize: vertical;"></textarea>
 					</div>
 					
 					<div style="margin-top: 20px; margin-bottom: 20px">
 						<label>할인율</label>
-						<textarea name="discount" rows="5" cols="89" maxlength="650" placeholder="할인 내역을 상세하게 설명해주세요. &#10; &#10;예) 메인메뉴 30%할인, 디저트류 10%할인" style="margin-top: 6px; border-radius: 3px; font-size: 14px; padding: 5px 10px 0 10px; border: 1px solid #999; resize: vertical;"></textarea>
+						<textarea name="discount" rows="5" cols="89" maxlength="650" placeholder="할인 내역을 간단히 작성해주세요. &#10; &#10;예) 메인메뉴 30%할인, 디저트류 10%할인" style="margin-top: 6px; border-radius: 3px; font-size: 14px; padding: 5px 10px 0 10px; border: 1px solid #999; resize: vertical;"></textarea>
 					</div>
 					
 					<div style="margin-bottom: 18px;">
 						<label>카테고리</label>
 						<div style="width: 100%; margin-top: 6px;">
-							<select name="categorySet"
-							style="width: 100%; margin: 0; height: 30px; border: 1px solid #999; border-radius: 3px; font-size: 14px;">
-								<c:if test="${empty categoryList}">
-									<option value="cateEmpty">등록된 카테고리가 없습니다.</option>
-								</c:if>
-								<c:forEach var="dto" items="${categoryList}">
-									<option value="${dto.cname}+${dto.cnum}">${dto.cname}</option> 
-								</c:forEach>
+							<select name="event_category" style="width: 100%; margin: 0; height: 30px; border: 1px solid #999; border-radius: 3px; font-size: 14px;">
+								<option value="music_concert">음악 & 콘서트</option>
+								<option value="visualart">전시회</option>
+								<option value="film">영화</option>
+								<option value="book">도서</option>
+								<option value="fashion">패션</option>
+								<option value="food">음식</option>
+								<option value="festival">축제</option>
+								<option value="sports_activity">스포츠 & 야외활동</option>
+								<option value="nightlife">밤 문화</option>
+								<option value="family_kids">가족 & 어린이</option> 
 							</select>
 						</div>
 					</div>
@@ -304,7 +311,11 @@
 		}
 		
 		function jusoCallBack(roadAddrPart1, addrDetail, roadAddrPart2, zipNo) {
-			document.event_register.store_address.value = zipNo + roadAddrPart1 + addrDetail + roadAddrPart2
+			document.event_register.zipNo.value = zipNo;
+			document.event_register.roadAddrPart1.value = roadAddrPart1;
+			document.event_register.roadAddrPart2.value = roadAddrPart2;
+			document.event_register.addrDetail.value = addrDetail;
+			document.event_register.store_address.value = zipNo + " " + roadAddrPart1 + " " + roadAddrPart2 + " " + addrDetail;
 		}
 		
 		function check() {
@@ -317,11 +328,42 @@
 				alert("이벤트 시작일을 설정해주세요.")
 				event_register.start_date.focus()
 				return false
+			} else {
+				var start_date = event_register.start_date.value;
+				var start_date_arr = start_date.split('-');
+				
+				for(var i = 0; i < start_date_arr.length; i++) {
+					var path = isNaN(start_date_arr[i]);
+					if(path) {
+						alert("이벤트 날짜가 잘못 입력되었습니다.")
+						event_register.start_date.focus()
+						return false;
+					}
+				}
 			}
+			if(event_register.end_date.value != "") {
+				var end_date = event_register.end_date.value;
+				var end_date_arr = end_date.split('-');
+				
+				for(var i = 0; i < end_date_arr.length; i++) {
+					var path = isNaN(end_date_arr[i]);
+					if(path) {
+						alert("이벤트 날짜가 잘못 입력되었습니다.")
+						event_register.end_date.focus()
+						return false;
+					}
+				}
+			}
+			
 			if(event_register.store_address.value=="") {
 				alert("주소를 입력해주세요.")
 				event_register.store_address.focus()
 				return false
+			}
+			if(event_register.addrDetail.value=="") {
+				alert("상세주소를 입력해주세요.")
+				event_register.store_address.focus()
+				return false;
 			}
 			if(event_register.store_address.value.length >= 65) {
 				alert("입력한 주소가 너무 깁니다.")
@@ -330,11 +372,11 @@
 			}
 			if(event_register.content.value=="") {
 				alert("이벤트 내용을 상세하게 작성해주세요.")
-				event_register.content.focus()
+				event_register.event_content.focus()
 				return false
 			}
 	
-			var content = event_register.content.value;
+			var content = event_register.event_content.value;
 			var content_len = content.length;
 			var one_char = "";
 			var content_byte = 0;
@@ -376,11 +418,11 @@
 				alert("글자수를 초과할 수 없습니다.");
 				return false;
 			}
-			if(discount_byte < 30) {
-				alert("할인 내용을 상세하게 작성해주세요.");
+			if(discount_byte < 15) {
+				alert("할인 내용을 5자 이상 작성해주세요.");
 				return false;
 			}
-			return true
+			//return true
 		}
 
 	</script>
