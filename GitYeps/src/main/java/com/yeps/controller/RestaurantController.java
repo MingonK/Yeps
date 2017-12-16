@@ -38,7 +38,6 @@ import com.yeps.service.RestaurantMapper;
 /**
  * Handles requests for the application home page.
  */
-
 @Controller
 public class RestaurantController {
 	@Resource(name = "uploadPath")
@@ -47,8 +46,11 @@ public class RestaurantController {
 	
 	@Autowired
 	private RestaurantMapper restaurantMapper;
+<<<<<<< HEAD
+=======
 	@Autowired
 	private FileMapper fileMapper;
+>>>>>>> branch 'master' of http://github.com/MingonK/Yeps.git
 
 
 //	private static final Logger logger = LoggerFactory.getLogger(RestaurantController.class);
@@ -63,7 +65,7 @@ public class RestaurantController {
 	public String jusoRest() throws Exception{
 		return "restaurant/jusoPopup";
 	}
-	@RequestMapping(value="/view")
+	@RequestMapping(value="/result",method=RequestMethod.POST)
 	public String view() throws Exception{
 		return "restaurant/result";
 	}
