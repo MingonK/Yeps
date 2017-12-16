@@ -38,8 +38,21 @@
 	
 	<interceptors>
         <interceptor>
+            <mapping path="/member_manager" />
+            <mapping path="/member_delete" />
+            <mapping path="/member_profile" />
             <mapping path="/qna_write" />
+            <mapping path="/qna_delete" />
+            <mapping path="/qna_update" />
+            <mapping path="/qna_reply" />
             <mapping path="/event_write" />
+            <mapping path="/restaurant_insert" />
+            <mapping path="/restaurant_update" />
+            <mapping path="/restaurant_delete" />
+            <mapping path="/review_insert" />
+            <mapping path="/review_update" />
+            <mapping path="/review_delete" />
+            
             <beans:bean class="com.yeps.service.LoginInterceptor"></beans:bean>            
         </interceptor>         
     </interceptors>

@@ -6,13 +6,6 @@
 <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css?ver=1" />
 <script src="//code.jquery.com/jquery.min.js?ver=1"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js?ver=2"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('.drop-menu-link').click(function() {
-			$('#topbar-account-wrap').toggle();
-		});
-	});
-</script>
 
 <body>
 <input type="hidden" id="set" value="${set}">
@@ -556,6 +549,9 @@
 		$('#page_header_location_inputs').click(function() {
 			$('#main_location_suggestion_container').show();
 		})
+		$('.drop-menu-link').click(function() {
+			$('#topbar-account-wrap').toggle();
+		});
 	});
 	
 	$('html').click(function(e) {

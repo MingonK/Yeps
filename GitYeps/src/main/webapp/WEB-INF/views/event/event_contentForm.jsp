@@ -12,8 +12,8 @@
 <head>
 	<title>${eventDTO.eventname}</title>
 	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=HXle5j7nJaMnyv_Zey_M&submodules=geocoder"></script>
-	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
-	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css"/>"/>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css?ver=1"/>"/>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css?ver=1"/>"/>
 	<script src="//code.jquery.com/jquery.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 	<script src="http://malsup.github.com/jquery.cycle2.js"></script>
@@ -552,7 +552,7 @@
 						<li style="margin-bottom: 12px; display: list-item; text-align: -webkit-match-parent;">
 							<div id="this_week_popular_events">
 								<div id="this_week_popular_events_photo_wrap">
-									<div id="this_week_popular_events_photo">
+									<div id="this_week_popular_events_photo" style="width: 60px; height: 60px;">
 										<c:forEach var="this_week_fileDTO" items="${thisWeek_EventFileList}">
 										<c:if test="${this_week_eventDTO.filenum == this_week_fileDTO.filenum}">
 											<a href="event_content?evnum=${this_week_eventDTO.evnum}" style="margin: 0; padding: 0; border: 0; cursor: pointer;">
