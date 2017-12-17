@@ -106,6 +106,19 @@ public class MemberMapper {
 		dto.setName(name);
 		return sqlSession.update("updateMemberProfile",dto);
 	}
+	
+	public int updateMemberPasswd(int mnum, String passwd, String passwd1) {
+		HashMap map = new HashMap();
+		map.put("mnum", mnum);
+		map.put("passwd", passwd);
+		map.put("passwd1", passwd1);
+		return sqlSession.update("updateMemberPasswd", map);
+	}
+	
+	public int leaveMember(MemberDTO dto) {
+		return sqlSession.delete("leaveMember", dto);
+	}
+	
 	/*
 
 	 public static MemberDTO checkMember(HashMap map) {

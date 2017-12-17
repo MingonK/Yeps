@@ -1,0 +1,536 @@
+.mainpage_header_container {
+	padding-top: 30px;
+   	height: 570px;
+   	background-color: #333;
+   	background-size: cover;
+   	background-position: 50%;
+   	min-width: 1020px;
+}
+
+.mainpage_header_content_container {
+	max-width: 1100px;
+   	margin: 0 auto;
+   	padding: 0 15px;
+}
+
+.mainpage_header_top_wrap {
+	margin-left: -18px;
+   	margin-right: -18px;
+   	border-collapse: separate;
+   	border-spacing: 18px 0;
+   	display: table;
+   	min-width: 100%;
+   	table-layout: auto;
+}
+
+.mainpage_header_top_left_wrap {
+	border-collapse: collapse;
+   	border-spacing: 0 0;
+   	margin-left: 9px;
+   	margin-right: 9px;
+   	width: 100%;
+   	box-sizing: border-box;
+   	display: table-cell;
+   	vertical-align: top;
+}
+
+.mainpage_header_top_left, .mainpage_header_top_right {
+	display: inline-block;
+}
+
+.mainpage_header_top_items {
+	display: inline-block;
+   	margin-right: 2px;
+   	text-align: -webkit-match-parent;
+}
+
+.mainpage_header_link {
+	border-radius: 0;
+   	border-bottom: 2px solid transparent;
+   	padding-bottom: 8px;
+   	color: #fff;
+   	display: block;
+   	padding: 9px 12px 10px;
+   	font-size: 14px;
+   	line-height: 1.28571em;
+   	font-weight: 700;
+   	background: none;
+}
+
+.mainpage_header_top_items:hover {
+	border-bottom: 2px solid white;
+}
+
+.mainpage_header_link:active {
+	color: #999;
+}
+
+.mainpage_header_top_right_wrap {
+	width: 15%;
+	border-collapse: collapse;
+   	border-spacing: 0 0;
+   	margin-left: 9px;
+   	margin-right: 9px;
+   	box-sizing: border-box;
+   	display: table-cell;
+   	vertical-align: top;
+   	white-space: nowrap;
+}
+
+.mainpage_header_login {
+	margin-right: 12px!important;
+}
+
+.mainpage_header_signup {
+	display: inline-block;
+   	margin-right: 2px;
+   	text-align: -webkit-match-parent;
+	margin-right: 0px!important;
+}
+
+.mainpage_header_signup_button {
+	box-shadow: none;
+   	border-radius: 4px;
+   	border: 2px solid #fff;
+   	margin-top: -2px;
+   	padding: 7px 24px 8px;
+   	text-decoration: none!important;
+   	color: #fff;
+   	display: inline-block;
+   	vertical-align: middle;
+   	margin: 0;
+   	cursor: pointer;
+   	font-weight: 700;
+   	text-align: center;
+  	user-select: none;
+   	font-size: 14px;
+   	line-height: 1.28571em;
+}
+
+.mainpage_header_signup_button:hover {
+	color: #666;
+	background-color: #fff;    
+}
+
+.mainpage_header_inner {
+	padding-top: 80px;
+	
+}
+
+#mainpage_header_mainlogo {
+	background-image: url(https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/948fbfff37bd/assets/img/logos_homepage/winter.png);
+	background-size: 160px 80px;
+	width: 160px;
+   	height: 80px;
+   	padding: 0;
+   	margin: 0 auto 48px;
+   	background-repeat: no-repeat;
+   	border: 0;
+}
+
+#mainpage_header_mainlogo a {
+	display: block;
+   	width: 100%;
+   	height: 100%;
+   	text-indent: -1000em;
+}
+
+.mainpage_find_form {
+	margin-bottom: 0!important;
+}
+
+.mainpage_search_arrange {
+	display: flex;
+	min-width: 100%;
+   	table-layout: auto;
+}
+
+.mainpage_search {
+	height: 21px!important;
+	padding: 12px 12px!important;
+} 
+
+.mainpage_search span {
+	font-size: 15px!important;
+}
+
+.mainpage_header_inner_categories {
+	padding-bottom: 168px;
+	text-align: center;
+	margin-top: 15px;
+}
+
+.mainpage_header_inner_category {
+	display: inline-block;
+   	padding: 0 12px;
+}
+
+.mainpage_header_inner_category_link, .mainpage_header_bottom_photo_owner_link {
+	color: #fff;
+	font-weight: bold;
+}
+
+.mainpage_header_inner_category_link:hover, .mainpage_header_recommend_name:hover, .mainpage_header_bottom_photo_owner_link:hover,
+.mainpage_new_businesses_section a:hover {
+	text-decoration: underline;
+}
+
+.mainpage_header_inner_bottom_text, .mainpage_header_bottom_photo_owner {
+	width: 100%!important;
+	box-sizing: border-box!important;
+	text-align: center!important;
+}
+
+.mainpage_header_bottom_text_name {
+	display: inline;
+}
+
+.mainpage_header_recommend_name {
+	color: #fff;
+	font-weight: 700;
+	text-decoration: none;
+}
+	
+.mainpage_header_bottom_photo_owner {
+	color: #fff;
+}
+
+#mainpage_header_inner_category_block_active{
+	color: #fff;
+	display: block;
+    cursor: pointer;
+    position: relative;
+}
+
+#mainpage_header_inner_category_block_active:before {
+	border-bottom-color: #e6e6e6;
+    border-width: 11px;
+    margin-left: -11px;
+    content: "";
+    left: 50%;
+    bottom: -11px;
+    width: 0;
+    height: 0;
+    position: absolute;
+    border: 1px solid transparent;
+    pointer-events: none;
+    display: block;
+    z-index: 1000;
+}
+
+#mainpage_header_inner_category_block_active:after {
+    pointer-events: none;
+    position: absolute;
+    z-index: 1000;
+    border-bottom-color: #fff;
+    border-width: 10px;
+    margin-left: -10px;
+    content: "";
+    left: 50%;
+    bottom: -11px;
+    width: 0;
+    height: 0;
+    border: 1px solid transparent;
+    pointer-events: none;
+    display: block;
+}
+
+<!-- ============================================ 메인페이지 헤더 부분 끝============================================ -->
+
+<!-- ============================================ 메인페이지 바디 부분 시작============================================ -->
+.mainpage_container {
+	background-color: #fff;
+   	min-width: 1020px;
+}
+
+.mainpage_content_container {
+	max-width: 960px;
+    margin: 0 auto;
+    padding: 0 15px;
+    
+}
+
+.mainpage_home_container_section {
+	padding-top: 72px;
+}
+
+.mainpage_homecontainer_section_location {
+	text-align: center!important;
+	word-wrap: break-word!important;
+    word-break: break-word!important;
+    overflow-wrap: break-word!important;
+    font-weight: 700;
+    margin-bottom: 6px;
+    font-size: 21px;
+    line-height: 1.28571em;
+    color: #d32323;
+}
+
+.mainpage_homecontainer_location_bar {
+	border-bottom: 1px solid #ccc;
+}
+
+.mainpage_homecontainer_location_bar_center {
+	margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    display: table;
+    margin: 0 0 -1px;
+    padding: 0;
+    list-style: none;
+    white-space: nowrap;
+}
+
+.mainpage_location_bar_item {
+	display: table-cell;
+    vertical-align: middle;
+}
+
+.mainpage_location_bar_item_link {
+	color: #666;
+    padding: 0 12px;
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    display: block;
+    vertical-align: bottom;
+    line-height: 1;
+    white-space: nowrap;
+    outline: 0;
+}
+
+.mainpage_location_bar_item_label {
+	line-height: 30px;
+	display: inline-block;
+}
+
+.mainpage_18x18_search_small_icon {
+	line-height: 30px;
+	top: 0;
+	fill: currentColor;
+	padding-bottom: 2px;
+}
+
+.mainpage_more_city {
+	vertical-align: middle;
+	line-height: 30px;
+	display: inline-block;
+}
+
+.mainpage_location_bar_item_link:hover {
+	border-bottom: 2px solid #d32323;
+}
+
+.mainpage_new_businesses_section {
+	padding-top: 42px;
+}
+
+.explore_city_title {
+	text-align: center;
+	margin-bottom: 12px;
+	word-wrap: break-word!important;
+    word-break: break-word!important;
+    overflow-wrap: break-word!important;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.3125em;
+    color: #d32323;
+}
+
+.mainpage_new_businesses_list {
+	margin-top: -30px;
+	margin-left: -15px;
+    margin-right: -15px;
+    display: block;
+    font-size: 0;
+    line-height: 1;
+    text-align: left;
+	border-collapse: separate;
+    border-spacing: 30px 0;
+    min-width: 100%;
+    table-layout: auto;
+}
+
+.mainpage_new_businesses_list .mainpage_new_businesses {
+	margin-top: 30px;
+	margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 30%;
+    display: inline-block;
+    zoom: 1;
+    font-size: 14px;
+    line-height: 1.28571em;
+    border-collapse: collapse;
+    border-spacing: 0 0;
+    vertical-align: top;
+}
+
+.mainpage_new_businesses_card {
+	border: 1px solid #e6e6e6;
+    border-radius: 4px;
+    background: #fff;
+}
+
+.mainpage_new_businesses_card_photo {
+	height: 180px;
+    overflow: hidden;
+    border-bottom: 1px solid #e6e6e6;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.mainpage_new_businesses_photo_box {
+	height: 100%;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.mainpage_new_businesses_card_content {
+	padding: 12px 12px 0;
+    position: relative;
+}
+
+.new_businesses_card_content_title {
+	max-width: 100%;
+    overflow: hidden!important;
+    text-overflow: ellipsis!important;
+    white-space: nowrap!important;
+    word-wrap: normal!important;
+    color: #0073bb;
+    word-break: break-word!important;
+    overflow-wrap: break-word!important;
+    font-weight: 700;
+    margin-bottom: 6px;
+    font-size: 16px;
+    line-height: 1.3125em;
+}
+
+.mainpage_new_business_rating{
+	margin: 6px 0;
+}
+
+.mainpage_new_business_rating_star {
+	float: left;
+    margin: -1px 6px 0 0;
+    position: relative;
+    overflow: hidden;
+    width: 102px;
+    height: 18px;
+    background-position: 0 -366px;
+    background: url(https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png) no-repeat;
+    background-size: 132px 560px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.offscreen {
+	clip: rect(0 0 0 0);
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+}
+
+.mainpage_new_business_review_count {
+	display: block;
+    float: left;
+    color: #666;
+    font-weight: 400;
+}
+
+.new_business_price_foodstyle {
+	display: block;
+    max-width: 100%;
+    overflow: hidden!important;
+    text-overflow: ellipsis!important;
+    white-space: nowrap!important;
+    word-wrap: normal!important;
+    clear: both;
+}
+
+.new_business_store_location {
+	margin-bottom: 6px!important;
+	margin-top: 6px!important;
+	max-width: 100%;
+    overflow: hidden!important;
+    text-overflow: ellipsis!important;
+    white-space: nowrap!important;
+    word-wrap: normal!important;
+}
+
+.new_business_open_date {
+	color: #f15c00;
+    margin-top: 6px;
+    margin-bottom: 12px;
+}
+
+.mainpage_new_businesses_photo_box .new_businesses_photo_box_link .photo_box_img {
+	outline: none;
+	position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    vertical-align: middle;
+}
+
+/* 로그인 추가작업부분 시작*/
+
+.mainpage_header_top_right_wrap_login {
+	border-collapse: collapse;
+   	border-spacing: 0 0;
+   	margin-left: 9px;
+   	margin-right: 9px;
+   	box-sizing: border-box;
+   	display: table-cell;
+   	vertical-align: top;
+   	white-space: nowrap;
+   	
+}
+
+.mainpage_header_top_right_wrap_login #page_header_notifications_wrap {
+	margin-left: 9px;
+    margin-right: 9px;
+    border-collapse: collapse;
+    border-spacing: 0 0;
+    vertical-align: middle;
+    display: table-cell;
+    box-sizing: border-box;
+}	
+
+.mainpage_header_top_right_wrap_login #page_header_acount_notifications {
+	margin-left: 0px;
+    margin-right: 0px;
+    border-collapse: separate;
+    border-spacing: 6px 0;
+    display: table;
+    min-width: 100%;
+    table-layout: auto
+}
+
+.mainpage_header_top_right_wrap_login .user-account_button {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+}
+
+.mainpage_header_top_right_wrap_login #messages-icon:hover, 
+.mainpage_header_top_right_wrap_login #notifications-icon:hover, 
+.mainpage_header_top_right_wrap_login #page_header_account .user-account_button:hover {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+
+}
+
+/* 로그인 추가작업부분 끝*/
+
+<!-- ============================================ 메인페이지 바디 부분 끝============================================ -->
+<!-- ============================================ 메인페이지 바디 리뷰 이하 시작============================================ -->
+
+
+<!-- ============================================ 메인페이지 바디 리뷰 이하 끝============================================ -->

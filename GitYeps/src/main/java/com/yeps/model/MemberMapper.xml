@@ -54,6 +54,14 @@
     <update id="updateMemberProfile" parameterType="MemberDTO">
     	update yeps_member set name=#{name} where mnum=#{mnum}
     </update>
+    
+    <update id="updateMemberPasswd" parameterType="java.util.HashMap">
+		update yeps_member set passwd=#{passwd1} where mnum=#{mnum} and passwd=#{passwd}
+	</update>
+	
+	<delete id="leaveMember" parameterType="MemberDTO">
+		delete from yeps_member where mnum = #{mnum} and passwd=#{passwd}
+	</delete>
 	<!-- 
 	
 	<select id="checkMember" parameterType="java.util.HashMap" resultType="MemberDTO">

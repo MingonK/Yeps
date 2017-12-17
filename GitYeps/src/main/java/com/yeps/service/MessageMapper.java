@@ -33,37 +33,33 @@ public class MessageMapper {
 		return sqlSession.insert("writeMessage", dto);
 	}
 	
-//	public List<MessageDTO> messageList(int start, int end){
-//		HashMap<String ,Integer> map = new HashMap();
-//	      map.put("start", start);
-//	      map.put("end", end);
-//		return sqlSession.selectList("messageList",map);
-//	}
-	public List<MessageDTO> messageList(int start,int end){
+	public List<MessageDTO> messageList(int start,int end,String lMode){
+		String sql = null;
+		if(lMode.equals("allList")) {
+			
+		    sql = "select * from (select rownum rn, A.* from (select * from yeps_message order by msgNum desc)A) where rn between " + start + " and " +end;
+		}else if(lMode.equals("lockerList")) {
+			
+			sql = "select * from (select rownum rn, A.* from (select * from yeps_message order by msgNum desc)A) where islocker=1 and rn between " + start +" and " + end ;
+		}else if(lMode.equals("msgBoxList")) {
+			
+			sql = "select * from (select rownum rn, A.* from (select * from yeps_message order by msgNum desc)A) where islocker!=1 and rn between " + start +" and " + end;
+		}else if(lMode.equals("receiver")) {
+			
+			sql =  "select * from (select rownum rn, A.* from (select * from yeps_message order by msgNum desc)A) where receiver=" + lMode + " and rn between " + start +" and " + end;
+		}else if(lMode.equals("sender")) {
+			
+			sql =  "select * from (select rownum rn, A.* from (select * from yeps_message order by msgNum desc)A) where sender=" + lMode + " and rn between " + start +" and " + end;
+		}else if(lMode.equals("noneMsg")) {
+			
+			sql =  "select * from (select rownum rn, A.* from (select * from yeps_message order by msgNum desc)A) where readNum=0 and islocker=0 and rn between " + start +" and " + end;
+		}else if(lMode.equals("noneLocker")) {
+			
+			sql =  "select * from (select rownum rn, A.* from (select * from yeps_message order by msgNum desc)A) where readNum=0 and islocker=1 and rn between " + start +" and " + end;
+		}
 	    Map<String, Object> map = new HashMap<String, Object>();
-	    map.put("start", start);
-	    map.put("end", end);
+	    map.put("sql", sql);
 		return sqlSession.selectList("messageList",map);
-	}
-
-	
-	public List<MessageDTO> lockerList() {
-		return sqlSession.selectList("lockerList");
-	}
-	
-	public List<MessageDTO> sendList(String sender){
-		return sqlSession.selectList("sendList",sender);
-	}
-	
-	public List<MessageDTO> receiveList(String receiver){
-		return sqlSession.selectList("receiveList", receiver);
-	}
-	
-	public List<MessageDTO> msgBoxList(int start, int end) {
-		Map<String, Object> map = new HashMap<String, Object>();
-	    map.put("start", start);
-	    map.put("end", end);
-		return sqlSession.selectList("msgBoxList", map);
 	}
 
 	public String getReceiver(int msgnum){
@@ -102,8 +98,12 @@ public class MessageMapper {
 	    return sqlSession.selectList("noReadLocker");	
 	}
 	
-	public List<MessageDTO> importantLocker(){
-		return sqlSession.selectList("importantLocker");
+	public MemberDTO getMember(String name) {
+		try {
+		    return sqlSession.selectOne("getMember",name);
+		}catch(Exception e) {
+			return null;
+		}
 	}
 	
 	public int getMessageCount() {
@@ -122,14 +122,6 @@ public class MessageMapper {
 		}
 	}
 	
-	public int getTrashCount() {
-		try {
-			return sqlSession.selectOne("getTrashCount");
-		}catch(Exception e) {
-			return 0;
-		}
-	}
-	
 	public int getSendCount(String sender) {
 		try {
 			return sqlSession.selectOne("getSendCount");
@@ -142,16 +134,8 @@ public class MessageMapper {
 		return sqlSession.update("moveToLocker", msgNum);
 	}
 	
-	public int moveToMsgBox(int msgnum) {
-		return sqlSession.update("moveToMsgBox",msgnum);
-	}
-	
-	public MemberDTO getMember(String name) {
-		try {
-		    return sqlSession.selectOne("getMember",name);
-		}catch(Exception e) {
-			return null;
-		}
+	public int lockerToMsgBox(int msgnum) {
+		return sqlSession.update("lockerToMsgBox",msgnum);
 	}
 	
 }

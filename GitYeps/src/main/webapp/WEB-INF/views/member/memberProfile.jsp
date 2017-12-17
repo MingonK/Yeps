@@ -15,18 +15,110 @@
 <script type="text/javascript">
 	var mode = "${param.mode}";
 	$(function() { 
-		if(mode == 'signup'){
-			$("#login").hide();
-			$('#join').show();
+		if(mode == 'passwd'){
+			$(".profile-column-beta_passwd").show();
+			$(".profile-column-beta_profile").hide();
+			$(".profile-column-beta_memberleave").hide();
+			$('.profile-nav_items > li > a').removeClass('is-active');
+	        $('#passwd-link').addClass('is-active');
+		}else if(mode == 'memberleave'){
+			$(".profile-column-beta_memberleave").show();
+			$(".profile-column-beta_passwd").hide();
+			$(".profile-column-beta_profile").hide();
+			$('.profile-nav_items > li > a').removeClass('is-active');
+	        $('#memberleave-link').addClass('is-active');
 		}else{
-			$("#login").show();
-			$('#join').hide();
+			$(".profile-column-beta_profile").show();
+        	$(".profile-column-beta_passwd").hide();
+        	$(".profile-column-beta_memberleave").hide();
+        	$('.profile-nav_items > li > a').removeClass('is-active');
+            $('#profile-link').addClass('is-active');
 		}
 	});
+
+	function checkPw(){
+		if(document.memberPasswd.passwd1.value == '' || document.memberPasswd.passwd2.value == ''){
+			document.memberPasswd.passCheck.value=""
+		}else{
+			if(document.memberPasswd.passwd1.value == document.memberPasswd.passwd2.value){
+				document.memberPasswd.passCheck.value="패스워드가 일치합니다";
+				document.memberPasswd.passCheck.style.color = "blue";
+			}else{
+				document.memberPasswd.passCheck.value="패스워드가 일치하지않습니다";
+				document.memberPasswd.passCheck.style.color = "red";
+			}
+		}
+	}
+	
+	function check(){
+		if(document.memberPasswd.passwd.value==""){
+			alert("패스워드를 입력해주세요")
+			document.memberPasswd.passwd.focus()
+			return
+		}
+		if(document.memberPasswd.passwd1.value==""){
+			alert("패스워드를 입력해주세요")
+			document.memberPasswd.passwd1.focus()
+			return
+		}
+		if(document.memberPasswd.passwd2.value==""){
+			alert("패스워드를 입력해주세요")
+			document.memberPasswd.passwd2.focus()
+			return
+		}
+		if(document.memberPasswd.passwd1.value != document.memberPasswd.passwd2.value){
+			alert("입력하신 패스워드와 패스워드 확인이 일치하지 않습니다")
+			return
+		}
+		if(document.memberPasswd.passwd1.value.length<6) {
+			alert("비밀번호는 영문,숫자,특수문자(!@$%^&* 만 허용)를 사용하여 6~16자까지 입력해주세요")
+			return
+		}
+		if(!document.memberPasswd.passwd1.value.match(/([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9])/)) {
+			alert("비밀번호는 영문,숫자,특수문자(!@$%^&* 만 허용)를 사용하여 6~16자까지 입력해주세요")
+			return
+		}
+		document.memberPasswd.submit()
+	}
+	
+	function memberleave() {
+		if(document.memberLeave.passwd.value==""){
+			alert("패스워드를 입력해주세요")
+			document.memberLeave.passwd.focus()
+			return
+		}
+		
+		if(confirm("정말 YEPS를 탈퇴하시겠습니까?")){
+			document.memberLeave.submit();
+		}else{
+			return
+		}
+		return
+	}
+	
+	
 	$(document).ready(function(){
         $('.profile-nav_items > li > a').click(function( e ){
            $('.profile-nav_items > li > a').removeClass('is-active');
            $(this).addClass('is-active');
+        })
+        
+        $('#profile-link').click(function(e){
+        	$(".profile-column-beta_profile").show();
+        	$(".profile-column-beta_passwd").hide();
+        	$(".profile-column-beta_memberleave").hide();
+        })
+        
+        $('#passwd-link').click(function(e){
+        	$(".profile-column-beta_passwd").show();
+        	$(".profile-column-beta_profile").hide();
+        	$(".profile-column-beta_memberleave").hide();
+        })
+        
+        $('#memberleave-link').click(function(e){
+        	$(".profile-column-beta_memberleave").show();
+        	$(".profile-column-beta_passwd").hide();
+        	$(".profile-column-beta_profile").hide();
         })
      });
 </script>
@@ -56,19 +148,28 @@
 						
 						<ul class="profile-nav_items">
 							<li class="profile-nav_item">
-								<a class="profile-nav_link is-active" href="#">
+								<a id="profile-link" class="profile-nav_link">
 									<div class="profile-nav_link-content profile-arrange">
 										<div class="profile-arrange_unit profile-arrange_unit--fill">
-											<span class="profile-nav_link-label">Profile</span>
+											<span class="profile-nav_link-label">프로필 수정</span>
 										</div>
 									</div>
 								</a>
 							</li>
 							<li class="profile-nav_item">
-								<a class="profile-nav_link" href="#">
+								<a id="passwd-link" class="profile-nav_link">
 									<div class="profile-nav_link-content profile-arrange">
 										<div class="profile-arrange_unit profile-arrange_unit--fill">
-											<span class="profile-nav_link-label">Password</span>
+											<span class="profile-nav_link-label">비밀번호 변경</span>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li class="profile-nav_item">
+								<a id="memberleave-link" class="profile-nav_link">
+									<div class="profile-nav_link-content profile-arrange">
+										<div class="profile-arrange_unit profile-arrange_unit--fill">
+											<span class="profile-nav_link-label">회원 탈퇴</span>
 										</div>
 									</div>
 								</a>
@@ -78,7 +179,7 @@
 					<div class="titled-nav-header" role="presentation"></div>
 				</div>
 				
-				<div class="profile-column-beta">
+				<div class="profile-column-beta_profile">
 					<div class="profile-section-header">
         				<h2>Profile</h2>
     				</div>
@@ -104,6 +205,41 @@
 						<a href="member_index">Cancel</a>
 					</form>
 				</div>
+				
+				<div class="profile-column-beta_passwd">
+					<div class="profile-section-header">
+        				<h2>Password</h2>
+    				</div>
+    				
+    				<form action="member_password" class="profilef" method="post" name="memberPasswd">
+						<label for="passwd">현재 비밀번호</label>
+						<span class="help-block">This field is required.</span>
+						<input id="passwd" maxlength="20" name="passwd" required="required" placeholder="현재 비밀번호" size="30" type="password" value="">
+						<label for="passwd-Change">변경할 비밀번호</label>
+						<span class="help-block">This field is required.</span>
+						<input id="passwd1" name="passwd1" placeholder="변경할 비밀번호" required="required" type="password" maxlength="20" onkeyup="checkPw()"> 
+						<input id="passwd2" name="passwd2" placeholder="변경할 비밀번호 확인" required="required" type="password" maxlength="20" onkeyup="checkPw()">
+						<input id="passwdcheck" type="text" name="passCheck" readOnly> 
+						<button type="button" onclick="check()" class="ybtn ybtn-primary"><span>Save Changes</span></button>
+						<a href="member_index">Cancel</a>
+					</form>
+				</div>
+				
+				<div class="profile-column-beta_memberleave">
+					<div class="profile-section-header">
+        				<h2>Member Leave</h2>
+    				</div>
+    				
+    				<form action="member_leave" class="profilef" method="post" name="memberLeave">
+						<label for="passwd">비밀번호를 입력해주세요.</label>
+						<span class="help-block">This field is required.</span>
+						<input id="passwd" maxlength="20" name="passwd" required="required" placeholder="비밀번호" size="30" type="password" value="">
+						<button type="button" onclick="memberleave()" class="ybtn ybtn-primary"><span>Member leave</span></button>
+						<a href="member_index">Cancel</a>
+					</form>
+				</div>
+				
+				
 			</div>
 		</div>
 	</div>

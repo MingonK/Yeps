@@ -35,9 +35,6 @@ import com.yeps.service.BoardPager;
 import com.yeps.service.FileMapper;
 import com.yeps.service.RestaurantMapper;
 
-/**
- * Handles requests for the application home page.
- */
 @Controller
 public class RestaurantController {
 	@Resource(name = "uploadPath")
@@ -48,10 +45,6 @@ public class RestaurantController {
 	private RestaurantMapper restaurantMapper;
 	@Autowired
 	private FileMapper fileMapper;
-
-
-//	private static final Logger logger = LoggerFactory.getLogger(RestaurantController.class);
-	
 	
 	@RequestMapping(value="/test")
 	public String test(){
@@ -60,7 +53,7 @@ public class RestaurantController {
 
 	@RequestMapping(value="/jusoPopup")
 	public String jusoRest() throws Exception{
-		return "restaurant/jusoPopup";
+		return "jusoPopup";
 	}
 	@RequestMapping(value="/result",method=RequestMethod.POST)
 	public String view() throws Exception{
@@ -72,21 +65,20 @@ public class RestaurantController {
 		return "restaurant/restaurant_insert";
 	}
 	@RequestMapping(value="/restaurant_insert", method=RequestMethod.POST)
-	public ModelAndView insertRest(HttpServletRequest req,@ModelAttribute RestaurantDTO dto,BindingResult result,MultipartHttpServletRequest mhsq) throws Exception {
-		String msg=null,url=null;
-		String upPath = "D:/spring/upload/";
+	public ModelAndView insertRest(HttpServletRequest req, @ModelAttribute RestaurantDTO dto, BindingResult result, MultipartHttpServletRequest mhsq) throws Exception {
+		String msg = null, url = null;
 	
 		Map<String, MultipartFile> fileMap = mhsq.getFileMap();
 		for (MultipartFile multipartFile : fileMap.values()) {
 			String genId = UUID.randomUUID().toString();
-			String originalfileName=multipartFile.getOriginalFilename();
+			String originalfileName = multipartFile.getOriginalFilename();
 			String saveFileName = genId + "." + getExtension(originalfileName);
-			String savePath = upPath + saveFileName; // 저장 될 파일 경로
+			String savePath = uploadPath + saveFileName; // 저장 될 파일 경로
 			multipartFile.transferTo(new File(savePath));
 			dto.setFilename(saveFileName);
 		}
 		
-		int res=restaurantMapper.insertRest(dto);
+		int res = restaurantMapper.insertRest(dto);
 		if(res>0) {
 			msg="레스토랑 등록 성공";
 			url="restaurant_list";

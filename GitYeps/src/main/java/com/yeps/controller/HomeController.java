@@ -27,6 +27,11 @@ public class HomeController {
 	private RestaurantMapper restaurantMapper;
 	
 	
+	@RequestMapping(value= "/main")
+	public String main() {
+		return "MainPage";
+	}
+	
 	@RequestMapping(value = "/")
 	public ModelAndView index() {
 	
