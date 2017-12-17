@@ -70,6 +70,14 @@ public class MessageController {
 		mav = pagingMessageList(req, lMode);
 		return mav;
 	}
+	
+	@RequestMapping(value = "message_locker")
+	public ModelAndView message_locker(HttpServletRequest req)throws Exception{
+		ModelAndView mav = new ModelAndView();
+		String lMode = "lockerList";
+		mav = pagingMessageList(req,lMode);
+		return mav;
+	}
 
 	@RequestMapping(value = "message_delete")
 	public ModelAndView message_delete(HttpServletRequest req, String[] check) {
@@ -139,10 +147,16 @@ public class MessageController {
 	public ModelAndView message_reply(HttpServletRequest req, String[] check) {
 		ModelAndView mav = new ModelAndView();
 		String receiver = req.getParameter("receiver");
-		String msg = null, url = null;
+		System.out.println("here?");
+		String msg = null, url = null, box = null;
+		box = req.getParameter("box");
         if(check == null) {
 			msg = "선택된 메시지가 없습니다. 다시 확인하세요.";
-			url = "yeps_message";
+			if(box.equals("msgBox")) {
+				url = "yeps_message";
+			}else if(box.equals("locker")) {
+				url = "message_locker";
+			}
 			mav.addObject("url", url);
 			mav.addObject("msg", msg);
 			mav.setViewName("message");
@@ -172,7 +186,7 @@ public class MessageController {
         String sender = null, lMode = null;
         String msg = null;
 		if(mode.equals("allMsg")) {
-            lMode = "allList";
+         
 			mav.setViewName("redirect:yeps_message");
 			
 		}else if(mode.equals("noneMsg")) {
@@ -180,9 +194,8 @@ public class MessageController {
 			mav = pagingMessageList(req, lMode);
 
 		}else if(mode.equals("lockerList")) {
-			lMode = "lockerList";
-			mav = pagingMessageList(req, lMode);
-            mav.setViewName("message/messageLocker");
+			
+            mav.setViewName("redirect:message_locker");
 			
 		}else if(mode.equals("noneLocker")) {
 			lMode = "noneLocker";
@@ -190,19 +203,17 @@ public class MessageController {
 			mav.setViewName("message/messageLocker");
 			
 		}else if(mode.equals("receive")) {
-			lMode = "receiver";
+			lMode = "receiver";//로그인시 로그인 회원을 receiver로.
 			mav = pagingMessageList(req,lMode);
 			
 		}else if(mode.equals("send")){
-			//mnum으로 sender 구하기
-			lMode = "sender";
+			lMode = "sender";//로그인시 로그인 회원을 sender로.
 			mav = pagingMessageList(req,lMode);
 		    mav.addObject("mode","send");
 			
 		}else if(mode.equals("toLocker")) {
-			lMode = "lockerList";
-			mav = pagingMessageList(req,lMode);
-			mav.setViewName("message/messageLocker");
+	
+			mav.setViewName("redirect:message_locker");
 		
 		}else if(mode.equals("msgBoxList")) {
 		    lMode = "msgBoxList";
@@ -321,18 +332,6 @@ public class MessageController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "yeps_test")
-	public ModelAndView test(HttpServletRequest req) {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("test");
-		return mav;
-	}
-	@RequestMapping(value = "message_getMessage")
-	public ModelAndView getMessage(HttpServletRequest req) {
-		ModelAndView mav = new ModelAndView();
-		return mav;
-	}
-
 }
 
 
