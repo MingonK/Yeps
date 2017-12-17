@@ -27,7 +27,6 @@ public class MessageController {
 	private MessageMapper yepsMessageMapper;
 
 	public ModelAndView pagingMessageList(HttpServletRequest req, @RequestParam String lMode) {
-
 		int count = yepsMessageMapper.getMessageCount();
 		int lCount = yepsMessageMapper.getLockerCount();
 		int mCount = count - lCount;
@@ -35,7 +34,7 @@ public class MessageController {
 		YepsPager yPager = new YepsPager(count, curPage);
 		int start = yPager.getPageBegin();
 		int end = yPager.getPageEnd();
-		int pageSize = yPager.PAGE_SCALE;
+		int pageSize = YepsPager.PAGE_SCALE;
 		int num = count - pageSize * (curPage - 1) + 1;
 		List<MessageDTO> list = yepsMessageMapper.messageList(start, end, lMode);
 		Map<String, Object> map = new HashMap<String, Object>();

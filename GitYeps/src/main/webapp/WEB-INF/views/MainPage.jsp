@@ -131,7 +131,7 @@
 									</a>
 								</li>
 								<li class="mainpage_header_message mainpage_header_top_items">
-									<a href="event_list" class="mainpage_header_link">
+									<a href="yeps_message" class="mainpage_header_link">
 										Message
 									</a>
 								</li>
@@ -139,6 +139,9 @@
 						</div>
 					</div>
 					
+					
+					
+					<!-- 여기 수정 부탁 해 민우!! -->
 					<div class="mainpage_header_top_right_wrap">
 						<ul class="mainpage_header_top_right" style="float: right">
 							<li class="mainpage_header_login mainpage_header_top_items">
@@ -153,6 +156,8 @@
 							</li>
 						</ul>
 					</div>
+					<!-- 여기 수정 부탁 해 민우!! -->
+					
 				</div>
 			</div>
 			
