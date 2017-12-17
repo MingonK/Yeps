@@ -30,8 +30,6 @@ public class MemberController {
 	@Autowired
 	private RandomNum randomNum;
 
-	@Autowired
-	private SendEmail sendEmail;
 
 	@RequestMapping(value="/member_index")
 	public ModelAndView indexMember() {
