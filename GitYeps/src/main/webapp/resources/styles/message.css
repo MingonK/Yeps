@@ -1,0 +1,196 @@
+#messageContainer {
+	height: 80%
+}
+
+#menu input {
+	width: 100;
+	height: 40;
+	color: #ffffff;
+	background: #d32323;
+	border-radius: 9px;
+	font-weight: bold;
+	font-family: consolas;
+}
+
+#menu {
+	background-color: #ffffff;
+	height: 60%;
+	width: 25%;
+	float: left;
+	font-weight: bold;
+	font-family: consolas;
+	font-size: 17px;
+}
+
+#messageList {
+	height: 90%;
+	width: 70%;
+	float: left;
+	margin: 1;
+	padding: 2;
+}
+
+#table tr[id="list"].selected {
+	background-color: yellow;
+	color: #fff;
+	font-weight: bold;
+}
+
+button #close {
+	background: #00ff0000; 
+	border: 0; 
+	color:000000;
+}
+
+button #reply {
+	width: 120px;
+	height: 40px;
+	border-radius: 7px;
+	color: #ffffff;
+	background: #d32323;
+	font-weight: bold;
+	font-family: consolas;
+	font-size: 17px;
+}
+
+#write, #writeToMe  {
+	width: 120px;
+	height: 40px;
+	border-radius: 7px;
+	color: #ffffff;
+	background: #d32323;
+	font-weight: bold;
+	font-family: consolas;
+	font-size: 17px;
+}
+
+#receiver,#title {
+	width: 100%;
+	height: 40;
+	border-radius: 7px;
+	font-family: consolas;
+	font-weight: bold;
+	font-size: 22px;	
+}
+
+#table #del,#reply,#search,#locker {
+	color: #ffffff; 
+	background: #d32323; 
+	border-radius: 5px; 
+	font-weight: bold; 
+	font-family: consolas;
+}
+
+button #sender{
+       background: #00ff0000; 
+       border: 0; 
+       font-weight: bold; 
+       font-family: consolas; 
+       color:#0073bb; 
+       font-size:17px;"
+       }
+
+    .popup {
+         width:100%;
+          height:100%;
+          display:none;
+          position:fixed;
+          top:0px;
+          left:0px;
+          background:rgba(0,0,0,0.75);
+      }
+    
+    .writeMessage {
+         width:100%;
+          height:100%;
+          display:none;
+          position:fixed;
+          top:0px;
+          left:0px;
+          background:rgba(0,0,0,0.75);
+      }
+    
+   /* Inner */
+      .popup-inner {
+          max-width:700px;
+          width:90%;
+          padding:40px;
+          position:absolute;
+          top:50%;
+          left:50%;
+          -webkit-transform:translate(-50%, -50%);
+          transform:translate(-50%, -50%);
+          box-shadow:0px 2px 6px rgba(0,0,0,1);
+          border-radius:3px;
+          background:#fff;
+      }
+      
+      .writeMessage-inner {
+          max-width:700px;
+          width:90%;
+          padding:40px;
+          position:absolute;
+          top:50%;
+          left:50%;
+          -webkit-transform:translate(-50%, -50%);
+          transform:translate(-50%, -50%);
+          box-shadow:0px 2px 6px rgba(0,0,0,1);
+          border-radius:3px;
+          background:#fff;
+      }
+    
+   /* Close Button */
+      .popup-close {
+          width:30px;
+          height:30px;
+          padding-top:4px;
+          display:inline-block;
+          position:absolute;
+          top:0px;
+          right:0px;
+          transition:ease 0.25s all;
+          -webkit-transform:translate(50%, -50%);
+          transform:translate(50%, -50%);
+          border-radius:1000px;
+          background:rgba(0,0,0,0.8);
+          font-family:Arial, Sans-Serif;
+          font-size:20px;
+          text-align:center;
+          line-height:100%;
+          color:#fff;
+      }
+      .writeMessage-close {
+          width:30px;
+          height:30px;
+          padding-top:4px;
+          display:inline-block;
+          position:absolute;
+          top:0px;
+          right:0px;
+          transition:ease 0.25s all;
+          -webkit-transform:translate(50%, -50%);
+          transform:translate(50%, -50%);
+          border-radius:1000px;
+          background:rgba(0,0,0,0.8);
+          font-family:Arial, Sans-Serif;
+          font-size:20px;
+          text-align:center;
+          line-height:100%;
+          color:#fff;
+      }
+    
+      .popup-close:hover {
+          -webkit-transform:translate(50%, -50%) rotate(180deg);
+          transform:translate(50%, -50%) rotate(180deg);
+          background:rgba(0,0,0,1);
+          text-decoration:none;
+      }
+      
+       .writeMessage-close:hover {
+          -webkit-transform:translate(50%, -50%) rotate(180deg);
+          transform:translate(50%, -50%) rotate(180deg);
+          background:rgba(0,0,0,1);
+          text-decoration:none;
+      }
+      
+     
