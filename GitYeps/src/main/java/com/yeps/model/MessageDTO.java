@@ -12,15 +12,8 @@ public class MessageDTO {
 	private String readDate;//읽은 시각 표시
 	private int readNum;//읽음, 안읽음 표시 위한 옵션
 	private int isLocker;//보관함쪽지 확인 옵션
-	private int isTrash;
 	
 	
-	public int getIsTrash() {
-		return isTrash;
-	}
-	public void setIsTrash(int isTrash) {
-		this.isTrash = isTrash;
-	}
 	public int getIsLocker() {
 		return isLocker;
 	}
