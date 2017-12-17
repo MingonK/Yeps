@@ -1,4 +1,4 @@
-package com.yeps.controller;
+/*package com.yeps.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -250,3 +250,4 @@ public class ReviewController {
 			return "/qna/restaurant_qna";
 		}
 }
+*/

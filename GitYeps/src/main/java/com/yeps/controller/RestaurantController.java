@@ -46,11 +46,8 @@ public class RestaurantController {
 	
 	@Autowired
 	private RestaurantMapper restaurantMapper;
-<<<<<<< HEAD
-=======
 	@Autowired
 	private FileMapper fileMapper;
->>>>>>> branch 'master' of http://github.com/MingonK/Yeps.git
 
 
 //	private static final Logger logger = LoggerFactory.getLogger(RestaurantController.class);

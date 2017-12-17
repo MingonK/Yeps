@@ -53,19 +53,19 @@ public class HomeController {
 			}
 		}
 		
-		List<RestaurantDTO> get_rname = new ArrayList<RestaurantDTO>();
+		/*List<RestaurantDTO> get_rname = new ArrayList<RestaurantDTO>();
 		for(int i=0; i < map.size(); i++) {
 			for(int j = 0; j < map.get(i).size(); j++) {
 				get_rname.add(restaurantMapper.restaurantRName(map.get(i).get(j).getRnum()));
 			}
-		}
+		}*/
 		
 	
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("NBPmnum", NBPmnum);
 		mav.addObject("recentReviewInfo", recentReviewInfo);
 		mav.addObject("get_mnameList", get_mname);
-		mav.addObject("get_rnameList", get_rname);
+		/*mav.addObject("get_rnameList", get_rname);*/
 		
 		mav.setViewName("index");
 		return mav;
