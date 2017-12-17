@@ -17,25 +17,19 @@
 </head>
 <body>
 <%-- <%@ include file="../top.jsp"%> --%>
-   <div id="messageContainer" align="center">
+   <div id="messageContainer"  >
 		<caption>
-			<h1>yeps Message</h1>
+			<h2 align="left" style="position: relative; left:150px;"> Messages</h2>
 		</caption>
-		<hr color="green" width="70%">
+		<hr color="#EEEEEE" width="80%" size="1">
 		<br>
-		<div id="menu" >
-			<h2>Menu</h2>
-		<br><br>
-        <div class="btn group" align="center">
-		<input type="button" value="쪽지쓰기" style="cursor:pointer;" id="write" data-popup-open="writeMessage" onclick="messageForm(' ');">
-		<input type="button" value="내게쓰기" style="cursor:pointer;" id="writeToMe" data-popup-open="writeMessage" onclick="messageForm('Me');">
-        </div><br><br>
-			<div align="center" id="tag">
-				<a href="message_action?filter=receive"><label style="cursor:pointer;">받은 쪽지 </label></a><a href="#"><label>:: ${count}</label></a><br> <br> 
-				<a href="message_action?filter=send"><label style="cursor:pointer;">보낸 쪽지 </label></a><a href="#"><label>:: ${sCount}</label></a><br> <br> 
-				<a href="message_action?filter=toLocker"><label style="cursor:pointer;">쪽지보관함 </label></a><a href="#"><label>:: ${lCount}</label></a><br> <br> 
-			</div>
-		</div><br>
+		<div id="menu" align="center" style="position:absolute;  ">
+			<a href="message_action?filter=receive"><label style="cursor:pointer;">InBox </label></a><a href="#"><label> :: ${count}  /  </label></a>
+			<a href="message_action?filter=send"><label style="cursor:pointer;"> Sent </label></a><a href="#"><label> :: ${sCount}  /  </label></a>
+			<a href="message_action?filter=toLocker"><label style="cursor:pointer;"> locker  </label></a><a href="#"><label>:: ${lCount}</label></a> 
+      <input type="button" value="Write New Message" align="right" style="cursor:pointer;" id="write" data-popup-open="writeMessage" onclick="messageForm(' ');"><br>
+		<hr color="#EEEEEE" width="100%" size="1">
+       </div><br>
 		<!-- Message sendform -->
 		<div class="popup" align="left" id="writeMessage" data-popup="writeMessage">
 		<form name="sendform" method="post">
@@ -66,7 +60,7 @@
 					        <a class="popup-close" data-popup-close="popup-1" href="#" onclick="readCheck();">x</a>
 				       </div>
 			    </div> 
-			<div id="messageList"  align="left" >
+			<div id="messageList"  style="position:absolute; " >
                 <form name="msgform" method="post" >
 				<table border="0" id="table">
 				    <tr valign="middle">
@@ -82,8 +76,9 @@
 								<option value="noneMsg">안읽은 쪽지</option>
 								<option value="toLocker">보관함</option>
 						</select> 
-					    <input type="button" id="search" style="cursor:pointer;" value="검색" onclick="searching();"> 
-				  <tr><td><br></tr>
+					    <input type="button" id="search" style="cursor:pointer;" value="검색" onclick="searching();"><br> 
+					    <hr color="#EEEEEE" width="100%" size="1">
+				  <tr><td></tr>
                     <tr align="center">
 						<td width="60px"><label>읽음</label></td>
 						<td width="60px"><label>번호</label></td>
@@ -98,6 +93,8 @@
 							</c:when>
 						</c:choose>
 					  </tr>
+					  <tr><td colspan="6"> <hr color="#EEEEEE" width="100%" size="1"></td></tr>
+					  
 			   <c:if test="${empty map.list}">
 				   <tr>
 						<c:choose>
@@ -128,9 +125,10 @@
 						style="background: #00ff0000; border: 0; font-weight: bold; font-family: consolas; color:#0073bb; font-size:20px; cursor:pointer;" >${dto.sender}</button>
 						<td><a class="btn" style="font-weight: bold; font-family: consolas; font-size:20px; cursor:pointer;" data-popup-open="popup-1" 
 						onclick="getMessage('${dto.sender}','${dto.title}','${dto.content }','${dto.msgNum}');">${dto.title}</a></td>
-					    <td><label>${dto.reg_date}</label></td>			
-					</tr>
+					    <td><label>${dto.reg_date}</label></td>
+					 </tr>
 				</c:forEach>
+				<tr><td colspan="6"> <hr color="#EEEEEE" width="100%" size="1"></td></tr>
 		        <tr>
 			    <td colspan="7" align="center">
                 <!-- **이전페이지 블록으로 이동 : 현재 페이지 블럭이 1보다 크면 [이전]하이퍼링크를 화면에 출력 -->
@@ -143,16 +141,16 @@
                     <!-- **현재페이지이면 하이퍼링크 제거 -->
                     <c:choose>
                         <c:when test="${num == map.yepsPager.curPage}">
-                         <span style="color: red"> [${num}] </span>&nbsp;
+                         <span style="color: red">  [${num}]  </span>&nbsp;&nbsp;
                         </c:when>
                         <c:otherwise>
-                            <a href="javascript:list('${num}')"> [${num}] </a>&nbsp;
+                            <a href="javascript:list('${num}')">  [${num}]  </a>&nbsp;&nbsp;
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
                 <!-- **다음페이지 블록으로 이동 : 현재 페이지 블럭이 전체 페이지 블럭보다 작거나 같으면 [다음]하이퍼링크를 화면에 출력 -->
                 <c:if test="${map.yepsPager.curBlock <= map.yepsPager.totBlock}">
-                   <a href="javascript:list('${map.yepsPager.nextPage}')">[next]</a>
+                   <a href="javascript:list('${map.yepsPager.nextPage}')"> [next] </a>
                 </c:if>
                </td></tr>
                </table></form>
@@ -175,10 +173,6 @@
     	$('#sendformTo').val(' ' + sender);
     }
     
-   /*  function closeSendform(){
-    	$('#sendfromTo').val(' ');
-    } */
-    
     function getMessage(sender,subject,message,msgnum){
     	 var msgnum = msgnum;
     	 var sender = sender;
@@ -188,7 +182,6 @@
     	 $('#from').append(sender);
          $('#subject').append(subject);
          $('#message').append(message);
-
     }   
 
     function sendMessage(){

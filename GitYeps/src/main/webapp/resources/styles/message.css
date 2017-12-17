@@ -1,33 +1,51 @@
 #messageContainer {
-	height: 80%
+	height: 70%;
+	position: relative; 
+	left: 200px; 
+	top: 40px; 
+	width:70%;
 }
 
 #menu input {
-	width: 100;
-	height: 40;
+	width: 175;
+	height: 35;
 	color: #ffffff;
 	background: #d32323;
+	float: right;
 	border-radius: 9px;
 	font-weight: bold;
 	font-family: consolas;
+	font-size: 16px;
+}
+
+#menu a {
+	float: left;
+	font-family: consolas;
+	font-size: 16px;
 }
 
 #menu {
 	background-color: #ffffff;
-	height: 60%;
-	width: 25%;
-	float: left;
+	height: 20%;
+	width: 70%;
+	position: absolute;
+	top: 80px;
+	left:200px;
 	font-weight: bold;
 	font-family: consolas;
 	font-size: 17px;
+	margin: 0 ;
 }
 
 #messageList {
-	height: 90%;
-	width: 70%;
-	float: left;
-	margin: 1;
-	padding: 2;
+	height: 60%;
+	width: 100%;
+	position: relative;
+	top: 130px;
+	left: 160px;
+	/* float: left;  */
+	margin: 0;
+	padding: 0;
 }
 
 #table tr[id="list"].selected {
@@ -53,8 +71,17 @@ button #reply {
 	font-size: 17px;
 }
 
-#write, #writeToMe  {
-	width: 120px;
+button #sender{
+       background: #00ff0000; 
+       border: 0; 
+       font-weight: bold; 
+       font-family: consolas; 
+       color:#0073bb; 
+       font-size:17px;"
+       }
+
+/* #write, #writeToMe  {
+	width: 300px;
 	height: 40px;
 	border-radius: 7px;
 	color: #ffffff;
@@ -62,7 +89,7 @@ button #reply {
 	font-weight: bold;
 	font-family: consolas;
 	font-size: 17px;
-}
+} */
 
 #receiver,#title {
 	width: 100%;
@@ -81,15 +108,6 @@ button #reply {
 	font-family: consolas;
 }
 
-button #sender{
-       background: #00ff0000; 
-       border: 0; 
-       font-weight: bold; 
-       font-family: consolas; 
-       color:#0073bb; 
-       font-size:17px;"
-       }
-
     .popup {
          width:100%;
           height:100%;
@@ -100,7 +118,7 @@ button #sender{
           background:rgba(0,0,0,0.75);
       }
     
-    .writeMessage {
+   /*  .writeMessage {
          width:100%;
           height:100%;
           display:none;
@@ -108,7 +126,7 @@ button #sender{
           top:0px;
           left:0px;
           background:rgba(0,0,0,0.75);
-      }
+      } */
     
    /* Inner */
       .popup-inner {
@@ -125,7 +143,7 @@ button #sender{
           background:#fff;
       }
       
-      .writeMessage-inner {
+    /*   .writeMessage-inner {
           max-width:700px;
           width:90%;
           padding:40px;
@@ -137,7 +155,7 @@ button #sender{
           box-shadow:0px 2px 6px rgba(0,0,0,1);
           border-radius:3px;
           background:#fff;
-      }
+      } */
     
    /* Close Button */
       .popup-close {
@@ -159,7 +177,7 @@ button #sender{
           line-height:100%;
           color:#fff;
       }
-      .writeMessage-close {
+      /* .writeMessage-close {
           width:30px;
           height:30px;
           padding-top:4px;
@@ -177,7 +195,7 @@ button #sender{
           text-align:center;
           line-height:100%;
           color:#fff;
-      }
+      } */
     
       .popup-close:hover {
           -webkit-transform:translate(50%, -50%) rotate(180deg);
@@ -186,11 +204,11 @@ button #sender{
           text-decoration:none;
       }
       
-       .writeMessage-close:hover {
+      /*  .writeMessage-close:hover {
           -webkit-transform:translate(50%, -50%) rotate(180deg);
           transform:translate(50%, -50%) rotate(180deg);
           background:rgba(0,0,0,1);
           text-decoration:none;
-      }
+      } */
       
      

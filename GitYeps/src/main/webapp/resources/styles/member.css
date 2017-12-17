@@ -667,11 +667,31 @@ small {
 
 .profile-nav_items a:hover {
     background: #f5f5f5;
+    cursor: pointer;
     -webkit-transition: background-color 200ms ease-out 50ms;
     transition: background-color 200ms ease-out 50ms;
 }
 
-.profile-column-beta {
+.profile-column-beta_profile {
+	display: none;
+	float: left;
+    padding: 0 15px;
+    min-height: 1px;
+    box-sizing: border-box;
+    width: 75%;
+}
+
+.profile-column-beta_passwd {
+	display : none;
+    float: left;
+    padding: 0 15px;
+    min-height: 1px;
+    box-sizing: border-box;
+    width: 75%;
+}
+
+.profile-column-beta_memberleave {
+	display : none;
     float: left;
     padding: 0 15px;
     min-height: 1px;
