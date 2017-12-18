@@ -53,9 +53,7 @@ var res = foodstyle.split(",");
 							<div class="price-category" style="width:202px;height:22px;">
 								<span class="business-attribute price-range">￦￦￦</span>
 								<span class="category-str-list" style="margin-right:6px;">
-								<c:forEach var="dto" items="res">
 									<a href="#">${getRest.foodstyle}</a>
-								</c:forEach>
 								</span>
 							</div>
 						</div>
@@ -94,7 +92,16 @@ var res = foodstyle.split(",");
 							<div class="mapbox-text" style="width:100%;height:180px;display:block;">
 								<ul style="width:280px;height:175px;margin:5px;list-style: none;">
 									<li class="u-relative" style="width:100%;height:88px;margin-bottom:3px;list-style: none;">
-										<div class="map-box-address" style="width:264px;height:90px;margin-left:24px;">
+<!-- 										<span class="icon" style="width: 18px;height: 18px;"> -->
+<!-- 										<svg class="icon_svg"> -->
+<!-- 											<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_marker"> -->
+<!-- 												<svg id="18x18_marker" height="100%" viewBox="0 0 18 18" width="100%"> -->
+<!-- 													<path d="M14 7A5 5 0 0 0 4 7c0 1.97 1.15 3.658 2.806 4.472h-.17L9 16l2.363-4.528h-.17C12.85 10.658 14 8.97 14 7zM9 5a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"></path> -->
+<!-- 												</svg> -->
+<!-- 											</use> -->
+<!-- 										</svg> -->
+<!-- 									</span> -->
+										<div class="map-box-address" style="width:264px;height:60px;margin-left:24px;">
 											<strong class="street-address">
 												<address>
        				 								${getRest.roadAddrPart1}<br>
@@ -104,6 +111,7 @@ var res = foodstyle.split(",");
 											</strong>
 										</div>
 									</li>
+									
 									<li class="get-direction" style="width:100%;height:19px;margin-bottom:3px;">
 									<span class="icon" style="width: 18px;height: 18px;">
 										<svg class="icon_svg">
@@ -128,40 +136,34 @@ var res = foodstyle.split(",");
 					</div>
 					<div class="restContent-showcase-container" style="width:66.6667%;;height:336px;display: table-cell;vertical-align: middle;">
 						<div class="restContent-showcase-container-inner" style="position: relative;width: 640px;height: 220px;">
-							<div class="top-shelf-grey">
+							<div class="top-shelf-grey"></div>
 							
-							</div>
-							<div class="restContent-photo-parent" style="width:100%;height:100%;">
-								<div class="restContent-showcase-photos" style=" position: relative;width:640px;height: 220px;transform-style: preserve-3d;">
-									<div class="restContent-photo1"
-										style="left: 0; z-index: 1000; display: block; position: absolute; margin: -15px; width: 250px; height: 250px; box-shadow: none;
-										 transition: all 0.2s ease-out; transition-property: transform, box-shadow; transform: scale(.88) translateZ(0);">
-											<div class="restContent-showcase-photo-box" style="height:100%;display: block;">
-											<a href="#" style="color: #0073bb; text-decoration: none;">
-											<img width="250px" height="250px"style="display: block; vertical-align: middle"src="getImage/Korean_Haejangguk.jpg"></a>
-										</div>
-									</div>
-								</div>
-								<div class="restContent-photo-box-overlay"
-									style="display: block;opacity: 0; position: absolute; right: 0; bottom: 0; left: 0; padding: 3px 6px; border-radius: 0 0 4px 4px; background: rgba(0, 0, 0, 0.5); color: white; font-size: 12px; line-height: 1.5em; font-weight: bold; overflow: hidden; transition: all 0.3s ease-in-out;">
-									<div class="restContent-photo-box-media-block" style="transition: all 0.2s ease-out;padding: 3px 6px 3px 1px;display: flex; position: relative;">
-										<div class="restContent-media-avatar"
-											style="position: relative; border-right: 6px solid transparent; border-left: none; display: block;">
-											<div class="restContent-photo-box" style="display: block;">
-												<a href="#" style="text-decoration: none;">
-													<img width="30px" height="30px"
-													style="outline: none; vertical-align: middle; border-radius: 4px; margin-top: 3px; display: block;"
-													src="getImage/businessman.png">
-												</a>
-											</div>
-										</div>
-										<div class="restContent-media-story" style="overflow: hidden;height: 36px;-webkit-box-flex: 1;">
-										
-										</div>
-									</div>
-								</div>
-							</div>
+						<div class="showcase-footer-links" style="position: absolute; right: 0; left: 0; top: 100%; padding: 6px 0;">
+							<a class="see-more u-pull-right" href="/biz_photos/kitchen-story-san-francisco" style="float: right !important;color: #0073bb;text-decoration: none;cursor: pointer;"> 
+								<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-grid icon--size-18 u-space-r-half">
+									<svg class="icon_svg">
+							        	<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_grid">
+							        		<svg id="18x18_grid" height="100%" viewBox="0 0 18 18" width="100%">
+							        			<path d="M10 15v-5h5v5h-5zm0-12h5v5h-5V3zm-7 7h5v5H3v-5zm0-7h5v5H3V3z"></path>
+						        			</svg>
+							        	</use>
+							    	</svg>
+								</span>See all 4215
+							</a>
 						</div>
+
+							<div class="showcase-photos current">
+								<div class="js-photo photo photo-1" data-media-id="VXaXWJEy7XSoyh1ij9zojA" data-media-index="17">
+									<div class="showcase-photo-box">
+										<a href="#">
+											<img class="photo-box-img" width="250" height="220" src="getImage/pepe.jpg" >
+										</a>
+									</div>
+								</div>
+							</div>
+							</div>
+
+					</div>
 					</div>
 				</div>
 			</div>
@@ -221,7 +223,7 @@ var res = foodstyle.split(",");
            										  <a href="#" style="ont-size: 14px;color: #666;white-space: nowrap;text-decoration: none;">in 143 reviews</a>
 											</p>
 											<p class="restContent-highlight-sub-info" style="color: #666;margin-bottom: 4px;">
-<!-- 												<a href="#" style="color: #0073bb; text-decoration: none;">$8 Blue Cheese Garlic Bread </a> -->
+												<a href="#" style="color: #0073bb; text-decoration: none;">$8 Blue Cheese Garlic Bread </a>
 											</p>
 										</div>
 									</li>
@@ -616,7 +618,7 @@ var res = foodstyle.split(",");
 											<dt class="restContent-attribute-key" style="margin-right: 0.25em;display: inline;">Today</dt>
 											<dd style="font-weight: bold;display: inline;"> 
 												<strong class="u-space-r-half" style="margin-right: 3px !important;font-weight: bold;">
-													<span class="nowrap">11:00 am</span> - <span class="nowrap">10:00 pm</span>
+													<span class="nowrap">11:00 am</span> - <span class="nowrap">10:00 pm</span><br>
 												</strong>
 												<span class="restContent-nowrap extra closed" style="color: #d32323;font-size: 12px;font-weight: bold;">Closed now</span>
 											</dd>
@@ -746,12 +748,12 @@ var res = foodstyle.split(",");
 						</div>
 						<div class="restContent-menu-preview" style="margin-bottom: 24px;height:204px;">
 							<h3 class="restContent-menu-preview-heading" style="margin-bottom: 12px; font-weight: bold; font-size: 16px; line-height: 1.3125em; color: #d32323; margin: 0 0 6px;display: block;">
-								<a href="#" style="color: #d32323;text-decoration: none;cursor: pointer;">Menu</a>
+								<a href="#" style="color: #d32323;text-decoration: none;cursor: pointer;">메뉴</a>
 							</h3>
 						</div>
 						<div class="restContent-business-info" style="height:1000px;margin-bottom: 24px;">
 							<h3 style="margin-bottom: 12px; font-weight: bold; font-size: 16px; line-height: 1.3125em; color: #d32323; margin: 0 0 6px; display: block;">
-								More business info
+								가게 정보
 							</h3>
 							<ul class="restContent-list" style="list-style: none;display: block;height:1000px;">
 								<li style="margin-bottom: 12px;display: list-item;height:auto;">
@@ -794,7 +796,7 @@ var res = foodstyle.split(",");
 										<dl style="padding-bottom: 6px;display: block;">
 											<dt class="restContent-attribute-key" style="margin-right: 0.25em;    display: inline;">키드존</dt>
 												<dd style="font-weight: bold;display: inline;">
-													${getRest.kidzone}
+													${getRest.kidszone}
 												</dd>
 										</dl>
 										
