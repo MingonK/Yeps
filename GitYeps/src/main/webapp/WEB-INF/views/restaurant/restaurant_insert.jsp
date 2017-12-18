@@ -5,6 +5,9 @@
 var week = new Array("mon","tue","wed","thu","fri","sat","sun")
 var day = new Array("월요일","화요일","수요일","목요일","금요일","토요일","일요일");
 
+
+
+
 // 한글 입력 방지
 function removeChar(event) {
     event = event || window.event;
@@ -296,8 +299,6 @@ function test() {
 						               <div class="filebox bs3-primary preview-image" style="margin: 6px 0 18px; width: 100%; height: 30px; display: block; text-align:left;">
 						                  <label for="input_file" id="input_file_label"style="width: 80px; color: black; display: inline-block; padding: .5em .75em; font-size: 14px; vertical-align: middle; text-align: center; cursor: pointer; border: 1px solid #999; border-radius: 3px;">사진 올리기</label>
 						                  <input type="file" id="input_file" class="upload-hidden" name="filename" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0;" >
-<!-- 						                  <input name="filename" class="upload-name" value="선택된 파일 없음" readonly style="width: 490px; height: 30px; display: inline-block; padding: 10px; font-size: 14px; line-height: normal; vertical-align: middle; background-color: #white; border: 1px solid #999; border-radius: 3px; -webkit-appearance: none; -moz-appearance: none; appearance: none;"> -->
-<!-- 						                  <input type="button" value="취소" id="input_file_cancel" style="padding: .5em .75em; background-color: white; display: inline-block; font-size: 14px; vertical-align: middle; text-align: center; cursor: pointer; border: 1px solid #999; border-radius: 3px; font-weight: bold;">  -->
 						               </div> 
 									</li>
 									<li class="restInsert-list">
@@ -779,7 +780,7 @@ function test() {
 							</form>
 					</div>
 					<div class="restInsert-beta" style="width:40%;height:100%;float: left;padding: 0 15px;display:inline-block;">
-				
+						<img id="preview" src="" width="500" style="display:none;">
 					</div>
 				</div>
 			</div>
@@ -787,6 +788,45 @@ function test() {
 	</div>		
 <script>
 
+</script>
+<script>
+var file = document.querySelector('#input_file');
+file.onchange = function () {
+    var fileList = file.files ;
+    // 읽기
+    var reader = new FileReader();
+    reader.readAsDataURL(fileList [0]);
+
+    //로드 한 후
+    reader.onload = function  () {
+        //로컬 이미지를 보여주기
+        document.getElementById("preview").style.display="block";
+        document.querySelector('#preview').src = reader.result;
+
+        //썸네일 이미지 생성
+        var tempImage = new Image(); //drawImage 메서드에 넣기 위해 이미지 객체화
+        tempImage.src = reader.result; //data-uri를 이미지 객체에 주입
+        tempImage.onload = function () {
+            //리사이즈를 위해 캔버스 객체 생성
+            var canvas = document.createElement('canvas');
+            var canvasContext = canvas.getContext("2d");
+
+            //캔버스 크기 설정
+            canvas.width = 100; //가로 100px
+            canvas.height = 100; //세로 100px
+
+            //이미지를 캔버스에 그리기
+            canvasContext.drawImage(this, 0, 0, 100, 100);
+
+            //캔버스에 그린 이미지를 다시 data-uri 형태로 변환
+            var dataURI = canvas.toDataURL("image/jpeg");
+
+            //썸네일 이미지 보여주기
+//             document.querySelector('#thumbnail').src = dataURI;
+           
+        };
+    };
+};
 </script>
 </body>
 </html>
