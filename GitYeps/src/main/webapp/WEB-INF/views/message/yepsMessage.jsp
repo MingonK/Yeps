@@ -19,37 +19,39 @@
 <%-- <%@ include file="../top.jsp"%> --%>
    <div id="messageContainer"  >
 		<caption>
-			<h2 align="left" style="position: relative; left:150px;"> Messages</h2>
+			<tr><td><label align="left" style="color: #d32323;  font-weight: bold; font-family: cambria; font-size: 26px; position: relative; left:185px;"> Messages</label>
+			<input type="button" id="write" value="Write New Message"  style="cursor:pointer; width: 175; height: 35; position: relative; left:770px;  
+	        color: #ffffff; background: #d32323; border-radius: 5px; font-weight: bold; font-family: cambria; font-size: 16px;" 
+	        data-popup-open="writeMessage" onclick="messageForm(' ');"></td></tr>
 		</caption>
-		<hr color="#EEEEEE" width="80%" size="1">
-		<br>
-		<div id="menu" align="center" style="position:absolute;  ">
-			<a href="message_action?filter=receive"><label style="cursor:pointer;">InBox </label></a><a href="#"><label> :: ${count}  /  </label></a>
-			<a href="message_action?filter=send"><label style="cursor:pointer;"> Sent </label></a><a href="#"><label> :: ${sCount}  /  </label></a>
-			<a href="message_action?filter=toLocker"><label style="cursor:pointer;"> locker  </label></a><a href="#"><label>:: ${lCount}</label></a> 
-      <input type="button" value="Write New Message" align="right" style="cursor:pointer;" id="write" data-popup-open="writeMessage" onclick="messageForm(' ');"><br>
-		<hr color="#EEEEEE" width="100%" size="1">
-       </div><br>
+		<hr color="#EEEEEE" width="71%" size="1">
+		<tr><td><br></td></tr>
+	    <div id="menu" align="center" style="position:absolute; right:20px; ">
+			<a href="message_action?filter=receive"><label style="cursor:pointer;">InBox </label></a><a href="#"><label> : ${count}  /  </label></a>
+			<a href="message_action?filter=send"><label style="cursor:pointer;"> Sent </label></a><a href="#"><label> : ${sCount}  /  </label></a>
+			<a href="message_action?filter=toLocker"><label style="cursor:pointer;"> locker  </label></a><a href="#"><label>: ${lCount}</label></a> 
+        </div>
 		<!-- Message sendform -->
-		<div class="popup" align="left" id="writeMessage" data-popup="writeMessage">
+		<div class="popup" align="left" id="writeMessage" data-popup="writeMessage" style="z-index: 1;">
 		<form name="sendform" method="post">
 		    <div class="popup-inner">
-		        <h3 align="left" style="font-weight:bold; font-size:26px">To</h3><br>
+		        <h3 align="left" style="font-weight:bold; font-size:26px; z-index: 1; ">To</h3><br>
 		        <input type="text" id="sendformTo" name="receiver" style="font-weight:bold; font-size:23px; height:40; border-radius: 7px;"><br>
 		        <h3 align="left" style="font-weight:bold; font-size:26px">Subject</h3><br>
 		        <input type="text" name="title" id="sendformSubject" style="font-weight:bold; font-size:23px; height:40; border-radius: 7px;"><br>
 		        <h3 align="left" style="font-weight:bold; font-size:26px">Message</h3><br>
 		        <textarea rows="5" name="content" id="sendformMessage" style="font-weight:bold; width:100%; font-size:20px; border-radius: 7px;" placeholder="여기에 메시지를 입력하세요."></textarea><br>
-		       <p><a data-popup-send="SendMessage" style="cursor:pointer;" href="#" onclick="sendMessage()">SendMessage </a> /
+		        <button type="button" data-popup-send="SendMessage" style="cursor:pointer; width: 175; height: 35;  
+	        color: #ffffff; background: #d32323; border-radius: 5px; font-weight: bold; font-family: cambria; font-size: 16px;" " href="#" onclick="sendMessage()">SendMessage </button> 
 		        <a data-popup-close="writeMessage" style="cursor:pointer;" href="#" onclick="closeSendform()"> Close</a></p>
 				<a class="popup-close" data-popup-close="writeMessage" href="#" >x</a>
 		    </div>
 		    </form>
 		 </div> 
 		 <!-- Message View  -->
-              <div class="popup" align="left" id="popup" data-popup="popup-1">
+              <div class="popup" align="left" id="popup" data-popup="popup-1" style="z-index: 1;">
 				       <div class="popup-inner">
-				       <h3 align="left" style="font-weight:bold; font-size:26px;">From</h3><br>
+				       <h3 align="left" style="font-weight:bold; font-size:26px; ">From</h3><br>
 				       <label id="from" style="font-weight:bold; font-size:23px;"></label>
 				       <h3 align="left" style="font-size:26px;">Subject</h3><br>
 				       <label id="subject" style="font-weight:bold; font-size:23px;"></label>
@@ -63,10 +65,8 @@
 			<div id="messageList"  style="position:absolute; " >
                 <form name="msgform" method="post" >
 				<table border="0" id="table">
-				    <tr valign="middle">
-						<td width="60px" align="center" rowspan="3" valign="middle"> 
-						<input type="checkbox" style="cursor:pointer;" name="first"></td>
-						<th align="left" colspan="6 ">
+				    <tr>
+						<th align="left" colspan="7 " style="left: 120px;" >
 						<input type="button" style="cursor:pointer;" name="del" id="del" value="삭제"  onclick="deleteCheckMsg();"> 
 						<button type="button" style="cursor:pointer;" id="reply"  >답장</button>
 						<input type="button"style="cursor:pointer;"  name="locker" id="locker" value="보관" onclick="moveToLocker();"> 
@@ -80,16 +80,17 @@
 					    <hr color="#EEEEEE" width="100%" size="1">
 				  <tr><td></tr>
                     <tr align="center">
-						<td width="60px"><label>읽음</label></td>
-						<td width="60px"><label>번호</label></td>
-						<td width="60px"><label>보낸이</label></td>
-						<td width="450px"><label>제목</label></td>
+                    <td align="center"><input type="checkbox" style="cursor:pointer;" name="first"></td>
+						<td width="90px"><label>읽음</label></td>
+						<td width="90px"><label>번호</label></td>
+						<td width="100px"><label>보낸이</label></td>
+						<td width="430px"><label>제목</label></td>
 						<c:choose>
 							<c:when test="${mode eq 'send'}">
-								<td width="130px"><label>보낸 시각</label></td>
+								<td width="150px"><label>보낸 시각</label></td>
 							</c:when>
 							<c:when test="${mode eq 'receive'}">
-								<td width="130px"><label>받은 시각</label></td>
+								<td width="150px"><label>받은 시각</label></td>
 							</c:when>
 						</c:choose>
 					  </tr>
@@ -304,6 +305,7 @@
               var targeted_popup_class = jQuery(this).attr('data-popup-open');
               $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
            e.preventDefault();
+           e.stopPropagation();
           });
     
           //----- CLOSE
@@ -315,6 +317,7 @@
               $('#message').empty();
               $('#sendformTo').empty();
               e.preventDefault();
+              e.stopPropagation();
           });
       });
     
