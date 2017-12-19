@@ -2,11 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<c:if test="${not empty requestScope.msg}">
-	<script type="text/javascript">
-		alert("${requestScope.msg}")
-	</script>
-</c:if> 
+
 <html>
 <head>
 <title>Yeps Message</title>
@@ -14,6 +10,12 @@
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"
 	type="text/javascript"></script>
+	<c:if test="${not empty requestScope.msg}">
+	<script type="text/javascript">
+		alert("${requestScope.msg}")
+		alert("${msg}")
+	</script>
+</c:if> 
 </head>
 <body>
 <%-- <%@ include file="../top.jsp"%> --%>
@@ -54,27 +56,28 @@
 	 </div>
 	 <div id="menu" >
 	    <hr color="#EEEEEE" width="100%" size="1">
-			<a href="message_action?filter=receive"><label style="cursor:pointer;">InBox </label></a><a href="#"><label> : ${count}  /  </label></a>
-			<a href="message_action?filter=send"><label style="cursor:pointer;"> Sent </label></a><a href="#"><label> : ${sCount}  /  </label></a>
-			<a href="message_action?filter=toLocker"><label style="cursor:pointer;"> locker  </label></a><a href="#"><label>: ${lCount}</label></a> 
+			<a href="message_action?filter=receive"><label style="cursor:pointer;">InBox </label></a><a href="#"><label> : ${mCount}    </label></a>
+			<a href="message_action?filter=send"><label style="cursor:pointer;"> Sent </label></a><a href="#"><label> : ${sCount}    </label></a>
+			<a href="message_action?filter=allLocker"><label style="cursor:pointer;"> locker  </label></a><a href="#"><label>: ${lCount}</label></a> 
      </div>
 			<div id="messageList"  style="position:absolute; " >
                 <form name="msgform" method="post" >
 				<table border="0" id="table">
 				    <tr>
 						<th align="left" colspan="7 " style="left: 120px;" >
-						<input type="button" style="cursor:pointer;" name="del" id="del" value="삭제"  onclick="deleteCheckMsg();"> 
-						<button type="button" style="cursor:pointer;" id="reply"  >답장</button>
-						<input type="button"style="cursor:pointer;"  name="locker" id="locker" value="보관" onclick="moveToLocker();"> 
-						<select name="filter" style="border-radius: 4px; cursor:pointer;">
-								<option value="0">:: 필터 ::</option>
+						<input type="button" style="cursor:pointer;" name="delete" id="delete" value="delete"  onclick="deleteCheckMsg();"> 
+						<button type="button" style="cursor:pointer;" id="reply"  >reply</button>
+						<input type="button"style="cursor:pointer;"  name="locker" id="locker" value="locker" onclick="moveToLocker();"> 
+						<select name="filter" style="border-radius: 3px; cursor:pointer;">
+								<option value="0"></option>
 								<option value="allMsg">모든 쪽지</option>
+								<option value="readMsg">읽은 쪽지</option>
 								<option value="noneMsg">안읽은 쪽지</option>
-								<option value="toLocker">보관함</option>
+								<option value="allLocker">보관함</option>
 						</select> 
-					    <input type="button" id="search" style="cursor:pointer;" value="검색" onclick="searching();"><br> 
+					    <input type="button" id="search" style="cursor:pointer;" value="select" onclick="searching();"><br> 
 					    <hr color="#EEEEEE" width="100%" size="1">
-				  <tr><td></tr>
+				  </tr>
                     <tr align="center">
                     <td align="center"><input type="checkbox" style="cursor:pointer;" name="first"></td>
 						<td width="90px"><label>읽음</label></td>
@@ -130,24 +133,24 @@
 			    <td colspan="7" align="center">
                 <!-- **이전페이지 블록으로 이동 : 현재 페이지 블럭이 1보다 크면 [이전]하이퍼링크를 화면에 출력 -->
                 <c:if test="${map.yepsPager.curBlock > 1}">
-                 <ul class="pager">
-                   <li> <a href="javascript:list('${map.yepsPager.prevPage}')">Previous</a></li></ul>
+                
+                  <a href="javascript:list('${map.yepsPager.prevPage}','${map.lMode}')" style="cursor:pointer;">[Previous]</a>&nbsp;&nbsp;
                  </c:if>
                 <!-- **하나의 블럭에서 반복문 수행 시작페이지부터 끝페이지까지 -->
                 <c:forEach var="num" begin="${map.yepsPager.blockBegin}" end="${map.yepsPager.blockEnd}">
                     <!-- **현재페이지이면 하이퍼링크 제거 -->
                     <c:choose>
                         <c:when test="${num == map.yepsPager.curPage}">
-                         <span style="color: red">  [${num}]  </span>&nbsp;&nbsp;
+                         <span style="color: red ">  [${num}]  </span>&nbsp;&nbsp;
                         </c:when>
                         <c:otherwise>
-                            <a href="javascript:list('${num}')">  [${num}]  </a>&nbsp;&nbsp;
+                            <a href="javascript:list('${num}','${map.lMode}')" style="cursor:pointer;">  [${num}]  </a>&nbsp;&nbsp;
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
                 <!-- **다음페이지 블록으로 이동 : 현재 페이지 블럭이 전체 페이지 블럭보다 작거나 같으면 [다음]하이퍼링크를 화면에 출력 -->
                 <c:if test="${map.yepsPager.curBlock <= map.yepsPager.totBlock}">
-                   <a href="javascript:list('${map.yepsPager.nextPage}')"> [next] </a>
+                   <a href="javascript:list('${map.yepsPager.nextPage}','${map.lMode}')" style="cursor:pointer;"> [next] </a>
                 </c:if>
                </td></tr></div>  
           </div>
@@ -170,14 +173,14 @@
 	    document.msgform.submit()
 	})
 	
-    function list(page){
-        location.href="yeps_message?curPage=" + page;
+    function list(page,lMode){
+        location.href="yeps_message?curPage=" + page + "&lMode=" + lMode;
     }
     
     function messageForm(sender){
     	$('#sendformTo').empty();
     	var sender = sender;
-    	$('#sendformTo').val(' ' + sender);
+    	$('#sendformTo').val(sender);
     }
     
     function getMessage(sender,subject,message,msgnum){
@@ -262,7 +265,7 @@
 		         if (checkVal[i].checked) {
 		            txt += checkVal[i].value + " ";
 	    }}});
-    	document.msgform.action = "message_delete";
+    	document.msgform.action = "message_delete?box=msgBox";
     	document.msgform.submit();
 		}
 

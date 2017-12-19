@@ -22,22 +22,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		${sql}
 	</select>
 	
-	<!-- <select id="sendList" resultType="MessageDTO">
-		select * from yeps_message where sender=#{sender}
-	</select>
-	
-	<select id="receiveList" resultType="MessageDTO">
-	    select * from yeps_message where receiver=#{receiver}
-	</select>
-	
-	<select id="noReadMessage" resultType="MessageDTO">
-	    select * from yeps_message where readnum=0 and islocker=0
-	</select>
-	
-	<select id="noReadLocker" resultType="MessageDTO">
-	    select * from yeps_message where readnum=0 and islocker=1
-	</select> -->
-	
 	<select id="receiver" resultType="String">
 	    select sender from yeps_message where msgnum=#{msgnum} 
 	</select>
@@ -64,7 +48,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="getLockerCount" resultType="int">
 	    select count(*) from yeps_message where islocker=1
-	</select>    
+	</select> 
+	
+	<select id="noneMessageCount" resultType="int">
+	    select count(*) from yeps_message where islocker!=1 and readNum=0
+	</select>   
+	
+	<select id="readMessageCount" resultType="int">
+	    select count(*) from yeps_message where islocker!=1 and readNum=1
+	</select>   
+	
+	<select id="noneLockerCount" resultType="int">
+	    select count(*) from yeps_message where islocker=1 and readNum=0
+	</select>   
+	
+	<select id="readLockerCount" resultType="int">
+	    select count(*) from yeps_message where islocker=1 and readNum=1
+	</select> 
 	
 	<update id="updateReadDate" parameterType="int">
 	    update yeps_message set readdate=sysdate where msgnum=#{msgnum}
