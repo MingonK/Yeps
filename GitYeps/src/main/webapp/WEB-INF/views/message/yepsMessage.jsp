@@ -17,48 +17,47 @@
 </head>
 <body>
 <%-- <%@ include file="../top.jsp"%> --%>
-   <div id="messageContainer" align="center" >
-      <div id="messageHeader"  >
-	        <tr><td><label style=" color: #d32323;  font-weight: bold; font-family: cambria; font-size: 26px; position: relative; float: left;  "> Messages</label>
-			<input type="button" id="write" value="Write New Message" data-popup-open="writeMessage" onclick="messageForm(' ');"></td></tr>
-	 </div>
-	 <div id="menu" style="float:left;">
-	    <hr color="#EEEEEE" width="100%" size="1">
-			<a href="message_action?filter=receive"><label style="cursor:pointer;">InBox </label></a><a href="#"><label> : ${count}  /  </label></a>
-			<a href="message_action?filter=send"><label style="cursor:pointer;"> Sent </label></a><a href="#"><label> : ${sCount}  /  </label></a>
-			<a href="message_action?filter=toLocker"><label style="cursor:pointer;"> locker  </label></a><a href="#"><label>: ${lCount}</label></a> 
-     </div>
-		<!-- Message sendform -->
+<!-- Message sendform -->
 		<div class="popup" align="left" id="writeMessage" data-popup="writeMessage" style="z-index: 1;">
 		<form name="sendform" method="post">
 		    <div class="popup-inner">
 		        <h4 align="left" >To</h4>
-		        <input type="text" id="sendformTo" name="receiver" style="width: 100%; font-weight:bold; font-size:21px; height:30; border-radius: 7px;"><br>
-		        <h4 align="left" style="font-weight:bold; font-size:23px">Subject</h4>
-		        <input type="text" name="title" id="sendformSubject" style="width: 100%; font-weight:bold; font-size:21px; height:30; border-radius: 7px;"><br>
-		        <h4 align="left" style="font-weight:bold; font-size:23px">Message</h4>
-		        <textarea rows="4" name="content" id="sendformMessage" style="font-weight:bold; width:100%; font-size:17px; border-radius: 7px;" placeholder="여기에 메시지를 입력하세요."></textarea><br><br>
-		        <button type="button" data-popup-send="SendMessage" style="cursor:pointer; width: 170; height: 33;  
-	        color: #ffffff; background: #d32323; border-radius: 5px; font-weight: bold; font-family: cambria; font-size: 17px;" onclick="sendMessage()">SendMessage </button>&nbsp;&nbsp;&nbsp;
+		        <input type="text" id="sendformTo" name="receiver"><br>
+		        <h4 align="left" >Subject</h4>
+		        <input type="text" name="title" id="sendformSubject" ><br>
+		        <h4 align="left">Message</h4>
+		        <textarea rows="4" name="content" id="sendformMessage"  placeholder="여기에 메시지를 입력하세요."></textarea><br><br>
+		        <button class="popup-send" type="button" data-popup-send="SendMessage" onclick="sendMessage()">SendMessage </button>&nbsp;&nbsp;&nbsp;
 		        <a data-popup-close="writeMessage" style="cursor:pointer;" href="#" onclick="closeSendform()">  Close</a>
 				<a class="popup-close" data-popup-close="writeMessage" href="#" >x</a>
 		    </div>
 		    </form>
 		 </div> 
-		 <!-- Message View  -->
+		  <!-- Message View  -->
               <div class="popup" align="left" id="popup" data-popup="popup-1" style="z-index: 1;">
 				       <div class="popup-inner">
-				       <h4 align="left" style="font-weight:bold; font-size:23px;">From</h4>
-				       <label id="from" style="font-weight:bold; font-size:21px;"></label>
-				       <h4 align="left" style="font-size:23px;">Subject</h4>
-				       <label id="subject" style="font-weight:bold; font-size:21px;"></label>
-				       <h4 align="left" style="font-size:23px;">Message</h4>
-				       <textarea id="message" rows="4" style="font-weight:bold; font-size:21px; border-radius:5px; width:100%; bgcolor:#fff;" disabled></textarea>
+				       <h4 align="left" >From</h4>
+				       <label id="from" ></label>
+				       <h4 align="left" >Subject</h4>
+				       <label id="subject" ></label>
+				       <h4 align="left" >Message</h4>
+				       <textarea id="message" rows="4" disabled></textarea>
 					        <p><a data-popup-close="popup-1" href="#" onclick="readCheck();">Close</a></p>
 					        <input type="hidden" id="readCheck" > 
 					        <a class="popup-close" data-popup-close="popup-1" href="#" onclick="readCheck();">x</a>
 				       </div>
 			    </div> 
+   <div id="messageContainer" align="center" >
+      <div id="messageHeader"  >
+	        <label> Messages</label>
+			<input type="button" id="write" value="Write New Message" data-popup-open="writeMessage" onclick="messageForm(' ');">
+	 </div>
+	 <div id="menu" >
+	    <hr color="#EEEEEE" width="100%" size="1">
+			<a href="message_action?filter=receive"><label style="cursor:pointer;">InBox </label></a><a href="#"><label> : ${count}  /  </label></a>
+			<a href="message_action?filter=send"><label style="cursor:pointer;"> Sent </label></a><a href="#"><label> : ${sCount}  /  </label></a>
+			<a href="message_action?filter=toLocker"><label style="cursor:pointer;"> locker  </label></a><a href="#"><label>: ${lCount}</label></a> 
+     </div>
 			<div id="messageList"  style="position:absolute; " >
                 <form name="msgform" method="post" >
 				<table border="0" id="table">
@@ -119,14 +118,12 @@
 						<td style="font-weight: bold;" >	
 							<c:set var="num" value="${num-1}"/>
 				            <c:out value="${num}"/></td>
-						<td><button type="button"  id="sender" name="sender" data-popup-open="writeMessage" onclick="messageForm('${dto.sender}')"
-						style="background: #00ff0000; border: 0; font-weight: bold; font-family: consolas; color:#0073bb; font-size:20px; cursor:pointer;" >${dto.sender}</button>
-						<td><a class="btn" style="font-weight: bold; font-family: consolas; font-size:20px; cursor:pointer;" data-popup-open="popup-1" 
-						onclick="getMessage('${dto.sender}','${dto.title}','${dto.content }','${dto.msgNum}');">${dto.title}</a></td>
+						<td><button type="button"  id="sender" name="sender" data-popup-open="writeMessage" onclick="messageForm('${dto.sender}')">${dto.sender}</button>
+						<td><a class="btn" data-popup-open="popup-1" onclick="getMessage('${dto.sender}','${dto.title}','${dto.content }','${dto.msgNum}');">${dto.title}</a></td>
 					    <td><label>${dto.reg_date}</label></td>
 					 </tr>
 				</c:forEach>
-				   </table></form> 
+				 </table></form> 
 				<div id="page" style="margin: 10px;">
 				<tr><td colspan="6"> <hr color="#EEEEEE" width="100%" size="1"></td></tr>
 		        <tr>
@@ -152,9 +149,9 @@
                 <c:if test="${map.yepsPager.curBlock <= map.yepsPager.totBlock}">
                    <a href="javascript:list('${map.yepsPager.nextPage}')"> [next] </a>
                 </c:if>
-               </td></tr></div></div>
-           <br>
-	    </div>
+               </td></tr></div>  
+          </div>
+       </div>
 	<script>
 	
     $("#reply").click(function(){
