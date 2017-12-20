@@ -38,24 +38,30 @@ public class MessageMapper {
 		if(lMode.equals("allList")) {
 			
 		    sql = "select * from (select rownum rn, A.* from (select * from yeps_message order by msgNum desc)A) where rn between " + start + " and " +end;
-		}else if(lMode.equals("lockerList")) {
-			
-			sql = "select * from (select rownum rn, A.* from (select * from yeps_message order by msgNum desc)A) where islocker=1 and rn between " + start +" and " + end ;
+		}else if(lMode.equals("allLocker")) {
+			sql = "select * from (select rownum rn, A.* from (select * from yeps_message where islocker=1 order by msgNum desc)A) where rn between " + start +" and " + end ;
+		
 		}else if(lMode.equals("msgBoxList")) {
 			
-			sql = "select * from (select rownum rn, A.* from (select * from yeps_message order by msgNum desc)A) where islocker!=1 and rn between " + start +" and " + end;
+			sql = "select * from (select rownum rn, A.* from (select * from yeps_message where islocker!=1 order by msgNum desc)A) where rn between " + start +" and " + end;
 		}else if(lMode.equals("receiver")) {
 			
-			sql =  "select * from (select rownum rn, A.* from (select * from yeps_message order by msgNum desc)A) where receiver=" + lMode + " and rn between " + start +" and " + end;
+			sql =  "select * from (select rownum rn, A.* from (select * from yeps_message where receiver='" + lMode + "' order by msgNum desc)A) where rn between " + start +" and " + end;
 		}else if(lMode.equals("sender")) {
 			
-			sql =  "select * from (select rownum rn, A.* from (select * from yeps_message order by msgNum desc)A) where sender=" + lMode + " and rn between " + start +" and " + end;
+			sql =  "select * from (select rownum rn, A.* from (select * from yeps_message where sender='" + lMode + "' order by msgNum desc)A) where rn between " + start +" and " + end;
+		}else if(lMode.equals("readMsg")) {
+			
+			sql =  "select * from (select rownum rn, A.* from (select * from yeps_message where readNum=1 and islocker=0 order by msgNum desc)A) where rn between " + start +" and " + end;
+		}else if(lMode.equals("readLocker")) {
+				
+		    sql =  "select * from (select rownum rn, A.* from (select * from yeps_message where readNum=1 and islocker=1 order by msgNum desc)A) where rn between " + start +" and " + end;
 		}else if(lMode.equals("noneMsg")) {
 			
-			sql =  "select * from (select rownum rn, A.* from (select * from yeps_message order by msgNum desc)A) where readNum=0 and islocker=0 and rn between " + start +" and " + end;
+			sql =  "select * from (select rownum rn, A.* from (select * from yeps_message where readNum=0 and islocker=0 order by msgNum desc)A) where rn between " + start +" and " + end;
 		}else if(lMode.equals("noneLocker")) {
 			
-			sql =  "select * from (select rownum rn, A.* from (select * from yeps_message order by msgNum desc)A) where readNum=0 and islocker=1 and rn between " + start +" and " + end;
+			sql =  "select * from (select rownum rn, A.* from (select * from yeps_message where readNum=0 and islocker=1 order by msgNum desc)A) where rn between " + start +" and " + end;
 		}
 	    Map<String, Object> map = new HashMap<String, Object>();
 	    map.put("sql", sql);
@@ -125,6 +131,38 @@ public class MessageMapper {
 	public int getSendCount(String sender) {
 		try {
 			return sqlSession.selectOne("getSendCount");
+		}catch(Exception e) {
+			return 0;
+		}
+	}
+	
+	public int noneMessageCount() {
+		try {
+			return sqlSession.selectOne("noneMessageCount");
+		}catch(Exception e) {
+			return 0;
+		}
+	}
+	
+	public int readMessageCount() {
+		try {
+			return sqlSession.selectOne("readMessageCount");
+		}catch(Exception e) {
+			return 0;
+		}
+	}
+	
+	public int noneLockerCount() {
+		try {
+			return sqlSession.selectOne("noneLockerCount");
+		}catch(Exception e) {
+			return 0;
+		}
+	}
+	
+	public int readLockerCount() {
+		try {
+			return sqlSession.selectOne("readLockerCount");
 		}catch(Exception e) {
 			return 0;
 		}

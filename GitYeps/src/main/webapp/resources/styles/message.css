@@ -1,51 +1,64 @@
 #messageContainer {
-	height: 90%;
+	height: 80%;
     position: relative; 
-     
-	left: 185px; 
-	top: 30px; 
-	width:80%;
+    top: 30px;  
+	
+	min-width: 800px;
+	max-width: 100%;
+	margin: 0 400px;
+	padding: 0px;
 }
 
-/* #messageContainer input {
-	width: 175;
-	height: 35;
-	color: #ffffff;
-	background: #d32323;
-	float: right;
-	border-radius: 9px;
-	font-weight: bold;
-	font-family: consolas;
-	font-size: 16px;
-} */
+ #messageHeader {
+    font-weight: bold;
+	font-family: cambria;
+	font-size: 17px;
+} 
+
+#messageHeader label{
+	color: #d32323;  
+	font-weight: bold; 
+	font-family: cambria; 
+	font-size: 26px; 
+	position: relative; 
+	float: left;  
+}
 
 #menu a {
-    float: left;
-	font-family: cambria;
+    font-family: cambria;
 	font-size: 17px;
 }
 
 #menu {
 	background-color: #ffffff;
-	height: 15%;
+	float: left;
 	width: 100%;
-    position: absolute; 
 	top: 50px;
-	left:185px;
 	font-weight: bold;
-	font-family: consolas;
+	font-family: cambria;
 	font-size: 17px;
-	margin: 0 ;
+	margin: 0px;
+}
+
+#write{
+	cursor:pointer; 
+	width: 175; 
+	height: 35; 
+	position: relative; 
+	float: right;
+	color: #ffffff; 
+	background: #d32323; 
+	border-radius: 5px; 
+	font-weight: bold; 
+	font-family: cambria; 
+	font-size: 16px;"
 }
 
 #messageList {
-	height: 80%;
 	width: 100%;
-	position: relative; 
 	top: 90px;
-	left: 185px;
-    margin: 0;
-	padding: 0;
+    margin: 5px;
+	padding: 5px;
 }
 
 #table tr[id="list"].selected {
@@ -71,6 +84,11 @@ button #reply {
 	font-size: 17px;
 }
 
+ .popup label {
+     font-weight:bold; 
+     font-size:21px;"
+     }
+     
 button #sender{
        background: #00ff0000; 
        border: 0; 
@@ -97,6 +115,23 @@ button #sender{
 	font-family: consolas;
 }
 
+#sender {
+	background: #00ff0000; 
+	border: 0; 
+	font-weight: bold; 
+	font-family: consolas; 
+	color:#0073bb; 
+	font-size:20px; 
+	cursor:pointer; 
+}
+
+.btn{
+	font-weight: bold; 
+	font-family: consolas; 
+	font-size:20px; 
+	cursor:pointer;
+}
+
     .popup {
          width:100%;
           height:100%;
@@ -107,11 +142,12 @@ button #sender{
           background:rgba(0,0,0,0.75);
       }
     
-   /* Inner */
+       /* Inner */
       .popup-inner {
-          max-width:700px;
+          max-width:550px;
+          max-height:330px;
           width:90%;
-          padding:40px;
+          padding:20px;
           position:absolute;
           top:50%;
           left:50%;
@@ -120,10 +156,50 @@ button #sender{
           box-shadow:0px 2px 6px rgba(0,0,0,1);
           border-radius:3px;
           background:#fff;
-      }
-      
-    
-   /* Close Button */
+       }
+       
+      .popup-inner h4 {
+          font-weight:bold; 
+          font-size:21px; 
+          z-index: 1; 
+       }
+       
+       .popup button {
+           cursor:pointer; 
+           width: 170; 
+           height: 33;  
+	       color: #ffffff; 
+	       background: #d32323; 
+	       border-radius: 5px; 
+	       font-weight: bold; 
+	       font-family: cambria; 
+	       font-size: 17px;
+	   }
+	   
+	   .popup input {
+           width: 100%; 
+           font-weight:bold; 
+           font-size:19px; 
+           height:30; 
+           border-radius: 7px;"
+       }
+       #sendformMessage {
+           resize: none; 
+           font-weight:bold; 
+           width:100%; 
+           font-size:17px; 
+           border-radius: 7px;
+           }
+       
+       #message {
+           resize: none; 
+           font-weight: bold; 
+           font-size: 21px; 
+           border-radius: 5px; 
+           width: 100%; 
+           bgcolor: #fff;
+           }
+     /* Close Button */
       .popup-close {
           width:30px;
           height:30px;

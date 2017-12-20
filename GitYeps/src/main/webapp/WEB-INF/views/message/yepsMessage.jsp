@@ -2,11 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<c:if test="${not empty requestScope.msg}">
-	<script type="text/javascript">
-		alert("${requestScope.msg}")
-	</script>
-</c:if> 
+
 <html>
 <head>
 <title>Yeps Message</title>
@@ -14,71 +10,74 @@
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"
 	type="text/javascript"></script>
+	<c:if test="${not empty requestScope.msg}">
+	<script type="text/javascript">
+		alert("${requestScope.msg}")
+		alert("${msg}")
+	</script>
+</c:if> 
 </head>
 <body>
 <%-- <%@ include file="../top.jsp"%> --%>
-   <div id="messageContainer"  >
-		<caption>
-			<tr><td><label align="left" style="color: #d32323;  font-weight: bold; font-family: cambria; font-size: 26px; position: relative; left:185px;"> Messages</label>
-			<input type="button" id="write" value="Write New Message"  style="cursor:pointer; width: 175; height: 35; position: relative; left:770px;  
-	        color: #ffffff; background: #d32323; border-radius: 5px; font-weight: bold; font-family: cambria; font-size: 16px;" 
-	        data-popup-open="writeMessage" onclick="messageForm(' ');"></td></tr>
-		</caption>
-		<hr color="#EEEEEE" width="71%" size="1">
-		<tr><td><br></td></tr>
-	    <div id="menu" align="center" style="position:absolute; right:20px; ">
-			<a href="message_action?filter=receive"><label style="cursor:pointer;">InBox </label></a><a href="#"><label> : ${count}  /  </label></a>
-			<a href="message_action?filter=send"><label style="cursor:pointer;"> Sent </label></a><a href="#"><label> : ${sCount}  /  </label></a>
-			<a href="message_action?filter=toLocker"><label style="cursor:pointer;"> locker  </label></a><a href="#"><label>: ${lCount}</label></a> 
-        </div>
-		<!-- Message sendform -->
+<!-- Message sendform -->
 		<div class="popup" align="left" id="writeMessage" data-popup="writeMessage" style="z-index: 1;">
 		<form name="sendform" method="post">
 		    <div class="popup-inner">
-		        <h3 align="left" style="font-weight:bold; font-size:26px; z-index: 1; ">To</h3><br>
-		        <input type="text" id="sendformTo" name="receiver" style="font-weight:bold; font-size:23px; height:40; border-radius: 7px;"><br>
-		        <h3 align="left" style="font-weight:bold; font-size:26px">Subject</h3><br>
-		        <input type="text" name="title" id="sendformSubject" style="font-weight:bold; font-size:23px; height:40; border-radius: 7px;"><br>
-		        <h3 align="left" style="font-weight:bold; font-size:26px">Message</h3><br>
-		        <textarea rows="5" name="content" id="sendformMessage" style="font-weight:bold; width:100%; font-size:20px; border-radius: 7px;" placeholder="여기에 메시지를 입력하세요."></textarea><br>
-		        <button type="button" data-popup-send="SendMessage" style="cursor:pointer; width: 175; height: 35;  
-	        color: #ffffff; background: #d32323; border-radius: 5px; font-weight: bold; font-family: cambria; font-size: 16px;" " href="#" onclick="sendMessage()">SendMessage </button> 
-		        <a data-popup-close="writeMessage" style="cursor:pointer;" href="#" onclick="closeSendform()"> Close</a></p>
+		        <h4 align="left" >To</h4>
+		        <input type="text" id="sendformTo" name="receiver"><br>
+		        <h4 align="left" >Subject</h4>
+		        <input type="text" name="title" id="sendformSubject" ><br>
+		        <h4 align="left">Message</h4>
+		        <textarea rows="4" name="content" id="sendformMessage"  placeholder="여기에 메시지를 입력하세요."></textarea><br><br>
+		        <button class="popup-send" type="button" data-popup-send="SendMessage" onclick="sendMessage()">SendMessage </button>&nbsp;&nbsp;&nbsp;
+		        <a data-popup-close="writeMessage" style="cursor:pointer;" href="#" onclick="closeSendform()">  Close</a>
 				<a class="popup-close" data-popup-close="writeMessage" href="#" >x</a>
 		    </div>
 		    </form>
 		 </div> 
-		 <!-- Message View  -->
+		  <!-- Message View  -->
               <div class="popup" align="left" id="popup" data-popup="popup-1" style="z-index: 1;">
 				       <div class="popup-inner">
-				       <h3 align="left" style="font-weight:bold; font-size:26px; ">From</h3><br>
-				       <label id="from" style="font-weight:bold; font-size:23px;"></label>
-				       <h3 align="left" style="font-size:26px;">Subject</h3><br>
-				       <label id="subject" style="font-weight:bold; font-size:23px;"></label>
-				       <h3 align="left" style="font-size:26px;">Message</h3><br><br>
-				       <label id="message" style="font-weight:bold; font-size:23px;"></label>
+				       <h4 align="left" >From</h4>
+				       <label id="from" ></label>
+				       <h4 align="left" >Subject</h4>
+				       <label id="subject" ></label>
+				       <h4 align="left" >Message</h4>
+				       <textarea id="message" rows="4" disabled></textarea>
 					        <p><a data-popup-close="popup-1" href="#" onclick="readCheck();">Close</a></p>
 					        <input type="hidden" id="readCheck" > 
 					        <a class="popup-close" data-popup-close="popup-1" href="#" onclick="readCheck();">x</a>
 				       </div>
 			    </div> 
+   <div id="messageContainer" align="center" >
+      <div id="messageHeader"  >
+	        <label> Messages</label>
+			<input type="button" id="write" value="Write New Message" data-popup-open="writeMessage" onclick="messageForm(' ');">
+	 </div>
+	 <div id="menu" >
+	    <hr color="#EEEEEE" width="100%" size="1">
+			<a href="message_action?filter=receive"><label style="cursor:pointer;">InBox </label></a><a href="#"><label> : ${mCount}    </label></a>
+			<a href="message_action?filter=send"><label style="cursor:pointer;"> Sent </label></a><a href="#"><label> : ${sCount}    </label></a>
+			<a href="message_action?filter=allLocker"><label style="cursor:pointer;"> locker  </label></a><a href="#"><label>: ${lCount}</label></a> 
+     </div>
 			<div id="messageList"  style="position:absolute; " >
                 <form name="msgform" method="post" >
 				<table border="0" id="table">
 				    <tr>
 						<th align="left" colspan="7 " style="left: 120px;" >
-						<input type="button" style="cursor:pointer;" name="del" id="del" value="삭제"  onclick="deleteCheckMsg();"> 
-						<button type="button" style="cursor:pointer;" id="reply"  >답장</button>
-						<input type="button"style="cursor:pointer;"  name="locker" id="locker" value="보관" onclick="moveToLocker();"> 
-						<select name="filter" style="border-radius: 4px; cursor:pointer;">
-								<option value="0">:: 필터 ::</option>
+						<input type="button" style="cursor:pointer;" name="delete" id="delete" value="delete"  onclick="deleteCheckMsg();"> 
+						<button type="button" style="cursor:pointer;" id="reply"  >reply</button>
+						<input type="button"style="cursor:pointer;"  name="locker" id="locker" value="locker" onclick="moveToLocker();"> 
+						<select name="filter" style="border-radius: 3px; cursor:pointer;">
+								<option value="0"></option>
 								<option value="allMsg">모든 쪽지</option>
+								<option value="readMsg">읽은 쪽지</option>
 								<option value="noneMsg">안읽은 쪽지</option>
-								<option value="toLocker">보관함</option>
+								<option value="allLocker">보관함</option>
 						</select> 
-					    <input type="button" id="search" style="cursor:pointer;" value="검색" onclick="searching();"><br> 
+					    <input type="button" id="search" style="cursor:pointer;" value="select" onclick="searching();"><br> 
 					    <hr color="#EEEEEE" width="100%" size="1">
-				  <tr><td></tr>
+				  </tr>
                     <tr align="center">
                     <td align="center"><input type="checkbox" style="cursor:pointer;" name="first"></td>
 						<td width="90px"><label>읽음</label></td>
@@ -122,56 +121,66 @@
 						<td style="font-weight: bold;" >	
 							<c:set var="num" value="${num-1}"/>
 				            <c:out value="${num}"/></td>
-						<td><button type="button"  id="sender" name="sender" data-popup-open="writeMessage" onclick="messageForm('${dto.sender}')"
-						style="background: #00ff0000; border: 0; font-weight: bold; font-family: consolas; color:#0073bb; font-size:20px; cursor:pointer;" >${dto.sender}</button>
-						<td><a class="btn" style="font-weight: bold; font-family: consolas; font-size:20px; cursor:pointer;" data-popup-open="popup-1" 
-						onclick="getMessage('${dto.sender}','${dto.title}','${dto.content }','${dto.msgNum}');">${dto.title}</a></td>
+						<td><button type="button"  id="sender" name="sender" data-popup-open="writeMessage" onclick="messageForm('${dto.sender}')">${dto.sender}</button>
+						<td><a class="btn" data-popup-open="popup-1" onclick="getMessage('${dto.sender}','${dto.title}','${dto.content }','${dto.msgNum}');">${dto.title}</a></td>
 					    <td><label>${dto.reg_date}</label></td>
 					 </tr>
 				</c:forEach>
+				 </table></form> 
+				<div id="page" style="margin: 10px;">
 				<tr><td colspan="6"> <hr color="#EEEEEE" width="100%" size="1"></td></tr>
 		        <tr>
 			    <td colspan="7" align="center">
                 <!-- **이전페이지 블록으로 이동 : 현재 페이지 블럭이 1보다 크면 [이전]하이퍼링크를 화면에 출력 -->
                 <c:if test="${map.yepsPager.curBlock > 1}">
-                 <ul class="pager">
-                   <li> <a href="javascript:list('${map.yepsPager.prevPage}')">Previous</a></li></ul>
+                
+                  <a href="javascript:list('${map.yepsPager.prevPage}','${map.lMode}')" style="cursor:pointer;">[Previous]</a>&nbsp;&nbsp;
                  </c:if>
                 <!-- **하나의 블럭에서 반복문 수행 시작페이지부터 끝페이지까지 -->
                 <c:forEach var="num" begin="${map.yepsPager.blockBegin}" end="${map.yepsPager.blockEnd}">
                     <!-- **현재페이지이면 하이퍼링크 제거 -->
                     <c:choose>
                         <c:when test="${num == map.yepsPager.curPage}">
-                         <span style="color: red">  [${num}]  </span>&nbsp;&nbsp;
+                         <span style="color: red ">  [${num}]  </span>&nbsp;&nbsp;
                         </c:when>
                         <c:otherwise>
-                            <a href="javascript:list('${num}')">  [${num}]  </a>&nbsp;&nbsp;
+                            <a href="javascript:list('${num}','${map.lMode}')" style="cursor:pointer;">  [${num}]  </a>&nbsp;&nbsp;
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
                 <!-- **다음페이지 블록으로 이동 : 현재 페이지 블럭이 전체 페이지 블럭보다 작거나 같으면 [다음]하이퍼링크를 화면에 출력 -->
                 <c:if test="${map.yepsPager.curBlock <= map.yepsPager.totBlock}">
-                   <a href="javascript:list('${map.yepsPager.nextPage}')"> [next] </a>
+                   <a href="javascript:list('${map.yepsPager.nextPage}','${map.lMode}')" style="cursor:pointer;"> [next] </a>
                 </c:if>
-               </td></tr>
-               </table></form>
-			</div><br>
-	    </div>
+               </td></tr></div>  
+          </div>
+       </div>
 	<script>
 	
     $("#reply").click(function(){
+    	$("input[name=check]:checked").each(function() {
+			var checkVal = $(this).val();
+			if(checkVal==null){
+	    		alert("선택된 쪽지가 없습니다. 다시 확인 하세요.");
+	    	}
+			alert(checkVal);
+			
+		for (var i = 0; i < checkVal.length; i++) {
+		         if (checkVal[i].checked) {
+		            txt += checkVal[i].value + " ";
+	    }}});
     	document.msgform.action = "message_reply?box=msgBox";
 	    document.msgform.submit()
 	})
 	
-    function list(page){
-        location.href="yeps_message?curPage=" + page;
+    function list(page,lMode){
+        location.href="yeps_message?curPage=" + page + "&lMode=" + lMode;
     }
     
     function messageForm(sender){
     	$('#sendformTo').empty();
     	var sender = sender;
-    	$('#sendformTo').val(' ' + sender);
+    	$('#sendformTo').val(sender);
     }
     
     function getMessage(sender,subject,message,msgnum){
@@ -256,7 +265,7 @@
 		         if (checkVal[i].checked) {
 		            txt += checkVal[i].value + " ";
 	    }}});
-    	document.msgform.action = "message_delete";
+    	document.msgform.action = "message_delete?box=msgBox";
     	document.msgform.submit();
 		}
 
