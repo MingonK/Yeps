@@ -49,13 +49,13 @@
 					        <a class="popup-close" data-popup-close="popup-1" href="#" onclick="readCheck();">x</a>
 				       </div>
 			    </div> 
-   <div id="messageContainer" align="center" >
+   <div id="messageContainer" align="center" style="padding-top: 15px; padding-bottom: 36px; width: 900px; margin: 0 auto; padding: 0 15px;">
       <div id="messageHeader"  >
 	        <label> Messages</label>
 			<input type="button" id="write" value="Write New Message" data-popup-open="writeMessage" onclick="messageForm(' ');">
 	 </div>
 	 <div id="menu" >
-	    <hr color="#EEEEEE" width="100%" size="1">
+	    <hr color="#EEE" width="100%" size="1">
 			<a href="message_action?filter=receive"><label style="cursor:pointer;">InBox </label></a><a href="#"><label> : ${mCount}    </label></a>
 			<a href="message_action?filter=send"><label style="cursor:pointer;"> Sent </label></a><a href="#"><label> : ${sCount}    </label></a>
 			<a href="message_action?filter=allLocker"><label style="cursor:pointer;"> locker  </label></a><a href="#"><label>: ${lCount}</label></a> 
@@ -93,7 +93,7 @@
 							</c:when>
 						</c:choose>
 					  </tr>
-					  <tr><td colspan="6"> <hr color="#EEEEEE" width="100%" size="1"></td></tr>
+					  <tr><td colspan="6"> <hr color="#EEE" width="100%" size="1"></td></tr>
 					  
 			   <c:if test="${empty map.list}">
 				   <tr>
@@ -128,7 +128,7 @@
 				</c:forEach>
 				 </table></form> 
 				<div id="page" style="margin: 10px;">
-				<tr><td colspan="6"> <hr color="#EEEEEE" width="100%" size="1"></td></tr>
+				<tr><td colspan="6"> <hr color="#EEE" width="100%" size="1"></td></tr>
 		        <tr>
 			    <td colspan="7" align="center">
                 <!-- **이전페이지 블록으로 이동 : 현재 페이지 블럭이 1보다 크면 [이전]하이퍼링크를 화면에 출력 -->
