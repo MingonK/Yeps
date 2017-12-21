@@ -24,8 +24,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yeps.model.MemberDTO;
 import com.yeps.model.MessageDTO;
 import com.yeps.service.YepsPager;
+import com.yeps.service.MemberMapper;
 import com.yeps.service.MessageMapper;
 
 @Controller
@@ -33,16 +35,26 @@ public class MessageController {
 
 	@Autowired
 	private MessageMapper yepsMessageMapper;
+	
+	@Autowired
+	private MemberMapper memberMapper;
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-
-	public ModelAndView pagingMessageList(HttpServletRequest req ,@RequestParam String lMode) {
+	
+	public ModelAndView pagingMessageList(HttpServletRequest req ,@RequestParam String lMode, String name) {
+		System.out.println(name);
         int cnt = 0;
 		int count = yepsMessageMapper.getMessageCount();
 		int lCount = yepsMessageMapper.getLockerCount();
-		int mCount = count - lCount;
+		int sCount = yepsMessageMapper.getSendCount(name);
+		System.out.println(count);
+		System.out.println("!" + sCount);
+		int mCount = yepsMessageMapper.getReceiveCount(name);
 		int curPage = req.getParameter("curPage")!=null?Integer.parseInt(req.getParameter("curPage")): 1 ;
-		System.out.println(lMode);
+		
+		System.out.println(sCount);
+		System.out.println(lCount);
+		System.out.println(mCount);
 		if(lMode==null) {
 	    lMode = req.getParameter("mode")!=null?req.getParameter("mode"):"msgBoxList";
 	        cnt = mCount;
@@ -54,37 +66,50 @@ public class MessageController {
 		}else if(lMode.equals("allList")) {
 		    cnt = count;
 		}else if(lMode.equals("noneMsg")) {
+			
 			cnt = yepsMessageMapper.noneMessageCount();
 		}else if(lMode.equals("readMsg")) {
+			
 			cnt = yepsMessageMapper.readMessageCount();
 		}else if(lMode.equals("noneLocker")) {
+			
 			cnt = yepsMessageMapper.noneLockerCount();
 		}else if(lMode.equals("readLocker")) {
+			
 			cnt = yepsMessageMapper.readLockerCount();
 		}
-		System.out.println(cnt);
-		YepsPager yPager = new YepsPager(cnt, curPage);
+		int pageScale = 10, blockScale = 5;
+		YepsPager yPager = new YepsPager(cnt, curPage, pageScale, blockScale );
 		int start = yPager.getPageBegin();
 		int end = yPager.getPageEnd();
 		int pageSize = yPager.PAGE_SCALE;
 		int num = count - pageSize * (curPage - 1) + 1; 
-		List<MessageDTO> list = yepsMessageMapper.messageList(start, end, lMode);
+		List<MessageDTO> list = yepsMessageMapper.messageList(start, end, lMode, name);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("lMode", lMode);
 		map.put("list", list); // list
 		map.put("count", count); 
 		map.put("yepsPager", yPager);
 		ModelAndView mav = new ModelAndView();
-	    mav.addObject("mCount", mCount);
+		System.out.println(sCount);
+		System.out.println(lCount);
+		System.out.println(mCount);
+	    mav.addObject("mCount",mCount);
 		mav.addObject("lCount",lCount);
+		mav.addObject("sCount",sCount);
 		mav.addObject("count", count);
 		mav.addObject("num", num);
 		mav.addObject("map", map); 
 		mav.addObject("mode", "receive");
 		if(lMode.equals("allLocker") || lMode.equals("readLocker") || lMode.equals("noneLocker")) {
 			mav.setViewName("message/messageLocker");
+			mav.addObject("set", "message");
 		}else {
 		mav.setViewName("message/yepsMessage");
+		mav.addObject("set", "message");
+		System.out.println(sCount);
+		System.out.println(lCount);
+		System.out.println(mCount);
 		}
 		return mav;
 	}
@@ -92,8 +117,19 @@ public class MessageController {
 	@RequestMapping(value = "yeps_message")
 	public ModelAndView yeps_message(HttpServletRequest req) throws Exception {
 		ModelAndView mav = new ModelAndView();
+		String msg = null, url = null;
 		String lMode = req.getParameter("lMode");
-		mav = pagingMessageList(req, lMode);
+		MemberDTO member = (MemberDTO)req.getSession().getAttribute("memberinfo");
+		if(member==null) {
+			msg = "로그인 먼저 해주세요. 로그인 페이지로 이동합니다.";
+			mav.addObject("msg", msg);
+			mav.setViewName("redirect:member_login?mode=login");
+	        return mav;
+		}
+       
+	    String name = member.getName().trim();
+		mav = pagingMessageList(req, lMode, name);
+		mav.addObject("set", "message");
 		return mav;
 	}
 	
@@ -101,8 +137,11 @@ public class MessageController {
 	public ModelAndView message_locker(HttpServletRequest req)throws Exception{
 		ModelAndView mav = new ModelAndView();
 		String lMode = "allLocker";
-		mav = pagingMessageList(req,lMode);
-		mav.setViewName("message/messageLocker");
+		MemberDTO member = (MemberDTO)req.getSession().getAttribute("memberinfo");
+		int mnum = member.getMnum();
+		String name = member.getName();
+		mav = pagingMessageList(req,lMode, name);
+		mav.addObject("set", "message");
 		return mav;
 	}
 
@@ -141,11 +180,12 @@ public class MessageController {
 			req.setAttribute("msg", msg);
 		}
 		if(box.equals("msgBox")) {
+			
 			mav.setViewName("redirect:yeps_message");
 		}else if(box.equals("locker")) {
+			
 			mav.setViewName("redirect:message_locker");
 		}
-		
 		return mav;
 	}
 
@@ -153,32 +193,45 @@ public class MessageController {
 	public ModelAndView message_send
 	(HttpServletRequest req,@ModelAttribute MessageDTO dto, HttpSession session, BindingResult result)
 			throws Exception {
+		
 		if (result.hasErrors()) {
 			dto.setMsgNum(0);
 		}
+		
 		ModelAndView mav = new ModelAndView();
 		String msg = null, lMode = null;
-
-		/*	int mnum = session.getAttribute("mnum");
-		String sender = yepsMessageMapper.getSender(mnum);//로그인시 로그인한 회원의 정보로 보내는 사람을 구한다.*/
-		String sender = "who";
-		dto.setSender(sender);
-		int res = yepsMessageMapper.writeMessage(dto);
-		if(res>0) {
-			msg = "쪽지를 보냈습니다.쪽지함으로 이동합니다.";
-			lMode = "msgBoxList";
-			
-			mav = pagingMessageList(req, lMode);
-			
-		}else {
-			msg = "쪽지 보내기에 실패하였습니다.";
-			mav = pagingMessageList(req, lMode);
+        MemberDTO member = (MemberDTO)req.getSession().getAttribute("memberinfo");
+		int mnum = member.getMnum();
+		dto.setMnum(mnum);
+		String name = member.getName();//로그인시 로그인한 회원의 정보로 보내는 사람을 구한다.*/
+		dto.setSender(name);
+		String receiver = dto.getReceiver();
+	
+		List<MemberDTO> memberList = memberMapper.listMember();
+		for(int i=0; i < memberList.size(); i++) {
+			String who = memberList.get(i).getName();
+			if(who.equals(receiver.trim())) {
+		    	 dto.setReceiver(who);
+		    }
 		}
+		System.out.println("@" + dto.getReceiver());
+		  int res = yepsMessageMapper.writeMessage(dto);
+	  		if(res>0) {
+	  			msg = "쪽지를 보냈습니다.쪽지함으로 이동합니다.";
+	  			lMode = "msgBoxList";
+	  			mav = pagingMessageList(req, lMode,  name);
+	  			
+	  		}else {
+	  			msg = "쪽지 보내기에 실패하였습니다.";
+	  			mav = pagingMessageList(req, lMode,  name);
+	  		}
+		System.out.println(dto.getReceiver());
+	  
 		mav.addObject("msg", msg);
 		return mav;
 	}
 
-	@RequestMapping(value = "message_reply")
+/*	@RequestMapping(value = "message_reply")
 	public ModelAndView message_reply(HttpServletRequest req, String[] check) {
 		ModelAndView mav = new ModelAndView();
 		String receiver = req.getParameter("receiver");
@@ -207,16 +260,19 @@ public class MessageController {
 			req.setAttribute("receiver", receiver);
 		}
 		mav.addObject("mode", "reply");
+		mav.addObject("set", "message");
 		mav.setViewName("message/yepsMessage");
 		return mav;
-	}
+	}*/
 
 	@RequestMapping(value = "message_action")
 	public ModelAndView message_search(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
 		String mode = req.getParameter("filter");
-	System.out.println("1");
-        String sender = null, lMode = null;
+		MemberDTO member = (MemberDTO)req.getSession().getAttribute("memberinfo");
+		int mnum = member.getMnum();
+		String name = member.getName();
+        String lMode = null;
         String msg = null;
 		if(mode.equals("allMsg")) {
          
@@ -224,32 +280,29 @@ public class MessageController {
 			
 		}else if(mode.equals("noneMsg")) {
 			lMode = "noneMsg";
-			mav = pagingMessageList(req, lMode);
+			mav = pagingMessageList(req, lMode,  name);
 			
 		}else if(mode.equals("readMsg")) {
 			lMode = "readMsg";
-			mav = pagingMessageList(req, lMode);
-
+			mav = pagingMessageList(req, lMode, name);
+		
         }else if(mode.equals("allLocker")) {
 			
             mav.setViewName("redirect:message_locker");
         }else if(mode.equals("readLocker")) {
 			lMode = "readLocker";
-			mav = pagingMessageList(req,lMode);
+			mav = pagingMessageList(req, lMode, name);
 			mav.setViewName("message/messageLocker");
-            
+			
 		}else if(mode.equals("noneLocker")) {
 			lMode = "noneLocker";
-			mav = pagingMessageList(req, lMode);
+			mav = pagingMessageList(req, lMode, name);
 			mav.setViewName("message/messageLocker");
 			
-		}else if(mode.equals("receive")) {
-			lMode = "receiver";//로그인시 로그인 회원을 receiver로.
-			mav = pagingMessageList(req,lMode);
-			
 		}else if(mode.equals("send")){
-			lMode = "sender";//로그인시 로그인 회원을 sender로.
-			mav = pagingMessageList(req,lMode);
+			System.out.println("6" + name);
+			lMode = "sender";
+			mav = pagingMessageList(req, lMode, name);
 		    mav.addObject("mode","send");
 		
 		}else if(mode.equals("msgBoxList")) {
@@ -290,7 +343,10 @@ public class MessageController {
 			}
 		}
 		String lMode = "msgBoxList";
-		mav = pagingMessageList(req, lMode);
+		MemberDTO member = (MemberDTO)req.getSession().getAttribute("memberinfo");
+		String name = member.getName();
+		int mnum = member.getMnum();
+		mav = pagingMessageList(req, lMode, name);
 		return mav;
 	}
 
@@ -307,7 +363,10 @@ public class MessageController {
 			rNum = yepsMessageMapper.updateReadNum0(msgNum);
 		}
 		String lMode = "lockerList";
-		mav = pagingMessageList(req,lMode);
+		MemberDTO member = (MemberDTO)req.getSession().getAttribute("memberinfo");
+		String name = member.getName();
+		int mnum = member.getMnum();
+		mav = pagingMessageList(req,lMode, name);
 		mav.setViewName("message/messageLocker");
 		return mav;
 	}
@@ -316,10 +375,13 @@ public class MessageController {
 	public ModelAndView message_moveToLocker(HttpServletRequest req,String[] check) {
 		ModelAndView mav = new ModelAndView();
 		String msg = null, lMode = null, url = null;
+		MemberDTO member = (MemberDTO)req.getSession().getAttribute("memberinfo");
+		String name = member.getName();
+		int mnum = member.getMnum();
 		if(check == null) {
-			lMode = "allList";
+			lMode = "msgBoxList";
 			msg = "선택된 메시지가 없습니다. 다시 확인하세요.";
-		    mav = pagingMessageList(req,lMode);
+		    mav = pagingMessageList(req,lMode, name);
 			mav.addObject("msg", msg);
 			return mav;
 		}
@@ -332,7 +394,7 @@ public class MessageController {
 				
 				msg = "보관함으로 이동 되었습니다. ";
 				lMode = "msgBoxList";
-				mav = pagingMessageList(req,lMode);
+				mav = pagingMessageList(req,lMode, name);
 				mav.addObject("msg", msg);
 			
 				
@@ -350,12 +412,16 @@ public class MessageController {
 	public ModelAndView message_moveToMsgBox(HttpServletRequest req,String[] check) {
 		ModelAndView mav = new ModelAndView();
 		String msg = null, lMode = null;
+		MemberDTO member = (MemberDTO)req.getSession().getAttribute("memberinfo");
+		String  name = member.getName();
+		int mnum = member.getMnum();
 		if(check == null) {
 			msg = "선택된 메시지가 없습니다. 다시 확인하세요.";
 			req.setAttribute("mode", "receive");
-			lMode = "allList";
-			mav = pagingMessageList(req, lMode);
+			lMode = "allLocker";
+			mav = pagingMessageList(req, lMode, name);
 			mav.addObject("msg", msg);
+			mav.setViewName("message/messageLocker");
 			return mav;
 		}
 		for(String num : check) {
@@ -369,8 +435,8 @@ public class MessageController {
 				mav.addObject("msg", msg);
 			}
 		}
-		lMode = "lockerList";
-		mav = pagingMessageList(req, lMode);
+		lMode = "allLocker";
+		mav = pagingMessageList(req, lMode, name);
 		mav.setViewName("message/messageLocker");
 		return mav;
 	}

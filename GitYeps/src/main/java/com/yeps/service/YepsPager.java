@@ -2,9 +2,9 @@ package com.yeps.service;
 
 public class YepsPager {
     // 페이지당 게시물 수
-    public static final int PAGE_SCALE = 10;
+    public int PAGE_SCALE;
     // 화면당 페이지 수
-    public static final int BLOCK_SCALE = 5;
+    public int BLOCK_SCALE;
     private int curPage; // 현재 페이수
     private int prevPage; // 이전 페이지
     private int nextPage; // 다음 페이지
@@ -23,9 +23,11 @@ public class YepsPager {
     
     // 생성자
     // BoardPager(레코드 갯수, 현재 페이지 번호)
-    public YepsPager(int count, int curPage){
+    public YepsPager(int count, int curPage,int PAGE_SCALE,int BLOCK_SCALE){
         curBlock = 1; // 현재 페이지 블록 번호
         this.curPage = curPage; // 현재 페이지 설정
+        this.PAGE_SCALE=PAGE_SCALE;
+        this.BLOCK_SCALE=BLOCK_SCALE;
         setTotPage(count); // 전체 페이지 갯수 계산
         setPageRange(); // 
         setTotBlock(); // 전체 페이지 블록 갯수 계산

@@ -15,7 +15,7 @@
 	</script>
 </c:if>
 <body>
-<%-- <%@ include file="../top.jsp"%> --%>
+<%@ include file="../top.jsp"%>
 <!-- Message sendform -->
 		<div class="popup" align="left" id="writeMessage" data-popup="writeMessage" style="z-index: 1;">
 		<form name="sendform" method="post">
@@ -46,17 +46,21 @@
 					        <a class="popup-close" data-popup-close="popup-1" href="#" onclick="readCheck();">x</a>
 				       </div>
 			    </div> 
-   <div id="lockerContainer" align="center" >
-	 <div id="messageHeader">
+   <div id="lockerContainer" align="center" style="    padding-top: 15px;
+    padding-bottom: 36px;    width: 900px;
+    margin: 0 auto;
+    padding: 0 15px;">
+	 <div id="messageHeader" >
 	 <label>Locker Messages</label>
-	 <input type="button" id="write" value="Write new Message" data-popup-open="writeMessage" onclick="messageForm(' ');"></div>
+	 	<input type="button" id="write" value="Write new Message" data-popup-open="writeMessage" onclick="messageForm(' ');">
+	 </div>
 		<div id="menu">	
 		<hr color="#EEE" width="100%" size="1">
 			<a href="message_action?filter=receive"><label style="cursor:pointer;">locker</label></a><a href="#"><label>: ${lCount}</label></a>
 			<a href="message_action?filter=send"><label style="cursor:pointer;">Sent </label></a><a href="#"><label>: ${sCount}</label></a>
 			<a href="message_action?filter=msgBoxList"><label style="cursor:pointer;">msgBox </label></a><a href="#"><label>: ${mCount}</label></a>
 		</div>
-		<div id="messageList" style="position:absolute;" >
+		<div id="messageList" style="position:absolute; " >
 			<form name="lockerform"  method="post">
 				<table border="0" id="table">
 					<tr>
@@ -72,7 +76,7 @@
 								<option value="msgBoxList">쪽지함</option>
 						</select> 
 						<input type="button" id="search" value="select" style="cursor:pointer;" onclick="searching();"> 
-						<hr color="#EEEEEE" width="100%" size="1">
+						<hr color="#EEE" width="100%" size="1">
 				    </tr>
 				    <tr align="center">
                     <td align="center"><input type="checkbox" style="curosr:pointer;" name="first"></td>
@@ -82,7 +86,7 @@
 						<td width="430px"><label>제목</label></td>
 						<th width="150px"><label>받은시각</label></th>
 					</tr>
-					<tr><td colspan="6"> <hr color="#EEEEEE" width="100%" size="1"></td></tr>
+					<tr><td colspan="6"> <hr color="#EEE" width="100%" size="1"></td></tr>
 					<c:if test="${empty map.list}">
 						<tr>
 							<td colspan="6" align="center">보관함이 비었습니다.</td>
@@ -129,7 +133,8 @@
                 <c:if test="${map.yepsPager.curBlock <= map.yepsPager.totBlock}">
                     <a href="javascript:list('${map.yepsPager.nextPage}','${map.lMode}')" style="cursor:pointer;">[다음]</a>
                 </c:if>    
-			</td></tr></div>
+			</td></tr>
+			</div>
 		</div>
 	</div>
   <script>

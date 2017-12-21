@@ -3,7 +3,13 @@ package com.yeps.model;
 public class MessageDTO {
 
 	private int msgNum;
-	private int mNum;//맴버 로그인시 회원정보 가져올 외래키
+	private int mnum;//맴버 로그인시 회원정보 가져올 외래키
+	public int getMnum() {
+		return mnum;
+	}
+	public void setMnum(int mnum) {
+		this.mnum = mnum;
+	}
 	private String title;
 	private String receiver;//받은 사람(로그인 회원과 연동되게)
 	private String sender;//보낸사람(로그인 회원과 연동되게)
@@ -33,12 +39,12 @@ public class MessageDTO {
 	public void setMsgNum(int msgNum) {
 		this.msgNum = msgNum;
 	}
-	public int getmNum() {
+	/*public int getmNum() {
 		return mNum;
 	}
 	public void setmNum(int mNum) {
 		this.mNum = mNum;
-	}
+	}*/
 	public String getTitle() {
 		return title;
 	}

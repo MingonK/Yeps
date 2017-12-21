@@ -2,14 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-
+<%@ page session="true" %>
 <html>
 <head>
 <title>Yeps Message</title>
   <script src="//code.jquery.com/jquery.min.js"></script>
-<script
+<!-- <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"
-	type="text/javascript"></script>
+	type="text/javascript"></script> -->
 	<c:if test="${not empty requestScope.msg}">
 	<script type="text/javascript">
 		alert("${requestScope.msg}")
@@ -18,7 +18,7 @@
 </c:if> 
 </head>
 <body>
-<%-- <%@ include file="../top.jsp"%> --%>
+ <%@ include file="../top.jsp"%> 
 <!-- Message sendform -->
 		<div class="popup" align="left" id="writeMessage" data-popup="writeMessage" style="z-index: 1;">
 		<form name="sendform" method="post">
@@ -37,7 +37,7 @@
 		 </div> 
 		  <!-- Message View  -->
               <div class="popup" align="left" id="popup" data-popup="popup-1" style="z-index: 1;">
-				       <div class="popup-inner">
+				   <div class="popup-inner">
 				       <h4 align="left" >From</h4>
 				       <label id="from" ></label>
 				       <h4 align="left" >Subject</h4>
@@ -47,16 +47,16 @@
 					        <p><a data-popup-close="popup-1" href="#" onclick="readCheck();">Close</a></p>
 					        <input type="hidden" id="readCheck" > 
 					        <a class="popup-close" data-popup-close="popup-1" href="#" onclick="readCheck();">x</a>
-				       </div>
-			    </div> 
-   <div id="messageContainer" align="center" style="padding-top: 15px; padding-bottom: 36px; width: 900px; margin: 0 auto; padding: 0 15px;">
-      <div id="messageHeader"  >
+				   </div>
+			  </div> 
+   <div id="messageContainer" align="center" >
+      <div id="messageHeader" style="height:50px;margin:0 auto;padding:0 30px;" >
 	        <label> Messages</label>
 			<input type="button" id="write" value="Write New Message" data-popup-open="writeMessage" onclick="messageForm(' ');">
 	 </div>
 	 <div id="menu" >
-	    <hr color="#EEE" width="100%" size="1">
-			<a href="message_action?filter=receive"><label style="cursor:pointer;">InBox </label></a><a href="#"><label> : ${mCount}    </label></a>
+	    <hr color="#EEEEEE" width="100%" size="1">
+			<a href="message_action?filter=msgBoxList"><label style="cursor:pointer;">InBox </label></a><a href="#"><label> : ${mCount}    </label></a>
 			<a href="message_action?filter=send"><label style="cursor:pointer;"> Sent </label></a><a href="#"><label> : ${sCount}    </label></a>
 			<a href="message_action?filter=allLocker"><label style="cursor:pointer;"> locker  </label></a><a href="#"><label>: ${lCount}</label></a> 
      </div>
@@ -66,7 +66,7 @@
 				    <tr>
 						<th align="left" colspan="7 " style="left: 120px;" >
 						<input type="button" style="cursor:pointer;" name="delete" id="delete" value="delete"  onclick="deleteCheckMsg();"> 
-						<button type="button" style="cursor:pointer;" id="reply"  >reply</button>
+					<!-- 	<button type="button" style="cursor:pointer;" id="reply"  >reply</button> -->
 						<input type="button"style="cursor:pointer;"  name="locker" id="locker" value="locker" onclick="moveToLocker();"> 
 						<select name="filter" style="border-radius: 3px; cursor:pointer;">
 								<option value="0"></option>
@@ -93,7 +93,7 @@
 							</c:when>
 						</c:choose>
 					  </tr>
-					  <tr><td colspan="6"> <hr color="#EEE" width="100%" size="1"></td></tr>
+					  <tr><td colspan="6"> <hr color="#EEEEEE" width="100%" size="1"></td></tr>
 					  
 			   <c:if test="${empty map.list}">
 				   <tr>
@@ -108,7 +108,7 @@
 					  </tr>
 				</c:if> 
 				<c:forEach var="dto" items="${map.list}">
-					<tr align="center" id="list">
+				   <tr align="center" id="list">
 						<td><input type="checkbox" style="cursor:pointer;" name="check" value="${dto.msgNum}"></td>
 						<td><c:choose>
 								<c:when test="${dto.readNum == 1}">
@@ -121,14 +121,14 @@
 						<td style="font-weight: bold;" >	
 							<c:set var="num" value="${num-1}"/>
 				            <c:out value="${num}"/></td>
-						<td><button type="button"  id="sender" name="sender" data-popup-open="writeMessage" onclick="messageForm('${dto.sender}')">${dto.sender}</button>
+						<td><button type="button"  id="sender" name="sender" ` onclick="messageForm('${dto.sender}')">${dto.sender}</button>
 						<td><a class="btn" data-popup-open="popup-1" onclick="getMessage('${dto.sender}','${dto.title}','${dto.content }','${dto.msgNum}');">${dto.title}</a></td>
 					    <td><label>${dto.reg_date}</label></td>
 					 </tr>
 				</c:forEach>
 				 </table></form> 
 				<div id="page" style="margin: 10px;">
-				<tr><td colspan="6"> <hr color="#EEE" width="100%" size="1"></td></tr>
+				<tr><td colspan="6"> <hr color="#EEEEEE" width="100%" size="1"></td></tr>
 		        <tr>
 			    <td colspan="7" align="center">
                 <!-- **이전페이지 블록으로 이동 : 현재 페이지 블럭이 1보다 크면 [이전]하이퍼링크를 화면에 출력 -->
@@ -157,21 +157,21 @@
        </div>
 	<script>
 	
-    $("#reply").click(function(){
-    	$("input[name=check]:checked").each(function() {
-			var checkVal = $(this).val();
-			if(checkVal==null){
-	    		alert("선택된 쪽지가 없습니다. 다시 확인 하세요.");
-	    	}
-			alert(checkVal);
+//     $("#reply").click(function(){
+//     	$("input[name=check]:checked").each(function() {
+// 			var checkVal = $(this).val();
+// 			if(checkVal==null){
+// 	    		alert("선택된 쪽지가 없습니다. 다시 확인 하세요.");
+// 	    	}
+// 			alert(checkVal);
 			
-		for (var i = 0; i < checkVal.length; i++) {
-		         if (checkVal[i].checked) {
-		            txt += checkVal[i].value + " ";
-	    }}});
-    	document.msgform.action = "message_reply?box=msgBox";
-	    document.msgform.submit()
-	})
+// 		for (var i = 0; i < checkVal.length; i++) {
+// 		         if (checkVal[i].checked) {
+// 		            txt += checkVal[i].value + " ";
+// 	    }}});
+//     	document.msgform.action = "message_reply?box=msgBox";
+// 	    document.msgform.submit()
+// 	})
 	
     function list(page,lMode){
         location.href="yeps_message?curPage=" + page + "&lMode=" + lMode;
@@ -269,43 +269,41 @@
     	document.msgform.submit();
 		}
 
-    $(document).ready(function(){
-        var tbl = $("#table");
-       // 테이블 헤더에 있는 checkbox 클릭시
-        $(":checkbox:first", tbl).click(function(){
-            // 클릭한 체크박스가 체크상태인지 체크해제상태인지 판단
-            if( $(this).is(":checked") ){
-                $(":checkbox", tbl).attr("checked", "checked");
-            }
-            else{
-                $(":checkbox", tbl).removeAttr("checked");
-            }
-            // 모든 체크박스에 change 이벤트 발생시키기               
-            $(":checkbox", tbl).trigger("change");
-        });
-         
-        // 헤더에 있는 체크박스외 다른 체크박스 클릭시
-        $(":checkbox:not(:first)", tbl).click(function(){
-            var allCnt = $(":checkbox:not(:first)", tbl).length;
-            var checkedCnt = $(":checkbox:not(:first)", tbl).filter(":checked").length;
-             
-            // 전체 체크박스 갯수와 현재 체크된 체크박스 갯수를 비교해서 헤더에 있는 체크박스 체크할지 말지 판단
-            if( allCnt==checkedCnt ){
-                $(":checkbox:first", tbl).attr("checked", "checked");
-            }
-            else{
-                $(":checkbox:first", tbl).removeAttr("checked");
-            }
-        }).change(function(){
-            if( $(this).is(":checked") ){
-                // 체크박스의  부모 > 부모니까  tr이 되고 tr에  selected 라는  class 를 추가한다.
-                $(this).parent().parent().addClass("selected");
-            }
-            else{
-                $(this).parent().parent().removeClass("selected");
-            }
-        });
-    });
+    $(document).ready(function() {
+		var tbl = $("#table");
+		// 테이블 헤더에 있는 checkbox 클릭시
+		$(":checkbox:first", tbl).click(function() {
+		    // 클릭한 체크박스가 체크상태인지 체크해제상태인지 판단
+			if ($(this).is(":checked")) {
+				$(":checkbox", tbl).attr("checked", "checked");
+			} else {
+				$(":checkbox", tbl).removeAttr("checked");
+			}
+			// 모든 체크박스에 change 이벤트 발생시키기               
+			    $(":checkbox", tbl).trigger("change");
+			});
+
+			// 헤더에 있는 체크박스외 다른 체크박스 클릭시
+			$(":checkbox:not(:first)", tbl).click(function() {
+				var allCnt = $(":checkbox:not(:first)",tbl).length;
+				var checkedCnt = $(":checkbox:not(:first)",tbl).filter(":checked").length;
+
+				// 전체 체크박스 갯수와 현재 체크된 체크박스 갯수를 비교해서 헤더에 있는 체크박스 체크할지 말지 판단
+				if (allCnt == checkedCnt) {
+					$(":checkbox:first", tbl).attr("checked", "checked");
+				} else {
+					$(":checkbox:first", tbl).removeAttr("checked");
+					
+				}}).change(function() {
+				if ($(this).is(":checked")) {
+					
+				// 체크박스의  부모 > 부모니까  tr이 되고 tr에  selected 라는  class 를 추가한다.
+					$(this).parent().parent().addClass("selected");
+				} else {
+					$(this).parent().parent().removeClass("selected");
+				}
+			});
+		});
     
     jQuery.noConflict();
     $(function() {
