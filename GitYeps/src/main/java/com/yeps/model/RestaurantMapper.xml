@@ -29,6 +29,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from restaurant
 	</select>
 	
+	
+	
+	
+	<!-- 상우 -->
+	<!--  
+	<select id="listrestaurant" resultType="RestaurantDTO">
+		select * from restaurant order by rnum desc
+	</select>
+	-->
+	<select id="GetRestaurantName_R" parameterType="int" resultType="RestaurantDTO" >
+		select * from yeps_restaurant where rnum = #{GETrnum}
+	</select>
+
+	<select id="restaurantRName" parameterType="int" resultType="RestaurantDTO" >
+		select * from yeps_restaurant where rnum= #{rnumList}
+	</select>
+	
+	<select id="restaurant_restaurantIMG" resultType="RestaurantDTO">
+  		select * from yeps_restaurant where 19 >= rownum 
+  	</select>
+  	
+  	<select id="previous_R" parameterType="int" resultType="RestaurantDTO" >
+  		select *from yeps_restaurant where rnum= #{rnum}
+  	</select>
+  	
+  	<select id="review_write_getrname" parameterType="int" resultType="String">
+  		select rname from yeps_restaurant where rnum= #{rnum}
+  	</select>
 
 
 
