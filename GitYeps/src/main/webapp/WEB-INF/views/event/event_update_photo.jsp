@@ -4,8 +4,8 @@
 <html>
 <head>
 	<title>Add a Event Photo - Yeps</title>
-	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css?ver=1"/>"/>
-	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_update_photo.css"/>"/>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_update_photo.css?ver=1"/>"/>
 	<script src="//code.jquery.com/jquery.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 </head>
@@ -62,7 +62,12 @@
 										</div>
 									</div>
 									<div id="user_photo_write_info">
-										<p style="">From <a href="#" style="font-weight: bold;">사진 업로더의 아이디 표시</a></p> 
+										<p>
+											From 
+											<a href="#" style="font-weight: bold;">
+												${sessionScope.memberinfo.email}
+											</a>
+										</p> 
 										<form id="info_photo" method="post" enctype="multipart/form-data">
 											<input type="hidden" id="photoname" style="display: none; cursor: auto;">
 											<button id="delete_button">Delete</button> 
@@ -122,7 +127,7 @@
 						$('#user_photo_edit_cotainer').show();
 						$('#filenum').val(responseData.filenum);
 						$('#photoname').val(responseData.filename);
-						var url = "getImage/" + responseData.origin_filename;
+						var url = "getImage/" + responseData.filename;
 						$('#photo_box_img').attr('src', url);
 					}
 				});
@@ -211,8 +216,11 @@
 							$('#user_photo_edit_cotainer').show();
 							$('#filenum').val(responseData.filenum);
 							$('#photoname').val(responseData.filename);
-							var url = "getImage/" + responseData.origin_filename;
+							var url = "getImage/" + responseData.filename;
 							$('#photo_box_img').attr('src', url);
+						},
+						error: function() {
+							alert("아작스 에러");
 						}
 					});
 				});
@@ -253,7 +261,7 @@
 		
 		$(document).on('click', '#Save_button', function(e) {
 			$('#evnum').val('${eventDTO.evnum}');
-			//$('#mnum')val('${sessionScope.mnum}');
+			$('#mnum').val('${sessionScope.memberinfo.mnum}');
 			$('#photo_description').attr('action', 'event_updatePro_photo');
 		})
 	</script>

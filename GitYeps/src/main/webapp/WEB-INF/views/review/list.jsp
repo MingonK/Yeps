@@ -2,13 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 
-
 <html>
 <head>
 	<title>yeps_review reviewList</title>
 </head>
 <body>
-
 <div align="center">
 	<b>글 목 록</b>
 	<table border="0" width="800">

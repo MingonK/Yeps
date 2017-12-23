@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yeps.model">
+	<select id="listEventReview" parameterType="int" resultType="EventReviewDTO">
+		select * from yeps_eventreview where evnum = #{evnum} order by eventReview_num asc
+	</select>
+	
+	<insert id="insertEventReview" parameterType="java.util.HashMap">
+		insert into yeps_eventreview values (yeps_eventreview_seq.nextval, #{evnum}, #{mnum}, (select email from yeps_member where mnum = #{mnum}), #{eventReview_content}, to_date(sysdate, 'yyyy/mm/dd hh24:mi:ss'), #{ip})
+	</insert>
+</mapper>

@@ -1,15 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css?ver=3"/>"/>
-<link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css?ver=1" />
-<script src="//code.jquery.com/jquery.min.js?ver=1"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js?ver=2"></script>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css?ver=1"/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css?ver=1"/>"/>
+<link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+<script src="//code.jquery.com/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 
 <body>
 <input type="hidden" id="set" value="${set}">
+<div id="wrap" style="background: white;">
 <div id="page_header">
 	<div id="header_main_content_wrap">
 		<div id="main_content_wrap">
@@ -18,7 +19,7 @@
 					<div id="yeps_img">
 						<a href="main">Yeps</a>
 					</div>
-						<div id="yeps_search_arrange_wrap">
+					<div id="yeps_search_arrange_wrap">
 						<form name="page_header_form" method="post" style="margin: 0; padding: 0; width: 100%;">
 							<div id="yeps_search_arrange">
 								<label id="find_label">
@@ -171,7 +172,7 @@
 									<span id="label_span">Near</span>
 									<span id="label_input_span">
 										<input type="text" maxlength="80" id="page_header_location_inputs" class="page_header_location_inputs" autocomplete="off" placeholder="지역별 검색" 
-												data-query="Las Vegas, NV" aria-autocomplete="list" tabindex="2" data-component-bound="true">
+												aria-autocomplete="list" tabindex="2" data-component-bound="true">
 										<input type="hidden" maxlength="80" data-component-bound="true" name="find_loc" value="Las Vegas, NV">
 									</span>
 								</label>
@@ -221,8 +222,8 @@
 									</div>
 								</div>
 							</div>
-							</form>
-						</div>
+						</form>
+					</div>
 						
 						<c:choose>
 							<c:when test="${empty sessionScope.memberinfo}">
@@ -235,7 +236,7 @@
 							<c:otherwise>
 								<div id="page_header_notifications_wrap">
 									<div id="page_header_notifications">
-										<a href="/mail" class="header-nav_link" id="messages-icon" data-analytics-label="messages_icon">
+										<a href="yeps_message" class="header-nav_link" id="messages-icon" data-analytics-label="messages_icon">
 											<span aria-label="Messages" style="width: 24px; height: 24px;" class="icon icon--24-speech icon--size-24 icon--white icon--fallback-inverted">
 											<svg class="icon_svg">
 												<path d="M18 3H6C4.34 3 3 4.34 3 6v7c0 1.66 1.34 3 3 3h2v5l5-5h5c1.66 0 3-1.34 3-3V6c0-1.66-1.34-3-3-3z"></path>
@@ -343,30 +344,30 @@
 																</a>
 															</li>
 															<li class="drop-down-menu-link hidden-non-responsive-block responsive-visible-medium-block">
-																<a class="js-analytics-click arrange arrange--middle arrange--6" href="#" data-analytics-label="">
+																<a class="js-analytics-click arrange arrange--middle arrange--6" href="yeps_message" data-analytics-label="">
 																	<strong class="arrange_unit">
 																		<span aria-hidden="true" style="width: 24px; height: 24px;" class="icon icon--24-talk icon--size-24 u-space-r1">
 																			<svg class="icon_svg">
 																				<path d="M20 17.326V21l-3-3c-2.715 0-5.006-1.504-5.746-3.566C14.047 13.42 16 11.144 16 8.5c0-.142-.015-.282-.026-.422A7.19 7.19 0 0 1 17 8c3.314 0 6 2.24 6 5 0 1.85-1.208 3.46-3 4.326zM8 14c-.08 0-.158-.007-.238-.01L4 17v-3.99c-1.812-.994-3-2.642-3-4.51C1 5.462 4.134 3 8 3s7 2.462 7 5.5S11.866 14 8 14z"></path>
 																			</svg>
-																		</span><strong class="unit_hover">Message</strong>
+																		</span>
+																		<strong class="unit_hover">Message</strong>
 																	</strong>
 																</a>
 															</li>
+															<c:if test="${sessionScope.memberinfo.ismaster == 'y' || sessionScope.memberinfo.ismanager == 'y'}">
 															<li class="drop-down-menu-link">
-																<a class="js-analytics-click arrange arrange--middle arrange--6" href="#" data-analytics-label="dropdown_rewards-inactive">
+																<a class="js-analytics-click arrange arrange--middle arrange--6" href="member_manager" data-analytics-label="dropdown_rewards-inactive">
 																	<strong class="arrange_unit">
 																		<span aria-hidden="true" style="width: 24px; height: 24px;" class="icon icon--24-cash-back icon--size-24 u-space-r1">
 																			<svg class="icon_svg">
-																				<path d="M13.632 11.153c1.49.283 2.765 1.012 2.765 2.752 0 1.683-1.296 2.78-3.402 2.978l.008.89H11.75v-.883c-2.547-.17-3.453-1.584-3.476-2.886h2.113c.03.616.502 1.146 1.41 1.267v-2.495l-.66-.133c-1.44-.29-2.668-1.13-2.668-2.75 0-1.713 1.443-2.66 3.294-2.823v-.91h1.26v.913c1.948.204 3.154 1.35 3.176 2.815h-2.05c-.016-.53-.42-1.083-1.163-1.21v2.34l.645.135zm-.645 4.11c.727-.057 1.252-.495 1.252-1.146 0-.56-.37-.927-1.12-1.125-.045-.006-.09-.02-.135-.028v2.3zm-1.19-6.592c-.66.074-1.148.46-1.148 1.057 0 .494.335.85.98 1.04.052.02.104.036.164.05V8.67zm9.13 4.12l-3.062-3.95h2.06c-1.27-2.854-4.193-4.862-7.603-4.862-4.57 0-8.29 3.6-8.29 8.024 0 4.426 3.72 8.026 8.29 8.026 3.566 0 6.604-2.195 7.772-5.26h2.148C21 18.936 17.026 22 12.322 22c-5.696 0-10.33-4.486-10.33-10S6.626 2 12.322 2c4.554 0 8.418 2.872 9.788 6.84h1.877l-3.06 3.95z"></path>
+																				<path d="M18.803 12.49l-4.162 1.194c-.8.23-1.45-.666-.98-1.357l2.42-3.59a.893.893 0 0 1 1.33-.172 7.66 7.66 0 0 1 1.97 2.71.894.894 0 0 1-.572 1.215zm-4.187 2.627l4.117 1.338a.893.893 0 0 1 .53 1.233 7.762 7.762 0 0 1-2.058 2.64.894.894 0 0 1-1.326-.216l-2.3-3.674c-.44-.706.24-1.578 1.03-1.32zm-3.996-3.64l-4.07-7.05a.893.893 0 0 1 .388-1.25A12.475 12.475 0 0 1 11.324 2c.518-.04.96.37.96.89v8.138c0 .913-1.208 1.236-1.664.446zm-.714 3.475L5.704 16a.894.894 0 0 1-1.103-.767 7.68 7.68 0 0 1 .358-3.33.892.892 0 0 1 1.237-.516l3.89 1.898c.75.365.635 1.466-.173 1.667zm.738 1.23c.557-.62 1.584-.205 1.555.627l-.158 4.322c-.02.54-.51.94-1.04.85A7.76 7.76 0 0 1 7.9 20.73a.893.893 0 0 1-.156-1.333l2.897-3.22z"></path>
 																			</svg>
-																		</span><strong class="unit_hover">Cash Back</strong>
+																		</span><strong class="unit_hover">Managed Page</strong>
 																	</strong>
-																	<span class="arrange_unit">
-																		<span class="ybadge ybadge-notification drop-down-menu-link_new-label">NEW</span>
-																	</span>
 																</a>
 															</li>
+															</c:if>
 															<li class="drop-down-menu-link">
 																<a class="js-analytics-click arrange arrange--middle arrange--6" href="member_profile" data-analytics-label="Zprofile">
 																	<strong class="arrange_unit">
@@ -393,19 +394,19 @@
 									</div>
 								</c:otherwise>
 							</c:choose>
-						</div>
 					</div>
 				</div>
 			</div>
+		</div>
 		<div id="header_main_content_footer_wrap">
 			<div id="footer_content_container">
 				<div id="footer_container_arrange">
 					<div id="footer_container_list">
-						<div id="footer_list" style="width: 854px; display: inline-block;">
+						<div id="footer_list" style="width: 854px; display: inline-block; margin-right: 12px;">
 							<ul style="display: inline-block;">
 								<li id="footer_list_li">
 									<div>
-										<a href="#" id="footer_list_li_unit">
+										<a href="restaurant_list" id="footer_list_li_unit">
 											<span style="width: 18px; height: 18px; margin-right: 3px !important; display: inline-block; vertical-align: middle; position: relative; overflow: hidden; top: -.1em; fill: #fff;">
 												<svg id="18x18_food" height="100%" viewBox="0 0 18 18" width="100%">
 													<path d="M13.61 17h-.007a1.39 1.39 0 0 1-1.376-1.587L13 10l-2-1c0-5.373 1.375-8 3.25-8 .497 0 .75.336.75.75v13.86A1.39 1.39 0 0 1 13.61 17zM6.557 9.912l.35 5.59a1.41 1.41 0 1 1-2.813 0l.35-5.59A1.994 1.994 0 0 1 3 8V1.5a.5.5 0 0 1 1 0v5a.5.5 0 0 0 1 0v-5a.5.5 0 0 1 1 0v5a.5.5 0 0 0 1 0v-5a.5.5 0 0 1 1 0V8c0 .91-.61 1.67-1.443 1.912z"></path>
@@ -505,7 +506,7 @@
 								</li>
 								<li id="footer_list_li_message">
 									<div>
-										<a href="#" id="footer_list_li_unit">
+										<a href="yeps_message" id="footer_list_li_unit">
 											Message
 										</a>
 									</div>
@@ -533,7 +534,14 @@
 			$('#footer_list_li_message').css('background', '#9b1a1a');
 		}
 		
-		$('#footer_list_block').hover(function() {
+/* 		$('#messages-icon').hover(function() {
+			$('#messages-icon').css('background-color', '#9b1a1a');
+		})
+		
+		$('#messages-icon').mouseleave(function() {
+			$('#messages-icon').css('background-color', '#9b1a1a');
+		}) */
+		$('#footer_list_block').hover(function() {
 			$('#header_page_footer_dropdown').attr('id', 'header_page_footer_dropdown_view');
 			$('#footer_list_li_unit_after').attr('id', 'footer_list_li_unit_after_active');
 			$('#header_page_footer_dropdown_wrap').css('pointer-events', 'auto');
@@ -550,16 +558,13 @@
 		$('#page_header_location_inputs').click(function() {
 			$('#main_location_suggestion_container').show();
 		})
-		$('.drop-menu-link').click(function() {
+		
+		$('.drop-menu-link').click(function(e) {
 			$('#topbar-account-wrap').toggle();
+			e.stopPropagation();
+			e.preventDefault();
 		});
 	});
-	
-	$(document).on('click', function(e) {
-	      if(!$(e.target).hasClass('drop-menu-link')) {
-	         $('#topbar-account-wrap').hide();
-	      }
-	   });
 	
 	$('html').click(function(e) {
 		if(!$(e.target).hasClass("page_header_inputs"))	{
@@ -568,7 +573,13 @@
 		}
 		if(!$(e.target).hasClass("page_header_location_inputs")) {
 			$('#main_location_suggestion_container').hide();
-		} 
+		}
+	});
+		
+	$(document).on('click', function(e) {
+		if(!$(e.target).hasClass('drop-menu') && !$(e.target).hasClass('drop-menu-link')) {
+			$('#topbar-account-wrap').hide();
+		}
 	});
 </script>
 

@@ -54,7 +54,7 @@ function busy_changeTime(){
 		}
 		for(var i=0;i<e.length;i++){
 			if(c==e.options[i].value){
-				document.getElementById("busy-hour-end").options[i].selected = 'selected';
+				document.getElementById("hour-end").options[i].selected = 'selected';
 				break;
 			}
 		}
@@ -115,7 +115,7 @@ function hour_changeTime(){
 				break;
 			}
 		}
-		if(s.options[s.selectedIndex].value=='휴일'){
+		if(s.options[s.selectedIndex].value=='익일'){
 			e.options.length = 0
 			var option = document.createElement('option');
 			option.text = "";
@@ -159,12 +159,12 @@ function busy_add() {
 	
 	if(s.options[s.selectedIndex].value=='없음'){
 		document.getElementById("busy-display").appendChild(div).innerHTML = "<span>"+day[day2]+"    "+"</span>"+"없음"+
-		"<a style='margin-left: 6px;' href='javascript:void(0);' onclick='remove2("+day2+")'>삭제</a>" 
+		"<a style='margin-left: 6px;' href='#' onclick='remove2("+day2+")'>삭제</a>" 
 		document.getElementsByName("busytime").value="없음";
 	}else{
 		document.getElementById("busy-display").appendChild(div).innerHTML = "<span>"+day[day2]+"    "+"</span>"+
 		"<span>"+start+"</span>"+"<span>"+"&nbsp-&nbsp"+"</span>"+"<span>"+end+"&nbsp"+"</span>"+
-		"<a href='javascript:void(0);' onclick='remove2("+day2+")'>삭제</a>"
+		"<a href='#' onclick='remove2("+day2+")'>삭제</a>"
 		document.getElementsByName("busytime").value=start +"&nbsp"+end;
 	}
 }
@@ -200,12 +200,12 @@ function hour_add() {
 	
 	if(s.options[s.selectedIndex].value=='익일'){
 		document.getElementById("hours-display").appendChild(div).innerHTML = "<span>"+day[day2]+"    "+"</span>"+"익일"+
-		"<a style='margin-left: 6px;' href='javascript:void(0);' onclick='remove("+day2+")'>삭제</a>" +
+		"<a style='margin-left: 6px;' href='#' onclick='remove("+day2+")'>삭제</a>" +
 		"<input type='hidden' name='"+week[day2]+"' value='익일'/>";
 	}else{
 		document.getElementById("hours-display").appendChild(div).innerHTML = "<span>"+day[day2]+"    "+"</span>"+
 		"<span>"+start+"</span>"+"<span>"+"&nbsp-&nbsp"+"</span>"+"<span>"+end+"&nbsp"+"</span>"+
-		"<a href='javascript:void(0);' onclick='remove("+day2+")'>삭제</a>" +
+		"<a href='#' onclick='remove("+day2+")'>삭제</a>" +
 		"<input type='hidden' name='"+week[day2]+"' value='"+start+" "+end+"'/>";
 	}
 }
@@ -213,11 +213,13 @@ function hour_add() {
 function remove(obj) {
 	var parent = document.getElementById("hours-display");
 	var child = document.getElementById(week[obj]);
+// 	var scrolly=$(window).scrollTop();
 	parent.removeChild(child);
 }
 function remove2(obj) {
 	var parent = document.getElementById("busy-display");
 	var child = document.getElementById("busy"+week[obj]);
+// 	var scrolly=$(window).scrollTop();
 	parent.removeChild(child);
 }
 
@@ -250,6 +252,7 @@ function test() {
 	for (var i = 0; i < reststyle_name.length; i++) {
 		if (reststyle_name[i].checked) {
 			reststyle.push(reststyle_name[i].value)
+			alert(reststyle[i])
 		}
 	}
 	document.getElementById("reststyle").value = reststyle.join(',')
@@ -283,36 +286,34 @@ function test() {
 				<div class="restInsert-layout-full" style="width:990px;height:100%;margin:0px -15px;display:block;">
 					<div class="restInsert-alpha" style="width:50%;height:100%;float: left;padding: 0 15px;display:inline-block;">
 
-						<h2 style="word-wrap: break-word !important;word-break: break-word !important;overflow-wrap: break-word !important; font-weight: bold;margin-bottom: 6px;font-size: 26px;line-height: 1.28571em;color: #d32323;">가게 등록</h2>
+						<h2 style="word-wrap: break-word !important;word-break: break-word !important;overflow-wrap: break-word !important;
+						font-weight: bold;margin-bottom: 6px;font-size: 26px;line-height: 1.28571em;color: #d32323;">가게 등록</h2>
 							<form name="restForm" id="restForm" enctype="multipart/form-data" method="post" action="restaurant_insert" onsubmit="return test();"
 							style="margin-bottom: 18px;display: block;width:100%;height:100%;">
 								<ul style="list-style:none;">
 									<li class="restInsert-list">
 										<label for="attr_BusinessName" class="restInsert-label-bold">가게 이름</label>
-										<input class="restInsert-input" id="" name="rname" placeholder="가게 이름을 입력해주세요" type="text" value="">	
+										<input class="restInsert-input" id="" name="rname" placeholder="가게 이름을 입력해주세요" type="text" value="지원의 집">	
 									</li>
 									<li class="restInsert-list">
-									 <label for="attr_BusinessName" class="restInsert-label-bold">사진 선택</label>
-						               <div class="filebox bs3-primary preview-image" style="margin: 6px 0 18px; width: 100%; height: 30px; display: block; text-align:left;">
-						                  <label for="input_file" id="input_file_label"style="width: 80px; color: black; display: inline-block; padding: .5em .75em; font-size: 14px; vertical-align: middle; text-align: center; cursor: pointer; border: 1px solid #999; border-radius: 3px;">사진 올리기</label>
-						                  <input type="file" id="input_file" class="upload-hidden" name="filename" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0;" >
-						               </div> 
+										<label for="filename" class="restInsert-label-bold">레스토랑 사진</label>
+										<input class="restInsert-input" id="filename" name="filename" placeholder="클릭!!" type="text" value="" onclick="">
 									</li>
 									<li class="restInsert-list">
 										<label for="zipNo" class="restInsert-label-bold">우편번호</label>
-										<input class="restInsert-input" id="" name="zipNo" placeholder="" type="text" value="" onclick="goPopup();" readonly>	
+										<input class="restInsert-input" id="" name="zipNo" placeholder="" type="text" value="21100" onclick="goPopup();" readonly>	
 									</li>
 									<li class="restInsert-list">
 										<label id="roadAddrPart1-label" for="roadAddrPart1" class="restInsert-label-bold" style="display:none;">도로명 주소</label>
-										<input class="restInsert-input" id="roadAddrPart1" name="roadAddrPart1" placeholder="" type="text" value="" style="display:none;" readonly>	
+										<input class="restInsert-input" id="roadAddrPart1" name="roadAddrPart1" placeholder="" type="text" value="인천광역시 계양구 봉오대로463번길 12" style="display:none;" readonly>	
 									</li>
 									<li class="restInsert-list">
 										<label id="addrDetail-label" for="addrDetail" class="restInsert-label-bold" style="display:none;">상세주소</label>
-										<input class="restInsert-input" id="addrDetail" name="addrDetail" placeholder="" type="text" value="" style="display:none;" readonly>	
+										<input class="restInsert-input" id="addrDetail" name="addrDetail" placeholder="" type="text" value="1동 502호" style="display:none;" readonly>	
 									</li>
 									<li class="restInsert-list">
 										<label id="roadAddrPart2-label"  for="roadAddrPart2" class="restInsert-label-bold" style="display:none;">상세주소2</label>
-										<input class="restInsert-input" id="roadAddrPart2" name="roadAddrPart2" placeholder="" type="text" value="" style="display:none;" readonly>	
+										<input class="restInsert-input" id="roadAddrPart2" name="roadAddrPart2" placeholder="" type="text" value="(효성동, 하나아파트)" style="display:none;" readonly>	
 									</li>
 									<li class="restInsert-list">
 										<label for="raddress" class="restInsert-label-bold">전화번호</label><br>
@@ -335,12 +336,12 @@ function test() {
 												<option value="063">063</option>
 												<option value="064">064</option>
 										</select>
-									<input class="restInsert-hp" type="text" name="hp2" value="" maxlength="4"  onkeypress="txtOnlyNum(event)" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" style="width:126.5px;">
-									- <input class="restInsert-hp" type="text" name="hp3" value="" maxlength="4"  onkeypress="txtOnlyNum(event)" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" style="width:126.5px;">
+									<input class="restInsert-hp" type="text" name="hp2" value="297" maxlength="4"  onkeypress="txtOnlyNum(event)" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" style="width:126.5px;">
+									- <input class="restInsert-hp" type="text" name="hp3" value="7765" maxlength="4"  onkeypress="txtOnlyNum(event)" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" style="width:126.5px;">
 									</li>
 									<li class="restInsert-list">
 										<label for="foodstyle" class="restInsert-label-bold">음식 종류</label>
-										<input class="restInsert-input" id="" name="foodstyle" placeholder="" type="text" value="">	
+										<input class="restInsert-input" id="" name="foodstyle" placeholder="" type="text" value="한식,중식">	
 									</li>
 									<li class="restInsert-list">
 										<label for="day" class="restInsert-label-bold">영업시간</label>
@@ -361,9 +362,9 @@ function test() {
 														<option value="6">일요일</option>
 													</select>
 												</li>
-												<li class="restInsert-li">
-													<select class="restInsert-day" id="hour-start" onchange="hour_changeTime()" style="width:147px">
-														<option value="휴일">휴일</option>
+												<li class="restInsert-li" style="width:153px;">
+													<select class="restInsert-day" id="hour-start" onchange="hour_changeTime()" style="width:">
+														<option value="익일">익일</option>
 														<option value="0.0" selected>오전 12:00</option>
 														<option value="0.5">오전 12:30</option>
 														<option value="1.0">오전 1:00</option>
@@ -414,8 +415,8 @@ function test() {
 														<option value="23.5">오후 11:30</option>
 													</select>
 												</li>
-												<li class="restInsert-li">
-													<select class="restInsert-day" id="hour-end" style="width:147px">
+												<li class="restInsert-li" style="width:153px;">
+													<select class="restInsert-day" id="hour-end">
 														<option value="0.5">오전 12:30</option>
 														<option value="1.0">오전 1:00</option>
 														<option value="1.5">오전 1:30</option>
@@ -491,56 +492,54 @@ function test() {
 									<li class="restInsert-list">
 										<label for="roadAddrPart1" class="restInsert-label-bold">좌석</label><br>
 										<div class="checkbox" style="width:370px;height:auto;">
-											<input class="magic-checkbox" type="checkbox" id="reststyle" name="reststyle" value="좌석" >
-											<label for="reststyle" class="restInsert-label" style="width:60px">좌석</label>
+											<input class="magic-checkbox" type="checkbox" id="reststyle" name="reststyle" value="좌석" checked>
+											<label for="reststyle" class="restInsert-label" style="width:15%">좌석</label>
 											
-											<input class="magic-checkbox" type="checkbox" id="reststyle2" name="reststyle" value="테이블석" >
-											<label for="reststyle2" class="restInsert-label" style="width:63px">테이블석</label>
+											<input class="magic-checkbox" type="checkbox" id="reststyle2" name="reststyle" value="테이블석" checked>
+											<label for="reststyle2" class="restInsert-label" style="width:20%">테이블석</label>
 											
-											<input class="magic-checkbox" type="checkbox" id="reststyle3" name="reststyle" value="야외석" >
-											<label for="reststyle3" class="restInsert-label"style="width:60px">야외석</label>
+											<input class="magic-checkbox" type="checkbox" id="reststyle3" name="reststyle" value="야외석" checked>
+											<label for="reststyle3" class="restInsert-label" style="width:15%">야외석</label>
 										</div>
 									
 									</li>
 									<li class="restInsert-list">
 										<label for="roadAddrPart1" class="restInsert-label-bold">예약</label><br>
 										
-										<input class="magic-radio" type="radio" id="reserv" name="reserv" value="가능" >
-										<label for="reserv" class="restInsert-label" style="width:58px">가능</label>
+										<input class="magic-radio" type="radio" id="reserv" name="reserv" value="가능" checked>
+										<label for="reserv" class="restInsert-label">가능</label>
 										<input class="magic-radio" type="radio" id="reserv2" name="reserv" value="불가능">
 										<label for="reserv2" class="restInsert-label">불가능</label>
 									</li>
-									
 									<li class="restInsert-list">
-										<label for="roadAddrPart1" class="restInsert-label-bold">배달</label><br>
-										
-										<input class="magic-radio" type="radio" id="delivery1" name="delivery" value="가능" >
-										<label for="delivery1" class="restInsert-label" style="width:58px">가능</label>
+										<label for="roadAddrPart1" class="restInsert-label-bold-bold">배달</label><br>
+																				
+										<input class="magic-radio" type="radio" id="delivery" name="delivery" value="가능" checked>
+										<label for="delivery" class="restInsert-label">가능</label>
 										<input class="magic-radio" type="radio" id="delivery2" name="delivery" value="불가능">
 										<label for="delivery2" class="restInsert-label">불가능</label>
 									</li>
-									
 									<li class="restInsert-list">
-										<label class="restInsert-label-bold">포장</label><br>
+										<label for="roadAddrPart1" class="restInsert-label-bold">포장</label><br>
 																				
-										<input class="magic-radio" type="radio" id="takeout1" name="takeout" value="가능" >
-										<label for="takeout1" class="restInsert-label" style="width:58px">가능</label>
+										<input class="magic-radio" type="radio" id="takeout" name="takeout" value="가능" checked>
+										<label for="takeout" class="restInsert-label">가능</label>
 										<input class="magic-radio" type="radio" id="takeout2" name="takeout" value="불가능">
 										<label for="takeout2" class="restInsert-label">불가능</label>
 									</li>
 									<li class="restInsert-list">
 										<label for="roadAddrPart1" class="restInsert-label-bold">주차장</label><br>
 																														
-										<input class="magic-radio" type="radio" id="parking" name="parking" value="가능" >
-										<label for="parking" class="restInsert-label" style="width:58px">가능</label>
+										<input class="magic-radio" type="radio" id="parking" name="parking" value="가능" checked>
+										<label for="parking" class="restInsert-label">가능</label>
 										<input class="magic-radio" type="radio" id="parking2" name="parking" value="불가능">
 										<label for="parking2" class="restInsert-label">불가능</label>
 									</li>
 									<li class="restInsert-list">
 										<label for="roadAddrPart1" class="restInsert-label-bold">단체예약</label><br>
 																																								
-										<input class="magic-radio" type="radio" id="groupreserv" name="groupreserv" value="가능" >
-										<label for="groupreserv" class="restInsert-label" style="width:58px">가능</label>
+										<input class="magic-radio" type="radio" id="groupreserv" name="groupreserv" value="가능" checked>
+										<label for="groupreserv" class="restInsert-label">가능</label>
 										<input class="magic-radio" type="radio" id="groupreserv2" name="groupreserv" value="불가능">
 										<label for="groupreserv2" class="restInsert-label">불가능</label>
 									</li>
@@ -548,67 +547,67 @@ function test() {
 										<label for="roadAddrPart1" class="restInsert-label-bold">소음</label><br>
 										
 										<input class="magic-radio" type="radio" id="noise" name="noise" value="조용함" >
-										<label for="noise" class="restInsert-label" style="width:58px">조용함</label>
+										<label for="noise" class="restInsert-label">조용함</label>
 										
-										<input class="magic-radio" type="radio" id="noise2" name="noise" value="평균" >
-										<label for="noise2" class="restInsert-label" style="width:58px">평균</label>
+										<input class="magic-radio" type="radio" id="noise2" name="noise" value="평균" checked>
+										<label for="noise2" class="restInsert-label">평균</label>
 										
 										<input class="magic-radio" type="radio" id="noise3" name="noise" value="시끄러움">
-										<label for="noise3" class="restInsert-label" style="width:58px">시끄러움</label>
+										<label for="noise3" class="restInsert-label">시끄러움</label>
 									</li>
 									<li class="restInsert-list">
 										<label for="roadAddrPart1" class="restInsert-label-bold">키드존</label><br>
 										
-										<input class="magic-radio" type="radio" id="kidszone" name="kidszone" value="키드존" >
-										<label for="kidszone" class="restInsert-label" style="width:58px">키드존</label>
-										<input class="magic-radio" type="radio" id="kidszone2" name="kidszone" value="노키드존">
-										<label for="kidszone2" class="restInsert-label">노키드존</label>
+										<input class="magic-radio" type="radio" id="kidzone" name="kidzone" value="키드존" checked>
+										<label for="kidzone" class="restInsert-label">키드존</label>
+										<input class="magic-radio" type="radio" id="kidszone2" name="kidzone" value="노키드존">
+										<label for="kidzone2" class="restInsert-label">노키드존</label>
 									</li>
 									<li class="restInsert-list">
 										<label for="roadAddrPart1" class="restInsert-label-bold">주류</label><br>
 										
 										<div class="checkbox" style="width:390px;height:auto;">
 										
-											<input class="magic-checkbox" type="checkbox" id="alcohol" name="alcohol" value="소주" >
-											<label for="alcohol" class="restInsert-label" style="width:60px">소주</label>
+											<input class="magic-checkbox" type="checkbox" id="alcohol" name="alcohol" value="소주" checked>
+											<label for="alcohol" class="restInsert-label" style="width:15%">소주</label>
 											
-											<input class="magic-checkbox" type="checkbox" id="alcohol2" name="alcohol" value="맥주" >
-											<label for="alcohol2" class="restInsert-label" style="width:60px">맥주</label>
+											<input class="magic-checkbox" type="checkbox" id="alcohol2" name="alcohol" value="맥주" checked>
+											<label for="alcohol2" class="restInsert-label" style="width:15%">맥주</label>
 											
-											<input class="magic-checkbox" type="checkbox" id="alcohol3" name="alcohol" value="양주" >
-											<label for="alcohol3" class="restInsert-label" style="width:60px">양주</label>
+											<input class="magic-checkbox" type="checkbox" id="alcohol3" name="alcohol" value="양주" checked>
+											<label for="alcohol3" class="restInsert-label" style="width:15%">양주</label>
 											
-											<input class="magic-checkbox" type="checkbox" id="alcohol4" name="alcohol" value="막걸리" >
-											<label for="alcohol4" class="restInsert-label" style="width:60px">막걸리</label>
+											<input class="magic-checkbox" type="checkbox" id="alcohol4" name="alcohol" value="막걸리" checked>
+											<label for="alcohol4" class="restInsert-label" style="width:15%">막걸리</label>
 										</div>
 									</li>
 									<li class="restInsert-list">
 										<label class="restInsert-label-bold">대기실</label><br>
 										
-										<input class="magic-radio" type="radio" id="waiting" name="waiting" value="있음" >
-										<label for="waiting" class="restInsert-label" style="width:58px">있음</label>
+										<input class="magic-radio" type="radio" id="waiting" name="waiting" value="있음" checked>
+										<label for="waiting" class="restInsert-label" style="width:15%">있음</label>
 										
 										<input class="magic-radio" type="radio" id="waiting2" name="waiting" value="없음">
-										<label for="waiting2" class="restInsert-label" >없음</label>
+										<label for="waiting2" class="restInsert-label" style="width:15%">없음</label>
 									</li>
 									<li class="restInsert-list">
 										<label for="roadAddrPart1" class="restInsert-label-bold">WIFI</label><br>
 
-										 <input class="magic-radio" type="radio" id="wifi" name="wifi" value="있음" >
-										 <label for="wifi" class="restInsert-label" style="width:58px;">있음</label>
+										 <input class="magic-radio" type="radio" id="wifi" name="wifi" value="있음" checked>
+										 <label for="wifi" class="restInsert-label" style="width:25%;">있음</label>
 										
 										<input class="magic-radio" type="radio" id="wifi2" name="wifi" value="없음">
-										<label for="wifi2" class="restInsert-label">없음</label>
+										<label for="wifi2" class="restInsert-label" style="width:25%;">없음</label>
 										
 									</li>
 									<li class="restInsert-list">
 										<label for="roadAddrPart1" class="restInsert-label-bold">화장실</label><br>
 										
-										<input class="magic-radio" type="radio" id="toilet" name="toilet" value="있음" >
-										<label for="toilet" class="restInsert-label" style="width:58px;">있음</label>
+										<input class="magic-radio" type="radio" id="toilet" name="toilet" value="있음" checked>
+										<label for="toilet" class="restInsert-label" style="width:25%;">있음</label>
 										
 										<input class="magic-radio" type="radio" id="toilet2" name="toilet" value="없음">
-										<label for="toilet2" class="restInsert-label">없음</label>
+										<label for="toilet2" class="restInsert-label" style="width:25%;">없음</label>
 									</li>
 									<li class="restInsert-list">
 										<label for="roadAddrPart1" class="restInsert-label-bold">테이블 수</label><br>
@@ -617,7 +616,7 @@ function test() {
 											<option value="1">1</option>
 											<option value="2">2</option>
 											<option value="3">3</option>
-											<option value="4">4</option>
+											<option value="4" selected>4</option>
 											<option value="5">5</option>
 											<option value="6">6</option>
 											<option value="7">7</option>
@@ -762,7 +761,7 @@ function test() {
 													</select>
 												</li>
 												<li class="restInsert-li">
-													<button type="button" value="submit" class="restInsert-button " style="padding: 5px 8px;font-size: 12px;line-height: 1.5em;border:1px solid #ccc;display:absolute;" onclick="busy_add();" >
+													<button type="button" value="submit" class="restInsert-button " style="padding: 5px 8px;font-size: 12px;line-height: 1.5em;border:1px solid #ccc;" onclick="busy_add();" >
 														<span>Add</span>
 													</button>
 												</li>
@@ -774,14 +773,12 @@ function test() {
 									<button id="restInsert-submit" name="action_submit" type="submit" value="등록" class="restInsert-submit">
 										<span>등록</span>
 									</button>
-									<a href="restaurant_list">취소</a>
+									<a href="#">취소</a>
 								</div>
 							</form>
 					</div>
 					<div class="restInsert-beta" style="width:40%;height:100%;float: left;padding: 0 15px;display:inline-block;">
-						<div class="restInsert-image" style="box-shadow: 0 6px 12px rgba(0,0,0,1);margin-top:20px;">
-							<img id="preview" src="" width="100%" style="display:none;border: 1px solid #999;border-radius: 5px;">
-						</div>
+				
 					</div>
 				</div>
 			</div>
@@ -789,45 +786,6 @@ function test() {
 	</div>		
 <script>
 
-</script>
-<script>
-var file = document.querySelector('#input_file');
-file.onchange = function () {
-    var fileList = file.files ;
-    // 읽기
-    var reader = new FileReader();
-    reader.readAsDataURL(fileList [0]);
-
-    //로드 한 후
-    reader.onload = function  () {
-        //로컬 이미지를 보여주기
-        document.getElementById("preview").style.display="block";
-        document.querySelector('#preview').src = reader.result;
-
-        //썸네일 이미지 생성
-        var tempImage = new Image(); //drawImage 메서드에 넣기 위해 이미지 객체화
-        tempImage.src = reader.result; //data-uri를 이미지 객체에 주입
-        tempImage.onload = function () {
-            //리사이즈를 위해 캔버스 객체 생성
-            var canvas = document.createElement('canvas');
-            var canvasContext = canvas.getContext("2d");
-
-            //캔버스 크기 설정
-            canvas.width = 100; //가로 100px
-            canvas.height = 100; //세로 100px
-
-            //이미지를 캔버스에 그리기
-            canvasContext.drawImage(this, 0, 0, 100, 100);
-
-            //캔버스에 그린 이미지를 다시 data-uri 형태로 변환
-            var dataURI = canvas.toDataURL("image/jpeg");
-
-            //썸네일 이미지 보여주기
-//             document.querySelector('#thumbnail').src = dataURI;
-           
-        };
-    };
-};
 </script>
 </body>
 </html>

@@ -9,7 +9,7 @@
 			<value>oracle.jdbc.driver.OracleDriver</value>
 		</property>			
 		<property name="url">
-			<value>jdbc:oracle:thin:@127.0.0.1:1521:xe</value>
+			<value>jdbc:oracle:thin:@yepsdbinstance.cvlo8lngm3zv.ap-northeast-2.rds.amazonaws.com:1521:ORCL</value>
 		</property>
 		<property name="username"><value>java7</value></property>
 		<property name="password"><value>java7</value></property>

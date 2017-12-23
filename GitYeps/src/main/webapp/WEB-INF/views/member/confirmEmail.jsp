@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ include file="../style.jsp"%>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/member.css"/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
 <html>
 <head>
 <title>Email 중복확인</title>

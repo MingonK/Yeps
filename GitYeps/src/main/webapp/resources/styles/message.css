@@ -1,15 +1,15 @@
-/* #messageContainer { */
-/* 	height: 80%; */
-/*     position: relative;  */
-/*     top: 30px;   */
+#messageContainer {
+	height: 80%;
+    position: relative; 
+    top: 30px;  
 	
-/* 	min-width: 800px; */
-/* 	max-width: 100%; */
-/* 	margin: 0 400px; */
-/* 	padding: 0px; */
-/* } */
+	min-width: 800px;
+	max-width: 100%;
+	margin: 0 400px;
+	padding: 0px;
+}
 
- #messageHeader {
+#messageHeader {
     font-weight: bold;
 	font-family: cambria;
 	font-size: 17px;
@@ -51,7 +51,8 @@
 	border-radius: 5px; 
 	font-weight: bold; 
 	font-family: cambria; 
-	font-size: 16px;"
+	font-size: 16px;
+	border: 1px solid #8d0005;
 }
 
 #messageList {
@@ -84,7 +85,7 @@ button #reply {
 	font-size: 17px;
 }
 
- .popup label {
+.popup label {
      font-weight:bold; 
      font-size:21px;"
      }
@@ -96,9 +97,9 @@ button #sender{
        font-family: consolas; 
        color:#0073bb; 
        font-size:17px;"
-       }
+}
 
-#receiver,#title {
+#receiver, #title {
 	width: 100%;
 	height: 40;
 	border-radius: 7px;
@@ -113,6 +114,7 @@ button #sender{
 	border-radius: 5px; 
 	font-weight: bold; 
 	font-family: consolas;
+	border: 1px solid #8d0005;
 }
 
 #sender {
@@ -132,100 +134,114 @@ button #sender{
 	cursor:pointer;
 }
 
-    .popup {
-         width:100%;
-          height:100%;
-          display:none;
-          position:fixed;
-          top:0px;
-          left:0px;
-          background:rgba(0,0,0,0.75);
-      }
+.popup {
+	width:100%;
+	height:100%;
+	display:none;
+	position:fixed;
+	top:0px;
+	left:0px;
+	background:rgba(0,0,0,0.75);
+}
     
        /* Inner */
-      .popup-inner {
-          max-width:550px;
-          max-height:330px;
-          width:90%;
-          padding:20px;
-          position:absolute;
-          top:50%;
-          left:50%;
-          -webkit-transform:translate(-50%, -50%);
-          transform:translate(-50%, -50%);
-          box-shadow:0px 2px 6px rgba(0,0,0,1);
-          border-radius:3px;
-          background:#fff;
-       }
+.popup-inner {
+	max-width:550px;
+	max-height:330px;
+	width:90%;
+	padding:20px;
+	position:absolute;
+	top:50%;
+	left:50%;
+	-webkit-transform:translate(-50%, -50%);
+	transform:translate(-50%, -50%);
+	box-shadow:0px 2px 6px rgba(0,0,0,1);
+	border-radius:3px;
+	background:#fff;
+	color: #d32323;
+}
        
-      .popup-inner h4 {
-          font-weight:bold; 
-          font-size:21px; 
-          z-index: 1; 
-       }
+.popup-inner a:hover {
+	text-decoration: underline;
+}
        
-       .popup button {
-           cursor:pointer; 
-           width: 170; 
-           height: 33;  
-	       color: #ffffff; 
-	       background: #d32323; 
-	       border-radius: 5px; 
-	       font-weight: bold; 
-	       font-family: cambria; 
-	       font-size: 17px;
-	   }
+.popup-inner h3 {
+	font-weight:bold; 
+	font-size:21px; 
+	z-index: 1;
+	margin: 5px 0;
+}
+       
+.popup button {
+	cursor:pointer; 
+	width: 170; 
+	height: 33;  
+	color: #ffffff; 
+	background: #d32323; 
+	border-radius: 5px; 
+	font-weight: bold; 
+	font-family: cambria; 
+	font-size: 17px;
+	border: 1px solid #8d0005;
+}
 	   
-	   .popup input {
-           width: 100%; 
-           font-weight:bold; 
-           font-size:19px; 
-           height:30; 
-           border-radius: 7px;"
-       }
-       #sendformMessage {
-           resize: none; 
-           font-weight:bold; 
-           width:100%; 
-           font-size:17px; 
-           border-radius: 7px;
-           }
+.popup button:hover, #table #del:hover, #reply:hover, #search:hover, #locker:hover, #write:hover {
+	background: red;
+}
+	   
+.popup input {
+	width: 100%; 
+	font-weight:bold; 
+	font-size:inherit; 
+	border-radius: 5px;
+	margin-bottom: 5px;
+	background: #fff;
+    border: 1px solid #999;
+    padding-left: 10px;
+}
+
+#sendformMessage {
+	resize: none; 
+	font-weight:bold; 
+	width:100%; 
+	font-size:17px; 
+	border-radius: 5px;
+	padding-left: 10px;
+}
        
-       #message {
-           resize: none; 
-           font-weight: bold; 
-           font-size: 21px; 
-           border-radius: 5px; 
-           width: 100%; 
-           bgcolor: #fff;
-           }
+#message {
+	resize: none; 
+	font-weight: bold; 
+	font-size: 21px; 
+	border-radius: 5px; 
+	width: 100%; 
+	bgcolor: #fff;
+}
      /* Close Button */
-      .popup-close {
-          width:30px;
-          height:30px;
-          padding-top:4px;
-          display:inline-block;
-          position:absolute;
-          top:0px;
-          right:0px;
-          transition:ease 0.25s all;
-          -webkit-transform:translate(50%, -50%);
-          transform:translate(50%, -50%);
-          border-radius:1000px;
-          background:rgba(0,0,0,0.8);
-          font-family:Arial, Sans-Serif;
-          font-size:20px;
-          text-align:center;
-          line-height:100%;
-          color:#fff;
-      }
+.popup-close {
+	width:30px;
+	height:30px;
+	padding-top:4px;
+	display:inline-block;
+	position:absolute;
+	top:0px;
+	right:0px;
+	transition:ease 0.25s all;
+	-webkit-transform:translate(50%, -50%);
+	transform:translate(50%, -50%);
+	border-radius:1000px;
+	background:rgba(0,0,0,0.8);
+	font-family:Arial, Sans-Serif;
+	font-size:20px;
+	text-align:center;
+	line-height:100%;
+	color:#fff;
+}
      
-    .popup-close:hover {
-          -webkit-transform:translate(50%, -50%) rotate(180deg);
-          transform:translate(50%, -50%) rotate(180deg);
-          background:rgba(0,0,0,1);
-          text-decoration:none;
-      }
+.popup-close:hover {
+	-webkit-transform:translate(50%, -50%) rotate(180deg);
+	transform:translate(50%, -50%) rotate(180deg);
+	background:rgba(0,0,0,1);
+	text-decoration:none;
+}
       
-    
-     

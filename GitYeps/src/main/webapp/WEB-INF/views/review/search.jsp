@@ -15,6 +15,6 @@
 	<c:forEach var="rvdto" items="${SearchedDTO_Rv}">
 		${rvdto.content}
 	</c:forEach>
-	 
+	
 </body>
 </html>

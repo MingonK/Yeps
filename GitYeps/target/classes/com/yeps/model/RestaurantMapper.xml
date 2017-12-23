@@ -6,59 +6,45 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.web.model">
 	<select id="listRestaurant" resultType="RestaurantDTO" parameterType="RestaurantDTO">
-		select * from (select rownum rn, A.* from (select * from restaurant order by rnum desc)A) where rn between #{start} and #{end}
+		select * from (select rownum rn, A.* from (select * from yeps_restaurant order by rnum desc)A) where rn between #{start} and #{end}
 	</select>
 
 	<insert id="insertRestaurant" parameterType="RestaurantDTO">
-		insert into restaurant values(restaurant_seq.nextval,0,#{rname},#{filename},#{zipNo},#{roadAddrPart1},#{addrDetail},#{roadAddrPart2},
+		insert into yeps_restaurant values(yeps_restaurant_seq.nextval,0,#{rname},#{filename},#{zipNo},#{roadAddrPart1},#{addrDetail},#{roadAddrPart2},
 		#{raddress},#{hp2},#{hp3},#{foodstyle},#{mon, jdbcType=VARCHAR},#{tue, jdbcType=VARCHAR},#{wed, jdbcType=VARCHAR},#{thu, jdbcType=VARCHAR},
 		#{fri, jdbcType=VARCHAR},#{sat, jdbcType=VARCHAR},#{sun,jdbcType=VARCHAR},
-		#{reststyle},#{reserv},#{delivery},#{takeout},#{parking},#{kidzone},#{groupreserv},#{noise},#{alcohol},#{waiting},
-		#{wifi},#{toilet},#{tablecount},#{standard},#{busytime})
+		#{reststyle},#{reserv},#{delivery},#{takeout},#{parking},#{kidszone},#{groupreserv},#{noise},#{alcohol},#{waiting},
+		#{wifi},#{toilet},#{tablecount},#{standard},#{busytime},sysdate)
 	</insert>
 	
 	<select id="getRest" resultType="RestaurantDTO" parameterType="int">
-		select * from restaurant where rnum=#{rnum}
+		select * from yeps_restaurant where rnum=#{rnum}
 	</select>
 	
 	<select id="uploadFileList" resultType="FileDTO">
-		select * from yeps_file where rnum=#{rnum}
+		select * from yeps_files where rnum=#{rnum}
 	</select>
 	
 	<select id="getCount" resultType="int">
-		select count(*) from restaurant
+		select count(*) from yeps_restaurant
+	</select>
+	<select id="getImageCount" resultType="int">
+		select count(*) from yeps_files where rnum=#{rnum}
+	</select>
+	
+	<select id="review_write_getrname" parameterType="int" resultType="String"> 
+		select rname from yeps_restaurant where rnum= #{rnum} 
 	</select>
 	
 	
 	
 	
-	<!-- 상우 -->
-	<!--  
-	<select id="listrestaurant" resultType="RestaurantDTO">
-		select * from restaurant order by rnum desc
-	</select>
-	-->
-	<select id="GetRestaurantName_R" parameterType="int" resultType="RestaurantDTO" >
-		select * from yeps_restaurant where rnum = #{GETrnum}
-	</select>
-
-	<select id="restaurantRName" parameterType="int" resultType="RestaurantDTO" >
-		select * from yeps_restaurant where rnum= #{rnumList}
-	</select>
 	
-	<select id="restaurant_restaurantIMG" resultType="RestaurantDTO">
-  		select * from yeps_restaurant where 19 >= rownum 
-  	</select>
-  	
-  	<select id="previous_R" parameterType="int" resultType="RestaurantDTO" >
-  		select *from yeps_restaurant where rnum= #{rnum}
-  	</select>
-  	
-  	<select id="review_write_getrname" parameterType="int" resultType="String">
-  		select rname from yeps_restaurant where rnum= #{rnum}
-  	</select>
-
-
+	<!-- =========================================================== -->
+	
+	<select id="GetRestaurantName_R" parameterType="int" resultType="RestaurantDTO">
+		select * from yeps_restaurant where rnum = #{rnum}
+	</select>
 
 </mapper>
 

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <% 
     pageContext.setAttribute("cr", "\r"); //Space
     pageContext.setAttribute("cn", "\n"); //Enter
@@ -12,21 +12,61 @@
 <head>
 	<title>${eventDTO.eventname}</title>
 	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=HXle5j7nJaMnyv_Zey_M&submodules=geocoder"></script>
-	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css?ver=1"/>"/>
-	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css?ver=1"/>"/>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css?ver=2"/>"/>
 	<script src="//code.jquery.com/jquery.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 	<script src="http://malsup.github.com/jquery.cycle2.js"></script>
 </head>
 	<%@ include file="../top.jsp"%>
+<div style="background: white; min-width: 1020px;">	
 	<div id="event_content_header_container">
 		<div id="event_content_header_content">
+			<div id="event_alert_container">
+				<div id="event_alert_error">
+					<p id="event_alert_message">
+					</p>
+				</div>
+			</div>
+		
 			<div id="event_header_eventname">
 				<div id="event_header_eventname_detail">
 					<h1>${eventDTO.eventname}</h1>
 					<div id="eventname_detail_category">
 						<span>
-							<a href="#">${eventDTO.event_category}</a>
+							<a href="event_list?mode=${eventDTO.event_category}">
+								<c:choose>
+									<c:when test="${eventDTO.event_category eq 'music_concert'}">
+										음악 & 콘서트
+									</c:when>
+									<c:when test="${eventDTO.event_category eq 'visualart'}">
+										전시회
+									</c:when>
+									<c:when test="${eventDTO.event_category eq 'film'}">
+										영화 & 시사회
+									</c:when>
+									<c:when test="${eventDTO.event_category eq 'book'}">
+										도서 & 출판
+									</c:when>
+									<c:when test="${eventDTO.event_category eq 'fashion'}">
+										패션
+									</c:when>
+									<c:when test="${eventDTO.event_category eq 'food'}">
+										음식
+									</c:when>
+									<c:when test="${eventDTO.event_category eq 'festival'}">
+										축제 & 행사
+									</c:when>
+									<c:when test="${eventDTO.event_category eq 'sports_activity'}">
+										스포츠 & 야외활동
+									</c:when>
+									<c:when test="${eventDTO.event_category eq 'nightlife'}">
+										야간 문화활동
+									</c:when>
+									<c:when test="${eventDTO.event_category eq 'family_kids'}">
+										가족 & 어린이
+									</c:when>
+								</c:choose>
+							</a>
 						</span>
 					</div>
 				</div>
@@ -165,7 +205,6 @@
 	
 	
 	
-	
 	<div id="event_content_super_container">
 		<div id="event_content_detail_container">
 			<div id="event_content_detail_left_container">
@@ -198,23 +237,117 @@
 						<div id="event_content_comment_header">
 							<h3>Discuss This Event</h3>
 						</div>
-						<p style="margin-bottom: 12px;">
-							No one has commented on this event yet.
-						</p>
-						<form name="eventReview" method="post" action="eventReview_insert" style="display: block; margin-bottom: 10px; margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline;">
+						
+						<!-- 이프문으로 있을 때 없을 때 구분!! -->
+						<c:if test="${empty eventReview_list}">
+							<p style="margin-bottom: 12px;">
+								아직 댓글이 없습니다.
+							</p>
+						</c:if>
+						
+						<ol id="event_content_comment_list">
+						<c:forEach var="event_reviewDTO" items="${eventReview_list}">
+							<c:forEach var="event_memberDTO" items="${eventReview_writer_list}">
+								<c:if test="${event_reviewDTO.mnum == event_memberDTO.mnum}">
+								<li>
+									<div id="event_topic_reply">
+										<div id="event_reply_user_info_wrapper">
+											<div id="event_reply_user_info_block">
+												<div id="event_reply_user_info_photo_wrapper">
+													<div id="event_reply_user_photo">
+														<a href="#">
+															<img src="" width="60" height="60" id="event_reply_user_img">
+														</a>
+													</div>
+												</div>
+																					
+												<div id="event_reply_user_info">
+													<ul>
+														<li id="event_reply_user_name">
+															<a id="event_reply_user_name" href="#">
+																${event_memberDTO.email}
+															</a>
+														</li>
+													
+														<li id="event_reply_user_location">
+															<b>유저 주소</b>
+														</li>
+													</ul>
+												
+													<ul>
+														<li id="event_reply_user_friend_count">
+															<span id="event_subscription_icon">
+																<svg>
+																	<g>
+																		<path d="M7.904 9.43l-2.098 4.697a.9.9 0 0 1-1.612 0L2.096 9.43a.902.902 0 0 1 .806-1.305h4.196c.67 0 1.105.705.806 1.305zM5 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path><path d="M15.904 9.43l-2.098 4.697a.89.89 0 0 1-.806.498.89.89 0 0 1-.806-.498L10.096 9.43a.902.902 0 0 1 .806-1.305h4.195c.67 0 1.106.705.807 1.305zM13 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" opacity=".502"></path>
+																	</g>
+																</svg>
+															</span>
+															<b>999</b> friends
+														</li>
+														<li id="event_reply_user_review_count">
+															<span>
+																<svg>
+																	<path d="M13 3H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1.505 9.643l-2.526-1.55L6.526 12.7 7 9.934 5 7.977l2.766-.404L8.97 4.7l1.264 2.873L13 7.977l-2 1.957.495 2.71z"></path>
+																</svg>
+															</span>
+															<b>999</b> reviews
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									
+									
+										<div id="topic_reply_body">
+											<div id="topic_reply_content">
+												<div id="event_reply_content">
+													<p id="reply_content_message_text">
+														${fn:replace(event_reviewDTO.eventReview_content,crcn,br)}
+													</p>
+												</div>
+												<div id="event_reply_content_flag">
+													<a class="event_reply_popup" id="event_content_description_bottom_flag_icon_action" href="#" data-popup-open="popup-2">
+														<span id="event_content_description_bottom_flag_icon">
+															<svg id="event_content_flag_icon" >
+																<path d="M6 10V3c4.976 1.098 4.024-1 8 0v7c-4.024-.976-3.024 1.024-8 0zM4 2h1v14H4V2z"></path>
+															</svg>
+														</span>
+														<span id="event_content_flag_tootip_wrap">
+															<span id="event_content_flag_tootip"> 									
+																부적절한 내용 신고
+															</span>
+														</span>
+													</a>
+												</div>
+											</div>
+											<span style="font-size: 12px; line-height: 1.5em; color: #999; white-space: nowrap;">
+												${fn:replace(event_reviewDTO.eventReview_writedate,crcn,br)}
+											</span>
+										</div>
+									</div>
+								</li>
+								</c:if>
+							</c:forEach>
+						</c:forEach>
+						</ol>
+						
+						
+						<form name="eventReviewForm" method="post" action="eventReview_insert" style="display: block; margin-bottom: 10px; margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline;">
 							<input type="hidden" name="evnum" value="${eventDTO.evnum}">
-							<input type="hidden" name="mnum" value="">
-							<input type="hidden" name="" value="">
-							<div id="event_content_comment_reply_box">
+							<input type="hidden" name="mnum" value="${sessionScope.memberinfo.mnum}">
+							<div id="event_content_comment_reply_box" style="margin-top: 18px;">
 								<label>
 									Enter Your Reply
 								</label>
 								<!-- 로그인 했을 때만 textarea를 볼 수있음!!!! -->
-								<div id="event_content_comment_reply">
-									<textarea name="eventReview_content" id="event_review_content"></textarea>
-								</div>
+								<c:if test="${!empty sessionScope.memberinfo}">
+									<div id="event_content_comment_reply">
+										<textarea name="eventReview_content" id="event_review_content"></textarea>
+									</div>
+								</c:if>
 								<fieldset>
-									<button id="event_reply_button" type="submit" value="submit">
+									<button type="submit" value="submit" id="event_reply_button">
 										<span>Post</span>	
 									</button> 
 								</fieldset>
@@ -546,17 +679,22 @@
 				
 				
 				<div id="other_events_this_week" style="margin-bottom: 0;">
-					<h3>금주 추천 이벤트</h3>
+					<h3>진행중인 이벤트</h3>
 					<ul>
 						<c:forEach var="this_week_eventDTO" items="${thisWeek_EventList}">
 						<li style="margin-bottom: 12px; display: list-item; text-align: -webkit-match-parent;">
 							<div id="this_week_popular_events">
 								<div id="this_week_popular_events_photo_wrap">
-									<div id="this_week_popular_events_photo" style="width: 60px; height: 60px;">
+									<div id="this_week_popular_events_photo">
+										<c:if test="${this_week_eventDTO.filenum == 0}">
+											<a href="event_content?evnum=${this_week_eventDTO.evnum}" style="margin: 0; padding: 0; border: 0; cursor: pointer;">
+												<img src="getImage/event_square.png" style="outline: none; border-radius: 4px; vertical-align: middle; margin: 0; padding: 0; border: 0; height: 60px; width: 60px;">
+											</a>
+										</c:if>
 										<c:forEach var="this_week_fileDTO" items="${thisWeek_EventFileList}">
 										<c:if test="${this_week_eventDTO.filenum == this_week_fileDTO.filenum}">
 											<a href="event_content?evnum=${this_week_eventDTO.evnum}" style="margin: 0; padding: 0; border: 0; cursor: pointer;">
-												<img src="getImage/${this_week_fileDTO.origin_filename}" style="outline: none; border-radius: 4px; vertical-align: middle; margin: 0; padding: 0; border: 0; height: 60px; width: 60px;">
+												<img src="getImage/${this_week_fileDTO.filename}" style="outline: none; border-radius: 4px; vertical-align: middle; margin: 0; padding: 0; border: 0; height: 60px; width: 60px;">
 											</a>
 										</c:if>
 										</c:forEach>
@@ -582,7 +720,7 @@
 						</li>
 						</c:forEach>
 					</ul>
-					<a href="event_list" style="font-size: 12px;">더 많은 이벤트 보기</a>
+					<a href="event_list" style="font-size: 12px;">이벤트 더 보기</a>
 				</div>
 			</div>
 		</div>
@@ -600,7 +738,7 @@
     	    	</h2>
     	    </div>
     	    <div id="flag_content_popup_error_message">
-    	    	<span style="color: #d32323;">
+    	    	<span style="color: #d32323">
     	    		<span id="popup_error_message_icon">
     	    			<svg>
     	    				<path d="M9 1a8 8 0 1 0 0 16A8 8 0 0 0 9 1zM8 5a1 1 0 0 1 2 0v4a1 1 0 0 1-2 0V5zm1 9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"></path>
@@ -636,8 +774,85 @@
     	</div>
 	</div>
 	
+	
+	
+	
+	<div class="flag_content_popup" data-popup="popup-2">
+    	<div class="popup-inner" style="width: 465px; z-index: 1;">
+    	    <div id="flag_content_popup_title">
+    	    	<div id="flag_content_popup_close" data-popup-close="popup-2">
+    				<h4 style="margin-top: -20px;">×</h4>
+    			</div>
+    	    	<h2>
+    	    		부적절한 댓글 신고
+    	    	</h2>
+    	    </div>
+    	    <div id="reply_flag_content_popup_error_message">
+    	    	<span id="popup_error_message">
+    	    		<span id="popup_error_message_icon" style="color: #d32323">
+    	    			<svg>
+    	    				<path d="M9 1a8 8 0 1 0 0 16A8 8 0 0 0 9 1zM8 5a1 1 0 0 1 2 0v4a1 1 0 0 1-2 0V5zm1 9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"></path>
+    	    			</svg>
+    	    		</span>
+    	    		신고사유를 선택하고 내용을 상세하게 작성해주세요.
+    	    	</span>
+    	    </div>
+    	    
+    	    <div id="flag_popup_description" style="padding: 0 12px;">
+    	    	<div>
+    	    		<p style="margin: 12px 0;">이 댓글을 신고하는 이유를 선택하고 상세하게 설명해주세요.</p>
+    	    		<form name="reply_flag_popup_form" id="reply_flag_popup_form" action="#" method="post" onsubmit="return reply_report_check()" style="margin-bottoom: 0;">
+    	    			<div>
+    	    				<label id="reply_flag_popup_form_label" for="reason_field" style="display: inline-block; font-weight: bold; margin: 0 0 6px;">
+    	    					이유
+    	    				</label>
+    	    				<select id="reason_field">
+    	    					<option value="default" selected>신고 사유를 선택하세요.</option>
+    	    					<option value="inappropriate_post">부적절한 홍보 게시물</option>
+    	    					<option value="Eroticism">음란성, 선정성 또는 부적합한 내용</option>
+    	    					<option value="swear_word">특정인 대상의 비방/욕설</option>
+    	    					<option value="Privacy_infringement">명예훼손/사생활 침해 및 저작권침해 등</option>
+    	    					<option value="personal_information">개인정보 공개</option>
+    	    					<option value="plaster">같은 내용의 반복 게시 (도배)</option>
+    	    					<option value="other">기타</option>
+    	    				</select>
+    	    			</div>
+    	    			<div id="flag_popup_descripte_container">
+    	    				<div id="flag_popup_descripte">
+    	    					<label id="reply_flag_popup_descripte_alert">신고내용을 상세하게 작성해주세요.</label>
+    	    					<textarea id="reply_flag_popup_descripte_field" name="flag_popup_descripte_field"></textarea>
+    	    				</div>
+    	    			</div>
+    	    		</form>
+    	    	</div>
+    	    </div>
+     	  	<div id="flag_popup_footer">
+     	  		<div id="flag_popup_buttons">
+     	  			<button id="reply_flag_popup_submit_button" type="submit" value="submit">
+     	  				<span>제출하기</span>
+     	  			</button>
+     	  			<a href="#" data-popup-close="popup-2">
+    					Close
+    				</a>
+     	  		</div>
+     	  	</div>
+    	</div>
+	</div>
+</div>
+	
+		
 	<script type="text/javascript">
 		var store_address = '${eventDTO.roadAddrPart1}';
+		var mode = '${param.mode}';
+		if(mode == 'empty_content') {
+			document.getElementById('event_alert_container').style.display = 'block';
+			document.getElementById('event_alert_container').style.backgroundColor = '#fcd6d3';
+			document.getElementById('event_alert_message').innerHTML = '댓글의 내용을 입력해주세요.';
+		} else if(mode == 'insert_eventReview') {
+			document.getElementById('event_alert_container').style.display = 'block';
+			document.getElementById('event_alert_container').style.backgroundColor = '#daecd2';
+			document.getElementById('event_alert_message').innerHTML = '댓글을 작성하였습니다.';
+		}
 		
 		naver.maps.Service.geocode({address : store_address}, function(status, response) {
 			var result = response.result;
@@ -661,7 +876,12 @@
 					'<div style="padding: 8px; background: white;">',
 						'<div style="display: inline-block;">',
 							'<div id="map_inner_eventphoto" style="float: left;">',
-								'<img src="getImage/${fileList[0].origin_filename}" style="outline: none; width: 100px; height: 100px;">',
+								'<c:if test="${empty fileList[0].filename}">',
+									'<img src="getImage/event_square.png" style="outline: none; width: 100px; height: 100px;">',
+								'</c:if>',
+								'<c:if test="${!empty fileList[0].filename}">',
+									'<img src="getImage/${fileList[0].filename}" style="outline: none; width: 100px; height: 100px;">',
+								'</c:if>',
 							'</div>',
 							'<div id="map_inner_eventname" style="margin-left: 5px; float: left; width: 150px; heght: 100px; font-size: 12px;">',
 								'<a href="event_content?evnum=${eventDTO.evnum}">${eventDTO.eventname}</a>',
@@ -693,7 +913,7 @@
 		
 		var list = new Array();
 		<c:forEach var="fileDTO" items="${fileList}">
-			list.push("${fileDTO.origin_filename}");
+			list.push("${fileDTO.filename}");
 		</c:forEach>
 		
 		for(var i = 0; i < list.length; i++) {
@@ -706,21 +926,49 @@
 			document.getElementById('slideshow_img').appendChild(img);
 		}
 		
-		function check() {
+		function check() {		
 			if(flag_popup_form.flag_popup_descripte_field.value == "") {
 				document.getElementById('flag_content_popup_error_message').style.display = 'block';
 				document.getElementById('flag_popup_descripte_alert').style.color = '#d32323';
+				document.getElementById('flag_content_popup_error_message span').style.color = "#d32323";
 				return false;
 			}
+			return true;
 		}
+		
+		function reply_report_check() {
+			var selected = document.getElementById('reason_field');
+			if(selected.options[selected.selectedIndex].value == "default") {
+				document.getElementById('reply_flag_content_popup_error_message').style.display = 'block';
+				document.getElementById('reply_flag_popup_form_label').style.color = '#d32323';
+				return false;
+			} else if(reply_flag_popup_form.reply_flag_popup_descripte_field.value == "") {
+				document.getElementById('reply_flag_content_popup_error_message').style.display = 'block';
+				document.getElementById('reply_flag_popup_form_label').style.color = '#d32323';
+				return false;
+			}
+			return true;
+		}
+		
 	</script>
 	<script>
    		//----- OPEN
     	$('[data-popup-open]').on('click', function(e)  {
+    		var memberinfo ='${sessionScope.memberinfo}';
+    		if(!memberinfo.length) {
+     			$(location).attr("href", "event_report");
+     			return;
+    		}
+    		
         	var targeted_popup_class = jQuery(this).attr('data-popup-open');
         	$('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
         	$('body').css('overflow','hidden');
-        	
+        	$('#flag_content_popup_error_message').css('display', 'none');
+        	$('#flag_popup_descripte_alert').css('color', 'black');
+        	$('#reply_flag_content_popup_error_message').css('display', 'none');
+        	$('#reply_flag_popup_descripte_alert').css('color', 'black');
+        	$('#reply_flag_popup_form_label').css('color', 'black');
+        	$("#reason_field").val("default").prop("selected", true);
  			e.stopPropagation();
         	e.preventDefault();
     	});
@@ -730,6 +978,7 @@
         	var targeted_popup_class = jQuery(this).attr('data-popup-close');
         	$('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
         	$('body').css('overflow','auto');
+        	
         	e.stopPropagation();
         	e.preventDefault();
     	});
@@ -743,16 +992,6 @@
 			$('#photo_box_action').mouseleave(function() {
 				$('#photo_box_action').css('background', 'rgba(0, 0, 0, 0.3)');
 				$('#event_content_photo_tooltip_wrap').css('left', '-9999px');
-			})
-			
-			$('#event_content_description_bottom_flag_icon_action').hover(function() {
-				$('#event_content_description_bottom_flag_icon').css('fill', 'black');
-				$('#event_content_flag_tootip_wrap').css('left', '13px');
-			})
-			
-			$('#event_content_description_bottom_flag_icon_action').mouseleave(function() {
-				$('#event_content_description_bottom_flag_icon').css('fill', 'currentColor');
-				$('#event_content_flag_tootip_wrap').css('left', '-9999px');
 			})
 			
 			$('#event_reply_button').hover(function() {
@@ -779,16 +1018,12 @@
 				$('#event_subscript_interested_button').css('background', '#f7f7f7');
 			})
 			
-			$('#flag_popup_submit_button').hover(function() {
-				$('#flag_popup_submit_button').css('background', 'red');
-			})
-			
-			$('#flag_popup_submit_button').mouseleave(function() {
-				$('#flag_popup_submit_button').css('background', '#d90007');
-			})
-			
-			$('#flag_popup_submit_button').click(function() {
+ 			$('#flag_popup_submit_button').click(function() {
 				$('#flag_popup_form').submit();
+			})
+			
+			$('#reply_flag_popup_submit_button').click(function() {
+				$('#reply_flag_popup_form').submit();
 			})
 		});
 	</script>

@@ -11,91 +11,50 @@ import org.springframework.stereotype.Service;
 import com.yeps.model.FileDTO;
 import com.yeps.model.RestaurantDTO;
 
-/**
- * This is not a best practices class.  It's just an example
- * to give you an idea of how iBATIS works.  For a more complete
- * example, see JPetStore 5.0 at http://www.ibatis.com.
- */
 @Service
 public class RestaurantMapper {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public List<RestaurantDTO> listRest(int start,int end){
-	    Map<String, Object> map = new HashMap<String, Object>();
-	    map.put("start", start);
-	    map.put("end", end);
-		return sqlSession.selectList("listRestaurant",map);
+	public List<RestaurantDTO> listRest(int start, int end) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		return sqlSession.selectList("listRestaurant", map);
 	}
 
 	public int insertRest(RestaurantDTO dto) {
-		return sqlSession.update("insertRestaurant",dto);
+		return sqlSession.update("insertRestaurant", dto);
 	}
-	
+
 	public RestaurantDTO getRest(int rnum) {
-		RestaurantDTO dto=sqlSession.selectOne("getRest",rnum);
+		RestaurantDTO dto = sqlSession.selectOne("getRest", rnum);
 		return dto;
 	}
-	
+
 	public int getCount() {
 		return sqlSession.selectOne("getCount");
 	}
+
+	public int getImageCount(int rnum) {
+		return sqlSession.selectOne("getImageCount", rnum);
+	}
+
 	public List<FileDTO> getFileList(int rnum) {
-		return sqlSession.selectList("uploadFileList",rnum);
+		return sqlSession.selectList("uploadFileList", rnum);
 	}
 
-	
-	
-	
-	
-	
-	
-	//상우
-//	public List<RestaurantDTO> listrestaurant(){
-//		return sqlSession.selectList("listrestaurant");
-//	}
+	// ------------------------------------------------------------------
 
-//	public int insertRest(RestaurantDTO dto) {
-//		return sqlSession.update("insertRestaurant",dto);
-//	}
-	
-	public List<RestaurantDTO> GetRestaurantName_R(int GETrnum) {
-		return sqlSession.selectList("GetRestaurantName_R", GETrnum);
-	}
-	
-	public RestaurantDTO restaurantRName(int rnumList) {
-			return sqlSession.selectOne("restaurantRName", rnumList);
-	}
-	
-	public List<RestaurantDTO> restaurant_restaurantIMG() {
-		return sqlSession.selectList("restaurant_restaurantIMG");
-	}
-	
-	public List<RestaurantDTO> previous_R(int rnum){
-		return sqlSession.selectList("previous_R", rnum);
-	}
-	
 	public String review_write_getrname(int rnum) {
 		return sqlSession.selectOne("review_write_getrname", rnum);
 	}
-	
-	
-	
-	
+
+	public List<RestaurantDTO> listRestReview(int start, int end) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		return sqlSession.selectList("listRestaurantReview", map);
+	}
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
