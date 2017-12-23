@@ -42,21 +42,17 @@ public class MessageController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	public ModelAndView pagingMessageList(HttpServletRequest req ,@RequestParam String lMode, String name) {
-		System.out.println(name);
+	//각각의 메시지 총 수를 구한다.
         int cnt = 0;
-		int count = yepsMessageMapper.getMessageCount();
-		int lCount = yepsMessageMapper.getLockerCount();
-		int sCount = yepsMessageMapper.getSendCount(name);
-		System.out.println(count);
-		System.out.println("!" + sCount);
-		int mCount = yepsMessageMapper.getReceiveCount(name);
+		int count = yepsMessageMapper.getMessageCount();//총 메시지 카운트. 하지만 보여지는 페이지에선 나오지 않을듯
+		int lCount = yepsMessageMapper.getLockerCount();//보관함 쪽지 개수
+		int sCount = yepsMessageMapper.getSendCount(name);//보낸 쪽지 개수
+		int mCount = yepsMessageMapper.getReceiveCount(name);//받은 쪽지 개수
+	   
 		int curPage = req.getParameter("curPage")!=null?Integer.parseInt(req.getParameter("curPage")): 1 ;
-		
-		System.out.println(sCount);
-		System.out.println(lCount);
-		System.out.println(mCount);
+		//lMode로 여러 종류의 리스트를 구분하여 카운트를 설정한다.  
 		if(lMode==null) {
-	    lMode = req.getParameter("mode")!=null?req.getParameter("mode"):"msgBoxList";
+	    lMode = req.getParameter("lMode")!=null?req.getParameter("lMode"):"msgBoxList";
 	        cnt = mCount;
 		}
 		if(lMode.equals("allLocker")) {
@@ -77,39 +73,49 @@ public class MessageController {
 		}else if(lMode.equals("readLocker")) {
 			
 			cnt = yepsMessageMapper.readLockerCount();
+		}else if(lMode.equals("sender")) {
+			
+			cnt = sCount;
 		}
+		
 		int pageScale = 10, blockScale = 5;
 		YepsPager yPager = new YepsPager(cnt, curPage, pageScale, blockScale );
 		int start = yPager.getPageBegin();
 		int end = yPager.getPageEnd();
 		int pageSize = yPager.PAGE_SCALE;
 		int num = count - pageSize * (curPage - 1) + 1; 
+		
+		System.out.println("2" + lMode);
+		
+		//페이징처리된 리스트를 구한다.
 		List<MessageDTO> list = yepsMessageMapper.messageList(start, end, lMode, name);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("lMode", lMode);
 		map.put("list", list); // list
 		map.put("count", count); 
 		map.put("yepsPager", yPager);
+		
 		ModelAndView mav = new ModelAndView();
-		System.out.println(sCount);
-		System.out.println(lCount);
-		System.out.println(mCount);
 	    mav.addObject("mCount",mCount);
 		mav.addObject("lCount",lCount);
 		mav.addObject("sCount",sCount);
 		mav.addObject("count", count);
 		mav.addObject("num", num);
 		mav.addObject("map", map); 
-		mav.addObject("mode", "receive");
+		
+		//lMode에 따라 보내질 페이지를 구분한다.
 		if(lMode.equals("allLocker") || lMode.equals("readLocker") || lMode.equals("noneLocker")) {
 			mav.setViewName("message/messageLocker");
 			mav.addObject("set", "message");
-		}else {
-		mav.setViewName("message/yepsMessage");
-		mav.addObject("set", "message");
-		System.out.println(sCount);
-		System.out.println(lCount);
-		System.out.println(mCount);
+		}else{
+			String mode = req.getParameter("mode");
+			if(mode==null) {
+				mav.addObject("mode", "receive");
+			}else {
+				mav.addObject("mode", mode);
+			}
+			mav.setViewName("message/yepsMessage");
+			mav.addObject("set", "message");
 		}
 		return mav;
 	}
@@ -214,7 +220,6 @@ public class MessageController {
 		    	 dto.setReceiver(who);
 		    }
 		}
-		System.out.println("@" + dto.getReceiver());
 		  int res = yepsMessageMapper.writeMessage(dto);
 	  		if(res>0) {
 	  			msg = "쪽지를 보냈습니다.쪽지함으로 이동합니다.";
@@ -225,9 +230,7 @@ public class MessageController {
 	  			msg = "쪽지 보내기에 실패하였습니다.";
 	  			mav = pagingMessageList(req, lMode,  name);
 	  		}
-		System.out.println(dto.getReceiver());
-	  
-		mav.addObject("msg", msg);
+	    mav.addObject("msg", msg);
 		return mav;
 	}
 
@@ -268,44 +271,45 @@ public class MessageController {
 	@RequestMapping(value = "message_action")
 	public ModelAndView message_search(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
-		String mode = req.getParameter("filter");
+		String filterMode = req.getParameter("filter");
 		MemberDTO member = (MemberDTO)req.getSession().getAttribute("memberinfo");
 		int mnum = member.getMnum();
 		String name = member.getName();
         String lMode = null;
         String msg = null;
-		if(mode.equals("allMsg")) {
+        System.out.println("#" + filterMode);
+		if(filterMode.equals("allMsg")) {
          
 			mav.setViewName("redirect:yeps_message");
 			
-		}else if(mode.equals("noneMsg")) {
+		}else if(filterMode.equals("noneMsg")) {
 			lMode = "noneMsg";
 			mav = pagingMessageList(req, lMode,  name);
 			
-		}else if(mode.equals("readMsg")) {
+		}else if(filterMode.equals("readMsg")) {
 			lMode = "readMsg";
 			mav = pagingMessageList(req, lMode, name);
 		
-        }else if(mode.equals("allLocker")) {
+        }else if(filterMode.equals("allLocker")) {
 			
             mav.setViewName("redirect:message_locker");
-        }else if(mode.equals("readLocker")) {
+        }else if(filterMode.equals("readLocker")) {
 			lMode = "readLocker";
 			mav = pagingMessageList(req, lMode, name);
 			mav.setViewName("message/messageLocker");
 			
-		}else if(mode.equals("noneLocker")) {
+		}else if(filterMode.equals("noneLocker")) {
 			lMode = "noneLocker";
 			mav = pagingMessageList(req, lMode, name);
 			mav.setViewName("message/messageLocker");
 			
-		}else if(mode.equals("send")){
-			System.out.println("6" + name);
-			lMode = "sender";
+		}else if(filterMode.equals("sender")){
+		
+			lMode = filterMode;
 			mav = pagingMessageList(req, lMode, name);
 		    mav.addObject("mode","send");
 		
-		}else if(mode.equals("msgBoxList")) {
+		}else if(filterMode.equals("msgBoxList")) {
 			mav.setViewName("redirect:yeps_message");
 			
 		}else {
@@ -319,7 +323,12 @@ public class MessageController {
 	@RequestMapping(value = "message_read")//쪽지함에서 읽음 표시
 	public ModelAndView message_read(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
+		MemberDTO member = (MemberDTO)req.getSession().getAttribute("memberinfo");
+		
+		String name = member.getName();
 		String mNum = req.getParameter("read") ;
+		String lMode = req.getParameter("lMode");
+		System.out.println("1" + lMode);
 		int msgNum = 0 ,resRead = 0 , readNum = 0,	resDate=0;
 		if(mNum==null) {
 			msgNum = Integer.parseInt(req.getParameter("msgnum"));
@@ -329,9 +338,12 @@ public class MessageController {
 				resDate = yepsMessageMapper.updateReadDate(msgNum);
 				readNum = yepsMessageMapper.getContent(msgNum).getReadNum();
 				mav.addObject("readNum", readNum);
+				mav = pagingMessageList(req,lMode,name);
 			}else {
-				mav.setViewName("redirect:yeps_message");
+				mav = pagingMessageList(req,lMode,name);
+				
 			}
+			return mav;
 		}else {
 			msgNum = Integer.parseInt(mNum);
 			readNum = yepsMessageMapper.getContent(msgNum).getReadNum();
@@ -342,32 +354,7 @@ public class MessageController {
 				resRead = yepsMessageMapper.updateReadNum0(msgNum);
 			}
 		}
-		String lMode = "msgBoxList";
-		MemberDTO member = (MemberDTO)req.getSession().getAttribute("memberinfo");
-		String name = member.getName();
-		int mnum = member.getMnum();
 		mav = pagingMessageList(req, lMode, name);
-		return mav;
-	}
-
-	@RequestMapping(value = "message_readLocker")//보관함에서의 읽음 표시
-	public ModelAndView message_readLocker(HttpServletRequest req) {
-		ModelAndView mav = new ModelAndView();
-		int msgNum = Integer.parseInt(req.getParameter("read")) ;
-		int	rNum = 0 ;
-		int readNum = yepsMessageMapper.getContent(msgNum).getReadNum();
-		if(readNum==0) {
-			rNum = yepsMessageMapper.updateReadNum1(msgNum);
-			int	rDate = yepsMessageMapper.updateReadDate(msgNum);
-		}else {
-			rNum = yepsMessageMapper.updateReadNum0(msgNum);
-		}
-		String lMode = "lockerList";
-		MemberDTO member = (MemberDTO)req.getSession().getAttribute("memberinfo");
-		String name = member.getName();
-		int mnum = member.getMnum();
-		mav = pagingMessageList(req,lMode, name);
-		mav.setViewName("message/messageLocker");
 		return mav;
 	}
 
@@ -387,25 +374,20 @@ public class MessageController {
 		}
 		for(String num : check) {
 			int msgnum = Integer.parseInt(num);
-		
-			int res = yepsMessageMapper.moveToLocker(msgnum);
-		
-			if (res>0) {
+		    int res = yepsMessageMapper.moveToLocker(msgnum);
+		    if (res>0) {
 				
 				msg = "보관함으로 이동 되었습니다. ";
 				lMode = "msgBoxList";
 				mav = pagingMessageList(req,lMode, name);
 				mav.addObject("msg", msg);
-			
-				
 			}else {
 				msg = "보관함 이동에 실패하였습니다.";
 				mav.addObject("msg", msg);
 				mav.setViewName("redirect:yeps_message");
 			}
 		}
-	
-		return mav;
+	    return mav;
 	}
 
 	@RequestMapping(value = "message_lockerToMsgBox")
