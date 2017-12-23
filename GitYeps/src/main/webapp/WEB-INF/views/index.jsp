@@ -10,7 +10,7 @@
 		<a href="category_list">카테고리 목록</a>
 		<a href="event_list">이벤트 목록</a>
 		<a href="menu_list">메뉴 목록</a>
-		<a href="yreview_list">리뷰 목록</a>
+		<a href="review_index">리뷰 목록</a>
 		<a href="member_index">회원 관리</a>
 		<a href="qna_list">QnA 목록</a>
 		<a href="yeps_message">message page</a>

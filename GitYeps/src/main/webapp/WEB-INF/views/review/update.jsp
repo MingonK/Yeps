@@ -5,19 +5,19 @@
 	<title>타이틀을 입력해주세요.</title>
 	<script type="text/javascript">
 		function check(){
-			if (f.writer.value==""){
+			if (updateF.writer.value==""){
 				alert("작성자명을 입력해 주세요!!")
-				f.writer.focus()
+				updateF.writer.focus()
 				return false
 			}
-			if (f.content.value==""){
+			if (updateF.content.value==""){
 				alert("내용을 입력해 주세요!!")
-				f.subject.focus()
+				updateF.subject.focus()
 				return false
 			}
-			if (f.gradepoint.value==""){
+			if (updateF.gradepoint.value==""){
 				alert("평점을 입력해 주세요!!")
-				f.content.focus()
+				updateF.content.focus()
 				return false
 			}
 			return true
@@ -26,7 +26,7 @@
 </head>
 <body>
 <div align="center">
-	<form name="f" action="review_update" method="post" onsubmit="return check()">
+	<form name="updateF" action="review_update" method="post" onsubmit="javascript:return check()">
 	<h3>글수정</h3>
 	<input type="hidden" name="rvnum" value="${getReview.rvnum}"/>
 

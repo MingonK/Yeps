@@ -43,7 +43,7 @@ public class MemberMapper {
 			return false;
 		}
 	}
-	
+
 	public int insertMember(MemberDTO dto) {
 		int res = sqlSession.insert("insertMember",dto);
 		return res;
@@ -79,7 +79,7 @@ public class MemberMapper {
 			return null;
 		}
 	}
-	
+
 	public List<String> findMemberEmail(MemberDTO dto) {
 		try {
 			return sqlSession.selectList("findMemberEmail", dto);
@@ -87,7 +87,7 @@ public class MemberMapper {
 			return null;
 		}
 	}
-	
+
 	public int findMemberPasswd(MemberDTO dto) {
 		try {
 			return sqlSession.selectOne("findMemberPasswd", dto);
@@ -95,18 +95,18 @@ public class MemberMapper {
 			return 0;
 		}
 	}
-	
+
 	public int temporaryPasswd(MemberDTO dto) {
 		return sqlSession.update("temporaryPasswd", dto);
 	}
-	
+
 	public int updateMemberProfile(int mnum, String name) {
 		MemberDTO dto = new MemberDTO();
 		dto.setMnum(mnum);
 		dto.setName(name);
 		return sqlSession.update("updateMemberProfile",dto);
 	}
-	
+
 	public int updateMemberPasswd(int mnum, String passwd, String passwd1) {
 		HashMap map = new HashMap();
 		map.put("mnum", mnum);
@@ -114,11 +114,11 @@ public class MemberMapper {
 		map.put("passwd1", passwd1);
 		return sqlSession.update("updateMemberPasswd", map);
 	}
-	
+
 	public int leaveMember(MemberDTO dto) {
 		return sqlSession.delete("leaveMember", dto);
 	}
-	
+
 	/*
 
 	 public static MemberDTO checkMember(HashMap map) {
@@ -153,14 +153,13 @@ public class MemberMapper {
 	 }
 
 	 */
+
 	
+	
+	
+	//상우 
 	public MemberDTO mylist_info1(int NBPmnum) {
-		try {
-			return sqlSession.selectOne("mylist_info1", NBPmnum);
-		}catch(Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+		return sqlSession.selectOne("mylist_info1", NBPmnum);
 	}
 
 	public List<MemberDTO> getSelectedRestaurant_M(int mnum){
@@ -170,8 +169,12 @@ public class MemberMapper {
 	public MemberDTO memberName(int mnumList) {
 		return sqlSession.selectOne("memberName", mnumList);
 	}
-	
+
 	public List<MemberDTO> previous_M(int mnum) {
 		return sqlSession.selectList("previous_M", mnum);
+	}
+
+	public List<MemberDTO> SearchedDTO_M(int mnum){
+		return sqlSession.selectList("SearchedDTO_M", mnum);
 	}
 }

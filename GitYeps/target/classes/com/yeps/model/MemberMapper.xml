@@ -76,22 +76,30 @@
 		update jsp_member set passwd=#{passwd} , email=#{email}, hp1=#{hp1}, hp2=#{hp2}, hp3=#{hp3} where no=#{no}
 	</update>
 	 -->
-
-
-
-	 <select id="mylist_info1" resultType="MemberDTO" parameterType="int" >
-  		select *from yeps_member where mnum = #{NBPmnum}
+	 
+	 
+	 
+	 
+	<!-- 상우 --> 
+	<select id="mylist_info1" parameterType="int"  resultType="MemberDTO">
+  		select * from yeps_member where mnum = #{NBPmnum}
   	</select>
   	
-  	<select id="getSelectedRestaurant_M" resultType="MemberDTO" parameterType="int">
-  		select *from yeps_member where mnum= #{mnum}
+  	<select id="getSelectedRestaurant_M" parameterType="int" resultType="MemberDTO">
+  		select * from yeps_member where mnum= #{mnum}
   	</select>
 
-	<select id="memberName" resultType="MemberDTO" parameterType="int">
+	<select id="memberName" parameterType="int" resultType="MemberDTO">
 		select * from yeps_member where mnum= #{mnumList}
 	</select>
 
-	<select id="previous_M" resultType="MemberDTO" parameterType="int">
+	<select id="previous_M" parameterType="int" resultType="MemberDTO">
 		select *from yeps_member where mnum= #{mnum}
 	</select>
+	
+	<select id="SearchedDTO_M" parameterType="int" resultType="MemberDTO">
+		select *from yeps_member where mnum= #{mnum}
+	</select>
+	
+	
 </mapper>
