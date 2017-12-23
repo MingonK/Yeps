@@ -6,78 +6,41 @@
 <html>
 <head>
 <title>Yeps Message</title>
-  <script src="//code.jquery.com/jquery.min.js"></script>
-<!-- <script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"
-	type="text/javascript"></script> -->
-	<c:if test="${not empty requestScope.msg}">
-	<script type="text/javascript">
-		alert("${requestScope.msg}")
-		alert("${msg}")
-	</script>
-</c:if> 
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/message.css"/>"/>
+ 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
+	<script src="//code.jquery.com/jquery.min.js"></script>
 </head>
-<body>
- <%@ include file="../top.jsp"%> 
-<!-- Message sendform -->
-		<div class="popup" align="left" id="writeMessage" data-popup="writeMessage" style="z-index: 1;">
-		<form name="sendform" method="post">
-		    <div class="popup-inner">
-		        <h4 align="left" >To</h4>
-		        <input type="text" id="sendformTo" name="receiver"><br>
-		        <h4 align="left" >Subject</h4>
-		        <input type="text" name="title" id="sendformSubject" ><br>
-		        <h4 align="left">Message</h4>
-		        <textarea rows="4" name="content" id="sendformMessage"  placeholder="여기에 메시지를 입력하세요."></textarea><br><br>
-		        <button class="popup-send" type="button" data-popup-send="SendMessage" onclick="sendMessage()">SendMessage </button>&nbsp;&nbsp;&nbsp;
-		        <a data-popup-close="writeMessage" style="cursor:pointer;" href="#" onclick="closeSendform()">  Close</a>
-				<a class="popup-close" data-popup-close="writeMessage" href="#" >x</a>
-		    </div>
-		    </form>
-		 </div> 
-		  <!-- Message View  -->
-              <div class="popup" align="left" id="popup" data-popup="popup-1" style="z-index: 1;">
-				   <div class="popup-inner">
-				       <h4 align="left" >From</h4>
-				       <label id="from" ></label>
-				       <h4 align="left" >Subject</h4>
-				       <label id="subject" ></label>
-				       <h4 align="left" >Message</h4>
-				       <textarea id="message" rows="4" disabled></textarea>
-					        <p><a data-popup-close="popup-1" href="#" onclick="readCheck();">Close</a></p>
-					        <input type="hidden" id="readCheck" > 
-					        <a class="popup-close" data-popup-close="popup-1" href="#" onclick="readCheck();">x</a>
-				   </div>
-			  </div> 
+<%@ include file="../top.jsp"%>
+<div style="background: white;">
+	<div style="margin: 0; padding: 10 50;">
    <div id="messageContainer" align="center" >
-      <div id="messageHeader" style="height:50px;margin:0 auto;padding:0 30px;" >
+      <div id="messageHeader" >
 	        <label> Messages</label>
 			<input type="button" id="write" value="Write New Message" data-popup-open="writeMessage" onclick="messageForm(' ');">
 	 </div>
 	 <div id="menu" >
 	    <hr color="#EEEEEE" width="100%" size="1">
-			<a href="message_action?filter=msgBoxList"><label style="cursor:pointer;">InBox </label></a><a href="#"><label> : ${mCount}    </label></a>
-			<a href="message_action?filter=send"><label style="cursor:pointer;"> Sent </label></a><a href="#"><label> : ${sCount}    </label></a>
-			<a href="message_action?filter=allLocker"><label style="cursor:pointer;"> locker  </label></a><a href="#"><label>: ${lCount}</label></a> 
+			<a href="message_action?filter=receive"><label style="cursor:pointer;">InBox </label></a><a href="#"><label> : ${count}  /  </label></a>
+			<a href="message_action?filter=send"><label style="cursor:pointer;"> Sent </label></a><a href="#"><label> : ${sCount}  /  </label></a>
+			<a href="message_action?filter=toLocker"><label style="cursor:pointer;"> locker  </label></a><a href="#"><label>: ${lCount}</label></a> 
      </div>
-			<div id="messageList"  style="position:absolute; " >
+			<div id="messageList"  style="position:absolute;">
                 <form name="msgform" method="post" >
 				<table border="0" id="table">
 				    <tr>
 						<th align="left" colspan="7 " style="left: 120px;" >
-						<input type="button" style="cursor:pointer;" name="delete" id="delete" value="delete"  onclick="deleteCheckMsg();"> 
-					<!-- 	<button type="button" style="cursor:pointer;" id="reply"  >reply</button> -->
-						<input type="button"style="cursor:pointer;"  name="locker" id="locker" value="locker" onclick="moveToLocker();"> 
-						<select name="filter" style="border-radius: 3px; cursor:pointer;">
-								<option value="0"></option>
+						<input type="button" style="cursor:pointer;" name="del" id="del" value="삭제"  onclick="deleteCheckMsg();"> 
+						<button type="button" style="cursor:pointer;" id="reply"  >답장</button>
+						<input type="button"style="cursor:pointer;"  name="locker" id="locker" value="보관" onclick="moveToLocker();"> 
+						<select name="filter" style="border-radius: 4px; cursor:pointer; width: 110px; height: 25px; text-align: center;">
+								<option value="0">:: 필터 ::</option>
 								<option value="allMsg">모든 쪽지</option>
-								<option value="readMsg">읽은 쪽지</option>
 								<option value="noneMsg">안읽은 쪽지</option>
-								<option value="allLocker">보관함</option>
+								<option value="toLocker">보관함</option>
 						</select> 
-					    <input type="button" id="search" style="cursor:pointer;" value="select" onclick="searching();"><br> 
+					    <input type="button" id="search" style="cursor:pointer;" value="검색" onclick="searching();"><br> 
 					    <hr color="#EEEEEE" width="100%" size="1">
-				  </tr>
+				  <tr><td></tr>
                     <tr align="center">
                     <td align="center"><input type="checkbox" style="cursor:pointer;" name="first"></td>
 						<td width="90px"><label>읽음</label></td>
@@ -108,7 +71,7 @@
 					  </tr>
 				</c:if> 
 				<c:forEach var="dto" items="${map.list}">
-				   <tr align="center" id="list">
+					<tr align="center" id="list">
 						<td><input type="checkbox" style="cursor:pointer;" name="check" value="${dto.msgNum}"></td>
 						<td><c:choose>
 								<c:when test="${dto.readNum == 1}">
@@ -121,7 +84,7 @@
 						<td style="font-weight: bold;" >	
 							<c:set var="num" value="${num-1}"/>
 				            <c:out value="${num}"/></td>
-						<td><button type="button"  id="sender" name="sender" ` onclick="messageForm('${dto.sender}')">${dto.sender}</button>
+						<td><button type="button"  id="sender" name="sender" data-popup-open="writeMessage" onclick="messageForm('${dto.sender}')">${dto.sender}</button>
 						<td><a class="btn" data-popup-open="popup-1" onclick="getMessage('${dto.sender}','${dto.title}','${dto.content }','${dto.msgNum}');">${dto.title}</a></td>
 					    <td><label>${dto.reg_date}</label></td>
 					 </tr>
@@ -133,48 +96,69 @@
 			    <td colspan="7" align="center">
                 <!-- **이전페이지 블록으로 이동 : 현재 페이지 블럭이 1보다 크면 [이전]하이퍼링크를 화면에 출력 -->
                 <c:if test="${map.yepsPager.curBlock > 1}">
-                
-                  <a href="javascript:list('${map.yepsPager.prevPage}','${map.lMode}')" style="cursor:pointer;">[Previous]</a>&nbsp;&nbsp;
+                 <ul class="pager">
+                   <li> <a href="javascript:list('${map.yepsPager.prevPage}')">Previous</a></li></ul>
                  </c:if>
                 <!-- **하나의 블럭에서 반복문 수행 시작페이지부터 끝페이지까지 -->
                 <c:forEach var="num" begin="${map.yepsPager.blockBegin}" end="${map.yepsPager.blockEnd}">
                     <!-- **현재페이지이면 하이퍼링크 제거 -->
                     <c:choose>
                         <c:when test="${num == map.yepsPager.curPage}">
-                         <span style="color: red ">  [${num}]  </span>&nbsp;&nbsp;
+                         <span style="color: red">  [${num}]  </span>&nbsp;&nbsp;
                         </c:when>
                         <c:otherwise>
-                            <a href="javascript:list('${num}','${map.lMode}')" style="cursor:pointer;">  [${num}]  </a>&nbsp;&nbsp;
+                            <a href="javascript:list('${num}')">  [${num}]  </a>&nbsp;&nbsp;
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
                 <!-- **다음페이지 블록으로 이동 : 현재 페이지 블럭이 전체 페이지 블럭보다 작거나 같으면 [다음]하이퍼링크를 화면에 출력 -->
                 <c:if test="${map.yepsPager.curBlock <= map.yepsPager.totBlock}">
-                   <a href="javascript:list('${map.yepsPager.nextPage}','${map.lMode}')" style="cursor:pointer;"> [next] </a>
+                   <a href="javascript:list('${map.yepsPager.nextPage}')"> [next] </a>
                 </c:if>
                </td></tr></div>  
           </div>
        </div>
+       </div>
+	</div>
+
+		<div class="popup" align="left" id="writeMessage" data-popup="writeMessage" style="z-index: 1;">
+			<form name="sendform" method="post">
+		    	<div class="popup-inner">
+					<h3 align="left" >To</h3>
+					<input type="text" id="sendformTo" name="receiver"><br>
+					<h3 align="left" >Subject</h3>
+			        <input type="text" name="title" id="sendformSubject"><br>
+			        <h3 align="left">Message</h3>
+			        <textarea rows="4" name="content" id="sendformMessage"  placeholder="여기에 메시지를 입력하세요."></textarea><br><br>
+			        <button class="popup-send" type="button" data-popup-send="SendMessage" onclick="sendMessage()">Send Message </button>&nbsp;&nbsp;&nbsp;
+			        <a data-popup-close="writeMessage" style="cursor:pointer;" href="#" onclick="closeSendform()">Close</a>
+					<a class="popup-close" data-popup-close="writeMessage" href="#" >x</a>
+			    </div>
+		    </form>
+		</div> 
+		  <!-- Message View  -->
+		<div class="popup" align="left" id="popup" data-popup="popup-1" style="z-index: 1;">
+			<div class="popup-inner">
+				<h4 align="left" >From</h4>
+				<label id="from" ></label>
+				<h4 align="left" >Subject</h4>
+				<label id="subject" ></label>
+				<h4 align="left" >Message</h4>
+				<textarea id="message" rows="4" disabled></textarea>
+				<p><a data-popup-close="popup-1" href="#" onclick="readCheck();">Close</a></p>
+				<input type="hidden" id="readCheck" > 
+				<a class="popup-close" data-popup-close="popup-1" href="#" onclick="readCheck();">x</a>
+			</div>
+		</div> 
 	<script>
 	
-//     $("#reply").click(function(){
-//     	$("input[name=check]:checked").each(function() {
-// 			var checkVal = $(this).val();
-// 			if(checkVal==null){
-// 	    		alert("선택된 쪽지가 없습니다. 다시 확인 하세요.");
-// 	    	}
-// 			alert(checkVal);
-			
-// 		for (var i = 0; i < checkVal.length; i++) {
-// 		         if (checkVal[i].checked) {
-// 		            txt += checkVal[i].value + " ";
-// 	    }}});
-//     	document.msgform.action = "message_reply?box=msgBox";
-// 	    document.msgform.submit()
-// 	})
+    $("#reply").click(function(){
+    	document.msgform.action = "message_reply?box=msgBox";
+	    document.msgform.submit()
+	})
 	
-    function list(page,lMode){
-        location.href="yeps_message?curPage=" + page + "&lMode=" + lMode;
+    function list(page){
+        location.href="yeps_message?curPage=" + page;
     }
     
     function messageForm(sender){
@@ -265,45 +249,47 @@
 		         if (checkVal[i].checked) {
 		            txt += checkVal[i].value + " ";
 	    }}});
-    	document.msgform.action = "message_delete?box=msgBox";
+    	document.msgform.action = "message_delete";
     	document.msgform.submit();
 		}
 
-    $(document).ready(function() {
-		var tbl = $("#table");
-		// 테이블 헤더에 있는 checkbox 클릭시
-		$(":checkbox:first", tbl).click(function() {
-		    // 클릭한 체크박스가 체크상태인지 체크해제상태인지 판단
-			if ($(this).is(":checked")) {
-				$(":checkbox", tbl).attr("checked", "checked");
-			} else {
-				$(":checkbox", tbl).removeAttr("checked");
-			}
-			// 모든 체크박스에 change 이벤트 발생시키기               
-			    $(":checkbox", tbl).trigger("change");
-			});
-
-			// 헤더에 있는 체크박스외 다른 체크박스 클릭시
-			$(":checkbox:not(:first)", tbl).click(function() {
-				var allCnt = $(":checkbox:not(:first)",tbl).length;
-				var checkedCnt = $(":checkbox:not(:first)",tbl).filter(":checked").length;
-
-				// 전체 체크박스 갯수와 현재 체크된 체크박스 갯수를 비교해서 헤더에 있는 체크박스 체크할지 말지 판단
-				if (allCnt == checkedCnt) {
-					$(":checkbox:first", tbl).attr("checked", "checked");
-				} else {
-					$(":checkbox:first", tbl).removeAttr("checked");
-					
-				}}).change(function() {
-				if ($(this).is(":checked")) {
-					
-				// 체크박스의  부모 > 부모니까  tr이 되고 tr에  selected 라는  class 를 추가한다.
-					$(this).parent().parent().addClass("selected");
-				} else {
-					$(this).parent().parent().removeClass("selected");
-				}
-			});
-		});
+    $(document).ready(function(){
+        var tbl = $("#table");
+       // 테이블 헤더에 있는 checkbox 클릭시
+        $(":checkbox:first", tbl).click(function(){
+            // 클릭한 체크박스가 체크상태인지 체크해제상태인지 판단
+            if( $(this).is(":checked") ){
+                $(":checkbox", tbl).attr("checked", "checked");
+            }
+            else{
+                $(":checkbox", tbl).removeAttr("checked");
+            }
+            // 모든 체크박스에 change 이벤트 발생시키기               
+            $(":checkbox", tbl).trigger("change");
+        });
+         
+        // 헤더에 있는 체크박스외 다른 체크박스 클릭시
+        $(":checkbox:not(:first)", tbl).click(function(){
+            var allCnt = $(":checkbox:not(:first)", tbl).length;
+            var checkedCnt = $(":checkbox:not(:first)", tbl).filter(":checked").length;
+             
+            // 전체 체크박스 갯수와 현재 체크된 체크박스 갯수를 비교해서 헤더에 있는 체크박스 체크할지 말지 판단
+            if( allCnt==checkedCnt ){
+                $(":checkbox:first", tbl).attr("checked", "checked");
+            }
+            else{
+                $(":checkbox:first", tbl).removeAttr("checked");
+            }
+        }).change(function(){
+            if( $(this).is(":checked") ){
+                // 체크박스의  부모 > 부모니까  tr이 되고 tr에  selected 라는  class 를 추가한다.
+                $(this).parent().parent().addClass("selected");
+            }
+            else{
+                $(this).parent().parent().removeClass("selected");
+            }
+        });
+    });
     
     jQuery.noConflict();
     $(function() {

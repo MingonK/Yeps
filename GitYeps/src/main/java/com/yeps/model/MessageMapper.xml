@@ -38,11 +38,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    select count(*) from yeps_message 
 	</select> 
 	
-	<select id="getSendCount" parameterType="String" resultType="int">
+	<select id="getSendCount" parameterType="java.util.HashMap" resultType="int">
 	    select count(*) from yeps_message where sender=#{sender}
 	    </select> 
 	    
-	<select id="getReceiveCount" parameterType="String" resultType="int">
+	<select id="getReceiveCount" parameterType="java.util.HashMap" resultType="int">
 	    select count(*) from yeps_message where receiver=#{receiver}
 	</select>  
 	

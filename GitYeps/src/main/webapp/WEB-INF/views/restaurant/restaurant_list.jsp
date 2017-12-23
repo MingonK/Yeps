@@ -1,19 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/restStyle.css?ver=1"/>"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="resources/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=jD9qGVpvZh7Zobclojwp&submodules=geocoder"></script>
 <style>
 .checked {
     color: red;
 }
+
+.tooltip .tooltiptext {
+	white-space: nowrap;
+    visibility: hidden;
+    width: 100px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 110%;
+    left: 60%;
+     margin-left: -60px;
+     
+}
+
+.tooltip .tooltiptext:after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    
+}
+.filter-check:checked {
+	visibility: hidden;
+}
 </style>
-<script src="resources/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=jD9qGVpvZh7Zobclojwp&submodules=geocoder"></script>
+
 </head>
 <%@include file="../top.jsp" %>
 	<div id="main" style="width: auto;padding: 0;margin: 0;font: inherit;vertical-align: baseline;">
@@ -41,16 +77,43 @@
 						<div class="filter-panel" style="font-size: 12px; line-height: 1.5em;position: relative;height:65px">
 							<div class="suggested-filters_filter-list" style="height:65px;">
 								<ul class="suggested-filters_filter-list" style="padding-bottom: 18px;display: flex;flex-wrap: wrap;list-style: none;height:48px;">
-									<li class="suggested-filters_filter" style="padding-right: 6px;margin-bottom: 12px; -webkit-box-flex: 0;flex-grow: 0;flex-shrink: 0;user-select: none;display: list-item;text-align: -webkit-match-parent;">
-										<ul class="suggested-filters_price-filters" style=" font-size: 0;list-style: none;display: block;-webkit-margin-start: 0px;-webkit-margin-end: 0px;">
+									<li class="suggested-filters_filter" style="height:38px;padding-right: 6px;margin-bottom: 12px; -webkit-box-flex: 0;flex-grow: 0;flex-shrink: 0;user-select: none;display: list-item;text-align: -webkit-match-parent;">
+										<ul class="suggested-filters_price-filters" style="height:38px;font-size: 0;list-style: none;display: block;-webkit-margin-start: 0px;-webkit-margin-end: 0px;">
 										<li style="display: inline-block; text-align: -webkit-match-parent;">
 											<label class="radio-check" style="display: inline; float: none; padding: 0; cursor: default;">
-												<input name="price" type="checkbox" value="RestaurantsPriceRange2.1" style="display: none; color: inherit; font: inherit; margin: 0; font-weight: normal; -webkit-appearance: checkbox; box-sizing: border-box; background-color: initial; cursor: default; padding: initial; border: initial; -webkit-rtl-ordering: logical; text-rendering: auto; letter-spacing: normal; word-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none; text-align: start; -webkit-writing-mode: horizontal-tb;">
-												<span class="filter-label show-tooltip" style="border-top-left-radius: 4px; border-bottom-left-radius: 4px; position: relative; border-right-width: 0;  padding-bottom: 9px; display: inline-block; border: 1px solid #ccc; padding: 8px 11px; background-color: #fff; font-size: 14px; cursor: pointer; min-height: 12px; min-width: 13px; text-align: center;">
-													￦ 
-													<span class="tooltip-wrapper" style="position: absolute; left: -9999px; bottom: 100%; width: 250px; margin-left: -125px; margin-bottom: 5px; text-align: center; text-decoration: none;">
-													<span class="tooltip" style="z-index: 1012; display: inline-block; position: relative; padding: 6px 9px; vertical-align: middle; white-space: normal; font-size: 12px; pointer-events: none; font-weight: bold; line-height: 18px; background: rgba(0, 0, 0, 0.8); color: white; border-radius: 5px; text-shadow: none; text-align: left; cursor: default; box-shadow: 0 1px rgba(255, 255, 255, 0.1);">Inexpensive</span>
+												<input class="filter-check" name="price" type="checkbox" value="RestaurantsPriceRange2.1" style="display: none; color: inherit; font: inherit; margin: 0; font-weight: normal; -webkit-appearance: checkbox; box-sizing: border-box; background-color: initial; cursor: default; padding: initial; border: initial; -webkit-rtl-ordering: logical; text-rendering: auto; letter-spacing: normal; word-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none; text-align: start; -webkit-writing-mode: horizontal-tb;">
+												<span class="tooltip" style="width:53px;height:20px;border-top-left-radius: 4px; border-bottom-left-radius: 4px; position: relative; border-right-width: 0;  padding-bottom: 9px; display: inline-block; border: 1px solid #ccc; padding: 8px 11px; background-color: #fff; font-size: 14px; cursor: pointer; min-height: 12px; min-width: 13px; text-align: center;">
+													￦
+													<span class="tooltiptext">저가</span>
 												</span>
+										</label>
+										</li>
+										
+										<li
+											style="display: inline-block; text-align: -webkit-match-parent;">
+											<label class="radio-check"
+											style="display: inline; float: none; padding: 0; cursor: default;">
+												<input name="price" type="checkbox"
+												value="RestaurantsPriceRange2.1"
+												style="display: none; color: inherit; font: inherit; margin: 0; font-weight: normal; -webkit-appearance: checkbox; box-sizing: border-box; background-color: initial; cursor: default; padding: initial; border: initial; -webkit-rtl-ordering: logical; text-rendering: auto; letter-spacing: normal; word-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none; text-align: start; -webkit-writing-mode: horizontal-tb;">
+												<span class="tooltip"
+												style="width:63px;height:20px;border-top-left-radius: 4px; border-bottom-left-radius: 4px; position: relative; border-right-width: 0; border-radius: 0; padding-bottom: 9px; display: inline-block; border: 1px solid #ccc; padding: 8px 11px; background-color: #fff; font-size: 14px; cursor: pointer; min-height: 12px; min-width: 13px; text-align: center;">
+													￦￦
+												<span class="tooltiptext">중저가</span>
+												</span>
+										</label>
+										</li>
+										
+										<li style="display: inline-block; text-align: -webkit-match-parent;">
+											<label class="radio-check"
+											style="display: inline; float: none; padding: 0; cursor: default;">
+												<input name="price" type="checkbox"
+												value="RestaurantsPriceRange2.1"
+												style="display: none; color: inherit; font: inherit; margin: 0; font-weight: normal; -webkit-appearance: checkbox; box-sizing: border-box; background-color: initial; cursor: default; padding: initial; border: initial; -webkit-rtl-ordering: logical; text-rendering: auto; letter-spacing: normal; word-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none; text-align: start; -webkit-writing-mode: horizontal-tb;">
+												<span class="tooltip"
+												style="width:73px;height:20px;border-top-left-radius: 4px; border-bottom-left-radius: 4px; position: relative; border-right-width: 0; border-radius: 0; padding-bottom: 9px; display: inline-block; border: 1px solid #ccc; padding: 8px 11px; background-color: #fff; font-size: 14px; cursor: pointer; min-height: 12px; min-width: 13px; text-align: center;">
+													￦￦￦
+											<span class="tooltiptext">중고가</span>
 											</span>
 										</label>
 										</li>
@@ -62,49 +125,10 @@
 												<input name="price" type="checkbox"
 												value="RestaurantsPriceRange2.1"
 												style="display: none; color: inherit; font: inherit; margin: 0; font-weight: normal; -webkit-appearance: checkbox; box-sizing: border-box; background-color: initial; cursor: default; padding: initial; border: initial; -webkit-rtl-ordering: logical; text-rendering: auto; letter-spacing: normal; word-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none; text-align: start; -webkit-writing-mode: horizontal-tb;">
-												<span class="filter-label show-tooltip"
-												style="border-top-left-radius: 4px; border-bottom-left-radius: 4px; position: relative; border-right-width: 0; border-radius: 0; padding-bottom: 9px; display: inline-block; border: 1px solid #ccc; padding: 8px 11px; background-color: #fff; font-size: 14px; cursor: pointer; min-height: 12px; min-width: 13px; text-align: center;">
-													￦￦ <span class="tooltip-wrapper"
-													style="position: absolute; left: -9999px; bottom: 100%; width: 250px; margin-left: -125px; margin-bottom: 5px; text-align: center; text-decoration: none;">
-														<span class="tooltip"
-														style="z-index: 1012; display: inline-block; position: relative; padding: 6px 9px; vertical-align: middle; white-space: normal; font-size: 12px; pointer-events: none; font-weight: bold; line-height: 18px; background: rgba(0, 0, 0, 0.8); color: white; border-radius: 5px; text-shadow: none; text-align: left; cursor: default; box-shadow: 0 1px rgba(255, 255, 255, 0.1);">Inexpensive</span>
-												</span>
-											</span>
-										</label>
-										</li>
-										
-										<li
-											style="display: inline-block; text-align: -webkit-match-parent;">
-											<label class="radio-check"
-											style="display: inline; float: none; padding: 0; cursor: default;">
-												<input name="price" type="checkbox"
-												value="RestaurantsPriceRange2.1"
-												style="display: none; color: inherit; font: inherit; margin: 0; font-weight: normal; -webkit-appearance: checkbox; box-sizing: border-box; background-color: initial; cursor: default; padding: initial; border: initial; -webkit-rtl-ordering: logical; text-rendering: auto; letter-spacing: normal; word-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none; text-align: start; -webkit-writing-mode: horizontal-tb;">
-												<span class="filter-label show-tooltip"
-												style="border-top-left-radius: 4px; border-bottom-left-radius: 4px; position: relative; border-right-width: 0; border-radius: 0; padding-bottom: 9px; display: inline-block; border: 1px solid #ccc; padding: 8px 11px; background-color: #fff; font-size: 14px; cursor: pointer; min-height: 12px; min-width: 13px; text-align: center;">
-													￦￦￦ <span class="tooltip-wrapper"
-													style="position: absolute; left: -9999px; bottom: 100%; width: 250px; margin-left: -125px; margin-bottom: 5px; text-align: center; text-decoration: none;">
-														<span class="tooltip"
-														style="z-index: 1012; display: inline-block; position: relative; padding: 6px 9px; vertical-align: middle; white-space: normal; font-size: 12px; pointer-events: none; font-weight: bold; line-height: 18px; background: rgba(0, 0, 0, 0.8); color: white; border-radius: 5px; text-shadow: none; text-align: left; cursor: default; box-shadow: 0 1px rgba(255, 255, 255, 0.1);">Inexpensive</span>
-												</span>
-											</span>
-										</label>
-										</li>
-										
-										<li
-											style="display: inline-block; text-align: -webkit-match-parent;">
-											<label class="radio-check"
-											style="display: inline; float: none; padding: 0; cursor: default;">
-												<input name="price" type="checkbox"
-												value="RestaurantsPriceRange2.1"
-												style="display: none; color: inherit; font: inherit; margin: 0; font-weight: normal; -webkit-appearance: checkbox; box-sizing: border-box; background-color: initial; cursor: default; padding: initial; border: initial; -webkit-rtl-ordering: logical; text-rendering: auto; letter-spacing: normal; word-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none; text-align: start; -webkit-writing-mode: horizontal-tb;">
-												<span class="filter-label show-tooltip"
-												style="border-radius: 4px;border-top-left-radius: 4px; border-bottom-left-radius: 4px; position: relative; border-right-width: 0; border-radius: 0; padding-bottom: 9px; display: inline-block; border: 1px solid #ccc; padding: 8px 11px; background-color: #fff; font-size: 14px; cursor: pointer; min-height: 12px; min-width: 13px; text-align: center;">
-													￦￦￦￦ <span class="tooltip-wrapper"
-													style="position: absolute; left: -9999px; bottom: 100%; width: 250px; margin-left: -125px; margin-bottom: 5px; text-align: center; text-decoration: none;">
-														<span class="tooltip"
-														style="z-index: 1012; display: inline-block; position: relative; padding: 6px 9px; vertical-align: middle; white-space: normal; font-size: 12px; pointer-events: none; font-weight: bold; line-height: 18px; background: rgba(0, 0, 0, 0.8); color: white; border-radius: 5px; text-shadow: none; text-align: left; cursor: default; box-shadow: 0 1px rgba(255, 255, 255, 0.1);">Inexpensive</span>
-												</span>
+												<span class="tooltip"
+												style="width:83px;height:20px;border-top-right-radius: 4px; border-bottom-right-radius: 4px; position: relative; border-right-width: 0;  padding-bottom: 9px; display: inline-block; border: 1px solid #ccc; padding: 8px 11px; background-color: #fff; font-size: 14px; cursor: pointer; min-height: 12px; min-width: 13px; text-align: center;">
+													￦￦￦￦ 
+											<span class="tooltiptext">고가</span>
 											</span>
 										</label>
 										</li>
@@ -114,24 +138,21 @@
 									<li class="suggested-filters_filter" style="flex-grow: 0;    flex-shrink: 0;padding-right: 6px;margin-bottom: 12px;-webkit-box-flex: 0;display: list-item;text-align: -webkit-match-parent;">
 										<label class="feature open-now radio-check" style="    display: inline;float: none; padding: 0;    cursor: default;">
 								            <input autocomplete="off" name="feature" type="checkbox" value="open_now" style="display: none; color: inherit; font: inherit; margin: 0; font-weight: normal; -webkit-appearance: checkbox; box-sizing: border-box; background-color: initial; cursor: default; padding: initial; border: initial; -webkit-rtl-ordering: logical; text-rendering: auto; letter-spacing: normal; word-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none; text-align: start;">
-										<span class="filter-label show-tooltip" style="display: inline-block; border: 1px solid #ccc; padding: 8px 11px; border-radius: 4px; background-color: #fff; font-size: 14px; cursor: pointer; min-height: 12px; min-width: 13px; text-align: center; position: relative;">
+										<span class="tooltip" style="width:83px;display: inline-block; border: 1px solid #ccc; padding: 8px 11px; border-radius: 4px; background-color: #fff; font-size: 14px; cursor: pointer; min-height: 12px; min-width: 13px; text-align: center; position: relative;">
 											<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-clock icon--size-18 icon--neutral-gray">
 												<svg id="18x18_clock" height="100%" viewBox="0 0 18 18" width="100%">
 													<path d="M9 17A8 8 0 1 1 9 1a8 8 0 0 1 0 16zM9 2C5.14 2 2 5.14 2 9s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm3.223 10.098a.998.998 0 0 1-.588-.192L8 9.256V5a1 1 0 0 1 2 0v3.24l2.812 2.05a1 1 0 0 1-.59 1.808z"></path>
 												</svg>
 											</span> 영업중 <span class="current-time"></span>
-											 <span class="tooltip-wrapper" style="position: absolute; left: -9999px; bottom: 100%; width: 250px; margin-left: -125px; margin-bottom: 5px; text-align: center; text-decoration: none;">
-												<span class="tooltip" style=" z-index: 1012;    display: inline-block; position: relative;padding: 6px 9px;    vertical-align: middle;white-space: normal;font-size: 12px; pointer-events: none;font-weight: bold;line-height: 18px;    background: rgba(0,0,0,0.8);color: white;border-radius: 5px;text-shadow: none;text-align: left;cursor: default;box-shadow: 0 1px rgba(255,255,255,0.1);"> 
-												Find businesses that are open now</span>
+											<span class="tooltiptext">영업중</span>
 										</span>
-									</span>
 								</label>
 									</li>
 
 								<li class="suggested-filters_filter" style="padding-right: 6px; margin-bottom: 12px; -webkit-box-flex: 0; flex-grow: 0; flex-shrink: 0; user-select: none; display: list-item; text-align: -webkit-match-parent;">
-									<label class="feature radio-check" style="    display: inline;float: none;padding: 0;cursor: default;user-select: none;text-align: -webkit-match-parent;"> 
+									<label class="feature radio-check" style="display: inline;float: none;padding: 0;cursor: default;user-select: none;text-align: -webkit-match-parent;"> 
 									<input autocomplete="off" name="feature" type="checkbox" value="PlatformDelivery" style="display: none; color: inherit; font: inherit; margin: 0; font-weight: normal; -webkit-appearance: checkbox; box-sizing: border-box; background-color: initial; cursor: default; padding: initial; border: initial; -webkit-rtl-ordering: logical; text-rendering: auto; letter-spacing: normal; word-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none; text-align: start; -webkit-writing-mode: horizontal-tb;">
-										<span class="filter-label show-tooltip" style="display: inline-block; border: 1px solid #ccc; padding: 8px 11px; border-radius: 4px; background-color: #fff; font-size: 14px; cursor: pointer; min-height: 12px; min-width: 13px; text-align: center; position: relative;">
+										<span class="tooltip" style="display: inline-block; border: 1px solid #ccc; padding: 8px 11px; border-radius: 4px; background-color: #fff; font-size: 14px; cursor: pointer; min-height: 12px; min-width: 13px; text-align: center; position: relative;">
 											<span aria-hidden="true" style="fill: #ca6d00; width: 18px; height: 18px;" class="icon icon--18-order icon--size-18"> 
 												<svg id="18x18_order" height="100%" viewBox="0 0 18 18" width="100%">
 													<g>
@@ -141,73 +162,52 @@
 												</svg>
 											</span>
 												배달 주문
-												<span class="tooltip-wrapper" style="position: absolute; left: -9999px;bottom: 100%; width: 250px;margin-left: -125px;margin-bottom: 5px;text-align: center;text-decoration: none;cursor: pointer;">
-												<span class="tooltip" style="z-index: 1012; display: inline-block; position: relative; padding: 6px 9px; vertical-align: middle; white-space: normal; font-size: 12px; pointer-events: none; font-weight: bold; line-height: 18px; background: rgba(0, 0, 0, 0.8); color: white; border-radius: 5px; text-shadow: none; text-align: left; cursor: default; box-shadow: 0 1px rgba(255, 255, 255, 0.1);">
-													Find businesses that deliver to you</span>
+												<span class="tooltiptext">배달 주문</span>
 										</span>
-									</span>
 								</label>
 								</li>
 
-
+								<li class="suggested-filters_filter" style="padding-right: 6px; margin-bottom: 12px; -webkit-box-flex: 0; flex-grow: 0; flex-shrink: 0; user-select: none; display: list-item; text-align: -webkit-match-parent;">                
+							    <label class="feature radio-check" style="display: inline;float: none;padding: 0;cursor: default;user-select: none;text-align: -webkit-match-parent;">
+							            <input autocomplete="off" name="feature" type="checkbox" value="PlatformPickup" style="display: none; color: inherit; font: inherit; margin: 0; font-weight: normal; -webkit-appearance: checkbox; box-sizing: border-box; background-color: initial; cursor: default; padding: initial; border: initial; -webkit-rtl-ordering: logical; text-rendering: auto; letter-spacing: normal; word-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none; text-align: start; -webkit-writing-mode: horizontal-tb;">
+							            <span class="tooltip" style="display: inline-block; border: 1px solid #ccc; padding: 8px 11px; border-radius: 4px; background-color: #fff; font-size: 14px; cursor: pointer; min-height: 12px; min-width: 13px; text-align: center; position: relative;">
+							               	<span aria-hidden="true" style="fill: #ca6d00; width: 18px; height: 18px;" class="icon icon--18-shopping icon--size-18">
+												    <svg id="18x18_shopping" height="100%" viewBox="0 0 18 18" width="100%">
+												    	<path d="M12 5V1H6v4H3v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V5h-3zM7 2h4v3H7V2z"></path>
+												    </svg>
+											</span>
+							    				주문 포장
+							    				<span class="tooltiptext">주문 포장</span>
+							            </span>
+							    </label>
+							</li>
+								
+								
 								<li class="suggested-filters_filter" style="padding-right: 6px; margin-bottom: 12px; -webkit-box-flex: 0; flex-grow: 0; flex-shrink: 0; user-select: none; display: list-item; text-align: -webkit-match-parent;">
 									<div class="coachmark-tooltip js-OnlineReservations-search-coachmark coachmark-tooltip--bottom" style="display: inline-block; position: relative;    user-select: none;    text-align: -webkit-match-parent;">
 										<div class="js-coachmark-tooltip coachmark-tooltip-content" style="z-index: 1002; width: 150px; padding-right: 24px; background: #0097ec; color: #fff; position: absolute; margin-right: 8px; border-radius: 5px; display: none; font-weight: normal; padding: 9px;">
 											<span aria-hidden="true" style="width: 14px; height: 14px;" class="icon icon--14-close icon--size-14 icon--inverse icon--fallback-inverted coachmark-close js-coachmark-close">
-											</span> <small>Toggle this filter to view restaurants that
-												take online reservations through Yelp</small>
+											</span> 
 										</div>
 										<div class="js-coachmark-target">
 											<label class="feature radio-check">
 												<input autocomplete="off" name="feature" type="checkbox" value="OnlineReservations" style="display: none; color: inherit; font: inherit; margin: 0; font-weight: normal; -webkit-appearance: checkbox; box-sizing: border-box; background-color: initial; cursor: default; padding: initial; border: initial; -webkit-rtl-ordering: logical; text-rendering: auto; letter-spacing: normal; word-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none; text-align: start;">
-												<a class="filter-label show-tooltip anchor-link" href="#" style="display: inline-block; border: 1px solid #ccc; padding: 8px 11px; border-radius: 4px; background-color: #fff; font-size: 14px; cursor: pointer; min-height: 12px; min-width: 13px; text-align: center; color: #333; position: relative; text-decoration: none;">
+												<a class="tooltip" href="#" style="width:83px;display: inline-block; border: 1px solid #ccc; padding: 8px 11px; border-radius: 4px; background-color: #fff; font-size: 14px; cursor: pointer; min-height: 12px; min-width: 13px; text-align: center; color: #333; position: relative; text-decoration: none;">
 													<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-reservation icon--size-18 icon--black">
 														<svg id="18x18_reservation" height="100%"viewBox="0 0 18 18" width="100%">
 															<path d="M13.6 16H4.4C3.077 16 2 14.88 2 13.5v-9C2 3.12 3.077 2 4.4 2H5a1 1 0 0 1 2 0h4a1 1 0 0 1 2 0h.6C14.923 2 16 3.12 16 4.5v9c0 1.38-1.077 2.5-2.4 2.5zM15 7H3v6.5c0 .828.627 1.5 1.4 1.5h9.2c.773 0 1.4-.672 1.4-1.5V7zm-5 3h3v3h-3v-3z"></path>
 														</svg>
-												</span> 예약 <span class="tooltip-wrapper"
-													style="position: absolute; left: -9999px; bottom: 100%; width: 250px; margin-left: -125px; margin-bottom: 5px; text-align: center; text-decoration: none;">
-														<span class="tooltip"
-														style="z-index: 1012; display: inline-block; position: relative; padding: 6px 9px; vertical-align: middle; white-space: normal; font-size: 12px; pointer-events: none; font-weight: bold; line-height: 18px; background: rgba(0, 0, 0, 0.8); color: white; border-radius: 5px; text-shadow: none; text-align: left; cursor: default; box-shadow: 0 1px rgba(255, 255, 255, 0.1);">Find
-															and book a table </span>
-												</span>
+												</span> 예약 
+												<span class="tooltiptext">예약</span>
 											</a>
 											</label>
 										</div>
 									</div>
 								</li>
 								
-								<li class="suggested-filters_filter" style="padding-right: 6px; margin-bottom: 12px; -webkit-box-flex: 0; flex-grow: 0; flex-shrink: 0; user-select: none; display: list-item; text-align: -webkit-match-parent;">
-									<div class="coachmark-tooltip js-OnlineReservations-search-coachmark coachmark-tooltip--bottom" style="display: inline-block; position: relative;    user-select: none;    text-align: -webkit-match-parent;">
-										<div class="js-coachmark-tooltip coachmark-tooltip-content" style="z-index: 1002; width: 150px; padding-right: 24px; background: #0097ec; color: #fff; position: absolute; margin-right: 8px; border-radius: 5px; display: none; font-weight: normal; padding: 9px;">
-											<span aria-hidden="true" style="width: 14px; height: 14px;" class="icon icon--14-close icon--size-14 icon--inverse icon--fallback-inverted coachmark-close js-coachmark-close">
-											</span> <small>Toggle this filter to view restaurants that
-												take online reservations through Yelp</small>
-										</div>
-										<div class="js-coachmark-target">
-											<label class="feature radio-check">
-												<input autocomplete="off" name="feature" type="checkbox" value="OnlineReservations" style="display: none; color: inherit; font: inherit; margin: 0; font-weight: normal; -webkit-appearance: checkbox; box-sizing: border-box; background-color: initial; cursor: default; padding: initial; border: initial; -webkit-rtl-ordering: logical; text-rendering: auto; letter-spacing: normal; word-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none; text-align: start;">
-												<a class="filter-label show-tooltip anchor-link" href="#" style="display: inline-block; border: 1px solid #ccc; padding: 8px 11px; border-radius: 4px; background-color: #fff; font-size: 14px; cursor: pointer; min-height: 12px; min-width: 13px; text-align: center; color: #333; position: relative; text-decoration: none;">
-													<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-reservation icon--size-18 icon--black">
-														<svg id="18x18_filter" height="100%" viewBox="0 0 18 18" width="100%">
-															<path d="M15 7h-5V5h5a1 1 0 0 1 0 2zm-2 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm-3 0c0 .55.45 1 1 1s1-.45 1-1-.45-1-1-1-1 .45-1 1zM7 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0-3c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zM2 6a1 1 0 0 1 1-1h1v2H3a1 1 0 0 1-1-1zm1 5h5v2H3a1 1 0 0 1 0-2zm13 1a1 1 0 0 1-1 1h-1v-2h1a1 1 0 0 1 1 1z"></path>
-														</svg>
-												</span> 필터 <span class="tooltip-wrapper"
-													style="position: absolute; left: -9999px; bottom: 100%; width: 250px; margin-left: -125px; margin-bottom: 5px; text-align: center; text-decoration: none;">
-														<span class="tooltip"
-														style="z-index: 1012; display: inline-block; position: relative; padding: 6px 9px; vertical-align: middle; white-space: normal; font-size: 12px; pointer-events: none; font-weight: bold; line-height: 18px; background: rgba(0, 0, 0, 0.8); color: white; border-radius: 5px; text-shadow: none; text-align: left; cursor: default; box-shadow: 0 1px rgba(255, 255, 255, 0.1);">Find
-															show more filters </span>
-												</span>
-											</a>
-											</label>
-										</div>
-									</div>
-								</li>
 								<li>
-								 <a href="restaurant_insert">가게 등록</a>
+									 <a href="restaurant_insert">가게 등록</a>
 								</li>
-								
-								
 
 							</ul>
 							</div>
@@ -221,85 +221,101 @@
 			<div class="scroll-map" style="width:1100px;margin-left:15px;margin-right:15px;display:inline-block;">
 					
 			<div class="column-alpha" style="width:700px; height:100%;display:inline-block;float:left;padding:0px 15px 0px 15px">
-				<ul style="display: inline-block;">
+				<ul style="list-style: none;display: block;">
 					<c:forEach var="dto" items="${map.list}">
-						<li style="width: 700px;padding:16px 0px 16px 0px;border-bottom: 1px solid #e6e6e6;">
-							<div class="biz-listing-large"style="width: 700px; height: 110px; position: relative;">
-								<div class="main-attribute"style="width: 420px; height: 90px; display: inline-block; float: left;">
-									<div class="midea-block"style="width: 390px; height: 90px; position:relative">
-										<div class="midea-avata"style="width: 100px; height: 90px; display: inline-block;">
-											<div class="photo-box"style="width: 90px; height: 90px; float: left;">
-												<c:if test="${!empty dto.filename }">
-													<img width="70px" height="70px"src="getImage/${dto.filename }">
-												</c:if>
-												<c:if test="${dto.filename==null}">
-													<img width="90px" height="90px" src="getImage/x.jpg">
-												</c:if>
-											</div>
-										</div>
-										<div class="midea-story"
-											style="width: 280px; height: 90px; display: inline-block; float: right;">
-											<h3><a href="restaurant_content?rnum=${dto.rnum }">${dto.rname }</a></h3>
-											<div class="rating" style="width: 280px; height: 17px">
-												<div class="star"style="width: 120px; height: 18px; display: inline-block">
-													<span class="fa fa-star checked"></span> 
-													<span class="fa fa-star checked"></span>
-													<span class="fa fa-star"></span>
-													<span class="fa fa-star"></span>
-													<span class="fa fa-star"></span>
+						<li style="margin: 0;padding: 18px 0;border-top: 1px solid #e6e6e6;padding-top: 17px;display: list-item;text-align: -webkit-match-parent;">
+							<div class="search-result natural-search-result">
+								<div class="biz-listing-large"style="margin: 0 -15px;height:auto;overflow:hidden;">
+									<div class="main-attribute"style=" float: left;padding: 0 15px;min-height: 1px;    box-sizing: border-box;width: 62.5%;">
+										<div class="midea-block"style="position: relative;display: flex;">
+											<div class="midea-avata"style="border-right: 12px solid transparent; border-left: none;">
+												<div class="photo-box" >
+													<a href="restaurant_content?rnum=${dto.rnum }" class="js-analytics-click" style="color: #0073bb;text-decoration: none;    cursor: pointer;">
+														<img width="90px" height="90px" src="getImage/${dto.filename }" style="outline: none;border-radius: 4px;vertical-align: middle;">	
+        											</a>
 												</div>
-												<span class="review-count rating-qualifier">1201reviews</span>
 											</div>
-											<div class="price-category"style="width: 280px; height: 19px">
-												<span class="business-attribute price-range">￦￦￦</span>
-												<span class="category-str-list">${dto.foodstyle}</span>
+											<div class="midea-story" style="-webkit-box-flex: 1; flex: 1;min-width: 0;min-height: 0;">
+													<h3 style="font-weight: normal;margin-bottom: 6px;    word-wrap: break-word !important;word-break: break-word !important;overflow-wrap: break-word !important;    font-size: 16px;line-height: 1.3125em;color: #d32323;    margin: 0 0 6px;    display: block;    -webkit-margin-before: 1em;-webkit-margin-after: 1em;-webkit-margin-start: 0px;-webkit-margin-end: 0px;">
+														<span class="indexed-biz-name" style="color: #333;    display: block;">
+															<a href="restaurant_content?rnum=${dto.rnum }" style="font-size: 16px;line-height: 1.3125em;    display: inline;    padding: 3px 0;    color: #0073bb;text-decoration: none;    cursor: pointer;">
+																<span>${dto.rname }</span>
+															</a>
+														</span>
+													</h3>
+														<div class="biz-rating biz-rating-large clearfix" style="margin: 6px 0;">
+															<div class="i-stars i-stars--regular-4 rating-large"style="    float: left;margin: -1px 6px 0 0;position: relative;overflow: hidden;    width: 102px;height: 18px; background-position: 0 -366px;    background: url(https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png) no-repeat;background-size: 132px 560px;display: inline-block;vertical-align: middle;">
+																<img class="offscreen" height="303" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png" width="84" alt="4.0 star rating" style=" clip: rect(0 0 0 0);position: absolute;left: -9999px;top: auto; overflow: hidden;width: 1px;height: 1px;    vertical-align: middle;">
+															</div>
+															<span class="review-count rating-qualifier" style="display: block;float: left;color: #666;font-weight: normal;">reviews</span>
+														</div >
+													<div class="price-category"style="clear: both;">
+														<span class="bullet-after">
+																<span class="business-attribute price-range" style="letter-spacing: 1px; white-space: nowrap;">￦￦￦</span>
+														</span>
+														<span class="category-str-list">
+															<a href="#" style="color: #0073bb;text-decoration: none;    cursor: pointer;">${dto.foodstyle}</a>
+														</span>
+													</div>
+												
 											</div>
 										</div>
 									</div>
+									<div class="secondary-attributes" style="float: left;padding: 0 15px;min-height: 1px;box-sizing: border-box;width: 37.5%;margin-top: 3px;">
+										<address style="display: block;font-style: normal;">
+											${dto.roadAddrPart1}<br>
+											${dto.addrDetail }<br>
+											${dto.roadAddrPart2 }<br>
+										</address>
+										<span class="offscreen" style="clip: rect(0 0 0 0);position: absolute;left: -9999px;top: auto;overflow: hidden;width: 1px;height: 1px;">Phone number</span>
+										<span class="hp">${dto.raddress}-${dto.hp2}-${dto.hp3 }</span>
+									</div>
 								</div>
-								<div class="second-attribute"
-									style="width: 280px; height: 110px; display: inline-block; position: absolute">
-									<span class="address">${dto.roadAddrPart1}</span><br>
-									<span class="address">${dto.addrDetail }</span><br>
-									<span class="address">${dto.roadAddrPart2 }</span><br>
-									<span class="hp">${dto.raddress}-${dto.hp2}-${dto.hp3 }</span>
+								<div class="snippet-block media-block" style="margin-top: 12px;margin-bottom: 0; font-size: 13px;line-height: 1.38462em;    position: relative;    display: flex;">
+								<div class="media-avatar" style="border-right: 6px solid transparent;border-left: none;">
+									<div class="photo-box pb-30s">
+										<a href="restaurant_content?rnum=${dto.rnum }" style="color: #0073bb;text-decoration: none;    cursor: pointer;">
+											<img width="30px" height="30px" src="getImage/pepe.jpg" style="outline: none;margin-top: 3px;border-radius: 4px;    vertical-align: middle;">
+										</a>
+									</div>
+								</div>
+								<div class="media-story" style="-webkit-box-flex: 1;flex: 1;min-width: 0;min-height: 0;">
+									<p style="margin-bottom: 0;display: block;">
+										리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 
+										<a href="#" style="white-space: nowrap;color: #0073bb;text-decoration: none;cursor: pointer;">read more</a>
+									</p>
 								</div>
 							</div>
-							<div class="search-avatar-offset snippet-block media-block"
-								style="width: 700px; height: 50px;">
-								<div class="media-avatar" style="width: 70px; height: 50px; float: left; padding-right: 10px">
-									<img width="50px" height="50px"src="getImage/pepe.jpg">
-								</div>
-								<div class="media-story" style="width: 700px; height: 36px; margin-top: 10px">
-									<span style="font-size: 100%; font: inherit; vertical-align: baseline;">좋아요 좋아요 좋아요 좋아요 좋아요 좋아요 좋아요 좋아요 좋아요 좋아요 좋아요 좋아요 좋아요</span>
-								</div>
+							
 							</div>
+							
+							
 						</li>
 					</c:forEach>
 				</ul>
 				<div class="page">
-					<div class="page-arange" style="width:350px;height:40px;float:left;">
+					<div class="page-arange" style="width:250px;height:40px;float:left;">
 					
 					</div>
 							<div class="paging"
-								style="width: 350px; height: 40px; display: inline-block; white-space: nowrap; 
+								style="width: 450px; height: 40px; display: inline-block; white-space: nowrap; 
 								margin-left: 3px; margin-right: 3px; border-collapse: collapse; border-spacing: 0 0;
 								 vertical-align: baseline; box-sizing: border-box; display: table-cell;">
-								<c:if test="${map.boardPager.curBlock > 1}">
+								<c:if test="${map.YepsPager.curBlock > 1}">
 									<a class="number" href="javascript:list('1')">[처음]</a>
 								</c:if>
 								<!-- **이전페이지 블록으로 이동 : 현재 페이지 블럭이 1보다 크면 [이전]하이퍼링크를 화면에 출력 -->
-								<c:if test="${map.boardPager.curBlock > 1}">
+								<c:if test="${map.YepsPager.curBlock > 1}">
 									<a class="number"
-										href="javascript:list('${map.boardPager.prevPage}')">[이전]</a>
+										href="javascript:list('${map.YepsPager.prevPage}')">[이전]</a>
 								</c:if>
 
 								<!-- **하나의 블럭에서 반복문 수행 시작페이지부터 끝페이지까지 -->
-								<c:forEach var="num" begin="${map.boardPager.blockBegin}"
-									end="${map.boardPager.blockEnd}">
+								<c:forEach var="num" begin="${map.YepsPager.blockBegin}"
+									end="${map.YepsPager.blockEnd}">
 									<!-- **현재페이지이면 하이퍼링크 제거 -->
 									<c:choose>
-										<c:when test="${num == map.boardPager.curPage}">
+										<c:when test="${num == map.YepsPager.curPage}">
 											<span class="number" style="color: red">${num}</span>&nbsp;
                         </c:when>
 										<c:otherwise>
@@ -310,15 +326,15 @@
 
 								<!-- **다음페이지 블록으로 이동 : 현재 페이지 블럭이 전체 페이지 블럭보다 작거나 같으면 [다음]하이퍼링크를 화면에 출력 -->
 								<c:if
-									test="${map.boardPager.curBlock <= map.boardPager.totBlock}">
+									test="${map.YepsPager.curBlock <= map.YepsPager.totBlock}">
 									<a class="number"
-										href="javascript:list('${map.boardPager.nextPage}')">[다음]</a>
+										href="javascript:list('${map.YepsPager.nextPage}')">[다음]</a>
 								</c:if>
 
 								<!-- **끝페이지로 이동 : 현재 페이지가 전체 페이지보다 작거나 같으면 [끝]하이퍼링크를 화면에 출력 -->
-								<c:if test="${map.boardPager.curPage <= map.boardPager.totPage}">
+								<c:if test="${map.YepsPager.curPage <= map.YepsPager.totPage}">
 									<a class="number"
-										href="javascript:list('${map.boardPager.totPage}')">[끝]</a>
+										href="javascript:list('${map.YepsPager.totPage}')">[끝]</a>
 								</c:if>
 							</div>
 						</div>
@@ -354,12 +370,9 @@
 		</c:forEach>
 
 		for (var i = 0; i < roadAddrPart1.length; i++) {
-			naver.maps.Service.geocode({address : roadAddrPart1[i]},
-							function(status, response) {
+			naver.maps.Service.geocode({address : roadAddrPart1[i]},function(status, response) {
 								var result = response.result;
-								var myaddr = new naver.maps.Point(
-										result.items[0].point.x,
-										result.items[0].point.y);
+								var myaddr = new naver.maps.Point(result.items[0].point.x,result.items[0].point.y);
 								map.setCenter(myaddr); // 검색된 좌표로 지도 이동
 								// 마커 표시
 								var marker = new naver.maps.Marker({
@@ -407,7 +420,6 @@
 								function getClickHandler(seq) {
 									return function(e) {
 										var marker = markers[seq], infoWindow = infoWindows[seq];
-
 										if (infoWindow.getMap()) {
 											infoWindow.close();
 										} else {
@@ -415,8 +427,7 @@
 										}
 									}
 								}
-								naver.maps.Event.addListener(markers[j],
-										'click', getClickHandler(j));
+								naver.maps.Event.addListener(markers[j],'mouseover', getClickHandler(j));
 								j++
 							});
 						};
@@ -436,7 +447,7 @@
 		</div>
 	</div>
 	
-	<script>
+<script>
     // **원하는 페이지로 이동시 검색조건, 키워드 값을 유지하기 위해 
     function list(page){
         location.href="restaurant_list?curPage="+page;
@@ -450,13 +461,15 @@
     	  $('.wrap').removeClass('fixed');
       }
   });
-  
-
-// 	$(window).scroll(function() {
-// 				if ($(window).scrollTop() == $(document).height()-$(window).height()) {
-// 					alert('End of Window');
-// 				}
-// 			});​
+//   $(document).ready(function(){
+// 	  $("ul suggested-filters_price-filters").hover(
+// 	     function() {
+// 	        $( this ).append( $( "<span> : Now You are a Super *****</span>" ) );
+// 	  }, function() {
+// 	        $( this ).find( "span:last" ).remove();
+// 	     }
+// 	);
+// 	});
 </script>
 <%@include file="../bottom.jsp" %>
 

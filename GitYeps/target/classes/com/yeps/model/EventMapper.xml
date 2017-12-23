@@ -5,14 +5,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.yeps.model">
-	<select id="listEvent" resultType="EventDTO">
-		select * from yeps_event order by evnum asc
+
+	<select id="getEventCount" resultType="int">
+		select count(*) from yeps_event
+	</select>
+	
+	<select id="getEventCountForFree" resultType="int">
+		select count(*) from yeps_event where discount like '%무료%'
+	</select>
+	
+	<select id="getEventCountForCategory" parameterType="java.util.HashMap" resultType="int">
+		select count(*) from yeps_event where event_category = #{event_category}
+	</select>
+	
+	<select id="listEvent" parameterType="java.util.HashMap" resultType="EventDTO">
+		${sql}
 	</select>
 	
 	<insert id="insertEvent" parameterType="EventDTO">
 		insert into yeps_event values (yeps_event_seq.nextval, #{eventname}, #{start_date},
 		 #{start_time}, #{end_date, jdbcType=VARCHAR}, #{end_time, jdbcType=VARCHAR}, #{store_address}, #{event_content}, #{discount}, #{event_category}, #{ip}, 
-		 #{filenum, jdbcType=INTEGER}, #{zipNo}, #{roadAddrPart1}, #{roadAddrPart2}, #{addrDetail}, sysdate)
+		 #{filenum, jdbcType=INTEGER}, #{zipNo}, #{roadAddrPart1}, #{roadAddrPart2, jdbcType=VARCHAR}, #{addrDetail}, sysdate)
 	</insert>
 	
 	<select id="getEventContent" parameterType="int" resultType="EventDTO">
@@ -28,10 +41,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<update id="updateFilenum" parameterType="java.util.HashMap">
-		update yeps_event set filenum = ${filenum} where evnum = ${evnum}
+		update yeps_event set filenum = #{filenum} where evnum = #{evnum}
 	</update>
 	
 	<select id="getThisWeek_EventList" resultType="EventDTO">
 		select * from yeps_event where to_char(sysdate+7, 'yyyymmdd') >= end_date and 5 >= rownum order by event_register_date asc
  	</select>
+ 	
+ 	<select id="getRandom_EventList" resultType="EventDTO">
+ 		select * from yeps_event where to_char(sysdate+7, 'yyyymmdd') >= end_date and 3 >= rownum order by dbms_random.value
+ 	</select>
+ 	
 </mapper>

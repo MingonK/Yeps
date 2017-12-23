@@ -121,8 +121,9 @@
 }
 
 #user_photo_write_info > p {
-	margin-bottom: 12px; margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline; display: block; 
-	-webkit-margin-before: 1em; -webkit-margin-after: 1em; -webkit-margin-start: 0px; -webkit-margin-end: 0px;
+	margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline;
+	margin-bottom: 12px; overflow:hidden; text-overflow:ellipsis; display: -webkit-box; 
+	-webkit-line-clamp: 2; -webkit-box-orient: vertical; word-wrap: break-word;
 }
 
 #delete_button {

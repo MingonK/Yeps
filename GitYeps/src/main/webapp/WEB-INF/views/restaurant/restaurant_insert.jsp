@@ -5,9 +5,6 @@
 var week = new Array("mon","tue","wed","thu","fri","sat","sun")
 var day = new Array("월요일","화요일","수요일","목요일","금요일","토요일","일요일");
 
-
-
-
 // 한글 입력 방지
 function removeChar(event) {
     event = event || window.event;
@@ -57,7 +54,7 @@ function busy_changeTime(){
 		}
 		for(var i=0;i<e.length;i++){
 			if(c==e.options[i].value){
-				document.getElementById("hour-end").options[i].selected = 'selected';
+				document.getElementById("busy-hour-end").options[i].selected = 'selected';
 				break;
 			}
 		}
@@ -118,7 +115,7 @@ function hour_changeTime(){
 				break;
 			}
 		}
-		if(s.options[s.selectedIndex].value=='익일'){
+		if(s.options[s.selectedIndex].value=='휴일'){
 			e.options.length = 0
 			var option = document.createElement('option');
 			option.text = "";
@@ -364,10 +361,10 @@ function test() {
 														<option value="6">일요일</option>
 													</select>
 												</li>
-												<li class="restInsert-li" style="width:153px;">
-													<select class="restInsert-day" id="hour-start" onchange="hour_changeTime()" style="width:">
-														<option value="익일">익일</option>
-														<option value="0.0" >오전 12:00</option>
+												<li class="restInsert-li">
+													<select class="restInsert-day" id="hour-start" onchange="hour_changeTime()" style="width:147px">
+														<option value="휴일">휴일</option>
+														<option value="0.0" selected>오전 12:00</option>
 														<option value="0.5">오전 12:30</option>
 														<option value="1.0">오전 1:00</option>
 														<option value="1.5">오전 1:30</option>
@@ -417,8 +414,8 @@ function test() {
 														<option value="23.5">오후 11:30</option>
 													</select>
 												</li>
-												<li class="restInsert-li" style="width:153px;">
-													<select class="restInsert-day" id="hour-end">
+												<li class="restInsert-li">
+													<select class="restInsert-day" id="hour-end" style="width:147px">
 														<option value="0.5">오전 12:30</option>
 														<option value="1.0">오전 1:00</option>
 														<option value="1.5">오전 1:30</option>
@@ -513,19 +510,21 @@ function test() {
 										<input class="magic-radio" type="radio" id="reserv2" name="reserv" value="불가능">
 										<label for="reserv2" class="restInsert-label">불가능</label>
 									</li>
+									
 									<li class="restInsert-list">
-										<label for="roadAddrPart1" class="restInsert-label-bold-bold">배달</label><br>
-																				
-										<input class="magic-radio" type="radio" id="delivery" name="delivery" value="가능" >
-										<label for="delivery" class="restInsert-label" style="width:58px">가능</label>
+										<label for="roadAddrPart1" class="restInsert-label-bold">배달</label><br>
+										
+										<input class="magic-radio" type="radio" id="delivery1" name="delivery" value="가능" >
+										<label for="delivery1" class="restInsert-label" style="width:58px">가능</label>
 										<input class="magic-radio" type="radio" id="delivery2" name="delivery" value="불가능">
 										<label for="delivery2" class="restInsert-label">불가능</label>
 									</li>
+									
 									<li class="restInsert-list">
-										<label for="roadAddrPart1" class="restInsert-label-bold">포장</label><br>
+										<label class="restInsert-label-bold">포장</label><br>
 																				
-										<input class="magic-radio" type="radio" id="takeout" name="takeout" value="가능" >
-										<label for="takeout" class="restInsert-label" style="width:58px">가능</label>
+										<input class="magic-radio" type="radio" id="takeout1" name="takeout" value="가능" >
+										<label for="takeout1" class="restInsert-label" style="width:58px">가능</label>
 										<input class="magic-radio" type="radio" id="takeout2" name="takeout" value="불가능">
 										<label for="takeout2" class="restInsert-label">불가능</label>
 									</li>
@@ -562,7 +561,7 @@ function test() {
 										
 										<input class="magic-radio" type="radio" id="kidszone" name="kidszone" value="키드존" >
 										<label for="kidszone" class="restInsert-label" style="width:58px">키드존</label>
-										<input class="magic-radio" type="radio" id="kidsszone2" name="kidszone" value="노키드존">
+										<input class="magic-radio" type="radio" id="kidszone2" name="kidszone" value="노키드존">
 										<label for="kidszone2" class="restInsert-label">노키드존</label>
 									</li>
 									<li class="restInsert-list">
@@ -763,7 +762,7 @@ function test() {
 													</select>
 												</li>
 												<li class="restInsert-li">
-													<button type="button" value="submit" class="restInsert-button " style="padding: 5px 8px;font-size: 12px;line-height: 1.5em;border:1px solid #ccc;" onclick="busy_add();" >
+													<button type="button" value="submit" class="restInsert-button " style="padding: 5px 8px;font-size: 12px;line-height: 1.5em;border:1px solid #ccc;display:absolute;" onclick="busy_add();" >
 														<span>Add</span>
 													</button>
 												</li>
@@ -780,7 +779,9 @@ function test() {
 							</form>
 					</div>
 					<div class="restInsert-beta" style="width:40%;height:100%;float: left;padding: 0 15px;display:inline-block;">
-						<img id="preview" src="" width="500" style="display:none;">
+						<div class="restInsert-image" style="box-shadow: 0 6px 12px rgba(0,0,0,1);margin-top:20px;">
+							<img id="preview" src="" width="100%" style="display:none;border: 1px solid #999;border-radius: 5px;">
+						</div>
 					</div>
 				</div>
 			</div>

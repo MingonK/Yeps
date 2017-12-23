@@ -15,8 +15,37 @@ public class EventMapper {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public List<EventDTO> listEvent() {
-		return sqlSession.selectList("listEvent");
+	public int getEventCount(String mode) {
+		if(mode.equals("normal")) {
+			return sqlSession.selectOne("getEventCount");
+		} else if(mode.equals("free")) {
+			return sqlSession.selectOne("getEventCountForFree");
+		} else {
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("event_category", mode);
+			return sqlSession.selectOne("getEventCountForCategory", map);
+		}
+	}
+	
+	public List<EventDTO> listEvent(String mode, int start, int end) {
+		String sql = null;
+		if (mode == null || mode.trim().equals("") || mode.trim().equals("recently")) {
+			sql = "select * from (select rownum rn, A.* from (select * from yeps_event order by evnum desc)A) where rn between '"
+					+ start + "' and '" + end + "'";
+		} else if (mode.equals("free")) {
+			sql = "select * from (select rownum rn, A.* from (select * from yeps_event where discount like '%무료%' order by evnum desc)A) where rn between '"
+					+ start + "' and '" + end + "'";
+		} else if (mode.equals("date")) {
+			sql = "select * from (select rownum rn, A.* from (select * from yeps_event order by evnum asc)A) where rn between '"
+					+ start + "' and '" + end + "'";
+		} else {
+			sql = "select * from (select rownum rn, A.* from (select * from yeps_event where event_category = '" + mode
+					+ "' order by evnum desc)A) where rn between '" + start + "' and '" + end + "'";
+		}		
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("sql", sql);
+		return sqlSession.selectList("listEvent", map);
 	}
 	
 	public int insertEvent(EventDTO dto) {
@@ -52,5 +81,9 @@ public class EventMapper {
 	
 	public List<EventDTO> getThisWeek_EventList() {
 		return sqlSession.selectList("getThisWeek_EventList");
+	}
+	
+	public List<EventDTO> getRandom_EventList() {
+		return sqlSession.selectList("getRandom_EventList");
 	}
 }

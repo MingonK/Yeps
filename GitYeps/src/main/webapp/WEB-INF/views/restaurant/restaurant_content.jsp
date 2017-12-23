@@ -2,43 +2,28 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 <html>
 <head>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js" ></script>
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=jD9qGVpvZh7Zobclojwp&submodules=geocoder"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/restStyle.css?ver=1"/>"/>
-<%-- <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/bootstrap.min.css?ver=1"/>"/> --%>
-<%-- <link rel="stylesheet" type="text/css" href="<c:url value="/resources/js/bootstrap.min.css?ver=1"/>"/> --%>
-<script type="text/javascript">
-	var day=new Array("월요일","화요일","수요일","목요일","금요일","토요일","일요일");
-	var d = new Date();
-	var day2=d.getDay()-1;
-// 	alert(day[day2]);
-	
-var foodstyle="${getRest.foodstyle}";
-var res = foodstyle.split(",");
-</script>
-<style>
-.checked {
-    color: red;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css?ver=1"/>"/>
+
 <title>레스토랑</title>
 </head>
 <%@include file="../top.jsp" %>
-	<div class="main" style="background: white;">
-		<div class="top-shelf" style="width:100%;height:480px;position:relative;padding:15px;">
-			<div class="content-container" style="width:960px;height:450px;margin:0 auto;padding:0 15px;">
-				<div class="biz-page-header clearfix" style="width:100%;height:120px;margin-bottom:13px;display:block;">
-					<div class="left" style="width:520px;height:120px;padding-right:30px;display:inline-block;float:left;">
-						<div style="width:490px;height:36px;">
-							<h1 style="font-weight: bold;font-size: 30px;">${getRest.rname }</h1>
-						</div>
-						<div class="biz-main-info embossed-text-white" style="width:490px;height:24px;margin-top:9px;">
-							<div class="rating-info clearfix" style="width:490px;height:24px;margin-bottom:9px;">
-								<div class="biz-rating biz-rating-very-large clearfix" style="float: left;line-height: 24px;margin-bottom: 0;">
+	<div class="main">
+	<div class="top-shelf" style="overflow: hidden; min-width: 990px; padding-bottom: 24px; margin-bottom: -18px; z-index: 1; width: 100%; position: relative; padding-top: 15px;">
+		<div class="content-container js-biz-details" style="width: 960px;margin: 0 auto;padding: 0 15px;">
+			<div class="biz-page-header clearfix" style="position: relative;display: flex;-webkit-box-align: center;align-items: center;width: 100%;margin-bottom: 13px;font-size: 16px;line-height: 1.3125em;">
+				<div class="biz-page-header-left claim-status" style="-webkit-box-flex: 1;flex: 1;min-width: 0;min-height: 0;padding-right: 30px;">
+					<div>
+						<h1 style="display: inline;padding-top: 0;margin-bottom: 6px;text-shadow: 0 1px rgba(255,255,255,0.7);word-wrap: break-word !important;word-break: break-word !important;overflow-wrap: break-word !important;font-weight: bold;    font-size: 30px;line-height: 1.2em;color: #333;    margin: 0 0 6px;">${getRest.rname }</h1>
+					</div>
+					<div class="biz-main-info embossed-text-white"style="margin-top: 9px;text-shadow: 0 1px rgba(255,255,255,0.7);">
+						<div class="rating-info clearfix" style="margin-bottom: 9px;">
+							<div class="biz-rating biz-rating-very-large clearfix" style="float: left; line-height: 24px; margin-bottom: 0;">
 								<div class="i-stars i-stars--large-4 rating-very-large"
 									title="4.0 star rating"
 									style="margin-top: 0; float: left; margin: -4px 6px 0 0; position: relative; overflow: hidden; width: 132px; height: 24px; background-position: 0 -168px; background: url(https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png) no-repeat; background-size: 132px 560px; display: inline-block; vertical-align: middle;">
@@ -47,127 +32,182 @@ var res = foodstyle.split(",");
 										width="84" alt="4.0 star rating"
 										style="clip: rect(0, 0, 0, 0); position: absolute; left: -9999px; top: auto; overflow: hidden; width: 1px; height: 1px; vertical-align: middle;">
 								</div>
-								<span class="review-count rating-qualifier">3705 reviews</span>
-								</div>
-							</div>
-							<div class="price-category" style="width:202px;height:22px;">
-								<span class="business-attribute price-range">￦￦￦</span>
-								<span class="category-str-list" style="margin-right:6px;">
-									<a href="#">${getRest.foodstyle}</a>
-								</span>
+								<span class="review-count rating-qualifier" style="position: relative;display: block;float: left;color: #666;font-weight: normal;">reviews</span>
 							</div>
 						</div>
-					</div>
-					<div class="right" style="width:345px;height:37px;display:inline-block;float:none;vertical-align: middle;">
-						<div class="biz-page-actions nowrap" style="width:100%;height:37px;">
-							<a href="#" class="write-review" style="width:90px;height:30px;float:left;padding-left:12px;margin:0 12px 0 0;">
-							리뷰쓰기
-							</a>
-							<span class="ybtn-group clearfix" style="width:100%;height:30px;">
-								<a href="#" class="photo" style="width:100px;height:30px;padding:5px 8px;border:1px;">
-								사진추가
-								</a>
-							</span>
+						<div class="price-category" style="float: left;clear: both;">
+							<span class="bullet-after">
+      								 <span class="business-attribute price-range" style="letter-spacing: 1px;white-space: nowrap;">￦￦</span>
+      						</span>
+       						<span class="category-str-list" style="margin-right: 6px;">
+			                    <a href="#" style="white-space: nowrap;color: #0073bb;text-decoration: none;">${getRest.foodstyle}</a>
+					    	</span>
 						</div>
+							
 					</div>
 				</div>
-				<div class="biz-page-subheader" style="width:100%;height:350px;    display: table;">
-					<div class="mapbox-container" style="width:33.33333%;height:350px;display: table-cell;vertical-align: middle;">
-						<div class="mapbox" style="padding:5px;background: #fff;border: 1px solid #ccc;">
-							<div class="mapbox-map" id="map" style="width:100%;height:135px;border: 1px solid #ccc;">
-							   <script>
-							      var map = new naver.maps.Map('map');
-							      var myaddress = '${getRest.roadAddrPart1}';
-							      naver.maps.Service.geocode({address: myaddress}, function(status, response) {
-							          var result = response.result;
-							          var myaddr = new naver.maps.Point(result.items[0].point.x, result.items[0].point.y);
-							          map.setCenter(myaddr);
-							          var marker = new naver.maps.Marker({
-							            position: myaddr,
-							            map: map
-							          });
-							      });
-							      </script>	
-							</div>			
-							<div class="mapbox-text" style="width:100%;height:180px;display:block;">
-								<ul style="width:280px;height:175px;margin:5px;list-style: none;">
-									<li class="u-relative" style="width:100%;height:88px;margin-bottom:3px;list-style: none;">
-<!-- 										<span class="icon" style="width: 18px;height: 18px;"> -->
-<!-- 										<svg class="icon_svg"> -->
-<!-- 											<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_marker"> -->
-<!-- 												<svg id="18x18_marker" height="100%" viewBox="0 0 18 18" width="100%"> -->
-<!-- 													<path d="M14 7A5 5 0 0 0 4 7c0 1.97 1.15 3.658 2.806 4.472h-.17L9 16l2.363-4.528h-.17C12.85 10.658 14 8.97 14 7zM9 5a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"></path> -->
-<!-- 												</svg> -->
-<!-- 											</use> -->
-<!-- 										</svg> -->
-<!-- 									</span> -->
-										<div class="map-box-address" style="width:264px;height:60px;margin-left:24px;">
-											<strong class="street-address">
-												<address>
-       				 								${getRest.roadAddrPart1}<br>
-       				 								${getRest.addrDetail}<br>
-       				 								${getRest.roadAddrPart2}
-    											</address>
-											</strong>
+					
+				<div class="biz-page-header-right u-relative"style="display: table;    position: relative !important;">
+					<div class="biz-page-actions nowrap"style="text-align: right;overflow: hidden;padding-bottom: 1px;margin-top: -1px;    white-space: nowrap;">
+						<a href="review_write" class="ybtn ybtn--primary war-button" style="color: #666; float: left; padding-left: 12px; margin: 0 12px 0 0; color: white; border-color: #8d0005; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3); background-color: #d90007; background: linear-gradient(#d90007, #c91400); display: inline-block; vertical-align: middle; cursor: pointer; border: 1px solid; font-weight: bold; text-align: center; user-select: none; font-size: 14px; line-height: 1.28571em; padding: 8px 19px 9px; border-radius: 3px;">
+							<span aria-hidden="true" style="width: 24px; height: 24px;" class="icon icon--24-star icon--size-24 icon--currentColor u-space-r-half icon--fallback-inverted">
+							    <svg id="24x24_star" height="100%" viewBox="0 0 24 24" width="100%">
+							    	<path d="M12 1.5l2.61 6.727 6.89.53-5.278 4.688 1.65 7.055L12 16.67 6.13 20.5l1.648-7.055L2.5 8.757l6.89-.53L12 1.5z"></path>
+							    </svg>
+							</span>
+							리뷰쓰기 
+						</a> 
+						<span class="ybtn-group clearfix" style="float: right;margin-top: 4px;"> 
+							<a class="ybtn ybtn--small add-photo-button" href="restaurant_uploadForm2?rnum=${getRest.rnum}" style="border-radius: 3px 0 0 3px; color: #666; position: relative; float: left; padding: 5px 8px; font-size: 12px; line-height: 1.5em; text-decoration: none !important; display: inline-block; vertical-align: middle; margin: 0; cursor: pointer; border: 1px solid; font-weight: bold; text-align: center; user-select: none; border-color: #ccc; color: #666; background-color: #f7f7f7; background: linear-gradient(#fff, #f7f7f7); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);">
+								<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-add-photo icon--size-18 icon--currentColor">
+							<svg id="18x18_add_photo" height="100%" viewBox="0 0 18 18"width="100%">
+						   		<path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 4.75a4.25 4.25 0 1 0 0 8.5 4.25 4.25 0 0 0 0-8.5zM11 10h-1v1a1 1 0 0 1-2 0v-1H7a1 1 0 0 1 0-2h1V7a1 1 0 0 1 2 0v1h1a1 1 0 0 1 0 2z"></path>
+							</svg>
+						</span> 
+							사진추가
+						</a>
+						
+						<a class="ybtn ybtn--small share-icon js-business-send-to-friend"href="#" style="margin-left: -1px; position: relative; float: left; border-radius: 0; padding: 5px 8px; font-size: 12px; line-height: 1.5em; display: inline-block; vertical-align: middle; text-decoration: none !important; margin: 0; cursor: pointer; border: 1px solid; font-weight: bold; text-align: center; user-select: none; border-color: #ccc; color: #666; background-color: #f7f7f7; background: linear-gradient(#fff, #f7f7f7); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);">
+							<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-share icon--size-18 icon--currentColor">
+							    <svg id="18x18_share" height="100%" viewBox="0 0 18 18" width="100%">
+							    	<path d="M17.714 6.43L13 10.356v-3.03c-1 0-5.097 1.47-6.286 3.62.274-3.08 4.286-5.5 6.286-5.5V2.5l4.714 3.93zM3 4v10h11v-2.5l1-1V15H2V3h8.5l-1 1H3z"></path>
+							    </svg>
+							</span>공유
+						</a>
+						
+						<a class="ybtn ybtn--small bookmark-button js-action-bar-bookmark-button not-bookmarked"href="#" style="margin-left: -1px; border-radius: 0 3px 3px 0; position: relative; float: left; padding: 5px 8px; font-size: 12px; line-height: 1.5em; display: inline-block; vertical-align: middle; text-decoration: none !important; transition: all 0.2s linear; margin: 0; cursor: pointer; border: 1px solid; font-weight: bold; text-align: center; user-select: none; border-color: #ccc; color: #666; background-color: #f7f7f7; background: linear-gradient(#fff, #f7f7f7); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);">
+							<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-bookmark icon--size-18 icon--currentColor">
+							    <svg id="18x18_bookmark" height="100%" viewBox="0 0 18 18" width="100%">
+							    	<path d="M14 2H4v14l5-4 5 4V2zm-3.13 7.957L8.978 8.794 7.148 10 7.5 7.926 6 6.458l2.074-.303L8.977 4l.948 2.155L12 6.458l-1.5 1.468.37 2.03z"></path>
+							    </svg>
+							</span>북마크
+						</a>
+						</span>
+						</div>
+						
+					</div>
+			</div>
+		
+		<div class="biz-page-subheader" style="width: 100%; height: 350px; display: table;">
+					<div class="mapbox-container" style="width: 33.33333%; height: 350px; display: table-cell; vertical-align: middle;">
+						<div class="mapbox" style="padding: 5px; background: #fff; border: 1px solid #ccc;">
+							<div class="mapbox-map" id="map" style="width: 100%; height: 180px; border: 1px solid #ccc;">
+								
+							</div>
+							<div class="mapbox-text" style="width: 100%; height: 130px; display: block;">
+								<ul style="margin: 5px; list-style: none;">
+								
+										<li class="u-relative" style="margin-bottom: 3px;    position: relative !important;display: list-item;list-style: none;">
+											<span style="width: 18px; height: 18px;" class="icon icon--18-marker icon--size-18 u-absolute u-sticky-top">
+											    <svg id="18x18_marker" height="100%" viewBox="0 0 18 18" width="100%">
+											    	<path d="M14 7A5 5 0 0 0 4 7c0 1.97 1.15 3.658 2.806 4.472h-.17L9 16l2.363-4.528h-.17C12.85 10.658 14 8.97 14 7zM9 5a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"></path>
+											    </svg>
+											</span>
+											<div class="map-box-address u-space-l4" style="line-height: 18px; margin-left: 24px;">
+												<strong class="street-address" style="font-weight: bold;">
+													<address style="display: block;font-style: normal;">
+														${getRest.roadAddrPart1}<br> ${getRest.addrDetail}<br>
+														${getRest.roadAddrPart2}
+													</address>
+												</strong>
+											</div>
+										</li>
+	
+									<li class="clearfix" style="margin-bottom: 3px;    display: list-item;text-align: -webkit-match-parent;">
+										<div>
+											<span class="icon" style="width: 18px; height: 18px;"> 
+												<svg class="icon_svg">
+													<path d="M16.444 7.556l-5.957-5.958a2.145 2.145 0 0 0-3.034 0L1.598 7.453a2.145 2.145 0 0 0 0 3.034l5.958 5.957a2 2 0 0 0 2.828 0l6.06-6.06a2 2 0 0 0 0-2.828zM9.97 11.47v-2.5h-3v3h-1v-4h4v-2.5l3 3-3 3z"></path>
+												</svg>
+											</span> 
+											<a class="btn" data-popup-open="popup-1" href="#">길찾기</a>
+											<div class="popup" data-popup="popup-1">
+											    <div class="popup-inner">
+											        <a class="popup-close" data-popup-close="popup-1" href="#">x</a>
+											    </div>
+											</div>
+										</div>
+									</li>
+									<li class="hp" style="margin-bottom: 3px;    display: list-item;text-align: -webkit-match-parent;">
+										<div style="display: block;">
+											<span class="icon" style="width: 18px; height: 18px;">
+												<svg class="icon_svg">
+														<path
+														d="M15.862 12.526l-2.91-1.68a.442.442 0 0 0-.486.087l-1.58 1.687a.857.857 0 0 1-.52.232s-1.083.03-3.13-1.985c-2.046-2.015-2.054-3.12-2.054-3.12 0-.17.094-.41.21-.533L6.85 5.656a.49.49 0 0 0 .08-.504L5.295 2.14c-.073-.155-.228-.18-.345-.058L2.26 4.924a1.07 1.07 0 0 0-.248.53s-.34 2.927 3.75 6.955c4.093 4.025 6.96 3.59 6.96 3.59.167-.027.4-.148.516-.27l2.684-2.845c.117-.123.09-.285-.062-.36z"></path>
+													</svg>
+											</span> <span class="phone">${getRest.raddress}-${getRest.hp2}-${getRest.hp3}</span>
 										</div>
 									</li>
 									
-									<li class="get-direction" style="width:100%;height:19px;margin-bottom:3px;">
-									<span class="icon" style="width: 18px;height: 18px;">
-										<svg class="icon_svg">
-											<path d="M16.444 7.556l-5.957-5.958a2.145 2.145 0 0 0-3.034 0L1.598 7.453a2.145 2.145 0 0 0 0 3.034l5.958 5.957a2 2 0 0 0 2.828 0l6.06-6.06a2 2 0 0 0 0-2.828zM9.97 11.47v-2.5h-3v3h-1v-4h4v-2.5l3 3-3 3z"></path>
-										</svg>
-									</span>
-										<a href="#">길찾기</a>
-									</li>
-									<li class="hp" style="width:100%;height:19px;margin-bottom:3px;">
-										<div style="display:block;">
-											<span class="icon" style="width: 18px;height: 18px;">
-												<svg class="icon_svg">
-													<path d="M15.862 12.526l-2.91-1.68a.442.442 0 0 0-.486.087l-1.58 1.687a.857.857 0 0 1-.52.232s-1.083.03-3.13-1.985c-2.046-2.015-2.054-3.12-2.054-3.12 0-.17.094-.41.21-.533L6.85 5.656a.49.49 0 0 0 .08-.504L5.295 2.14c-.073-.155-.228-.18-.345-.058L2.26 4.924a1.07 1.07 0 0 0-.248.53s-.34 2.927 3.75 6.955c4.093 4.025 6.96 3.59 6.96 3.59.167-.027.4-.148.516-.27l2.684-2.845c.117-.123.09-.285-.062-.36z"></path>
-												</svg>
-											</span>
-										<span class="phone">${getRest.raddress}-${getRest.hp2}-${getRest.hp3}</span>
-										</div>
-									</li>
 								</ul>
+								
 							</div>
-						</div>	
-					</div>
-					<div class="restContent-showcase-container" style="width:66.6667%;;height:336px;display: table-cell;vertical-align: middle;">
-						<div class="restContent-showcase-container-inner" style="position: relative;width: 640px;height: 220px;">
-							<div class="top-shelf-grey"></div>
-							
-						<div class="showcase-footer-links" style="position: absolute; right: 0; left: 0; top: 100%; padding: 6px 0;">
-							<a class="see-more u-pull-right" href="/biz_photos/kitchen-story-san-francisco" style="float: right !important;color: #0073bb;text-decoration: none;cursor: pointer;"> 
-								<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-grid icon--size-18 u-space-r-half">
-									<svg class="icon_svg">
-							        	<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_grid">
-							        		<svg id="18x18_grid" height="100%" viewBox="0 0 18 18" width="100%">
-							        			<path d="M10 15v-5h5v5h-5zm0-12h5v5h-5V3zm-7 7h5v5H3v-5zm0-7h5v5H3V3z"></path>
-						        			</svg>
-							        	</use>
-							    	</svg>
-								</span>See all 4215
-							</a>
 						</div>
-
+					</div>
+					<div class="restContent-showcase-container"
+						style="width: 66.6667%;; height: 336px; display: table-cell; vertical-align: middle;">
+						<div class="restContent-showcase-container-inner"
+							style="position: relative; width: 640px; height: 220px;">
+							<div class="top-shelf-grey"></div>
+	
+							<div class="showcase-footer-links"
+								style="position: absolute; right: 0; left: 0; top: 100%; padding: 6px 0;">
+								<a class="see-more u-pull-right"
+									href="restaurant_photoList?rnum=${getRest.rnum}" style="float: right !important; color: #0073bb; text-decoration: none; cursor: pointer;">
+									<span aria-hidden="true" style="width: 18px; height: 18px;"class="icon icon--18-grid icon--size-18 u-space-r-half">
+										<svg class="icon_svg">
+								        	<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_grid">
+								        		<svg id="18x18_grid" height="100%" viewBox="0 0 18 18" width="100%">
+								        			<path d="M10 15v-5h5v5h-5zm0-12h5v5h-5V3zm-7 7h5v5H3v-5zm0-7h5v5H3V3z"></path>
+							        			</svg>
+								        	</use>
+								    	</svg>
+								</span>
+								See all ${getImageCount}
+								</a>
+							</div>
+	
 							<div class="showcase-photos current">
-								<div class="js-photo photo photo-1" data-media-id="VXaXWJEy7XSoyh1ij9zojA" data-media-index="17">
-									<div class="showcase-photo-box">
-										<a href="#">
-											<img class="photo-box-img" width="250" height="220" src="getImage/pepe.jpg" >
+								<div class="js-photo photo photo-1"
+									data-media-id="VXaXWJEy7XSoyh1ij9zojA" data-media-index="17" style="z-index: 1000;display:inline-block;width: 100%;height: 220px;    box-shadow: none;transition: all 0.2s ease-out;transition-property: transform, box-shadow;">
+									<div class="showcase-photo-box" style="height:100%;">
+									<c:forEach items="${uploadFileList}" var="upload" >
+										<a href="#" style="color: #0073bb;text-decoration: none;"> 
+											<img class="photo-box-img" style="display:inline-block;vertical-align: middle;" width="210" height="220" src="getImage/${upload.filename }">
 										</a>
+									</c:forEach>
 									</div>
 								</div>
+<!-- 							<div class="js-photo photo photo-2" -->
+<!-- 									data-media-id="VXaXWJEy7XSoyh1ij9zojA" data-media-index="17" style="left: 220px;z-index: 1001;display: block;position: absolute;margin: -15px;width: 250px;height: 250px;    box-shadow: none;transition: all 0.2s ease-out;transition-property: transform, box-shadow;"> -->
+<!-- 									<div class="showcase-photo-box" style="height:100%;"> -->
+<%-- 									<c:forEach items="${uploadFileList}" var="upload"> --%>
+<!-- 										<a href="#" style="color: #0073bb;text-decoration: none;">  -->
+<%-- 											<img class="photo-box-img" style="transform: translateZ(0) rotate(0);display:block;vertical-align: middle;" width="250" height="220" src="getImage/${upload.filename }"> --%>
+<!-- 										</a> -->
+<%-- 									</c:forEach> --%>
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								<div class="js-photo photo photo-3" -->
+<!-- 									data-media-id="VXaXWJEy7XSoyh1ij9zojA" data-media-index="17" style="left: 440px;z-index: 1000;display: block;position: absolute;margin: -15px;width: 250px;height: 250px;    box-shadow: none;transition: all 0.2s ease-out;transition-property: transform, box-shadow;"> -->
+<!-- 									<div class="showcase-photo-box" style="height:100%;"> -->
+<%-- 									<c:forEach items="${uploadFileList}" var="upload"> --%>
+<!-- 										<a href="#" style="color: #0073bb;text-decoration: none;">  -->
+<%-- 											<img class="photo-box-img" style="transform: translateZ(0) rotate(0);display:block;vertical-align: middle;" width="250" height="220" src="getImage/${upload.filename }"> --%>
+<!-- 										</a> -->
+<%-- 									</c:forEach> --%>
+<!-- 									</div> -->
+<!-- 								</div>  -->
+								
 							</div>
-							</div>
-
-					</div>
+						</div>
+	
 					</div>
 				</div>
-			</div>
+		
 		</div>
+	</div>
+</div>
 		<div class="restContent-super-container" style="width: 960px;height:100%; margin: 0 auto; padding: 0 15px; padding-top: 18px; padding-bottom: 36px;">
 				<div class="restContent-container" style="display:block;width:100%;overflow:hidden;height:auto;">
 					<div class="restContent-layout-block" style="margin-bottom: 0;position: relative;margin: 0 -15px;width:960px;overflow:hidden;height:auto;">
@@ -352,22 +392,40 @@ var res = foodstyle.split(",");
 																class="star-selector js-star-selector"
 																data-original-rating="0" data-component-bound="true"
 																style="vertical-align: middle; display: inline-block; -webkit-margin-start: 2px; -webkit-margin-end: 2px; -webkit-padding-before: 0.35em; -webkit-padding-start: 0.75em; -webkit-padding-end: 0.75em; -webkit-padding-after: 0.625em; min-width: -webkit-min-content;">
-																<ul class="restContent-star-selector"
-																	style="float: left; height: 30px; width: 162px; background-position: 0 -0; background: url(https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/a5aa4dca29f3/assets/img/stars/selector_stars.png) no-repeat; background-size: 162px 180px; display: inline-block; vertical-align: middle; list-style: none;">
-																	<li class="restContent-star-selector-show-tooltip"
-																		style="margin-right: 3px; float: left; height: 30px; width: 30px; margin: 0; padding: 0; position: relative;display: list-item;text-align: -webkit-match-parent;">
-																			<input class="restContent-star-selector_input"
-																		id="rating-1" name="rating" type="radio" value="1"
-																		style="cursor: pointer; border: none; margin: 0; padding: 0; width: 30px; height: 30px; opacity: 0; color: inherit; font: inherit; font-weight: normal; box-sizing: border-box; background-color: initial; -webkit-rtl-ordering: logical; text-rendering: auto; letter-spacing: normal; word-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none; display: inline-block; text-align: start;">
-																		<label class="restContent-star-selector_label" for="rating-1" style="display: none;cursor: default;">1 (Eek! Methinks not.)</label>
-																		<span class="restContent-tooltip-wrapper"
-																		style="position: absolute; left: -9999px; bottom: 100%; width: 250px; margin-left: -125px; margin-bottom: 5px; text-align: center; text-decoration: none;">
-																			<span class="restContent-tooltip"
-																			style="z-index: 1012; display: inline-block; position: relative; padding: 6px 9px; vertical-align: middle; white-space: normal; font-size: 12px; pointer-events: none; font-weight: bold; line-height: 18px; background: rgba(0, 0, 0, 0.8); color: white; border-radius: 5px; text-shadow: none; text-align: left; cursor: default; box-shadow: 0 1px rgba(255, 255, 255, 0.1);">
-																			Eek!Methinks not.</span>
-																	</span>
-																	</li>
-																</ul>
+						 <form name="starpointF" method="post" action="review_write">
+						
+						<div>
+                        
+                           <ul id="star_rating" style="margin: 0px; padding: 0px; diplay: inline-block; width: 165px; height: 30px; overflow: hidden; list-style: none; vertical-align: middle;
+                               background: url(https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/a5aa4dca29f3/assets/img/stars/selector_stars.png) no-repeat;">
+      
+                              <li class="selector star-selector-li-1_4" data-label="Eek! Methinks not.">
+                                 <input id="rating-1" type="radio" value="1" name="rating" class="star-selector-input">
+                                 <label class="star-selector_label" for="rating-1">1 (Eek! Methinks not.)</label>
+                              </li>
+                              <li class="selector star-selector-li-1_4" data-label="Meh. I've experienced better.">
+                                 <input id="rating-2" type="radio" value="2" name="rating" class="star-selector-input">
+                                 <label class="star-selector_label" for="rating-2">2 (Meh. I've experienced better.)</label>
+                              </li>
+                              <li class="selector star-selector-li-1_4" data-label="3 (A-OK.)">
+                                 <input id="rating-3" type="radio" value="3" name="rating" class="star-selector-input">
+                                 <label class="star-selector_label" for="rating-3">3 (A-OK.)</label>
+                              </li>
+                              <li class="selector star-selector-li-1_4" data-label="4 (Yay! I'm a fan.)">
+                                 <input id="rating-4" type="radio" value="4"  name="rating" class="star-selector-input">
+                                 <label class="star-selector_label" for="rating-4">4 (Yay! I'm a fan.)</label>
+                              </li>
+                              <li class="selector star-selector-li-5" data-label="5 (Woohoo! As good as it gets!)">
+                                 <input id="rating-5" type="radio" value="5"  name="rating" class="star-selector-input">
+                                 <label class="star-selector_label" for="rating-5">5 (Woohoo! As good as it gets!)</label>
+                              </li>
+                           </ul>
+                                 <input type="hidden" name="rnum" value="${getRest.rnum}">   
+                                 <input type="hidden" name="star" id="star">
+                        
+                           </div>
+                           </form>
+
 															</fieldset>
 														</div>
 														<a class="restContent-text-link" href="#" style="color: #0073bb;text-decoration: none;    cursor: pointer;    text-align: center !important;">
@@ -378,6 +436,8 @@ var res = foodstyle.split(",");
 												</div>
 												</div>
 											</li>
+										
+								<c:forEach var="getReview" items="${selectedDataRV}">	
 									<li style="margin: 0; padding: 18px 0; border-bottom: 1px solid #e6e6e6; padding-bottom: 17px; display: list-item; text-align: -webkit-match-parent;">
 										<div class="restContent-review-with" style="    width: 100%; overflow: hidden;height: auto;">
 											<div class="restContent-user" style="float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 37.5%;">
@@ -555,51 +615,176 @@ var res = foodstyle.split(",");
 												<div class="restContent-review-content" style="padding: 0 12px 6px 0; min-height: 156px; word-wrap: break-word !important; word-break: break-word !important; overflow-wrap: break-word !important;">
 													<div class="restContent-review-rating" style="margin: 6px 0;width:100%;overflow:hidden;height:auto;">
 														<div>
-															<div class="i-stars i-stars--regular-5 rating-large" title="5.0 star rating"
-															style="float: left; margin: -1px 6px 0 0; position: relative; overflow: hidden; width: 102px; height: 18px; background-position: 0 -402px; background: url(https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png) no-repeat; background-size: 132px 560px; display: inline-block; vertical-align: middle;">
+															<div class="i-stars i-stars--regular-5 rating-large" title="5.0 star rating" style="float: left; margin: -1px 6px 0 0; position: relative; overflow: hidden; width: 102px; height: 18px; background-position: 0 -402px; background: url(https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png) no-repeat; background-size: 132px 560px; display: inline-block; vertical-align: middle;">
 																<img class="offscreen" height="303"
 																	src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png"
 																	width="102" alt="5.0 star rating"
 																	style="clip: rect(0, 0, 0, 0); position: absolute; left: -9999px; top: auto; overflow: hidden; width: 1px; height: 1px; vertical-align: middle;">
-															
 															</div>
 														</div>
 														<span class="restContent-rating-qualifier" style="display: block; float: left; color: #666; font-weight: normal;">
-      															  12/13/2017
-															</span>
+															${getReview.joindate }
+														</span><!-- 날짜 -->
+      															
+															
 													</div>
-															<p lang="en" style="margin-bottom: 12px;">
-															I was a bit worried since some people said this place was a tourist trap on here, but it turned out to be wonderful! <br><br>
-															The boy and I came here for an anniversary dinner since we were craving seafood. We made a reservation a few days in advance,
-															 hoping and requesting a nice seat. We came 20 minutes early, and we were seated just in time! Next to a window with a view of the bay too!
-															  Someone had also wrote "Happy Anniversary!" on our table. :) <br><br>
-															  For starters, we ordered the clam chowder and fried scallops. I ordered the shellfish platter for one with a lobster tail for my entree, and the boy ordered the surf and turf.
-															   Everything was perfect! You could tell the seafood was fresh and the boy was also happy with the quality and cooking of the steak.
-															    We loved everything that we ordered, and also enjoyed a yummy creme brûlée. <br><br>
-															    We were in awe of the meal we had. Not to mention, the sour dough was the best we ever had! We couldn't stop raving about it.
-															     We also have to thank our server Justin H. for being so awesome and kind. We asked to take our leftover bread to go, and he came back with more fresh sour dough to take home!
-															</p>
-												</div><!--리뷰 내용 -->
+													<p lang="ko" style="    margin-bottom: 12px;display:block;">
+														${getReview.content }
+													</p>
+													</div><!--리뷰 내용 -->
+													
+												<div class="review-footer clearfix">
+													<div class="rateReview voting-feedback" style="float: left;margin-bottom: 0;font-size: 12px;line-height: 1.5em;color: #666;" style="white-space: nowrap;margin-bottom: 6px;font-weight: bold;    display: block;">
+														<p class="voting-intro voting-prompt saving-msg" data-component-bound="true" style="white-space: nowrap;margin-bottom: 6px;font-weight: bold;">
+															Was this review …?
+														</p>
+														<ul class="restContent-review-button" style="margin-top: -1px;    list-style: none;    display: block;">
+														<li class="vote-item inline-block" style="    margin-right: 6px;    display: inline-block;    text-align: -webkit-match-parent;">
+															<a class="ybtn ybtn--small useful js-analytics-click" style="color: #666; white-space: nowrap; padding: 5px 8px; font-size: 12px; line-height: 1.5em; text-decoration: none !important; display: inline-block; vertical-align: middle; margin: 0; cursor: pointer; border: 1px solid; font-weight: bold; text-align: center; user-select: none; border-color: #ccc; color: #666; background-color: #f7f7f7; background: linear-gradient(#fff, #f7f7f7); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); border-radius: 3px;">
+																<span aria-hidden="true" style="fill: #666666; width: 18px; height: 18px;" class="icon icon--18-useful-outline icon--size-18 icon--active-inverse button-content u-space-r-half">
+																    <svg id="18x18_useful_outline" height="100%" viewBox="0 0 18 18" width="100%">
+																    	<path d="M9 17c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM9 2C5.14 2 2 5.14 2 9s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm2 8.392V12H7v-1.608a3.982 3.982 0 0 1-2-3.445 4 4 0 0 1 8 0c0 1.477-.81 2.752-2 3.445zM8 5.25a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5zm1.003 9.747h-.006A1.997 1.997 0 0 1 7 13h4a1.997 1.997 0 0 1-1.997 1.997z"></path>
+																    </svg>
+																</span>
+																<span class="vote-type" style="font-weight: bold;margin-right: 3px;">Useful</span>
+															</a>
+														</li>
+														
+														<li class="vote-item inline-block" style="    margin-right: 6px;    display: inline-block;    text-align: -webkit-match-parent;">
+															<a class="ybtn ybtn--small useful js-analytics-click" style="color: #666; white-space: nowrap; padding: 5px 8px; font-size: 12px; line-height: 1.5em; text-decoration: none !important; display: inline-block; vertical-align: middle; margin: 0; cursor: pointer; border: 1px solid; font-weight: bold; text-align: center; user-select: none; border-color: #ccc; color: #666; background-color: #f7f7f7; background: linear-gradient(#fff, #f7f7f7); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); border-radius: 3px;">
+																<span aria-hidden="true" style="fill: #666666; width: 18px; height: 18px;" class="icon icon--18-useful-outline icon--size-18 icon--active-inverse button-content u-space-r-half">
+																    <svg id="18x18_funny_outline" height="100%" viewBox="0 0 18 18" width="100%">
+																    	<path d="M9 17c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM9 2C5.14 2 2 5.14 2 9s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm0 12a4.87 4.87 0 0 1-4.787-4h9.574A4.87 4.87 0 0 1 9 14zm2.5-5.625a1.376 1.376 0 1 1 0-2.75 1.376 1.376 0 0 1 0 2.75zm-5 0a1.376 1.376 0 1 1 0-2.75 1.376 1.376 0 0 1 0 2.75z"></path>
+																    </svg>
+																</span>
+																<span class="vote-type" style="font-weight: bold;margin-right: 3px;">Funny</span>
+															</a>
+														</li>
+														
+														<li class="vote-item inline-block" style="    margin-right: 6px;    display: inline-block;    text-align: -webkit-match-parent;">
+															<a class="ybtn ybtn--small useful js-analytics-click" style="color: #666; white-space: nowrap; padding: 5px 8px; font-size: 12px; line-height: 1.5em; text-decoration: none !important; display: inline-block; vertical-align: middle; margin: 0; cursor: pointer; border: 1px solid; font-weight: bold; text-align: center; user-select: none; border-color: #ccc; color: #666; background-color: #f7f7f7; background: linear-gradient(#fff, #f7f7f7); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); border-radius: 3px;">
+																<span aria-hidden="true" style="fill: #666666; width: 18px; height: 18px;" class="icon icon--18-useful-outline icon--size-18 icon--active-inverse button-content u-space-r-half">
+																    <svg id="18x18_cool_outline" height="100%" viewBox="0 0 18 18" width="100%">
+																    	<path d="M9 17c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM9 2C5.14 2 2 5.14 2 9s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm6.026 5.335C14.766 8.797 13.5 10 11.986 10h-.003c-1.218 0-2.282-.764-2.767-1.813-.088-.19-.344-.242-.432-.052C8.3 9.185 7.234 10 6.016 10h-.003C4.5 10 3.195 8.83 2.973 7.35l-.093-.84c-.053-.242.192-.51.477-.51h11.286c.294 0 .508.332.477.56l-.094.775zm-2.068 4.154A4.28 4.28 0 0 1 9 14.144a4.28 4.28 0 0 1-3.958-2.657A6.81 6.81 0 0 0 9 12.753a6.81 6.81 0 0 0 3.958-1.265z"></path>
+															    	</svg>
+																</span>
+																<span class="vote-type" style="font-weight: bold;margin-right: 3px;">Cool</span>
+															</a>
+														</li>
+													</ul><!-- 좋아요 -->
+													</div>
+													<div class="review-footer-actions pull-right clearfix" style="    margin-top: 23px;    float: right;">
+														<a class="chiclet-link show-tooltip js-analytics-click chiclet-link--flag" style="position: relative;display: inline-block;padding: 5px;border: 1px solid #ccc;border-radius: 3px;font-size: 12px;line-height: 1.5em;color: #999;background: transparent;box-shadow: none;white-space: nowrap;transition: all 0.3s ease;text-decoration: none;cursor: pointer;">
+															<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-flag icon--size-18 icon--currentColor">
+															    <svg id="18x18_flag" height="100%" viewBox="0 0 18 18" width="100%">
+															    	<path d="M6 10V3c4.976 1.098 4.024-1 8 0v7c-4.024-.976-3.024 1.024-8 0zM4 2h1v14H4V2z"></path>
+														    	</svg>
+															</span>
+															<span class="tooltip-wrapper" style="position: absolute;left: -9999px;bottom: 100%;width: 250px;margin-left: -125px;margin-bottom: 5px;text-align: center;text-decoration: none;color: #999;white-space: nowrap;cursor: pointer;">
+													            <span class="tooltip" style="z-index: 1012;display: inline-block;position: relative;padding: 6px 9px;    vertical-align: middle;white-space: normal;font-size: 12px;pointer-events: none;font-weight: bold;line-height: 18px;    background: rgba(0,0,0,0.8);color: white;border-radius: 5px;text-shadow: none;text-align: left;cursor: default;box-shadow: 0 1px rgba(255,255,255,0.1);">
+													            	Report review
+													            </span>
+													        </span>
+														</a>
+													</div>
+												</div>
 												
-												<div class="restContent-review-button" >
 												
-												</div><!-- 좋아요 -->
-												<div class="restContent-review-reply" style="margin-top: 18px; padding: 11px; background: #f5f5f5; border: 1px solid #e6e6e6; border-radius: 4px;">
+<!-- 												<div class="restContent-review-reply" style="margin-top: 18px; padding: 11px; background: #f5f5f5; border: 1px solid #e6e6e6; border-radius: 4px;"> -->
 													
-													
-													
-												</div><!-- 사장 답변 -->
+<!-- 												</div>사장 답변 -->
 											</div>
 										</div>
-									</li>
+									</li><!-- 리뷰 -->
+									</c:forEach>
 								</ul>
+								      <div class="event_list_paging_section" style="font-size: 14px;">
+         <div class="event_list_pagination_block">
+            <div class="event_list_pagination_wrap">
+               <div class="event_list_page_of_pages">
+                  <c:if test="${map.YepsPager.blockEnd == 0}">
+                     Page ${map.curPage} of 1
+                  </c:if>
+                  <c:if test="${map.YepsPager.blockEnd != 0}">
+                     Page ${map.curPage} of ${map.YepsPager.blockEnd}
+                  </c:if>
+               </div>
+<!--                페이징 처리!! 현재페이지는 span이 되고 나머지는 a로 -->
+               <c:if test="${map.YepsPager.blockEnd != 1}">
+               <div class="event_list_page_link_wrapper">
+                  <div class="event_list_page_link_wrap">
+                  
+                  <c:if test="${map.YepsPager.curBlock > 1}">
+                     <div class="event_list_next_block">
+                        <a class="event_list_next_block_action" href="javascript:list('1')">
+                           <span>Start</span>
+                        </a>
+                     </div>
+                  </c:if>
+
+                  <c:if test="${map.YepsPager.curBlock > 1}">
+                     <div class="event_list_next_block">
+                        <a class="event_list_next_block_action" href="javascript:list('${map.YepsPager.prevPage}')">
+                           <span style="width: 24px; height: 24px; fill: currentColor;" class="icon">
+                              <svg class="icon_svg">
+                                 <path d="M14.475 18.364l1.414-1.414L10.94 12l4.95-4.95-1.415-1.414L8.11 12l6.365 6.364z"></path>
+                              </svg>
+                           </span>
+                           <span>Previous</span>
+                        </a>
+                     </div>
+                  </c:if>
+                  
+                  <c:forEach var="num" begin="${map.YepsPager.blockBegin}" end="${map.YepsPager.blockEnd}">
+                     <div class="event_list_page_link_option">
+                     <c:choose>
+                        <c:when test="${num == map.YepsPager.curPage}">
+                           <span class="event_list_page_option_action">
+                              ${num}
+                           </span>
+                        </c:when>
+                        <c:otherwise>
+                           <a href="javascript:list('${num}')" class="event_list_page_option_link_action">
+                              ${num}
+                           </a>
+                        </c:otherwise>
+                     </c:choose>
+                     </div>x
+                  </c:forEach>
+                  
+                  <c:if test="${map.YepsPager.curBlock <= map.YepsPager.totBlock}">
+                     <div class="event_list_next_block">
+                        <a class="event_list_next_block_action" href="javascript:list('${map.YepsPager.nextPage}')">
+                           <span>Next</span>
+                           <span style="width: 24px; height: 24px; fill: currentColor;" class="icon">
+                              <svg class="icon_svg">
+                                 <path d="M9.525 5.636L8.11 7.05 13.06 12l-4.95 4.95 1.415 1.414L15.89 12 9.524 5.636z"></path>
+                              </svg>
+                           </span>
+                        </a>
+                     </div>
+                  </c:if>
+                  
+                  <c:if test="${map.YepsPager.curPage <= map.YepsPager.totPage}">
+                     <div class="event_list_next_block">
+                        <a class="event_list_next_block_action" href="javascript:list('${map.YepsPager.totPage}')">
+                           <span>End</span>
+                        </a>
+                     </div>
+                  </c:if>
+                  </div>
+               </div>
+               </c:if>
+            </div>
+         </div>
+      </div>
 									</div>
 								</div>
 							</div>
 					</div>
 				<div class="restContent-beta" style="padding: 0 30px 0 0; margin-right: -15px; float: left; min-height: 1px; box-sizing: border-box; width: 33.33333%;height:auto; box-shadow:-1px 0 0 #e6e6e6;display:inline-block;">
-					<div class="restContent-open-rail clearfix" style=" margin-left: -1px;padding-left: 1px;background: #fff;width:300px;height:210px;">
-						<div class="restContent-summary" style="padding: 3px 11px 3px 6px;margin-bottom: 18px;background: #f5f5f5;border: 1px solid #e6e6e6;border-radius: 4px;width:280px;height:185px;">
+					<div class="restContent-open-rail clearfix" style=" margin-left: -1px;padding-left: 1px;background: #fff;width:300px;height:auto;">
+						<div class="restContent-summary" style="padding: 3px 11px 3px 6px;margin-bottom: 18px;background: #f5f5f5;border: 1px solid #e6e6e6;border-radius: 4px;width:280px;height:auto;">
 							<ul class="restContent-iconed-list" style="list-style: none;">
 								<li class="restContent-iconed-hours-iconed-list-item" style="display: table;width: 100%;margin-bottom: 0;">
 									<div class="restContent-iconed-list-avatar" style="float: none;display: table-cell;vertical-align: ;min-width: 34px;margin: 0;padding-right: 9px;text-align: center;">
@@ -638,14 +823,14 @@ var res = foodstyle.split(",");
 										</span>
 									</div>
 									<div class="restContent-iconed-list-story" style="display: table-cell;width: 100%;padding: 9px 0;border-bottom: 1px solid #e6e6e6;padding-bottom: 8px;">
-							            <b style="font-weight: bold;"><a style="color: #0073bb;text-decoration: none;" class="menu-explore js-menu-explore" href="/menu/fog-harbor-fish-house-san-francisco-2/dinner-menu">Full menu</a></b>
+							            <b style="font-weight: bold;"><a style="color: #0073bb;text-decoration: none;" class="menu-explore js-menu-explore" href="restaurant_insertMenuForm">Full menu</a></b>
 							        </div>
 							    </li>
 							    <li class="restContent-iconed-list-item" style="display: table;width: 100%;margin-bottom: 0;">
 						            <div class="restContent-iconed-list-avatar" style="float: none;display: table-cell;vertical-align: middle;min-width: 34px;margin: 0;padding-right: 9px;text-align: center;">
 						       		 	<span class="restContent-business-attribute price-range" data-remainder="￦￦" style="font-size: 13px;line-height: 1.38462em;font-weight: bold;color: #41a700;">￦￦</span>
 						            </div>
-						            <div class="restContent-iconed-list-story" style="display: table-cell;width: 100%;padding: 9px 0;padding-bottom: 8px;    border-bottom: 1px solid #e6e6e6;">
+						            <div class="restContent-iconed-list-story" style="display: table-cell;width: 100%;padding: 9px 0;padding-bottom: 8px;">
 						                <dl class="restContent-short-def-list" style="display: block;">
 						                    <dt class="restContent-attribute-key" style="margin-right: 0.25em;display: inline;">Price range</dt>
 						                    <dd class="restContent-nowrap price-description" style="font-weight: bold;display: inline;white-space: nowrap;">
@@ -654,22 +839,6 @@ var res = foodstyle.split(",");
 						                </dl>
 						            </div>
 						        </li>
-						        <li class="restContent-iconed-list-item health-score" style="display: table; width: 100%;margin-bottom: 0;">
-									<div class="restContent-iconed-list-avatar" style="float: none; display: table-cell; vertical-align: middle; min-width: 34px; margin: 0; padding-right: 9px; text-align: center;">
-										<div class="restContent-temscore-block"style="font-size: 12px; font-weight: bold; padding: 1px 5px 2px; display: inline-block; background: #fff; border: 1px solid #ccc;">87</div>
-									</div>
-									<div class="restContent-iconed-list-story" style="border-bottom: none; display: table-cell; width: 100%; padding: 9px 0; padding-bottom: 8px;">
-										<div class="restContent-iconed-list-story-health-score-info">
-											<dl class="restContent-iconed-list-story-short-def-list" style="display: block;">
-												<dt class="restContent-iconed-list-story-attribute-key" style="margin-right: 0.25em;    display: inline;">
-													<b style="font-weight: bold;font-size:14px;"><a href="#" style="color: #0073bb;text-decoration: none;">Health inspection</a></b>
-												</dt>
-												<dd class="restContent-nowrap health-score-description" style="font-weight: bold;display: inline; white-space: nowrap;">
-													87 out of 100</dd>
-											</dl>
-										</div>
-									</div>
-								</li>
 							</ul>
 						</div>
 					</div>
@@ -855,8 +1024,6 @@ var res = foodstyle.split(",");
 													${getRest.busytime}
 												</dd>
 										</dl>
-										
-										
 									</div>
 								</li>
 							</ul>
@@ -866,24 +1033,88 @@ var res = foodstyle.split(",");
 			</div>
 				</div>
 		</div>
-	</div>
-</body>
-</html>
+		<script>
+   $(document).ready(function() {
+      $('.selector').hover(function(e) {
+         var star = $(e.target).val();
+         $(this).parent().removeClass('i-selector-stars--extra-large-0');
+         $(this).parent().removeClass('i-selector-stars--extra-large-1');
+         $(this).parent().removeClass('i-selector-stars--extra-large-2');
+         $(this).parent().removeClass('i-selector-stars--extra-large-3');
+         $(this).parent().removeClass('i-selector-stars--extra-large-4');
+         $(this).parent().removeClass('i-selector-stars--extra-large-5');
+         
+         if(star == 0){
+            $(this).parent().addClass('i-selector-stars--extra-large-0');
+         }else if(star == 1){
+            $(this).parent().addClass('i-selector-stars--extra-large-1');
+         }else if(star == 2){
+            $(this).parent().addClass('i-selector-stars--extra-large-2');
+         }else if(star == 3){
+            $(this).parent().addClass('i-selector-stars--extra-large-3');
+         }else if(star == 4){
+            $(this).parent().addClass('i-selector-stars--extra-large-4');
+         }else if(star == 5){
+            $(this).parent().addClass('i-selector-stars--extra-large-5');
+         } 
+      });
+      
+         
+      $('.selector').mouseleave(function(){
+         $(this).parent().removeClass('i-selector-stars--extra-large-0');
+         $(this).parent().removeClass('i-selector-stars--extra-large-1');
+         $(this).parent().removeClass('i-selector-stars--extra-large-2');
+         $(this).parent().removeClass('i-selector-stars--extra-large-3');
+         $(this).parent().removeClass('i-selector-stars--extra-large-4');
+         $(this).parent().removeClass('i-selector-stars--extra-large-5');
+      });   
+      
+      
+      $('.selector').click(function(e){ 
+    	  
+         var star = $(e.target).val();
+         $('#star').val(star);
+         $(this).parent().parent().parent().submit();
+         
+      });
+      
+      $(function() {
+          //----- OPEN
+        $('[data-popup-open]').on('click', function(e)  {
+            var targeted_popup_class = jQuery(this).attr('data-popup-open');
+            $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+            e.preventDefault();
+        });
+  
+     //----- CLOSE
+        $('[data-popup-close]').on('click', function(e)  {
+            var targeted_popup_class = jQuery(this).attr('data-popup-close');
+            $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+            e.preventDefault();
+        });
+    });
+      
+      var map = new naver.maps.Map('map',{
+//		  	  zoom:8
+	    });
+	      
+	      var myaddress = '${getRest.roadAddrPart1}';
+	      	naver.maps.Service.geocode({address: myaddress}, function(status, response) {
+	          var result = response.result;
+	          var myaddr = new naver.maps.Point(result.items[0].point.x, result.items[0].point.y);
+	          map.setCenter(myaddr);
+	          var marker = new naver.maps.Marker({
+	            position: myaddr,
+	            map: map
+	          });
+	      });
+      
+   });   
+   </script>
+	<script type="text/javascript">
+    // **원하는 페이지로 이동시 검색조건, 키워드 값을 유지하기 위해 
+    function list(page){
+        location.href="restaurant_list?curPage="+page;
+    }
+	</script>
 <%@ include file="../bottom.jsp" %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

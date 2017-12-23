@@ -4,17 +4,15 @@
 <html>
 <head>
 	<title>이벤트 등록 - yeps</title>
-	<link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
-	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
-	<script src="//code.jquery.com/jquery.min.js"></script>
-	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css?ver=1"/>"/>
 </head>
-	<%@ include file="../top.jsp"%>
-	<div id="super-container">
-		<div id="Eventcontainer">
+<%@ include file="../top.jsp"%>
+<div id="super_container">
+	<div id="Eventcontainer">
+		<div>
 			<ul>
 				<li>
-					<a href="event_list" class="return_event">Return to Events</a>
+					<a href="event_list" class="return_event">Return To Events</a>
 				</li>
 			</ul>
 			<div id="header">
@@ -113,11 +111,11 @@
 									<path d="M13.6 16H4.4C3.077 16 2 14.88 2 13.5v-9C2 3.12 3.077 2 4.4 2H5a1 1 0 0 1 2 0h4a1 1 0 0 1 2 0h.6C14.923 2 16 3.12 16 4.5v9c0 1.38-1.077 2.5-2.4 2.5zM15 7H3v6.5c0 .828.627 1.5 1.4 1.5h9.2c.773 0 1.4-.672 1.4-1.5V7zm-5 3h3v3h-3v-3z"></path>
 								</svg>
 							</span>
-								<input type="text" name="end_date" id="end_date"
+								<input type="text" name="end_date" id="end_date" disabled
 								style="width: 140px; padding-left: 30px; height: 30px; border: 1px solid #999; border-radius: 3px; font-size: 14px; vertical-align: middle;">
 							</div>
-							<div class="select_end_time" style="display: none; float: left; display: none;">
-								<select name="end_time"
+							<div class="select_end_time" style="display: none; float: left;">
+								<select name="end_time" id="end_time" disabled
 								style="width: 100px; margin: 0; height: 30px; border: 1px solid #999; border-radius: 3px; font-size: 14px;">
 									<option value="오전 12:00">오전 12:00</option>
 									<option value="오전 12:30">오전 12:30</option>
@@ -192,7 +190,7 @@
 					
 					<div style="margin-top: 20px; margin-bottom: 20px">
 						<label>할인율</label>
-						<textarea name="discount" rows="5" cols="89" maxlength="650" placeholder="할인 내역을 간단히 작성해주세요. &#10; &#10;예) 메인메뉴 30%할인, 디저트류 10%할인" style="margin-top: 6px; border-radius: 3px; font-size: 14px; padding: 5px 10px 0 10px; border: 1px solid #999; resize: vertical;"></textarea>
+						<textarea name="discount" rows="5" cols="89" maxlength="650" placeholder="예) 메인메뉴 30%할인, 디저트류 10%할인 &#10; &#10; 무료인 경우 '무료'라고 만 적어주세요." style="margin-top: 6px; border-radius: 3px; font-size: 14px; padding: 5px 10px 0 10px; border: 1px solid #999; resize: vertical;"></textarea>
 					</div>
 					
 					<div style="margin-bottom: 18px;">
@@ -201,13 +199,13 @@
 							<select name="event_category" style="width: 100%; margin: 0; height: 30px; border: 1px solid #999; border-radius: 3px; font-size: 14px;">
 								<option value="music_concert">음악 & 콘서트</option>
 								<option value="visualart">전시회</option>
-								<option value="film">영화</option>
-								<option value="book">도서</option>
+								<option value="film">영화 & 시사회</option>
+								<option value="book">도서 & 출판</option>
 								<option value="fashion">패션</option>
 								<option value="food">음식</option>
-								<option value="festival">축제</option>
+								<option value="festival">축제 & 행사</option>
 								<option value="sports_activity">스포츠 & 야외활동</option>
-								<option value="nightlife">밤 문화</option>
+								<option value="nightlife">야간 문화활동</option>
 								<option value="family_kids">가족 & 어린이</option> 
 							</select>
 						</div>
@@ -221,9 +219,10 @@
 					</div>
 				</div>
 				</form>
-			</div>	
-		</div>			
-	</div>
+			</div>
+		</div>
+	</div>			
+</div>
 	<script>
 		$(function() {
 			$.datepicker.regional['ko'] = {
@@ -288,8 +287,12 @@
 			$('.endtime').click(function() {
 				if($(this).html() == '마감일 등록') {
 					$(this).html('마감일 삭제');
+					$('#end_time').attr('disabled', false);
+					$('#end_date').attr('disabled', false);
 				} else {
 					$(this).html('마감일 등록');
+					$('#end_date').attr('disabled', true);
+					$('#end_time').attr('disabled', true);
 				}
 				$('.to').toggle();
 				$('.end_date').toggle();
@@ -418,11 +421,7 @@
 				alert("글자수를 초과할 수 없습니다.");
 				return false;
 			}
-			if(discount_byte < 15) {
-				alert("할인 내용을 5자 이상 작성해주세요.");
-				return false;
-			}
-			//return true
+			return true
 		}
 
 	</script>

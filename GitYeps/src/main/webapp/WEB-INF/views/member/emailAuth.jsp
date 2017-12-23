@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-<%@include file="../style.jsp"%>
-<link rel="stylesheet" type="text/css"
-	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css?ver=1" />
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/member.css"/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
 <script src="//code.jquery.com/jquery.min.js?ver=1"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js?ver=1"></script>
 <script type="text/javascript">
@@ -40,7 +39,9 @@
 		</div>
 		<form id="email_auth_middle" method="post" name="authenform">
 			<ul class="inline-layout">
-				<li style="width: 70%"><input type="text" name="authnum" placeholder="인증번호 입력" autocomplete=off onkeypress="if(event.keyCode==13){return false;}"></li>
+				<li style="width: 70%;">
+					<input type="text" name="authnum" placeholder="인증번호 입력" autocomplete=off onkeypress="if(event.keyCode==13){return false;}">
+				</li>
 			</ul>
 		</form>
 		<div id="email_auth_bottom">

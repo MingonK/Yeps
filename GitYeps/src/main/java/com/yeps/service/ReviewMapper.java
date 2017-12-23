@@ -4,11 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
-import com.yeps.model.MemberDTO;
-import com.yeps.model.RestaurantDTO;
 import com.yeps.model.ReviewDTO;
 
 @Service
@@ -18,8 +15,6 @@ public class ReviewMapper {
 	private SqlSession sqlSession;
 
 	public List<ReviewDTO> listReview() {
-		// sqlSession
-		// selectList, selectOne, insert, update, delete
 		return sqlSession.selectList("listReview");
 	}
 
@@ -36,80 +31,44 @@ public class ReviewMapper {
 	}
 
 	public ReviewDTO getReview(int rvnum) {
-		// try {
-		return sqlSession.selectOne("getReview", rvnum);
-		// }catch(Exception e) {
-		// return;
-		// }
+		try {
+			return sqlSession.selectOne("getReview", rvnum);
+		 }catch(Exception e) {
+			 return null;
+		 }
 	}
 
 	public int new_BestGradePoint() {
-		try {
-			return sqlSession.selectOne("new_BestGradePoint");
-		} catch (Exception e) {
-			return 0;
-		}
-	}
-
-	public String getgetSelectedRestaurant_Rname(int rnum) {
-		try {
-			return sqlSession.selectOne("getgetSelectedRestaurant_Rname", rnum);
-		}catch(Exception e) {
-			return null; 
-		}
+		return sqlSession.selectOne("new_BestGradePoint");
 	}
 	
+	public String getSelectedRestaurant_Rname(int rnum) {
+		return sqlSession.selectOne("getgetSelectedRestaurant_Rname", rnum);
+	}
+
 	public List<ReviewDTO> getSelectedRestaurant_Rv(int rnum) {
 		return sqlSession.selectList("getSelectedRestaurant_Rv", rnum);
 	}
 	
-	public List<Integer> getSelectedRestaurant_Rv_M(int rnum){
-		return sqlSession.selectList("getSelectedRestaurant_Rv_M", rnum);
-	}
+//	public List<Integer> getSelectedRestaurant_Rv_M(int rnum){
+//		return sqlSession.selectList("getSelectedRestaurant_Rv_M", rnum);
+//	}
 	
 //	public List<MemberDTO> getSelectedRestaurant_M(int rnum){
 //		return sqlSession.selectList("getSelectedRestaurant_M", rnum);
 //	}
 
-//	public MemberDTO mylist_info1(int NBPmnum) {
-//		try {
-//			return sqlSession.selectOne("mylist_info1", NBPmnum);
-//		}catch(Exception e) {
-//			e.printStackTrace();
-//			return null;
-//		}
-//	}
 
-	public ReviewDTO review_mylist_info2(int NBPmnum) {
-		try {
-			return sqlSession.selectOne("review_mylist_info2", NBPmnum);
-		}catch(Exception e) {
-			e.printStackTrace();
-			return null;
-	    }
+	public ReviewDTO review_mylist_info(int NBPmnum) {
+		return sqlSession.selectOne("review_mylist_info", NBPmnum);
 	}
 
-	// public FileDTO review_mylist_info3(int NBPmnum) {
-	// //try {
-	// return sqlSession.selectOne("review_mylist_info3", NBPmnum);
-	// }catch(Exception e) {
-	// return;
-	// }
-
 	public int review_mylist_updatedata(int NBPmnum) {
-		try {
-			return sqlSession.selectOne("review_mylist_updatedata", NBPmnum);
-		} catch (Exception e) {
-			return 0;
-		}
+		return sqlSession.selectOne("review_mylist_updatedata", NBPmnum);
 	}
 	
 	public int GetRestaurantName_Rv(int NBPmnum) {
-		try {
-			return sqlSession.selectOne("GetRestaurantName_Rv", NBPmnum);
-		}catch(Exception e) {
-			return 0;
-		}
+		return sqlSession.selectOne("GetRestaurantName_Rv", NBPmnum);
 	}
 	
 	public List<ReviewDTO> recentReviewInfo() {
@@ -128,7 +87,15 @@ public class ReviewMapper {
 		return sqlSession.selectList("previous_Rv");
 	}
 	
+	public List<ReviewDTO> review_keyword(String SearchKeyword){
+		return sqlSession.selectList("review_keyword", SearchKeyword);
+	}
 
+	
+//	public int review_EstimateCount_update(int rvnum) {
+//		return sqlSession.update("review_EstimateCount_update", rvnum);
+//	}
+	
 	
 	
 }

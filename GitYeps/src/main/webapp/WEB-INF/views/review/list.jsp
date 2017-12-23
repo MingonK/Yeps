@@ -25,12 +25,15 @@
 			<th>파일이미지</th>
 			<th>IP</th>
 			<th>recentreview</th>
+			<th>useful</th>
+			<th>funny</th>
+			<th>cool</th>
 			<td>삭제</td>
 			<td>수정</td>
 		</tr>
 	<c:if test="${empty reviewList}">
 		<tr>
-			<td colspan="11">등록된 게시글이 없습니다.</td>
+			<td colspan="14">등록된 게시글이 없습니다.</td>
 		</tr>	
 	</c:if> 	
 	<c:forEach var="dto" items="${reviewList}">
@@ -44,6 +47,9 @@
 			<td>${dto.filenum}</td>
 			<td>${dto.ip}</td>
 			<td>${dto.recentreview}</td>
+			<th>${dto.useful}</th>
+			<th>${dto.funny}</th>
+			<th>${dto.cool}</th>
 			<td><a href="review_delete?rvnum=${dto.rvnum}">삭제</a></td>
 			<td><a href="review_update?rvnum=${dto.rvnum}">수정</a></td>
 		

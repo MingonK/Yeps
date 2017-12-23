@@ -119,17 +119,20 @@ public class MessageMapper {
 	}
 	
 	public int getSendCount(String sender) {
-		System.out.println(sender+"9");
+		  Map<String, Object> map = new HashMap<String, Object>();
+		    map.put("sender", sender);
 		try {
-			return sqlSession.selectOne("getSendCount");
+			return sqlSession.selectOne("getSendCount",map);
 		}catch(Exception e) {
 			return 0;
 		}
 	}
 	
 	public int getReceiveCount(String receiver) {
+		  Map<String, Object> map = new HashMap<String, Object>();
+		    map.put("receiver", receiver);
 		try {
-			return sqlSession.selectOne("getReceiveCount");
+			return sqlSession.selectOne("getReceiveCount",map);
 		}catch(Exception e) {
 			return 0;
 		}

@@ -28,7 +28,7 @@
 	
 	
 	<c:forEach var="rdto" items="${getRnameAndRnum}">
-	Wrote a review for <a href="review_selectedres?rnum=${rdto.rnum}">${rdto.rname}(식당명)</a><p>	
+		Wrote a review for <a href="review_selectedres?rnum=${rdto.rnum}&rname=${rdto.rname}">${rdto.rname}(식당명)</a><p>	
 	</c:forEach>		
 			
 						

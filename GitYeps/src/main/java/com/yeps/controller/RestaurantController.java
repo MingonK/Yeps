@@ -31,105 +31,125 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.yeps.model.FileDTO;
 import com.yeps.model.RestaurantDTO;
-import com.yeps.service.BoardPager;
 import com.yeps.service.FileMapper;
 import com.yeps.service.RestaurantMapper;
+import com.yeps.service.YepsPager;
 
 @Controller
 public class RestaurantController {
 	@Resource(name = "uploadPath")
 	private String uploadPath;
-	
-	
+
 	@Autowired
 	private RestaurantMapper restaurantMapper;
+
 	@Autowired
 	private FileMapper fileMapper;
-	
-	@RequestMapping(value="/test")
-	public String test(){
-		return "restaurant/test";
-	}
 
-	@RequestMapping(value="/jusoPopup")
-	public String jusoRest() throws Exception{
+	@RequestMapping(value = "/jusoPopup")
+	public String jusoRest() throws Exception {
 		return "jusoPopup";
 	}
-	@RequestMapping(value="/result",method=RequestMethod.POST)
-	public String view() throws Exception{
-		return "restaurant/result";
-	}
 
-	@RequestMapping(value="/restaurant_insert", method=RequestMethod.GET)
+	@RequestMapping(value = "/restaurant_insert", method = RequestMethod.GET)
 	public String insertRest() throws Exception {
 		return "restaurant/restaurant_insert";
 	}
-	@RequestMapping(value="/restaurant_insert", method=RequestMethod.POST)
-	public ModelAndView insertRest(HttpServletRequest req, @ModelAttribute RestaurantDTO dto, BindingResult result, MultipartHttpServletRequest mhsq) throws Exception {
+
+	@RequestMapping(value = "/restaurant_insert", method = RequestMethod.POST)
+	public ModelAndView insertRest(HttpServletRequest req, @ModelAttribute RestaurantDTO dto, BindingResult result)
+			throws Exception {
 		String msg = null, url = null;
-	
-		Map<String, MultipartFile> fileMap = mhsq.getFileMap();
-		for (MultipartFile multipartFile : fileMap.values()) {
-			String genId = UUID.randomUUID().toString();
-			String originalfileName = multipartFile.getOriginalFilename();
-			String saveFileName = genId + "." + getExtension(originalfileName);
-			String savePath = uploadPath + saveFileName; // 저장 될 파일 경로
-			multipartFile.transferTo(new File(savePath));
-			dto.setFilename(saveFileName);
+
+		// Map<String, MultipartFile> fileMap = mhsq.getFileMap();
+		// for (MultipartFile multipartFile : fileMap.values()) {
+		// String genId = UUID.randomUUID().toString();
+		// String originalfileName=multipartFile.getOriginalFilename();
+		// String saveFileName = genId + "." + getExtension(originalfileName);
+		// String savePath = uploadPath + saveFileName; // 저장 될 파일 경로
+		// multipartFile.transferTo(new File(savePath));
+		// dto.setFilename(saveFileName);
+		// }
+		MultipartHttpServletRequest mr = (MultipartHttpServletRequest) req;
+		MultipartFile mf = mr.getFile("filename");
+		String origin_fileName = mf.getOriginalFilename();
+		int fileSize = (int) mf.getSize();
+		File file = new File(uploadPath, origin_fileName);
+		try {
+			mf.transferTo(file);
+			dto.setFilename(origin_fileName);
+		} catch (Exception e) {
+			e.printStackTrace();
+			origin_fileName = null;
+			fileSize = 0;
+			file = null;
+			dto.setFilename("");
 		}
-		
 		int res = restaurantMapper.insertRest(dto);
-		if(res>0) {
-			msg="레스토랑 등록 성공";
-			url="restaurant_list";
-		}else {
-			msg="레스토랑 등록 실패";
-			url="restaurant_insert";
+		if (res > 0) {
+			msg = "레스토랑 등록 성공";
+			url = "restaurant_list";
+		} else {
+			msg = "레스토랑 등록 실패";
+			url = "restaurant_insert";
+			file.delete();
 		}
 		req.setAttribute("msg", msg);
 		req.setAttribute("url", url);
 		return new ModelAndView("message");
 	}
 
-	@RequestMapping(value="/restaurant_uploadForm2")
-	public String uploadForm() {
-		return "restaurant/restaurant_uploadForm2";
-	}
-
-	@RequestMapping(value="/restaurant_upload")
-	public ModelAndView uploadRest(HttpServletRequest req,@ModelAttribute FileDTO dto, MultipartHttpServletRequest mhsq) throws IllegalStateException,IOException{
-		String msg=null,url=null;
-		String rnum=req.getParameter("rnum");
-		String realFolder = "D:/spring/upload/";
-
-		File dir = new File(realFolder);
-		if (!dir.isDirectory()) {
-			dir.mkdirs();
-		}
+	@RequestMapping(value = "/restaurant_upload", method = RequestMethod.POST)
+	public ModelAndView uploadRest(HttpServletRequest req, @ModelAttribute FileDTO dto,
+			MultipartHttpServletRequest mhsq) throws IllegalStateException, IOException {
+		String msg = null, url = null;
+		String rnum = req.getParameter("rnum");
 
 		Map<String, MultipartFile> fileMap = mhsq.getFileMap();
 		for (MultipartFile multipartFile : fileMap.values()) {
 			String genId = UUID.randomUUID().toString();
-			String originalfileName=multipartFile.getOriginalFilename();
+			String originalfileName = multipartFile.getOriginalFilename();
 			String saveFileName = genId + "." + getExtension(originalfileName);
-			String savePath = realFolder + saveFileName; // 저장 될 파일 경로
-			long fileSize = multipartFile.getSize();
+			String savePath = uploadPath + saveFileName; // 저장 될 파일 경로
+			int fileSize = (int) multipartFile.getSize();
 			multipartFile.transferTo(new File(savePath));
 			dto.setRnum(Integer.parseInt(rnum));
-			int res=fileMapper.insertFile(dto);
-			if(res>0) {
-				msg="사진 등록 성공";
-				url="restaurant_content?rnum="+rnum;
-			}else {
-				msg="사진 등록 실패";
-				url="restaurant_list";
-			}
+			dto.setFilename(saveFileName);
+			dto.setFile_content("");
+			dto.setFilesize(fileSize);
+			dto.setOrigin_filename(originalfileName);
+		}
+
+		// MultipartHttpServletRequest mr = (MultipartHttpServletRequest) req;
+		// MultipartFile mf = mr.getFile("upload_file");
+		// String genId = UUID.randomUUID().toString();
+		// String origin_fileName = mf.getOriginalFilename();
+		// String saveFileName = genId + "." + getExtension(origin_fileName);
+		// int fileSize = (int) mf.getSize();
+		// File file = new File(uploadPath, saveFileName);
+		// try {
+		// mf.transferTo(file);
+		// dto.setFilename(saveFileName);
+		// dto.setFile_content("");
+		// dto.setFilesize(fileSize);
+		// dto.setOrigin_filename(origin_fileName);
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
+		int res = fileMapper.insertFile(dto);
+		if (res > 0) {
+			msg = "사진 등록 성공";
+			url = "restaurant_content?rnum=" + rnum;
+		} else {
+			msg = "사진 등록 실패";
+			url = "restaurant_list";
 		}
 
 		req.setAttribute("msg", msg);
 		req.setAttribute("url", url);
-		return new ModelAndView("restaurant/message");
+		return new ModelAndView("message");
 	}
+
 	public String getExtension(String fileName) {
 		int dotPosition = fileName.lastIndexOf('.');
 
@@ -140,60 +160,61 @@ public class RestaurantController {
 		}
 	}
 
+	@RequestMapping(value = "/restaurant_list")
+	public ModelAndView listRest(@RequestParam(defaultValue = "1") int curPage) throws Exception {
+		int count = restaurantMapper.getCount();
+		int pageScale = 10;
+		int blockScale = 10;
+		// 페이지 나누기 관련 처리
+		YepsPager YepsPager = new YepsPager(count, curPage, pageScale, blockScale);
+		int start = YepsPager.getPageBegin();
+		int end = YepsPager.getPageEnd();
 
-	@RequestMapping(value="/restaurant_list")
-	public ModelAndView listRest(@RequestParam(defaultValue="1") int curPage) throws Exception{
-	    int count = restaurantMapper.getCount();
-	    // 페이지 나누기 관련 처리
-	    BoardPager boardPager = new BoardPager(count, curPage);
-	    int start = boardPager.getPageBegin();
-	    int end = boardPager.getPageEnd();
-	    
 		List<RestaurantDTO> list = restaurantMapper.listRest(start, end);
-		
-	    Map<String, Object> map = new HashMap<String, Object>();
-	    map.put("list", list); // list
-	    map.put("count", count); // 레코드의 갯수
-	    map.put("boardPager", boardPager);
-	    
-	    ModelAndView mav = new ModelAndView();
-	    mav.addObject("map", map); 
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list); // list
+		map.put("count", count); // 레코드의 갯수
+		map.put("YepsPager", YepsPager);
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("map", map);
 		mav.setViewName("restaurant/restaurant_list");
 		return mav;
 	}
 
-	@RequestMapping(value="/restaurant_content")
-	public ModelAndView contentRest(@RequestParam int rnum){
+	@RequestMapping(value = "/restaurant_content")
+	public ModelAndView contentRest(@RequestParam int rnum) {
 		RestaurantDTO dto = restaurantMapper.getRest(rnum);
-//		List<uploadFileVO> uploadFileList = restaurantMapper.getFileList(rnum);
+		List<FileDTO> uploadFileList = restaurantMapper.getFileList(rnum);
+		int getImageCount = restaurantMapper.getImageCount(rnum);
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("getRest", dto);
-//		mav.addObject("uploadFileList", uploadFileList);
+		mav.addObject("uploadFileList", uploadFileList);
+		mav.addObject("getImageCount", getImageCount);
 		mav.setViewName("restaurant/restaurant_content");
-		return mav; 
+		return mav;
 	}
-	
-	@RequestMapping(value="/getImage/{name:.+}",method=RequestMethod.GET)
-	@ResponseBody
-	    public ResponseEntity<byte[]> profileImage(@PathVariable("name") String name) throws IOException {
-	        HttpHeaders header = new HttpHeaders();
-	        header.setContentType(MediaType.IMAGE_PNG);
-	        return new ResponseEntity<byte[]>(IOUtils.toByteArray(new FileInputStream(new File(uploadPath+name))), header, HttpStatus.CREATED);
-	    }
 
+	@RequestMapping(value = "/restaurant_photoList")
+	public ModelAndView photoListRest(HttpServletRequest req, @RequestParam(defaultValue = "1") int curPage) {
+		String rnum = req.getParameter("rnum");
 
+		int count = restaurantMapper.getCount();
+		int pageScale = 10;
+		int blockScale = 10;
+		YepsPager YepsPager = new YepsPager(count, curPage, pageScale, blockScale);
+		int start = YepsPager.getPageBegin();
+		int end = YepsPager.getPageEnd();
+		RestaurantDTO dto = restaurantMapper.getRest(Integer.parseInt(rnum));
+		List<FileDTO> uploadFileList = restaurantMapper.getFileList(Integer.parseInt(rnum));
+		ModelAndView mav = new ModelAndView();
 
+		mav.addObject("getRest", dto);
+		mav.addObject("uploadFileList", uploadFileList);
+		mav.setViewName("restaurant/restaurant_photoList");
+		return mav;
 
-
-
-
-
-
-
-
-
-
-
-
+	}
 }

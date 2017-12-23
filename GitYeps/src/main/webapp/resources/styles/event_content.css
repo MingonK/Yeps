@@ -8,7 +8,7 @@
 }
 
 #event_header_eventname {
-	margin-bottom: 18px;
+	margin-bottom: 18px; padding-left: 16px;
 }
 
 #event_header_eventname_detail {
@@ -16,10 +16,32 @@
 	box-sizing: border-box; display: table-cell; vertical-align: top;
 }
 
+#event_header_eventname_detail h1 {
+	font-size: 30px; margin: 0; word-wrap: break-word !important; word-break: break-word !important; overflow-wrap: break-word !important; font-weight: bold;
+    margin-bottom: 6px; font-size: 30px; line-height: 1.2em; color: #333;
+}
+
 #event_header_eventname_detail h3 {
 	padding-top: 0; word-wrap: break-word !important; word-break: break-word !important; overflow-wrap: break-word !important; 
 	font-weight: bold; margin-bottom: 6px; font-size: 30px; line-height: 1.2em; color: #333;
 } 
+#event_alert_container {
+	margin-left: 15px;
+    width: 930px;
+    display: none;
+    background: none;
+    border-radius: 5px;
+}
+
+#event_alert_error {
+	width: 100%; box-sizing: border-box; position: relative; margin-bottom: 12px;
+    padding: 18px 18px 18px 24px; font-size: 16px; line-height: 1.5em; 
+}
+
+#event_alert_message {
+	margin: 0;
+    padding-right: 30px;
+}
 
 #photo_map_container {
 	margin-bottom: -30px; height: 302px;
@@ -91,7 +113,7 @@
 }
 
 #event_info_list {
-	padding: 10px 15px 10px 15px; height: 280px; position: relative;
+	padding: 10px 15px 10px 15px; height: 280px; position: relative; font-size: 14px;
 }
 
 #location_block {
@@ -191,6 +213,7 @@
 
 #event_content_super_container {
 	width: 960px; height: auto; overflow: hidden; margin: 0 auto; padding: 0 15px; padding-top: 15px; padding-bottom: 36px;
+	font-size: 15px;
 }
 
 #event_content_detail_container {
@@ -214,13 +237,24 @@
 }
 
 #event_content_description_bottom_flag_box {
-	padding-left: 570px; vertical-align: bottom; box-sizing: border-box; display: table-cell; white-space: nowrap;
+	padding-left: 579px; vertical-align: bottom; box-sizing: border-box; display: table-cell; white-space: nowrap;
 }
 
 #event_content_description_bottom_flag_icon_action {
 	position: relative; display: inline-block; padding: 5px; border: 1px solid #ccc; border-radius: 3px;
 	font-size: 12px; line-height: 1.5em; color: #999; background: transparent; 
 	box-shadow: none; white-space: nowrap;
+}
+
+#event_content_description_bottom_flag_icon_action:hover {
+	text-decoration: none;
+    color: #333;
+    border-color: rgba(0,0,0,0.2);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.5);
+}
+
+#event_content_description_bottom_flag_icon_action:hover #event_content_flag_tootip_wrap {
+	left: 13px;
 }
 
 #event_content_description_bottom_flag_icon {
@@ -252,14 +286,18 @@
 	font-weight: bold; margin-bottom: 6px; font-size: 16px;
 }
 
+#event_content_comment_reply {
+	font-size: 13px; 
+}
+
 #event_content_comment_reply_box label {
-	display: inline-block; font-weight: bold; margin: 0 0 6px;
+	display: inline-block; font-weight: bold; margin: 0 0 6px; cursor: text;
 }
 
 #event_review_content {
 	box-sizing: border-box; width: 100%; height: 100px; resize: vertical; display: block; margin: 0 0 18px;
-	padding: 5px 9px; background: #fff; border: 1px solid #999; border-radius: 3px; font-size: 14px; 
-	font-weight: normal; color: inherit; font: inherit;
+	padding: 5px 9px; background: #fff; border: 1px solid #999; border-radius: 3px; font-weight: normal; 
+	color: inherit; font: inherit;
 }
 
 #event_content_comment_reply_box fieldset {
@@ -275,11 +313,12 @@
 
 #event_content_detail_right_container {
 	float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 33.33333%; box-shadow: -1px 0 0 #e6e6e6;
+	font-size: 13px;
 }
 
 
 #event_content_detail_subscription_action h3 {
-	font-weight: bold; margin-bottom: 6px; font-size: 16px;
+	font-weight: bold; margin-bottom: 6px;
 }
 
 #event_subscription_buttons {
@@ -313,11 +352,15 @@
 }
 
 #event_subscription_whos_in h3 {
-	font-weight: bold; margin-bottom: 6px; font-size: 16px; border-collapse: collapse; white-space: nowrap;
+	font-weight: bold; margin-bottom: 6px; border-collapse: collapse; white-space: nowrap;
 }
 
 #event_subscription_whos_in_response {
 	margin-left: 6px; margin-right: 6px; vertical-align: baseline; box-sizing: border-box; display: table-cell;
+}
+
+#event_content_detail_right_container > span {
+	font-size: 13px;
 }
 
 #event_subscription_user_info_block {
@@ -353,7 +396,7 @@
 	line-height: 1; display: inline-block; margin-right: 6px; color: #666;
 }
 
-#event_subscription_review_count span {
+#event_subscription_review_count span, #event_reply_user_review_count span {
 	fill: #f15c00; width: 18px; height: 18px; display: inline-block; vertical-align: middle; 
 	position: relative; overflow: hidden; top: -.1em;
 }
@@ -379,7 +422,7 @@
 }
 
 #event_subscription_interested h3 {
-	font-weight: bold; margin-bottom: 6px; font-size: 16px; border-collapse: collapse; white-space: nowrap;
+	font-weight: bold; margin-bottom: 6px; border-collapse: collapse; white-space: nowrap;
 }
 
 #event_subscription_interested_response {
@@ -429,7 +472,7 @@
 	margin: 0 0 6px; display: block; color: #d32323; vertical-align: baseline;
 }
 
-#flag_content_popup_error_message {
+#flag_content_popup_error_message, #reply_flag_content_popup_error_message {
 	display: none; color: #d32323; font-weight: bold; margin: 0;
 	padding: 18px 12px 0; background: none; border: none;
 }
@@ -445,14 +488,14 @@
 }
 
 #flag_popup_description {
-	position: relative; overflow: hidden; overflow-y: auto; padding: 18px 12px;
+	position: relative; overflow: hidden; overflow-y: auto; padding: 18px 12px; font-size: 13px;
 }
 
 #flag_popup_descripte label {
 	display: inline-block; font-weight: bold; cursor: default; margin: 0 0 6px;
 }
 
-#flag_popup_descripte_field {
+#flag_popup_descripte_field, #reply_flag_popup_descripte_field {
 	height: 78px; resize: vertical; display: block; box-sizing: border-box; width: 100%; margin: 0 0 18px; 
 	padding: 5px 9px; text-align: start; font-weight: normal; cursor: text; max-height: 150px; background: #fff; 
 	border: 1px solid #999; border-radius: 3px; font-size: 14px;
@@ -462,11 +505,15 @@
 	padding: 0 12px 12px;
 }
 
-#flag_popup_submit_button {
+#flag_popup_submit_button, #reply_flag_popup_submit_button {
 	padding: 5px 8px; font-size: 12px; line-height: 1.5em; color: white; box-shadow: 0 1px 1px rgba(0,0,0,0.3); 
 	background-color: #d90007; display: inline-block; vertical-align: middle; overflow: visible; 
 	border-radius: 3px; margin: 0; cursor: pointer; border: 1px solid #8d0005; font-weight: bold; 
 	text-align: center;
+}
+
+#flag_popup_submit_button:hover, #reply_flag_popup_submit_button:hover {
+	background: red;
 }
 
 #flag_popup_buttons a {
@@ -515,7 +562,7 @@
 #event_content_photo_tootip:before, #event_content_flag_tootip:before {
 	display: block;
 	position: absolute;
-	content: " ";
+	content: '';
 	width: 0;
 	height: 0;
 	border: 8px solid transparent;
@@ -532,7 +579,7 @@
 #event_content_photo_tootip:after, #event_content_flag_tootip:after {
 	display: block;
 	position: absolute;
-	content: " ";
+	content: '';
 	width: 0;
 	height: 0;
 	border: 7px solid transparent;
@@ -552,7 +599,7 @@
 }
 	
 #estimation_line:before, #estimation_line:after, #photo_map_container:before, .popup-inner:before {
-	content: " ";
+	content: '';
 	display: table;
 }
 		
@@ -562,7 +609,8 @@
 		
 #event_subscription_whos_in_section > a:hover, #event_subscription_interested_section a:hover, #event_subscription_user_name > a:hover,
 #this_week_popular_events_info > strong > a:hover, #other_events_this_week > a:hover, #flag_popup_buttons > a:hover,
-#map_inner_eventname > a:hover, #storename_line > a:hover, #eventname_detail_category > span > a:hover {
+#map_inner_eventname > a:hover, #storename_line > a:hover, #eventname_detail_category > span > a:hover,
+#event_reply_user_name:hover a {
 	text-decoration: underline;
 }
 		
@@ -599,3 +647,163 @@
 #flag_content_popup_close:hover {
 	background: #d9d9d9;
 }
+
+#event_content_comment_list {
+	margin-bottom: 18px;
+	list-style: none;
+	margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+#event_content_comment_list > li:first-child {
+	border-top: 1px solid #e6e6e6;
+}
+
+#event_content_comment_list > li {
+	margin: 0;
+    padding: 18px 0;
+    border-bottom: 1px solid #e6e6e6;
+    padding-bottom: 17px;
+}
+
+#event_topic_reply {
+	margin: 0 -15px;
+}
+
+#event_topic_reply:before, #event_topic_reply:after {
+	content: " ";
+    display: table;
+}
+
+#event_topic_reply:after {
+	clear: both;
+}
+
+#event_topic_reply > #event_reply_user_info_wrapper {
+	float: left;
+    padding: 0 15px;
+    min-height: 1px;
+    box-sizing: border-box;
+    width: 33.33333%;
+}
+
+#event_reply_user_info_block {
+	font-size: 12px;
+    line-height: 1.5em;
+    position: relative;
+    display: flex;
+	
+}
+
+#event_reply_user_info_photo_wrapper {
+	border-right-width: 9px;
+	border-right: 6px solid transparent;
+    border-left: none;
+}
+
+#event_reply_user_img {
+	outline: none;
+	border-radius: 4px;
+	vertical-align: middle;
+}
+
+#event_reply_user_info {
+	-webkit-box-flex: 1;
+	flex: 1;
+    min-width: 0;
+    min-height: 0;
+}
+
+#event_reply_user_name {
+	font-size: 14px;
+    line-height: 1.28571em;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#event_reply_user_friend_count, #event_reply_user_review_count {
+	color: #666;
+}
+
+#event_topic_reply > #topic_reply_body {
+	float: left;
+    padding: 0 15px;
+    min-height: 1px;
+    box-sizing: border-box;
+    width: 66.66667%;
+}
+
+#topic_reply_content {
+	margin-left: -12px;
+    margin-right: -12px;
+    border-collapse: separate;
+    border-spacing: 12px 0;
+	display: table;
+    min-width: 100%;
+    table-layout: auto;
+}
+
+#event_reply_content {
+	margin-left: 6px;
+    margin-right: 6px;
+    border-collapse: collapse;
+    border-spacing: 0 0;
+    width: 100%;
+    box-sizing: border-box;
+    display: table-cell;
+    vertical-align: top;
+    font-size: 13px;
+}
+
+#reply_content_message_text {
+	word-wrap: break-word !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    margin-bottom: 12px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 12px;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+#event_reply_content_flag {
+	margin-left: 6px;
+    margin-right: 6px;
+    border-collapse: collapse;
+    border-spacing: 0 0;
+    box-sizing: border-box;
+    display: table-cell;
+    vertical-align: top;
+}
+
+#reason_field {
+	height: 30px; line-height: 30px; 
+	display: block; box-sizing: border-box; 
+	width: 100%; margin: 0 0 18px; padding: 5px 9px;
+	background: #fff; border: 1px solid #999; 
+	border-radius: 3px; font-size: 14px; 
+	overflow: visible !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

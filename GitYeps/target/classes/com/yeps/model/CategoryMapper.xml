@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.yeps.model">
 	<select id="listCategory" resultType="CategoryDTO">
-		select * from (select rownum rn, A.* from (select * from yeps_category)A)
+		select * from yeps_category
 	</select>
 
 	<insert id="insertCategory" parameterType="String">

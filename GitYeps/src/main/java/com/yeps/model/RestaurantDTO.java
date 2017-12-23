@@ -6,15 +6,7 @@ public class RestaurantDTO {
 	private int cnum;
 	private String rname;
 	private String zipNo ;
-	
 	private String filename;
-	
-	public String getFilename() {
-		return filename;
-	}
-	public void setFilename(String filename) {
-		this.filename = filename;
-	}
 	private String roadAddrPart1;
 	private String addrDetail;
 	private String roadAddrPart2;
@@ -29,13 +21,12 @@ public class RestaurantDTO {
 	private String fri;
 	private String sat;
 	private String sun;
-
 	private String reststyle;	// 좌석/테이블/야외석
 	private String reserv;		// 예약가능여부
 	private String delivery;	// 배달가능여부
 	private String takeout;		// 테이크아웃가능여부
 	private String parking;		// 주차장보유여부
-	private String kidzone;		// 놀이방보유여부
+	private String kidszone;		// 놀이방보유여부
 	private String groupreserv;		// 단체예약가능여부
 	private String noise;		//소음정도
 	private String alcohol;		// 주류판매여부
@@ -45,7 +36,7 @@ public class RestaurantDTO {
 	private String tablecount;	// 테이블 총 갯수
 	private String standard;
 	private String busytime;	// 바쁜시간
-	
+	private String rest_regdate;
 	
 	public int getRnum() {
 		return rnum;
@@ -64,6 +55,18 @@ public class RestaurantDTO {
 	}
 	public void setRname(String rname) {
 		this.rname = rname;
+	}
+	public String getZipNo() {
+		return zipNo;
+	}
+	public void setZipNo(String zipNo) {
+		this.zipNo = zipNo;
+	}
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
 	}
 	public String getRoadAddrPart1() {
 		return roadAddrPart1;
@@ -107,7 +110,48 @@ public class RestaurantDTO {
 	public void setFoodstyle(String foodstyle) {
 		this.foodstyle = foodstyle;
 	}
-	
+	public String getMon() {
+		return mon;
+	}
+	public void setMon(String mon) {
+		this.mon = mon;
+	}
+	public String getTue() {
+		return tue;
+	}
+	public void setTue(String tue) {
+		this.tue = tue;
+	}
+	public String getWed() {
+		return wed;
+	}
+	public void setWed(String wed) {
+		this.wed = wed;
+	}
+	public String getThu() {
+		return thu;
+	}
+	public void setThu(String thu) {
+		this.thu = thu;
+	}
+	public String getFri() {
+		return fri;
+	}
+	public void setFri(String fri) {
+		this.fri = fri;
+	}
+	public String getSat() {
+		return sat;
+	}
+	public void setSat(String sat) {
+		this.sat = sat;
+	}
+	public String getSun() {
+		return sun;
+	}
+	public void setSun(String sun) {
+		this.sun = sun;
+	}
 	public String getReststyle() {
 		return reststyle;
 	}
@@ -138,11 +182,11 @@ public class RestaurantDTO {
 	public void setParking(String parking) {
 		this.parking = parking;
 	}
-	public String getKidzone() {
-		return kidzone;
+	public String getKidszone() {
+		return kidszone;
 	}
-	public void setKidzone(String kidzone) {
-		this.kidzone = kidzone;
+	public void setKidszone(String kidszone) {
+		this.kidszone = kidszone;
 	}
 	public String getGroupreserv() {
 		return groupreserv;
@@ -198,53 +242,10 @@ public class RestaurantDTO {
 	public void setBusytime(String busytime) {
 		this.busytime = busytime;
 	}
-	public String getMon() {
-		return mon;
+	public String getRest_regdate() {
+		return rest_regdate;
 	}
-	public void setMon(String mon) {
-		this.mon = mon;
+	public void setRest_regdate(String rest_regdate) {
+		this.rest_regdate = rest_regdate;
 	}
-	public String getTue() {
-		return tue;
-	}
-	public void setTue(String tue) {
-		this.tue = tue;
-	}
-	public String getWed() {
-		return wed;
-	}
-	public void setWed(String wed) {
-		this.wed = wed;
-	}
-	public String getThu() {
-		return thu;
-	}
-	public void setThu(String thu) {
-		this.thu = thu;
-	}
-	public String getFri() {
-		return fri;
-	}
-	public void setFri(String fri) {
-		this.fri = fri;
-	}
-	public String getSat() {
-		return sat;
-	}
-	public void setSat(String sat) {
-		this.sat = sat;
-	}
-	public String getSun() {
-		return sun;
-	}
-	public void setSun(String sun) {
-		this.sun = sun;
-	}
-	public String getZipNo() {
-		return zipNo;
-	}
-	public void setZipNo(String zipNo) {
-		this.zipNo = zipNo;
-	}
-
 }

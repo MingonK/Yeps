@@ -29,7 +29,7 @@ small {
 }
 
 #member-wrapper{
-	width: 480;
+   width: 480;
    height: 100%;
    margin: 70px auto;
    float: left;
@@ -41,43 +41,43 @@ small {
 }
 
 #join{
-	display : none;
-	width: 300;
-	height: 100%;
-	margin: auto;
+   display : none;
+   width: 300;
+   height: 100%;
+   margin: auto;
 }
 
 #find_email{
-	display : none;
+   display : none;
    width: 350;
    height: 100%;
    margin: auto;
 }
 
 #find_passwd{
-	display : none;
+   display : none;
    width: 350;
    height: 100%;
    margin: auto;
 }
 
 #find_passwd, #find_email p{
-	font-size: 14px;
+   font-size: 14px;
 }
 
 #login_img{
-	width: 480;
+   width: 480;
    height: 100%;
    margin: 70px auto;
    float: left;
 }
 
 #member_header{
-	margin-bottom: 30px;
+   margin-bottom: 30px;
 }
 
 #member_header p.subheading {
-	font-size: 15px;
+   font-size: 15px;
     font-weight: bold;
 }
 
@@ -92,15 +92,15 @@ small {
 }
 
 #member_body {
-	position:relative;
+   position:relative;
 }
 
 .memberf [type="text"], .memberf [type="number"], .memberf [type="password"], .memberf [type="email"], .memberf [type="url"], .memberf [type="tel"], .memberf [type="date"], .memberf textarea, .memberf select, .memberf .pseudo-input,
 .findpasswdf [type="text"], .findpasswdf [type="number"], .findpasswdf [type="password"], .findpasswdf [type="email"], .findpasswdf [type="url"], .findpasswdf [type="tel"], .findpasswdf [type="date"], .findpasswdf textarea, .findpasswdf select, .findpasswdf .pseudo-input,
 .findemailf [type="text"], .findemailf [type="number"], .findemailf [type="password"], .findemailf [type="email"], .findemailf [type="url"], .findemailf [type="tel"], .findemailf [type="date"], .findemailf textarea, .findemailf select, .findemailf .pseudo-input{
-	
-	display: block;
-	box-sizing: border-box;
+   
+   display: block;
+   box-sizing: border-box;
     width: 100%;
     margin: 0 0 9px;
     padding: 5px 9px;
@@ -152,16 +152,16 @@ small {
 #forgot-email {
     text-align: right;
     margin-bottom: 12px;
-    margin-top: -12px;
+    margin-top: -5px;
 }
 
 .forgot-passwd-link:hover, .forgot-passwd-link:focus {
-	 cursor: pointer ;
+    cursor: pointer ;
     text-decoration: underline ;
 }
 
 .forgot-email-link:hover, .forgot-email-link:focus {
-	 cursor: pointer ;
+    cursor: pointer ;
     text-decoration: underline ;
 }
 
@@ -194,7 +194,7 @@ small {
 .ybtn-full{
     width: 100%;
     webkit-box-sizing: border-box;
-   	moz-box-sizing: border-box;
+      moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 
@@ -222,10 +222,10 @@ small {
 }
 
 .memberssn1{
-	IME-MODE: disabled
+   IME-MODE: disabled
 }
 .memberssn2{
-	IME-MODE: disabled
+   IME-MODE: disabled
 }
 
 .inline-layout {
@@ -270,32 +270,32 @@ small {
 }
 
 #emailpicker-div li {
-	padding: 0px 0px 0px 20px;
-	display:block;
-	text-align:left;
+   padding: 0px 0px 0px 20px;
+   display:block;
+   text-align:left;
 }
 
 #email3{
-	font-weight:bold;
+   font-weight:bold;
 }
 
 #email3:hover {
-	cursor: pointer;
-	 background: #0073bb;
-	 color: #ffffff;
+   cursor: pointer;
+    background: #0073bb;
+    color: #ffffff;
 }
 
 #passwdcheck{
-	background-color:transparent;
-	border:0;
-	text-align:right;
-	font-weight: bold;
-	font-size: 12px;
-	margin-top: -8px;
+   background-color:transparent;
+   border:0;
+   text-align:right;
+   font-weight: bold;
+   font-size: 12px;
+   margin-top: -8px;
 }
 
 #mailCheck{
-	text-align: left;
+   text-align: left;
     background-color:transparent;
     border: 0;
     text-align: right;
@@ -306,7 +306,7 @@ small {
 }
 
 #signup-button{
-	 margin-top: -10px;
+    margin-top: -10px;
 }
 
 .confirmbtn-primary {
@@ -324,14 +324,14 @@ small {
 .confirmbtn-full{
     width: 100%;
     webkit-box-sizing: border-box;
-   	moz-box-sizing: border-box;
+      moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 
 .confirmbtn {
     display: inline-block;
     vertical-align: middle;
-    margin: 0;
+    margin-top: -4px;
     cursor: pointer;
     border: 1px solid;
     font-weight: bold;
@@ -351,9 +351,9 @@ small {
 }
 
 #confirmemail{
-	position: relative;
-	width: 360px;
-	height: 420px;
+   position: relative;
+   width: 360px;
+   height: 420px;
    padding: 0;
    font: inherit;
    vertical-align: baseline;
@@ -362,19 +362,19 @@ small {
 }
 
 #confirmemail #emailpicker-div{
-	position: absolute; 
- 	z-index: 1; 
- 	top: 205px;
- 	right: 10px;
- 	width: 50%;
- 	background: #fff;
- 	font-size: 14px;
+   position: absolute; 
+    z-index: 1; 
+    top: 205px;
+    right: 10px;
+    width: 50%;
+    background: #fff;
+    font-size: 14px;
 }
 
 #member_popup{
-	position: relative;
-	width: 360px;
-	height: 300px;
+   position: relative;
+   width: 360px;
+   height: 300px;
    padding: 0;
    font: inherit;
    vertical-align: baseline;
@@ -390,9 +390,9 @@ small {
 
 #confirmemail [type="text"], #confirmemail [type="number"], #confirmemail [type="password"], #confirmemail [type="email"], #member_popup [type="url"], #confirmemail [type="tel"], #member_popup [type="date"], #confirmemail textarea, #confirmemail select, #confirmemail .pseudo-input,
 #member_popup [type="text"], #member_popup [type="number"], #member_popup [type="password"], #member_popup [type="email"], #member_popup [type="url"], #member_popup [type="tel"], #member_popup [type="date"], #member_popup textarea, #member_popup select, #member_popup .pseudo-input{
-	
-	display: block;
-	box-sizing: border-box;
+   
+   display: block;
+   box-sizing: border-box;
     width: 100%;
     margin: 0 0 9px;
     padding: 5px 9px;
@@ -405,29 +405,29 @@ small {
 }
 
 #confirmemail_yes_head{
-	position: relative;
-	width: 350px;
-	height: 160px;
-	text-align: left;
-	margin-top: 50px;
+   position: relative;
+   width: 350px;
+   height: 160px;
+   text-align: left;
+   margin-top: 50px;
 }
 
 #confirmemail_yes_body{
-	width: 280px;
-	height: 150px;
-	margin: 30px auto;
+   width: 280px;
+   height: 150px;
+   margin: 30px auto;
 }
 
 #confirmemail_no_head{
-	width: 350px;
-	height: 120px;
-	margin-top: 50px;
+   width: 350px;
+   height: 120px;
+   margin-top: 50px;
 }
 
 #confirmemail_no_body{
-	width: 280px;
-	height: 150px;
-	margin: 30px auto;
+   width: 280px;
+   height: 150px;
+   margin: 30px auto;
 }
 
 .confirmemailbtn {
@@ -471,12 +471,12 @@ small {
 }
 
 #member_popup_head .subused_pw_change{
-	font-size: 15px;
-	font-weight: bold;
+   font-size: 15px;
+   font-weight: bold;
 }
 
 #member_popup_empty_head .subused{
-	font-size: 17px;
+   font-size: 17px;
     font-weight: bold;
     margin: auto;
     padding-top: 70px;
@@ -493,38 +493,38 @@ small {
 }
 
 #email_auth_top{
-	width: 260px;
-	height: 30px;
-	text-align: center;
-	margin-top: 40px;
-	font-size: 14px;
+   width: 260px;
+   height: 30px;
+   text-align: center;
+   margin-top: 40px;
+   font-size: 14px;
 }
 
 .auth_top{
-	font-size: 15px;
+   font-size: 15px;
     font-weight: bold;
 }
 
 #email_auth_middle{
-	width: 260px;
-	height: 40px;
+   width: 260px;
+   height: 40px;
 }
 
 #email_auth_middle ul{
-	margin: 0;
-	padding: 0;
+   margin: 0;
+   padding: 0;
 }
 
 #email_auth_bottom{
-	width: 180px;
-	height: 50px;
-	margin: 0px auto;
+   width: 180px;
+   height: 50px;
+   margin: 0px auto;
 }
 
 #email_auth_middle [type="text"], #email_auth_middle [type="number"], #email_auth_middle [type="password"], #email_auth_middle [type="email"], #email_auth_middle [type="url"], #email_auth_middle [type="tel"], #email_auth_middle [type="date"], #email_auth_middle textarea, #email_auth_middle select, #email_auth_middle .pseudo-input{
-	
-	display: block;
-	box-sizing: border-box;
+   
+   display: block;
+   box-sizing: border-box;
     width: 100%;
     margin: 0 0 9px;
     padding: 5px 9px;
@@ -537,35 +537,35 @@ small {
 }
 
 #email_auth_middle .inline-layout {
-	margin: 0px auto;
-	text-align: center;
+   margin: 0px auto;
+   text-align: center;
 }
 
 #member_popup_head, #member_popup_empty_head{
-	position: relative;
-	width: 360px;
-	height: 180px;
-	text-align: center;
-	margin-top: 30px;
+   position: relative;
+   width: 360px;
+   height: 180px;
+   text-align: center;
+   margin-top: 30px;
 }
 
 #member_popup_head_len {
-	width: 360px;
-	height: 50px;
-	text-align: center;
-	margin-top: 30px;
+   width: 360px;
+   height: 50px;
+   text-align: center;
+   margin-top: 30px;
 }
 
 #member_popup_body {
-	width: 280px;
-	height: 90px;
-	margin: 0px auto;
+   width: 280px;
+   height: 90px;
+   margin: 0px auto;
 }
 
 .profile-content-wrap{
-	background: white;
-	height: 80%;
-	min-width: 1020px;
+   background: white;
+   height: 80%;
+   min-width: 1020px;
 }
 
 .profile-content-wrap >.profile-container {
@@ -581,8 +581,8 @@ small {
 }
 
 .profile-settings-container {
-	padding-top: 18px;
-	height: 100%;
+   padding-top: 18px;
+   height: 100%;
 }
 
 .profile-column-alpha {
@@ -596,7 +596,7 @@ small {
 }
 
 .profile-titled-header_content {
-	display: table;
+   display: table;
     min-width: 220;
     table-layout: auto;
     box-sizing: border-box;
@@ -625,14 +625,14 @@ small {
 }
 
 .profile-nav_link-content {
-	margin-left: -6px;
+   margin-left: -6px;
     margin-right: -6px;
     border-collapse: separate;
     border-spacing: 6px 0;
 }
 
 .profile-arrange {
-	display: table;
+   display: table;
     min-width: 100%;
     table-layout: auto;
 }
@@ -673,8 +673,8 @@ small {
 }
 
 .profile-column-beta_profile {
-	display: none;
-	float: left;
+   display: none;
+   float: left;
     padding: 0 15px;
     min-height: 1px;
     box-sizing: border-box;
@@ -682,7 +682,7 @@ small {
 }
 
 .profile-column-beta_passwd {
-	display : none;
+   display : none;
     float: left;
     padding: 0 15px;
     min-height: 1px;
@@ -691,7 +691,7 @@ small {
 }
 
 .profile-column-beta_memberleave {
-	display : none;
+   display : none;
     float: left;
     padding: 0 15px;
     min-height: 1px;
@@ -700,7 +700,7 @@ small {
 }
 
 .profile-section-header {
-	margin-bottom: 11px;
+   margin-bottom: 11px;
     border-bottom: 1px solid #e6e6e6;
 }
 
@@ -716,12 +716,12 @@ small {
 }
 
 .profilef {
-	max-width: 465px;
-	
+   max-width: 465px;
+   
 }
 
 .profilef .psection {
-	margin-bottom: 18px;
+   margin-bottom: 18px;
 }
 
 .profilef h4 {
@@ -783,4 +783,274 @@ small {
 
 .ybtn+a:hover {
     text-decoration: underline ;
+}
+
+.member_manager_form .sc-search-field input, .ie .member_manager_form .sc-search-field input {
+   width: 65%;
+    padding: 8px 12px 7px;
+    float: left;
+}
+
+.member_manager_form [type="text"], .member_manager_form [type="password"], .member_manager_form [type="email"], .member_manager_form [type="url"], .member_manager_form [type="tel"], .member_manager_form textarea, .member_manager_form select, .member_manager_form .pseudo-input {
+    display: block;
+    box-sizing: border-box;
+    width: 10%;
+    height: 30px;
+    margin: 0 5px 18px;
+    background: rgba(250,250,249,0.9);
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.15);
+    font-size: 14px;
+    line-height: 1.29em;
+    float:left;
+}
+
+.member_managerbtn-primary {
+   width : 20%;
+    border-color: #861202;
+    color: white;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+    background-color: #d90007;
+    background: linear-gradient(#d90007, #c91400);
+    float:left
+}
+
+.member_managerbtn {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+    cursor: pointer;
+    border: 1px solid;
+    font-weight: bold;
+    text-align: center;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-size: 14px;
+    line-height: 1.28571em;
+    border-color: #000000;
+     box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    padding: 8px 19px 9px;
+    border-radius: 3px;
+    float:left;
+}
+
+.member_managerbtn-primary:hover {
+    background-color: #ed0008;
+    background: -webkit-linear-gradient(#ed0008, #dd1600);
+    background: linear-gradient(#ed0008, #dd1600);
+}
+
+
+.memberManager {
+   background: white;
+   min-width: 1020px;
+}
+
+.memberManagerContainer_wrap {
+   padding-bottom: 36px;
+    width: 960px;
+    margin: 0 auto;
+    padding: 15px 15px;
+}
+
+
+.memberManagerContainer_section_header {
+    margin-bottom: 11px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.memberManager h2 {
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    font-weight: bold;
+    margin-bottom: 6px;
+    font-size: 21px;
+    line-height: 1.28571em;
+    color: #d32323;
+}
+
+.memberManager h3 {
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    font-weight: bold;
+    margin-bottom: 6px;
+    font-size: 16px;
+    line-height: 1.3125em;
+    color: #d32323;
+}
+
+.memberManagerContainer_section {
+   margin-bottom: 18px;
+}
+
+.memberManagerContainer_section_member_wrap {
+   margin-top: -30px;
+   margin-left: -15px;
+   margin-right: -15px;
+   display: block;
+    font-size: 0;
+    line-height: 1;
+    text-align: left;
+    border-collapse: separate;
+    border-spacing: 30px 0;
+    min-width: 100%;
+    table-layout: auto;
+}
+
+.memberManagerContainer_section_member {
+   margin-top: 30px;
+   margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 25%;
+    display: inline-block;
+    zoom: 1;
+    font-size: 14px;
+    line-height: 1.28571em;
+    border-collapse: collapse;
+    border-spacing: 0 0;
+    box-sizing: border-box;
+    vertical-align: top;
+}
+
+.not_found_member {
+   margin-top: 30px;
+   margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%;
+    display: inline-block;
+    zoom: 1;
+    font-size: 14px;
+    line-height: 1.28571em;
+    border-collapse: collapse;
+    border-spacing: 0 0;
+    box-sizing: border-box;
+    vertical-align: top;
+    text-align:center;
+}
+
+.member_passport {
+   font-size: 12px;
+    line-height: 1.5em;
+    position: relative;
+    display: flex;
+}
+
+.member_avatar {
+   border-right: 6px solid transparent;
+    border-left: none;
+}
+
+.member_avatar a {
+    color: #0073bb;
+    text-decoration: none;
+}
+
+.member_story {
+   margin-left: 9px;
+   -webkit-box-flex: 1;
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+}
+
+
+.user-display-name{
+   font-size: 14px;
+    line-height: 1.28571em;
+    font-weight: bold;
+}
+
+.member_story b{
+    font-weight: bold;
+}
+
+.memberManagerContainer_section_member_wrap {
+   display: block;
+    font-size: 0;
+    line-height: 1;
+    text-align: left;
+    border-collapse: separate;
+    border-spacing: 30px 0;
+    min-width: 100%;
+    table-layout: auto;
+}
+
+.member_profilef {
+   margin : 30px auto;
+   max-width: 700px;
+   height: 100%;
+}
+
+.member_profilef .psection {
+   margin-bottom: 18px;
+}
+
+.member_profilef h4 {
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    font-weight: bold;
+    margin-bottom: 6px;
+    font-size: 14px;
+    line-height: 1.28571em;
+    color: #333;
+    margin: 0 0 3px;
+}
+
+.member_profilef b, .member_profilef strong, .member_profilef h5 {
+    font-weight: bold;
+}
+
+.member_profilef label, .member_profilef legend {
+   font-size: 15px;
+    display: inline-block;
+    font-weight: bold;
+    margin: 0 0 6px;
+}
+
+.member_profilef label+.help-block {
+    margin: -6px 0 3px;
+    display: block;
+    color: #999;
+    font-size: 12px;
+    line-height: 1.5em;
+    font-weight: normal;
+}
+
+.member_profilef [type="text"], .member_profilef [type="number"], .member_profilef [type="password"], .member_profilef [type="email"], .member_profilef [type="url"], .member_profilef [type="tel"], .member_profilef [type="date"], .member_profilef textarea, .member_profilef select, .member_profilef .pseudo-input {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0 0 18px;
+    padding: 5px 9px;
+    background: #fff;
+    border: 1px solid #999;
+    border-radius: 3px;
+    font-size: 14px;
+    line-height: 1.29em;
+}
+
+.member_profilef_alpha {
+   text-align: center;
+   width: 30%;
+   float: left;
+}
+
+.member_profilef_beta {
+   width: 70%;
+   float: left;
+}
+
+.deletebtn {
+   width: 50%;
 }

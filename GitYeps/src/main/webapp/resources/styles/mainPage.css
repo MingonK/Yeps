@@ -66,7 +66,6 @@
 }
 
 .mainpage_header_top_right_wrap {
-	width: 15%;
 	border-collapse: collapse;
    	border-spacing: 0 0;
    	margin-left: 9px;
@@ -171,7 +170,7 @@
 }
 
 .mainpage_header_inner_category_link:hover, .mainpage_header_recommend_name:hover, .mainpage_header_bottom_photo_owner_link:hover,
-.mainpage_new_businesses_section a:hover {
+.mainpage_new_businesses_section a:hover, .mainpage_browes_more_categories a:hover, .under_review_container a:hover {
 	text-decoration: underline;
 }
 
@@ -235,9 +234,9 @@
     display: block;
 }
 
-<!-- ============================================ 메인페이지 헤더 부분 끝============================================ -->
+/* ============================================ 메인페이지 헤더 부분 끝============================================ */
 
-<!-- ============================================ 메인페이지 바디 부분 시작============================================ -->
+/* ============================================ 메인페이지 바디 부분 시작============================================ */
 .mainpage_container {
 	background-color: #fff;
    	min-width: 1020px;
@@ -322,6 +321,7 @@
 
 .mainpage_new_businesses_section {
 	padding-top: 42px;
+	padding-bottom: 72px;
 }
 
 .explore_city_title {
@@ -482,7 +482,8 @@
     vertical-align: middle;
 }
 
-/* 로그인 추가작업부분 시작*/
+
+
 
 .mainpage_header_top_right_wrap_login {
 	border-collapse: collapse;
@@ -524,13 +525,200 @@
 .mainpage_header_top_right_wrap_login #notifications-icon:hover, 
 .mainpage_header_top_right_wrap_login #page_header_account .user-account_button:hover {
     background-color: rgba(0, 0, 0, 0.2) !important;
-
 }
 
-/* 로그인 추가작업부분 끝*/
+/* ============================================ 메인페이지 More Browse ============================================= */
 
-<!-- ============================================ 메인페이지 바디 부분 끝============================================ -->
-<!-- ============================================ 메인페이지 바디 리뷰 이하 시작============================================ -->
+.mainpage_browse_categories {
+	background-color: #f5f5f5!important;
+	min-width: 1020px;
+}
+
+.mainpage_browse_categories_content_container {
+	max-width: 960px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.browse_categories_section {
+	padding-bottom: 36px;
+	padding-top: 36px;
+	
+}
+
+.browes_categories_section_header {
+	margin-bottom: 24px!important;
+	text-align: center!important;
+	word-wrap: break-word!important;
+    word-break: break-word!important;
+    overflow-wrap: break-word!important;
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 1.28571em;
+    color: #d32323;
+}
+
+.mainpage_browes_categories_content {
+	margin-bottom: -30px;
+}
+
+.mainpage_browes_categories_content_partial_wrap, .mainpage_browes_more_categories_lines {
+	margin-left: -15px;
+    margin-right: -15px;
+    margin-bottom: 30px!important;
+    display: flex;
+    border-collapse: separate;
+    border-spacing: 30px 0;
+    min-width: 100%;
+    table-layout: auto;
+}
+
+.mainpage_browes_categories_content_partial_wrap {
+	text-align: center!important;
+}
+
+.mainpage_browes_more_categories_lines {
+	margin-bottom: 18px!important;
+}
 
 
-<!-- ============================================ 메인페이지 바디 리뷰 이하 끝============================================ -->
+.mainpage_browes_categories_content_unit {
+	-webkit-box-flex: 1;
+	flex: 1;
+    min-width: 0;
+    min-height: 0;
+    display: block;
+    border-collapse: collapse;
+    border-spacing: 0 0;
+    margin-left: 15px;
+    margin-right: 15px;
+    box-sizing: border-box;
+    vertical-align: top;
+}
+
+.mainpage_browes_categories_content_link {
+	padding-top: 17px;
+    padding-bottom: 17px;
+    display: block;
+    background: #fff;
+    padding: 11px;
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+    
+}
+
+.mainpage_browes_categories_content_img {
+	margin-bottom: 6px!important;
+	height: 72px;
+    width: 72px;
+    vertical-align: middle;
+}
+
+.mainpage_browes_categories_content_title {
+	font-weight: bold;
+	max-width: 100%;
+    overflow: hidden!important;
+    text-overflow: ellipsis!important;
+    white-space: nowrap!important;
+    word-wrap: normal!important;
+    padding-top: 0;
+    color: #333;
+    word-break: break-word!important;
+    overflow-wrap: break-word!important;
+    font-weight: 700;
+    margin-bottom: 6px;
+    font-size: 14px;
+    line-height: 1.28571em;
+}
+
+.mainpage_browes_categories_content_link:hover {
+	text-decoration: none;
+    border-color: #0073bb;
+    box-shadow: 0 6px 12px rgba(0,0,0,.1);
+}
+
+.mainpage_browes_categories_content_link:hover .mainpage_browes_categories_content_title {
+	color: #0073bb;
+}
+
+.mainpage_browes_more_categories.is_disabled {
+	opacity: 0;
+    padding-top: 0;
+}
+
+.mainpage_browes_more_categories {
+	padding-top: 30px;
+    transition: padding-top .2s ease-in-out,max-height .2s ease-in-out,opacity .2s ease-in-out;
+    animation-delay: .1s;
+    overflow: hidden;
+}
+
+.more_categories_divider {
+	position: relative;
+    margin-bottom: 30px!important;
+}
+
+.hr_line {
+	border: none;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid transparent;
+    text-align: center;
+    margin: 12px 0;
+}
+
+.more_categories_divider:before, .more_categories_divider:after {
+	width: 0;
+    height: 0;
+    content: "";
+    display: inline-block;
+    border-style: solid;
+    position: absolute;
+    right: 97px;
+    pointer-events: none;
+}
+
+.more_categories_divider:before{
+	border-color: transparent transparent #b8b8b8;
+	border-width: 0 12px 12px;
+    top: -12px;
+}
+
+.more_categories_divider:after {
+	border-color: transparent transparent #f5f5f5;
+    border-bottom-style: solid;
+    border-width: 0 12px 12px;
+    top: -11px;
+}
+
+.mainpage_browes_more_categories_units {
+	-webkit-box-flex: 1;
+	flex: 1;
+    min-width: 0;
+    min-height: 0;
+    display: block;
+    border-collapse: collapse;
+    border-spacing: 0 0;
+    margin-left: 15px;
+    margin-right: 15px;
+    max-width: 100%;
+    overflow: hidden!important;
+    text-overflow: ellipsis!important;
+    white-space: nowrap!important;
+    word-wrap: normal!important;
+    box-sizing: border-box;
+    vertical-align: top;
+}
+
+.mainpage_24x24_coffee, .mainpage_24x24_Health_Medical, .mainpage_24x24_Arts_Entertainment, .mainpage_24x24_food,
+.mainpage_24x24_Professional_Service, .mainpage_24x24_Pets, .mainpage_24x24_RealEstate , .mainpage_24x24_Hotels_Travel, 
+.mainpage_24x24_Local_Service, .mainpage_24x24_EventPlanning_Services, .mainpage_24x24_PublicServices_Government, .mainpage_24x24_Financial_Services, 
+.mainpage_24x24_Mass_Media, .mainpage_24x24_Local_Flavor, .mainpage_24x24_Religious_Organizations, .mainpage_24x24_Education {
+	margin-right: 6px!important;
+	fill: #0073bb;
+}
+
+/* ============================================ 메인페이지 바디 부분 끝 ============================================ */
+/* ============================================ 메인페이지 바디 리뷰 이하 시작 ============================================ */
+
+
+/* ============================================ 메인페이지 바디 리뷰 이하 끝 ============================================ */
