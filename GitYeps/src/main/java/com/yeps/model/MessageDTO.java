@@ -4,12 +4,6 @@ public class MessageDTO {
 
 	private int msgNum;
 	private int mnum;//맴버 로그인시 회원정보 가져올 외래키
-	public int getMnum() {
-		return mnum;
-	}
-	public void setMnum(int mnum) {
-		this.mnum = mnum;
-	}
 	private String title;
 	private String receiver;//받은 사람(로그인 회원과 연동되게)
 	private String sender;//보낸사람(로그인 회원과 연동되게)
@@ -18,8 +12,21 @@ public class MessageDTO {
 	private String readDate;//읽은 시각 표시
 	private int readNum;//읽음, 안읽음 표시 위한 옵션
 	private int isLocker;//보관함쪽지 확인 옵션
+	private int isIssue;
 	
 	
+	public int getIsIssue() {
+		return isIssue;
+	}
+	public void setIsIssue(int isIssue) {
+		this.isIssue = isIssue;
+	}
+	public int getMnum() {
+		return mnum;
+	}
+	public void setMnum(int mnum) {
+		this.mnum = mnum;
+	}
 	public int getIsLocker() {
 		return isLocker;
 	}
@@ -39,12 +46,7 @@ public class MessageDTO {
 	public void setMsgNum(int msgNum) {
 		this.msgNum = msgNum;
 	}
-	/*public int getmNum() {
-		return mNum;
-	}
-	public void setmNum(int mNum) {
-		this.mNum = mNum;
-	}*/
+	
 	public String getTitle() {
 		return title;
 	}

@@ -41,26 +41,28 @@ public class MessageController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	public ModelAndView pagingMessageList(HttpServletRequest req ,@RequestParam String lMode, String name) {
+	public ModelAndView pagingMessageList(HttpServletRequest req ,@RequestParam String lMode, String email) {
+		ModelAndView mav = new ModelAndView();
 	    //각각의 메시지 총 수를 구한다.
         int cnt = 0;
 		int count = yepsMessageMapper.getMessageCount();//총 메시지 카운트. 하지만 보여지는 페이지에선 나오지 않을듯
 		int lCount = yepsMessageMapper.getLockerCount();//보관함 쪽지 개수
-		int sCount = yepsMessageMapper.getSendCount(name);//보낸 쪽지 개수
-		int mCount = yepsMessageMapper.getReceiveCount(name);//받은 쪽지 개수
-	   
+		int sCount = yepsMessageMapper.getSendCount(email);//보낸 쪽지 개수
+		int mCount = yepsMessageMapper.getReceiveCount(email);//받은 쪽지 개수
+		int aCount = yepsMessageMapper.allAlertCount(email);
+	    int rCount = yepsMessageMapper.readAlertCount(email);
 		int curPage = req.getParameter("curPage")!=null?Integer.parseInt(req.getParameter("curPage")): 1 ;
 		//lMode로 여러 종류의 리스트를 구분하여 카운트를 설정한다.  
 		if(lMode==null) {
 	    lMode = req.getParameter("lMode")!=null?req.getParameter("lMode"):"msgBoxList";
-	        cnt = mCount;
+	     
 		}
 		if(lMode.equals("allLocker")) {
 			cnt = lCount;
 		}else if(lMode.equals("msgBoxList")) {
-			cnt = mCount;
+			cnt = mCount ;
 		}else if(lMode.equals("allList")) {
-		    cnt = count;
+		    cnt = count - aCount;
 		}else if(lMode.equals("noneMsg")) {
 			
 			cnt = yepsMessageMapper.noneMessageCount();
@@ -73,39 +75,50 @@ public class MessageController {
 		}else if(lMode.equals("readLocker")) {
 			
 			cnt = yepsMessageMapper.readLockerCount();
+		}else if(lMode.equals("alertMsg")) {
+			
+			cnt = aCount;
+		}else if(lMode.equals("readAlert")) {
+			
+			cnt = rCount;
+		}else if(lMode.equals("noneAlert")) {
+			
+			cnt = aCount - rCount; 
 		}else if(lMode.equals("sender")) {
 			
 			cnt = sCount;
 		}
-		
 		int pageScale = 10, blockScale = 5;
 		YepsPager yPager = new YepsPager(cnt, curPage, pageScale, blockScale );
 		int start = yPager.getPageBegin();
 		int end = yPager.getPageEnd();
 		int pageSize = yPager.PAGE_SCALE;
 		int num = count - pageSize * (curPage - 1) + 1; 
-		
-		System.out.println("2" + lMode);
+		 
+		if(lMode == null || email == null) {
+		   mav.setViewName("MainPage");
+		   return mav;
+		}
 		
 		//페이징처리된 리스트를 구한다.
-		List<MessageDTO> list = yepsMessageMapper.messageList(start, end, lMode, name);
+		List<MessageDTO> list = yepsMessageMapper.messageList(start, end, lMode, email);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("lMode", lMode);
 		map.put("list", list); // list
 		map.put("count", count); 
 		map.put("yepsPager", yPager);
 		
-		ModelAndView mav = new ModelAndView();
 	    mav.addObject("mCount",mCount);
 		mav.addObject("lCount",lCount);
 		mav.addObject("sCount",sCount);
+		mav.addObject("aCount",aCount);
 		mav.addObject("count", count);
 		mav.addObject("num", num);
 		mav.addObject("map", map); 
 		//로그인 회원이 마스터나 매니져인지 확인후 권한 주기
 		MemberDTO member = (MemberDTO)req.getSession().getAttribute("memberinfo");
 		String key = null;
-		if(member.getIsmaster().equals('y') || member.getIsmanager().equals('y')) {
+		if(member.getIsmanager().equals("y")) {
 		    key = "almighty";
 		}else {
 			key = "ordinary";
@@ -115,8 +128,12 @@ public class MessageController {
 		if(lMode.equals("allLocker") || lMode.equals("readLocker") || lMode.equals("noneLocker")) {
 			mav.setViewName("message/messageLocker");
 			
+		}else if(lMode.equals("alertMsg") || lMode.equals("readAlert") || lMode.equals("noneAlert"))  {
+			
+		    mav.setViewName("message/messageAlert");
 		}else{
-			String mode = req.getParameter("mode");
+		    String mode = req.getParameter("mode");
+		    
 			if(mode==null) {
 				mav.addObject("mode", "receive");
 			}else {
@@ -125,7 +142,7 @@ public class MessageController {
 			mav.setViewName("message/yepsMessage");
 		}
 		mav.addObject("set", "message");
-		mav.addObject("key", key);
+		mav.addObject("key", key);//key 값 지정
 		return mav;
 	}
 
@@ -141,15 +158,15 @@ public class MessageController {
 			mav.setViewName("redirect:member_login?mode=login");
 	        return mav;
 		}
-		if(member.getIsmaster().equals('y') || member.getIsmanager().equals('y')) {
+		if(member.getIsmaster().equals("y") || member.getIsmanager().equals("y")) {
 		    key = "almighty";
 		}else {
 			key = "ordinary";
 		}
-        String name = member.getName().trim();
-		mav = pagingMessageList(req, lMode, name);
+        String email = member.getEmail();
+		mav = pagingMessageList(req, lMode, email);
 		mav.addObject("set", "message");
-		mav.addObject("key", key);
+		mav.addObject("key", key);//key 값 지정
 		return mav;
 	}
 	
@@ -162,10 +179,23 @@ public class MessageController {
 			mav.setViewName("MainPage");
 			return mav;
 		}
-		int mnum = member.getMnum();
-		String name = member.getName();
-		mav = pagingMessageList(req,lMode, name);
+		String email = member.getEmail();
+		mav = pagingMessageList(req,lMode, email);
 		mav.addObject("set", "message");
+		return mav;
+	}
+	
+	@RequestMapping(value = "message_alert")
+	public ModelAndView message_alert(HttpServletRequest req)throws Exception{
+		ModelAndView mav = new ModelAndView();
+		String lMode = "alertMsg";
+		MemberDTO member = (MemberDTO)req.getSession().getAttribute("memberinfo");
+		if(member==null) {
+			mav.setViewName("MainPage");
+			return mav;
+		}
+		String email = member.getEmail();
+		mav = pagingMessageList(req, lMode, email);
 		return mav;
 	}
 
@@ -173,18 +203,16 @@ public class MessageController {
 	public ModelAndView message_delete(HttpServletRequest req, String[] check) {
 		ModelAndView mav = new ModelAndView();
 		String msgNum = req.getParameter("msgNum");
-		String msg = null, lMode = null, box = null;
-		box = req.getParameter("box");
+		String msg = null, lMode = null;
+		MemberDTO member = (MemberDTO)req.getSession().getAttribute("memberinfo");
+		lMode = req.getParameter("lMode");
+		String email = member.getEmail();
 		int res = 0;
 		if(msgNum==null) {
 			if(check == null) {
 				msg = "선택된 메시지가 없습니다. 다시 확인하세요.";
-				if(box.equals("msgBox")) {
-					mav.setViewName("redirect:yeps_message");
-				}else if(box.equals("locker")) {
-					mav.setViewName("redirect:message_locker");
-				}
-				req.setAttribute("msg", msg);
+				mav = pagingMessageList(req, lMode, email);
+				mav.addObject("msg", msg);
 				return mav;
 			}
 			for(String num : check) {
@@ -195,21 +223,15 @@ public class MessageController {
                 }else {
 					msg = "메시지 삭제에 실패하였습니다.";
 				}
-				req.setAttribute("msg", msg);
 			}
 		}else {
 			int msgnum = Integer.parseInt(msgNum);
 			res = yepsMessageMapper.deleteMessage(msgnum);
 			msg = "메시지가 삭제 되었습니다.";
-			req.setAttribute("msg", msg);
-		}
-		if(box.equals("msgBox")) {
 			
-			mav.setViewName("redirect:yeps_message");
-		}else if(box.equals("locker")) {
-			
-			mav.setViewName("redirect:message_locker");
 		}
+		mav = pagingMessageList(req, lMode, email);
+		mav.addObject("msg", msg);
 		return mav;
 	}
 
@@ -223,72 +245,61 @@ public class MessageController {
 		}
 		
 		ModelAndView mav = new ModelAndView();
-		String msg = null, lMode = null;
+		String msg = null, lMode = null, receiver = null, email = null;
+		int res = 0;
+		String issue = req.getParameter("issue");
         MemberDTO member = (MemberDTO)req.getSession().getAttribute("memberinfo");
+        
         if(member==null) {
 			mav.setViewName("MainPage");
 			return mav;
 		}
-		int mnum = member.getMnum();
+        int mnum = member.getMnum();
 		dto.setMnum(mnum);
-		String name = member.getName();//로그인시 로그인한 회원의 정보로 보내는 사람을 구한다.*/
-		dto.setSender(name);
-		String receiver = dto.getReceiver().trim();
-		dto.setReceiver(receiver);
-//		List<MemberDTO> memberList = memberMapper.listMember();
-//		for(int i=0; i < memberList.size(); i++) {
-//			String who = memberList.get(i).getName();
-//			if(who.equals(receiver.trim())) {
-//		    	 dto.setReceiver(who);
-//		    }
-//		}
-		  int res = yepsMessageMapper.writeMessage(dto);
+		email = member.getEmail();//로그인시 로그인한 회원의 정보로 보내는 사람을 구한다.*/
+		dto.setSender(email);
+        
+    	List<MemberDTO> memberList = memberMapper.listMemberForMessage();
+    	
+       if(issue == null && dto.getReceiver() != null) {
+		receiver = dto.getReceiver().trim();
+	    dto.setReceiver(receiver);
+		dto.setIsIssue(0);
+		for(int i=0; i < memberList.size(); i++) {
+			String who = memberList.get(i).getEmail();
+			if(who.equals(receiver.trim())) {
+		    	 dto.setReceiver(who);
+		    }
+		}
+		 res = yepsMessageMapper.writeMessage(dto);
 	  		if(res>0) {
 	  			msg = "쪽지를 보냈습니다.쪽지함으로 이동합니다.";
 	  			lMode = "msgBoxList";
-	  			mav = pagingMessageList(req, lMode,  name);
+	  			mav = pagingMessageList(req, lMode,  email);
 	  			
 	  		}else {
 	  			msg = "쪽지 보내기에 실패하였습니다.";
-	  			mav = pagingMessageList(req, lMode,  name);
+	  			mav = pagingMessageList(req, lMode,  email);
 	  		}
 	    mav.addObject("msg", msg);
+       }else  if(issue.equals("issue")) {
+    	  
+       	for(int i=0; i <memberList.size(); i++) {
+    		String isManager = memberList.get(i).getIsmanager();
+    	    email = memberList.get(i).getEmail();
+    		if(isManager.equals("y")) {
+    			receiver = memberList.get(i).getEmail();
+    			dto.setReceiver(receiver);
+    			dto.setIsIssue(1);
+    		    res = yepsMessageMapper.writeMessage(dto);
+    		}
+    	}
+    	msg = "이슈를 보냈습니다.";
+    	mav.addObject("msg",msg);
+    	mav.setViewName("redirect:yeps_message");
+        }
 		return mav;
 	}
-
-/*	@RequestMapping(value = "message_reply")
-	public ModelAndView message_reply(HttpServletRequest req, String[] check) {
-		ModelAndView mav = new ModelAndView();
-		String receiver = req.getParameter("receiver");
-		String msg = null, box = null;
-		box = req.getParameter("box");
-        if(check == null) {
-			msg = "선택된 메시지가 없습니다. 다시 확인하세요.";
-			if(box.equals("msgBox")) {
-				mav.setViewName("redirect: yeps_message");
-			}else if(box.equals("locker")) {
-				mav.setViewName("redirect: message_locker");
-			}
-			
-			mav.addObject("msg", msg);
-			return mav;
-		}
-		if(receiver==null) {
-			ArrayList list2 = new ArrayList() ;
-			for(String num : check) {
-				int msgnum = Integer.parseInt(num);
-				receiver = (String)yepsMessageMapper.getReceiver(msgnum);
-				list2.add(receiver);
-			}
-			req.setAttribute("receiver", list2 );
-		}else {
-			req.setAttribute("receiver", receiver);
-		}
-		mav.addObject("mode", "reply");
-		mav.addObject("set", "message");
-		mav.setViewName("message/yepsMessage");
-		return mav;
-	}*/
 
 	@RequestMapping(value = "message_action")
 	public ModelAndView message_search(HttpServletRequest req) {
@@ -299,40 +310,49 @@ public class MessageController {
 			mav.setViewName("MainPage");
 			return mav;
 		}
-		int mnum = member.getMnum();
-		String name = member.getName();
+	
+		String email = member.getEmail();
         String lMode = null;
         String msg = null;
-        System.out.println("#" + filterMode);
 		if(filterMode.equals("allMsg")) {
-         
-			mav.setViewName("redirect:yeps_message");
+            mav.setViewName("redirect:yeps_message");
 			
 		}else if(filterMode.equals("noneMsg")) {
 			lMode = "noneMsg";
-			mav = pagingMessageList(req, lMode,  name);
+			mav = pagingMessageList(req, lMode,  email);
 			
 		}else if(filterMode.equals("readMsg")) {
 			lMode = "readMsg";
-			mav = pagingMessageList(req, lMode, name);
+			mav = pagingMessageList(req, lMode, email);
 		
         }else if(filterMode.equals("allLocker")) {
 			
             mav.setViewName("redirect:message_locker");
         }else if(filterMode.equals("readLocker")) {
 			lMode = "readLocker";
-			mav = pagingMessageList(req, lMode, name);
+			mav = pagingMessageList(req, lMode, email);
 			mav.setViewName("message/messageLocker");
 			
 		}else if(filterMode.equals("noneLocker")) {
 			lMode = "noneLocker";
-			mav = pagingMessageList(req, lMode, name);
+			mav = pagingMessageList(req, lMode, email);
 			mav.setViewName("message/messageLocker");
 			
-		}else if(filterMode.equals("sender")){
+		}else if(filterMode.equals("alertMsg")){
+		    lMode = filterMode;
+			mav = pagingMessageList(req, lMode, email);
+	
+		}else if(filterMode.equals("readAlert")){
+		    lMode = filterMode;
+			mav = pagingMessageList(req, lMode, email);
+	
+		}else if(filterMode.equals("noneAlert")){
+		    lMode = filterMode;
+			mav = pagingMessageList(req, lMode, email);
 		
-			lMode = filterMode;
-			mav = pagingMessageList(req, lMode, name);
+		}else if(filterMode.equals("sender")){
+		    lMode = filterMode;
+			mav = pagingMessageList(req, lMode, email);
 		    mav.addObject("mode","send");
 		
 		}else if(filterMode.equals("msgBoxList")) {
@@ -343,6 +363,7 @@ public class MessageController {
 			mav.setViewName("message/yepsMessage");
 			mav.addObject("msg", msg);
 		}
+	
 		return mav;
 	}
 
@@ -354,11 +375,10 @@ public class MessageController {
 			mav.setViewName("MainPage");
 			return mav;
 		}
-		String name = member.getName();
-		
+		String email = member.getEmail();
 		String mNum = req.getParameter("read") ;
 		String lMode = req.getParameter("lMode");
-		System.out.println("1" + lMode);
+		
 		int msgNum = 0 ,resRead = 0 , readNum = 0,	resDate=0;
 		if(mNum==null) {
 			msgNum = Integer.parseInt(req.getParameter("msgnum"));
@@ -368,9 +388,9 @@ public class MessageController {
 				resDate = yepsMessageMapper.updateReadDate(msgNum);
 				readNum = yepsMessageMapper.getContent(msgNum).getReadNum();
 				mav.addObject("readNum", readNum);
-				mav = pagingMessageList(req,lMode,name);
+				mav = pagingMessageList(req,lMode,email);
 			}else {
-				mav = pagingMessageList(req,lMode,name);
+				mav = pagingMessageList(req,lMode,email);
 				
 			}
 			return mav;
@@ -384,7 +404,7 @@ public class MessageController {
 				resRead = yepsMessageMapper.updateReadNum0(msgNum);
 			}
 		}
-		mav = pagingMessageList(req, lMode, name);
+		mav = pagingMessageList(req, lMode, email);
 		return mav;
 	}
 
@@ -397,12 +417,12 @@ public class MessageController {
 			mav.setViewName("MainPage");
 			return mav;
 		}
-		String name = member.getName();
+		String email = member.getEmail();
 		int mnum = member.getMnum();
 		if(check == null) {
 			lMode = "msgBoxList";
 			msg = "선택된 메시지가 없습니다. 다시 확인하세요.";
-		    mav = pagingMessageList(req,lMode, name);
+		    mav = pagingMessageList(req,lMode, email);
 			mav.addObject("msg", msg);
 			return mav;
 		}
@@ -413,7 +433,7 @@ public class MessageController {
 				
 				msg = "보관함으로 이동 되었습니다. ";
 				lMode = "msgBoxList";
-				mav = pagingMessageList(req,lMode, name);
+				mav = pagingMessageList(req,lMode, email);
 				mav.addObject("msg", msg);
 			}else {
 				msg = "보관함 이동에 실패하였습니다.";
@@ -433,13 +453,13 @@ public class MessageController {
 			mav.setViewName("MainPage");
 			return mav;
 		}
-		String  name = member.getName();
+		String  email = member.getEmail();
 		int mnum = member.getMnum();
 		if(check == null) {
 			msg = "선택된 메시지가 없습니다. 다시 확인하세요.";
 			req.setAttribute("mode", "receive");
 			lMode = "allLocker";
-			mav = pagingMessageList(req, lMode, name);
+			mav = pagingMessageList(req, lMode, email);
 			mav.addObject("msg", msg);
 			mav.setViewName("message/messageLocker");
 			return mav;
@@ -456,17 +476,12 @@ public class MessageController {
 			}
 		}
 		lMode = "allLocker";
-		mav = pagingMessageList(req, lMode, name);
+		mav = pagingMessageList(req, lMode, email);
 		mav.setViewName("message/messageLocker");
 		return mav;
 	}
 	
-	@RequestMapping(value = "message_alert")
-	public ModelAndView message_alert(HttpServletRequest req) {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("message/messageAlert");
-		return mav;
-	}
+	
 }
 
 
