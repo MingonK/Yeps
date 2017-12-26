@@ -1,29 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" session="true" %>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ page session="true" %>
 <html>
 <head>
 <title>Yeps Message</title>
-<script src="//code.jquery.com/jquery.min.js"></script>
-<c:if test="${not empty requestScope.msg}">
-	<script type="text/javascript">
-		alert("${msg}")
-	</script>
-</c:if> 
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/message.css"/>"/>
+ 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
+	<script src="//code.jquery.com/jquery.min.js"></script>
 </head>
-<body>
-<%@ include file="../top.jsp"%> 
-<!--  issueform  -->
+<%@ include file="../top.jsp"%>
+<div style="background: white;">
 <div class="popup" align="left" id="writeIssue" data-popup="writeIssue"  style="z-index: 1;">
     <form name="sendIssueform" method="post">
 	     <div class="popup-inner">
 	         <h4 align="left"  style="color: #d32323;"> Send Issue To Manager</h4>
 	             <input type="hidden" id="issueValue" value="issue">
-	         <h4 align="left" style="color: #d32323;">Subject is</h4><br>
-	             <input type="text" name="title" id="sendIssueSubject" ><br>
-	         <h4 align="left" style="color: #d32323;">Content is</h4><br>
-	             <textarea rows="4" name="content" id="sendIssueContent"  placeholder="여기에 메시지를 입력하세요."></textarea><br><br>
+	         <h4 align="left" style="color: #d32323;">Subject is</h4>
+	             <input type="text" name="title" id="sendIssueSubject" >
+	         <h4 align="left" style="color: #d32323;">Content is</h4>
+	             <textarea rows="4" name="content" id="sendIssueContent"  placeholder="여기에 메시지를 입력하세요."></textarea>
 	                 <button class="popup-send" id="sendIssue" type="button" data-popup-send="SendIssue" >SendIssue </button>&nbsp;&nbsp;
 			         <a data-popup-close="writeIssue" style="cursor:pointer;" href="#">  Close</a>
 					 <a class="popup-close" data-popup-close="writeIssue" href="#" >x</a>
@@ -34,12 +31,12 @@
 <div class="popup" align="left" id="writeMessage" data-popup="writeMessage"  style="z-index: 1;">
     <form name="sendform" method="post">
 	    <div class="popup-inner">
-	        <h4 align="left"  style="color: #d32323;">Send Message To</h4><br>
-	            <input type="text" id="sendformTo" name="receiver"><br>
-	        <h4 align="left" style="color: #d32323;">Subject is</h4><br>
-	            <input type="text" name="title" id="sendformSubject" ><br>
-	        <h4 align="left" style="color: #d32323;">Content is</h4><br>
-	            <textarea rows="4" name="content" id="sendformMessage"  placeholder="여기에 메시지를 입력하세요."></textarea><br><br>
+	        <h4 align="left"  style="color: #d32323;">Send Message To</h4>
+	            <input type="text" id="sendformTo" name="receiver">
+	        <h4 align="left" style="color: #d32323;">Subject is</h4>
+	            <input type="text" name="title" id="sendformSubject" >
+	        <h4 align="left" style="color: #d32323;">Content is</h4>
+	            <textarea rows="4" name="content" id="sendformMessage"  placeholder="여기에 메시지를 입력하세요."></textarea>
 	                <button class="popup-send" id="sendMessage" type="button" data-popup-send="SendMessage" onclick="sendMessage()">SendMessage </button>
 			        <a data-popup-close="writeMessage" style="cursor:pointer;" href="#">  Close</a>
 					<a class="popup-close" data-popup-close="writeMessage" href="#" >X</a>
@@ -49,39 +46,34 @@
 	<!-- Message View  -->
         <div class="popup" align="left" id="popup" data-popup="popup-1" style="z-index: 1;">
 		    <div class="popup-inner">
-			  <h4 align="left"  style="color: #d32323;">Message From</h4><br>
+			  <h4 align="left"  style="color: #d32323;">Message From</h4>
 			     <input type="text" id="from" readOnly>
-			  <h4 align="left"  style="color: #d32323;">Subject is</h4><br>
+			  <h4 align="left"  style="color: #d32323;">Subject is</h4>
 			     <input type="text" id="subject" readOnly>
-			  <h4 align="left"  style="color: #d32323;">Content is</h4><br>
-			     <textarea id="message" rows="4" readOnly></textarea><br><br>
+			  <h4 align="left"  style="color: #d32323;">Content is</h4>
+			     <textarea id="message" rows="4" readOnly></textarea>
 			        <button class="popup-reply" id="replyMessage" type="button" data-popup-close="popup-1" data-popup-open="writeMessage" style="cursor:pointer;">reply </button>
+			         <button class="popup-delete" id="deleteMessage" type="button" data-popup-close="popup-1" style="cursor:pointer;" onclick="deleteMsg('${map.lMode}');">delete </button>&nbsp;
 			           <a data-popup-close="popup-1" href="#" style="cursor:pointer;" onclick="readCheck('${map.lMode}');">Close</a>
 				           <input type="hidden" id="readCheck" > <input type="hidden" id="pageMode">
-				           <button class="popup-delete" id="deleteMessage" type="button" data-popup-close="popup-1" style="cursor:pointer;" onclick="deleteMsg('${map.lMode}');">delete </button>&nbsp;
 				       <a class="popup-close" style="cursor:pointer;" data-popup-close="popup-1" href="#" onclick="readCheck('${map.lMode}');">x</a>
 		       </div>
 	      </div> 
-	          <div id="messageContainer"  >
-	              <div id="messageHeader"  >
+	          <div id="messageContainer">
+	              <div id="messageHeader">
 		              <label> Messages</label>
 				          <input type="button" id="write" value="Write New Message" data-popup-open="writeMessage" onclick="messageForm();">
 		          </div>
-		      <div id="menu" >
-	             <a href="message_action?filter=msgBoxList"><label style="cursor:pointer;">InBox </label></a><label>  :  ${mCount} </label>
-			     <a href="message_action?filter=sender"><label style="cursor:pointer;"> Sent </label></a><label>  :  ${sCount} </label>
-			     <a href="message_action?filter=allLocker"><label style="cursor:pointer;"> locker  </label></a><label>  :  ${lCount} </label>
-			   
-			     <c:choose>
-			         <c:when test="${ key eq 'almighty' }">
-			             <label style="float:right;">  :  ${aCount} </label><a href="message_alert"><label style="cursor:pointer; float:right;">alertBox</label></a>
-			             </c:when>
-			         <c:otherwise>
-			             <label style="float:right; color: #blue; font-size: 14px; font-family: cambria;"><span style="color:#ff00ff">오늘도 행복한 하루 되세요.</span>  </label>
-			         </c:otherwise>
-			      </c:choose>
+		      <div id="menu">
+	            <a href="message_action?filter=msgBoxList"><label style="cursor:pointer;">InBox :  ${mCount} </label></a>&nbsp;&nbsp;
+			    <a href="message_action?filter=sender"><label style="cursor:pointer;">Sent :  ${sCount} </label></a>&nbsp;&nbsp;
+			    <a href="message_action?filter=allLocker"><label style="cursor:pointer;">locker :  ${lCount} </label></a>
+			    <c:if test="${ key eq 'almighty' }">
+					<a href="message_alert" style="float:right;"><label style="cursor:pointer;">alertBox :  ${aCount}</label></a>
+				</c:if>
+			      
 			  </div>
-		  <div id="messageList"  style="position:absolute; " >
+		  <div id="messageList"  style="position:absolute;">
 	         <form name="msgform" method="post" >
 				  <table  id="table" style="width: 100%;">
 					   <tr>
@@ -90,15 +82,13 @@
 						<!-- 	<button type="button" style="cursor:pointer;" id="reply"  >reply</button> -->
 						   <input type="button"style="cursor:pointer;"  name="locker" id="locker" value="locker" onclick="moveToLocker();"> 
 						   <select  id="select" name="filter" >
-									<option value="0"></option>
 									<option value="allMsg">모든 쪽지</option>
 									<option value="readMsg">읽은 쪽지</option>
 									<option value="noneMsg">안읽은 쪽지</option>
 									<option value="allLocker">보관함</option>
 							</select> 
-						    <input type="button" id="search" style="cursor: pointer;" value="select" onclick="searching();">
-						    <input type="button" id="issue" style="cursor: pointer; color: #ffffff; background: #d32323; border-radius: 5px; font-weight: bold; 
-	                        font-family: cambria; float: right;" data-popup-open="writeIssue" value="issue" > <br> 
+						    <input type="button" id="search" value="select" onclick="searching();">
+						    <input type="button" id="issue" style="float: right;" data-popup-open="writeIssue" value="issue" > <br> 
 						   
 					        </tr>
 	                        <tr align="center" >
@@ -136,15 +126,15 @@
 							    <td><input type="checkbox" style="cursor:pointer;" name="check" value="${dto.msgNum}"></td>
 							    <td><c:choose>
 									    <c:when test="${dto.readNum == 1}">
-											<label><input type="image" src="resources/img/open.jpg" name="read" value="${dto.msgNum}" style="cursor:pointer;" onclick="readMessage('${map.lMode}');"></label>
+											<label><input type="image" src="getImage/open.jpg" name="read" value="${dto.msgNum}" style="cursor:pointer;" onclick="readMessage('${map.lMode}');"></label>
 									    </c:when>
 									    <c:when test="${dto.readNum == 0}">
-											<label><input type="image" src="resources/img/close.jpg" name="read" value="${dto.msgNum}" style="cursor:pointer;" onclick="readMessage('${map.lMode}');"></label>
+											<label><input type="image" src="getImage/close.jpg" name="read" value="${dto.msgNum}" style="cursor:pointer;" onclick="readMessage('${map.lMode}');"></label>
 									    </c:when>
 								    </c:choose></td>
 							    <td style="font-weight: bold;" >	
 								    <c:set var="num" value="${num-1}"/>
-					                <c:out value="${num}"/></td>
+					                <c:out value="${num+1}"/></td>
 							    <td><a class="btn" data-popup-open="writeMessage" id="sender" name="sender" onclick="messageForm('${dto.sender}')">${dto.sender}</a>
 							    <td><a class="btn" data-popup-open="popup-1" onclick="getMessage('${dto.sender}','${dto.title}','${dto.content }','${dto.msgNum}','${map.lMode}');">${dto.title}</a></td>
 						        <td><label>${dto.reg_date}</label></td>
@@ -229,37 +219,8 @@
 	      </div>
 	  </div>
   </div>
-  <script>
-	
-//     (ReadCheck = function(lMode) {
-//      var msgnum = $('#readCheck').val();
-//      var url = "message_read?msgnum=" + msgnum + "&lMode=" + lMode ;
-//         $.ajax({
-//            url: url,
-//            method: 'post',
-//            data: data,
-//            dataType: 'json',
-//            processData: false,
-//            contentType: false,
-//            success: function(responseData) {
-//               if(responseData.failed) {
-//                  alert("잠시후 다시 시도해주세요.");
-//                  return false;
-//               }
-              
-//               $('#result_photo_status_text').hide();
-//               $('#sucess_file_upload_header').show();
-//               $('#user_photo_edit_cotainer').show();
-//               $('#filenum').val(responseData.filenum);
-//               $('#photoname').val(responseData.filename);
-//               var url = "getImage/" + responseData.filename;
-//               $('#photo_box_img').attr('src', url);
-//            }
-//         });
-//      });
-//      F_FileMultiUpload(files[0], objDragAndDrop);
-	
-	
+</div>
+	<script>
 	$('#issue').click(function(){
 		$('#sendIssueSubject').val('Issue : ');
 	}) 
@@ -333,8 +294,6 @@
     function readCheck(){
     	var lMode = $('#pageMode').val();
     	var msgnum = $('#readCheck').val();
-    	alert(lMode)
-    	alert(msgnum)
     	var url = "message_read?msgnum=" + msgnum + "&lMode=" + lMode ;
         window.location = url;
     }
@@ -406,6 +365,13 @@
 			});
 		});
     
+    $('#delete').hover(function() {
+    	$('#delete').css('background', 'red');
+    })
+    $('#delete').mouseleave(function() {
+    	$('#delete').css('background', '#d32323');
+    })
+    
     jQuery.noConflict();
     $(function() {
           //----- OPEN
@@ -420,6 +386,10 @@
           $('[data-popup-close]').on('click', function(e)  {
               var targeted_popup_class = jQuery(this).attr('data-popup-close');
               $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+              $('#subject').empty();
+              $('#from').empty(); 
+              $('#message').empty();
+              $('#sendformTo').empty();
               e.preventDefault();
               e.stopPropagation();
           });

@@ -99,10 +99,9 @@
 								
 								<div id="photo_slideshow_parent">
 									<div id="photo_slideshow_slide">
-										<div class="cycle-slideshow" data-cycle-speed="6000" id="slideshow_img">
+										<div class="cycle-slideshow" data-popup-open="photo_popup" data-cycle-speed="1000" id="slideshow_img">
 											<!-- 사진 눌렀을 때 팝업!! -->
-											<a href="#">
-											</a>
+											<a href="#"></a>
 										</div>
 									</div>
 								</div>
@@ -727,11 +726,165 @@
 	</div>
 	
 	
+	<div class="photo_content_popup" data-popup="photo_popup">
+    	<div class="photo_popup-inner" style="z-index: 1;">
+    	    <div id="photo_content_popup_close" data-popup-close="photo_popup">
+    	    	Close
+    	    	<span class="icon popup_close_icon" style="width: 24px; height: 24px; margin-left: 3px !important; fill: currentColor;">
+    	    		<svg class="icon_svg" height="100%" viewBox="0 0 24 24" width="100%">
+    	    			<path d="M17.657 19.07L12 13.415 6.343 19.07 4.93 17.658 10.585 12 4.93 6.343 6.342 4.93 12 10.585l5.657-5.657L19.07 6.34 13.416 12l5.657 5.657-1.413 1.414z"></path>
+    	    		</svg>
+    	    	</span>
+    	    </div>
+			<div class="photo_content_popup_wrapper">
+				<div class="photo_content_popup_container">
+					<div class="photo_content_popup_container">
+						<div class="photo_popup_container">
+							<div class="photo_popup_grid">
+								<div class="photo_popup_grid_main">
+									<span class="ms-arrow msa-previous" id="prev"></span>
+    								<span class="ms-arrow msa-next" id="next"></span>
+									<div id="popup_slideshow_img" class="cycle-slideshow" data-cycle-fx="scrollHorz" data-cycle-prev="#prev" data-cycle-next="#next" data-cycle-timeout="0">
+									</div>
+									
+									<div class="photo_popup_grid_main_photo_area_footer">
+										<ul class="photo_popup_footer_inner">
+											<li>
+												<a href="event_browseAll_photo">
+													<span class="icon" style="opacity: 0.7; filter: drop-shadow(0 0 4px rgba(0,0,0,0.3)); margin-right: 3px !important; fill: currentColor; width: 18px; height: 18px;">
+														<svg class="icon_svg" height="100%" width="100%" viewBox="0 0 18 18">
+															<path d="M10 15v-5h5v5h-5zm0-12h5v5h-5V3zm-7 7h5v5H3v-5zm0-7h5v5H3V3z"></path>
+														</svg>
+													</span>
+													Browse all
+												</a>
+											</li>
+											
+											
+											<li style="width: 17%;">
+												<span class="photo_popup_footer_page_count">
+													<span class="photo_popup_footer_current">
+														1
+													</span>
+													of
+													<span class="photo_popup_footer_total"></span>
+												</span>
+											</li>
+										</ul>
+									</div>
+								</div>
+								
+								
+								
+								<div class="photo_upload_user_wrraper">
+									<div class="photo_upload_user_container">
+										<div class="photo_upload_user_info">
+											<div class="photo_upload_user_info_item">
+												<div class="photo_user_passport">
+													<div class="photo_user_passport_block">
+														<div class="photo_user_passport_photo">
+															<div>
+																<a href="#">
+																	<img height="30" width="30" src="https://s3-media4.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/60s.jpg" style="outline: none; margin-top: 3px; border-radius: 4px; vertical-align: middle;">
+																</a>
+															</div>
+														</div>
+														
+														<div class="photo_user_passport_info_block">
+															<ul>
+																<li>
+																	<a href="#" style="font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; text-decoration: none;">
+																		유저 아이디																		
+																	</a>
+																</li>
+															</ul>
+															
+															
+															<ul>
+																<li class="friend-count" style="line-height: 1; display: inline-block; margin-right: 6px;">
+																	<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-friends icon--size-18">
+																		<svg class="icon_svg">
+																			<path d="M7.904 9.43l-2.098 4.697a.9.9 0 0 1-1.612 0L2.096 9.43a.902.902 0 0 1 .806-1.305h4.196c.67 0 1.105.705.806 1.305zM5 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path>
+																			<path d="M15.904 9.43l-2.098 4.697a.89.89 0 0 1-.806.498.89.89 0 0 1-.806-.498L10.096 9.43a.902.902 0 0 1 .806-1.305h4.195c.67 0 1.106.705.807 1.305zM13 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" opacity=".502"></path>
+																		</svg>
+																	</span>
+																	<b>0</b>	<!-- 친구 수 -->
+																</li>
+																
+																<li class="review-count" style="line-height: 1; display: inline-block; margin-right: 6px;">
+																	<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-review icon--size-18">
+																		<svg class="icon_svg">
+																			<path d="M13 3H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1.505 9.643l-2.526-1.55L6.526 12.7 7 9.934 5 7.977l2.766-.404L8.97 4.7l1.264 2.873L13 7.977l-2 1.957.495 2.71z"></path>
+																		</svg>
+																	</span>
+																	<b>0</b> <!-- 리뷰 수 -->
+																</li>
+																
+																<li class="photo-count" style="line-height: 1; display: inline-block; margin-right: 6px;">
+                													<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-camera icon--size-18">
+    																	<svg class="icon_svg" height="100%" viewBox="0 0 18 18" width="100%">
+        																	<path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 6.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path>
+    																	</svg>
+																	</span>
+                													<b>0</b>
+            													</li>
+															</ul>
+														</div>
+													</div>
+												</div>
+											</div>
+											
+											
+											<div class="photo_upload_user_info_footer">
+												<div style="margin-top: 6px;">
+													<div>
+														사진에 적은 캡션 내용
+													</div>
+												</div>
+												
+												
+												<div style="margin-top: 6px;">
+													<span class="photo_upload_user_info_upload_date">
+														업로드 날짜
+													</span>
+												</div>
+											</div>
+										</div>
+										
+										
+										<div>
+											
+										</div>
+										
+										
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+    	    
+
+    	</div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	 
+	<!-- 이벤트 내용신고 부분 -->
+	
+	
 	<div class="flag_content_popup" data-popup="popup-1">
     	<div class="popup-inner" style="width: 465px; z-index: 1;">
     	    <div id="flag_content_popup_title">
     	    	<div id="flag_content_popup_close" data-popup-close="popup-1">
-    				<h4 style="margin-top: -20px;">×</h4>
+    				<h4 style="display: table-cell; padding: 0px 7px;">×</h4>
     			</div>
     	    	<h2>
     	    		부적절한 내용 신고
@@ -751,7 +904,9 @@
     	    <div id="flag_popup_description">
     	    	<div>
     	    		<p>지금 보고계신 콘텐츠의 수정이 필요한 부분과 실제 이벤트에서 어떠한 사항을 위반하고 있는지 알려 주시기 바랍니다.</p>
-    	    		<form name="flag_popup_form" id="flag_popup_form" action="#" method="post" onsubmit="return check()" style="margin-bottoom: 0;">
+    	    		<form name="flag_popup_form" id="flag_popup_form" action="message_send?issue=issue" method="post" onsubmit="return check()" style="margin-bottoom: 0;">
+    	    			<input type="hidden" name="evnum" value="${eventDTO.evnum}">
+    	    			<input type="hidden" name="email" value="${sessionScope.memberinfo.email}">
     	    			<div id="flag_popup_descripte_container">
     	    				<div id="flag_popup_descripte">
     	    					<label id="flag_popup_descripte_alert">신고내용을 상세하게 작성해주세요.</label>
@@ -776,12 +931,14 @@
 	
 	
 	
+	<!-- 댓글 내용신고 부분 -->
+	
 	
 	<div class="flag_content_popup" data-popup="popup-2">
     	<div class="popup-inner" style="width: 465px; z-index: 1;">
     	    <div id="flag_content_popup_title">
     	    	<div id="flag_content_popup_close" data-popup-close="popup-2">
-    				<h4 style="margin-top: -20px;">×</h4>
+    				<h4 style="display: table-cell; padding: 0px 7px;">×</h4>
     			</div>
     	    	<h2>
     	    		부적절한 댓글 신고
@@ -917,7 +1074,7 @@
 		</c:forEach>
 		
 		for(var i = 0; i < list.length; i++) {
-			var img = document.createElement('img');			
+			var img = document.createElement('img');
 			img.src = 'getImage/' + list[i];
 			img.style.cursor = 'pointer';
 			img.style.width = '100%';
@@ -926,7 +1083,7 @@
 			document.getElementById('slideshow_img').appendChild(img);
 		}
 		
-		function check() {		
+		function check() {
 			if(flag_popup_form.flag_popup_descripte_field.value == "") {
 				document.getElementById('flag_content_popup_error_message').style.display = 'block';
 				document.getElementById('flag_popup_descripte_alert').style.color = '#d32323';
@@ -952,16 +1109,43 @@
 		
 	</script>
 	<script>
-   		//----- OPEN
+   		//----- OPEN   		
+   		var list = new Array();
+		<c:forEach var="fileDTO" items="${fileList}">
+			list.push("${fileDTO.filename}");
+		</c:forEach>
+		for(var i = 0; i < list.length; i++) {
+			var img = $("<img>").attr("src", "getImage/" + list[i]).css('vertical-align', 'middle').css('display', 'inline-block').css('max-width', '100%').css('max-height', '100%');
+			$('#popup_slideshow_img').append(img);
+		}
     	$('[data-popup-open]').on('click', function(e)  {
-    		var memberinfo ='${sessionScope.memberinfo}';
-    		if(!memberinfo.length) {
-     			$(location).attr("href", "event_report");
-     			return;
-    		}
-    		
         	var targeted_popup_class = jQuery(this).attr('data-popup-open');
         	$('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+        	if(targeted_popup_class == 'popup-1' || targeted_popup_class == 'popup-2') {
+        		var memberinfo ='${sessionScope.memberinfo}';
+        		if(!memberinfo.length) {
+         			$(location).attr("href", "event_report");
+         			return;
+        		}
+        	} else if(targeted_popup_class == 'photo_popup') {
+        		var count = 1;
+        		$('#prev').on('click', function() {
+        			count--;
+        			if(count <= 0) {
+        				count = list.length;
+        			}
+        			$('.photo_popup_footer_current').text(count);
+        		})
+        		$('#next').on('click', function() {
+        			count++;
+        			if(count > list.length) {
+        				count = 1;
+        			}
+        			$('.photo_popup_footer_current').text(count);
+        		})
+        		$('.photo_popup_footer_total').text(list.length);
+        	}
+        	
         	$('body').css('overflow','hidden');
         	$('#flag_content_popup_error_message').css('display', 'none');
         	$('#flag_popup_descripte_alert').css('color', 'black');
@@ -979,6 +1163,9 @@
         	$('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
         	$('body').css('overflow','auto');
         	
+        	if(targeted_popup_class == 'photo_popup') {
+        		$('#slideimg').removeClass('cycle-slideshow');
+        	}
         	e.stopPropagation();
         	e.preventDefault();
     	});

@@ -60,10 +60,15 @@
 	float: right;
 	color: #ffffff;
 	background: #d32323;
+	border: 1px solid #8d0005;
 	border-radius: 5px;
 	font-weight: bold;
 	font-family: cambria;
 	font-size: 16px;
+}
+
+#write:hover {
+	background: red;
 }
 
 #messageList , #alert_messageList{
@@ -100,6 +105,7 @@ button #reply {
 	font-weight: bold;
 	font-family: cambria;
 	font-size: 17px;
+	
 }
 
 .popup label {
@@ -133,21 +139,18 @@ button #reply {
 	font-weight: bold;
 	font-size: 15px;
 	font-family: cambria;
+	border: 1px solid #8d0005;
+}
+
+#delete:hover, #reply:hover, #search:hover, #locker:hover, #issue:hover, #msgBox:hover {
+	background: red;
+	cursor: pointer;
 }
 
 #select {
 	 border-radius: 3px; 
 	 cursor:pointer; 
 	 height: 24px;
-}
-
-#issue {
-	color: #ffffff;
-	background: #d32323;
-	border-radius: 5px;
-	font-weight: bold;
-	font-family: cambria;
-	float: right;
 }
 
 .btn {
@@ -190,18 +193,6 @@ button #reply {
 	z-index: 1;
 }
 
-.popup #sendMessage, #alert_sendMessage {
-	cursor: pointer;
-	width: 150;
-	height: 33;
-	color: #ffffff;
-	background: #d32323;
-	border-radius: 5px;
-	font-weight: bold;
-	font-family: cambria;
-	font-size: 17px;
-}
-
 .popup #sendIssue,#locker_sendIssue {
 	cursor: pointer;
 	width: 120;
@@ -214,7 +205,7 @@ button #reply {
 	font-size: 17px;
 }
 
-.popup #replyMessage, #deleteMessage, #alert_replyMessage, #alert_deleteMassage {
+.popup #replyMessage, #deleteMessage, #alert_replyMessage, #alert_deleteMassage, #sendMessage, #alert_sendMessage {
 	cursor: pointer;
 	width: 57;
 	height: 27;
@@ -224,21 +215,30 @@ button #reply {
 	font-weight: bold;
 	font-family: cambria;
 	font-size: 15px;
+	border: 1px solid #8d0005;
+}
+
+.popup #sendMessage, #alert_sendMessage {
+	width: 150;
+	height: 33;
+}
+
+.popup #replyMessage:hover, #deleteMessage:hover, #alert_replyMessage:hover, #alert_deleteMassage:hover,
+#sendMessage:hover, #alert_sendMessage:hover {
+	background: red;
+}
+
+.popup a:hover, #messageContainer a:hover, #menu a:hover {
+	text-decoration: underline;
 }
 
 .popup input {
 	width: 100%;
-	font-weight: bold;
-	font-size: 17px;
 	height: 30;
 	border-radius: 5px;
-}
-
-#sendformMessage, #alert_sendformMessage{
-	resize: none;
-	width: 100%;
-	font-size: 17px;
-	border-radius: 5px;
+	border: 1px solid #999;
+	padding-left: 5px;
+	margin-bottom: 20px;
 }
 
 #sendIssueContent {
@@ -248,13 +248,15 @@ button #reply {
 	border-radius: 5px;
 }
 
-#message {
+#message, #sendformMessage, #alert_sendformMessage {
 	resize: none;
 	font-weight: bold;
-	font-size: 19px;
+	font-size: 17px;
 	border-radius: 5px;
 	width: 100%;
 	backgroundcolor: #fff;
+	padding-left: 5px;
+	margin-bottom: 20px;
 }
 
 /* Close Button */
@@ -369,4 +371,9 @@ button #reply {
 	border-bottom: 3px solid #d32323;
 	text-align: center;
 	white-space: nowrap;
+}
+
+.popup-inner h4 {
+	margin: 0px;
+    margin-bottom: 10px;
 }
