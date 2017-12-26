@@ -33,39 +33,51 @@ public class MessageMapper {
 		return sqlSession.insert("writeMessage", dto);
 	}
 	
-	public List<MessageDTO> messageList(int start,int end,String lMode,String name){
+	public List<MessageDTO> messageList(int start,int end,String lMode,String email){
 		String sql = null;
 		if(lMode.equals("allList")) {
 			//로그인한 회원의 받은 쪽지를 전부 가져온다.
-		    sql = "select * from (select rownum rn, A.* from (select * from yeps_message where receiver='"+ name +"' order by msgNum desc)A)"
+		    sql = "select * from (select rownum rn, A.* from (select * from yeps_message where receiver='"+ email +"' and isIssue=0 order by msgNum desc)A)"
 		    		+ " where  rn between " + start + " and " + end;
 		}else if(lMode.equals("allLocker")) {
 			//로그인한 회원의 보관함에 있는 쪽지를  가져온다.
-			sql = "select * from (select rownum rn, A.* from (select * from yeps_message where receiver='"+ name +"' and islocker=1 order by msgNum desc)A)"
+			sql = "select * from (select rownum rn, A.* from (select * from yeps_message where receiver='"+ email +"' and islocker=1 and isIssue=0 order by msgNum desc)A)"
 					+ " where rn between " + start +" and " + end ;
 		}else if(lMode.equals("msgBoxList")) {
 			//로그인한 회원의 쪽지함에 있는 쪽지를 가져온다.
-			sql = "select * from (select rownum rn, A.* from (select * from yeps_message where receiver='"+ name + "' and islocker!=1 order by msgNum desc)A) "
+			sql = "select * from (select rownum rn, A.* from (select * from yeps_message where receiver='"+ email + "' and islocker!=1 and isIssue=0 order by msgNum desc)A) "
 					+ "where rn between " + start +" and " + end;
 		}else if(lMode.equals("sender")) {
 			//로그인한 회원의 보낸 쪽지 전부를 가져온다.
-			sql =  "select * from (select rownum rn, A.* from (select * from yeps_message where sender='"+ name + "' order by msgNum desc)A) "
+			sql =  "select * from (select rownum rn, A.* from (select * from yeps_message where sender='"+ email + "' and isIssue=0 order by msgNum desc)A) "
 					+ "where rn between " + start +" and " + end;
 		}else if(lMode.equals("readMsg")) {
 			//읽은 쪽지중 쪽지함에 있는 쪽지
-			sql =  "select * from (select rownum rn, A.* from (select * from yeps_message where receiver='"+ name + "' and readNum=1 and islocker=0 order by msgNum desc)A)"
+			sql =  "select * from (select rownum rn, A.* from (select * from yeps_message where receiver='"+ email + "' and readNum=1 isIssue=0 and islocker=0 order by msgNum desc)A)"
 					+ " where rn between " + start +" and " + end;
 		}else if(lMode.equals("readLocker")) {
 			//읽은 쪽지중 보관함에 있는 쪽지
-		    sql =  "select * from (select rownum rn, A.* from (select * from yeps_message where receiver='"+ name +"' and readNum=1 and islocker=1 order by msgNum desc)A)"
+		    sql =  "select * from (select rownum rn, A.* from (select * from yeps_message where receiver='"+ email +"' and readNum=1 and islocker=1 and isIssue=0 order by msgNum desc)A)"
 		    		+ " where rn between " + start +" and " + end;
 		}else if(lMode.equals("noneMsg")) {
 			//안읽은 쪽지함 쪽지
-			sql =  "select * from (select rownum rn, A.* from (select * from yeps_message where receiver='"+ name +"' and readNum=0 and islocker=0 order by msgNum desc)A)"
+			sql =  "select * from (select rownum rn, A.* from (select * from yeps_message where receiver='"+ email +"' and readNum=0 and islocker=0 and isIssue=0 order by msgNum desc)A)"
 					+ " where rn between " + start +" and " + end;
 		}else if(lMode.equals("noneLocker")) {
 			//안읽은 보관함 쪽지
-			sql =  "select * from (select rownum rn, A.* from (select * from yeps_message where receiver='"+ name +"' and readNum=0 and islocker=1 order by msgNum desc)A) "
+			sql =  "select * from (select rownum rn, A.* from (select * from yeps_message where receiver='"+ email +"' and readNum=0 and islocker=1 and isIssue=0 order by msgNum desc)A) "
+					+ "where rn between " + start +" and " + end;
+		}else if(lMode.equals("alertMsg")) {
+			//이슈 모든 쪽지
+			sql =  "select * from (select rownum rn, A.* from (select * from yeps_message where receiver='"+ email +"' and isIssue=1 order by msgNum desc)A) "
+					+ "where rn between " + start +" and " + end;
+		}else if(lMode.equals("readAlert")) {
+			//이슈 읽은 쪽지
+			sql =  "select * from (select rownum rn, A.* from (select * from yeps_message where receiver='"+ email +"' and readnum=1 and isIssue=1 order by msgNum desc)A) "
+					+ "where rn between " + start +" and " + end;
+		}else if(lMode.equals("noneAlert")) {
+			//이슈 안읽은 쪽지
+			sql =  "select * from (select rownum rn, A.* from (select * from yeps_message where receiver='"+ email +"' and readnum=0 and isIssue=1 order by msgNum desc)A) "
 					+ "where rn between " + start +" and " + end;
 		}
 		
@@ -165,6 +177,27 @@ public class MessageMapper {
 	public int readLockerCount() {
 		try {
 			return sqlSession.selectOne("readLockerCount");
+		}catch(Exception e) {
+			return 0;
+		}
+	}
+	
+	public int allAlertCount(String receiver) {
+		  Map<String, Object> map = new HashMap<String, Object>();
+		    map.put("receiver", receiver);
+		 
+		try {
+			return sqlSession.selectOne("allAlertCount", map);
+		}catch(Exception e) {
+			return 0;
+		}
+	}
+	
+	public int readAlertCount(String receiver) {
+		  Map<String, Object> map = new HashMap<String, Object>();
+		  map.put("receiver", receiver);
+		try {
+			return sqlSession.selectOne("readAlertCount",map);
 		}catch(Exception e) {
 			return 0;
 		}
