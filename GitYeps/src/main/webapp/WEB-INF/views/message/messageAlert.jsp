@@ -11,7 +11,6 @@
 		alert("${requestScope.msg}")
 	</script>
 </c:if>
-<body>
 <%@ include file="../top.jsp"%>
 <!-- Message sendform -->
 <div class="popup" align="left" id="alert_writeMessage" data-popup="alert_writeMessage" style="z-index: 1;">

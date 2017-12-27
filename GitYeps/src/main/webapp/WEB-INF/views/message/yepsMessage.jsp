@@ -88,13 +88,12 @@
 									<option value="allLocker">보관함</option>
 							</select> 
 						    <input type="button" id="search" value="select" onclick="searching();">
-						    <input type="button" id="issue" style="float: right;" data-popup-open="writeIssue" value="issue" > <br> 
+						    <input type="button" id="issue" style="float: right;" data-popup-open="writeIssue" value="Report" > <br> 
 						   
 					        </tr>
 	                        <tr align="center" >
 	                            <td align="center"><input type="checkbox" style="cursor:pointer;" name="first"></td>
 								<td width="90px"><label>읽음</label></td>
-								<td width="90px"><label>번호</label></td>
 								<td width="100px"><label>보낸이</label></td>
 								<td width="430px"><label>제목</label></td>
 								<c:choose>
@@ -132,9 +131,6 @@
 											<label><input type="image" src="getImage/close.jpg" name="read" value="${dto.msgNum}" style="cursor:pointer;" onclick="readMessage('${map.lMode}');"></label>
 									    </c:when>
 								    </c:choose></td>
-							    <td style="font-weight: bold;" >	
-								    <c:set var="num" value="${num-1}"/>
-					                <c:out value="${num+1}"/></td>
 							    <td><a class="btn" data-popup-open="writeMessage" id="sender" name="sender" onclick="messageForm('${dto.sender}')">${dto.sender}</a>
 							    <td><a class="btn" data-popup-open="popup-1" onclick="getMessage('${dto.sender}','${dto.title}','${dto.content }','${dto.msgNum}','${map.lMode}');">${dto.title}</a></td>
 						        <td><label>${dto.reg_date}</label></td>

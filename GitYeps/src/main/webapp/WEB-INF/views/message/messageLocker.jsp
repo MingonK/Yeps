@@ -4,7 +4,13 @@
 <html>
 <head>
 <title>Message Locker</title>
-<script src="//code.jquery.com/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"
+	type="text/javascript"></script>
 </head>
 <c:if test="${not empty requestScope.msg}">
 	<script type="text/javascript">
@@ -12,255 +18,197 @@
 	</script>
 </c:if>
 <body>
-<%@ include file="../top.jsp"%>
-<!--  issueform  -->
-<div class="popup" align="left" id="writeIssue" data-popup="writeIssue"  style="z-index: 1;">
-    <form name="sendIssueform" method="post">
-	     <div class="popup-inner">
-	         <h4 align="left"  style="color: #d32323;"> Send Issue To Manager</h4>
-	             <input type="hidden" id="issueValue" value="issue">
-	         <h4 align="left" style="color: #d32323;">Subject is</h4><br>
-	             <input type="text" name="title" id="sendIssueSubject" ><br>
-	         <h4 align="left" style="color: #d32323;">Content is</h4><br>
-	             <textarea rows="4" name="content" id="sendIssueContent"  placeholder="여기에 메시지를 입력하세요."></textarea><br><br>
-	                 <button class="popup-send" id="sendIssue" type="button" data-popup-send="SendIssue" >SendIssue </button>&nbsp;&nbsp;
-			         <a data-popup-close="writeIssue" style="cursor:pointer;" href="#">  Close</a>
-					 <a class="popup-close" data-popup-close="writeIssue" href="#" >x</a>
-		  </div>
-	 </form>
-</div> 
-<!-- Message sendform -->
-<div class="popup" align="left" id="writeMessage" data-popup="writeMessage" style="z-index: 1;">
-<form name="sendform" method="post">
-    <div class="popup-inner">
-        <h4 align="left" style="color: #d32323;">Send Message To</h4>
-            <input type="text" id="sendformTo" name="receiver"><br>
-        <h4 align="left" style="color: #d32323;">Subject is</h4>
-            <input type="text" name="title" id="sendformSubject" ><br>
-        <h4 align="left" style="color: #d32323;">Content is</h4>
-            <textarea rows="4" name="content" id="sendformMessage"  placeholder="여기에 메시지를 입력하세요."></textarea><br>
-            <button class="popup-send" id="sendMessage" type="button" data-popup-send="SendMessage" onclick="sendMessage()">SendMessage </button>&nbsp;&nbsp;
-            <a data-popup-close="writeMessage" style="cursor:pointer;" href="#">  Close</a>
-		    <a class="popup-close" data-popup-close="writeMessage" href="#" >x</a>
-         </div>
-     </form>
- </div> 
- <!-- Message View  -->
- <div class="popup" align="left" id="popup" data-popup="popup-1" style="z-index: 1;">
-      <div class="popup-inner">
-      <h4 align="left" style="color: #d32323;" >Message From</h4>
-      <input type="text" id="from" readOnly>
-      <h4 align="left" style="color: #d32323;">Subject is</h4>
-      <input type="text" id="subject" readOnly>
-      <h4 align="left" style="color: #d32323;">Content is</h4>
-      <textarea id="message" rows="4" readOnly></textarea>
-        <p><a data-popup-close="popup-1" href="#" onclick="readCheck();">Close</a></p>
-        <input type="hidden" id="readCheck" > 
-        <a class="popup-close" data-popup-close="popup-1" href="#" onclick="readCheck();">x</a>
-      </div>
- </div> 
- <div id="lockerContainer" style="height: 80% ; position: relative; top: 30px; min-width: 800px; margin: 0 auto; padding: 0px; width: 900px" >
-	 <div id="messageHeader">
-	 <label>Locker Messages</label>
-	 	<input type="button" id="write" value="Write new Message" data-popup-open="writeMessage" onclick="messageForm(' ');">
-	 </div>
-	<div id="menu">	
-		<a href="message_action?filter=receive"><label style="cursor:pointer;">locker</label></a><label>: ${lCount}</label>
-		<a href="message_action?filter=sender"><label style="cursor:pointer;">Sent </label></a><label>: ${sCount}</label>
-		<a href="message_action?filter=msgBoxList"><label style="cursor:pointer;">msgBox </label></a><label>: ${mCount}</label>
-		<a href="message_alert"><label style="cursor:pointer; ">alertBox</label></a><label>: ${aCount}</label>
-	</div>
-	<div id="messageList" style="position:absolute; " >
-		<form name="lockerform"  method="post">
-			<table border="0" id="table" style="width: 100%;">
-				<tr>
-					<th align="left" colspan="7 " style="left: 120px; border-bottom: 1px solid #e6e6e6; height: 40px; padding: 10px;" >
-					<input type="button" name="del" id="delete" value="delete" style="cursor:pointer;" onclick="deleteCheckMsg();"> 
-<!-- 						<input type="button" name="reply" id="reply" value="reply" style="cursor:pointer;" >  -->
-					<input type="button" name="msgBox" id="msgBox" value="msgBox"  onclick="lockerToMsgBox();"> 
-					<select id="select" name="filter" >
-						<option value="0"></option>
-						<option value="allLocker">모든 쪽지</option>
-						<option value="readLocker">읽은 쪽지</option>
-						<option value="noneLocker">안읽은 쪽지</option>
-						<option value="msgBoxList">쪽지함</option>
-					</select> 
-					<input type="button" id="search" value="select" style="cursor:pointer;" onclick="searching();">
-					<input type="button" id="issue"  data-popup-open="writeIssue" value="issue" onclick="issueToManager();"> <br>  
-					
-			    </tr>
-			    <tr align="center"  >
-                   <td align="center"><input type="checkbox" style="cursor:pointer;" name="first"></td>
-					<td width="90px"><label>읽음</label></td>
-					<td width="90px"><label>번호</label></td>
-					<td width="100px"><label>보낸이</label></td>
-					<td width="430px"><label>제목</label></td>
-					<td width="150px"><label>받은시각</label></th>
-				</tr>
-				<tr><td colspan="7" style=" border-bottom: 1px solid #e6e6e6;"> </td></tr> 
-				<c:if test="${empty map.list}">
-					<tr>
-						<td colspan="6" align="center" height="60px">보관함이 비었습니다.</td>
+<%-- <%@ include file="../top.jsp"%> --%>
+   <div id="lockerContainer" style="height:80%;" >
+		<caption>
+			<h1 align="center" style="font-family: consolas; color: #d32323;">yeps Message</h1>
+		</caption>
+		<hr color="green" width="70%">
+		<br>
+		<div align="center" id="menu" >
+			<h3 align="center">Menu</h3>
+			<br>  <div class="btn group" align="left">
+		<button class="btn btn-danger" data-target="#sendform" data-toggle="modal" id="write">쪽지쓰기</button>
+		<button class="btn btn-default" data-target="#sendform" data-toggle="modal" data-receiver="Me" id="writeToMe">내게쓰기</button>
+		</div><br><br> 
+			<div align="center" id="tag">
+				<a href="message_action?filter=receive"><label>받은 쪽지 </label></a><a href="#"><label>:: ${map.count}</label></a><br> <br> 
+				<a href="message_action?filter=send"><label>보낸 쪽지 </label></a><a href="#"><label>:: ${sCount}</label></a><br> <br> 
+				<a href="message_action?filter=msgBox"><label>쪽지함 </label></a><a href="#"><label>:: ${mCount}</label></a><br> <br> 
+			</div>
+		</div>
+		 <div class="modal fade" id="sendform" >
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                   <!-- header -->
+                   <div class="modal-header">
+                     <!-- 닫기(x) 버튼 -->
+                     <button type="button" class="close" data-dismiss="modal">×</button>
+                     <!-- header title -->
+                     <h3 class="modal-receiver" align="left">To</h3>
+                     <input type="text" style="width: 100%; height: 40; border-radius: 7px; font-family: consolas; font-weight: bold; font-size: 22px;" name="receiver" id="receiver">  
+                   </div>
+                   <!-- body -->
+                   <div class="modal-body">
+                       <h3 align="left">Subject</h3><br>
+                       <input type="text" style="width: 100%; height: 40; border-radius: 7px; font-family: consolas; font-weight: bold; font-size: 22px;"name="title" id="title"> 
+                   </div>
+                   <!-- Footer -->
+                   <div class="modal-footer" align="left">
+                    <h3 align="left" style="font-weitht: bold;">Message</h3>
+                    <textarea style="width: 100%; border-radius: 7px; font-size:20px;" cols="100%"
+									rows="5" name="content" id="content" placeholder=" 여기에 내용을 입력하세요."></textarea>
+								<br><br>
+				    <button type="button" class="btn btn-danger" onclick="sendMsg()">SendMessage</button>
+				    <button type="reset" name="cancel" value="cancel" style="background: #00ff0000; border: 0;">cancel</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+                <div class="modal fade" id="messageView" >
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header" >
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h3 style="font-family: consolas; font-weight: bold; font-size: 26px; color: #d32323;" >from</h3>
+					<label id="sender" style="font-family: consolas; font-weight: bold; font-size: 22px; color:#000000;" ></label>
+                    </div>
+                  <div class="modal-body">
+                   <h3 style="font-family: consolas; font-weight: bold; font-size: 26px; color: #d32323;" >subject</h3><br>
+                   <h4 style="font-family: consolas; font-weight: bold; font-size: 23px; color:#000000;"></h4>   
+                   </div>
+                  <div class="modal-footer">
+                    <h3 align="left" style="font-weitht: bold; font-size: 26px; font-family: consolas;">Message</h3>
+                    <textarea style="width: 100%; border-radius: 9px; font-weitht: bold; font-size: 22px; color:000000; font-family: consolas;" 
+                    cols="100%" rows="6" name="content"  disabled >여기로 내용을 불러온다.</textarea><br><br>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" style="background: #00ff0000; border: 0; color:000000;">close</button>
+                  </div>
+                 </div>
+                </div>
+               </div>
+		<br><br>
+		<div id="messageList"  align="left" style="height: 60%; width: 70%; float: left;  padding:1;">
+			<form name="lockerform" id="lockerform" method="post">
+				<table border="0" id="table">
+					<tr valign="middle">
+						<td width="60px" align="center" rowspan="3" valign="middle"><br> 
+						<input type="checkbox" name="first"></td>
+						<th align="left" colspan="6">
+						<input type="button" name="del" value="삭제" style="color: #ffffff; background: #d32323; border-radius: 5px; font-weight: bold; font-family: consolas;" onclick="deleteMsg();"> 
+						<input type="button" name="reply" id="reply" value="답장" style="color: #ffffff; background: #d32323; border-radius: 5px; font-weight: bold; font-family: consolas;" > 
+						<input type="button" name="locker" value="쪽지함" style="color: #ffffff; background: #d32323; border-radius: 5px; font-weight: bold; font-family: consolas;" onclick="lockerToMsgBox();"> 
+						<select name="filter" style="border-radius: 4px;">
+								<option value="0">:: 필터 ::</option>
+								<option value="allMsgl">모든 쪽지</option>
+								<option value="noneMsgl">안읽은 쪽지</option>
+								<option value="msgBox">쪽지함</option>
+						</select> 
+						<input type="button" id="search" value="검색" style="color: #ffffff; background: #d32323; border-radius: 5px; font-weight: bold; font-family: consolas;" onclick="searching();"> 
+				    </tr>
+				<tr><td><br></tr>
+                    <tr align="center">
+						<td width="60px"><label>읽음</label></td>
+						<td width="60px"><label>번호</label></td>
+						<td width="60px"><label>보낸이</label></td>
+						<td width="500px"><label>제목</label></td>
+						<th width="120px"><label>받은시각</label></th>
 					</tr>
-				</c:if>
-				<c:forEach var="dto" items="${map.list}">
-					<tr align="center" id="list">
-						<td><input type="checkbox" name="check" value="${dto.msgNum}"></td>
-						<td><c:choose>
-								<c:when test="${dto.readNum == 1}">
-									<label><input type="image" src="resources/img/open.jpg" name="read" value="${dto.msgNum}" onclick="readMessage('${map.lMode}');"></label>
-								</c:when>
-								<c:when test="${dto.readNum == 0}">
-									<label><input type="image" src="resources/img/close.jpg" name="read" value="${dto.msgNum}" onclick="readMessage('${map.lMode}');"></label>
-								</c:when>
-							</c:choose></td>
-					<td style="font-weight: bold;" >	
-						<c:set var="num" value="${num-1}"/>
-			            <c:out value="${num}"/></td>
-						<td><button type="button" data-popup-open="writeMessage" id="sender" name="sender" onclick="messageForm('${dto.sender}')">${dto.sender}</button>
-					    <td><a class="btn" data-popup-open="popup-1" onclick="getMessage('${dto.sender}','${dto.title}','${dto.content }','${dto.msgNum}');">${dto.title}</a></td>
-				    <td><label>${dto.reg_date}</label></td>
-					</tr>
-				</c:forEach>
+					<c:if test="${empty map.list}">
+						<tr>
+							<td colspan="6" align="center">보관함이 비었습니다.</td>
+						</tr>
+					</c:if>
+					<c:forEach var="dto" items="${map.list}">
+						<tr align="center" id="list">
+							<td><input type="checkbox" name="check" value="${dto.msgNum}"></td>
+							<td><c:choose>
+									<c:when test="${dto.readNum == 1}">
+										<label><input type="image" src="resources/img/open.jpg" name="read" value="${dto.msgNum}" onclick="readMessage();"></label>
+									</c:when>
+									<c:when test="${dto.readNum == 0}">
+										<label><input type="image" src="resources/img/close.jpg" name="read" value="${dto.msgNum}" onclick="readMessage();"></label>
+									</c:when>
+								</c:choose></td>
+						<td style="font-weight: bold;" >	
+							<c:set var="num" value="${num-1}"/>
+				            <c:out value="${num}"/></td>
+							<td><button type="button" name="sender" value="${dto.sender}" class="btn btn-default" data-target="#sendform" data-toggle="modal" data-receiver="${dto.sender}"
+						    style="background: #00ff0000; border: 0; font-weight: bold; font-family: consolas; color:#0073bb; font-size:17px;" >${dto.sender}</button>
+						    <td><button type="button" name="title" value="${dto.msgNum}" class="btn btn-default" data-target="#messageView" data-toggle="modal" 
+						    data-title="${dto.title}" data-sender="${dto.sender}" data-content="${dto.content}"
+						    style="background: #00ff0000; border: 0; font-weight: bold; font-family: consolas; color:#0073bb; font-size:17px;" onclick="readCheck('${dto.msgNum}')" >${dto.title}</button></td>
+							<td><label>${dto.reg_date}</label></td>
+						</tr>
+					</c:forEach>
+						<tr>
+					<td colspan="7" align="center">
+                <c:if test="${map.yepsPager.curBlock > 1}">
+                    <a href="javascript:list('${map.yepsPager.prevPage}')">[이전]</a>
+                </c:if>
+                <c:forEach var="num" begin="${map.yepsPager.blockBegin}" end="${map.yepsPager.blockEnd}">
+                    <c:choose>
+                        <c:when test="${num == map.yepsPager.curPage}">
+                            <span style="color: red">  [${num}]  </span>&nbsp;
+                        </c:when>
+                        <c:otherwise>
+                            <a href="javascript:list('${num}')">  [${num}] </a>&nbsp;
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+                <!-- **다음페이지 블록으로 이동 : 현재 페이지 블럭이 전체 페이지 블럭보다 작거나 같으면 [다음]하이퍼링크를 화면에 출력 -->
+                <c:if test="${map.yepsPager.curBlock <= map.yepsPager.totBlock}">
+                    <a href="javascript:list('${map.yepsPager.nextPage}')">[다음]</a>
+                </c:if>
 				</table>
-		    </form>
-		<div class="yeps_message_section" style="font-size: 14px; ">
-		   <div class="yeps_message_pagination_block">
-		       <div class="yeps_message_pagination_wrap">
-		           <div class="yeps_message_page_of_pages" >
-		                <c:if test="${map.yepsPager.blockEnd == 0}">
-		                     Page ${map.yepsPager.curPage} of 1
-		                </c:if>
-		                <c:if test="${map.yepsPager.blockEnd != 0}">
-		                     Page ${map.yepsPager.curPage} of ${map.yepsPager.blockEnd}
-		                </c:if>
-		           </div>
-		<!--                페이징 처리!! 현재페이지는 span이 되고 나머지는 a로 -->
-		           <c:if test="${map.yepsPager.blockEnd != 1}">
-		           <div class="yeps_message_page_link_wrapper">
-		               <div class="yeps_message_page_link_wrap">
-		                    <c:if test="${map.yepsPager.curBlock > 1}">
-		                    <div class="yeps_message_next_block">
-		                       <a class="yeps_message_next_block_action" href="javascript:list('1')">
-		                          <span>Start</span>
-		                       </a>
-		                    </div>
-		                 </c:if>
-		
-		                 <c:if test="${map.yepsPager.curBlock > 1}">
-		                    <div class="yeps_message_next_block">
-		                       <a class="yeps_message_next_block_action" href="javascript:list('${map.yepsPager.prevPage}','${map.lMode}')">
-		                          <span style="width: 24px; height: 24px; fill: currentColor;" class="icon">
-		                             <svg class="icon_svg">
-		                                <path d="M14.475 18.364l1.414-1.414L10.94 12l4.95-4.95-1.415-1.414L8.11 12l6.365 6.364z"></path>
-		                             </svg>
-		                          </span>
-		                          <span>Previous</span>
-		                       </a>
-		                    </div>
-		                 </c:if>
-		                 <c:forEach var="num" begin="${map.yepsPager.blockBegin}" end="${map.yepsPager.blockEnd}">
-		                          <div class="yeps_message_page_link_option">
-		                             <c:choose>
-		                                 <c:when test="${num == map.yepsPager.curPage}">
-		                                     <span class="yeps_message_page_option_action">
-		                                          ${num}
-		                                     </span>
-		                                 </c:when>
-		                              <c:otherwise>
-		                                      <a href="javascript:list('${num}','${map.lMode}')" class="yeps_message_page_option_link_action">
-		                                          ${num}
-		                                      </a>
-		                                  </c:otherwise>
-		                              </c:choose>
-		                           </div>
-		                        </c:forEach>
-		                    <c:if test="${map.yepsPager.curBlock <= map.yepsPager.totBlock}">
-		                         <div class="yeps_message_next_block">
-		                              <a class="yeps_message_next_block_action" href="javascript:list('${map.yepsPager.nextPage}','${map.lMode}')">
-		                                   <span>Next</span>
-		                                   <span style="width: 24px; height: 24px; fill: currentColor;" class="icon">
-		                                       <svg class="icon_svg">
-		                                           <path d="M9.525 5.636L8.11 7.05 13.06 12l-4.95 4.95 1.415 1.414L15.89 12 9.524 5.636z"></path>
-		                                       </svg>
-		                                   </span>
-		                               </a>
-		                           </div>
-		                       </c:if>
-		                   <c:if test="${map.yepsPager.curPage <= map.yepsPager.totPage}">
-		                       <div class="yeps_message_next_block">
-		                           <a class="yeps_message_next_block_action" href="javascript:list('${map.yepsPager.totPage}','${map.lMode}')">
-		                                <span>End</span>
-		                                </a>
-		                             </div>
-		                          </c:if>
-		                       </div>
-		                   </div>
-		               </c:if>
-		            </div>
-		        </div>
-		    </div>
-        </div>
-    </div>
-<script>
-	
-	function list(page,lMode){
-	        location.href="yeps_message?curPage=" + page + "&lMode=" + lMode;
+			<br>
+			</form>
+		</div>
+		<br>
+	</div>
+    <script>
+	function list(page){
+	        location.href="yeps_message?curPage=" + page;
 	    }
-    
-    function messageForm(sender){
-    	$('#sendformTo').empty();
-    	var sender = sender;
-    	$('#sendformTo').val(sender);
-    }
-    
-    function getMessage(sender,subject,message,msgnum){
-   	 var msgnum = msgnum;
-   	 var sender = sender;
-   	 var subject = subject;
-   	 var message = message;
-   	 $('#readCheck').val(msgnum) 
-   	 $('#from').val(sender);
-     $('#subject').val(subject);
-     $('#message').val(message);
-   }   
 
 	 jQuery.noConflict();
-	 
-	 $('#sendIssue').click(function(){
-// 		  if($('#sendformSubject').val()==''){
-// 	    	alert("제목을 입력해주세요");
-// 	    	$('#sendformSubject').focus()
-// 	    	return false;
-	    	
-// 	    	}else if($('#sendformMessage').val()==''){
-// 	    	alert("내용을 입력해주세요");
-// 	    	$('#sendformMessage').focus()
-// 	    	return false; 
-		    	
-		 var issue = $('#issueValue').val();
-	 	    document.sendIssueform.action = "message_send?issue=" + issue;
-	 	    document.sendIssueform.submit();
-	 })
-	
-    function sendMessage(){
-    	if($('#sendformTo').val()==''){
+	    $('#sendform').on('show.bs.modal', function (event) {
+	    	var button = $(event.relatedTarget); // Button that triggered the modal
+	    	var receiver = button.data('receiver'); // Extract info from data-* attributes
+	    	var modal = $(this);
+	    	modal.find('.modal-header input').val("  " + receiver);
+	    	});
+
+	    $('#messageView').on('show.bs.modal', function (event) { //  윈도우가 오픈할때 아래의 옵션을 적용
+	         var button = $(event.relatedTarget) // 모달 윈도우를 오픈하는 버튼
+	         var content = $(this).button.data('content') // 버튼에서 data-contnet 값을 content 변수에 저장
+	         var sender = button.data('sender')
+	         var title = button.data('title')
+	         var modal = $(this)
+	         modal.find('.modal-footer textarea').val('Content : ' + content) // 모달위도우에서 .modal-footer에 textarea를  찾아 content 값을 넣어줌
+	         modal.find('.modal-header #sender').text('  ' + sender)
+	         modal.find('.modal-body h4').text(' ' + title)
+	    
+	     })
+	     
+	function sendMsg(){
+    	if($('#receiver').val()==''){
     	alert("받는 사람을 입력해주세요");
-    	$('#sendformTo').focus()
+    	$('#receiver').focus()
     	return false;
     	
-    	}else if($('#sendformSubject').val()==''){
+    	}else if($('#title').val()==''){
     	alert("제목를 입력해주세요");
-    	$('#sendformSubject').focus()
+    	$('#title').focus()
     	return false;
     	
-    	}else if($('#sendformMessage').val()==''){
+    	}else if($('#content').val()==''){
     	alert("내용을 입력해주세요");
-    	$('#sendformMessage').focus()
+    	$('#content').focus()
     	return false;
     	}
-        document.sendform.action = "message_send";
-        document.sendform.submit();
+        document.msgform.action = "message_send";
+        document.msgform.submit();
     } 
 	
 	function searching() {
@@ -270,20 +218,21 @@
 			lockerform.filter.focus()
 			return false
 		}
-		document.lockerform.action = "message_action";
+		document.lockerform.action = "message_search";
 		document.lockerform.submit();
 	}
 
-	function readMessage(lMode) {
-		document.lockerform.action = "message_read?lMode=" + lMode;
+	function readMessage() {
+		document.lockerform.action = "message_readLocker";
 		document.lockerform.submit();
 	}
 	
-	function readCheck(lMode){
-    	var msgnum = $('#readCheck').val();
-    	var url = "message_read?msgnum=" + msgnum + "&lMode=" + lMode ;
-        window.location = url;
-    }
+	 function readCheck(msgnum){
+	        var msgnum = msgnum;
+	    	var url = "message_read?title=" + msgnum ;
+	    	alert(msgnum)
+	        window.location = url;
+	    }
 
 	function lockerToMsgBox() {
 		$("input[name=check]:checked").each(function() {
@@ -299,7 +248,7 @@
 		});
 	}
 
-	function deleteCheckMsg() {
+	function deleteMsg() {
 		$("input[name=check]:checked").each(function() {
 			var checkVal = $(this).val();
 			alert(checkVal);
@@ -309,7 +258,7 @@
 				}
 			}
 		});
-		document.lockerform.action = "message_delete?box=locker";
+		document.lockerform.action = "message_delete";
 		document.lockerform.submit()
 	}
 
@@ -343,29 +292,10 @@
 					
 				// 체크박스의  부모 > 부모니까  tr이 되고 tr에  selected 라는  class 를 추가한다.
 					$(this).parent().parent().addClass("selected");
-				} else {
-					$(this).parent().parent().removeClass("selected");
+				} else {$(this).parent().parent().removeClass("selected");
 				}
 			});
 		});
-	
-	 $(function() {
-         //----- OPEN
-         $('[data-popup-open]').on('click', function(e)  {
-             var targeted_popup_class = jQuery(this).attr('data-popup-open');
-             $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
-          e.preventDefault();
-          e.stopPropagation();
-         });
-   
-         //----- CLOSE
-         $('[data-popup-close]').on('click', function(e)  {
-             var targeted_popup_class = jQuery(this).attr('data-popup-close');
-             $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
-             e.preventDefault();
-             e.stopPropagation();
-         });
-     });
 	</script>
 <%@ include file="../bottom.jsp"%>
 
