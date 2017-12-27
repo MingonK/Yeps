@@ -255,7 +255,7 @@
 												<div id="event_reply_user_info_photo_wrapper">
 													<div id="event_reply_user_photo">
 														<a href="#">
-															<img src="" width="60" height="60" id="event_reply_user_img">
+															<img src="https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/90s.jpg" width="60" height="60" id="event_reply_user_img">
 														</a>
 													</div>
 												</div>
@@ -269,21 +269,24 @@
 														</li>
 													
 														<li id="event_reply_user_location">
-															<b>유저 주소</b>
+															<c:forTokens items="${event_memberDTO.address}" delims=" " begin="1" end="2" var="addr">
+                                                              <b> ${addr}</b>
+                                                            </c:forTokens>
 														</li>
 													</ul>
 												
 													<ul>
-														<li id="event_reply_user_friend_count">
-															<span id="event_subscription_icon">
-																<svg>
-																	<g>
-																		<path d="M7.904 9.43l-2.098 4.697a.9.9 0 0 1-1.612 0L2.096 9.43a.902.902 0 0 1 .806-1.305h4.196c.67 0 1.105.705.806 1.305zM5 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path><path d="M15.904 9.43l-2.098 4.697a.89.89 0 0 1-.806.498.89.89 0 0 1-.806-.498L10.096 9.43a.902.902 0 0 1 .806-1.305h4.195c.67 0 1.106.705.807 1.305zM13 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" opacity=".502"></path>
-																	</g>
-																</svg>
-															</span>
-															<b>999</b> friends
-														</li>
+<!-- 														<li id="event_reply_user_friend_count"> -->
+<!-- 															<span id="event_subscription_icon"> -->
+<!-- 																<svg> -->
+<!-- 																	<g> -->
+<!-- 																		<path d="M7.904 9.43l-2.098 4.697a.9.9 0 0 1-1.612 0L2.096 9.43a.902.902 0 0 1 .806-1.305h4.196c.67 0 1.105.705.806 1.305zM5 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path> -->
+<!-- 																		<path d="M15.904 9.43l-2.098 4.697a.89.89 0 0 1-.806.498.89.89 0 0 1-.806-.498L10.096 9.43a.902.902 0 0 1 .806-1.305h4.195c.67 0 1.106.705.807 1.305zM13 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" opacity=".502"></path> -->
+<!-- 																	</g> -->
+<!-- 																</svg> -->
+<!-- 															</span> -->
+<!-- 															<b>999</b> friends -->
+<!-- 														</li> -->
 														<li id="event_reply_user_review_count">
 															<span>
 																<svg>
@@ -355,376 +358,389 @@
 					</div>
 				</div>
 			</div>
-			<div id="event_content_detail_right_container">
-				<div id="event_content_detail_subscription" style="margin-bottom: 18px;">
-					<div id="event_content_detail_subscription_action" style="margin-bottom: 0;">
-						<h3>이벤트에 관심있어요!</h3>
-						<div id="event_subscription_button_wrap">
-							<div id="event_subscription_buttons">
-								<div id="event_subscription_join_button">
-									<form action="#" method="post" name="event_subscription_join_form" style="margin-bottom: 18px; padding: 0; border: 0; font-size: 100%; display: block;">
-										<input type="hidden" name="뭐가 들어가야 될지 생각해보자">
-										<input type="hidden" name="뭐가 들어가야 될지 생각해보자">
-										<button type="submit" value="submit" id="event_subscript_join_button">
-											<span>참여할래요!</span>	
-										</button>
-									</form>
-								</div>
-								<div id="event_subscription_good_button" style="flex: 1; min-width: 0; min-height: 0; display: block; margin-left: 3px; margin-right: 3px; border-collapse: collapse; border-spacing: 0 0; vertical-align: top;">
-									<form action="#" method="post" name="event_subscription_join_form" style="margin-bottom: 18px; padding: 0; border: 0; font-size: 100%; display: block;">
-										<input type="hidden" name="뭐가 들어가야 될지 생각해보자">
-										<input type="hidden" name="뭐가 들어가야 될지 생각해보자">
-										<button type="submit" value="submit" id="event_subscript_interested_button"> 											
-											<span>관심있어요!</span>
-										</button>
-									</form>
-								</div>
-							</div>
-						</div>
+ 			<div id="event_content_detail_right_container">
+ 				<div id="event_content_detail_subscription" style="margin-bottom: 18px;">
+ 					<div id="event_content_detail_subscription_action" style="margin-bottom: 0;">
+<!-- 						<h3>이벤트에 관심있어요!</h3> -->
+<!-- 						<div id="event_subscription_button_wrap"> -->
+<!-- 							<div id="event_subscription_buttons"> -->
+<!-- 								<div id="event_subscription_join_button"> -->
+<!-- 									<form action="#" method="post" name="event_subscription_join_form" style="margin-bottom: 18px; padding: 0; border: 0; font-size: 100%; display: block;"> -->
+<!-- 										<input type="hidden" name="뭐가 들어가야 될지 생각해보자"> -->
+<!-- 										<input type="hidden" name="뭐가 들어가야 될지 생각해보자"> -->
+<!-- 										<button type="submit" value="submit" id="event_subscript_join_button"> -->
+<!-- 											<span>참여할래요!</span>	 -->
+<!-- 										</button> -->
+<!-- 									</form> -->
+<!-- 								</div> -->
+<!-- 								<div id="event_subscription_good_button" style="flex: 1; min-width: 0; min-height: 0; display: block; margin-left: 3px; margin-right: 3px; border-collapse: collapse; border-spacing: 0 0; vertical-align: top;"> -->
+<!-- 									<form action="#" method="post" name="event_subscription_join_form" style="margin-bottom: 18px; padding: 0; border: 0; font-size: 100%; display: block;"> -->
+<!-- 										<input type="hidden" name="뭐가 들어가야 될지 생각해보자"> -->
+<!-- 										<input type="hidden" name="뭐가 들어가야 될지 생각해보자"> -->
+<!-- 										<button type="submit" value="submit" id="event_subscript_interested_button"> 											 -->
+<!-- 											<span>관심있어요!</span> -->
+<!-- 										</button> -->
+<!-- 									</form> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
 						
-						<div id="event_subscription_whos_in_section" style="margin-bottom: 18px;">
-							<div id="event_subscription_whos_in_line">
-								<div id="event_subscription_whos_in">
-									<h3>누가 참여할까요?</h3>
-								</div>
-								<div id="event_subscription_whos_in_response">
-									<span>total responses</span>
-								</div>
-							</div>
+<!-- 						<div id="event_subscription_whos_in_section" style="margin-bottom: 18px;"> -->
+<!-- 							<div id="event_subscription_whos_in_line"> -->
+<!-- 								<div id="event_subscription_whos_in"> -->
+<!-- 									<h3>누가 참여할까요?</h3> -->
+<!-- 								</div> -->
+<!-- 								<div id="event_subscription_whos_in_response"> -->
+<!-- 									<span>total responses</span> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
 							
-							<ul id="whos_in_list">
-								<li style="margin-bottom: 12px;">
-									<div id="event_subscription_user_info_block">
-										<div id="event_subscription_user_info_profile">
-											<div id="event_subscription_user_profile_photo">
-												<!-- 유저 프로필로 이동 -->
-												<a href="#">
-													<img id="event_subscription_user_photo" height="30" weight="30" src="#">
-												</a>
+<!-- 							<ul id="whos_in_list"> -->
+<!-- 								<li style="margin-bottom: 12px;"> -->
+<!-- 									<div id="event_subscription_user_info_block"> -->
+<!-- 										<div id="event_subscription_user_info_profile"> -->
+<!-- 											<div id="event_subscription_user_profile_photo"> -->
+<!-- 												유저 프로필로 이동 -->
+<!-- 												<a href="#"> -->
+<!-- 													<img id="event_subscription_user_photo" height="30" weight="30" src="#"> -->
+<!-- 												</a> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 										<div id="event_subscription_simple_user_info"> -->
+<!-- 											<ul> -->
+<!-- 												<li id="event_subscription_user_name"> -->
+<!-- 													<a href="#" id="event_subscription_display_user_name"> -->
+<!-- 														유저 아이디 -->
+<!-- 													</a> -->
+<!-- 												</li> -->
+<!-- 											</ul> -->
+<!-- 											<ul> -->
+<!-- 												<li id="event_subscription_friend_count"> -->
+<!-- 													<span id="event_subscription_icon"> -->
+<!-- 														<svg> -->
+<!-- 															<g> -->
+<!-- 																<path d="M7.904 9.43l-2.098 4.697a.9.9 0 0 1-1.612 0L2.096 9.43a.902.902 0 0 1 .806-1.305h4.196c.67 0 1.105.705.806 1.305zM5 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path><path d="M15.904 9.43l-2.098 4.697a.89.89 0 0 1-.806.498.89.89 0 0 1-.806-.498L10.096 9.43a.902.902 0 0 1 .806-1.305h4.195c.67 0 1.106.705.807 1.305zM13 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" opacity=".502"></path> -->
+<!-- 															</g> -->
+<!-- 														</svg> -->
+<!-- 													</span> -->
+<!-- 													<b>999</b> -->
+<!-- 												</li> -->
+<!-- 												<li id="event_subscription_review_count"> -->
+<!-- 													<span> -->
+<!-- 														<svg> -->
+<!-- 															<path d="M13 3H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1.505 9.643l-2.526-1.55L6.526 12.7 7 9.934 5 7.977l2.766-.404L8.97 4.7l1.264 2.873L13 7.977l-2 1.957.495 2.71z"></path> -->
+<!-- 														</svg> -->
+<!-- 													</span> -->
+<!-- 													<b>999</b> -->
+<!-- 												</li> -->
+<!-- 											</ul> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</li> -->
+								
+								
+<!-- 								<li style="margin-bottom: 12px;"> -->
+<!-- 									<div id="event_subscription_user_info_block"> -->
+<!-- 										<div id="event_subscription_user_info_profile"> -->
+<!-- 											<div id="event_subscription_user_profile_photo"> -->
+<!-- 												유저 프로필로 이동 -->
+<!-- 												<a href="#"> -->
+<!-- 													<img id="event_subscription_user_photo" height="30" weight="30" src="#"> -->
+<!-- 												</a> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 										<div id="event_subscription_simple_user_info"> -->
+<!-- 											<ul> -->
+<!-- 												<li id="event_subscription_user_name"> -->
+<!-- 													<a href="#" id="event_subscription_display_user_name"> -->
+<!-- 														유저 아이디 -->
+<!-- 													</a> -->
+<!-- 												</li> -->
+<!-- 											</ul> -->
+<!-- 											<ul> -->
+<!-- 												<li id="event_subscription_friend_count"> -->
+<!-- 													<span id="event_subscription_icon"> -->
+<!-- 														<svg> -->
+<!-- 															<g> -->
+<!-- 																<path d="M7.904 9.43l-2.098 4.697a.9.9 0 0 1-1.612 0L2.096 9.43a.902.902 0 0 1 .806-1.305h4.196c.67 0 1.105.705.806 1.305zM5 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path><path d="M15.904 9.43l-2.098 4.697a.89.89 0 0 1-.806.498.89.89 0 0 1-.806-.498L10.096 9.43a.902.902 0 0 1 .806-1.305h4.195c.67 0 1.106.705.807 1.305zM13 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" opacity=".502"></path> -->
+<!-- 															</g> -->
+<!-- 														</svg> -->
+<!-- 													</span> -->
+<!-- 													<b>999</b> -->
+<!-- 												</li> -->
+<!-- 												<li id="event_subscription_review_count"> -->
+<!-- 													<span> -->
+<!-- 														<svg> -->
+<!-- 															<path d="M13 3H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1.505 9.643l-2.526-1.55L6.526 12.7 7 9.934 5 7.977l2.766-.404L8.97 4.7l1.264 2.873L13 7.977l-2 1.957.495 2.71z"></path> -->
+<!-- 														</svg> -->
+<!-- 													</span> -->
+<!-- 													<b>999</b> -->
+<!-- 												</li> -->
+<!-- 											</ul> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</li> -->
+								
+								
+<!-- 								<li style="margin-bottom: 12px;"> -->
+<!-- 									<div id="event_subscription_user_info_block"> -->
+<!-- 										<div id="event_subscription_user_info_profile"> -->
+<!-- 											<div id="event_subscription_user_profile_photo"> -->
+<!-- 												유저 프로필로 이동 -->
+<!-- 												<a href="#"> -->
+<!-- 													<img id="event_subscription_user_photo" height="30" weight="30" src="#"> -->
+<!-- 												</a> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 										<div id="event_subscription_simple_user_info"> -->
+<!-- 											<ul> -->
+<!-- 												<li id="event_subscription_user_name"> -->
+<!-- 													<a href="#" id="event_subscription_display_user_name"> -->
+<!-- 														유저 아이디 -->
+<!-- 													</a> -->
+<!-- 												</li> -->
+<!-- 											</ul> -->
+<!-- 											<ul> -->
+<!-- 												<li id="event_subscription_friend_count"> -->
+<!-- 													<span id="event_subscription_icon"> -->
+<!-- 														<svg> -->
+<!-- 															<g> -->
+<!-- 																<path d="M7.904 9.43l-2.098 4.697a.9.9 0 0 1-1.612 0L2.096 9.43a.902.902 0 0 1 .806-1.305h4.196c.67 0 1.105.705.806 1.305zM5 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path><path d="M15.904 9.43l-2.098 4.697a.89.89 0 0 1-.806.498.89.89 0 0 1-.806-.498L10.096 9.43a.902.902 0 0 1 .806-1.305h4.195c.67 0 1.106.705.807 1.305zM13 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" opacity=".502"></path> -->
+<!-- 															</g> -->
+<!-- 														</svg> -->
+<!-- 													</span> -->
+<!-- 													<b>999</b> -->
+<!-- 												</li> -->
+<!-- 												<li id="event_subscription_review_count"> -->
+<!-- 													<span> -->
+<!-- 														<svg> -->
+<!-- 															<path d="M13 3H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1.505 9.643l-2.526-1.55L6.526 12.7 7 9.934 5 7.977l2.766-.404L8.97 4.7l1.264 2.873L13 7.977l-2 1.957.495 2.71z"></path> -->
+<!-- 														</svg> -->
+<!-- 													</span> -->
+<!-- 													<b>999</b> -->
+<!-- 												</li> -->
+<!-- 											</ul> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</li> -->
+<!-- 							</ul> -->
+							
+<!-- 							<a href="#" style="font-size: 12px;">전체 유저 보기</a> -->
+<!-- 						</div> -->
+						
+						
+						
+<!-- 						<div id="event_subscription_interested_section"> -->
+<!-- 							<div id="event_subscription_interested_line"> -->
+<!-- 								<div id="event_subscription_interested"> -->
+<!-- 									<h3>관심있어요</h3> -->
+<!-- 								</div> -->
+<!-- 								<div id="event_subscription_interested_response"> -->
+<!-- 									<span> -->
+<!-- 										total response -->
+<!-- 									</span> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+							
+							
+<!-- 							<ul id="interested_list"> -->
+<!-- 								<li style="margin-bottom: 12px;"> -->
+<!-- 									<div id="event_subscription_user_info_block"> -->
+<!-- 										<div id="event_subscription_user_info_profile"> -->
+<!-- 											<div id="event_subscription_user_profile_photo"> -->
+<!-- 												유저 프로필로 이동 -->
+<!-- 												<a href="#"> -->
+<!-- 													<img id="event_subscription_user_photo" height="30" weight="30" src="#"> -->
+<!-- 												</a> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 										<div id="event_subscription_simple_user_info"> -->
+<!-- 											<ul> -->
+<!-- 												<li id="event_subscription_user_name"> -->
+<!-- 													<a href="#" id="event_subscription_display_user_name"> -->
+<!-- 														유저 아이디 -->
+<!-- 													</a> -->
+<!-- 												</li> -->
+<!-- 											</ul> -->
+<!-- 											<ul> -->
+<!-- 												<li id="event_subscription_friend_count"> -->
+<!-- 													<span id="event_subscription_icon"> -->
+<!-- 														<svg> -->
+<!-- 															<g> -->
+<!-- 																<path d="M7.904 9.43l-2.098 4.697a.9.9 0 0 1-1.612 0L2.096 9.43a.902.902 0 0 1 .806-1.305h4.196c.67 0 1.105.705.806 1.305zM5 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path><path d="M15.904 9.43l-2.098 4.697a.89.89 0 0 1-.806.498.89.89 0 0 1-.806-.498L10.096 9.43a.902.902 0 0 1 .806-1.305h4.195c.67 0 1.106.705.807 1.305zM13 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" opacity=".502"></path> -->
+<!-- 															</g> -->
+<!-- 														</svg> -->
+<!-- 													</span> -->
+<!-- 													<b>999</b> -->
+<!-- 												</li> -->
+<!-- 												<li id="event_subscription_review_count"> -->
+<!-- 													<span> -->
+<!-- 														<svg> -->
+<!-- 															<path d="M13 3H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1.505 9.643l-2.526-1.55L6.526 12.7 7 9.934 5 7.977l2.766-.404L8.97 4.7l1.264 2.873L13 7.977l-2 1.957.495 2.71z"></path> -->
+<!-- 														</svg> -->
+<!-- 													</span> -->
+<!-- 													<b>999</b> -->
+<!-- 												</li> -->
+<!-- 											</ul> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</li> -->
+								
+								
+								
+<!-- 								<li style="margin-bottom: 12px;"> -->
+<!-- 									<div id="event_subscription_user_info_block"> -->
+<!-- 										<div id="event_subscription_user_info_profile"> -->
+<!-- 											<div id="event_subscription_user_profile_photo"> -->
+<!-- 												유저 프로필로 이동 -->
+<!-- 												<a href="#"> -->
+<!-- 													<img id="event_subscription_user_photo" height="30" weight="30" src="#" style="outline: none; margin-top: 3px; border-radius: 4px; vertical-align: middle;"> -->
+<!-- 												</a> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 										<div id="event_subscription_simple_user_info">											<ul> -->
+<!-- 												<li id="event_subscription_user_name"> -->
+<!-- 													<a href="#" id="event_subscription_display_user_name"> -->
+<!-- 														유저 아이디 -->
+<!-- 													</a> -->
+<!-- 												</li> -->
+<!-- 											</ul> -->
+<!-- 											<ul> -->
+<!-- 												<li id="event_subscription_friend_count"> -->
+<!-- 													<span id="event_subscription_icon"> -->
+<!-- 														<svg> -->
+<!-- 															<g> -->
+<!-- 																<path d="M7.904 9.43l-2.098 4.697a.9.9 0 0 1-1.612 0L2.096 9.43a.902.902 0 0 1 .806-1.305h4.196c.67 0 1.105.705.806 1.305zM5 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path><path d="M15.904 9.43l-2.098 4.697a.89.89 0 0 1-.806.498.89.89 0 0 1-.806-.498L10.096 9.43a.902.902 0 0 1 .806-1.305h4.195c.67 0 1.106.705.807 1.305zM13 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" opacity=".502"></path> -->
+<!-- 															</g> -->
+<!-- 														</svg> -->
+<!-- 													</span> -->
+<!-- 													<b>999</b> -->
+<!-- 												</li> -->
+<!-- 												<li id="event_subscription_review_count"> -->
+<!-- 													<span> -->
+<!-- 														<svg> -->
+<!-- 															<path d="M13 3H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1.505 9.643l-2.526-1.55L6.526 12.7 7 9.934 5 7.977l2.766-.404L8.97 4.7l1.264 2.873L13 7.977l-2 1.957.495 2.71z"></path> -->
+<!-- 														</svg> -->
+<!-- 													</span> -->
+<!-- 													<b>999</b> -->
+<!-- 												</li> -->
+<!-- 											</ul> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</li> -->
+								
+								
+<!-- 								<li style="margin-bottom: 12px;"> -->
+<!-- 									<div id="event_subscription_user_info_block"> -->
+<!-- 										<div id="event_subscription_user_info_profile"> -->
+<!-- 											<div id="event_subscription_user_profile_photo"> -->
+<!-- 												유저 프로필로 이동 -->
+<!-- 												<a href="#"> -->
+<!-- 													<img id="event_subscription_user_photo" height="30" weight="30" src="#"> -->
+<!-- 												</a> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 										<div id="event_subscription_simple_user_info"> -->
+<!-- 											<ul> -->
+<!-- 												<li id="event_subscription_user_name"> -->
+<!-- 													<a href="#" id="event_subscription_display_user_name"> -->
+<!-- 														유저 아이디 -->
+<!-- 													</a> -->
+<!-- 												</li> -->
+<!-- 											</ul> -->
+<!-- 											<ul> -->
+<!-- 												<li id="event_subscription_friend_count"> -->
+<!-- 													<span id="event_subscription_icon"> -->
+<!-- 														<svg> -->
+<!-- 															<g> -->
+<!-- 																<path d="M7.904 9.43l-2.098 4.697a.9.9 0 0 1-1.612 0L2.096 9.43a.902.902 0 0 1 .806-1.305h4.196c.67 0 1.105.705.806 1.305zM5 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path><path d="M15.904 9.43l-2.098 4.697a.89.89 0 0 1-.806.498.89.89 0 0 1-.806-.498L10.096 9.43a.902.902 0 0 1 .806-1.305h4.195c.67 0 1.106.705.807 1.305zM13 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" opacity=".502"></path> -->
+<!-- 															</g> -->
+<!-- 														</svg> -->
+<!-- 													</span> -->
+<!-- 													<b>999</b> -->
+<!-- 												</li> -->
+<!-- 												<li id="event_subscription_review_count"> -->
+<!-- 													<span> -->
+<!-- 														<svg> -->
+<!-- 															<path d="M13 3H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1.505 9.643l-2.526-1.55L6.526 12.7 7 9.934 5 7.977l2.766-.404L8.97 4.7l1.264 2.873L13 7.977l-2 1.957.495 2.71z"></path> -->
+<!-- 														</svg> -->
+<!-- 													</span> -->
+<!-- 													<b>999</b> -->
+<!-- 												</li> -->
+<!-- 											</ul> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</li> -->
+<!-- 							</ul> -->
+							
+<!-- 							<a href="#" style="font-size: 12px;">전체 유저 보기</a> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+				
+				
+				
+						<div id="other_events_this_week" style="margin-bottom: 0;">
+							<h3>진행중인 이벤트</h3>
+							<ul>
+								<c:if test="${empty thisWeek_EventList}">
+									<li style="margin-bottom: 12px; display: list-item; text-align: -webkit-match-parent;">
+										진행중인 이벤트가 없습니다.
+									</li>
+								</c:if>
+								<c:forEach var="this_week_eventDTO" items="${thisWeek_EventList}">
+								<li style="margin-bottom: 12px; display: list-item; text-align: -webkit-match-parent;">
+									<div id="this_week_popular_events">
+										<div id="this_week_popular_events_photo_wrap">
+											<div id="this_week_popular_events_photo">
+												<c:forEach var="this_week_fileDTO" items="${thisWeek_EventFileList}">
+													<c:if test="${this_week_eventDTO.evnum == this_week_fileDTO.evnum}">
+														<c:if test="${this_week_fileDTO.filename == 'nothing'}">
+															<a href="event_content?evnum=${this_week_eventDTO.evnum}" style="margin: 0; padding: 0; border: 0; cursor: pointer;">
+																<img src="getImage/event_square.png" style="outline: none; border-radius: 4px; vertical-align: middle; margin: 0; padding: 0; border: 0; height: 60px; width: 60px;">
+															</a>
+														</c:if>
+														<c:if test="${this_week_fileDTO.filename != 'nothing'}">
+															<a href="event_content?evnum=${this_week_eventDTO.evnum}" style="margin: 0; padding: 0; border: 0; cursor: pointer;">
+																<img src="getImage/${this_week_fileDTO.filename}" style="outline: none; border-radius: 4px; vertical-align: middle; margin: 0; padding: 0; border: 0; height: 60px; width: 60px;">
+															</a>
+														</c:if>
+													</c:if>
+												</c:forEach>
 											</div>
 										</div>
-										<div id="event_subscription_simple_user_info">
-											<ul>
-												<li id="event_subscription_user_name">
-													<a href="#" id="event_subscription_display_user_name">
-														유저 아이디
-													</a>
-												</li>
-											</ul>
-											<ul>
-												<li id="event_subscription_friend_count">
-													<span id="event_subscription_icon">
-														<svg>
-															<g>
-																<path d="M7.904 9.43l-2.098 4.697a.9.9 0 0 1-1.612 0L2.096 9.43a.902.902 0 0 1 .806-1.305h4.196c.67 0 1.105.705.806 1.305zM5 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path><path d="M15.904 9.43l-2.098 4.697a.89.89 0 0 1-.806.498.89.89 0 0 1-.806-.498L10.096 9.43a.902.902 0 0 1 .806-1.305h4.195c.67 0 1.106.705.807 1.305zM13 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" opacity=".502"></path>
-															</g>
-														</svg>
-													</span>
-													<b>999</b>
-												</li>
-												<li id="event_subscription_review_count">
-													<span>
-														<svg>
-															<path d="M13 3H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1.505 9.643l-2.526-1.55L6.526 12.7 7 9.934 5 7.977l2.766-.404L8.97 4.7l1.264 2.873L13 7.977l-2 1.957.495 2.71z"></path>
-														</svg>
-													</span>
-													<b>999</b>
-												</li>
-											</ul>
+										
+										<div id="this_week_popular_events_info">
+											<strong>
+												<a href="event_content?evnum=${this_week_eventDTO.evnum}" style="font-weight: bold;">
+													${this_week_eventDTO.eventname}
+												</a>
+											</strong>
+											<small>
+												<c:if test="${empty this_week_eventDTO.end_date}">
+													${this_week_eventDTO.start_date}, ${this_week_eventDTO.start_time}
+												</c:if>
+												<c:if test="${!empty this_week_eventDTO.end_date}">
+													${this_week_eventDTO.start_date}, ${this_week_eventDTO.start_time} – ${this_week_eventDTO.end_date}, ${this_week_eventDTO.end_time}
+												</c:if>
+											</small>
+<!-- 											<div> -->
+<!-- 												<small style="color: #999; font-weight: normal; font-size: 12px; line-height: 1.5em;"> -->
+<!-- 													999명 관심있어요 -->
+<!-- 												</small> -->
+<!-- 											</div> -->
 										</div>
 									</div>
 								</li>
-								
-								
-								<li style="margin-bottom: 12px;">
-									<div id="event_subscription_user_info_block">
-										<div id="event_subscription_user_info_profile">
-											<div id="event_subscription_user_profile_photo">
-												<!-- 유저 프로필로 이동 -->
-												<a href="#">
-													<img id="event_subscription_user_photo" height="30" weight="30" src="#">
-												</a>
-											</div>
-										</div>
-										<div id="event_subscription_simple_user_info">
-											<ul>
-												<li id="event_subscription_user_name">
-													<a href="#" id="event_subscription_display_user_name">
-														유저 아이디
-													</a>
-												</li>
-											</ul>
-											<ul>
-												<li id="event_subscription_friend_count">
-													<span id="event_subscription_icon">
-														<svg>
-															<g>
-																<path d="M7.904 9.43l-2.098 4.697a.9.9 0 0 1-1.612 0L2.096 9.43a.902.902 0 0 1 .806-1.305h4.196c.67 0 1.105.705.806 1.305zM5 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path><path d="M15.904 9.43l-2.098 4.697a.89.89 0 0 1-.806.498.89.89 0 0 1-.806-.498L10.096 9.43a.902.902 0 0 1 .806-1.305h4.195c.67 0 1.106.705.807 1.305zM13 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" opacity=".502"></path>
-															</g>
-														</svg>
-													</span>
-													<b>999</b>
-												</li>
-												<li id="event_subscription_review_count">
-													<span>
-														<svg>
-															<path d="M13 3H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1.505 9.643l-2.526-1.55L6.526 12.7 7 9.934 5 7.977l2.766-.404L8.97 4.7l1.264 2.873L13 7.977l-2 1.957.495 2.71z"></path>
-														</svg>
-													</span>
-													<b>999</b>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</li>
-								
-								
-								<li style="margin-bottom: 12px;">
-									<div id="event_subscription_user_info_block">
-										<div id="event_subscription_user_info_profile">
-											<div id="event_subscription_user_profile_photo">
-												<!-- 유저 프로필로 이동 -->
-												<a href="#">
-													<img id="event_subscription_user_photo" height="30" weight="30" src="#">
-												</a>
-											</div>
-										</div>
-										<div id="event_subscription_simple_user_info">
-											<ul>
-												<li id="event_subscription_user_name">
-													<a href="#" id="event_subscription_display_user_name">
-														유저 아이디
-													</a>
-												</li>
-											</ul>
-											<ul>
-												<li id="event_subscription_friend_count">
-													<span id="event_subscription_icon">
-														<svg>
-															<g>
-																<path d="M7.904 9.43l-2.098 4.697a.9.9 0 0 1-1.612 0L2.096 9.43a.902.902 0 0 1 .806-1.305h4.196c.67 0 1.105.705.806 1.305zM5 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path><path d="M15.904 9.43l-2.098 4.697a.89.89 0 0 1-.806.498.89.89 0 0 1-.806-.498L10.096 9.43a.902.902 0 0 1 .806-1.305h4.195c.67 0 1.106.705.807 1.305zM13 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" opacity=".502"></path>
-															</g>
-														</svg>
-													</span>
-													<b>999</b>
-												</li>
-												<li id="event_subscription_review_count">
-													<span>
-														<svg>
-															<path d="M13 3H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1.505 9.643l-2.526-1.55L6.526 12.7 7 9.934 5 7.977l2.766-.404L8.97 4.7l1.264 2.873L13 7.977l-2 1.957.495 2.71z"></path>
-														</svg>
-													</span>
-													<b>999</b>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</li>
+								</c:forEach>
 							</ul>
-							
-							<a href="#" style="font-size: 12px;">전체 유저 보기</a>
-						</div>
-						
-						
-						
-						<div id="event_subscription_interested_section">
-							<div id="event_subscription_interested_line">
-								<div id="event_subscription_interested">
-									<h3>관심있어요</h3>
-								</div>
-								<div id="event_subscription_interested_response">
-									<span>
-										total response
-									</span>
-								</div>
-							</div>
-							
-							
-							<ul id="interested_list">
-								<li style="margin-bottom: 12px;">
-									<div id="event_subscription_user_info_block">
-										<div id="event_subscription_user_info_profile">
-											<div id="event_subscription_user_profile_photo">
-												<!-- 유저 프로필로 이동 -->
-												<a href="#">
-													<img id="event_subscription_user_photo" height="30" weight="30" src="#">
-												</a>
-											</div>
-										</div>
-										<div id="event_subscription_simple_user_info">
-											<ul>
-												<li id="event_subscription_user_name">
-													<a href="#" id="event_subscription_display_user_name">
-														유저 아이디
-													</a>
-												</li>
-											</ul>
-											<ul>
-												<li id="event_subscription_friend_count">
-													<span id="event_subscription_icon">
-														<svg>
-															<g>
-																<path d="M7.904 9.43l-2.098 4.697a.9.9 0 0 1-1.612 0L2.096 9.43a.902.902 0 0 1 .806-1.305h4.196c.67 0 1.105.705.806 1.305zM5 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path><path d="M15.904 9.43l-2.098 4.697a.89.89 0 0 1-.806.498.89.89 0 0 1-.806-.498L10.096 9.43a.902.902 0 0 1 .806-1.305h4.195c.67 0 1.106.705.807 1.305zM13 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" opacity=".502"></path>
-															</g>
-														</svg>
-													</span>
-													<b>999</b>
-												</li>
-												<li id="event_subscription_review_count">
-													<span>
-														<svg>
-															<path d="M13 3H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1.505 9.643l-2.526-1.55L6.526 12.7 7 9.934 5 7.977l2.766-.404L8.97 4.7l1.264 2.873L13 7.977l-2 1.957.495 2.71z"></path>
-														</svg>
-													</span>
-													<b>999</b>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</li>
-								
-								
-								
-								<li style="margin-bottom: 12px;">
-									<div id="event_subscription_user_info_block">
-										<div id="event_subscription_user_info_profile">
-											<div id="event_subscription_user_profile_photo">
-												<!-- 유저 프로필로 이동 -->
-												<a href="#">
-													<img id="event_subscription_user_photo" height="30" weight="30" src="#" style="outline: none; margin-top: 3px; border-radius: 4px; vertical-align: middle;">
-												</a>
-											</div>
-										</div>
-										<div id="event_subscription_simple_user_info">											<ul>
-												<li id="event_subscription_user_name">
-													<a href="#" id="event_subscription_display_user_name">
-														유저 아이디
-													</a>
-												</li>
-											</ul>
-											<ul>
-												<li id="event_subscription_friend_count">
-													<span id="event_subscription_icon">
-														<svg>
-															<g>
-																<path d="M7.904 9.43l-2.098 4.697a.9.9 0 0 1-1.612 0L2.096 9.43a.902.902 0 0 1 .806-1.305h4.196c.67 0 1.105.705.806 1.305zM5 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path><path d="M15.904 9.43l-2.098 4.697a.89.89 0 0 1-.806.498.89.89 0 0 1-.806-.498L10.096 9.43a.902.902 0 0 1 .806-1.305h4.195c.67 0 1.106.705.807 1.305zM13 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" opacity=".502"></path>
-															</g>
-														</svg>
-													</span>
-													<b>999</b>
-												</li>
-												<li id="event_subscription_review_count">
-													<span>
-														<svg>
-															<path d="M13 3H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1.505 9.643l-2.526-1.55L6.526 12.7 7 9.934 5 7.977l2.766-.404L8.97 4.7l1.264 2.873L13 7.977l-2 1.957.495 2.71z"></path>
-														</svg>
-													</span>
-													<b>999</b>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</li>
-								
-								
-								<li style="margin-bottom: 12px;">
-									<div id="event_subscription_user_info_block">
-										<div id="event_subscription_user_info_profile">
-											<div id="event_subscription_user_profile_photo">
-												<!-- 유저 프로필로 이동 -->
-												<a href="#">
-													<img id="event_subscription_user_photo" height="30" weight="30" src="#">
-												</a>
-											</div>
-										</div>
-										<div id="event_subscription_simple_user_info">
-											<ul>
-												<li id="event_subscription_user_name">
-													<a href="#" id="event_subscription_display_user_name">
-														유저 아이디
-													</a>
-												</li>
-											</ul>
-											<ul>
-												<li id="event_subscription_friend_count">
-													<span id="event_subscription_icon">
-														<svg>
-															<g>
-																<path d="M7.904 9.43l-2.098 4.697a.9.9 0 0 1-1.612 0L2.096 9.43a.902.902 0 0 1 .806-1.305h4.196c.67 0 1.105.705.806 1.305zM5 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path><path d="M15.904 9.43l-2.098 4.697a.89.89 0 0 1-.806.498.89.89 0 0 1-.806-.498L10.096 9.43a.902.902 0 0 1 .806-1.305h4.195c.67 0 1.106.705.807 1.305zM13 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" opacity=".502"></path>
-															</g>
-														</svg>
-													</span>
-													<b>999</b>
-												</li>
-												<li id="event_subscription_review_count">
-													<span>
-														<svg>
-															<path d="M13 3H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1.505 9.643l-2.526-1.55L6.526 12.7 7 9.934 5 7.977l2.766-.404L8.97 4.7l1.264 2.873L13 7.977l-2 1.957.495 2.71z"></path>
-														</svg>
-													</span>
-													<b>999</b>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</li>
-							</ul>
-							
-							<a href="#" style="font-size: 12px;">전체 유저 보기</a>
+							<a href="event_list" style="font-size: 12px;">이벤트 더 보기</a>
 						</div>
 					</div>
-				</div>
-				
-				
-				
-				<div id="other_events_this_week" style="margin-bottom: 0;">
-					<h3>진행중인 이벤트</h3>
-					<ul>
-						<c:forEach var="this_week_eventDTO" items="${thisWeek_EventList}">
-						<li style="margin-bottom: 12px; display: list-item; text-align: -webkit-match-parent;">
-							<div id="this_week_popular_events">
-								<div id="this_week_popular_events_photo_wrap">
-									<div id="this_week_popular_events_photo">
-										<c:if test="${this_week_eventDTO.filenum == 0}">
-											<a href="event_content?evnum=${this_week_eventDTO.evnum}" style="margin: 0; padding: 0; border: 0; cursor: pointer;">
-												<img src="getImage/event_square.png" style="outline: none; border-radius: 4px; vertical-align: middle; margin: 0; padding: 0; border: 0; height: 60px; width: 60px;">
-											</a>
-										</c:if>
-										<c:forEach var="this_week_fileDTO" items="${thisWeek_EventFileList}">
-										<c:if test="${this_week_eventDTO.filenum == this_week_fileDTO.filenum}">
-											<a href="event_content?evnum=${this_week_eventDTO.evnum}" style="margin: 0; padding: 0; border: 0; cursor: pointer;">
-												<img src="getImage/${this_week_fileDTO.filename}" style="outline: none; border-radius: 4px; vertical-align: middle; margin: 0; padding: 0; border: 0; height: 60px; width: 60px;">
-											</a>
-										</c:if>
-										</c:forEach>
-									</div>
-								</div>
-								
-								<div id="this_week_popular_events_info">
-									<strong>
-										<a href="event_content?evnum=${this_week_eventDTO.evnum}" style="font-weight: bold;">
-											${this_week_eventDTO.eventname}
-										</a>
-									</strong>
-									<small>
-										${this_week_eventDTO.start_date}, ${this_week_eventDTO.start_time} – ${this_week_eventDTO.end_date}, ${this_week_eventDTO.end_time}
-									</small>
-									<div>
-										<small style="color: #999; font-weight: normal; font-size: 12px; line-height: 1.5em;">
-											999명 관심있어요
-										</small>
-									</div>
-								</div>
-							</div>
-						</li>
-						</c:forEach>
-					</ul>
-					<a href="event_list" style="font-size: 12px;">이벤트 더 보기</a>
 				</div>
 			</div>
 		</div>
 	</div>
-	
 	
 	<div class="photo_content_popup" data-popup="photo_popup">
     	<div class="photo_popup-inner" style="z-index: 1;">
@@ -776,90 +792,90 @@
 								
 								
 								
-								<div class="photo_upload_user_wrraper">
-									<div class="photo_upload_user_container">
-										<div class="photo_upload_user_info">
-											<div class="photo_upload_user_info_item">
-												<div class="photo_user_passport">
-													<div class="photo_user_passport_block">
-														<div class="photo_user_passport_photo">
-															<div>
-																<a href="#">
-																	<img height="30" width="30" src="https://s3-media4.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/60s.jpg" style="outline: none; margin-top: 3px; border-radius: 4px; vertical-align: middle;">
-																</a>
-															</div>
-														</div>
+<!-- 								<div class="photo_upload_user_wrraper"> -->
+<!-- 									<div class="photo_upload_user_container"> -->
+<!-- 										<div class="photo_upload_user_info"> -->
+<!-- 											<div class="photo_upload_user_info_item"> -->
+<!-- 												<div class="photo_user_passport"> -->
+<!-- 													<div class="photo_user_passport_block"> -->
+<!-- 														<div class="photo_user_passport_photo"> -->
+<!-- 															<div> -->
+<!-- 																<a href="#"> -->
+<!-- 																	<img height="30" width="30" src="https://s3-media4.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/60s.jpg" style="outline: none; margin-top: 3px; border-radius: 4px; vertical-align: middle;"> -->
+<!-- 																</a> -->
+<!-- 															</div> -->
+<!-- 														</div> -->
 														
-														<div class="photo_user_passport_info_block">
-															<ul>
-																<li>
-																	<a href="#" style="font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; text-decoration: none;">
-																		유저 아이디																		
-																	</a>
-																</li>
-															</ul>
+<!-- 														<div class="photo_user_passport_info_block"> -->
+<!-- 															<ul> -->
+<!-- 																<li> -->
+<!-- 																	<a href="#" style="font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; text-decoration: none;"> -->
+<!-- 																		유저 아이디																		 -->
+<!-- 																	</a> -->
+<!-- 																</li> -->
+<!-- 															</ul> -->
 															
 															
-															<ul>
-																<li class="friend-count" style="line-height: 1; display: inline-block; margin-right: 6px;">
-																	<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-friends icon--size-18">
-																		<svg class="icon_svg">
-																			<path d="M7.904 9.43l-2.098 4.697a.9.9 0 0 1-1.612 0L2.096 9.43a.902.902 0 0 1 .806-1.305h4.196c.67 0 1.105.705.806 1.305zM5 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path>
-																			<path d="M15.904 9.43l-2.098 4.697a.89.89 0 0 1-.806.498.89.89 0 0 1-.806-.498L10.096 9.43a.902.902 0 0 1 .806-1.305h4.195c.67 0 1.106.705.807 1.305zM13 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" opacity=".502"></path>
-																		</svg>
-																	</span>
-																	<b>0</b>	<!-- 친구 수 -->
-																</li>
+<!-- 															<ul> -->
+<!-- 																<li class="friend-count" style="line-height: 1; display: inline-block; margin-right: 6px;"> -->
+<!-- 																	<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-friends icon--size-18"> -->
+<!-- 																		<svg class="icon_svg"> -->
+<!-- 																			<path d="M7.904 9.43l-2.098 4.697a.9.9 0 0 1-1.612 0L2.096 9.43a.902.902 0 0 1 .806-1.305h4.196c.67 0 1.105.705.806 1.305zM5 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path> -->
+<!-- 																			<path d="M15.904 9.43l-2.098 4.697a.89.89 0 0 1-.806.498.89.89 0 0 1-.806-.498L10.096 9.43a.902.902 0 0 1 .806-1.305h4.195c.67 0 1.106.705.807 1.305zM13 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" opacity=".502"></path> -->
+<!-- 																		</svg> -->
+<!-- 																	</span> -->
+<!-- 																	<b>0</b>	친구 수 -->
+<!-- 																</li> -->
 																
-																<li class="review-count" style="line-height: 1; display: inline-block; margin-right: 6px;">
-																	<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-review icon--size-18">
-																		<svg class="icon_svg">
-																			<path d="M13 3H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1.505 9.643l-2.526-1.55L6.526 12.7 7 9.934 5 7.977l2.766-.404L8.97 4.7l1.264 2.873L13 7.977l-2 1.957.495 2.71z"></path>
-																		</svg>
-																	</span>
-																	<b>0</b> <!-- 리뷰 수 -->
-																</li>
+<!-- 																<li class="review-count" style="line-height: 1; display: inline-block; margin-right: 6px;"> -->
+<!-- 																	<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-review icon--size-18"> -->
+<!-- 																		<svg class="icon_svg"> -->
+<!-- 																			<path d="M13 3H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1.505 9.643l-2.526-1.55L6.526 12.7 7 9.934 5 7.977l2.766-.404L8.97 4.7l1.264 2.873L13 7.977l-2 1.957.495 2.71z"></path> -->
+<!-- 																		</svg> -->
+<!-- 																	</span> -->
+<!-- 																	<b>0</b> 리뷰 수 -->
+<!-- 																</li> -->
 																
-																<li class="photo-count" style="line-height: 1; display: inline-block; margin-right: 6px;">
-                													<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-camera icon--size-18">
-    																	<svg class="icon_svg" height="100%" viewBox="0 0 18 18" width="100%">
-        																	<path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 6.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path>
-    																	</svg>
-																	</span>
-                													<b>0</b>
-            													</li>
-															</ul>
-														</div>
-													</div>
-												</div>
-											</div>
+<!-- 																<li class="photo-count" style="line-height: 1; display: inline-block; margin-right: 6px;"> -->
+<!--                 													<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-camera icon--size-18"> -->
+<!--     																	<svg class="icon_svg" height="100%" viewBox="0 0 18 18" width="100%"> -->
+<!--         																	<path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 6.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path> -->
+<!--     																	</svg> -->
+<!-- 																	</span> -->
+<!--                 													<b>0</b> -->
+<!--             													</li> -->
+<!-- 															</ul> -->
+<!-- 														</div> -->
+<!-- 													</div> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
 											
 											
-											<div class="photo_upload_user_info_footer">
-												<div style="margin-top: 6px;">
-													<div>
-														사진에 적은 캡션 내용
-													</div>
-												</div>
+<!-- 											<div class="photo_upload_user_info_footer"> -->
+<!-- 												<div style="margin-top: 6px;"> -->
+<!-- 													<div> -->
+<!-- 														사진에 적은 캡션 내용 -->
+<!-- 													</div> -->
+<!-- 												</div> -->
 												
 												
-												<div style="margin-top: 6px;">
-													<span class="photo_upload_user_info_upload_date">
-														업로드 날짜
-													</span>
-												</div>
-											</div>
-										</div>
+<!-- 												<div style="margin-top: 6px;"> -->
+<!-- 													<span class="photo_upload_user_info_upload_date"> -->
+<!-- 														업로드 날짜 -->
+<!-- 													</span> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
 										
 										
-										<div>
+<!-- 										<div> -->
 											
-										</div>
+<!-- 										</div> -->
 										
 										
 										
-									</div>
-								</div>
+<!-- 									</div> -->
+<!-- 								</div> -->
 							</div>
 						</div>
 					</div>

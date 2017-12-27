@@ -10,7 +10,6 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 </head>
 <body ondragstart="return false">
-<input type="hidden" id="mode" value="${param.mode}">
 	<%@ include file="../top.jsp"%>
 	<div id="insert_photo_super_wrap">
 		<div id="insert_photo_middle_wrap">
@@ -39,7 +38,7 @@
 											<legend>OR</legend>
 										</fieldset>
 										<div id="file_browser" style="pointer-events: auto;">
-											<input type="file" id="file_browser_input" onchange="javascript:fileCheck(this)" accept="image/gif, image/jpeg, image/png">
+											<input type="file" id="file_browser_input" onchange="javascript:fileCheck(this)" multiple accept="image/gif, image/jpeg, image/png">
 											<button type="submit" id="file_browser_button">
 												<span>Browse Files</span>
 											</button>
@@ -49,154 +48,180 @@
 							</div>
 						</div>
 						
-						
-						<div id="sucess_file_upload_header">
-							<h2>Photos</h2>
-						</div>
-						<div id="user_photo_edit_cotainer">
-							<div id="user_photo_edit">
-								<div id="user_photo_edit_top">
-									<div id="user_photo_area">
-										<div id="user_photo_box" style="position: relative;">
-											<img alt="event_photo" id="photo_box_img" width="168px" height="168px">
+						<c:if test="${!empty myUploadFileList}">
+							<div id="sucess_file_upload_header">
+								<h2>Photos</h2>
+							</div>
+							<div id="user_photo_edit_container">
+							<c:forEach var="fileDTO" items="${myUploadFileList}">
+								<div id="user_photo_edit">
+									<div id="user_photo_edit_top">
+										<div id="user_photo_area">
+											<div id="user_photo_box" style="position: relative;">
+												<img src="getImage/${fileDTO.filename}" alt="event_photo" id="photo_box_img" width="168px" height="168px">
+											</div>
+										</div>
+										<div id="user_photo_write_info">
+											<p>
+												From 
+												<a href="member_details" style="font-weight: bold;">
+													${sessionScope.memberinfo.email}
+												</a>
+											</p> 
+											<form name="event_photo_delete_form" id="info_photo" action="event_delete_photo" method="post">
+												<input type="hidden" name="filename" value="${fileDTO.filename}">
+												<input type="hidden" name="evnum" value="${eventDTO.evnum}">
+												<button id="delete_button">Delete</button> 
+											</form>
 										</div>
 									</div>
-									<div id="user_photo_write_info">
-										<p>
-											From 
-											<a href="#" style="font-weight: bold;">
-												${sessionScope.memberinfo.email}
-											</a>
-										</p> 
-										<form id="info_photo" method="post" enctype="multipart/form-data">
-											<input type="hidden" id="photoname" style="display: none; cursor: auto;">
-											<button id="delete_button">Delete</button> 
-										</form>
-									</div>
+									
+									<form id="photo_description" method="post" style="margin-bottom: 18px; display: block;" enctype="multipart/form-data">
+										<input type="hidden" name="evnum" id="evnum">
+										<input type="hidden" name="mnum" id="mnum">
+										<input type="hidden" name="filenum" id="filenum">
+										<label>Description</label>
+										<div id="description_container">
+											<textarea rows="4" name="file_content">${fileDTO.file_content}</textarea>
+										</div>
+										<button type="submit" id="Save_button">
+											<span>Save</span>
+										</button>
+									</form>
 								</div>
-								
-								<form id="photo_description" method="post" style="margin-bottom: 18px; display: block;" enctype="multipart/form-data">
-									<input type="hidden" name="evnum" id="evnum">
-									<input type="hidden" name="mnum" id="mnum">
-									<input type="hidden" name="filenum" id="filenum">
-									<label>Description</label>
-									<div id="description_container">
-										<textarea rows="4" name="file_content"></textarea>
-									</div>
-									<button type="submit" id="Save_button">
-										<span>Save</span>
-									</button>
-								</form>
+							</c:forEach>	
 							</div>
-						</div>
+						</c:if>
+						
+						
+						
+<!-- 						<div id="sucess_file_upload_header"> -->
+<!-- 							<h2>Photos</h2> -->
+<!-- 						</div> -->
+<!-- 						<div id="user_photo_edit_cotainer"></div> -->
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<script type="text/javascript">
- 		function fileCheck(obj) {
-			var pathpoint = obj.value.lastIndexOf('.');
-			var filepoint = obj.value.substring(pathpoint+1, obj.length);
-			var filetype = filepoint.toLowerCase();
-			
-			if(filetype == 'jpg' || filetype == 'gif' || filetype == 'png' || filetype == 'jpeg') {
-				var fileObject = document.getElementById('file_browser_input');
-				if(fileObject.files[0].size > 10485760) {
-					alert("이미지의 크기가 10MB를 초과할 수 없습니다.");
+ 		function fileCheck() {
+ 			var fileObject = document.getElementById('file_browser_input');
+ 			var files = fileObject.files;
+ 			
+			var data = new FormData();
+ 			for(var i = 0; i < files.length; i++) {
+ 				alert(files[i].name);
+ 				var pathpoint = files[i].name.lastIndexOf('.');
+				var filepoint = files[i].name.substring(pathpoint+1, files[i].length);
+				var filetype = filepoint.toLowerCase();
+
+				if(filetype == 'jpg' || filetype == 'gif' || filetype == 'png' || filetype == 'jpeg') {
+					if(files[i].size > 10485760) {
+						alert("이미지의 크기가 10MB를 초과할 수 없습니다.");
+						return false;
+					} else {
+						data.append('file'+i, files[i]);
+					}
+				} else if(filetype == 'bmp') {
+ 					alert('.bmp형식의 이미지는 적절한 형식이 아닙니다. 다른 형식의 이미지 파일을 선택해주세요.');
+ 					return false;
+ 				} else {
+					alert('이미지 파일만 선택할 수 있습니다.');
 					return false;
 				}
-				var data = new FormData();
-				data.append('filename', fileObject.files[0]);
-				
-				var url = "event_fileUpLoad?evnum=${eventDTO.evnum}";
-				$.ajax({
-					url: url,
-					method: 'post',
-					data: data,
-					dataType: 'json',
-					processData: false,
-					contentType: false,
-					success: function(responseData) {
-						if(responseData.failed) {
-							alert("잠시후 다시 시도해주세요.");
-							return false;
-						} 
-						$('#result_photo_status_text').hide();
-						$('#sucess_file_upload_header').show();
-						$('#user_photo_edit_cotainer').show();
-						$('#filenum').val(responseData.filenum);
-						$('#photoname').val(responseData.filename);
-						var url = "getImage/" + responseData.filename;
-						$('#photo_box_img').attr('src', url);
-					}
-				});
-				return true;
-			} else {
-				alert('이미지 파일만 선택할 수 있습니다.');
-				var parentObj = obj.parentNode;
-				var node = parentObj.replaceChild(obj.cloneNode(true), obj);
-				return false;
-			}
-			if(filetype == 'bmp') {
-				alert('.bmp형식의 이미지는 적절한 형식이 아닙니다. 다른 형식의 이미지 파일을 선택해주세요.');
-				return false;
-			}
-		}
-
+ 			}
+	
+ 			var url = "event_fileUpLoad?evnum=${eventDTO.evnum}";
+ 			$.ajax({
+ 				url: url,
+ 				method: 'post',
+ 				data: data,
+ 				dataType: 'json',
+ 				processData: false,
+ 				contentType: false,
+ 				success: function(responseData) {
+ 						if(responseData.failed) {
+ 							alert("업로드할 수 없는 파일이 존재합니다.");
+ 							return false;
+ 						} else if (responseData.created_fail) {
+ 							alert(responseData.created_fail);
+ 							return false;
+ 						} else if (responseData.upload_failed) {
+ 							alert(responseData.upload_failed)
+ 							return false;
+ 						}
+ 					var uploadFiles = responseData.fileList;
+ 					location.reload();
+ 					
+ 					$('#result_photo_status_text').hide();
+ 					$('#sucess_file_upload_header').show();
+ 					$('#user_photo_edit_container').show();
+ 				},
+ 				error: function() {
+ 					alert("아작스 에러");
+ 					return false;
+ 				}
+ 			});		
+ 		}
+	</script>
+	
+	
+	<script>
 		$(function() {
 			var objDragAndDrop = $('#file_uploader_container');
 			objDragAndDrop.on('dragenter', function (e) {
 				e.stopPropagation();
 				e.preventDefault();
 				$(this).css('opacity', '0.33');
-			});
+			});	
 
 			objDragAndDrop.on('dragleave', function (e) {
 				e.stopPropagation();
 				e.preventDefault();
 				$(this).css('opacity', '1');
 			});
-
+	
 			objDragAndDrop.on('dragover', function (e) {
 				e.stopPropagation();
 				e.preventDefault();
 				$(this).css('opacity', '0.33');
 			});
-
+	
 			objDragAndDrop.on('drop', function (e) {
 				e.preventDefault();
 				$(this).css('opacity', '1');
-
+	
 				var files = e.originalEvent.dataTransfer.files;
 				if(files.length < 1) {
 					return;
-				} else if (files.length > 1) {
-					alert("하나의 파일만 올려주세요.");
-					return;
 				}
 				
-				var pathpoint = files[0].name.lastIndexOf('.');
-				var filepoint = files[0].name.substring(pathpoint+1, files[0].name.length);
-				var filetype = filepoint.toLowerCase();
-				
-				if(filetype != 'jpg' && filetype != 'gif' && filetype != 'png' && filetype != 'jpeg') {
-					alert('이미지 파일만 선택할 수 있습니다.');
-					return;
+				for(var i = 0; i < files.length; i++) {
+					var pathpoint = files[i].name.lastIndexOf('.');
+					var filepoint = files[i].name.substring(pathpoint+1, files[i].name.length);
+					var filetype = filepoint.toLowerCase();
+					
+					if(filetype != 'jpg' && filetype != 'gif' && filetype != 'png' && filetype != 'jpeg') {
+						alert('이미지 파일만 선택할 수 있습니다.');
+						return;
+					}
+					if(filetype == 'bmp') {
+						alert('.bmp형식의 이미지는 적절한 형식이 아닙니다. 다른 형식의 이미지 파일을 선택해주세요.');
+						return;	
+					}
+					if(files[0].size > 10485760) {
+						alert("이미지의 크기가 10MB를 초과할 수 없습니다.");
+						return;
+					}
 				}
-				if(filetype == 'bmp') {
-					alert('.bmp형식의 이미지는 적절한 형식이 아닙니다. 다른 형식의 이미지 파일을 선택해주세요.');
-					return;
-				}
-				if(files[0].size > 10485760) {
-					alert("이미지의 크기가 10MB를 초과할 수 없습니다.");
-					return;
-				}
-				
-				(F_FileMultiUpload = function(file, objDragAndDrop) {
+	
+				(F_FileMultiUpload = function(files, objDragAndDrop) {
 					var data = new FormData();
-					data.append('filename', file);
-						
+					for(var i = 0; i < files.length; i++) {
+						data.append('files'+i, files[i]);
+					}
+					
 					var url = "event_fileUpLoad?evnum=${eventDTO.evnum}";
 					$.ajax({
 						url: url,
@@ -206,40 +231,40 @@
 						processData: false,
 						contentType: false,
 						success: function(responseData) {
-							if(responseData.failed) {
-								alert("잠시후 다시 시도해주세요.");
-								return false;
-							}
+								if(responseData.failed) {
+									alert("업로드할 수 없는 파일이 존재합니다.");
+									return false;
+								} else if (responseData.created_fail) {
+									alert(responseData.created_fail);
+									return false;
+								} else if (responseData.upload_failed) {
+									alert(responseData.upload_failed)
+									return false;
+								}
+							var uploadFiles = responseData.fileList;
+							window.location.reload();
 							
 							$('#result_photo_status_text').hide();
 							$('#sucess_file_upload_header').show();
-							$('#user_photo_edit_cotainer').show();
-							$('#filenum').val(responseData.filenum);
-							$('#photoname').val(responseData.filename);
-							var url = "getImage/" + responseData.filename;
-							$('#photo_box_img').attr('src', url);
+							$('#user_photo_edit_container').show();
 						},
 						error: function() {
 							alert("아작스 에러");
+							return false;
 						}
 					});
 				});
-				F_FileMultiUpload(files[0], objDragAndDrop);
+				F_FileMultiUpload(files, objDragAndDrop);
 			});
 		});
-	</script>
-	<script>
+		
 		$(document).ready(function() {
-			var mode = $('#mode');
-			
-			if(mode.val() == 'photo_del') {
+			var del = '${delete}';
+			if(del) {
 				$('#result_photo_status_text').show();
-				$('#sucess_file_upload_header').hide();
-				$('#user_photo_edit_cotainer').hide();
 			} else {
 				$('#result_photo_status_text').hide();
 			}
-			
 			$('#file_browser_button').hover(function() {
 				$(this).css('background-color', 'red');
 			})
@@ -249,20 +274,12 @@
 			$('#file_browser_button').click(function() {
 				$('#file_browser_input').click();				
 			})
-			$('#delete_button').click(function() {
-				var filename = $('#photoname').val();
-				if(confirm('정말 삭제하시겠습니까?')) {
-					$('#info_photo').attr('action', 'event_update_photo?mode=photo_del&evnum=${eventDTO.evnum}&filename='+filename); //파라미터로 photo_del을 보내서 사진 지워진 후 인지 아닌지 판별
-				} else {
-					return false;
-				}
-			})
 		});
 		
 		$(document).on('click', '#Save_button', function(e) {
 			$('#evnum').val('${eventDTO.evnum}');
 			$('#mnum').val('${sessionScope.memberinfo.mnum}');
 			$('#photo_description').attr('action', 'event_updatePro_photo');
-		})
+		});
 	</script>
 <%@ include file="../bottom.jsp"%>

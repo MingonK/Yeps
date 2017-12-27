@@ -22,6 +22,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete yeps_files where filenum = #{filenum}
 	</delete>
 	
+	<delete id="deleteFileToFilename" parameterType="String">
+		delete yeps_files where filename = #{filename}
+	</delete>
+	
+	<select id="getfileListForMe" parameterType="java.util.HashMap" resultType="FileDTO">
+		select * from yeps_files where evnum = #{evnum} and mnum = #{mnum} order by filenum desc
+	</select>
+	
+	<select id="getFYIEventFile" parameterType="int" resultType="FileDTO">
+		select * from yeps_files where evnum = #{evnum} and rownum = 1 order by filenum asc
+	</select>
+	
 	<select id="getTargetEventFiles" parameterType="int" resultType="FileDTO">
 		select * from yeps_files where evnum = #{evnum} order by filenum desc
 	</select>

@@ -17,7 +17,15 @@
 			<div class="event_list_main_section_location_bar">
 				<div class="event_list_section_header_location_bar_inner">
 					<div class="event_list_section_header_location_left">
-						<h1>현재 검색한 위치가 나타나야 함.</h1>
+						<c:if test="${empty sessionScope.memberinfo}">
+							<h1>서울특별시</h1>
+						</c:if>
+						<c:if test="${!empty sessionScope.memberinfo}">
+							<c:forTokens items="${sessionScope.memberinfo.address}" delims=" " begin="1" end="2" var="addr">
+                            	<c:set var="address" value="${address += addr}"/>
+                            </c:forTokens>
+                            <h1>${address}</h1>
+						</c:if>
 					</div>
 					<!-- 반복문 돌면서 최대 5개 까지 출력 -->
 					<div class="event_list_section_header_location_nowrap">
@@ -50,10 +58,11 @@
 										<strong style="font-weight: bold;">Home</strong>
 									</a>
 									<br>
-									<a href="#">계정에 등록 된 집 주소를 보여주세요.</a>
+									<!-- 이 지역으로 검색되어야 함 -->
+									<a href="#">${memberinfo.address}</a>
 								</li>
 							</ul>
-							<a href="#">저장된 집 주소 바꾸기 »</a>
+							<a href="member_profile">저장된 집 주소 바꾸기 »</a>
 						</div>
 						
 						<div class="more_cities_island_section">
@@ -71,7 +80,7 @@
 						</div>
 						
 						<div class="more_cities_island_section">
-							<h4>유명 도시</h4>
+							<h4>인기 지역</h4>
 							<div class="popular_cities">
 								<div class="popular_cities_left" style="vertical-align: top;">
 									<!-- 반복문으로 16개 도시 출력 -->
@@ -144,7 +153,7 @@
 						<li class="event_browse_filter_tap_items">
 							<div class="event_browse_filter_tap_items_dropdown">
 								<div class="event_browse_filter_itmes_dropdown_toggle">
-									<a class="dropdown_toggle_action" href="#" data-dropdown-prefix="Sort by:">
+									<a class="dropdown_toggle_action" href="#" role="button" data-dropdown-prefix="Sort by:">
 										<span class="data-dropdown-prefix" style="font-size: 14px;">Sort by: </span>
 										<span class="dropdow_toggle_text">
 											<c:choose>
@@ -162,7 +171,7 @@
 												</c:otherwise>
 											</c:choose>
 										</span>
-										<span class="icon icon_14x14_triangle_down" style="left: -3px; width: 14px; height: 14px; fill: currentColor;">
+										<span class="icon" style="left: -3px; width: 14px; height: 14px; fill: currentColor;">
 											<svg class="icon_svg" id="14x14_triangle_down" weight="100%" height="100%" viewbox="0 0 14 14">
 												<path d="M7 9L3.5 5h7L7 9z"></path>
 											</svg>
@@ -213,7 +222,7 @@
 						<li class="event_browse_filter_tap_items">
 							<div class="event_browse_filter_tap_items_dropdown">
 								<div class="event_browse_filter_itmes_dropdown_toggle">
-									<a class="dropdown_toggle_action" href="#" style="padding-right: 0;">
+									<a class="dropdown_toggle_action" href="#" role="button" style="padding-right: 0;">
 										<span class="dropdow_toggle_text" style="font-weight: normal; font-size: 13px;">
 											<c:choose>
 												<c:when test="${empty mode}">
@@ -249,12 +258,15 @@
 												<c:when test="${mode == 'family_kids'}">
 													가족 & 어린이
 												</c:when>
+												<c:when test="${mode == 'other'}">
+													기타
+												</c:when>
 												<c:otherwise>
 													전체 목록
 												</c:otherwise>
 											</c:choose>
 										</span>
-										<span class="icon icon_14x14_triangle_down" style="left: -3px; width: 14px; height: 14px; fill: currentColor;">
+										<span class="icon" style="left: -3px; width: 14px; height: 14px; fill: currentColor;">
 											<svg class="icon_svg" id="14x14_triangle_down" weight="100%" height="100%" viewbox="0 0 14 14">
 												<path d="M7 9L3.5 5h7L7 9z"></path>
 											</svg>
@@ -342,7 +354,14 @@
 															가족 & 어린이
 														</span>
 													</a>
-												</li>						
+												</li>
+												<li class="event_browse_dropdown_menu_item">
+													<a href="event_list?mode=other" class="dropdown_menu_item_link">
+														<span style="display: inline-block;">
+															기타
+														</span>
+													</a>
+												</li>					
 											</ul>
 										</div>
 									</div>
@@ -381,29 +400,23 @@
 					<div class="event_list_line_unit_wrapper">
 						<div class="event_list_card_photo">
 							<c:forEach var="fileDTO" items="${fileList}">
-								<c:if test="${eventDTO.filenum == fileDTO.filenum}">
-									<div class="event_list_photo_box" style="background-image: url(getImage/${fileDTO.filename});">
-										<a href="event_content?evnum=${eventDTO.evnum}">
-											<img src="getImage/${fileDTO.filename}" height="300" width="300" class="event_list_photo_box_img">
-										</a>
-									</div>
-								</c:if>
-								
-								<c:if test="${eventDTO.filenum == 0}">
-									<div class="event_list_photo_box" style="background-color: #f5f5f5; background-size: contain; background-image: url(getImage/event_square.png);">
-										<a href="event_content?evnum=${eventDTO.evnum}">
-											<img src="getImage/event_square.png" height="300" width="300" class="event_list_photo_box_img">
-										</a>									
-									</div>
+								<c:if test="${eventDTO.evnum == fileDTO.evnum}">
+									<c:if test="${fileDTO.filename == 'nothing'}">
+										<div class="event_list_photo_box" style="background-color: #f5f5f5; background-size: contain; background-image: url(getImage/event_square.png);">
+											<a href="event_content?evnum=${eventDTO.evnum}">
+												<img src="getImage/event_square.png" height="300" width="300" class="event_list_photo_box_img">
+											</a>									
+										</div>
+									</c:if>
+									<c:if test="${fileDTO.filename != 'nothing'}">
+										<div class="event_list_photo_box" style="background-image: url(getImage/${fileDTO.filename});">
+											<a href="event_content?evnum=${eventDTO.evnum}">
+												<img src="getImage/${fileDTO.filename}" height="300" width="300" class="event_list_photo_box_img">
+											</a>
+										</div>
+									</c:if>
 								</c:if>
 							</c:forEach>
-							<c:if test="${empty fileList}">
-								<div class="event_list_photo_box" style="background-color: #f5f5f5; background-size: contain; background-image: url(getImage/event_square.png);">
-									<a href="event_content?evnum=${eventDTO.evnum}">
-										<img src="getImage/event_square.png" height="300" width="300" class="event_list_photo_box_img">
-									</a>									
-								</div>
-							</c:if>
 						</div>
 					
 					<div class="event_list_card_body">
@@ -477,11 +490,14 @@
 									<c:when test="${eventDTO.event_category eq 'family_kids'}">
 										가족 & 어린이
 									</c:when>
+									<c:when test="${eventDTO.event_category eq 'other'}">
+										기타
+									</c:when>
 								</c:choose>
 							</a>
-							<span style="float: right !important; color: #999; font-weight: normal;">
-								999 interested
-							</span>
+<!-- 							<span style="float: right !important; color: #999; font-weight: normal;"> -->
+<!-- 								999 interested -->
+<!-- 							</span> -->
 						</div>
 					</div>
 
@@ -598,44 +614,58 @@
 					
 					
 					<ul class="footer_section_other_events_list">
-					<c:forEach var="thisWeek_random_eventDTO" items="${thisWeek_random_eventList}">
+						<c:if test="${empty thisWeek_random_eventList}">
+							<li>
+								진행중인 이벤트가 없습니다.
+							</li>
+						</c:if>
+						<c:if test="${!empty thisWeek_random_eventList}">
+						<c:forEach var="thisWeek_random_eventDTO" items="${thisWeek_random_eventList}">
 						<li>
 							<div class="footer_section_other_events_list_item">
 								<div class="list_item_photo_box_wrapper">
 									<div class="list_item_photo_box">
 										<a href="event_content?evnum=${thisWeek_random_eventDTO.evnum}">
 										<c:forEach var="thisWeek_random_fileDTO" items="${thisWeek_random_fileList}">
-											<c:if test="${thisWeek_random_eventDTO.filenum eq thisWeek_random_fileDTO.filenum}">
-												<img src="getImage/${thisWeek_random_fileDTO.filename}" width="60px" height="60px">
+											<c:if test="${thisWeek_random_eventDTO.evnum == thisWeek_random_fileDTO.evnum}">
+												<c:if test="${thisWeek_random_fileDTO.filename == 'nothing'}">
+													<img src="getImage/event_square.png" width="60px" height="60px">
+												</c:if>
+												<c:if test="${thisWeek_random_fileDTO.filename != 'nothing'}">
+													<img src="getImage/${thisWeek_random_fileDTO.filename}" width="60px" height="60px">
+												</c:if>
 											</c:if>
 										</c:forEach>
-										<c:if test="${thisWeek_random_eventDTO.filenum eq 0}">
-											<img src="getImage/event_square.png" width="60px" height="60px">
-										</c:if>	
 										</a>
 									</div>
 								</div>
 								
 								<div class="list_item_info_wrap">
 									<strong style="font-weight: bold;">
-										<a href="#">
+										<a href="event_content?evnum=${thisWeek_random_eventDTO.evnum}">
 											${thisWeek_random_eventDTO.eventname}
 										</a>
 									</strong>
 									
 									<small style="font-size: 12px; line-height: 1.5em">
-										${thisWeek_random_eventDTO.start_date}, ${thisWeek_random_eventDTO.start_time} – ${thisWeek_random_eventDTO.end_date}, ${thisWeek_random_eventDTO.end_time}
+										<c:if test="${empty thisWeek_random_eventDTO.end_date}">
+											${thisWeek_random_eventDTO.start_date}, ${thisWeek_random_eventDTO.start_time}
+										</c:if>
+										<c:if test="${!empty thisWeek_random_eventDTO.end_date}">
+											${thisWeek_random_eventDTO.start_date}, ${thisWeek_random_eventDTO.start_time} – ${thisWeek_random_eventDTO.end_date}, ${thisWeek_random_eventDTO.end_time}
+										</c:if>
 									</small>
 									
-									<div>
-										<small style="font-size: 12px; line-height: 1.5em; color: #999; font-weight: normal;">
-											999명 interested
-										</small>
-									</div>
+<!-- 									<div> -->
+<!-- 										<small style="font-size: 12px; line-height: 1.5em; color: #999; font-weight: normal;"> -->
+<!-- 											999명 interested -->
+<!-- 										</small> -->
+<!-- 									</div> -->
 								</div>
 							</div>
 						</li>
 					</c:forEach>
+					</c:if>
 					</ul>
 									
 					<a class="link_more" href="event_list">
@@ -843,25 +873,22 @@
 		$('.icon_14x14_triangle_down').hide();
 		$('.location_more_cities_island').hide();
 	})
+
 	
 	$(document).on('click', '.dropdown_toggle_action', function(e) {
-		var parent = $(e.target).parents('.event_browse_filter_itmes_dropdown_toggle');
-		var parent_next = parent.next();
-		var dropdown_menu = parent_next.children('.event_browse_filter_itmes_dropdown_menu');
+		var parent = $(this).parents('.event_browse_filter_itmes_dropdown_toggle');
 		
  		if(!$(parent).hasClass('is_active')) {
+ 			$('.event_browse_filter_itmes_dropdown_toggle').removeClass('is_active');
+			$('.event_browse_filter_itmes_dropdown_menu').removeClass('is_visible');
 			$(parent).addClass('is_active');
+			$(parent).next().children('.event_browse_filter_itmes_dropdown_menu').addClass('is_visible');
 		} else {
 			$(parent).removeClass('is_active');
+			$(parent).next().children('.event_browse_filter_itmes_dropdown_menu').removeClass('is_visible');
 		}
-		if(!$(dropdown_menu).hasClass('is_visible')) {
-			$(dropdown_menu).addClass('is_visible');
-		} else {
-			$(dropdown_menu).removeClass('is_visible');
-		}
-		
-		e.stopPropagation();
-		e.preventDefault();
+ 		e.stopPropagation();
+ 		e.preventDefault();
 	})
 	
 	$(document).on('click', function(e) {

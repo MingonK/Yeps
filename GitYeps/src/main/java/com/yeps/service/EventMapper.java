@@ -80,10 +80,18 @@ public class EventMapper {
 	}
 	
 	public List<EventDTO> getThisWeek_EventList() {
-		return sqlSession.selectList("getThisWeek_EventList");
+		try {
+			return sqlSession.selectList("getThisWeek_EventList");
+		} catch(Exception e) {
+			return null;
+		}
 	}
 	
 	public List<EventDTO> getRandom_EventList() {
-		return sqlSession.selectList("getRandom_EventList");
+		try {
+			return sqlSession.selectList("getRandom_EventList");
+		} catch(Exception e) {
+			return null;
+		}
 	}
 }

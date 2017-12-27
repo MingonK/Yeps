@@ -30,6 +30,17 @@ public class FileMapper {
 		return sqlSession.delete("deleteFile", filenum);
 	}
 	
+	public int deleteFileToFilename(String filename) {
+		return sqlSession.delete("deleteFileToFilename", filename);
+	}
+	
+	public List<FileDTO> getfileListForMe(int evnum, int mnum) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("evnum", evnum);
+		map.put("mnum", mnum);
+		return sqlSession.selectList("getfileListForMe", map);
+	}
+	
 	public int updateFileContent(int filenum, String filecontent) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("filenum", filenum);
@@ -39,5 +50,9 @@ public class FileMapper {
 	
 	public List<FileDTO> getTargetEventFiles(int evnum) {
 		return sqlSession.selectList("getTargetEventFiles", evnum);
+	}
+	
+	public FileDTO getFYIEventFile(int evnum) {
+		return sqlSession.selectOne("getFYIEventFile", evnum);
 	}
 }

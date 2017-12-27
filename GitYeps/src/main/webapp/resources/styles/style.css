@@ -165,7 +165,7 @@ h2, h3{
 }
 
 #label_span {
-	float: left; margin-right: 5px; font-weight: bold; color: #333;
+	float: left; margin-right: 5px; margin-top: 2px; font-weight: bold; color: #333;
     cursor: default; user-select: none; padding: 0; border: 0;
     font-size: 100%; font: inherit; vertical-align: baseline;
 }
@@ -194,7 +194,7 @@ h2, h3{
 }
 
 #page_header_inputs, #page_header_location_inputs, #page_header_searchDate_inputs {
-	margin: 0; border: 0; outline: 0; box-shadow: none; 
+	margin-top: 2px; border: 0; outline: 0; box-shadow: none; 
     vertical-align: baseline !important; padding: 0 !important;
     color: inherit; font: inherit; font-weight: normal;
     display: inline-block; background: transparent; position: relative; box-sizing: border-box;
@@ -336,6 +336,7 @@ h2, h3{
 #header_page_footer_dropdown_view {
 	display: block; position: static; z-index: 1012; padding: .5em 0; top: auto; border-radius: 3px; 
 	border: 1px solid #e6e6e6; background-color: white; box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+	border-top: 1px solid white;
 }
 
 #header_page_footer_dropdown_menu_item {
