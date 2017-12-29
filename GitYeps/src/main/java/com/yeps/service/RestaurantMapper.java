@@ -56,5 +56,35 @@ public class RestaurantMapper {
 		map.put("end", end);
 		return sqlSession.selectList("listRestaurantReview", map);
 	}
+	
+	
+	//상우//
+//	public List<RestaurantDTO> listrestaurant(){
+//		return sqlSession.selectList("listrestaurant");
+//	}
+
+//	public int insertRest(RestaurantDTO dto) {
+//		return sqlSession.update("insertRestaurant",dto);
+//	}
+	
+	public List<RestaurantDTO> GetRestaurantName_R(int GETrnum) {
+		return sqlSession.selectList("GetRestaurantName_R", GETrnum);
+	}
+	
+	public RestaurantDTO restaurantRName(int rnumList) {
+			return sqlSession.selectOne("restaurantRName", rnumList);
+	}
+	
+	public List<RestaurantDTO> restaurant_restaurantIMG() {
+		return sqlSession.selectList("restaurant_restaurantIMG");
+	}
+	
+	public List<RestaurantDTO> previous_R(int rnum){
+		return sqlSession.selectList("previous_R", rnum);
+	}
+	
+//	public String review_write_getrname(int rnum) {
+//		return sqlSession.selectOne("review_write_getrname", rnum);
+//	}
 
 }

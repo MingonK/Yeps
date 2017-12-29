@@ -13,6 +13,7 @@
 		<a href="event_insert_photo">이벤트 사진 등록</a>&emsp;
 		<a href="main">메인 페이지</a>&emsp;&emsp;&emsp;
 		<a href="test">테스트 페이지</a>
+		<a href="review_index">리뷰 페이지</a>
 	</div>
 </body>
 </html>

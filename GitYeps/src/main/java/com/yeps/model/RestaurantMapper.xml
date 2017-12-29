@@ -5,6 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.web.model">
+
 	<select id="listRestaurant" resultType="RestaurantDTO" parameterType="RestaurantDTO">
 		select * from (select rownum rn, A.* from (select * from yeps_restaurant order by rnum desc)A) where rn between #{start} and #{end}
 	</select>
@@ -38,6 +39,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	
+	
+	<!-- 상우 -->
+	<!--  
+	<select id="listrestaurant" resultType="RestaurantDTO">
+		select * from restaurant order by rnum desc
+	</select>
+	-->
+	
+	<select id="GetRestaurantName_R" parameterType="int" resultType="RestaurantDTO" >
+		select * from yeps_restaurant where rnum = #{GETrnum}
+	</select>
+
+	<select id="restaurantRName" parameterType="int" resultType="RestaurantDTO" >
+		select * from yeps_restaurant where rnum= #{rnumList}
+	</select>
+	
+	<select id="restaurant_restaurantIMG" resultType="RestaurantDTO">
+  		select * from yeps_restaurant where 19 >= rownum 
+  	</select>
+  	
+  	<select id="previous_R" parameterType="int" resultType="RestaurantDTO" >
+  		select *from yeps_restaurant where rnum= #{rnum}
+  	</select>
+  	
 	
 	
 	<!-- =========================================================== -->

@@ -90,22 +90,21 @@
 
 
 
-    <select id="mylist_info" parameterType="int" resultType="MemberDTO">
-        select *from yeps_member where mnum = #{NBPmnum}
-     </select>
-     
-     <select id="getSelectedRestaurant_M" parameterType="int" resultType="MemberDTO">
-        select *from yeps_member where mnum = #{mnum}
-     </select>
+<select resultType="MemberDTO" id="getSelectedRestaurant_M" parameterType="int"> 
+   select * from yeps_member where mnum= #{mnum} 
+</select>
 
-   <select id="memberName" parameterType="int" resultType="MemberDTO">
-      select * from yeps_member where mnum = #{mnumList}
-   </select>
+<select resultType="MemberDTO" id="memberName" parameterType="int"> 
+   select * from yeps_member where mnum= #{mnumList} 
+</select>
 
-   <select id="previous_M" parameterType="int" resultType="MemberDTO">
-      select *from yeps_member where mnum = #{mnum}
-   </select>
-   
+<select resultType="MemberDTO" id="previous_M" parameterType="int"> 
+   select *from yeps_member where mnum= #{mnum} 
+</select>
+
+<select resultType="MemberDTO" id="SearchedDTO_M" parameterType="int"> 
+   select *from yeps_member where mnum= #{mnum} 
+</select>
    
    
    
