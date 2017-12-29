@@ -6,8 +6,9 @@
 <head>
 <title>findID</title>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/member.css?ver=3"/>"/>
 </head>
-<body>
+<body ondragstart="return false">
 	<c:choose>
 		<c:when test="${empty emailList}">
 			<div id="member_popup">

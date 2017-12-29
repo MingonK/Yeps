@@ -2,22 +2,15 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<% 
-    pageContext.setAttribute("cr", "\r"); //Space
-    pageContext.setAttribute("cn", "\n"); //Enter
-    pageContext.setAttribute("crcn", "\r\n"); //Space, Enter
-    pageContext.setAttribute("br", "<br/>"); //br 태그
-%>
 <html>
 <head>
 	<title>Yeps!</title>
-	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css?ver=1"/>"/>
-	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/mainPage.css?ver=3"/>"/>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/mainPage.css?ver=4"/>"/>
 	<script src="//code.jquery.com/jquery.min.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 	
 <style>
-
 .under_review_container {
 	background-color: #fff;
     min-width: 1020px;   
@@ -86,7 +79,6 @@
 
 .review_of_the_day_writer_info {
 	width: 100%;
-	display: table-cell;
 }
 
 .review_of_the_day_writer {
@@ -99,10 +91,15 @@
 	margin: 3px 0;
 }
 
-.review_of_the_day_writer_friend_count, .review_of_the_day_writer_review_count, .review_of_the_day_writer_is_elite {
+.review_of_the_day_writer_friend_count {
 	color: #666;
 	display: inline;
     margin-right: 6px;
+}
+
+.review_of_the_day_writer_is_elite {
+	display: inline;
+	margin-right: 6px;
 }
 
 .review_of_the_day_writer_is_elite a {
@@ -114,53 +111,6 @@
 	font-size: 14px;
     line-height: 1.28571em;
 }
-
-.bedge_benner_blue {
-	background-color: #d0ecfb;
-	padding: 4px 52px 3px 6px;
-    border-radius: 4px;
-    position: relative;
-    
-}
-
-.bedge_benner_blue_img {
-	position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    right: 6px;
-    vertical-align: middle;
-}
-
-.mainpage_review_rating_regdate {
-	margin: 6px 0;
-}
-
-.mainpage_review_rating {
-	float: left;
-    margin: -1px 6px 0 0;
-    position: relative;
-    overflow: hidden;
-    width: 102px;
-    height: 18px;
-    background-position: 0 -366px;
-    background: url(https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png) no-repeat;
-    background-size: 132px 560px;
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.mainpage_review_rating img {
-	clip: rect(0 0 0 0);
-    position: absolute;
-    left: -9999px;
-    top: auto;
-    overflow: hidden;
-    width: 1px;
-    height: 1px;
-    vertical-align: middle;
-}
-
 </style>
 </head>
 <body>
@@ -172,7 +122,7 @@
 						<div style="white-space: nowrap;">
 							<ul class="mainpage_header_top_left">
 								<li class="mainpage_header_write_review mainpage_header_top_items">
-									<a href="restaurant_restaurantIMG" class="mainpage_header_link">
+									<a href="#" class="mainpage_header_link">
 										Write a Review
 									</a>
 								</li>
@@ -192,6 +142,7 @@
 					
 					
 					
+					<!-- 로그인부분 수정 완료했습니다! -->
 					
 					<c:choose>
 							<c:when test="${empty sessionScope.memberinfo}">
@@ -214,12 +165,13 @@
 							<div class="mainpage_header_top_right_wrap_login">
 								<div id="page_header_notifications_wrap">
 									<div id="page_header_notifications">
-										<a href="yeps_message" class="header-nav_link" id="messages-icon" data-analytics-label="messages_icon">
+										<a href="/mail" class="header-nav_link" id="messages-icon" data-analytics-label="messages_icon">
 											<span aria-label="Messages" style="width: 24px; height: 24px;" class="icon icon--24-speech icon--size-24 icon--white icon--fallback-inverted">
 											<svg class="icon_svg">
 												<path d="M18 3H6C4.34 3 3 4.34 3 6v7c0 1.66 1.34 3 3 3h2v5l5-5h5c1.66 0 3-1.34 3-3V6c0-1.66-1.34-3-3-3z"></path>
 											</svg>
 											</span>
+											<span class="new_message_count">1</span>
 										</a>
 										<a href="#" class="header-nav_link show-tooltip js-analytics-click" id="notifications-icon" data-analytics-label="notifications_icon">
 											<span aria-label="Notifications" style="width: 24px; height: 24px;" class="icon icon--24-notification icon--size-24 icon--white icon--fallback-inverted">
@@ -232,138 +184,165 @@
 								</div>
 								
 								<div id="page_header_notifications_wrap">
-		                           <div id="page_header_acount_notifications">
-		                              <div id="page_header_account">
-		                                 <div id="topbar-account-item" class="drop-menu-origin" data-component-bound="true">
-		                                    <a class="drop-menu-link user-account_button drop-menu-highlighted" href="javascript:;" id="topbar-account-link" data-component-bound="true">
-		                                       <span class="user-account_avatar responsive-visible-large-block"><img alt="Smile08908 .." class="photo-box-img" height="90" src="https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/90s.jpg" srcset="https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/180s.jpg 2.00x,https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/ms.jpg 1.11x,https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/120s.jpg 1.33x,https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/168s.jpg 1.87x,https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/ls.jpg 2.78x,https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/258s.jpg 2.87x" width="90"></span>
-		                                       <span aria-hidden="true" style="width: 14px; height: 14px;" class="icon icon-triangle-down">
-		                                          <svg class="icon_svg">
-		                                             <path d="M7 9L3.5 5h7L7 9z"></path>
-		                                          </svg>
-		                                       </span>
-		                                    </a>
-		                                    <div id="topbar-account-wrap" class="drop-menu drop-menu-has-arrow" data-component-bound="true">
-		                                       <div class="drop-menu-arrow responsive-hidden-small"></div>
-		                                          <div class="drop-menu-group responsive-visible-large-block">
-		                                             <div class="ypassport ypassport-notext media-block">
-		                                                <div class="media-avatar responsive-photo-box js-analytics-click" data-analytics-label="about_me">
-		                                                   <div class="photo-box pb-60s" data-hovercard-id="mNnbq24hI6DxMOQ0JLFrnQ">
-		                                                      <a href="member_details" class="js-analytics-click" data-analytics-label="user-photo">
-		                                                         <img class="photo-box-img" height="60" src="https://s3-media4.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/60s.jpg" width="60">
-		                                                      </a>
-		                                                   </div>
-		                                                </div>
-		                                                <div class="media-story">
-		                                                   <ul class="user-passport-info">
-		                                                      <li class="user-name">
-		                                                         <a class="user-display-name js-analytics-click" href="member_details" data-hovercard-id="mNnbq24hI6DxMOQ0JLFrnQ" data-analytics-label="about_me" id="dropdown_user-name">
-		                                                            <strong class="unit_hover">
-		                                                            	<c:if test="${!empty sessionScope.memberinfo.nickname}">
-		                                                            		<c:out value="${sessionScope.memberinfo.nickname}"/>
-		                                                            	</c:if>
-		                                                            	<c:if test="${empty sessionScope.memberinfo.nickname}">
-																			<c:set value="${sessionScope.memberinfo.name}" var="memberName"/>
+									<div id="page_header_acount_notifications">
+										<div id="page_header_account">
+											<div id="topbar-account-item" class="drop-menu-origin" data-component-bound="true">
+												<a class="drop-menu-link user-account_button drop-menu-highlighted" href="javascript:;" id="topbar-account-link" data-component-bound="true">
+													<span class="user-account_avatar responsive-visible-large-block">
+													<c:choose>
+														<c:when test="${empty sessionScope.mainPhoto}">
+															<img class="photo-box-img" height="90" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" width="90">
+														</c:when>
+														<c:otherwise>
+															<img class="photo-box-img" src="getImage/${mainPhoto.filename}" alt="member_main_photo" id="photo_box_img" width="90px" height="90px">
+														</c:otherwise>
+													</c:choose>
+													</span>
+													<span aria-hidden="true" style="width: 14px; height: 14px;" class="icon icon-triangle-down">
+														<svg class="icon_svg">
+															<path d="M7 9L3.5 5h7L7 9z"></path>
+														</svg>
+													</span>
+												</a>
+												<div id="topbar-account-wrap" class="drop-menu drop-menu-has-arrow" data-component-bound="true">
+													<div class="drop-menu-arrow responsive-hidden-small"></div>
+														<div class="drop-menu-group responsive-visible-large-block">
+															<div class="ypassport ypassport-notext media-block">
+																<div class="media-avatar responsive-photo-box js-analytics-click" data-analytics-label="about_me">
+																	<div class="photo-box pb-60s" data-hovercard-id="mNnbq24hI6DxMOQ0JLFrnQ">
+																		<a href="member_details" class="js-analytics-click" data-analytics-label="user-photo">
 																			<c:choose>
-																				<c:when test="${fn:length(memberName) > 7}">
-		                                                                        	<c:out value="${fn:substring(memberName,0,6)}"/>..
+																				<c:when test="${empty sessionScope.mainPhoto}">
+																					<img class="photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" width="60">
 																				</c:when>
 																				<c:otherwise>
-																					<c:out value="${memberName}"/>
-																				</c:otherwise> 
-		                                                              	  </c:choose>
-		                                                              	</c:if>
-		                                                            </strong>
-		                                                         </a>
-		                                                      </li>
-		                                                      <li class="user-location responsive-hidden-small">
-		                                                         <b>
-		                                                            <c:forTokens items="${sessionScope.memberinfo.address}" delims=" " begin="1" end="2" var="addr">
-		                                                               ${addr}
-		                                                            </c:forTokens>
-		                                                         </b>
-		                                                      </li>
-		                                                   </ul>
-		                                                   <ul class="user-passport-stats">
-		                                                      <li class="review-count">
-		                                                         <span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-review icon--size-18">
-		                                                            <svg class="icon_svg">
-		                                                               <path d="M13 3H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1.505 9.643l-2.526-1.55L6.526 12.7 7 9.934 5 7.977l2.766-.404L8.97 4.7l1.264 2.873L13 7.977l-2 1.957.495 2.71z"></path>
-		                                                            </svg>
-		                                                         </span>
-		                                                         <b>${sessionScope.memberinfo.reviewcount}</b> <!-- 리뷰 수 -->
-		                                                      </li>
-		                                                   </ul>
-		                                                </div>
-		                                             </div>
-		                                                      </div>
-		                                          <ul class="drop-menu-group--nav drop-menu-group">
-		                                             <li class="drop-down-menu-link">
-		                                                <a class="js-analytics-click arrange arrange--middle arrange--6" href="member_details" data-analytics-label="dropdown_about-me">
-		                                                   <strong class="arrange_unit">
-		                                                      <span aria-hidden="true" style="width: 24px; height: 24px;" class="icon icon--24-profile icon--size-24 u-space-r1">
-		                                                         <svg class="icon_svg">
-		                                                            <path d="M4.37 22c.278-4.762 3.587-8 7.63-8 4.043 0 7.352 3.238 7.63 8H4.37zM12 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"></path>
-		                                                         </svg>
-		                                                      </span><strong class="unit_hover">About Me</strong>
-		                                                   </strong>
-		                                                </a>
-		                                             </li>
-		                                             <li class="drop-down-menu-link hidden-non-responsive-block responsive-visible-medium-block">
-		                                                <a class="js-analytics-click arrange arrange--middle arrange--6" href="#" data-analytics-label="">
-		                                                   <strong class="arrange_unit">
-		                                                      <span aria-hidden="true" style="width: 24px; height: 24px;" class="icon icon--24-talk icon--size-24 u-space-r1">
-		                                                         <svg class="icon_svg">
-		                                                            <path d="M20 17.326V21l-3-3c-2.715 0-5.006-1.504-5.746-3.566C14.047 13.42 16 11.144 16 8.5c0-.142-.015-.282-.026-.422A7.19 7.19 0 0 1 17 8c3.314 0 6 2.24 6 5 0 1.85-1.208 3.46-3 4.326zM8 14c-.08 0-.158-.007-.238-.01L4 17v-3.99c-1.812-.994-3-2.642-3-4.51C1 5.462 4.134 3 8 3s7 2.462 7 5.5S11.866 14 8 14z"></path>
-		                                                         </svg>
-		                                                      </span><strong class="unit_hover">Message</strong>
-		                                                   </strong>
-		                                                </a>
-		                                             </li>
-		                                             <c:if test="${memberinfo.ismaster eq 'y' || memberinfo.ismaneger eq 'y'}">
-		                                             <li class="drop-down-menu-link">
-		                                                <a class="js-analytics-click arrange arrange--middle arrange--6" href="member_manager" data-analytics-label="dropdown_rewards-inactive">
-		                                                   <strong class="arrange_unit">
-		                                                      <span aria-hidden="true" style="width: 24px; height: 24px;" class="icon icon--24-cash-back icon--size-24 u-space-r1">
-		                                                         <svg class="icon_svg">
-		                                                            <path d="M18.803 12.49l-4.162 1.194c-.8.23-1.45-.666-.98-1.357l2.42-3.59a.893.893 0 0 1 1.33-.172 7.66 7.66 0 0 1 1.97 2.71.894.894 0 0 1-.572 1.215zm-4.187 2.627l4.117 1.338a.893.893 0 0 1 .53 1.233 7.762 7.762 0 0 1-2.058 2.64.894.894 0 0 1-1.326-.216l-2.3-3.674c-.44-.706.24-1.578 1.03-1.32zm-3.996-3.64l-4.07-7.05a.893.893 0 0 1 .388-1.25A12.475 12.475 0 0 1 11.324 2c.518-.04.96.37.96.89v8.138c0 .913-1.208 1.236-1.664.446zm-.714 3.475L5.704 16a.894.894 0 0 1-1.103-.767 7.68 7.68 0 0 1 .358-3.33.892.892 0 0 1 1.237-.516l3.89 1.898c.75.365.635 1.466-.173 1.667zm.738 1.23c.557-.62 1.584-.205 1.555.627l-.158 4.322c-.02.54-.51.94-1.04.85A7.76 7.76 0 0 1 7.9 20.73a.893.893 0 0 1-.156-1.333l2.897-3.22z"></path>
-		                                                         </svg>
-		                                                      </span><strong class="unit_hover">Managed Page</strong>
-		                                                   </strong>
-		                                                   <span class="arrange_unit">
-		                                                      <span class="ybadge ybadge-notification drop-down-menu-link_new-label">MNG</span>
-		                                                   </span>
-		                                                </a>
-		                                             </li>
-		                                             </c:if>
-		                                             <li class="drop-down-menu-link">
-		                                                <a class="js-analytics-click arrange arrange--middle arrange--6" href="member_profile" data-analytics-label="Zprofile">
-		                                                   <strong class="arrange_unit">
-		                                                      <span aria-hidden="true" style="width: 24px; height: 24px;" class="icon icon--24-settings icon--size-24 u-space-r1">
-		                                                         <svg class="icon_svg">
-		                                                            <path d="M21.872 10.48c.076.497.128 1.002.128 1.52s-.05 1.022-.127 1.518l-3.165.475c-.14.47-.323.92-.552 1.343l1.9 2.57c-.3.408-.62.8-.976 1.156l-.018.018a10.05 10.05 0 0 1-1.154.975l-2.57-1.9a7 7 0 0 1-1.344.553l-.475 3.165a9.94 9.94 0 0 1-1.506.127h-.034c-.51 0-1.01-.052-1.5-.127l-.475-3.165a7 7 0 0 1-1.343-.553l-2.57 1.9c-.408-.3-.798-.62-1.155-.975l-.018-.018a10.068 10.068 0 0 1-.978-1.155l1.9-2.57a6.97 6.97 0 0 1-.552-1.344l-3.164-.475C2.052 13.022 2 12.518 2 12s.052-1.023.128-1.52l3.164-.475a7 7 0 0 1 .553-1.342l-1.9-2.57a10.035 10.035 0 0 1 2.148-2.15l2.57 1.9a7.015 7.015 0 0 1 1.343-.55l.475-3.166C10.98 2.052 11.486 2 12 2s1.023.052 1.52.127l.474 3.165c.47.14.92.323 1.342.552l2.57-1.9a10.044 10.044 0 0 1 2.15 2.148l-1.9 2.57c.23.424.412.874.552 1.343l3.164.475zM12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z"></path>
-		                                                         </svg>
-		                                                      </span><strong class="unit_hover">Account Settings</strong>
-		                                                   </strong>
-		                                                </a>
-		                                             </li>
-		                                          </ul>
-		                                          <ul class="drop-menu-group">
-		                                             <li class="drop-down-menu-link drop-down-menu-link--logout">
-		                                                <form action="member_logout" id="logout-form" name="logout-form">
-		                                                   <button type="submit" class="u-pseudo-link" id="header-log-out" data-analytics-label="logout">Log Out</button>
-		                                                </form>
-		                                             </li>
-		                                          </ul>
-		                                       </div>         
-		                                    </div>
-		                                 </div>
-		                              </div>
-		                           </div>
+																					<img class="photo-box-img" src="getImage/${mainPhoto.filename}" alt="member_main_photo" id="photo_box_img" width="60px" height="60px">
+																				</c:otherwise>
+																			</c:choose>
+																		</a>
+																	</div>
+																</div>
+																<div class="media-story">
+																	<ul class="user-passport-info">
+																		<li class="user-name">
+																			<a class="user-display-name js-analytics-click" href="member_details" data-hovercard-id="mNnbq24hI6DxMOQ0JLFrnQ" data-analytics-label="about_me" id="dropdown_user-name">
+																				<strong class="unit_hover">
+																					<c:set value="${sessionScope.memberinfo.name}" var="memberName"/>
+                    																	<c:choose>
+                    																		<c:when test="${fn:length(memberName) > 7}">
+												                    							<c:out value="${fn:substring(memberName,0,6)}"/>..
+                    																		</c:when>
+                    																		<c:otherwise>
+                    																			<c:out value="${memberName}"/>
+                    																		</c:otherwise> 
+                    																	</c:choose>
+																				</strong>
+																			</a>
+																		</li>
+																		<li class="user-location responsive-hidden-small">
+																			<b>
+																				<c:choose>
+																					<c:when test="${!empty sessionScope.memberinfo.address}">
+																						<c:forTokens items="${sessionScope.memberinfo.address}" delims=" " begin="1" end="2" var="addr">
+																							${addr}
+																						</c:forTokens>
+																					</c:when>
+																					<c:otherwise>
+																						서울특별시
+																					</c:otherwise>
+																				</c:choose>
+																			</b>
+																		</li>
+																	</ul>
+																	<ul class="user-passport-stats">
+																		<li class="friend-count">
+																			<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-friends icon--size-18">
+																				<svg class="icon_svg">
+																					<path d="M7.904 9.43l-2.098 4.697a.9.9 0 0 1-1.612 0L2.096 9.43a.902.902 0 0 1 .806-1.305h4.196c.67 0 1.105.705.806 1.305zM5 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path>
+																					<path d="M15.904 9.43l-2.098 4.697a.89.89 0 0 1-.806.498.89.89 0 0 1-.806-.498L10.096 9.43a.902.902 0 0 1 .806-1.305h4.195c.67 0 1.106.705.807 1.305zM13 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" opacity=".502"></path>
+																				</svg>
+																			</span>
+																			<b>0</b>	<!-- 친구 수 -->
+																		</li>
+																		<li class="review-count">
+																			<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-review icon--size-18">
+																				<svg class="icon_svg">
+																					<path d="M13 3H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1.505 9.643l-2.526-1.55L6.526 12.7 7 9.934 5 7.977l2.766-.404L8.97 4.7l1.264 2.873L13 7.977l-2 1.957.495 2.71z"></path>
+																				</svg>
+																			</span>
+																			<b>${sessionScope.memberinfo.reviewcount}</b> <!-- 리뷰 수 -->
+																		</li>
+																	</ul>
+																</div>
+															</div>
+																		</div>
+														<ul class="drop-menu-group--nav drop-menu-group">
+															<li class="drop-down-menu-link">
+																<a class="js-analytics-click arrange arrange--middle arrange--6" href="member_details" data-analytics-label="dropdown_about-me">
+																	<strong class="arrange_unit">
+																		<span aria-hidden="true" style="width: 24px; height: 24px;" class="icon icon--24-profile icon--size-24 u-space-r1">
+																			<svg class="icon_svg">
+																				<path d="M4.37 22c.278-4.762 3.587-8 7.63-8 4.043 0 7.352 3.238 7.63 8H4.37zM12 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"></path>
+																			</svg>
+																		</span><strong class="unit_hover">About Me</strong>
+																	</strong>
+																</a>
+															</li>
+															<li class="drop-down-menu-link hidden-non-responsive-block responsive-visible-medium-block">
+																<a class="js-analytics-click arrange arrange--middle arrange--6" href="#" data-analytics-label="">
+																	<strong class="arrange_unit">
+																		<span aria-hidden="true" style="width: 24px; height: 24px;" class="icon icon--24-talk icon--size-24 u-space-r1">
+																			<svg class="icon_svg">
+																				<path d="M20 17.326V21l-3-3c-2.715 0-5.006-1.504-5.746-3.566C14.047 13.42 16 11.144 16 8.5c0-.142-.015-.282-.026-.422A7.19 7.19 0 0 1 17 8c3.314 0 6 2.24 6 5 0 1.85-1.208 3.46-3 4.326zM8 14c-.08 0-.158-.007-.238-.01L4 17v-3.99c-1.812-.994-3-2.642-3-4.51C1 5.462 4.134 3 8 3s7 2.462 7 5.5S11.866 14 8 14z"></path>
+																			</svg>
+																		</span><strong class="unit_hover">Message</strong>
+																	</strong>
+																</a>
+															</li>
+															<c:if test="${memberinfo.ismaster eq 'y' || memberinfo.ismanager eq 'y'}">
+																<li class="drop-down-menu-link">
+																	<a class="js-analytics-click arrange arrange--middle arrange--6" href="member_manager">
+																		<strong class="arrange_unit">
+																			<span aria-hidden="true" style="width: 24px; height: 24px;" class="icon icon--24-cash-back icon--size-24 u-space-r1">
+																				<svg class="icon_svg">
+																					<path d="M18.803 12.49l-4.162 1.194c-.8.23-1.45-.666-.98-1.357l2.42-3.59a.893.893 0 0 1 1.33-.172 7.66 7.66 0 0 1 1.97 2.71.894.894 0 0 1-.572 1.215zm-4.187 2.627l4.117 1.338a.893.893 0 0 1 .53 1.233 7.762 7.762 0 0 1-2.058 2.64.894.894 0 0 1-1.326-.216l-2.3-3.674c-.44-.706.24-1.578 1.03-1.32zm-3.996-3.64l-4.07-7.05a.893.893 0 0 1 .388-1.25A12.475 12.475 0 0 1 11.324 2c.518-.04.96.37.96.89v8.138c0 .913-1.208 1.236-1.664.446zm-.714 3.475L5.704 16a.894.894 0 0 1-1.103-.767 7.68 7.68 0 0 1 .358-3.33.892.892 0 0 1 1.237-.516l3.89 1.898c.75.365.635 1.466-.173 1.667zm.738 1.23c.557-.62 1.584-.205 1.555.627l-.158 4.322c-.02.54-.51.94-1.04.85A7.76 7.76 0 0 1 7.9 20.73a.893.893 0 0 1-.156-1.333l2.897-3.22z"></path>
+																				</svg>
+																			</span><strong class="unit_hover">Managed Page</strong>
+																		</strong>
+																		<span class="arrange_unit">
+																			<span class="ybadge ybadge-notification drop-down-menu-link_new-label">MNG</span>
+																		</span>
+																	</a>
+																</li>
+															</c:if>
+															<li class="drop-down-menu-link">
+																<a class="js-analytics-click arrange arrange--middle arrange--6" href="member_profile" data-analytics-label="Zprofile">
+																	<strong class="arrange_unit">
+																		<span aria-hidden="true" style="width: 24px; height: 24px;" class="icon icon--24-settings icon--size-24 u-space-r1">
+																			<svg class="icon_svg">
+																				<path d="M21.872 10.48c.076.497.128 1.002.128 1.52s-.05 1.022-.127 1.518l-3.165.475c-.14.47-.323.92-.552 1.343l1.9 2.57c-.3.408-.62.8-.976 1.156l-.018.018a10.05 10.05 0 0 1-1.154.975l-2.57-1.9a7 7 0 0 1-1.344.553l-.475 3.165a9.94 9.94 0 0 1-1.506.127h-.034c-.51 0-1.01-.052-1.5-.127l-.475-3.165a7 7 0 0 1-1.343-.553l-2.57 1.9c-.408-.3-.798-.62-1.155-.975l-.018-.018a10.068 10.068 0 0 1-.978-1.155l1.9-2.57a6.97 6.97 0 0 1-.552-1.344l-3.164-.475C2.052 13.022 2 12.518 2 12s.052-1.023.128-1.52l3.164-.475a7 7 0 0 1 .553-1.342l-1.9-2.57a10.035 10.035 0 0 1 2.148-2.15l2.57 1.9a7.015 7.015 0 0 1 1.343-.55l.475-3.166C10.98 2.052 11.486 2 12 2s1.023.052 1.52.127l.474 3.165c.47.14.92.323 1.342.552l2.57-1.9a10.044 10.044 0 0 1 2.15 2.148l-1.9 2.57c.23.424.412.874.552 1.343l3.164.475zM12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z"></path>
+																			</svg>
+																		</span><strong class="unit_hover">Account Settings</strong>
+																	</strong>
+																</a>
+															</li>
+														</ul>
+														<ul class="drop-menu-group">
+															<li class="drop-down-menu-link drop-down-menu-link--logout">
+																<form action="member_logout" id="logout-form" name="logout-form">
+																	<button type="submit" class="u-pseudo-link" id="header-log-out" data-analytics-label="logout">Log Out</button>
+																</form>
+															</li>
+														</ul>
+													</div>			
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 								</c:otherwise>
 							</c:choose>
-					
+					<!-- 로그인부분 수정 완료했습니다! -->
 					
 				</div>
 			</div>
@@ -372,7 +351,7 @@
 			<div class="mainpage_header_inner">
 				<div class="mainpage_header_inner_mainlogo" style="text-align: center!important;">
 					<h1 id="mainpage_header_mainlogo">
-						<a href="main">Yeps</a>
+						<a href="#">Yeps</a>
 					</h1>
 				</div>
 				<form method="post" action="#" class="mainpage_find_form" >
@@ -568,7 +547,7 @@
 						<div id="header_searchbutton_container">
 							<div id="header_searchbutton_contain_wrap">
 								<div id="header_searchbutton_wrap">
-									<button type="submit" value="submit" tabindex="3" style="background: #d32323; height: 45px; width: 70px; padding: 0 20px;" title="Search" id="header_searchbutton" class="mainpage_searchbutton">
+									<button type="submit" value="submit" tabindex="3" style="height: 45px; width: 70px; padding: 0 20px;" title="Search" id="header_searchbutton">
 										<span aria-hidden="true" style="fill: #fff; width: 24px; height: 24px;">
 											<svg id="24x24_search" viewBox="0 0 24 24">
 												<path d="M20.753 19.34l-4.295-4.297A7.46 7.46 0 0 0 18 10.5a7.5 7.5 0 1 0-7.5 7.5 7.46 7.46 0 0 0 4.543-1.542l4.296 4.295a1 1 0 1 0 1.412-1.414zM10.5 16A5.506 5.506 0 0 1 5 10.5C5 7.467 7.467 5 10.5 5S16 7.467 16 10.5 13.533 16 10.5 16z"></path>
@@ -630,7 +609,7 @@
 												</a>
 											</li>
 											<li id="header_page_footer_dropdown_menu_item">
-											<a href="#" id="footer_dropdown_menu_item_link">
+												<a href="#" id="footer_dropdown_menu_item_link">
 													<span style="white-space: nowrap;">Contractors</span>
 												</a>
 											</li>
@@ -754,7 +733,7 @@
 											</svg>
 										</span>
 										<span class="mainpage_more_city">
-											더 보기
+											더 많은 지역
 										</span>
 									</a>
 								</li>
@@ -963,278 +942,6 @@
 		</div>
 	</div>
 	
-	<div class="mainpage_browse_categories">
-		<div class="mainpage_browse_categories_content_container">
-			<div class="browse_categories_inner_container">
-				<div class="browse_categories_section">
-					<h2 class="browes_categories_section_header">Browse Businesses by Category</h2>
-					
-					<div class="mainpage_browes_categories_content">
-						<div class="mainpage_browes_categories_content_partial_wrap">
-							<div class="mainpage_browes_categories_content_unit">
-								<a href="#" class="mainpage_browes_categories_content_link">
-									<img class="mainpage_browes_categories_content_img"  width="72" src="https://s3-media1.fl.yelpcdn.com/assets/srv0/homepage/80b92cd513f0/assets/img/categories/72x72_restaurants.png">
-									<h3 class="mainpage_browes_categories_content_title">Restaurants</h3>
-								</a>
-							</div>
-							
-							<div class="mainpage_browes_categories_content_unit">
-								<a href="#" class="mainpage_browes_categories_content_link">
-									<img class="mainpage_browes_categories_content_img"  width="72" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/homepage/ad1f85392c04/assets/img/categories/72x72_shopping.png">
-									<h3 class="mainpage_browes_categories_content_title">Shopping</h3>
-								</a>
-							</div>
-							
-							<div class="mainpage_browes_categories_content_unit">
-								<a href="#" class="mainpage_browes_categories_content_link">
-									<img class="mainpage_browes_categories_content_img"  width="72" src="https://s3-media1.fl.yelpcdn.com/assets/srv0/homepage/4ee31d03d5b2/assets/img/categories/72x72_nightlife.png">
-									<h3 class="mainpage_browes_categories_content_title">Nightlife</h3>
-								</a>
-							</div>
-							
-							<div class="mainpage_browes_categories_content_unit">
-								<a href="#" class="mainpage_browes_categories_content_link">
-									<img class="mainpage_browes_categories_content_img"  width="72" src="https://s3-media4.fl.yelpcdn.com/assets/srv0/homepage/7b915f332ffe/assets/img/categories/72x72_active_life.png">
-									<h3 class="mainpage_browes_categories_content_title">Active Life</h3>
-								</a>
-							</div>
-						</div>
-						
-						<div class="mainpage_browes_categories_content_partial_wrap">
-							<div class="mainpage_browes_categories_content_unit">
-								<a href="#" class="mainpage_browes_categories_content_link">
-									<img class="mainpage_browes_categories_content_img"  width="72" src="https://s3-media1.fl.yelpcdn.com/assets/srv0/homepage/dda5bcbe7e6c/assets/img/categories/72x72_beauty.png">
-									<h3 class="mainpage_browes_categories_content_title">Beauty & Spas</h3>
-								</a>
-							</div>
-							<div class="mainpage_browes_categories_content_unit">
-								<a href="#" class="mainpage_browes_categories_content_link">
-									<img class="mainpage_browes_categories_content_img"  width="72" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/homepage/59b42d70fa94/assets/img/categories/72x72_automotive.png">
-									<h3 class="mainpage_browes_categories_content_title">Automotive</h3>
-								</a>
-							</div>
-							<div class="mainpage_browes_categories_content_unit">
-								<a href="#" class="mainpage_browes_categories_content_link">
-									<img class="mainpage_browes_categories_content_img"  width="72" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/homepage/52d0e24aea08/assets/img/categories/72x72_home_services.png">
-									<h3 class="mainpage_browes_categories_content_title">Home Services</h3>
-								</a>
-							</div>
-							<div class="mainpage_browes_categories_content_unit">
-								<a href="javascript:;" class="mainpage_browes_categories_content_link">
-									<img class="mainpage_browes_categories_content_img"  width="72" src="https://s3-media4.fl.yelpcdn.com/assets/srv0/homepage/3110ec19fa2b/assets/img/categories/72x72_more_categories.png">
-									<h3 class="mainpage_browes_categories_content_title change_title">More Categories</h3>
-								</a>
-							</div>
-						</div>
-						
-					</div>
-					
-					
-					
-					<div class="mainpage_browes_more_categories is_disabled" id="mainpage_more_categories" style="max-height: 0px; position: static; visibility: visible;">
-						<div class="more_categories_divider hr_line"></div>
-						
-						<div class="mainpage_browes_more_categories_lines">
-							<div class="mainpage_browes_more_categories_units">
-								<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_coffee">
-									<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
-										<path d="M19 13h-1a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V5h15a3 3 0 0 1 3 3v2a3 3 0 0 1-3 3zm1-5c0-.55-.45-1-1-1h-1v4h1c.55 0 1-.45 1-1V8zm2 10a1 1 0 0 1-1 1H3a1 1 0 0 1 0-2h18a1 1 0 0 1 1 1z"></path>
-									</svg>
-								</span>
-								<a href="#">
-									<strong style="font-weight: 700;">Coffee & Tea</strong>
-								</a>
-							</div>
-							
-							<div class="mainpage_browes_more_categories_units">
-								<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Food">
-									<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
-										<path d="M17.22 22a1.78 1.78 0 0 1-1.74-2.167l1.298-4.98L14 13l1.756-9.657A1.635 1.635 0 0 1 19 3.635V20.22A1.78 1.78 0 0 1 17.22 22zm-7.138-9.156l.697 7.168a1.79 1.79 0 1 1-3.56 0l.7-7.178A3.985 3.985 0 0 1 5 9V3a1 1 0 0 1 2 0v5.5c0 .28.22.5.5.5s.5-.22.5-.5V3a1 1 0 0 1 2 0v5.5c0 .28.22.5.5.5s.5-.22.5-.5V3a1 1 0 0 1 2 0v5.83c0 1.85-1.2 3.518-2.918 4.014z"></path>
-									</svg>
-								</span>
-								<a href="#">
-									<strong style="font-weight: 700;">Food</strong>
-								</a>
-							</div>
-							
-							
-							<div class="mainpage_browes_more_categories_units">
-								<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Arts_Entertainment">
-									<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
-										<path d="M11.85 3c-4.73.08-8.7 3.99-8.85 8.72-.02.62.03 1.23.13 1.82A3.003 3.003 0 0 0 6.09 16H11c.55 0 1 .45 1 1v.19c0 2.3 2.49 3.76 4.49 2.61A9.002 9.002 0 0 0 11.85 3zM8 11.5c-.83 0-1.5-.67-1.5-1.5S7.17 8.5 8 8.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3 8c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm1-5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"></path>
-									</svg>
-								</span>
-								<a href="#">
-									<strong style="font-weight: 700;">Arts & Entertainment</strong>
-								</a>
-							</div>
-							
-							<div class="mainpage_browes_more_categories_units">
-								<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Health_Medical">
-									<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
-										<path d="M15 9V4H9v5H4v6h5v5h6v-5h5V9h-5z"></path>
-									</svg>
-								</span>
-								<a href="#">
-									<strong style="font-weight: 700;">Health & Medical</strong>
-								</a>
-							</div>
-						</div>
-						
-						
-						
-						<div class="mainpage_browes_more_categories_lines">
-							<div class="mainpage_browes_more_categories_units">
-								<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Professional_Service">
-									<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
-										<path d="M19 20H5a3 3 0 0 1-3-3v-4h8v3h4v-3h8v4a3 3 0 0 1-3 3zM2 7h6V4h8v3h6v5H2V7zm8 0h4V6h-4v1z"></path>
-									</svg>
-								</span>
-								<a href="#">
-									<strong style="font-weight: 700;">Professional Services</strong>
-								</a>
-							</div>
-							
-							<div class="mainpage_browes_more_categories_units">
-								<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Pets">
-									<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
-										<path d="M16.956 14.106l-7.07-7.07A2.5 2.5 0 0 0 6.35 3.498a2.49 2.49 0 0 0-.698 2.13 2.493 2.493 0 0 0-2.13.697A2.5 2.5 0 0 0 7.057 9.86l7.07 7.07a2.5 2.5 0 0 0 3.536 3.538 2.49 2.49 0 0 0 .698-2.13 2.49 2.49 0 0 0 2.134-.7 2.5 2.5 0 1 0-3.536-3.534z"></path>
-									</svg>
-								</span>
-								<a href="#">
-									<strong style="font-weight: 700;">Pets</strong>
-								</a>
-							</div>
-							
-							
-							<div class="mainpage_browes_more_categories_units">
-								<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_RealEstate">
-									<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
-										<path d="M12 3l-8.48 9.327C2.938 12.97 3.393 14 4.26 14H5v7h5v-5h4v5h5v-7h.74c.868 0 1.323-1.03.74-1.673L12 3z"></path>
-									</svg>
-								</span>
-								<a href="#">
-									<strong style="font-weight: 700;">Real Estate</strong>
-								</a>
-							</div>
-							
-							<div class="mainpage_browes_more_categories_units">
-								<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Hotels_Travel">
-									<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
-										<path d="M20.4 13.61a1.924 1.924 0 0 0-1.825-.505l-2.203.55-3.228-3.227 5.973-4.887-.438-.436a1.92 1.92 0 0 0-2.117-.407L10.157 7.44 6.732 4.018c-.75-.75-2.644-1.43-3.394-.68-.75.75-.07 2.646.68 3.395l3.423 3.425-2.743 6.408a1.92 1.92 0 0 0 .407 2.114l.44.437 4.886-5.973 3.227 3.228-.55 2.203a1.92 1.92 0 0 0 .504 1.824l.59.586 2.717-4.073 4.073-2.716-.59-.59z"></path>
-									</svg>
-								</span>
-								<a href="#">
-									<strong style="font-weight: 700;">Hotels & Travel</strong>
-								</a>
-							</div>
-						</div>
-						
-						
-						<div class="mainpage_browes_more_categories_lines">
-							<div class="mainpage_browes_more_categories_units">
-								<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Local_Service">
-									<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
-										<path d="M21 10h-8.35A5.996 5.996 0 0 0 1 12a5.996 5.996 0 0 0 11.65 2H14v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1a2 2 0 0 0 0-4zM7 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path>
-									</svg>
-								</span>
-								<a href="#">
-									<strong style="font-weight: 700;">Local Services</strong>
-								</a>
-							</div>
-							
-							<div class="mainpage_browes_more_categories_units">
-								<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_EventPlanning_Services">
-									<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
-										<path d="M15.14 14.96L17 18h-2v5h-1v-5h-2l1.86-3.04C10.85 14.586 8.5 11.616 8.5 8c0-3.87 2.69-7 6-7s6 3.13 6 7c0 3.617-2.35 6.587-5.36 6.96zM12.39 3.55c-.54-.14-1.14.39-1.36 1.19-.21.8.05 1.57.58 1.71.54.14 1.14-.39 1.36-1.19.21-.8-.05-1.57-.58-1.71zm-.45 11.89a4.737 4.737 0 0 1-2.82 1.49L10.5 19H9v4H8v-4H6.5l1.367-2.05c-2.53-.365-4.487-2.88-4.487-5.93 0-3.1 2.02-5.66 4.61-5.95-.32.91-.49 1.9-.49 2.93 0 3.38 1.84 6.27 4.44 7.44z"></path>
-									</svg>
-								</span>
-								<a href="#">
-									<strong style="font-weight: 700;">Event Planning & Services</strong>
-								</a>
-							</div>
-							
-							
-							<div class="mainpage_browes_more_categories_units">
-								<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_PublicServices_Government">
-									<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
-										<path d="M21 11V9h-1l-8-6-8 6H3v2h2v7H4v1H3v2h18v-2h-1v-1h-1v-7h2zm-8 7h-2v-7h2v7zm-6-7h2v7H7v-7zm10 7h-2v-7h2v7z"></path>
-									</svg>
-								</span>
-								<a href="#">
-									<strong style="font-weight: 700;">Public Services & Government</strong>
-								</a>
-							</div>
-							
-							<div class="mainpage_browes_more_categories_units">
-								<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Financial_Services">
-									<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
-										<path d="M6 19v-2h14V9h2v10H6zM2 5h16v10H2V5zm8 7.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"></path>
-									</svg>
-								</span>
-								<a href="#">
-									<strong style="font-weight: 700;">Financial Services</strong>
-								</a>
-							</div>
-						</div>
-						
-						
-						<div class="mainpage_browes_more_categories_lines">
-							<div class="mainpage_browes_more_categories_units">
-								<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Education">
-									<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
-										<path d="M9.994 18H19v1H9.993v-1zm7.004-1H8.493c-.827 0-1.5.673-1.5 1.5s.673 1.5 1.5 1.5h9.505a1 1 0 0 1 0 2h-9.28c-1.812 0-3.467-1.277-3.7-3.075-.09-.7-.027-1.925-.027-1.925V4a2 2 0 0 1 2.004-2H17a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2z"></path>
-									</svg>
-								</span>
-								<a href="#">
-									<strong style="font-weight: 700;">Education</strong>
-								</a>
-							</div>
-							
-							<div class="mainpage_browes_more_categories_units">
-								<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Religious_Organizations">
-									<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
-										<path d="M18.5 11L16 14.5v-6L12 3 8 8.5v6L5.5 11 3 14.5V21h7v-4h4v4h7v-6.5L18.5 11z"></path>
-									</svg>
-								</span>
-								<a href="#">
-									<strong style="font-weight: 700;">Religious Organizations</strong>
-								</a>
-							</div>
-							
-							
-							<div class="mainpage_browes_more_categories_units">
-								<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Local_Flavor">
-									<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
-										<path d="M12 1.5l2.61 6.727 6.89.53-5.278 4.688 1.65 7.055L12 16.67 6.13 20.5l1.648-7.055L2.5 8.757l6.89-.53L12 1.5z"></path>
-									</svg>
-								</span>
-								<a href="#">
-									<strong style="font-weight: 700;"> Local Flavor</strong>
-								</a>
-							</div>
-							
-							<div class="mainpage_browes_more_categories_units">
-								<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Mass_Media">
-									<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
-										<path d="M19 6h-6.586l2.293-2.293a1 1 0 1 0-1.414-1.414L10 5.586 6.707 2.293a1 1 0 1 0-1.414 1.414L7.586 6H5a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V9a3 3 0 0 0-3-3zm-3 11c0 .55-.45 1-1 1H5c-.55 0-1-.45-1-1V9c0-.55.45-1 1-1h10c.55 0 1 .45 1 1v8zm3-4c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm0-3c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"></path>
-									</svg>
-								</span>
-								<a href="#">
-									<strong style="font-weight: 700;">Mass Media</strong>
-								</a>
-							</div>
-						</div>
-					
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	
-	
-	
 	
 	<div class="under_review_container">
 		<div class="under_review_content_container">
@@ -1250,8 +957,7 @@
 										<div class="review_of_the_day_writer_photo_box">
 											<div>
 												<a href="#">
-												<!-- 만약 아이디에 사진 없다면 이거 띄우도록 이프 문! -->
-													<img class="review_of_the_day_writer_img" height="60" widgh="60" src="https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/90s.jpg">
+													<img class="review_of_the_day_writer_img" height="60" widgh="60" src="#">
 												</a>
 											</div>
 										</div>
@@ -1259,7 +965,7 @@
 										<div class="review_of_the_day_writer_info">
 											<strong style="font-weight: 700;">
 												<a href="#" class="review_of_the_day_writer">
-													${review_of_the_day_memberDTO.name}
+													유저 아이디
 												</a>
 											</strong>
 											<ul class="review_of_the_day_writer_status">
@@ -1292,7 +998,7 @@
 												<div style="display: inline;">
 													<span>
 														<a href="#" style="font-weight: 700;">
-															${review_of_the_day_restaurantDTO.rname}
+															식당 명
 														</a>
 													</span>
 												</div>   
@@ -1300,32 +1006,14 @@
 										</div>
 									</div>
 									
-									<div class="bedge_benner_blue">
-										Review of the Day
-										<img class="bedge_benner_blue_img" src="https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_styleguide/8bb21835695e/assets/img/badge_banner_icons/40x40_rotd.png" width="40">
-									</div>
+									<div>	</div>
 									
-									<div class="mainpage_review_rating_regdate">
-										<div>
-											<div class="mainpage_review_rating">
-												<img height="303" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png" width="84">
-											</div>
-										</div>
-										<span>
-											${review_of_the_day_reviewDTO.joindate} 작성
-										</span>
-									</div>
+									<div>	</div>
 									
-									<p style="margin-bottom: 12px;">
-										${fn:replace(review_of_the_day_reviewDTO.content,crcn,br)}
-									</p>
+									<p></p>
 								</div>
 								
-								<p style="text-align: center!important; margin-bottom: 12px;">
-									<a href="#">
-										Read previous reviews
-									</a>
-								</p>
+								<p></p>
 								
 								
 							</div>
@@ -1367,38 +1055,18 @@
 			$('#mainpage_header_inner_category_block_active').attr('id', 'mainpage_header_inner_category_block');
 			$('#header_page_footer_dropdown_wrap').css('pointer-events', 'none');
 		})
-		
-		$('.mainpage_searchbutton').hover(function() {
-			$('.mainpage_searchbutton').css('background', '#c91400');
-		})
-		$('.mainpage_searchbutton').mouseleave(function() {
-			$('.mainpage_searchbutton').css('background', '#bd1f1f');
-		})
-			
-		$('.drop-menu-link').click(function(e) {
-			$('#topbar-account-wrap').toggle();
-		    e.stopPropagation();
-		    e.preventDefault();
-		});
-		
-		$(document).on('click', '.mainpage_browes_categories_content_link', function(e) { 			
- 			if($('#mainpage_more_categories').hasClass('is_disabled')) {
-  				$('.change_title').text('Fewer Categories');
- 	 			$('#mainpage_more_categories').removeClass('is_disabled');
-  	 			$('.mainpage_browes_more_categories').css('max-height', '212px');
-  	 			$('.mainpage_browes_more_categories').css('position', 'static');
- 			} else {
- 				$('.change_title').text('More Categories');
-	 			$('#mainpage_more_categories').addClass('is_disabled');
- 	 			$('.mainpage_browes_more_categories').css('max-height', '0px');
- 			}
-		});
-		   
-		$(document).on('click', function(e) {
-			if(!$(e.target).hasClass('drop-menu-link')) {
-				$('#topbar-account-wrap').hide();
-			}
-		});
+	});
+	
+	$('.drop-menu-link').click(function(e) {
+		$('#topbar-account-wrap').toggle();
+		e.stopPropagation();
+		e.preventDefault();
+	});
+	
+	$(document).on('click', function(e) {
+		if(!$(e.target).hasClass('drop-menu-link')) {
+			$('#topbar-account-wrap').hide();
+		}
 	});
 	
 	$('html').click(function(e) {
@@ -1438,5 +1106,5 @@
 	</script>
 
 
-<%@include file="bottom.jsp"%>
+
 

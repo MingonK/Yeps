@@ -258,7 +258,16 @@
                               <div id="page_header_account">
                                  <div id="topbar-account-item" class="drop-menu-origin" data-component-bound="true">
                                     <a class="drop-menu-link user-account_button drop-menu-highlighted" href="#" id="topbar-account-link" data-component-bound="true">
-                                       <span class="user-account_avatar responsive-visible-large-block"><img class="photo-box-img" height="90" src="https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/90s.jpg" srcset="https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/180s.jpg 2.00x,https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/ms.jpg 1.11x,https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/120s.jpg 1.33x,https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/168s.jpg 1.87x,https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/ls.jpg 2.78x,https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/258s.jpg 2.87x" width="90"></span>
+                                       <span class="user-account_avatar responsive-visible-large-block">
+                                          <c:choose>
+                                             <c:when test="${empty sessionScope.mainPhoto}">
+                                                <img class="photo-box-img" height="90" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" width="90">
+                                             </c:when>
+                                             <c:otherwise>
+                                                <img class="photo-box-img" src="getImage/${mainPhoto.filename}" alt="member_main_photo" id="photo_box_img" width="90px" height="90px">
+                                             </c:otherwise>
+                                          </c:choose>
+                                       </span>
                                        <span aria-hidden="true" style="width: 14px; height: 14px;" class="icon icon-triangle-down">
                                           <svg class="icon_svg">
                                              <path d="M7 9L3.5 5h7L7 9z"></path>
@@ -272,7 +281,14 @@
                                                 <div class="media-avatar responsive-photo-box js-analytics-click">
                                                    <div class="photo-box pb-60s">
                                                       <a href="member_details" class="js-analytics-click" data-analytics-label="user-photo">
-                                                         <img class="photo-box-img" height="60" src="https://s3-media4.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/60s.jpg" srcset="https://s3-media4.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/90s.jpg 1.50x,https://s3-media4.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/168s.jpg 2.80x,https://s3-media4.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/ms.jpg 1.67x,https://s3-media4.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/180s.jpg 3.00x,https://s3-media4.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/120s.jpg 2.00x" width="60">
+                                                         <c:choose>
+                                                            <c:when test="${empty sessionScope.mainPhoto}">
+                                                               <img class="photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" width="60">
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                               <img class="photo-box-img" src="getImage/${mainPhoto.filename}" alt="member_main_photo" id="photo_box_img" width="60px" height="60px">
+                                                            </c:otherwise>
+                                                         </c:choose>
                                                       </a>
                                                    </div>
                                                 </div>
@@ -300,9 +316,16 @@
                                                       </li>
                                                       <li class="user-location responsive-hidden-small">
                                                          <b>
-                                                            <c:forTokens items="${sessionScope.memberinfo.address}" delims=" " begin="1" end="2" var="addr">
-                                                               ${addr}
-                                                            </c:forTokens>
+                                                            <c:choose>
+                                                               <c:when test="${!empty sessionScope.memberinfo.address}">
+                                                                  <c:forTokens items="${sessionScope.memberinfo.address}" delims=" " begin="1" end="2" var="addr">
+                                                                     ${addr}
+                                                                  </c:forTokens>
+                                                               </c:when>
+                                                               <c:otherwise>
+                                                                  	서울특별시
+                                                               </c:otherwise>
+                                                            </c:choose>
                                                          </b>
                                                       </li>
                                                    </ul>
@@ -342,7 +365,7 @@
                                                    </strong>
                                                 </a>
                                              </li>
-                                             <c:if test="${memberinfo.ismaster eq 'y' || memberinfo.ismaneger eq 'y'}">
+                                             <c:if test="${memberinfo.ismaster eq 'y' || memberinfo.ismanager eq 'y'}">
                                              <li class="drop-down-menu-link">
                                                 <a class="js-analytics-click arrange arrange--middle arrange--6" href="member_manager">
                                                    <strong class="arrange_unit">
@@ -524,7 +547,8 @@
 			$('#footer_list_li_message').css('background', '#9b1a1a');
 		}
 	});
-		$(document).on("mouseenter","#footer_list_block",function(){
+	
+	$(document).on("mouseenter","#footer_list_block",function(){
         $('#header_page_footer_dropdown').attr('id', 'header_page_footer_dropdown_view');
         $('#footer_list_li_unit_after').attr('id', 'footer_list_li_unit_after_active');
         $('#header_page_footer_dropdown_wrap').css('pointer-events', 'auto');

@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../style.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
 <title>findPw</title>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/member.css?ver=3"/>"/>
 </head>
-<body>
+<body ondragstart="return false">
 	<c:choose>
 		<c:when test="${temporaryPw==1}">
 			<div id="member_popup">

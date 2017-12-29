@@ -4,12 +4,180 @@
 <html>
 <head>
 <title>Login</title>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/member.css"/>"/>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/member.css?ver=6"/>"/>
 <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css?ver=1" />
 <script src="//code.jquery.com/jquery.min.js?ver=1"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js?ver=1"></script>
 	
+
+</head>
+<%@ include file="../top.jsp"%>
+	<div id="super-container">
+		<div id="Membercontainer">
+			<div id="Memberbody">
+				<div id="member-wrapper">
+					<div id="login" align="center"> <!-- 로그인 Div -->
+						<div id="member_header">
+							<h2>Log In to YEPS</h2>
+							<p class="subheading">New to YEPS? 
+							<a class="signup-link u-pseudo-link">Sign up</a>
+							<p class="legal-copy">By logging in, you agree to YEPS 
+							<a class="legal-link" href="https://www.yelp.com/static?p=tos">Terms of Service</a>
+								and <a class="legal-link" href="/tos/privacy_en_us_20160131">Privacy Policy</a>.
+							</p>
+						</div>
+
+						<div id="member_body">
+							<form name="loginf" class="memberf" action="member_login" method="POST" onsubmit="return loginCheck()">
+								<input id="email" name="email" placeholder="Email" required="required" type="email" autocomplete=off value=""> 
+								<input id="passwd" name="passwd" placeholder="Password" required="required" type="password" autocomplete=off value="">
+								<div id="forgot-email">
+									<small><a class="forgot-email-link">Forgot e-mail?</a></small>
+								</div>
+								<div id="forgot-passwd">
+									<small><a class="forgot-passwd-link">Forgot password?</a></small>
+								</div>
+								<button type="submit" value="submit" class="ybtn ybtn-primary ybtn-big ybtn-full">
+									<span>Log In</span>
+								</button>
+								<div class="sub-text-box">
+									<small class="subtle-text">New to YEPS? 
+									<a class="signup-link u-pseudo-link">Sign up</a></small>
+								</div>
+							</form>
+						</div>
+					</div>
+					
+					<div id="join" align="center"> <!-- 회원가입 Div -->
+						<div id="member_header">
+							<h2>Sign Up for YEPS</h2>
+							<p class="subheading">Connect with great local businesses</p>
+							<p class="legal-copy">By signing up, you agree to YEPS 
+							<a class="legal-link" href="https://www.yelp.com/static?p=tos">Terms of Service</a> and 
+							<a class="legal-link" href="/tos/privacy_en_us_20160131">Privacy Policy</a>.
+							</p>
+						</div>
+						
+						<div id="member_body">
+							<form name="joinf" class="memberf" method="POST" action="member_join">
+								<input name="name" placeholder="이름" required="required" type="text" autocomplete=off value="">
+								<ul class="inline-layout">
+									<li><input id="memberssn1"onkeypress="return numberOnly();" onkeyup="focusSsn2('join')" maxlength="6" placeholder="주민번호 앞자리" required="required" type="text" name="ssn1" autocomplete=off value="" /></li>
+									<li><input id="memberssn2" onkeypress="return numberOnly();" maxlength="7" placeholder="주민번호 뒷자리" required="required" type="password" name="ssn2" value="" /></li>
+								</ul>
+								<ul class="inline-layout">
+									<li style="width: 45%"><input name="email1" maxlength="20" placeholder="이메일" required="required" onkeydown="inputEmailChk()" type="text" autocomplete=off value=""></li>
+									<li style="width: 55%">
+										<div id="member_email2">
+											<div class="member_email2_input" style="position: relative; float: left; vertical-align: middle;">
+												<span class="member_at" aria-hidden="true" style="position: relative; vertical-align: middle;">
+													<label style="margin: 7px 0 0 10px; diplay: block; height: 18px; position: absolute;">@</label> </span> 
+												<span> 
+													<input type="text" id="member_email2_input" name="email2" maxlength="30" required="required" onkeydown="inputEmailChk()" autocomplete=off style="padding-left: 30px;">
+												</span>
+											</div>
+										</div>
+									</li>
+								</ul>
+								<ul class="inline-layout">
+									<li style="width: 70%; margin-top: -8px;"><input id="mailCheck" type="text" name="mailCheck" value="*이메일 중복 확인" readOnly></li>
+									<li style="width: 30%;"><input id="confirmemailbtn" type="button" name="confirm_email" class="confirmbtn confirmbtn-primary confirmbtn-full" value="중복확인" onclick="openConfirmEmail()"></li>
+								</ul>
+
+								<input type="hidden" name="idDuplication" value="idUncheck">
+								<input id="passwd" name="passwd" placeholder="패스워드" required="required" type="password" maxlength="20" onkeyup="checkPw()"> 
+								<input id="passwd2" name="passwd2" placeholder="패스워드 확인" required="required" type="password" maxlength="20" onkeyup="checkPw()"> 
+								<input id="passwdcheck" type="text" name="passCheck" readOnly>
+								<button id="signup-button" type="button" value="Sign Up" onclick="check()" class="ybtn ybtn-primary ybtn-big ybtn-full">
+									<span>Sign Up</span>
+								</button>
+							</form>
+							<div class="sub-text-box">
+								<small class="subtle-text">Already on Yelp? 
+								<a class="signup-link u-pseudo-link">Log in</a></small>
+							</div>
+							
+							<div id="emailpicker-div">
+								<ul>
+									<li id="email3" onclick="change_email('0')">직접 입력</li>
+									<li id="email3" onclick="change_email('gmail.com')">gmail.com</li>
+									<li id="email3" onclick="change_email('hanmail.net')">hanmail.net</li>
+									<li id="email3" onclick="change_email('naver.com')">naver.com</li>
+									<li id="email3" onclick="change_email('nate.com')">nate.com</li>
+									<li id="email3" onclick="change_email('korea.com')">korea.com</li>
+									<li id="email3" onclick="change_email('yahoo.com')">yahoo.com</li>
+									<li id="email3" onclick="change_email('hotmail.com')">hotmail.com</li>
+									<li id="email3" onclick="change_email('chol.com')">chol.com</li>
+									<li id="email3" onclick="change_email('netian.com')">netian.com</li>
+									<li id="email3" onclick="change_email('dreamwiz.com')">dreamwiz.co</li>
+									<li id="email3" onclick="change_email('live.com')">live.com</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					
+					<div id="find_email" align="center"> <!-- 이메일찾기 Div -->
+						<div id="member_header">
+							<h2>Forgot Email</h2>
+							<p>Please enter your profile and we will let you know your email address.</p>
+						</div>
+						<div id="member_body">
+							<form name="findemailf" class="findemailf" method="POST" onsubmit="return findEmailCheck()">
+								<input id="name" name="name" placeholder="이름" required="required" type="text" autocomplete=off value="">
+								<ul class="inline-layout">
+									<li><input id="memberssn1" onkeypress="return numberOnly();" onkeyup="focusSsn2('findemail')" maxlength="6" placeholder="주민번호 앞자리" required="required" type="text" name="ssn1" autocomplete=off value="" /></li>
+									<li><input id="memberssn2" onkeypress="return numberOnly();" maxlength="7" placeholder="주민번호 뒷자리" required="required" type="password" name="ssn2" value="" /></li>
+								</ul>
+								<div id="forgot-email">
+									<small><a class="forgot-passwd-link">Forgot password?</a></small>
+								</div>
+								<button type="submit" value="submit" class="ybtn ybtn-primary ybtn-big ybtn-full">
+									<span>Find Email</span>
+								</button>
+								<div class="sub-text-box">
+									<small class="subtle-text">
+									<a class="login-link u-pseudo-link">Back to Login</a></small>
+								</div>
+							</form>
+						</div>
+					</div>
+					
+					<div id="find_passwd" align="center"> <!-- 비밀번호찾기 Div -->
+						<div id="member_header">
+							<h2>Forgot Password</h2>
+							<p>Please enter your profile and we will send you an email about your changed password.</p>
+						</div>
+						<div id="member_body">
+							<form name="findpasswdf" class="findpasswdf" method="POST" onsubmit="return findPasswdCheck()">
+								<input id="name" name="name" placeholder="이름" required="required" type="text" value="">
+								<ul class="inline-layout">
+									<li><input id="memberssn1" onkeypress="return numberOnly();" onkeyup="focusSsn2('findpasswd')" maxlength="6" placeholder="주민번호 앞자리" required="required" type="text" name="ssn1" autocomplete=off value="" /></li>
+									<li><input id="memberssn2" onkeypress="return numberOnly();" maxlength="7" placeholder="주민번호 뒷자리" required="required" type="password" name="ssn2" value="" /></li>
+								</ul>
+								<input id="email" name="email" placeholder="이메일" required="required" type="email" autocomplete=off value="">
+								<div id="forgot-email">
+									<small><a class="forgot-email-link">Forgot e-mail?</a></small>
+								</div>
+								<button type="submit" value="submit" class="ybtn ybtn-primary ybtn-big ybtn-full">
+									<span>Reset Password</span>
+								</button>
+								<div class="sub-text-box">
+									<small class="subtle-text">
+										<a class="login-link u-pseudo-link">Back to Login</a>
+									</small>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div id="login_img">
+					<img src="https://s3-media4.fl.yelpcdn.com/assets/2/www/img/1e82406ff345/signup/signup_illustration.png">
+				</div>
+			</div>
+		</div>
+	</div>
+
 <script type="text/javascript">
 	var mode = "${param.mode}";
 	$(function() { 
@@ -280,172 +448,5 @@
 			frm.target = "findPasswd";
 			frm.submit;
 		}
-	</script>
-</head>
-<%@ include file="../top.jsp"%>
-	<div id="super_container">
-		<div id="Membercontainer">
-			<div id="Memberbody">
-				<div id="member-wrapper">
-					<div id="login" align="center"> <!-- 로그인 Div -->
-						<div id="member_header">
-							<h2>Log In to YEPS</h2>
-							<p class="subheading">New to YEPS? 
-							<a class="signup-link u-pseudo-link">Sign up</a>
-							<p class="legal-copy">By logging in, you agree to YEPS 
-							<a class="legal-link" href="https://www.yelp.com/static?p=tos">Terms of Service</a>
-								and <a class="legal-link" href="/tos/privacy_en_us_20160131">Privacy Policy</a>.
-							</p>
-						</div>
-
-						<div id="member_body">
-							<form name="loginf" class="memberf" action="member_login" method="POST" onsubmit="return loginCheck()">
-								<input id="email" name="email" placeholder="Email" required="required" type="email" autocomplete=off value=""> 
-								<input id="passwd" name="passwd" placeholder="Password" required="required" type="password" autocomplete=off value="">
-								<div id="forgot-email">
-									<small><a class="forgot-email-link">Forgot e-mail?</a></small>
-								</div>
-								<div id="forgot-passwd">
-									<small><a class="forgot-passwd-link">Forgot password?</a></small>
-								</div>
-								<button type="submit" value="submit" class="ybtn ybtn-primary ybtn-big ybtn-full">
-									<span>Log In</span>
-								</button>
-								<div class="sub-text-box">
-									<small class="subtle-text">New to YEPS? 
-									<a class="signup-link u-pseudo-link">Sign up</a></small>
-								</div>
-							</form>
-						</div>
-					</div>
-					
-					<div id="join" align="center"> <!-- 회원가입 Div -->
-						<div id="member_header">
-							<h2>Sign Up for YEPS</h2>
-							<p class="subheading">Connect with great local businesses</p>
-							<p class="legal-copy">By signing up, you agree to YEPS 
-							<a class="legal-link" href="https://www.yelp.com/static?p=tos">Terms of Service</a> and 
-							<a class="legal-link" href="/tos/privacy_en_us_20160131">Privacy Policy</a>.
-							</p>
-						</div>
-						
-						<div id="member_body">
-							<form name="joinf" class="memberf" method="POST" action="member_join">
-								<input name="name" placeholder="이름" required="required" type="text" autocomplete=off value="">
-								<ul class="inline-layout">
-									<li><input id="memberssn1"onkeypress="return numberOnly();" onkeyup="focusSsn2('join')" maxlength="6" placeholder="주민번호 앞자리" required="required" type="text" name="ssn1" autocomplete=off value="" /></li>
-									<li><input id="memberssn2" onkeypress="return numberOnly();" maxlength="7" placeholder="주민번호 뒷자리" required="required" type="password" name="ssn2" value="" /></li>
-								</ul>
-								<ul class="inline-layout">
-									<li style="width: 45%"><input name="email1" maxlength="20" placeholder="이메일" required="required" onkeydown="inputEmailChk()" type="text" autocomplete=off value=""></li>
-									<li style="width: 55%">
-										<div id="member_email2">
-											<div class="member_email2_input" style="position: relative; float: left; vertical-align: middle;">
-												<span class="member_at" aria-hidden="true" style="position: relative; vertical-align: middle;">
-													<label style="margin: 7px 0 0 10px; diplay: block; height: 18px; position: absolute;">@</label> </span> 
-												<span> 
-													<input type="text" id="member_email2_input" name="email2" maxlength="30" required="required" onkeydown="inputEmailChk()" autocomplete=off style="padding-left: 30px;">
-												</span>
-											</div>
-										</div>
-									</li>
-								</ul>
-								<ul class="inline-layout">
-									<li style="width: 70%; margin-top: -8px;"><input id="mailCheck" type="text" name="mailCheck" value="*이메일 중복 확인" readOnly></li>
-									<li style="width: 30%;"><input id="confirmemailbtn" type="button" name="confirm_email" class="confirmbtn confirmbtn-primary confirmbtn-full" value="중복확인" onclick="openConfirmEmail()"></li>
-								</ul>
-
-								<input type="hidden" name="idDuplication" value="idUncheck">
-								<input id="passwd" name="passwd" placeholder="패스워드" required="required" type="password" maxlength="20" onkeyup="checkPw()"> 
-								<input id="passwd2" name="passwd2" placeholder="패스워드 확인" required="required" type="password" maxlength="20" onkeyup="checkPw()"> 
-								<input id="passwdcheck" type="text" name="passCheck" readOnly>
-								<button id="signup-button" type="button" value="Sign Up" onclick="check()" class="ybtn ybtn-primary ybtn-big ybtn-full">
-									<span>Sign Up</span>
-								</button>
-							</form>
-							<div class="sub-text-box">
-								<small class="subtle-text">Already on Yelp? 
-								<a class="signup-link u-pseudo-link">Log in</a></small>
-							</div>
-							
-							<div id="emailpicker-div">
-								<ul>
-									<li id="email3" onclick="change_email('0')">직접 입력</li>
-									<li id="email3" onclick="change_email('gmail.com')">gmail.com</li>
-									<li id="email3" onclick="change_email('hanmail.net')">hanmail.net</li>
-									<li id="email3" onclick="change_email('naver.com')">naver.com</li>
-									<li id="email3" onclick="change_email('nate.com')">nate.com</li>
-									<li id="email3" onclick="change_email('korea.com')">korea.com</li>
-									<li id="email3" onclick="change_email('yahoo.com')">yahoo.com</li>
-									<li id="email3" onclick="change_email('hotmail.com')">hotmail.com</li>
-									<li id="email3" onclick="change_email('chol.com')">chol.com</li>
-									<li id="email3" onclick="change_email('netian.com')">netian.com</li>
-									<li id="email3" onclick="change_email('dreamwiz.com')">dreamwiz.co</li>
-									<li id="email3" onclick="change_email('live.com')">live.com</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					
-					<div id="find_email" align="center"> <!-- 이메일찾기 Div -->
-						<div id="member_header">
-							<h2>Forgot Email</h2>
-							<p>Please enter your profile and we will let you know your email address.</p>
-						</div>
-						<div id="member_body">
-							<form name="findemailf" class="findemailf" method="POST" onsubmit="return findEmailCheck()">
-								<input id="name" name="name" placeholder="이름" required="required" type="text" autocomplete=off value="">
-								<ul class="inline-layout">
-									<li><input id="memberssn1" onkeypress="return numberOnly();" onkeyup="focusSsn2('findemail')" maxlength="6" placeholder="주민번호 앞자리" required="required" type="text" name="ssn1" autocomplete=off value="" /></li>
-									<li><input id="memberssn2" onkeypress="return numberOnly();" maxlength="7" placeholder="주민번호 뒷자리" required="required" type="password" name="ssn2" value="" /></li>
-								</ul>
-								<div id="forgot-email">
-									<small><a class="forgot-passwd-link">Forgot password?</a></small>
-								</div>
-								<button type="submit" value="submit" class="ybtn ybtn-primary ybtn-big ybtn-full">
-									<span>Find Email</span>
-								</button>
-								<div class="sub-text-box">
-									<small class="subtle-text">
-									<a class="login-link u-pseudo-link">Back to Login</a></small>
-								</div>
-							</form>
-						</div>
-					</div>
-					
-					<div id="find_passwd" align="center"> <!-- 비밀번호찾기 Div -->
-						<div id="member_header">
-							<h2>Forgot Password</h2>
-							<p>Please enter your profile and we will send you an email about your changed password.</p>
-						</div>
-						<div id="member_body">
-							<form name="findpasswdf" class="findpasswdf" method="POST" onsubmit="return findPasswdCheck()">
-								<input id="name" name="name" placeholder="이름" required="required" type="text" value="">
-								<ul class="inline-layout">
-									<li><input id="memberssn1" onkeypress="return numberOnly();" onkeyup="focusSsn2('findpasswd')" maxlength="6" placeholder="주민번호 앞자리" required="required" type="text" name="ssn1" autocomplete=off value="" /></li>
-									<li><input id="memberssn2" onkeypress="return numberOnly();" maxlength="7" placeholder="주민번호 뒷자리" required="required" type="password" name="ssn2" value="" /></li>
-								</ul>
-								<input id="email" name="email" placeholder="이메일" required="required" type="email" autocomplete=off value="">
-								<div id="forgot-email">
-									<small><a class="forgot-email-link">Forgot e-mail?</a></small>
-								</div>
-								<button type="submit" value="submit" class="ybtn ybtn-primary ybtn-big ybtn-full">
-									<span>Reset Password</span>
-								</button>
-								<div class="sub-text-box">
-									<small class="subtle-text">
-										<a class="login-link u-pseudo-link">Back to Login</a>
-									</small>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-				<div id="login_img">
-					<img src="https://s3-media4.fl.yelpcdn.com/assets/2/www/img/1e82406ff345/signup/signup_illustration.png">
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<%@ include file="../bottom.jsp"%>
+</script>
+<%@ include file="../bottom.jsp"%>

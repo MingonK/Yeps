@@ -140,6 +140,13 @@
 			<version>11.2.0</version>
 		</dependency>   
 		
+		<!-- 아마존 -->
+      <dependency>
+          <groupId>com.amazonaws</groupId>
+          <artifactId>aws-java-sdk</artifactId>
+          <version>1.11.255</version>
+      </dependency> 
+		
 		<!-- 파일 업로드 -->
 		<dependency>
 		    <groupId>commons-fileupload</groupId>

@@ -12,129 +12,155 @@ import com.yeps.model.MemberDTO;
 @Service
 public class MemberMapper {
 
-	@Autowired
-	private SqlSession sqlSession;
+		@Autowired
+		private SqlSession sqlSession;
 
-	public int getMemberCount() {
-		return sqlSession.selectOne("getMemberCount");
-	}
-
-	public int getSearchMemberCount(String search, String searchString) {
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("search", search);
-		map.put("searchString", searchString);
-		try {
-			return sqlSession.selectOne("getSearchMemberCount", map);
-		} catch (Exception e) {
-			return 0;
+		public int getMemberCount() {
+			try {
+				return sqlSession.selectOne("getMemberCount");
+			}catch(Exception e){
+				return 0;
+			}
 		}
-	}
-
-	public List<MemberDTO> listMember(int startRow, int endRow) {
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		map.put("startRow", startRow);
-		map.put("endRow", endRow);
-
-		return sqlSession.selectList("listMember", map);
-	}
-
-	public List<MemberDTO> listMemberForMessage() {
-		return sqlSession.selectList("listMemberForMessage");
-	}
-
-	public List<MemberDTO> findMember(int startRow, int endRow, String search, String searchString) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("startRow", startRow);
-		map.put("endRow", endRow);
-		map.put("search", search);
-		map.put("searchString", searchString);
-		return sqlSession.selectList("findMember", map);
-	}
-
-	public MemberDTO getMemberProfile(int mnum) {
-		try {
-			return sqlSession.selectOne("getMemberProfile", mnum);
-		} catch (Exception e) {
-			return null;
+		
+		public int getSearchMemberCount(String search, String searchString) {
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("search", search);
+			map.put("searchString", searchString);
+			try {
+				return sqlSession.selectOne("getSearchMemberCount", map);
+			}catch(Exception e) {
+				return 0;
+			}
 		}
-	}
+		
+		public List<MemberDTO> listMember(int startRow, int endRow) {
+			HashMap<String ,Integer> map = new HashMap<String ,Integer>();
+			map.put("startRow", startRow);
+			map.put("endRow", endRow);
+			
+			return sqlSession.selectList("listMember", map);
+		}
 
-	public boolean checkJumin(MemberDTO dto) {
-		int count = 0;
-		try {
-			count = sqlSession.selectOne("checkJumin", dto);
-			if (count > 0) {
-				return true;
-			} else {
+		public List<MemberDTO> findMember(int startRow, int endRow, String search, String searchString){
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("startRow", startRow);
+			map.put("endRow", endRow);
+			map.put("search", search);
+			map.put("searchString", searchString);
+			return sqlSession.selectList("findMember", map);
+		}
+		
+		public MemberDTO getMemberProfile(int mnum){
+			try {
+				return sqlSession.selectOne("getMemberProfile", mnum);
+			}catch(Exception e) {
+				return null;
+			}
+		}
+
+		public boolean checkJumin(MemberDTO dto) {
+			int count = 0;
+			try {
+				count = sqlSession.selectOne("checkJumin",dto);
+				if(count>0) {
+					return true;
+				}else {
+					return false;
+				}
+			}catch(Exception e){
 				return false;
 			}
-		} catch (Exception e) {
-			return false;
 		}
-	}
-
-	public int insertMember(MemberDTO dto) {
-		int res = sqlSession.insert("insertMember", dto);
-		return res;
-	}
-
-	public MemberDTO confirmEmail(String email) {
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("email", email);
-		try {
-			return sqlSession.selectOne("confirmEmail", map);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
+		
+		public int insertMember(MemberDTO dto) {
+			int res = sqlSession.insert("insertMember",dto);
+			return res;
 		}
-	}
 
-	public int deleteMember(int mnum) {
-		return sqlSession.delete("deleteMember", mnum);
-	}
+		public MemberDTO confirmEmail(String email) {
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("email", email);
+			try {
+				return sqlSession.selectOne("confirmEmail", map);
+			}catch(Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+		}
 
-	public MemberDTO loginMember(MemberDTO dto) {
-		return sqlSession.selectOne("loginMember", dto);
-	}
+		public int deleteMember(int mnum) {
+			return sqlSession.delete("deleteMember",mnum);
+		}
 
-	public String getSaltByEmail(MemberDTO dto) {
-		return sqlSession.selectOne("getSaltByEmail", dto);
-	}
+		public MemberDTO loginMember(MemberDTO dto) {
+			try {
+				return sqlSession.selectOne("loginMember", dto);
+			}catch(Exception e) {
+				return null;
+			}
+		}
+		
+		public MemberDTO getMemberByMnum(int mnum) {
+			try {
+				return sqlSession.selectOne("getMemberByMnum", mnum);
+			}catch(Exception e) {
+				return null;
+			}
+		}
 
-	public List<String> findMemberEmail(MemberDTO dto) {
-		return sqlSession.selectList("findMemberEmail", dto);
-	}
-
-	public int findMemberPasswd(MemberDTO dto) {
-		return sqlSession.selectOne("findMemberPasswd", dto);
-	}
-
-	public int temporaryPasswd(MemberDTO dto) {
-		return sqlSession.update("temporaryPasswd", dto);
-	}
-
-	public int updateMemberProfile(int mnum, String name) {
-		MemberDTO dto = new MemberDTO();
-		dto.setMnum(mnum);
-		dto.setName(name);
-		return sqlSession.update("updateMemberProfile", dto);
-	}
-
-	public int updateMemberProfileByMaster(MemberDTO dto) {
-		return sqlSession.update("updateMemberProfileByMaster", dto);
-	}
-
-	public int updateMemberPasswd(int mnum, String passwd, String passwd1) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("mnum", mnum);
-		map.put("passwd", passwd);
-		map.put("passwd1", passwd1);
-		return sqlSession.update("updateMemberPasswd", map);
-	}
-
-	public int leaveMember(MemberDTO dto) {
-		return sqlSession.delete("leaveMember", dto);
-	}
+		public String getSaltByEmail(MemberDTO dto) {
+			try {
+				return sqlSession.selectOne("getSaltByEmail", dto);
+			}catch(Exception e) {
+				return null;
+			}
+		}
+		
+		public List<String> findMemberEmail(MemberDTO dto) {
+			try {
+				return sqlSession.selectList("findMemberEmail", dto);
+			}catch(Exception e) {
+				return null;
+			}
+		}
+		
+		public int findMemberPasswd(MemberDTO dto) {
+			try {
+				return sqlSession.selectOne("findMemberPasswd", dto);
+			}catch(Exception e) {
+				return 0;
+			}
+		}
+		
+		public int temporaryPasswd(MemberDTO dto) {
+			return sqlSession.update("temporaryPasswd", dto);
+		}
+		
+		public int updateMemberProfile(int mnum, String name, String nickname, String address) {
+			MemberDTO dto = new MemberDTO();
+			dto.setMnum(mnum);
+			dto.setName(name);
+			dto.setNickname(nickname);
+			dto.setAddress(address);
+			return sqlSession.update("updateMemberProfile",dto);
+		}
+		
+		public int updateMemberProfileByMaster(MemberDTO dto) {
+			return sqlSession.update("updateMemberProfileByMaster",dto);
+		}
+		
+		public int updateMemberPasswd(int mnum, String passwd, String passwd1) {
+			HashMap<String ,Object> map = new HashMap<String ,Object>();
+			map.put("mnum", mnum);
+			map.put("passwd", passwd);
+			map.put("passwd1", passwd1);
+			return sqlSession.update("updateMemberPasswd", map);
+		}
+		
+		public int leaveMember(MemberDTO dto) {
+			return sqlSession.delete("leaveMember", dto);
+		}
 
 	/*--------------------------------------------*/
 
@@ -158,4 +184,14 @@ public class MemberMapper {
      public List<MemberDTO> SearchedDTO_M(int mnum){
         return sqlSession.selectList("SearchedDTO_M", mnum);
      }
+     
+     
+   //---------------------------------형님
+
+     public List<MemberDTO> listMemberForMessage() {
+     	return sqlSession.selectList("listMemberForMessage");
+     }
 }
+
+
+
