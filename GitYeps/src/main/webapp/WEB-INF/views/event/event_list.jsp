@@ -21,10 +21,11 @@
 							<h1>서울특별시</h1>
 						</c:if>
 						<c:if test="${!empty sessionScope.memberinfo}">
-							<c:forTokens items="${sessionScope.memberinfo.address}" delims=" " begin="1" end="2" var="addr">
-                            	<c:set var="address" value="${address += addr}"/>
-                            </c:forTokens>
-                            <h1>${address}</h1>
+							<h1>
+								<c:forTokens items="${sessionScope.memberinfo.address}" delims=" " begin="1" end="2" var="addr">
+									${addr}
+								</c:forTokens>
+                            </h1>
 						</c:if>
 					</div>
 					<!-- 반복문 돌면서 최대 5개 까지 출력 -->
@@ -50,6 +51,7 @@
 				
 				<div class="location_more_cities_island" style="display: none;">
 					<div class="more_cities_island_wrap">
+					<c:if test="${!empty sessionScope.memberinfo}">
 						<div class="more_cities_island_section">
 							<h4>저장된 위치</h4>
 							<ul>
@@ -78,7 +80,7 @@
 							</ul>
 							<a href="#" class="clear-location-toggle">최근 검색위치 초기화 »</a>
 						</div>
-						
+						</c:if>
 						<div class="more_cities_island_section">
 							<h4>인기 지역</h4>
 							<div class="popular_cities">
@@ -402,16 +404,16 @@
 							<c:forEach var="fileDTO" items="${fileList}">
 								<c:if test="${eventDTO.evnum == fileDTO.evnum}">
 									<c:if test="${fileDTO.filename == 'nothing'}">
-										<div class="event_list_photo_box" style="background-color: #f5f5f5; background-size: contain; background-image: url(getImage/event_square.png);">
+										<div class="event_list_photo_box" style="background-color: #f5f5f5; background-size: contain; background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png);">
 											<a href="event_content?evnum=${eventDTO.evnum}">
-												<img src="getImage/event_square.png" height="300" width="300" class="event_list_photo_box_img">
+												<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png" height="300" width="300" class="event_list_photo_box_img">
 											</a>									
 										</div>
 									</c:if>
 									<c:if test="${fileDTO.filename != 'nothing'}">
-										<div class="event_list_photo_box" style="background-image: url(getImage/${fileDTO.filename});">
+										<div class="event_list_photo_box" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${fileDTO.filename});">
 											<a href="event_content?evnum=${eventDTO.evnum}">
-												<img src="getImage/${fileDTO.filename}" height="300" width="300" class="event_list_photo_box_img">
+												<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${fileDTO.filename}" height="300" width="300" class="event_list_photo_box_img">
 											</a>
 										</div>
 									</c:if>
@@ -419,88 +421,96 @@
 							</c:forEach>
 						</div>
 					
-					<div class="event_list_card_body">
-						<div class="event_list_card_content">
-							<h3 class="event_list_card_content_title">
-								<a href="event_content?evnum=${eventDTO.evnum}">
-									<span>
-										${eventDTO.eventname}
+						<div class="event_list_card_body">
+							<div class="event_list_card_content">
+								<h3 class="event_list_card_content_title">
+									<a href="event_content?evnum=${eventDTO.evnum}">
+										<span>
+											${eventDTO.eventname}
+										</span>
+									</a>
+								</h3>
+								
+								<div class="event_list_card_content_periode">
+									<span style="width: 24px; height: 24px;" class="icon">
+									<svg class="icon_svg" height="100%" width="100%" viewBox="0 0 24 24">
+											<path d="M18 21H6a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3 1 1 0 0 1 2 0h8a1 1 0 0 1 2 0 3 3 0 0 1 3 3v12a3 3 0 0 1-3 3zm1-13H5v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1V8zm-6 5h4v4h-4v-4z"></path>
+										</svg>
 									</span>
+									<c:if test="${empty eventDTO.end_date}">
+										${eventDTO.start_date}, ${eventDTO.start_time}
+									</c:if>
+									<c:if test="${!empty eventDTO.end_date}">
+										${eventDTO.start_date}, ${eventDTO.start_time} – ${eventDTO.end_date}, ${eventDTO.end_time}
+									</c:if>
+								</div>
+							
+								<div class="event_list_card_content_location">
+									<span style="width: 24px; height: 24px;" class="icon">
+										<svg class="icon_svg" height="100%" width="100%" viewBox="0 0 24 24">
+											<path d="M12 2C8.13 2 5 5.13 5 9c0 2.61 1.43 4.88 3.54 6.08L12 22l3.46-6.92A6.987 6.987 0 0 0 19 9c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"></path>
+										</svg>
+									</span>
+									<a href="#">${eventDTO.roadAddrPart1}</a> — ${eventDTO.roadAddrPart2}
+								</div>
+								
+								<p class="event_list_card_content_text">
+									${fn:replace(eventDTO.event_content,crcn,br)}
+								</p>
+							</div>
+							
+							<div class="event_list_card_footer">
+								<a href="event_list?mode=${eventDTO.event_category}">
+									<c:choose>
+										<c:when test="${eventDTO.event_category eq 'music_concert'}">
+											음악 & 콘서트
+										</c:when>
+										<c:when test="${eventDTO.event_category eq 'visualart'}">
+											전시회
+										</c:when>
+										<c:when test="${eventDTO.event_category eq 'film'}">
+											영화 & 시사회	
+										</c:when>
+										<c:when test="${eventDTO.event_category eq 'book'}">
+											도서 & 출판
+										</c:when>
+										<c:when test="${eventDTO.event_category eq 'fashion'}">
+											패션
+										</c:when>
+										<c:when test="${eventDTO.event_category eq 'food'}">
+											음식
+										</c:when>
+										<c:when test="${eventDTO.event_category eq 'festival'}">
+											축제 & 행사
+										</c:when>
+										<c:when test="${eventDTO.event_category eq 'sports_activity'}">
+											스포츠 & 야외활동
+										</c:when>
+										<c:when test="${eventDTO.event_category eq 'nightlife'}">
+											야간 문화활동
+										</c:when>
+										<c:when test="${eventDTO.event_category eq 'family_kids'}">
+											가족 & 어린이
+										</c:when>
+										<c:when test="${eventDTO.event_category eq 'other'}">
+											기타
+										</c:when>
+									</c:choose>
 								</a>
-							</h3>
-							
-							<div class="event_list_card_content_periode">
-								<span style="width: 24px; height: 24px;" class="icon">
-									<svg class="icon_svg" height="100%" width="100%" viewBox="0 0 24 24">
-										<path d="M18 21H6a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3 1 1 0 0 1 2 0h8a1 1 0 0 1 2 0 3 3 0 0 1 3 3v12a3 3 0 0 1-3 3zm1-13H5v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1V8zm-6 5h4v4h-4v-4z"></path>
-									</svg>
-								</span>
-								<c:if test="${empty eventDTO.end_date}">
-									${eventDTO.start_date}, ${eventDTO.start_time}
-								</c:if>
-								<c:if test="${!empty eventDTO.end_date}">
-									${eventDTO.start_date}, ${eventDTO.start_time} – ${eventDTO.end_date}, ${eventDTO.end_time}
+								
+								<c:if test="${sessionScope.memberinfo.ismaster eq 'y' || sessionScope.memberinfo.ismanager eq 'y' || eventDTO.mnum == sessionScope.memberinfo.mnum}">
+									<span id="event_del_edit" style="float: right !important; color: #999; font-weight: normal;">
+										<a id="event_delete" href="javascript:deleteEvent('${eventDTO.evnum}')">
+											삭제
+										</a>
+										/
+										<a href="event_edit?evnum=${eventDTO.evnum}">
+											수정
+										</a>
+									</span>
 								</c:if>
 							</div>
-							
-							<div class="event_list_card_content_location">
-								<span style="width: 24px; height: 24px;" class="icon">
-									<svg class="icon_svg" height="100%" width="100%" viewBox="0 0 24 24">
-										<path d="M12 2C8.13 2 5 5.13 5 9c0 2.61 1.43 4.88 3.54 6.08L12 22l3.46-6.92A6.987 6.987 0 0 0 19 9c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"></path>
-									</svg>
-								</span>
-								<a href="#">${eventDTO.roadAddrPart1}</a> — ${eventDTO.roadAddrPart2}
-							</div>
-							
-							<p class="event_list_card_content_text">
-								${fn:replace(eventDTO.event_content,crcn,br)}
-							</p>
 						</div>
-						
-						<div class="event_list_card_footer">
-							<a href="event_list?mode=${eventDTO.event_category}">
-								<c:choose>
-									<c:when test="${eventDTO.event_category eq 'music_concert'}">
-										음악 & 콘서트
-									</c:when>
-									<c:when test="${eventDTO.event_category eq 'visualart'}">
-										전시회
-									</c:when>
-									<c:when test="${eventDTO.event_category eq 'film'}">
-										영화 & 시사회
-									</c:when>
-									<c:when test="${eventDTO.event_category eq 'book'}">
-										도서 & 출판
-									</c:when>
-									<c:when test="${eventDTO.event_category eq 'fashion'}">
-										패션
-									</c:when>
-									<c:when test="${eventDTO.event_category eq 'food'}">
-										음식
-									</c:when>
-									<c:when test="${eventDTO.event_category eq 'festival'}">
-										축제 & 행사
-									</c:when>
-									<c:when test="${eventDTO.event_category eq 'sports_activity'}">
-										스포츠 & 야외활동
-									</c:when>
-									<c:when test="${eventDTO.event_category eq 'nightlife'}">
-										야간 문화활동
-									</c:when>
-									<c:when test="${eventDTO.event_category eq 'family_kids'}">
-										가족 & 어린이
-									</c:when>
-									<c:when test="${eventDTO.event_category eq 'other'}">
-										기타
-									</c:when>
-								</c:choose>
-							</a>
-<!-- 							<span style="float: right !important; color: #999; font-weight: normal;"> -->
-<!-- 								999 interested -->
-<!-- 							</span> -->
-						</div>
-					</div>
-
 					</div>
 				</c:if>
 				
@@ -629,10 +639,10 @@
 										<c:forEach var="thisWeek_random_fileDTO" items="${thisWeek_random_fileList}">
 											<c:if test="${thisWeek_random_eventDTO.evnum == thisWeek_random_fileDTO.evnum}">
 												<c:if test="${thisWeek_random_fileDTO.filename == 'nothing'}">
-													<img src="getImage/event_square.png" width="60px" height="60px">
+													<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png" width="60px" height="60px">
 												</c:if>
 												<c:if test="${thisWeek_random_fileDTO.filename != 'nothing'}">
-													<img src="getImage/${thisWeek_random_fileDTO.filename}" width="60px" height="60px">
+													<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${thisWeek_random_fileDTO.filename}" width="60px" height="60px">
 												</c:if>
 											</c:if>
 										</c:forEach>
@@ -873,7 +883,7 @@
 		$('.icon_14x14_triangle_down').hide();
 		$('.location_more_cities_island').hide();
 	})
-
+	
 	
 	$(document).on('click', '.dropdown_toggle_action', function(e) {
 		var parent = $(this).parents('.event_browse_filter_itmes_dropdown_toggle');
@@ -903,6 +913,14 @@
 <script type="text/javascript">	
 	function list(page){
 		location.href="event_list?curPage=" + page;
+	}
+	
+	function deleteEvent(evnum) {
+		if(confirm("이벤트에 등록된 모든 자료를 삭제합니다. 계속 하시겠습니까?")) {
+			location.href="event_delete?evnum=" + evnum;
+		} else {
+			return;
+		}
 	}
 </script>
 

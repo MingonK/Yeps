@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css?ver=1"/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/mainPage.css?ver=1"/>"/>
 <%-- <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css?ver=1"/>"/> --%>
 <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 <script src="//code.jquery.com/jquery.min.js"></script>
@@ -237,11 +238,18 @@
 								<div id="page_header_notifications_wrap">
 									<div id="page_header_notifications">
 										<a href="yeps_message" class="header-nav_link" id="messages-icon" data-analytics-label="messages_icon">
-											<span aria-label="Messages" style="width: 24px; height: 24px;" class="icon icon--24-speech icon--size-24 icon--white icon--fallback-inverted">
-											<svg class="icon_svg">
-												<path d="M18 3H6C4.34 3 3 4.34 3 6v7c0 1.66 1.34 3 3 3h2v5l5-5h5c1.66 0 3-1.34 3-3V6c0-1.66-1.34-3-3-3z"></path>
-											</svg>
-											</span>
+                                 			<span aria-label="Messages" style="width: 24px; height: 24px;" class="icon icon--24-speech icon--size-24 icon--white icon--fallback-inverted">
+                                     			<svg class="icon_svg">
+                                         			<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#24x24_speech">
+                                             			<svg id="24x24_speech" height="100%" viewBox="0 0 24 24" width="100%">
+                                                 			<path d="M18 3H6C4.34 3 3 4.34 3 6v7c0 1.66 1.34 3 3 3h2v5l5-5h5c1.66 0 3-1.34 3-3V6c0-1.66-1.34-3-3-3z"></path>
+                                             			</svg>
+                                         			</use>
+                                    			</svg>
+                                 			</span>
+                               				<c:if test="${ not empty sessionScope.noneCount && sessionScope.noneCount > 0}">
+                                 				<span class="ybadge ybadge--notification ">${sessionScope.noneCount}</span>
+                              				</c:if>
 										</a>
 										<a href="#" class="header-nav_link show-tooltip js-analytics-click" id="notifications-icon" data-analytics-label="notifications_icon">
 											<span aria-label="Notifications" style="width: 24px; height: 24px;" class="icon icon--24-notification icon--size-24 icon--white icon--fallback-inverted">
@@ -264,7 +272,7 @@
                                                 <img class="photo-box-img" height="90" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" width="90">
                                              </c:when>
                                              <c:otherwise>
-                                                <img class="photo-box-img" src="getImage/${mainPhoto.filename}" alt="member_main_photo" id="photo_box_img" width="90px" height="90px">
+                                                <img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${mainPhoto.filename}" alt="member_main_photo" id="photo_box_img" width="90px" height="90px">
                                              </c:otherwise>
                                           </c:choose>
                                        </span>
@@ -286,7 +294,7 @@
                                                                <img class="photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" width="60">
                                                             </c:when>
                                                             <c:otherwise>
-                                                               <img class="photo-box-img" src="getImage/${mainPhoto.filename}" alt="member_main_photo" id="photo_box_img" width="60px" height="60px">
+                                                               <img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${mainPhoto.filename}" alt="member_main_photo" id="photo_box_img" width="60px" height="60px">
                                                             </c:otherwise>
                                                          </c:choose>
                                                       </a>
@@ -344,7 +352,7 @@
                                            </div>
                                           <ul class="drop-menu-group--nav drop-menu-group">
                                              <li class="drop-down-menu-link">
-                                                <a class="js-analytics-click arrange arrange--middle arrange--6" href="member_details">
+                                                <a class="js-analytics-click arrange arrange--middle arrange--6" href="member_details" style="display: block; word-wrap: break-word;">
                                                    <strong class="arrange_unit">
                                                       <span aria-hidden="true" style="width: 24px; height: 24px;" class="icon icon--24-profile icon--size-24 u-space-r1">
                                                          <svg class="icon_svg">
@@ -355,7 +363,7 @@
                                                 </a>
                                              </li>
                                              <li class="drop-down-menu-link hidden-non-responsive-block responsive-visible-medium-block">
-                                                <a class="js-analytics-click arrange arrange--middle arrange--6" href="#">
+                                                <a class="js-analytics-click arrange arrange--middle arrange--6" href="yeps_message">
                                                    <strong class="arrange_unit">
                                                       <span aria-hidden="true" style="width: 24px; height: 24px;" class="icon icon--24-talk icon--size-24 u-space-r1">
                                                          <svg class="icon_svg">
@@ -376,7 +384,7 @@
                                                       </span><strong class="unit_hover">Managed Page</strong>
                                                    </strong>
                                                    <span class="arrange_unit">
-                                                      <span class="ybadge ybadge-notification drop-down-menu-link_new-label">MNG</span>
+                                                      <span class="ybadge ybadge-notification drop-down-menu-link_new-label" style="position: static; padding: 0 3px;">MNG</span>
                                                    </span>
                                                 </a>
                                              </li>
@@ -547,8 +555,7 @@
 			$('#footer_list_li_message').css('background', '#9b1a1a');
 		}
 	});
-	
-	$(document).on("mouseenter","#footer_list_block",function(){
+		$(document).on("mouseenter","#footer_list_block",function(){
         $('#header_page_footer_dropdown').attr('id', 'header_page_footer_dropdown_view');
         $('#footer_list_li_unit_after').attr('id', 'footer_list_li_unit_after_active');
         $('#header_page_footer_dropdown_wrap').css('pointer-events', 'auto');

@@ -17,9 +17,7 @@
 	<!--  
 	Filenum:${mylist_file.filenum}<br>
 	-->
-	Filenum:<br>
-
-	
+	Filenum:
 	Name:${mylist_member.name}<br>
 	ReviewCount:${mylist_member.reviewcount}<br>
 
@@ -27,6 +25,7 @@
 	<c:if test="${empty getRnameAndRnum}">
 		getRnameAndRnum의 값이 넘어오고있지 않음!
 	</c:if>
+	
 	
 	<c:forEach var="rdto" items="${getRnameAndRnum}">
 		Wrote a review for <a href="review_selectedres?rnum=${rdto.rnum}&rname=${rdto.rname}">${rdto.rname}(식당명)</a><p>	

@@ -31,10 +31,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getFYIEventFile" parameterType="int" resultType="FileDTO">
-		select * from yeps_files where evnum = #{evnum} and rownum = 1 order by filenum asc
+		select * from yeps_files where evnum = #{evnum} and rownum = 1 order by filenum desc
 	</select>
 	
 	<select id="getTargetEventFiles" parameterType="int" resultType="FileDTO">
 		select * from yeps_files where evnum = #{evnum} order by filenum desc
 	</select>
+	
+	<delete id="deleteFileToEvnum" parameterType="int">
+		delete yeps_files where evnum = #{evnum}
+	</delete>
 </mapper>

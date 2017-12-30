@@ -13,42 +13,44 @@
 <title>레스토랑</title>
 </head>
 <%@include file="../top.jsp" %>
-	<div class="main">
+	<div class="main" style="background: white;">
 	<div class="top-shelf" style="overflow: hidden; min-width: 990px; padding-bottom: 24px; margin-bottom: -18px; z-index: 1; width: 100%; position: relative; padding-top: 15px;">
+		
 		<div class="content-container js-biz-details" style="width: 960px;margin: 0 auto;padding: 0 15px;">
+			
 			<div class="biz-page-header clearfix" style="position: relative;display: flex;-webkit-box-align: center;align-items: center;width: 100%;margin-bottom: 13px;font-size: 16px;line-height: 1.3125em;">
-				<div class="biz-page-header-left claim-status" style="-webkit-box-flex: 1;flex: 1;min-width: 0;min-height: 0;padding-right: 30px;">
-					<div>
-						<h1 style="display: inline;padding-top: 0;margin-bottom: 6px;text-shadow: 0 1px rgba(255,255,255,0.7);word-wrap: break-word !important;word-break: break-word !important;overflow-wrap: break-word !important;font-weight: bold;    font-size: 30px;line-height: 1.2em;color: #333;    margin: 0 0 6px;">${getRest.rname }</h1>
+			
+					<div class="biz-page-header-left claim-status" style="-webkit-box-flex: 1;flex: 1;min-width: 0;min-height: 0;padding-right: 30px;">
+						<div class="u-space-t1" style="margin-top: 6px !important;">
+						<h1
+							style="display: inline; padding-top: 6px; font-size: 36px; line-height: 1.16667em; margin-bottom: 6px; text-shadow: 0 1px rgba(255, 255, 255, 0.7); word-wrap: break-word !important; word-break: break-word !important; overflow-wrap: break-word !important; font-weight: bold; color: #333; margin: 0 0 6px;">${getRest.rname }</h1>
 					</div>
-					<div class="biz-main-info embossed-text-white"style="margin-top: 9px;text-shadow: 0 1px rgba(255,255,255,0.7);">
-						<div class="rating-info clearfix" style="margin-bottom: 9px;">
-							<div class="biz-rating biz-rating-very-large clearfix" style="float: left; line-height: 24px; margin-bottom: 0;">
-								<div class="i-stars i-stars--large-4 rating-very-large"
-									title="4.0 star rating"
-									style="margin-top: 0; float: left; margin: -4px 6px 0 0; position: relative; overflow: hidden; width: 132px; height: 24px; background-position: 0 -168px; background: url(https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png) no-repeat; background-size: 132px 560px; display: inline-block; vertical-align: middle;">
-									<img class="offscreen" height="303"
+						<div class="biz-main-info embossed-text-white"style="margin-top: 9px;text-shadow: 0 1px rgba(255,255,255,0.7);">
+							<div class="rating-info clearfix" style="margin-bottom: 9px;height:auto;overflow:hidden;">
+								<div class="biz-rating biz-rating-very-large clearfix" style="float: left; line-height: 24px; margin-bottom: 0;">
+									<div class="restContent-star-rating-${starAvg }">
+										<img class="offscreen" height="303"
 										src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png"
 										width="84" alt="4.0 star rating"
 										style="clip: rect(0, 0, 0, 0); position: absolute; left: -9999px; top: auto; overflow: hidden; width: 1px; height: 1px; vertical-align: middle;">
+									</div>
+									<span class="review-count rating-qualifier" style="position: relative;display: block;float: left;color: #666;font-weight: normal;">${reviewCount} 리뷰</span>
 								</div>
-								<span class="review-count rating-qualifier" style="position: relative;display: block;float: left;color: #666;font-weight: normal;">reviews</span>
 							</div>
-						</div>
-						<div class="price-category" style="float: left;clear: both;">
-							<span class="bullet-after">
-      								 <span class="business-attribute price-range" style="letter-spacing: 1px;white-space: nowrap;">￦￦</span>
-      						</span>
-       						<span class="category-str-list" style="margin-right: 6px;">
+							<div class="price-category" style="float: left;clear: both;">
+								<span class="bullet-after">
+       								 <span class="business-attribute price-range" style="letter-spacing: 1px;white-space: nowrap;">￦￦</span>
+        						</span>
+        						<span class="category-str-list" style="margin-right: 6px;">
 			                    <a href="#" style="white-space: nowrap;color: #0073bb;text-decoration: none;">${getRest.foodstyle}</a>
 					    	</span>
-						</div>
+							</div>
 							
+						</div>
 					</div>
-				</div>
 					
-				<div class="biz-page-header-right u-relative"style="display: table;    position: relative !important;">
-					<div class="biz-page-actions nowrap"style="text-align: right;overflow: hidden;padding-bottom: 1px;margin-top: -1px;    white-space: nowrap;">
+					<div class="biz-page-header-right u-relative"style="display: table;    position: relative !important;">
+						<div class="biz-page-actions nowrap"style="text-align: right;overflow: hidden;padding-bottom: 1px;margin-top: -1px;    white-space: nowrap;">
 						<a href="review_write" class="ybtn ybtn--primary war-button" style="color: #666; float: left; padding-left: 12px; margin: 0 12px 0 0; color: white; border-color: #8d0005; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3); background-color: #d90007; background: linear-gradient(#d90007, #c91400); display: inline-block; vertical-align: middle; cursor: pointer; border: 1px solid; font-weight: bold; text-align: center; user-select: none; font-size: 14px; line-height: 1.28571em; padding: 8px 19px 9px; border-radius: 3px;">
 							<span aria-hidden="true" style="width: 24px; height: 24px;" class="icon icon--24-star icon--size-24 icon--currentColor u-space-r-half icon--fallback-inverted">
 							    <svg id="24x24_star" height="100%" viewBox="0 0 24 24" width="100%">
@@ -58,13 +60,12 @@
 							리뷰쓰기 
 						</a> 
 						<span class="ybtn-group clearfix" style="float: right;margin-top: 4px;"> 
-							<a class="ybtn ybtn--small add-photo-button" href="restaurant_uploadForm2?rnum=${getRest.rnum}" style="border-radius: 3px 0 0 3px; color: #666; position: relative; float: left; padding: 5px 8px; font-size: 12px; line-height: 1.5em; text-decoration: none !important; display: inline-block; vertical-align: middle; margin: 0; cursor: pointer; border: 1px solid; font-weight: bold; text-align: center; user-select: none; border-color: #ccc; color: #666; background-color: #f7f7f7; background: linear-gradient(#fff, #f7f7f7); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);">
+						<a class="ybtn ybtn--small add-photo-button" href="restaurant_uploadForm2?rnum=${getRest.rnum}" style="border-radius: 3px 0 0 3px; color: #666; position: relative; float: left; padding: 5px 8px; font-size: 12px; line-height: 1.5em; text-decoration: none !important; display: inline-block; vertical-align: middle; margin: 0; cursor: pointer; border: 1px solid; font-weight: bold; text-align: center; user-select: none; border-color: #ccc; color: #666; background-color: #f7f7f7; background: linear-gradient(#fff, #f7f7f7); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);">
 								<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-add-photo icon--size-18 icon--currentColor">
 							<svg id="18x18_add_photo" height="100%" viewBox="0 0 18 18"width="100%">
 						   		<path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 4.75a4.25 4.25 0 1 0 0 8.5 4.25 4.25 0 0 0 0-8.5zM11 10h-1v1a1 1 0 0 1-2 0v-1H7a1 1 0 0 1 0-2h1V7a1 1 0 0 1 2 0v1h1a1 1 0 0 1 0 2z"></path>
-							</svg>
-						</span> 
-							사진추가
+						   </svg>
+							</span> 사진추가
 						</a>
 						
 						<a class="ybtn ybtn--small share-icon js-business-send-to-friend"href="#" style="margin-left: -1px; position: relative; float: left; border-radius: 0; padding: 5px 8px; font-size: 12px; line-height: 1.5em; display: inline-block; vertical-align: middle; text-decoration: none !important; margin: 0; cursor: pointer; border: 1px solid; font-weight: bold; text-align: center; user-select: none; border-color: #ccc; color: #666; background-color: #f7f7f7; background: linear-gradient(#fff, #f7f7f7); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);">
@@ -88,30 +89,46 @@
 					</div>
 			</div>
 		
-		<div class="biz-page-subheader" style="width: 100%; height: 350px; display: table;">
-					<div class="mapbox-container" style="width: 33.33333%; height: 350px; display: table-cell; vertical-align: middle;">
+		<div class="biz-page-subheader" style="display: table;">
+					<div class="mapbox-container" style="width: 33.33333%;display: table-cell; vertical-align: middle;height:auto;overflow:hidden;">
 						<div class="mapbox" style="padding: 5px; background: #fff; border: 1px solid #ccc;">
-							<div class="mapbox-map" id="map" style="width: 100%; height: 180px; border: 1px solid #ccc;">
-								
+							<div class="mapbox-map" id="map2" style="height: 180px; border: 1px solid #ccc;">
+								<script>
+								  var map = new naver.maps.Map('map2',{
+								  	  zoom:12
+								    });
+								      
+								      var myaddress = '${getRest.roadAddrPart1}';
+								      	naver.maps.Service.geocode({address: myaddress}, function(status, response) {
+								          var result = response.result;
+								          var myaddr = new naver.maps.Point(result.items[0].point.x, result.items[0].point.y);
+								          map.setCenter(myaddr);
+								          var marker = new naver.maps.Marker({
+								            position: myaddr,
+								            map: map
+								          });
+								      });
+								      </script>
 							</div>
-							<div class="mapbox-text" style="width: 100%; height: 130px; display: block;">
-								<ul style="margin: 5px; list-style: none;">
-								
+							<div class="mapbox-text" style="min-height: 105px;">
+								<ul style="margin: 5px; list-style: none;    display: block;">
 										<li class="u-relative" style="margin-bottom: 3px;    position: relative !important;display: list-item;list-style: none;">
-											<span style="width: 18px; height: 18px;" class="icon icon--18-marker icon--size-18 u-absolute u-sticky-top">
+											<span aria-hidden="true" style="vertical-align: top;width: 18px; height: 18px;" class="icon icon--18-marker icon--size-18 u-absolute u-sticky-top">
 											    <svg id="18x18_marker" height="100%" viewBox="0 0 18 18" width="100%">
 											    	<path d="M14 7A5 5 0 0 0 4 7c0 1.97 1.15 3.658 2.806 4.472h-.17L9 16l2.363-4.528h-.17C12.85 10.658 14 8.97 14 7zM9 5a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"></path>
-											    </svg>
+										    	</svg>
 											</span>
-											<div class="map-box-address u-space-l4" style="line-height: 18px; margin-left: 24px;">
-												<strong class="street-address" style="font-weight: bold;">
-													<address style="display: block;font-style: normal;">
-														${getRest.roadAddrPart1}<br> ${getRest.addrDetail}<br>
-														${getRest.roadAddrPart2}
-													</address>
-												</strong>
+											</span>
+											<div class="map-box-address u-space-l4" style="line-height: 18px;display:inline-block;">
+													<strong class="street-address" style="font-weight: bold;">
+														<address style="display: block;font-style: normal;">
+															${getRest.roadAddrPart1}<br> ${getRest.addrDetail}<br>
+															${getRest.roadAddrPart2}
+														</address>
+													</strong>
 											</div>
 										</li>
+												
 	
 									<li class="clearfix" style="margin-bottom: 3px;    display: list-item;text-align: -webkit-match-parent;">
 										<div>
@@ -139,13 +156,14 @@
 										</div>
 									</li>
 									
+									
 								</ul>
 								
 							</div>
 						</div>
 					</div>
 					<div class="restContent-showcase-container"
-						style="width: 66.6667%;; height: 336px; display: table-cell; vertical-align: middle;">
+						style="width: 66.6667%;display: table-cell; vertical-align: middle;">
 						<div class="restContent-showcase-container-inner"
 							style="position: relative; width: 640px; height: 220px;">
 							<div class="top-shelf-grey"></div>
@@ -167,7 +185,7 @@
 								</a>
 							</div>
 	
-							<div class="showcase-photos current">
+							<div class="showcase-photos">
 								<div class="js-photo photo photo-1"
 									data-media-id="VXaXWJEy7XSoyh1ij9zojA" data-media-index="17" style="z-index: 1000;display:inline-block;width: 100%;height: 220px;    box-shadow: none;transition: all 0.2s ease-out;transition-property: transform, box-shadow;">
 									<div class="showcase-photo-box" style="height:100%;">
@@ -177,7 +195,27 @@
 										</a>
 									</c:forEach>
 									</div>
+								<div class="photo-box-overlay js-overlay"
+									style="opacity: 0; position: absolute; right: 0; bottom: 0; left: 0; padding: 3px 6px; border-radius: 0 0 4px 4px; background: #333; background: rgba(0, 0, 0, 0.5); color: white; font-size: 12px; line-height: 1.5em; font-weight: bold; overflow: hidden; -webkit-transition: all 0.3s ease-in-out; transition: all 0.3s ease-in-out;">
+									<div class="photo-box-overlay_caption" style="    padding: 3px 6px 3px 1px;    position: relative;    display: flex;transition: all 0.2s ease-out;">
+										<div class="media-avatar avatar" style="    position: relative;    border-right: 6px solid transparent; border-left: none;">
+											<div class="photo-box pb-30s">
+												<a href="#" class="js-analytics-click" data-analytics-label="user-photo" style="    color: white;    text-decoration: none;    cursor: pointer;">
+									                <img class="photo-box-img" height="30" src="https://s3-media2.fl.yelpcdn.com/photo/SDnJqhDE0GRwI8pu4Gus2g/30s.jpg" width="30"
+									                style="    outline: none;    display: block;    margin-top: 3px;    border-radius: 4px;    vertical-align: middle;">
+									        </a>
+											</div>
+										</div>
+										<div class="media-story"
+											style="overflow: hidden; height: 36px; -webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;">
+											<a class="photo-desc" href="#"
+												style="text-decoration: none; text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5); color: white; cursor: pointer;">
+												Photo of Yardbird Southern Table &amp; Bar - Las Vegas, NV,
+												United States </a>
+										</div>
+									</div>
 								</div>
+							</div>
 <!-- 							<div class="js-photo photo photo-2" -->
 <!-- 									data-media-id="VXaXWJEy7XSoyh1ij9zojA" data-media-index="17" style="left: 220px;z-index: 1001;display: block;position: absolute;margin: -15px;width: 250px;height: 250px;    box-shadow: none;transition: all 0.2s ease-out;transition-property: transform, box-shadow;"> -->
 <!-- 									<div class="showcase-photo-box" style="height:100%;"> -->
@@ -251,7 +289,7 @@
 											<div class="restcontent-review-highlights-photo-box">
 												<a href="#"
 													style="color: #0073bb; text-decoration: none; cursor: pointer;">
-													<img width="60px" height="60px" style="outline: none;border-radius: 4px;vertical-align: middle;" src="getImage/businessman.png">
+													<img width="60px" height="60px" style="outline: none;border-radius: 4px;vertical-align: middle;" src="getImage/pepe.jpg">
 												</a>
 											</div>
 										</div>
@@ -326,7 +364,8 @@
 												<b style="font-weight: normal;color: #333;">for Fog Harbor Fish House</b>
 											</h2>
 											<div class="restContent-feed_filters" >
-												<div class="restContent-section-header_block" style="margin: 0px !important;display:table;">
+												<div class="section-header_block" style="margin: 0px !important;display:table;">
+												
 													<div class="restContent-arrange-middle" style="margin-bottom: 6px !important; display: table; min-width: 100%; table-layout: auto;">
 														<div class="restContent-feed-search" style="  vertical-align: middle;width: 100%;    box-sizing: border-box;display: table-cell;">
 															<div class="restContent-section-header-search" style="">
@@ -422,7 +461,6 @@
                            </ul>
                                  <input type="hidden" name="rnum" value="${getRest.rnum}">   
                                  <input type="hidden" name="star" id="star">
-                        
                            </div>
                            </form>
 
@@ -615,20 +653,21 @@
 												<div class="restContent-review-content" style="padding: 0 12px 6px 0; min-height: 156px; word-wrap: break-word !important; word-break: break-word !important; overflow-wrap: break-word !important;">
 													<div class="restContent-review-rating" style="margin: 6px 0;width:100%;overflow:hidden;height:auto;">
 														<div>
-															<div class="i-stars i-stars--regular-5 rating-large" title="5.0 star rating" style="float: left; margin: -1px 6px 0 0; position: relative; overflow: hidden; width: 102px; height: 18px; background-position: 0 -402px; background: url(https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png) no-repeat; background-size: 132px 560px; display: inline-block; vertical-align: middle;">
-																<img class="offscreen" height="303"
-																	src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png"
-																	width="102" alt="5.0 star rating"
-																	style="clip: rect(0, 0, 0, 0); position: absolute; left: -9999px; top: auto; overflow: hidden; width: 1px; height: 1px; vertical-align: middle;">
-															</div>
+															<script>
+															
+															</script>
+															<div class="restList-star-rating-${getReview.gradepoint }" >
+															<img class="offscreen" 
+																src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png"
+																width="84" height="303" alt="4.0 star rating"
+																style="clip: rect(0, 0, 0, 0); position: absolute; left: -9999px; top: auto; overflow: hidden; width: 1px; height: 1px; vertical-align: middle;">
+														</div>
 														</div>
 														<span class="restContent-rating-qualifier" style="display: block; float: left; color: #666; font-weight: normal;">
 															${getReview.joindate }
 														</span><!-- 날짜 -->
-      															
-															
 													</div>
-													<p lang="ko" style="    margin-bottom: 12px;display:block;">
+													<p lang="ko" style="margin-bottom: 12px;display:block;">
 														${getReview.content }
 													</p>
 													</div><!--리뷰 내용 -->
@@ -698,15 +737,15 @@
 									</li><!-- 리뷰 -->
 									</c:forEach>
 								</ul>
-								      <div class="event_list_paging_section" style="font-size: 14px;">
+								<div class="event_list_paging_section" style="font-size: 14px;">
          <div class="event_list_pagination_block">
             <div class="event_list_pagination_wrap">
                <div class="event_list_page_of_pages">
                   <c:if test="${map.YepsPager.blockEnd == 0}">
-                     Page ${map.curPage} of 1
+                     Page ${map.YepsPager.curPage} of 1
                   </c:if>
                   <c:if test="${map.YepsPager.blockEnd != 0}">
-                     Page ${map.curPage} of ${map.YepsPager.blockEnd}
+                     Page ${map.YepsPager.curPage} of ${map.YepsPager.blockEnd}
                   </c:if>
                </div>
 <!--                페이징 처리!! 현재페이지는 span이 되고 나머지는 a로 -->
@@ -749,7 +788,7 @@
                            </a>
                         </c:otherwise>
                      </c:choose>
-                     </div>x
+                     </div>
                   </c:forEach>
                   
                   <c:if test="${map.YepsPager.curBlock <= map.YepsPager.totBlock}">
@@ -778,6 +817,7 @@
             </div>
          </div>
       </div>
+		
 									</div>
 								</div>
 							</div>
@@ -823,7 +863,7 @@
 										</span>
 									</div>
 									<div class="restContent-iconed-list-story" style="display: table-cell;width: 100%;padding: 9px 0;border-bottom: 1px solid #e6e6e6;padding-bottom: 8px;">
-							            <b style="font-weight: bold;"><a style="color: #0073bb;text-decoration: none;" class="menu-explore js-menu-explore" href="restaurant_insertMenuForm">Full menu</a></b>
+							            <b style="font-weight: bold;"><a style="color: #0073bb;text-decoration: none;" class="menu-explore js-menu-explore" href="restaurant_listMenu">Full menu</a></b>
 							        </div>
 							    </li>
 							    <li class="restContent-iconed-list-item" style="display: table;width: 100%;margin-bottom: 0;">
@@ -1033,7 +1073,25 @@
 			</div>
 				</div>
 		</div>
-		<script>
+		
+		
+<script>
+	 $(function() {
+		//----- OPEN
+		$('[data-popup-open]').on('click', function(e)  {
+			var targeted_popup_class = jQuery(this).attr('data-popup-open');
+			$('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+			e.preventDefault();
+		});
+	    
+		//----- CLOSE
+		$('[data-popup-close]').on('click', function(e)  {
+			var targeted_popup_class = jQuery(this).attr('data-popup-close');
+			$('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+			e.preventDefault();
+			});
+		});
+		 
    $(document).ready(function() {
       $('.selector').hover(function(e) {
          var star = $(e.target).val();
@@ -1078,43 +1136,15 @@
          
       });
       
-      $(function() {
-          //----- OPEN
-        $('[data-popup-open]').on('click', function(e)  {
-            var targeted_popup_class = jQuery(this).attr('data-popup-open');
-            $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
-            e.preventDefault();
-        });
-  
-     //----- CLOSE
-        $('[data-popup-close]').on('click', function(e)  {
-            var targeted_popup_class = jQuery(this).attr('data-popup-close');
-            $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
-            e.preventDefault();
-        });
-    });
-      
-      var map = new naver.maps.Map('map',{
-//		  	  zoom:8
-	    });
-	      
-	      var myaddress = '${getRest.roadAddrPart1}';
-	      	naver.maps.Service.geocode({address: myaddress}, function(status, response) {
-	          var result = response.result;
-	          var myaddr = new naver.maps.Point(result.items[0].point.x, result.items[0].point.y);
-	          map.setCenter(myaddr);
-	          var marker = new naver.maps.Marker({
-	            position: myaddr,
-	            map: map
-	          });
-	      });
-      
    });   
-   </script>
-	<script type="text/javascript">
-    // **원하는 페이지로 이동시 검색조건, 키워드 값을 유지하기 위해 
-    function list(page){
-        location.href="restaurant_list?curPage="+page;
-    }
-	</script>
+</script>
+
+
+<script type="text/javascript">
+//**원하는 페이지로 이동시 검색조건, 키워드 값을 유지하기 위해 
+function list(page){
+    location.href="restaurant_content?curPage="+page;
+}
+</script>
+
 <%@ include file="../bottom.jsp" %>

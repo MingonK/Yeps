@@ -12,6 +12,9 @@ public class ReviewDTO {
 	private int filenum;	
 	private String ip;
 	private String recentreview;
+	private int useful;
+	private int funny;
+	private int cool;
 	
 	
 	public int getRvnum() {
@@ -74,5 +77,25 @@ public class ReviewDTO {
 	public void setRecentreview(String recentreview) {
 		this.recentreview = recentreview;
 	}
+	public int getUseful() {
+		return useful;
+	}
+	public void setUseful(int useful) {
+		this.useful = useful;
+	}
+	public int getFunny() {
+		return funny;
+	}
+	public void setFunny(int funny) {
+		this.funny = funny;
+	}
+	public int getCool() {
+		return cool;
+	}
+	public void setCool(int cool) {
+		this.cool = cool;
+	}
+	
+	
 	
 }

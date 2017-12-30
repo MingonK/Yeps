@@ -55,4 +55,8 @@ public class FileMapper {
 	public FileDTO getFYIEventFile(int evnum) {
 		return sqlSession.selectOne("getFYIEventFile", evnum);
 	}
+	
+	public int deleteFileToEvnum(int evnum) {
+		return sqlSession.delete("deleteFileToEvnum", evnum);
+	}
 }

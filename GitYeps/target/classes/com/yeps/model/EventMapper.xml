@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertEvent" parameterType="EventDTO">
 		insert into yeps_event values (yeps_event_seq.nextval, #{eventname}, #{start_date},
 		 #{start_time}, #{end_date, jdbcType=VARCHAR}, #{end_time, jdbcType=VARCHAR}, #{store_address}, #{event_content}, #{discount}, #{event_category}, #{ip}, 
-		 #{filenum, jdbcType=INTEGER}, #{zipNo}, #{roadAddrPart1}, #{roadAddrPart2, jdbcType=VARCHAR}, #{addrDetail}, sysdate)
+		 #{filenum, jdbcType=INTEGER}, #{zipNo}, #{roadAddrPart1}, #{roadAddrPart2, jdbcType=VARCHAR}, #{addrDetail}, sysdate, #{mnum})
 	</insert>
 	
 	<select id="getEventContent" parameterType="int" resultType="EventDTO">
@@ -52,4 +52,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		select * from yeps_event where end_date >= to_char(sysdate+7, 'yyyymmdd') or to_char(sysdate-7, 'yyyymmdd') >= start_date and 3 >= rownum order by dbms_random.value
  	</select>
  	
+ 	<delete id="deleteEvent" parameterType="int">
+ 		delete yeps_event where evnum = #{evnum}
+ 	</delete>
+ 	
+ 	<update id="updateEvent" parameterType="EventDTO">
+ 		update yeps_event set start_date = #{start_date}, start_time = #{start_time}, end_date = #{end_date, jdbcType=VARCHAR}, end_time = #{end_time, jdbcType=VARCHAR}, 
+ 				store_address = #{store_address}, event_content = #{event_content}, discount = #{discount}, event_category = #{event_category}, 
+ 				filenum = #{filenum, jdbcType=INTEGER}, zipNo = #{zipNo}, roadAddrPart1 = #{roadAddrPart1}, roadAddrPart2 = #{roadAddrPart2, jdbcType=VARCHAR}, 
+ 				addrDetail = #{addrDetail} where eventname = #{eventname} and store_address = #{store_address}
+ 	</update>
 </mapper>

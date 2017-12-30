@@ -4,6 +4,8 @@ public class MessageDTO {
 
 	private int msgNum;
 	private int mnum;//맴버 로그인시 회원정보 가져올 외래키
+	private int evnum;
+	private int rvnum;
 	private String title;
 	private String receiver;//받은 사람(로그인 회원과 연동되게)
 	private String sender;//보낸사람(로그인 회원과 연동되게)
@@ -82,6 +84,18 @@ public class MessageDTO {
 	}
 	public void setReadDate(String readDate) {
 		this.readDate = readDate;
+	}
+	public int getEvnum() {
+		return evnum;
+	}
+	public void setEvnum(int evnum) {
+		this.evnum = evnum;
+	}
+	public int getRvnum() {
+		return rvnum;
+	}
+	public void setRvnum(int rvnum) {
+		this.rvnum = rvnum;
 	}
 	
 }

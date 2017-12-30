@@ -6,9 +6,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.yeps.model">
 
-	<insert id="insertMemberMainPhoto" parameterType="MemberPhotoDTO">
+   <insert id="insertMemberMainPhoto" parameterType="MemberPhotoDTO">
       insert into yeps_member_photos(filenum, mnum, filename, origin_filename, filesize, file_upload_date, ismainphoto) values (yeps_member_photos_seq.nextval, #{mnum, jdbcType=INTEGER}, #{filename}, #{origin_filename}, #{filesize}, sysdate, 'y')
-	</insert>
+   </insert>
    
    <insert id="insertMemberPhoto" parameterType="MemberPhotoDTO">
       insert into yeps_member_photos(filenum, mnum, filename, origin_filename, filesize, file_upload_date, ismainphoto) values (yeps_member_photos_seq.nextval, #{mnum, jdbcType=INTEGER}, #{filename}, #{origin_filename}, #{filesize}, sysdate, 'n')
@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    </select>
    
    <update id="changeMemberMainPhoto" parameterType="int">
-   	  update yeps_member_photos set ismainphoto='n' where mnum=#{mnum}
+        update yeps_member_photos set ismainphoto='n' where mnum=#{mnum}
    </update>
    
    <update id="setMemberMainPhoto" parameterType="java.util.HashMap">
@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    </update>
    
    <delete id="deleteMemberPhoto" parameterType="java.util.HashMap">
-   	  delete from yeps_member_photos where mnum = #{mnum} and filenum=#{filenum}
+        delete from yeps_member_photos where mnum = #{mnum} and filenum=#{filenum}
    </delete>
    <!--
    

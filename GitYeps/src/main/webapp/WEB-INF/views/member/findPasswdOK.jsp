@@ -5,9 +5,8 @@
 <head>
 <title>findPw</title>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/member.css?ver=3"/>"/>
 </head>
-<body ondragstart="return false">
+<body>
 	<c:choose>
 		<c:when test="${temporaryPw==1}">
 			<div id="member_popup">

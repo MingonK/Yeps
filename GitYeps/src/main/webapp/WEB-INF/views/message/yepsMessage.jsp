@@ -6,7 +6,7 @@
 <html>
 <head>
 <title>Yeps Message</title>
-	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/message.css"/>"/>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/message.css?ver=1"/>"/>
  	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
 	<script src="//code.jquery.com/jquery.min.js"></script>
 </head>
@@ -15,13 +15,13 @@
 <div class="popup" align="left" id="writeIssue" data-popup="writeIssue"  style="z-index: 1;">
     <form name="sendIssueform" method="post">
 	     <div class="popup-inner">
-	         <h4 align="left"  style="color: #d32323;"> Send Issue To Manager</h4>
+	         <h4 align="left"  style="color: #d32323; margin-bottom: 20px;">Send Report To Manager</h4>
 	             <input type="hidden" id="issueValue" value="issue">
 	         <h4 align="left" style="color: #d32323;">Subject is</h4>
-	             <input type="text" name="title" id="sendIssueSubject" >
+	             <input type="text" name="title" id="sendIssueSubject">
 	         <h4 align="left" style="color: #d32323;">Content is</h4>
 	             <textarea rows="4" name="content" id="sendIssueContent"  placeholder="여기에 메시지를 입력하세요."></textarea>
-	                 <button class="popup-send" id="sendIssue" type="button" data-popup-send="SendIssue" >SendIssue </button>&nbsp;&nbsp;
+	                 <button class="popup-send" id="sendIssue" type="button" data-popup-send="SendIssue" >Send Report</button>&nbsp;&nbsp;
 			         <a data-popup-close="writeIssue" style="cursor:pointer;" href="#">  Close</a>
 					 <a class="popup-close" data-popup-close="writeIssue" href="#" >x</a>
 		  </div>
@@ -125,10 +125,10 @@
 							    <td><input type="checkbox" style="cursor:pointer;" name="check" value="${dto.msgNum}"></td>
 							    <td><c:choose>
 									    <c:when test="${dto.readNum == 1}">
-											<label><input type="image" src="getImage/open.jpg" name="read" value="${dto.msgNum}" style="cursor:pointer;" onclick="readMessage('${map.lMode}');"></label>
+											<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/open.jpg">
 									    </c:when>
 									    <c:when test="${dto.readNum == 0}">
-											<label><input type="image" src="getImage/close.jpg" name="read" value="${dto.msgNum}" style="cursor:pointer;" onclick="readMessage('${map.lMode}');"></label>
+											<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/close.jpg">
 									    </c:when>
 								    </c:choose></td>
 							    <td><a class="btn" data-popup-open="writeMessage" id="sender" name="sender" onclick="messageForm('${dto.sender}')">${dto.sender}</a>
@@ -151,7 +151,7 @@
 	                             </div>
 	                     <!--  페이징 처리!! 현재페이지는 span이 되고 나머지는 a로    -->
 	                         <c:if test="${map.yepsPager.blockEnd != 1}">
-	                             <div class="yeps_message_page_link_wrapper">
+	                             <div class="yeps_message_page_link_wrapper" style="text-align: right;">
 	                                 <div class="yeps_message_page_link_wrap">
 	                                     <c:if test="${map.yepsPager.curBlock > 1}">
 	                                         <div class="yeps_message_next_block">
@@ -201,7 +201,7 @@
 	                                    </div>
 	                                </c:if>
 	                            <c:if test="${map.yepsPager.curPage <= map.yepsPager.totPage}">
-	                                <div class="yeps_message_next_block">
+	                                <div class="yeps_message_next_block" style="display: inline-block;">
 	                                    <a class="yeps_message_next_block_action" href="javascript:list('${map.yepsPager.totPage}','${map.lMode}')">
 	                                        <span>End</span>
 	                                    </a>
@@ -217,10 +217,6 @@
   </div>
 </div>
 	<script>
-	$('#issue').click(function(){
-		$('#sendIssueSubject').val('Issue : ');
-	}) 
-	
  	$('#sendIssue').click(function(){
  	    var issue = $('#issueValue').val();
  	    document.sendIssueform.action = "message_send?issue=" + issue;
@@ -281,12 +277,7 @@
 	    document.msgform.action = "message_action";
 	    document.msgform.submit();
     }
-    
-    function readMessage(lMode){
-        document.msgform.action = "message_read?lMode=" + lMode;
-    	document.msgform.submit();
-    }
-    
+
     function readCheck(){
     	var lMode = $('#pageMode').val();
     	var msgnum = $('#readCheck').val();

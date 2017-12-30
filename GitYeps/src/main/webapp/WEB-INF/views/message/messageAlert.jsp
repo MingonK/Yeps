@@ -4,7 +4,9 @@
 <html>
 <head>
 <title>Message Locker</title>
-<script src="//code.jquery.com/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/message.css"/>"/>
+ 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
+	<script src="//code.jquery.com/jquery.min.js"></script>
 </head>
 <c:if test="${not empty requestScope.msg}">
 	<script type="text/javascript">
@@ -89,10 +91,10 @@
 							 <td>
 							 <c:choose>
 									 <c:when test="${dto.readNum == 1}">
-									 	<label><input type="image" src="resources/img/open.jpg" name="read" value="${dto.msgNum}" onclick="readMessage('${map.lMode}');"></label>
+									 	<label><input type="image" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/open.jpg" name="read" value="${dto.msgNum}" onclick="readMessage('${map.lMode}');"></label>
 									 </c:when>
 									 <c:when test="${dto.readNum == 0}">
-										<label><input type="image" src="resources/img/close.jpg" name="read" value="${dto.msgNum}" onclick="readMessage('${map.lMode}');"></label>
+										<label><input type="image" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/close.jpg" name="read" value="${dto.msgNum}" onclick="readMessage('${map.lMode}');"></label>
 									 </c:when>
 							   </c:choose></td>
 						       <td style="font-weight: bold;" >	

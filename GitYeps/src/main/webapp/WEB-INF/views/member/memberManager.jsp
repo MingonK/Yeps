@@ -4,7 +4,7 @@
 
 <html>
 <head>
-<title>mvc멤버</title>
+<title>Yeps - Managed Page</title>
 <script src="//code.jquery.com/jquery.min.js?ver=1"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js?ver=1"></script>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
@@ -78,10 +78,10 @@
 															<a href="member_manager?mnum=${dto.mnum}" class="js-analytics-click" data-analytics-label="user-photo">
 																<c:choose>
 																	<c:when test="${empty map.listMemberPhoto[status.index].filename}">
-																		<img class="photo-box-img" height="60" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_styleguide/514f6997a318/assets/img/default_avatars/user_60_square.png" width="60">
+																		<img class="photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" width="60" style="border-radius: 4px;">
 																	</c:when>
 																	<c:otherwise>
-																		<img class="photo-box-img" src="getImage/${map.listMemberPhoto[status.index].filename}" alt="member_main_photo" id="photo_box_img" width="60px" height="60px">
+																		<img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${map.listMemberPhoto[status.index].filename}" style="border-radius: 4px;" alt="member_main_photo" id="photo_box_img" width="60px" height="60px">
 																	</c:otherwise>
 																</c:choose>
 															
@@ -107,19 +107,26 @@
 																</a>
 															</li>
 															<li class="user-location responsive-hidden-small">
-																<b>Korea, seoul</b>
+																<c:if test="${empty dto.address}">
+																	<b>Korea, seoul</b>
+																</c:if>
+																<b>
+																	<c:forTokens items="${dto.address}" delims=" " begin="1" end="2" var="addr">
+																		${addr}
+																	</c:forTokens>
+																</b>
 															</li>
 														</ul>
 														<ul class="user-passport-stats">
-															<li class="friend-count">
-																<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-friends icon--size-18">
-																	<svg class="icon_svg">
-																		<path d="M7.904 9.43l-2.098 4.697a.9.9 0 0 1-1.612 0L2.096 9.43a.902.902 0 0 1 .806-1.305h4.196c.67 0 1.105.705.806 1.305zM5 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path>
-																		<path d="M15.904 9.43l-2.098 4.697a.89.89 0 0 1-.806.498.89.89 0 0 1-.806-.498L10.096 9.43a.902.902 0 0 1 .806-1.305h4.195c.67 0 1.106.705.807 1.305zM13 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" opacity=".502"></path>
-																	</svg>
-																</span>
-																<b>0</b> friends	<!-- 친구 수 -->
-															</li>
+<!-- 															<li class="friend-count"> -->
+<!-- 																<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-friends icon--size-18"> -->
+<!-- 																	<svg class="icon_svg"> -->
+<!-- 																		<path d="M7.904 9.43l-2.098 4.697a.9.9 0 0 1-1.612 0L2.096 9.43a.902.902 0 0 1 .806-1.305h4.196c.67 0 1.105.705.806 1.305zM5 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path> -->
+<!-- 																		<path d="M15.904 9.43l-2.098 4.697a.89.89 0 0 1-.806.498.89.89 0 0 1-.806-.498L10.096 9.43a.902.902 0 0 1 .806-1.305h4.195c.67 0 1.106.705.807 1.305zM13 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" opacity=".502"></path> -->
+<!-- 																	</svg> -->
+<!-- 																</span> -->
+<!-- 																<b>0</b> friends	친구 수 -->
+<!-- 															</li> -->
 															<li class="review-count">
 																<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-review icon--size-18">
 																	<svg class="icon_svg">
