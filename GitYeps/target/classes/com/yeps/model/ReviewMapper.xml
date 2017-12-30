@@ -92,6 +92,8 @@
   		select * from (select * from yeps_review where rnum=#{rnum} order by rvnum desc) where rownum = 1 
   	</select>
   	
-
+	<select id="Get_InsertReviewDate" resultType="String">
+        select to_char(sysdate, 'yyyy/mm/dd')from dual
+	</select>
   	
 </mapper>		

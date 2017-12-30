@@ -61,15 +61,25 @@
 	      </div> 
 	          <div id="messageContainer">
 	              <div id="messageHeader">
-		              <label> Messages</label>
-				          <input type="button" id="write" value="Write New Message" data-popup-open="writeMessage" onclick="messageForm();">
+		            <c:choose>
+                    	<c:when test="${ where eq 'yeps' }">
+                       		<label> Messages</label>
+                    	</c:when>
+                    	<c:when test="${where eq 'locker' }">
+                       		<label> Locker</label>
+                    	</c:when>
+                    	<c:when test="${where eq 'alert' }">
+                       		<label> alert </label>
+                    	</c:when>
+					</c:choose>
+				    <input type="button" id="write" value="Write New Message" data-popup-open="writeMessage" onclick="messageForm();">
 		          </div>
 		      <div id="menu">
 	            <a href="message_action?filter=msgBoxList"><label style="cursor:pointer;">InBox :  ${mCount} </label></a>&nbsp;&nbsp;
 			    <a href="message_action?filter=sender"><label style="cursor:pointer;">Sent :  ${sCount} </label></a>&nbsp;&nbsp;
 			    <a href="message_action?filter=allLocker"><label style="cursor:pointer;">locker :  ${lCount} </label></a>
 			    <c:if test="${ key eq 'almighty' }">
-					<a href="message_alert" style="float:right;"><label style="cursor:pointer;">alertBox :  ${aCount}</label></a>
+					<a href="message_action?filter=alertMsg" style="float:right;"><label style="cursor:pointer;">alertBox :  ${aCount}</label></a>
 				</c:if>
 			      
 			  </div>
@@ -85,7 +95,12 @@
 									<option value="allMsg">모든 쪽지</option>
 									<option value="readMsg">읽은 쪽지</option>
 									<option value="noneMsg">안읽은 쪽지</option>
-									<option value="allLocker">보관함</option>
+								<c:if test="${where eq 'yeps' }">
+                              		<option value="allLocker">보관함</option>
+                           		</c:if>
+                           		<c:if test="${where eq 'locker' or where eq 'alert'}">
+                              		<option value="msgBoxList">쪽지함</option>
+                           		</c:if>
 							</select> 
 						    <input type="button" id="search" value="select" onclick="searching();">
 						    <input type="button" id="issue" style="float: right;" data-popup-open="writeIssue" value="Report" > <br> 
@@ -108,14 +123,15 @@
 							<tr><td colspan="7" style=" border-bottom: 1px solid #e6e6e6;"> </td></tr> 
 						        <c:if test="${empty map.list}">
 					        <tr >
-							    <c:choose>
-								    <c:when test="${mode eq 'send' or mode eq ''}">
-									    <td colspan="6" align="center" height="60px">보낸 쪽지가 없습니다.</td>
-								    </c:when>
-								    <c:when test="${mode eq 'receive'}">
-									    <td colspan="6" align="center" height="60px">받은 쪽지가 없습니다.</td>
-								    </c:when>
-							   </c:choose>
+								<c:choose>
+                            		<c:when test="${mode eq 'send' or mode eq ''}">
+                               			<td colspan="6" align="center" height="60px">보낸 쪽지가 없습니다.</td>
+                            		</c:when>
+                            		<c:when test="${mode eq 'receive' or mode eq 'locker'}">
+                               			<td colspan="6" align="center" height="60px">받은 쪽지가 없습니다.</td>
+                            		</c:when>
+                        		</c:choose>
+
 							   
 						    </tr>
 					            </c:if> 
