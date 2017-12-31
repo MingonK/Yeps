@@ -16,7 +16,11 @@ public class MemberMapper {
 	private SqlSession sqlSession;
 
 	public int getMemberCount() {
-		return sqlSession.selectOne("getMemberCount");
+		try {
+			return sqlSession.selectOne("getMemberCount");
+		} catch (Exception e) {
+			return 0;
+		}
 	}
 
 	public int getSearchMemberCount(String search, String searchString) {
@@ -94,29 +98,47 @@ public class MemberMapper {
 	}
 
 	public MemberDTO loginMember(MemberDTO dto) {
-		return sqlSession.selectOne("loginMember", dto);
+		try {
+			return sqlSession.selectOne("loginMember", dto);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	public String getSaltByEmail(MemberDTO dto) {
-		return sqlSession.selectOne("getSaltByEmail", dto);
+		try {
+			return sqlSession.selectOne("getSaltByEmail", dto);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	public List<String> findMemberEmail(MemberDTO dto) {
-		return sqlSession.selectList("findMemberEmail", dto);
+		try {
+			return sqlSession.selectList("findMemberEmail", dto);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	public int findMemberPasswd(MemberDTO dto) {
-		return sqlSession.selectOne("findMemberPasswd", dto);
+		try {
+			return sqlSession.selectOne("findMemberPasswd", dto);
+		} catch (Exception e) {
+			return 0;
+		}
 	}
 
 	public int temporaryPasswd(MemberDTO dto) {
 		return sqlSession.update("temporaryPasswd", dto);
 	}
 
-	public int updateMemberProfile(int mnum, String name) {
+	public int updateMemberProfile(int mnum, String name, String nickname, String address) {
 		MemberDTO dto = new MemberDTO();
 		dto.setMnum(mnum);
 		dto.setName(name);
+		dto.setNickname(nickname);
+		dto.setAddress(address);
 		return sqlSession.update("updateMemberProfile", dto);
 	}
 
@@ -151,11 +173,33 @@ public class MemberMapper {
 		return sqlSession.selectList("getSelectedRestaurant_M", mnum);
 	}
 
-	public MemberDTO memberName(int mnumList) {
-		return sqlSession.selectOne("memberName", mnumList);
+	public MemberDTO getMemberInfo(int mnum) {
+		return sqlSession.selectOne("getMemberInfo", mnum);
 	}
 
 	public List<MemberDTO> previous_M(int mnum) {
 		return sqlSession.selectList("previous_M", mnum);
 	}
+
+	// 12월 29일 추가
+
+	public MemberDTO getMemberByMnum(int mnum) {
+		try {
+			return sqlSession.selectOne("getMemberByMnum", mnum);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	public int updateReviewCount(int mnum, int reviewcount) {
+        HashMap<String ,Object> map = new HashMap<String ,Object>();
+       map.put("mnum", mnum);
+       map.put("reviewcount", reviewcount);
+        return sqlSession.update("reviewCount",map);
+     }
+     
+     public int getReviewCount(int mnum) {
+        return sqlSession.selectOne("getReviewCount",mnum);
+     }
+
 }

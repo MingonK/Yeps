@@ -18,6 +18,8 @@ public class MemberDTO {
 	private String controlstore;
 	private String controlreview;
 	private String salt;
+	private String nickname;
+	private String address;
 
 	public int getMnum() {
 		return mnum;
@@ -153,6 +155,22 @@ public class MemberDTO {
 
 	public void setSalt(String salt) {
 		this.salt = salt;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	@Override

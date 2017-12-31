@@ -6,7 +6,7 @@
 <html>
 <head>
 <title>Yeps Message</title>
-	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/message.css"/>"/>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/message.css?ver=1"/>"/>
  	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
 	<script src="//code.jquery.com/jquery.min.js"></script>
 </head>
@@ -15,13 +15,13 @@
 <div class="popup" align="left" id="writeIssue" data-popup="writeIssue"  style="z-index: 1;">
     <form name="sendIssueform" method="post">
 	     <div class="popup-inner">
-	         <h4 align="left"  style="color: #d32323;"> Send Issue To Manager</h4>
+	         <h4 align="left"  style="color: #d32323; margin-bottom: 20px;">Send Report To Manager</h4>
 	             <input type="hidden" id="issueValue" value="issue">
 	         <h4 align="left" style="color: #d32323;">Subject is</h4>
-	             <input type="text" name="title" id="sendIssueSubject" >
+	             <input type="text" name="title" id="sendIssueSubject">
 	         <h4 align="left" style="color: #d32323;">Content is</h4>
 	             <textarea rows="4" name="content" id="sendIssueContent"  placeholder="여기에 메시지를 입력하세요."></textarea>
-	                 <button class="popup-send" id="sendIssue" type="button" data-popup-send="SendIssue" >SendIssue </button>&nbsp;&nbsp;
+	                 <button class="popup-send" id="sendIssue" type="button" data-popup-send="SendIssue" >Send Report</button>&nbsp;&nbsp;
 			         <a data-popup-close="writeIssue" style="cursor:pointer;" href="#">  Close</a>
 					 <a class="popup-close" data-popup-close="writeIssue" href="#" >x</a>
 		  </div>
@@ -61,15 +61,25 @@
 	      </div> 
 	          <div id="messageContainer">
 	              <div id="messageHeader">
-		              <label> Messages</label>
-				          <input type="button" id="write" value="Write New Message" data-popup-open="writeMessage" onclick="messageForm();">
+		            <c:choose>
+                    	<c:when test="${ where eq 'yeps' }">
+                       		<label> Messages</label>
+                    	</c:when>
+                    	<c:when test="${where eq 'locker' }">
+                       		<label> Locker</label>
+                    	</c:when>
+                    	<c:when test="${where eq 'alert' }">
+                       		<label> alert </label>
+                    	</c:when>
+					</c:choose>
+				    <input type="button" id="write" value="Write New Message" data-popup-open="writeMessage" onclick="messageForm();">
 		          </div>
 		      <div id="menu">
 	            <a href="message_action?filter=msgBoxList"><label style="cursor:pointer;">InBox :  ${mCount} </label></a>&nbsp;&nbsp;
 			    <a href="message_action?filter=sender"><label style="cursor:pointer;">Sent :  ${sCount} </label></a>&nbsp;&nbsp;
 			    <a href="message_action?filter=allLocker"><label style="cursor:pointer;">locker :  ${lCount} </label></a>
 			    <c:if test="${ key eq 'almighty' }">
-					<a href="message_alert" style="float:right;"><label style="cursor:pointer;">alertBox :  ${aCount}</label></a>
+					<a href="message_action?filter=alertMsg" style="float:right;"><label style="cursor:pointer;">alertBox :  ${aCount}</label></a>
 				</c:if>
 			      
 			  </div>
@@ -85,7 +95,12 @@
 									<option value="allMsg">모든 쪽지</option>
 									<option value="readMsg">읽은 쪽지</option>
 									<option value="noneMsg">안읽은 쪽지</option>
-									<option value="allLocker">보관함</option>
+								<c:if test="${where eq 'yeps' }">
+                              		<option value="allLocker">보관함</option>
+                           		</c:if>
+                           		<c:if test="${where eq 'locker' or where eq 'alert'}">
+                              		<option value="msgBoxList">쪽지함</option>
+                           		</c:if>
 							</select> 
 						    <input type="button" id="search" value="select" onclick="searching();">
 						    <input type="button" id="issue" style="float: right;" data-popup-open="writeIssue" value="Report" > <br> 
@@ -108,14 +123,15 @@
 							<tr><td colspan="7" style=" border-bottom: 1px solid #e6e6e6;"> </td></tr> 
 						        <c:if test="${empty map.list}">
 					        <tr >
-							    <c:choose>
-								    <c:when test="${mode eq 'send' or mode eq ''}">
-									    <td colspan="6" align="center" height="60px">보낸 쪽지가 없습니다.</td>
-								    </c:when>
-								    <c:when test="${mode eq 'receive'}">
-									    <td colspan="6" align="center" height="60px">받은 쪽지가 없습니다.</td>
-								    </c:when>
-							   </c:choose>
+								<c:choose>
+                            		<c:when test="${mode eq 'send' or mode eq ''}">
+                               			<td colspan="6" align="center" height="60px">보낸 쪽지가 없습니다.</td>
+                            		</c:when>
+                            		<c:when test="${mode eq 'receive' or mode eq 'locker'}">
+                               			<td colspan="6" align="center" height="60px">받은 쪽지가 없습니다.</td>
+                            		</c:when>
+                        		</c:choose>
+
 							   
 						    </tr>
 					            </c:if> 
@@ -125,10 +141,10 @@
 							    <td><input type="checkbox" style="cursor:pointer;" name="check" value="${dto.msgNum}"></td>
 							    <td><c:choose>
 									    <c:when test="${dto.readNum == 1}">
-											<label><input type="image" src="getImage/open.jpg" name="read" value="${dto.msgNum}" style="cursor:pointer;" onclick="readMessage('${map.lMode}');"></label>
+											<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/open.jpg">
 									    </c:when>
 									    <c:when test="${dto.readNum == 0}">
-											<label><input type="image" src="getImage/close.jpg" name="read" value="${dto.msgNum}" style="cursor:pointer;" onclick="readMessage('${map.lMode}');"></label>
+											<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/close.jpg">
 									    </c:when>
 								    </c:choose></td>
 							    <td><a class="btn" data-popup-open="writeMessage" id="sender" name="sender" onclick="messageForm('${dto.sender}')">${dto.sender}</a>
@@ -151,7 +167,7 @@
 	                             </div>
 	                     <!--  페이징 처리!! 현재페이지는 span이 되고 나머지는 a로    -->
 	                         <c:if test="${map.yepsPager.blockEnd != 1}">
-	                             <div class="yeps_message_page_link_wrapper">
+	                             <div class="yeps_message_page_link_wrapper" style="text-align: right;">
 	                                 <div class="yeps_message_page_link_wrap">
 	                                     <c:if test="${map.yepsPager.curBlock > 1}">
 	                                         <div class="yeps_message_next_block">
@@ -201,7 +217,7 @@
 	                                    </div>
 	                                </c:if>
 	                            <c:if test="${map.yepsPager.curPage <= map.yepsPager.totPage}">
-	                                <div class="yeps_message_next_block">
+	                                <div class="yeps_message_next_block" style="display: inline-block;">
 	                                    <a class="yeps_message_next_block_action" href="javascript:list('${map.yepsPager.totPage}','${map.lMode}')">
 	                                        <span>End</span>
 	                                    </a>
@@ -217,10 +233,6 @@
   </div>
 </div>
 	<script>
-	$('#issue').click(function(){
-		$('#sendIssueSubject').val('Issue : ');
-	}) 
-	
  	$('#sendIssue').click(function(){
  	    var issue = $('#issueValue').val();
  	    document.sendIssueform.action = "message_send?issue=" + issue;
@@ -281,12 +293,7 @@
 	    document.msgform.action = "message_action";
 	    document.msgform.submit();
     }
-    
-    function readMessage(lMode){
-        document.msgform.action = "message_read?lMode=" + lMode;
-    	document.msgform.submit();
-    }
-    
+
     function readCheck(){
     	var lMode = $('#pageMode').val();
     	var msgnum = $('#readCheck').val();

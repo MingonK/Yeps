@@ -1,8 +1,12 @@
 package com.yeps.controller;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,11 +19,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yeps.model.MemberDTO;
+import com.yeps.model.MemberPhotoDTO;
 import com.yeps.service.MemberMapper;
+import com.yeps.service.MemberPhotoMapper;
+import com.yeps.service.MessageMapper;
 import com.yeps.service.RandomNum;
+import com.yeps.service.S3Connection;
 import com.yeps.service.SHA256Util;
 import com.yeps.service.SendEmail;
 import com.yeps.service.YepsPager;
@@ -29,12 +40,14 @@ public class MemberController {
 
 	@Autowired
 	private MemberMapper memberMapper;
-
 	@Autowired
 	private RandomNum randomNum;
-
+	@Autowired
+	private MemberPhotoMapper memberPhotoMapper;
 	@Autowired
 	private SendEmail sendEmail;
+	@Autowired
+	private MessageMapper messageMapper;
 
 	@RequestMapping(value = "/member_index")
 	public ModelAndView indexMember() {
@@ -59,6 +72,7 @@ public class MemberController {
 
 		String mnum = req.getParameter("mnum");
 		MemberDTO memberProfile = null;
+		MemberPhotoDTO memberMainPhoto = null;
 		if (mnum != null) {
 			try {
 				memberProfile = memberMapper.getMemberProfile(Integer.parseInt(mnum));
@@ -68,7 +82,7 @@ public class MemberController {
 		}
 
 		if (memberProfile == null || mnum == null || mnum.trim().equals("")) {
-			List<MemberDTO> list = null;
+			List<MemberDTO> memberList = null;
 			String search = req.getParameter("search");
 			String searchString = req.getParameter("searchString");
 
@@ -84,12 +98,22 @@ public class MemberController {
 			int end = yepsPager.getPageEnd();
 
 			if (searchString == null || searchString.trim().equals("") || search == null || search.trim().equals("")) {
-				list = memberMapper.listMember(start, end);
+				memberList = memberMapper.listMember(start, end);
 			} else {
-				list = memberMapper.findMember(start, end, search, searchString);
+				memberList = memberMapper.findMember(start, end, search, searchString);
 			}
+			List<MemberPhotoDTO> memberPhotoList = new ArrayList<MemberPhotoDTO>();
+			if (memberList != null) {
+				for (int i = 0; i < memberList.size(); i++) {
+					int memberNum = memberList.get(i).getMnum();
+					MemberPhotoDTO memberPhotoDTO = memberPhotoMapper.getMemberMainPhoto(memberNum);
+					memberPhotoList.add(memberPhotoDTO);
+				}
+			}
+
 			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("listMember", list); // list
+			map.put("listMemberPhoto", memberPhotoList);
+			map.put("listMember", memberList); // list
 			map.put("count", count); // 레코드의 갯수
 			map.put("yepsPager", yepsPager);
 			map.put("search", search);
@@ -97,6 +121,7 @@ public class MemberController {
 			mav.addObject("map", map);
 			mav.setViewName("member/memberManager");
 		} else {
+			mav.addObject("memberMainPhoto", memberMainPhoto);
 			mav.addObject("memberProfile", memberProfile);
 			mav.setViewName("member/memberManager");
 		}
@@ -156,23 +181,24 @@ public class MemberController {
 			dto.setPasswd(passwd);
 
 			int res = memberMapper.insertMember(dto);
-
 			if (res > 0) {
 				msg = "회원등록성공!! 메인페이지로 이동합니다.";
 				url = "main";
 
-				MemberDTO dto2 = memberMapper.loginMember(dto);
-				if (dto2.getIsmaster().equals("y")) {
-					session.setAttribute("memberinfo", dto2);
+				MemberDTO getLoginMemberDTO = memberMapper.loginMember(dto);
+				if (getLoginMemberDTO.getIsmaster().equals("y")) {
+					session.setAttribute("memberinfo", getLoginMemberDTO);
 					msg = "마스터 아이디로 로그인 하셨습니다";
 					url = "main";
-				} else if (dto2.getIsmanager().equals("y")) {
-					session.setAttribute("memberinfo", dto2);
+				} else if (getLoginMemberDTO.getIsmanager().equals("y")) {
+					session.setAttribute("memberinfo", getLoginMemberDTO);
 					msg = "관리자 아이디로 로그인 하셨습니다";
 					url = "main";
 				} else {
-					session.setAttribute("memberinfo", dto2);
+					session.setAttribute("memberinfo", getLoginMemberDTO);
 				}
+				MemberPhotoDTO mainPhoto = memberPhotoMapper.getMemberMainPhoto(getLoginMemberDTO.getMnum());
+				session.setAttribute("mainPhoto", mainPhoto);
 
 			} else {
 				msg = "회원등록실패!! 회원가입페이지로 이동합니다";
@@ -287,21 +313,29 @@ public class MemberController {
 		passwd = SHA256Util.getEncrypt(passwd, salt);
 		dto.setPasswd(passwd);
 
-		MemberDTO dto2 = memberMapper.loginMember(dto);
-		if (dto2 != null) {
-			if (dto2.getIsmaster().equals("y")) {
-				session.setAttribute("memberinfo", dto2);
+		MemberDTO getLoginMemberDTO = memberMapper.loginMember(dto);
+		if (getLoginMemberDTO != null) {
+			String email = getLoginMemberDTO.getEmail();
+			int noReadMessage = messageMapper.noneMessageCount(email);
+			session.setAttribute("noneCount", noReadMessage);
+			
+			if (getLoginMemberDTO.getIsmaster().equals("y")) {
+				session.setAttribute("memberinfo", getLoginMemberDTO);
 				msg = "마스터 아이디로 로그인 하셨습니다";
 				url = "main";
-			} else if (dto2.getIsmanager().equals("y")) {
-				session.setAttribute("memberinfo", dto2);
+			} else if (getLoginMemberDTO.getIsmanager().equals("y")) {
+				session.setAttribute("memberinfo", getLoginMemberDTO);
 				msg = "관리자 아이디로 로그인 하셨습니다";
 				url = "main";
 			} else {
-				session.setAttribute("memberinfo", dto2);
+				session.setAttribute("memberinfo", getLoginMemberDTO);
 				mav.setViewName("mainPage");
+				MemberPhotoDTO mainPhoto = memberPhotoMapper.getMemberMainPhoto(getLoginMemberDTO.getMnum());
+				session.setAttribute("mainPhoto", mainPhoto);
 				return mav;
 			}
+			MemberPhotoDTO mainPhoto = memberPhotoMapper.getMemberMainPhoto(getLoginMemberDTO.getMnum());
+			session.setAttribute("mainPhoto", mainPhoto);
 
 		} else {
 			msg = "비밀번호를 확인해주세요.";
@@ -428,16 +462,19 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/member_profile", method = RequestMethod.POST)
-	public ModelAndView profileMemberPro(HttpServletRequest req, @ModelAttribute MemberDTO dto2, HttpSession session,
-			BindingResult result) {
+	public ModelAndView profileMemberPro(HttpServletRequest req, @ModelAttribute MemberDTO updateMemberDTO,
+			HttpSession session, BindingResult result) {
 		if (result.hasErrors()) {
-			dto2.setMnum(0);
-			dto2.setReviewcount(0);
-			dto2.setImagecount(0);
+			updateMemberDTO.setMnum(0);
+			updateMemberDTO.setReviewcount(0);
+			updateMemberDTO.setImagecount(0);
 		}
 
 		String mnum = req.getParameter("mnum");
 		String name = req.getParameter("name");
+		String nickname = req.getParameter("nickname");
+		String address = req.getParameter("address");
+
 		if (name == null || name.trim().equals("")) {
 			return new ModelAndView("member/memberProfile");
 		}
@@ -455,55 +492,54 @@ public class MemberController {
 				mav.addObject("url", url);
 				return mav;
 			} else {
-				dto2.setIsmanager("n");
-				dto2.setControlcate("n");
-				dto2.setControlevent("n");
-				dto2.setControlmember("n");
-				dto2.setControlreview("n");
-				dto2.setControlstore("n");
+				updateMemberDTO.setNickname(nickname);
+				updateMemberDTO.setIsmanager("n");
+				updateMemberDTO.setControlcate("n");
+				updateMemberDTO.setControlevent("n");
+				updateMemberDTO.setControlmember("n");
+				updateMemberDTO.setControlreview("n");
+				updateMemberDTO.setControlstore("n");
+
 				String[] controlckbox = req.getParameterValues("controlckbox");
 
 				if (controlckbox != null) {
-					dto2.setIsmanager("y");
+					updateMemberDTO.setIsmanager("y");
 					for (int i = 0; i < controlckbox.length; i++) {
 						if (controlckbox[i].equals("controlcate")) {
-							dto2.setControlcate("y");
+							updateMemberDTO.setControlcate("y");
 						} else if (controlckbox[i].equals("controlevent")) {
-							dto2.setControlevent("y");
+							updateMemberDTO.setControlevent("y");
 						} else if (controlckbox[i].equals("controlmember")) {
-							dto2.setControlmember("y");
+							updateMemberDTO.setControlmember("y");
 						} else if (controlckbox[i].equals("controlreview")) {
-							dto2.setControlreview("y");
+							updateMemberDTO.setControlreview("y");
 						} else if (controlckbox[i].equals("controlstore")) {
-							dto2.setControlstore("y");
+							updateMemberDTO.setControlstore("y");
 						}
 					}
 				}
-				res = memberMapper.updateMemberProfileByMaster(dto2);
-				if (res > 0) {
 
-					msg = "회원 프로필 정보 수정 성공!";
-					url = "member_manager?mnum=" + dto2.getMnum();
+				res = memberMapper.updateMemberProfileByMaster(updateMemberDTO);
+				if (res > 0) {
+					url = "member_manager?mnum=" + updateMemberDTO.getMnum();
 				} else {
-					msg = "회원 프로필 정보 수정 실패!";
-					url = "member_manager?mnum=" + dto2.getMnum();
+					url = "member_manager?mnum=" + updateMemberDTO.getMnum();
 				}
 			}
 		} else {
 			int memberNum = dto.getMnum();
-			res = memberMapper.updateMemberProfile(memberNum, name);
+			res = memberMapper.updateMemberProfile(memberNum, name, nickname, address);
 			if (res > 0) {
-				msg = "프로필 정보 수정 성공!";
 				url = "member_profile?mode=profile";
 				dto.setName(name);
+				dto.setNickname(nickname);
+				dto.setAddress(address);
 				session.setAttribute("memberinfo", dto);
 			} else {
-				msg = "프로필 정보 수정 실패!";
 				url = "member_profile?mode=profile";
 			}
 		}
-		mav.setViewName("message");
-		mav.addObject("msg", msg);
+		mav.setViewName("usingOnlyURL");
 		mav.addObject("url", url);
 
 		return mav;
@@ -546,10 +582,10 @@ public class MemberController {
 		int res = memberMapper.updateMemberPasswd(dto.getMnum(), passwd, passwd1);
 
 		if (res > 0) {
-			msg = "비밀번호 변경 성공!";
+			msg = "비밀번호를 변경하였습니다.";
 			url = "member_profile?mode=passwd";
 		} else {
-			msg = "비밀번호 변경 실패! 비밀번호를 다시 확인해주세요.";
+			msg = "비밀번호를 다시 확인해주세요.";
 			url = "member_profile?mode=passwd";
 			mav.addObject("mode", "passwd");
 		}
@@ -596,6 +632,305 @@ public class MemberController {
 		mav.addObject("msg", msg);
 		mav.addObject("url", url);
 
+		return mav;
+	}
+
+	@RequestMapping(value = "/member_login_ajax", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, String> loginMemberAjaxPro(HttpServletRequest req, @ModelAttribute MemberDTO dto,
+			HttpSession session) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		if (session.getAttribute("memberinfo") != null) {
+			map.put("msg", "로그아웃을 먼저 해주세요.");
+			return map;
+		}
+
+		if (dto.getEmail() == null || dto.getPasswd() == null || dto.getEmail().trim().equals("")
+				|| dto.getPasswd().trim().equals("")) {
+			map.put("msg", "잘못된 접근입니다.");
+			return map;
+		}
+
+		String salt = memberMapper.getSaltByEmail(dto);
+		if (salt == null) {
+			map.put("msg", "존재하지 않는 이메일 입니다.");
+			return map;
+		}
+		String passwd = dto.getPasswd();
+
+		passwd = SHA256Util.getEncrypt(passwd, salt);
+		dto.setPasswd(passwd);
+
+		MemberDTO getLoginMemberDTO = memberMapper.loginMember(dto);
+		if (getLoginMemberDTO != null) {
+			if (getLoginMemberDTO.getIsmaster().equals("y")) {
+				session.setAttribute("memberinfo", getLoginMemberDTO);
+				map.put("msg", "마스터 아이디로 로그인 하셨습니다");
+			} else if (getLoginMemberDTO.getIsmanager().equals("y")) {
+				session.setAttribute("memberinfo", getLoginMemberDTO);
+				map.put("msg", "관리자 아이디로 로그인 하셨습니다");
+			} else {
+				session.setAttribute("memberinfo", getLoginMemberDTO);
+			}
+			MemberPhotoDTO mainPhoto = memberPhotoMapper.getMemberMainPhoto(getLoginMemberDTO.getMnum());
+			session.setAttribute("mainPhoto", mainPhoto);
+
+		} else {
+			map.put("msg", "비밀번호를 확인해주세요.");
+		}
+		return map;
+	}
+
+	@RequestMapping(value = "/member_details", method = RequestMethod.GET)
+	public ModelAndView detailsMemberForm(HttpServletRequest req, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		String mnum = req.getParameter("mnum");
+		MemberDTO memberDTO = null;
+		List<MemberPhotoDTO> getPhotoList = null;
+		if (mnum == null || mnum.trim().equals("")) {
+			memberDTO = (MemberDTO) session.getAttribute("memberinfo");
+			if (memberDTO == null) {
+				return new ModelAndView("redirect:/main");
+			}
+			getPhotoList = memberPhotoMapper.getMemberPhotoList(memberDTO.getMnum());
+		} else {
+			memberDTO = memberMapper.getMemberByMnum(Integer.parseInt(mnum));
+			if (memberDTO == null) {
+				return new ModelAndView("redirect:/main");
+			}
+			getPhotoList = memberPhotoMapper.getMemberPhotoList(Integer.parseInt(mnum));
+		}
+		
+		String email = memberDTO.getEmail();
+		int noneCount = messageMapper.noneMessageCount(email);
+		mav.addObject("noneCount", noneCount);
+		
+		mav.addObject("memberDTO", memberDTO);
+		mav.addObject("getPhotoList", getPhotoList);
+		mav.setViewName("member/memberDetails");
+		return mav;
+	}
+
+	@RequestMapping(value = "/member_photos")
+	public ModelAndView insertPhoto_Member(HttpServletRequest req) {
+		return new ModelAndView("member/memberPhotos");
+	}
+
+	@RequestMapping(value = "/member_fileUpLoad")
+	@ResponseBody
+	public HashMap<String, Object> fileUpLoad_member(HttpServletRequest req) {
+
+		HttpSession session = req.getSession();
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
+		MultipartHttpServletRequest mr = (MultipartHttpServletRequest) req;
+		Iterator<String> it = mr.getFileNames();
+		String origin_fileName = null;
+		int fileSize = 0;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		boolean isExistMainPhoto = memberPhotoMapper.isExistMemberMainPhoto(memberDTO.getMnum());
+
+		if (!isExistMainPhoto) {
+			if (it.hasNext()) {
+				MultipartFile mf = mr.getFile(it.next());
+				origin_fileName = mf.getOriginalFilename();
+				fileSize = (int) mf.getSize();
+				String genId = UUID.randomUUID().toString();
+				String contentType = getExtension(origin_fileName);
+				String saveFileName = genId + "." + contentType;
+				File file = new File(saveFileName);
+
+				if (mf.getSize() != 0) {
+					try {
+						mf.transferTo(file);
+						S3Connection.getInstance().putObjectAsync("yepsbucket", "images/" + saveFileName, file,
+								"image/" + contentType);
+						MemberPhotoDTO MemberPhotoDTO = new MemberPhotoDTO();
+						MemberPhotoDTO.setMnum(memberDTO.getMnum());
+						MemberPhotoDTO.setFilename(saveFileName);
+						MemberPhotoDTO.setOrigin_filename(origin_fileName);
+						MemberPhotoDTO.setFilesize(fileSize);
+						int result = memberPhotoMapper.insertMemberPhoto(MemberPhotoDTO, "main");
+						if (result > 0) {
+							map.put("success", "파일 등록 성공");
+						} else {
+							memberPhotoMapper.deleteMemberPhotoToFilename(saveFileName);
+							S3Connection.getInstance().deleteObject("yepsbucket", "images/" + saveFileName);
+							map.put("failed", "파일 등록에 실패했습니다. 잠시후 다시 시도해주세요.");
+							return map;
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+						origin_fileName = null;
+						fileSize = 0;
+						file = null;
+						map.put("created_fail", "파일 생성 실패, 잠시 후 다시 시도하세요.");
+						return map;
+					}
+				} else {
+					map.put("upload_failed", "업로드할 수 없는 파일이 존재합니다.");
+				}
+			}
+		}
+
+		while (it.hasNext()) {
+			MultipartFile mf = mr.getFile(it.next());
+			origin_fileName = mf.getOriginalFilename();
+			fileSize = (int) mf.getSize();
+			String genId = UUID.randomUUID().toString();
+			String contentType = getExtension(origin_fileName);
+			String saveFileName = genId + "." + contentType;
+			File file = new File(saveFileName);
+
+			if (mf.getSize() != 0) {
+				try {
+					mf.transferTo(file);
+					S3Connection.getInstance().putObjectAsync("yepsbucket", "images/" + saveFileName, file,
+							"image/" + contentType);
+					MemberPhotoDTO MemberPhotoDTO = new MemberPhotoDTO();
+					MemberPhotoDTO.setMnum(memberDTO.getMnum());
+					MemberPhotoDTO.setFilename(saveFileName);
+					MemberPhotoDTO.setOrigin_filename(origin_fileName);
+					MemberPhotoDTO.setFilesize(fileSize);
+					int result = memberPhotoMapper.insertMemberPhoto(MemberPhotoDTO, "");
+					if (result > 0) {
+						map.put("success", "파일 등록 성공");
+					} else {
+						memberPhotoMapper.deleteMemberPhotoToFilename(saveFileName);
+						S3Connection.getInstance().deleteObject("yepsbucket", "images/" + saveFileName);
+						map.put("failed", "파일 등록에 실패했습니다. 잠시후 다시 시도해주세요.");
+						file.delete();
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+					origin_fileName = null;
+					fileSize = 0;
+					file = null;
+					map.put("created_fail", "파일 생성 실패, 잠시 후 다시 시도하세요.");
+				}
+			} else {
+				map.put("upload_failed", "업로드할 수 없는 파일이 존재합니다.");
+			}
+		}
+		MemberPhotoDTO mainPhoto = memberPhotoMapper.getMemberMainPhoto(memberDTO.getMnum());
+		session.setAttribute("mainPhoto", mainPhoto);
+		map.put("mnum", memberDTO.getMnum());
+		return map;
+	}
+
+	public String getExtension(String fileName) {
+		int dotPosition = fileName.lastIndexOf('.');
+
+		if (-1 != dotPosition && fileName.length() - 1 > dotPosition) {
+			return fileName.substring(dotPosition + 1);
+		} else {
+			return "";
+		}
+	}
+
+	@RequestMapping(value = "/member_photolist")
+	public ModelAndView photolist_Member(HttpServletRequest req, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		String mnum = req.getParameter("mnum");
+		if (mnum == null || mnum.trim().equals("")) {
+			return new ModelAndView("redirect:/main");
+		}
+		MemberDTO dto = memberMapper.getMemberByMnum(Integer.parseInt(mnum));
+		if (dto == null) {
+			return new ModelAndView("redirect:/main");
+		}
+		List<MemberPhotoDTO> memberPhotoList = memberPhotoMapper.getMemberPhotoList(dto.getMnum());
+		mav.addObject("memberDTO", dto);
+		mav.addObject("memberPhotoList", memberPhotoList);
+		mav.setViewName("member/memberPhotoList");
+		return mav;
+	}
+
+	@RequestMapping(value = "/member_photo_update", method = RequestMethod.GET)
+	public ModelAndView updatePhoto_Member_get(HttpServletRequest req, HttpSession session) {
+		return new ModelAndView("redirect:/main");
+	}
+
+	@RequestMapping(value = "/member_photo_update", method = RequestMethod.POST)
+	public ModelAndView updatePhoto_Member(HttpServletRequest req, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		String filenum = req.getParameter("filenum");
+		String mnum = req.getParameter("mnum");
+
+		String msg = null, url = null;
+		if (filenum == null || mnum == null || filenum.trim().equals("") || mnum.trim().equals("")) {
+			msg = "잘못된 접근입니다.";
+			url = "main";
+			mav.setViewName("message");
+			mav.addObject("msg", msg);
+			mav.addObject("url", url);
+			return mav;
+		}
+
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
+		MemberDTO userDTO = memberMapper.getMemberByMnum(Integer.parseInt(mnum)); // 변경한 사진을 가진 유저의 정보
+		if (memberDTO.getMnum() == Integer.parseInt(mnum) || memberDTO.getIsmanager().equals("y")) {
+			int res = memberPhotoMapper.changeMemberMainPhoto(Integer.parseInt(filenum), Integer.parseInt(mnum));
+			if (res > 0) {
+				if (memberDTO.getMnum() == userDTO.getMnum()) { // 내 사진을 변경했는지(내 사진을 변경했다면 현재 나의 메인 사진을 바꿔줘야함)
+					MemberPhotoDTO mainPhoto = memberPhotoMapper.getMemberMainPhoto(memberDTO.getMnum());
+					session.setAttribute("mainPhoto", mainPhoto);
+				}
+				mav.addObject("mode", "successUpdate");
+			} else {
+				mav.addObject("mode", "failedUpdate");
+			}
+		}
+		List<MemberPhotoDTO> memberPhotoList = memberPhotoMapper.getMemberPhotoList(userDTO.getMnum());
+		mav.addObject("memberDTO", userDTO);
+		mav.addObject("memberPhotoList", memberPhotoList);
+		mav.setViewName("member/memberPhotoList");
+		return mav;
+	}
+
+	@RequestMapping(value = "/member_photo_delete", method = RequestMethod.GET)
+	public ModelAndView deletePhoto_Member_get(HttpServletRequest req, HttpSession session) {
+		return new ModelAndView("redirect:/main");
+	}
+
+	@RequestMapping(value = "/member_photo_delete", method = RequestMethod.POST)
+	public ModelAndView deletePhoto_Member(HttpServletRequest req, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		String filenum = req.getParameter("filenum");
+		String mnum = req.getParameter("mnum");
+		String filename = req.getParameter("filename");
+		String ismainphoto = req.getParameter("ismainphoto");
+
+		String msg = null, url = null;
+		if (filenum.trim().equals("") || filenum == null || mnum.trim().equals("") || mnum == null) {
+			msg = "잘못된 접근입니다.";
+			url = "main";
+			mav.setViewName("message");
+			mav.addObject("msg", msg);
+			mav.addObject("url", url);
+			return mav;
+		}
+
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
+		MemberDTO userDTO = memberMapper.getMemberByMnum(Integer.parseInt(mnum)); // 변경한 사진을 가진 유저의 정보
+		if (memberDTO.getMnum() == Integer.parseInt(mnum) || memberDTO.getIsmanager().equals("y")) {
+			int res = memberPhotoMapper.deleteMemberPhoto(Integer.parseInt(filenum), Integer.parseInt(mnum),
+					ismainphoto);
+			if (res > 0) {
+				S3Connection.getInstance().deleteObject("yepsbucket", "images/" + filename);
+				if (memberDTO.getMnum() == userDTO.getMnum()) { // 내 사진을 변경했는지(내 사진을 변경했다면 현재 나의 메인 사진을 바꿔줘야함)
+					MemberPhotoDTO mainPhoto = memberPhotoMapper.getMemberMainPhoto(memberDTO.getMnum());
+					session.setAttribute("mainPhoto", mainPhoto);
+				}
+				mav.addObject("mode", "successDelete");
+			} else {
+				mav.addObject("mode", "failedDelete");
+			}
+		}
+		List<MemberPhotoDTO> memberPhotoList = memberPhotoMapper.getMemberPhotoList(userDTO.getMnum());
+		mav.addObject("memberDTO", userDTO);
+		mav.addObject("memberPhotoList", memberPhotoList);
+		mav.setViewName("member/memberPhotoList");
 		return mav;
 	}
 

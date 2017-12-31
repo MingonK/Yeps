@@ -94,4 +94,12 @@ public class EventMapper {
 			return null;
 		}
 	}
+	
+	public int deleteEvent(int evnum) {
+		return sqlSession.delete("deleteEvent", evnum);
+	}
+	
+	public int updateEvent(EventDTO dto) {
+		return sqlSession.update("updateEvent", dto);
+	}
 }

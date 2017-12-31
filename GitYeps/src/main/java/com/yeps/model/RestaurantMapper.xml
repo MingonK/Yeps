@@ -17,8 +17,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{wifi},#{toilet},#{tablecount},#{standard},#{busytime},sysdate)
 	</insert>
 	
-	<select id="getRest" resultType="RestaurantDTO" parameterType="int">
-		select * from yeps_restaurant where rnum=#{rnum}
+	<select id="getRest" parameterType="int" resultType="RestaurantDTO" >
+		select * from yeps_restaurant where rnum = #{rnum}
 	</select>
 	
 	<select id="uploadFileList" resultType="FileDTO">
@@ -36,16 +36,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select rname from yeps_restaurant where rnum= #{rnum} 
 	</select>
 	
-	
+	<select id="listRestaurant_delivery" parameterType="RestaurantDTO" resultType="RestaurantDTO" > 
+		select * from (select rownum rn, A.* from (select * from yeps_restaurant where delivery='가능' order by rnum desc)A) where rn between #{start} and #{end} 
+	</select>
+
+	<select id="listRestaurant_reserv" parameterType="RestaurantDTO" resultType="RestaurantDTO" > 
+		select * from (select rownum rn, A.* from (select * from yeps_restaurant where reserv='가능' order by rnum desc)A) where rn between #{start} and #{end} 
+	</select>
+
+	<select id="listRestaurant_takeout" parameterType="RestaurantDTO" resultType="RestaurantDTO" > 
+		select * from (select rownum rn, A.* from (select * from yeps_restaurant where takeout='가능' order by rnum desc)A) where rn between #{start} and #{end} 
+	</select>
+
+	<select id="getNewRestaurant" parameterType="RestaurantDTO" resultType="RestaurantDTO" > 
+		select * from yeps_restaurant where rownum=1 order by rnum desc 
+	</select>
 	
 	
 	
 	<!-- =========================================================== -->
 	
 	<select id="GetRestaurantName_R" parameterType="int" resultType="RestaurantDTO">
-		select * from yeps_restaurant where rnum = #{rnum}
+		select * from yeps_restaurant where rnum = #{GETrnum}
 	</select>
-
+	
+	<select id="review_restaurantIMG" resultType="RestaurantDTO">
+        select * from yeps_restaurant where 19 >= rownum 
+     </select>
 </mapper>
 
 

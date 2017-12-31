@@ -19,6 +19,7 @@ public class EventDTO {
 	private String addrDetail;
 	private String event_register_date;
 	private int event_review_num;
+	private int mnum;
 	
 	public int getEvnum() {
 		return evnum;
@@ -127,5 +128,11 @@ public class EventDTO {
 	}
 	public void setEvent_review_num(int event_review_num) {
 		this.event_review_num = event_review_num;
+	}
+	public int getMnum() {
+		return mnum;
+	}
+	public void setMnum(int mnum) {
+		this.mnum = mnum;
 	}
 }

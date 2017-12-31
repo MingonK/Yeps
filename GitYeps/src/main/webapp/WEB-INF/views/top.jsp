@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css?ver=1"/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/mainPage.css?ver=1"/>"/>
 <%-- <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css?ver=1"/>"/> --%>
 <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 <script src="//code.jquery.com/jquery.min.js"></script>
@@ -237,11 +238,18 @@
 								<div id="page_header_notifications_wrap">
 									<div id="page_header_notifications">
 										<a href="yeps_message" class="header-nav_link" id="messages-icon" data-analytics-label="messages_icon">
-											<span aria-label="Messages" style="width: 24px; height: 24px;" class="icon icon--24-speech icon--size-24 icon--white icon--fallback-inverted">
-											<svg class="icon_svg">
-												<path d="M18 3H6C4.34 3 3 4.34 3 6v7c0 1.66 1.34 3 3 3h2v5l5-5h5c1.66 0 3-1.34 3-3V6c0-1.66-1.34-3-3-3z"></path>
-											</svg>
-											</span>
+                                 			<span aria-label="Messages" style="width: 24px; height: 24px;" class="icon icon--24-speech icon--size-24 icon--white icon--fallback-inverted">
+                                     			<svg class="icon_svg">
+                                         			<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#24x24_speech">
+                                             			<svg id="24x24_speech" height="100%" viewBox="0 0 24 24" width="100%">
+                                                 			<path d="M18 3H6C4.34 3 3 4.34 3 6v7c0 1.66 1.34 3 3 3h2v5l5-5h5c1.66 0 3-1.34 3-3V6c0-1.66-1.34-3-3-3z"></path>
+                                             			</svg>
+                                         			</use>
+                                    			</svg>
+                                 			</span>
+                               				<c:if test="${ not empty sessionScope.noneCount && sessionScope.noneCount > 0}">
+                                 				<span class="ybadge ybadge--notification ">${sessionScope.noneCount}</span>
+                              				</c:if>
 										</a>
 										<a href="#" class="header-nav_link show-tooltip js-analytics-click" id="notifications-icon" data-analytics-label="notifications_icon">
 											<span aria-label="Notifications" style="width: 24px; height: 24px;" class="icon icon--24-notification icon--size-24 icon--white icon--fallback-inverted">
@@ -258,7 +266,16 @@
                               <div id="page_header_account">
                                  <div id="topbar-account-item" class="drop-menu-origin" data-component-bound="true">
                                     <a class="drop-menu-link user-account_button drop-menu-highlighted" href="#" id="topbar-account-link" data-component-bound="true">
-                                       <span class="user-account_avatar responsive-visible-large-block"><img class="photo-box-img" height="90" src="https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/90s.jpg" srcset="https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/180s.jpg 2.00x,https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/ms.jpg 1.11x,https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/120s.jpg 1.33x,https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/168s.jpg 1.87x,https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/ls.jpg 2.78x,https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/258s.jpg 2.87x" width="90"></span>
+                                       <span class="user-account_avatar responsive-visible-large-block">
+                                          <c:choose>
+                                             <c:when test="${empty sessionScope.mainPhoto}">
+                                                <img class="photo-box-img" height="90" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" width="90">
+                                             </c:when>
+                                             <c:otherwise>
+                                                <img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${mainPhoto.filename}" alt="member_main_photo" id="photo_box_img" width="90px" height="90px">
+                                             </c:otherwise>
+                                          </c:choose>
+                                       </span>
                                        <span aria-hidden="true" style="width: 14px; height: 14px;" class="icon icon-triangle-down">
                                           <svg class="icon_svg">
                                              <path d="M7 9L3.5 5h7L7 9z"></path>
@@ -272,7 +289,14 @@
                                                 <div class="media-avatar responsive-photo-box js-analytics-click">
                                                    <div class="photo-box pb-60s">
                                                       <a href="member_details" class="js-analytics-click" data-analytics-label="user-photo">
-                                                         <img class="photo-box-img" height="60" src="https://s3-media4.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/60s.jpg" srcset="https://s3-media4.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/90s.jpg 1.50x,https://s3-media4.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/168s.jpg 2.80x,https://s3-media4.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/ms.jpg 1.67x,https://s3-media4.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/180s.jpg 3.00x,https://s3-media4.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/120s.jpg 2.00x" width="60">
+                                                         <c:choose>
+                                                            <c:when test="${empty sessionScope.mainPhoto}">
+                                                               <img class="photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" width="60">
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                               <img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${mainPhoto.filename}" alt="member_main_photo" id="photo_box_img" width="60px" height="60px">
+                                                            </c:otherwise>
+                                                         </c:choose>
                                                       </a>
                                                    </div>
                                                 </div>
@@ -300,9 +324,16 @@
                                                       </li>
                                                       <li class="user-location responsive-hidden-small">
                                                          <b>
-                                                            <c:forTokens items="${sessionScope.memberinfo.address}" delims=" " begin="1" end="2" var="addr">
-                                                               ${addr}
-                                                            </c:forTokens>
+                                                            <c:choose>
+                                                               <c:when test="${!empty sessionScope.memberinfo.address}">
+                                                                  <c:forTokens items="${sessionScope.memberinfo.address}" delims=" " begin="1" end="2" var="addr">
+                                                                     ${addr}
+                                                                  </c:forTokens>
+                                                               </c:when>
+                                                               <c:otherwise>
+                                                                  	서울특별시
+                                                               </c:otherwise>
+                                                            </c:choose>
                                                          </b>
                                                       </li>
                                                    </ul>
@@ -321,7 +352,7 @@
                                            </div>
                                           <ul class="drop-menu-group--nav drop-menu-group">
                                              <li class="drop-down-menu-link">
-                                                <a class="js-analytics-click arrange arrange--middle arrange--6" href="member_details">
+                                                <a class="js-analytics-click arrange arrange--middle arrange--6" href="member_details" style="display: block; word-wrap: break-word;">
                                                    <strong class="arrange_unit">
                                                       <span aria-hidden="true" style="width: 24px; height: 24px;" class="icon icon--24-profile icon--size-24 u-space-r1">
                                                          <svg class="icon_svg">
@@ -332,7 +363,7 @@
                                                 </a>
                                              </li>
                                              <li class="drop-down-menu-link hidden-non-responsive-block responsive-visible-medium-block">
-                                                <a class="js-analytics-click arrange arrange--middle arrange--6" href="#">
+                                                <a class="js-analytics-click arrange arrange--middle arrange--6" href="yeps_message">
                                                    <strong class="arrange_unit">
                                                       <span aria-hidden="true" style="width: 24px; height: 24px;" class="icon icon--24-talk icon--size-24 u-space-r1">
                                                          <svg class="icon_svg">
@@ -342,7 +373,7 @@
                                                    </strong>
                                                 </a>
                                              </li>
-                                             <c:if test="${memberinfo.ismaster eq 'y' || memberinfo.ismaneger eq 'y'}">
+                                             <c:if test="${memberinfo.ismaster eq 'y' || memberinfo.ismanager eq 'y'}">
                                              <li class="drop-down-menu-link">
                                                 <a class="js-analytics-click arrange arrange--middle arrange--6" href="member_manager">
                                                    <strong class="arrange_unit">
@@ -353,7 +384,7 @@
                                                       </span><strong class="unit_hover">Managed Page</strong>
                                                    </strong>
                                                    <span class="arrange_unit">
-                                                      <span class="ybadge ybadge-notification drop-down-menu-link_new-label">MNG</span>
+                                                      <span class="ybadge ybadge-notification drop-down-menu-link_new-label" style="position: static; padding: 0 3px;">MNG</span>
                                                    </span>
                                                 </a>
                                              </li>

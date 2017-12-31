@@ -11,157 +11,12 @@
 <html>
 <head>
 	<title>Yeps!</title>
-	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css?ver=1"/>"/>
-	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/mainPage.css?ver=3"/>"/>
+	<link rel="shortcut icon" type="image⁄x-icon" href="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/gradepoint_yes_color.png">
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/mainPage.css"/>"/>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css"/>"/>
 	<script src="//code.jquery.com/jquery.min.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-	
-<style>
-
-.under_review_container {
-	background-color: #fff;
-    min-width: 1020px;   
-}
-
-.under_review_content_container {
-	max-width: 960px;
-    margin: 0 auto;
-    padding: 0 15px;
-}
-
-.mainpage_review_of_the_day {
-	width: 66.66667%;
-	float: left;
-    padding: 0 15px;
-    min-height: 1px;
-    box-sizing: border-box;
-
-}
-
-.review_of_the_day_title {
-	margin-bottom: 12px;
-	text-align: center;
-	word-wrap: break-word!important;
-    word-break: break-word!important;
-    overflow-wrap: break-word!important;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 1.3125em;
-    color: #d32323;
-}
-
-.review_of_the_day_content {
-	min-height: 288px;
-    margin-bottom: 12px;
-    box-sizing: border-box;
-    background: #fff;
-    padding: 11px;
-    border: 1px solid #e6e6e6;
-    border-radius: 4px;
-    
-}
-
-.review_of_the_day_writer_container {
-	margin-bottom: 18px!important;
-	font-size: 12px;
-    line-height: 1.5em;
-    margin-left: -12px;
-    margin-right: -12px;
-    border-collapse: separate;
-    border-spacing: 12px 0;
-    display: table;
-    min-width: 100%;
-    table-layout: auto;
-}
-
-.review_of_the_day_writer_photo_box, .review_of_the_day_writer_inf {
-	border-collapse: collapse;
-    border-spacing: 0 0;
-    margin-left: 6px;
-    margin-right: 6px;
-    box-sizing: border-box;
-    display: table-cell;
-    vertical-align: top;
-}
-
-.review_of_the_day_writer_info {
-	width: 100%;
-	display: table-cell;
-}
-
-.review_of_the_day_writer {
-	font-size: 14px;
-    line-height: 1.28571em;
-    font-weight: 700;
-}
-
-.review_of_the_day_writer_status {
-	margin: 3px 0;
-}
-
-.review_of_the_day_writer_friend_count, .review_of_the_day_writer_review_count, .review_of_the_day_writer_is_elite {
-	color: #666;
-	display: inline;
-    margin-right: 6px;
-}
-
-.review_of_the_day_writer_is_elite a {
-	color: #f15c00;
-    font-weight: 700;
-}
-
-.where_write_review {
-	font-size: 14px;
-    line-height: 1.28571em;
-}
-
-.bedge_benner_blue {
-	background-color: #d0ecfb;
-	padding: 4px 52px 3px 6px;
-    border-radius: 4px;
-    position: relative;
-    
-}
-
-.bedge_benner_blue_img {
-	position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    right: 6px;
-    vertical-align: middle;
-}
-
-.mainpage_review_rating_regdate {
-	margin: 6px 0;
-}
-
-.mainpage_review_rating {
-	float: left;
-    margin: -1px 6px 0 0;
-    position: relative;
-    overflow: hidden;
-    width: 102px;
-    height: 18px;
-    background-position: 0 -366px;
-    background: url(https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png) no-repeat;
-    background-size: 132px 560px;
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.mainpage_review_rating img {
-	clip: rect(0 0 0 0);
-    position: absolute;
-    left: -9999px;
-    top: auto;
-    overflow: hidden;
-    width: 1px;
-    height: 1px;
-    vertical-align: middle;
-}
-
-</style>
 </head>
 <body>
 	<div class="mainpage_header_container" style="background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_large_assets/8a6cc705477a/assets/img/home/hero_photos/uteUmycsbh0UibXk-At-3A.jpg);">
@@ -172,7 +27,7 @@
 						<div style="white-space: nowrap;">
 							<ul class="mainpage_header_top_left">
 								<li class="mainpage_header_write_review mainpage_header_top_items">
-									<a href="restaurant_restaurantIMG" class="mainpage_header_link">
+									<a href="review_restaurantIMG" class="mainpage_header_link">
 										Write a Review
 									</a>
 								</li>
@@ -216,11 +71,25 @@
 									<div id="page_header_notifications">
 										<a href="yeps_message" class="header-nav_link" id="messages-icon" data-analytics-label="messages_icon">
 											<span aria-label="Messages" style="width: 24px; height: 24px;" class="icon icon--24-speech icon--size-24 icon--white icon--fallback-inverted">
-											<svg class="icon_svg">
-												<path d="M18 3H6C4.34 3 3 4.34 3 6v7c0 1.66 1.34 3 3 3h2v5l5-5h5c1.66 0 3-1.34 3-3V6c0-1.66-1.34-3-3-3z"></path>
-											</svg>
+												<svg class="icon_svg">
+													<path d="M18 3H6C4.34 3 3 4.34 3 6v7c0 1.66 1.34 3 3 3h2v5l5-5h5c1.66 0 3-1.34 3-3V6c0-1.66-1.34-3-3-3z"></path>
+												</svg>
 											</span>
-										</a>
+<!-- 											<a href="yeps_message" class="header-nav_link" id="messages-icon" data-analytics-label="messages_icon"> -->
+<!-- 												<span aria-label="Messages" style="width: 24px; height: 24px;" class="icon icon--24-speech icon--size-24 icon--white icon--fallback-inverted"> -->
+<!-- 													<svg class="icon_svg"> -->
+<!-- 														<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#24x24_speech"> -->
+<!-- 															<svg id="24x24_speech" height="100%" viewBox="0 0 24 24" width="100%"> -->
+<!-- 																<path d="M18 3H6C4.34 3 3 4.34 3 6v7c0 1.66 1.34 3 3 3h2v5l5-5h5c1.66 0 3-1.34 3-3V6c0-1.66-1.34-3-3-3z"></path> -->
+<!-- 															</svg> -->
+<!-- 														</use> -->
+<!-- 													</svg> -->
+<!-- 												</span> -->
+												<c:if test="${ not empty sessionScope.noneCount && sessionScope.noneCount > 0}">
+													<span class="ybadge ybadge--notification ">${sessionScope.noneCount}</span>
+												</c:if>
+											</a>
+										
 										<a href="#" class="header-nav_link show-tooltip js-analytics-click" id="notifications-icon" data-analytics-label="notifications_icon">
 											<span aria-label="Notifications" style="width: 24px; height: 24px;" class="icon icon--24-notification icon--size-24 icon--white icon--fallback-inverted">
 												<svg class="icon_svg">
@@ -236,7 +105,16 @@
 		                              <div id="page_header_account">
 		                                 <div id="topbar-account-item" class="drop-menu-origin" data-component-bound="true">
 		                                    <a class="drop-menu-link user-account_button drop-menu-highlighted" href="javascript:;" id="topbar-account-link" data-component-bound="true">
-		                                       <span class="user-account_avatar responsive-visible-large-block"><img alt="Smile08908 .." class="photo-box-img" height="90" src="https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/90s.jpg" srcset="https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/180s.jpg 2.00x,https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/ms.jpg 1.11x,https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/120s.jpg 1.33x,https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/168s.jpg 1.87x,https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/ls.jpg 2.78x,https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/258s.jpg 2.87x" width="90"></span>
+		                                       <span class="user-account_avatar responsive-visible-large-block">
+                                          			<c:choose>
+                                             			<c:when test="${empty sessionScope.mainPhoto}">
+                                                			<img class="photo-box-img" height="90" width="90" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png">
+                                             			</c:when>
+                                             			<c:otherwise>
+                                                			<img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${mainPhoto.filename}" alt="member_main_photo" id="photo_box_img" width="90px" height="90px">
+                                             			</c:otherwise>
+                                          			</c:choose>
+                                       			</span>
 		                                       <span aria-hidden="true" style="width: 14px; height: 14px;" class="icon icon-triangle-down">
 		                                          <svg class="icon_svg">
 		                                             <path d="M7 9L3.5 5h7L7 9z"></path>
@@ -250,7 +128,14 @@
 		                                                <div class="media-avatar responsive-photo-box js-analytics-click" data-analytics-label="about_me">
 		                                                   <div class="photo-box pb-60s" data-hovercard-id="mNnbq24hI6DxMOQ0JLFrnQ">
 		                                                      <a href="member_details" class="js-analytics-click" data-analytics-label="user-photo">
-		                                                         <img class="photo-box-img" height="60" src="https://s3-media4.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/60s.jpg" width="60">
+                                                         		<c:choose>
+                                                        		    <c:when test="${empty sessionScope.mainPhoto}">
+                                                            		   <img class="photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" width="60">
+                                                           			</c:when>
+                                                            		<c:otherwise>
+                                                               			<img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${mainPhoto.filename}" alt="member_main_photo" id="photo_box_img" width="60px" height="60px">
+                                                            		</c:otherwise>
+                                                         		</c:choose>
 		                                                      </a>
 		                                                   </div>
 		                                                </div>
@@ -277,12 +162,19 @@
 		                                                         </a>
 		                                                      </li>
 		                                                      <li class="user-location responsive-hidden-small">
-		                                                         <b>
-		                                                            <c:forTokens items="${sessionScope.memberinfo.address}" delims=" " begin="1" end="2" var="addr">
-		                                                               ${addr}
-		                                                            </c:forTokens>
-		                                                         </b>
-		                                                      </li>
+																<b>
+                                                            		<c:choose>
+                                                               			<c:when test="${!empty sessionScope.memberinfo.address}">
+                                                                  			<c:forTokens items="${sessionScope.memberinfo.address}" delims=" " begin="1" end="2" var="addr">
+                                                                     			${addr}
+                                                                  			</c:forTokens>
+                                                               			</c:when>
+                                                               			<c:otherwise>
+                                                                  			서울특별시
+                                                               			</c:otherwise>
+                                                            		</c:choose>
+                                                         		</b>
+                                                      		 </li>
 		                                                   </ul>
 		                                                   <ul class="user-passport-stats">
 		                                                      <li class="review-count">
@@ -310,7 +202,7 @@
 		                                                </a>
 		                                             </li>
 		                                             <li class="drop-down-menu-link hidden-non-responsive-block responsive-visible-medium-block">
-		                                                <a class="js-analytics-click arrange arrange--middle arrange--6" href="#" data-analytics-label="">
+		                                                <a class="js-analytics-click arrange arrange--middle arrange--6" href="yeps_message" data-analytics-label="">
 		                                                   <strong class="arrange_unit">
 		                                                      <span aria-hidden="true" style="width: 24px; height: 24px;" class="icon icon--24-talk icon--size-24 u-space-r1">
 		                                                         <svg class="icon_svg">
@@ -320,7 +212,7 @@
 		                                                   </strong>
 		                                                </a>
 		                                             </li>
-		                                             <c:if test="${memberinfo.ismaster eq 'y' || memberinfo.ismaneger eq 'y'}">
+		                                             <c:if test="${memberinfo.ismaster eq 'y' || memberinfo.ismanager eq 'y'}">
 		                                             <li class="drop-down-menu-link">
 		                                                <a class="js-analytics-click arrange arrange--middle arrange--6" href="member_manager" data-analytics-label="dropdown_rewards-inactive">
 		                                                   <strong class="arrange_unit">
@@ -331,7 +223,7 @@
 		                                                      </span><strong class="unit_hover">Managed Page</strong>
 		                                                   </strong>
 		                                                   <span class="arrange_unit">
-		                                                      <span class="ybadge ybadge-notification drop-down-menu-link_new-label">MNG</span>
+		                                                      <span class="ybadge ybadge-notification drop-down-menu-link_new-label" style="position: static; padding: 0 3px;">MNG</span>
 		                                                   </span>
 		                                                </a>
 		                                             </li>
@@ -363,10 +255,8 @@
 								</div>
 								</c:otherwise>
 							</c:choose>
-					
-					
-				</div>
-			</div>
+						</div>
+					</div>
 			
 			
 			<div class="mainpage_header_inner">
@@ -1251,7 +1141,12 @@
 											<div>
 												<a href="#">
 												<!-- 만약 아이디에 사진 없다면 이거 띄우도록 이프 문! -->
-													<img class="review_of_the_day_writer_img" height="60" widgh="60" src="https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/90s.jpg">
+													<c:if test="${review_of_the_day_userPhoto == null}">
+														<img class="review_of_the_day_writer_img" height="60" widgh="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" style="border-radius: 4px;">
+													</c:if>
+													<c:if test="${review_of_the_day_userPhoto != null}">
+														<img class="review_of_the_day_writer_img" height="60" widgh="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${review_of_the_day_userPhoto.filename}" style="border-radius: 4px;">
+													</c:if>
 												</a>
 											</div>
 										</div>
@@ -1259,32 +1154,17 @@
 										<div class="review_of_the_day_writer_info">
 											<strong style="font-weight: 700;">
 												<a href="#" class="review_of_the_day_writer">
-													${review_of_the_day_memberDTO.name}
+													${review_of_the_day_memberDTO.email}
 												</a>
 											</strong>
-											<ul class="review_of_the_day_writer_status">
-												<li class="review_of_the_day_writer_friend_count">
-													<span class="icon 18x18_friend_icon">
-														<svg style="fill: #f15c00; width: 18px; height: 18px;">
-															<g>
-																<path d="M7.904 9.43l-2.098 4.697a.9.9 0 0 1-1.612 0L2.096 9.43a.902.902 0 0 1 .806-1.305h4.196c.67 0 1.105.705.806 1.305zM5 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path><path d="M15.904 9.43l-2.098 4.697a.89.89 0 0 1-.806.498.89.89 0 0 1-.806-.498L10.096 9.43a.902.902 0 0 1 .806-1.305h4.195c.67 0 1.106.705.807 1.305zM13 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" opacity=".502"></path>
-															</g>
-														</svg>
-													</span>
-													<b>999</b>
-												</li>
-												
+											<ul class="review_of_the_day_writer_status">												
 												<li class="review_of_the_day_writer_review_count">
 													<span class="icon 18x18_review_icon">
 														<svg style="fill: #f15c00; width: 18px; height: 18px;">
 															<path d="M13 3H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1.505 9.643l-2.526-1.55L6.526 12.7 7 9.934 5 7.977l2.766-.404L8.97 4.7l1.264 2.873L13 7.977l-2 1.957.495 2.71z"></path>
 														</svg>
 													</span>
-													<b>999</b>
-												</li>
-												
-												<li class="review_of_the_day_writer_is_elite">
-													<a href="#">Elite ’17(?)</a>
+													<b>${review_of_the_day_memberDTO.reviewcount}</b>
 												</li>
 											</ul>
 											<div class="where_write_review">
@@ -1302,13 +1182,13 @@
 									
 									<div class="bedge_benner_blue">
 										Review of the Day
-										<img class="bedge_benner_blue_img" src="https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_styleguide/8bb21835695e/assets/img/badge_banner_icons/40x40_rotd.png" width="40">
+										<img class="bedge_benner_blue_img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/40x40_rotd.png" width="40">
 									</div>
 									
 									<div class="mainpage_review_rating_regdate">
-										<div>
-											<div class="mainpage_review_rating">
-												<img height="303" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png" width="84">
+										<div>											
+											<div class="mainpage_review_rating pre_div_star${review_of_the_day_reviewDTO.gradepoint}" title="4.0 star rating">
+												<img class="pre_starimg1" height="303" width="84" alt="4.0 star rating" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/stars.png" >
 											</div>
 										</div>
 										<span>
@@ -1331,11 +1211,208 @@
 							</div>
 						</div>
 						
-						<div>
-							Recent List
+						<div class="mainpage_recent_list">
+							<div class="js-fresh-lists">
+								<h3 class="recent_list_title">Recent Lists</h3>
+								<div class="recent_list_wrap_container">
+									<div class="recent_list_wrap">
+										<div class="recent_list_unit">
+											<ul class="recent_list_set">
+											<!-- 3번 반복 !!!!!! -->
+												<li class="recent_list_item">
+													<div class="recent_list_item_block">
+														<div class="recent_list_item_photo_area">
+															<div class="recent_list_item_photo_box">
+																<!-- 등록된 사진이 없다면 !!!!!!!!!!!!! -->
+																<div class="recent_list_item_photo" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png);">
+																	<a href="#" style="display: block;">
+																		<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png" class="recent_list_photo" width="90" height="90">
+																	</a>
+																</div>
+															</div>
+														</div>
+														
+														<div class="recent_list_item_info_area">
+															<p class="recent_list_item_title">
+																<a href="#" style="font-weight: 700;">
+																	제목
+																</a>
+															</p>
+															
+															<p class="recent_list_item_description">
+																내용
+															</p>
+															
+															<div class="recent_list_item_owner">
+																By
+																<a href="#">
+																	작성자
+																</a>
+															</div>
+														</div>
+													</div>
+												</li>
+												
+												<li class="recent_list_item">
+													<div class="recent_list_item_block">
+														<div class="recent_list_item_photo_area">
+															<div class="recent_list_item_photo_box">
+																<!-- 등록된 사진이 없다면 !!!!!!!!!!!!! -->
+																<div class="recent_list_item_photo" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png);">
+																	<a href="#" style="display: block;">
+																		<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png" class="recent_list_photo" width="90" height="90">
+																	</a>
+																</div>
+															</div>
+														</div>
+														
+														<div class="recent_list_item_info_area">
+															<p class="recent_list_item_title">
+																<a href="#" style="font-weight: 700;">
+																	제목
+																</a>
+															</p>
+															
+															<p class="recent_list_item_description">
+																내용
+															</p>
+															
+															<div class="recent_list_item_owner">
+																By
+																<a href="#">
+																	작성자
+																</a>
+															</div>
+														</div>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								
+								<p style="text-align: center!important; margin-bottom: 12px;">
+									<a href="#">
+										Browse more lists
+									</a>
+								</p>
+							</div>
 						</div>
 					</div>
 				</div>
+				
+				
+				<div class="mainpage_home_container_section">
+					<h2 class="browes_categories_section_header" style="margin-bottom: 6px;">
+						Recent Activity
+					</h2>
+					
+					<div class="recent_activity_wrapper">
+						<div class="recent_activity_container">
+							<div class="recent_activity_line">	
+							<!-- 여기 이거 반복문!!!!! -->
+								<c:forEach var="reviewDTO" items="${recentReviewInfoList}" varStatus="status">
+								<div class="recent_activity_unit">
+									<div class="recent_activity_unit_header">
+										<div class="recent_activity_unit_header_content">
+											<div class="recent_activity_unit_header_user_profile">
+												<div class="photo_box">
+													<a href="member_details?mnum=${reviewDTO.mnum}">
+														<c:if test="${empty memberPhotoList.get(status.index).filename}">
+															<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" height="30" width="30" style="border-radius: 4px;">
+														</c:if>
+														<c:if test="${!empty memberPhotoList.get(status.index).filename}">
+															<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${memberPhotoList.get(status.index).filename}" height="30" width="30" style="border-radius: 4px;">
+														</c:if>
+														
+													</a>
+												</div>
+											</div>
+											
+											<div class="recent_activity_unit_header_user_profile" style="width: 100%;">
+												<a href="member_details?mnum=${reviewDTO.mnum}">
+													<c:if test="${empty get_mnameList.get(status.index).nickname}">
+														<strong>${get_mnameList.get(status.index).email}</strong>
+													</c:if>
+													<c:if test="${!empty get_mnameList.get(status.index).nickname}">
+														<strong>${get_mnameList.get(status.index).nickname}</strong>
+													</c:if>
+												</a>
+												<br>
+												<span style="float: left; margin-right: 12px; margin-bottom: -2px;">
+													Wrote a review
+												</span>
+											</div>
+										</div>
+									</div>
+									
+									
+									<!-- 만약 사진이 있으면 보이고 없으면 안보이고 -->
+									<div class="recent_activity_unit_content">
+										<div class="recent_activity_unit_content_photo">
+											<div class="photo_box_background" style="background-image: url(https://s3-media4.fl.yelpcdn.com/bphoto/jsDmbW9Eaqgyc0Kbw4TUvg/l.jpg)">
+												<a href="#" style="display: block;">
+													<img class="recent_activity_photo_box" height="400" src="https://s3-media4.fl.yelpcdn.com/bphoto/jsDmbW9Eaqgyc0Kbw4TUvg/l.jpg" width="600">
+												</a>
+											</div>
+										</div>
+										
+										<div class="recent_activity_unit_content_text_body">
+											<div class="recent_activity_unit_content_text_body_title">
+												<div class="recent_activity_unit_content_text_body_title_link">
+													<span>
+														<a href="restaurant_content?rnum=${reviewDTO.rnum}" style="font-weight: 700;">
+															<span>
+																${get_rnameList.get(status.index).rname}
+															</span>
+														</a>
+													</span>
+												</div>
+											</div>
+											
+											<div class="recent_activity_unit_content_text_body_star">
+												<div class="pre_div_star${reviewDTO.gradepoint} star_wrapper" title="4.0 star rating">
+                                           			<img class="pre_starimg1" height="303" width="84" alt="4.0 star rating" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png" >
+                                        		</div>
+											</div>
+											
+											<p class="recent_activity_unit_content_text">
+												<span>
+													${reviewDTO.content}
+												</span>
+											</p>
+										</div>
+									</div>
+									
+									<div class="recent_activity_unit_footer">
+										<a href="#" style="white-space: nowrap!important;">
+											전체 보기
+										</a>
+									</div>
+								
+								</div>
+								</c:forEach>
+								
+							</div>
+						
+						
+						<p class="recent_activity_readmore">
+							<a id="show_more_activity">
+								<span class="icon" style="width: 24px; height: 24px; margin-right: 3px!important; fill: currentColor; ">
+									<svg class="svg_icon" height="100%" viewBox="0 0 24 24" width="100%">
+										<path d="M18.364 9.525L16.95 8.11 12 13.06 7.05 8.11 5.636 9.526 12 15.89l6.364-6.365z"></path>
+									</svg>
+								</span>
+								
+								<span>
+									Show more activity in 해당 지역
+								</span>
+							</a>
+						</p>
+						
+						<div></div>
+					</div>
+				</div>				
 			</div>
 		</div>
 	</div>
@@ -1410,6 +1487,12 @@
 			$('#main_location_suggestion_container').hide();
 		} 
 	});
+	
+	$(document).on('click', '#show_more_activity', function() {
+		var height = parseInt($('.recent_activity_line').css('max-height'));
+ 		$('.recent_activity_line').css("max-height", height*2);
+	})
+	
 	</script>
 	
 	<script type="text/javascript">

@@ -31,32 +31,19 @@
   	</select>	
   	
   	<select id="getSelectedRestaurant_Rv" resultType="ReviewDTO" parameterType="int">
-  		select *from yeps_review where rnum = #{rnum}
+  		select * from yeps_review where rnum = #{rnum}
   	</select>
   	
   	<select id="getSelectedRestaurant_Rv_M" resultType="int" parameterType="int">
   		select mnum from yeps_review where rnum = #{rnum}
   	</select>
   	
-  	
-  	<!--  
-  	<select id="mylist_info1" resultType="MemberDTO" parameterType="int" >
-  		select *from yeps_member where mnum = #{NBPmnum}
+  	<select id="review_mylist_info" parameterType="int" resultType="ReviewDTO">
+  		select * from yeps_review where mnum = #{NBPmnum} and rvnum = (select max(rvnum) from yeps_review where gradepoint=(select max(gradepoint) from yeps_review))
   	</select>
-  	-->
-  	
-  	<select id="review_mylist_info" resultType="ReviewDTO" parameterType="int">
-  		select *from yeps_review where rvnum = #{NBPmnum}
-  	</select>
-  	
-  	<!--  
-  	<select id="review_mylist_info3" resultType="FileDTO" parameterType="int">
-  		select *from yeps_file where filenum = #{NBPmnum}
-  	</select>
-  	-->
   	
   	<update id="review_mylist_updatedata" parameterType="int">
-  		update yeps_review set recentreview='y' where mnum=#{NBPmnum}
+  		update yeps_review set recentreview='y' where rvnum = #{rvnum}
   	</update>
   	
   	<select id="GetRestaurantName_Rv" parameterType="int" resultType="int">
@@ -64,11 +51,11 @@
   	</select>
   	
   	<select id="recentReviewInfo" resultType="ReviewDTO">
-  		select rvnum, gradepoint, content from yeps_review order by rvnum desc 
+  		select rvnum, gradepoint, content from yeps_review order by rvnum desc
   	</select>
   	
-  	<select id="numList" resultType="ReviewDTO" parameterType="int">
-  		select rnum, mnum from yeps_review where rnum= #{reviewIntList}
+  	<select id="numList" parameterType="int" resultType="ReviewDTO">
+  		select rnum, mnum from yeps_review where rvnum= #{reviewIntList}
   	</select>
   	
   	<select id="previous_reviews_Num" resultType="ReviewDTO">
@@ -82,20 +69,31 @@
   	<select id="review_keyword" resultType="ReviewDTO" parameterType="String">
   		select *from yeps_review where content like '%'||#{SearchKeyword}||'%'
   	</select>
-  	<!--  
-  	<update id="review_EstimateCount_update" parameterType="int">
-     	 update yeps_review set useful=#{}, funny=#{}, cool=#{} where rvnum=#{} 
-	</update>
-  	-->
   	
   	
   	
   	
-  	
-  	
-  	
-  	<!-- 레스토랑매퍼에 있던 -->
-  	<select id="listRestaurantReview" parameterType="ReviewDTO" resultType="ReviewDTO"> 
-  		select * from (select rownum rn, A.* from (select * from yeps_review order by rnum desc)A) where rn between #{start} and #{end} 
+  	<select id="getSelectedRestaurant_Rname" parameterType="int" resultType="String" > 
+  		select rname from yeps_restaurant where rnum = #{rnum} 
   	</select>
+  	
+  	
+  	
+  	<!-- 지원이 한테서 가져옴 -->
+  	<select id="listRestaurantReview" parameterType="ReviewDTO" resultType="ReviewDTO"> 
+		select * from (select rownum rn, A.* from (select * from yeps_review order by rvnum desc)A) where rn between #{start} and #{end} 
+	</select>
+  	
+  	<select id="getStarAvg" resultType="int" > 
+  		select avg(gradepoint) from yeps_review where rnum=#{rnum} 
+  	</select>
+  	
+  	<select id="getLastReview" parameterType="int" resultType="ReviewDTO"> 
+  		select * from (select * from yeps_review where rnum=#{rnum} order by rvnum desc) where rownum = 1 
+  	</select>
+  	
+	<select id="Get_InsertReviewDate" resultType="String">
+        select to_char(sysdate, 'yyyy/mm/dd')from dual
+	</select>
+  	
 </mapper>		

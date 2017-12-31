@@ -32,67 +32,6 @@ public class ReviewController {
 	@Autowired
 	private RestaurantMapper restaurantMapper;
 
-	// ★★ 임시용 1★★
-	@RequestMapping(value = "/gradepoint")
-	public String gradepoint() {
-		return "gradepoint";
-	}
-
-	// ★★ 임시용 2★★
-	@RequestMapping(value = "/view")
-	public ModelAndView view(HttpServletRequest req) {
-		int gradepoint = Integer.parseInt(req.getParameter("gradepoint"));
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("gradepoint", gradepoint);
-		mav.setViewName("view");
-		return mav;
-	}
-
-	// ★★ 페이징처리 ★★
-	// public ModelAndView pagingReviewList(HttpServletRequest req){
-	//
-	// int count = reviewMapper.getReviewCount();
-	// int curPage =
-	// req.getParameter("curPage")!=null?Integer.parseInt(req.getParameter("curPage")):
-	// 1 ;
-	// YepsPager yPager = new YepsPager(count, curPage);
-	// int start = yPager.getPageBegin();
-	// int end = yPager.getPageEnd();
-	// int pageSize = yPager.PAGE_SCALE;
-	// int num = count - pageSize * (curPage - 1) + 1;
-	// List<ReviewDTO> list = reviewMapper.reviewBoxList(start, end);
-	// Map<String, Object> map = new HashMap<String, Object>();
-	// map.put("list", list); //list
-	// map.put("count", count);
-	// map.put("yepsPager", yPager);
-	// ModelAndView mav = new ModelAndView();
-	// int lCount = reviewMapper.getLockerCount();
-	// int mCount = count - lCount;
-	// mav.addObject("mCount", mCount);
-	// mav.addObject("lCount",lCount);
-	// mav.addObject("count", count);
-	// mav.addObject("num", num);
-	// mav.addObject("map", map);
-	// mav.addObject("mode", "receive");
-	// mav.setViewName("");
-	// return mav;
-	//
-	// }
-
-	@RequestMapping(value = "/review_write")
-	public ModelAndView review_write(HttpServletRequest req) {
-		String rnum = req.getParameter("rnum");
-		// String rname = req.getParameter("rname");
-		String rname = restaurantMapper.review_write_getrname(Integer.parseInt(rnum));
-		String star = req.getParameter("star");
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("rnum", rnum);
-		mav.addObject("rname", rname);
-		mav.addObject("star", star);
-		mav.setViewName("review/write");
-		return mav;
-	}
-
 	@RequestMapping(value = "/review_list")
 	public ModelAndView review_list() {
 		List<ReviewDTO> list = reviewMapper.listReview();
@@ -102,39 +41,6 @@ public class ReviewController {
 		mav.addObject("reviewList", list);
 		mav.setViewName("review/list");
 		return mav;
-	}
-
-	@RequestMapping(value = "/review_insert")
-	public ModelAndView review_insert(HttpServletRequest req) {
-		String rnum = req.getParameter("rnum");
-		// dto에 값 입력 내가 하는부분은 나중에 수정해야 할 부분임
-
-		// ★작성자는 인서트쿼리문에 넣을 필요가 없음//작성한 사람은 mnum을 통해서 누구인지 name을 꺼낼 수 있기때문에!!
-		ReviewDTO dto = new ReviewDTO();
-		dto.setRvnum(1);
-		dto.setRnum(2);
-		// dto.setWriter("writer");
-		dto.setContent(req.getParameter("content"));
-		dto.setGradepoint(1);
-		dto.setFilenum(3);
-		dto.setIp(req.getRemoteAddr());
-		dto.setRecentreview("n");
-
-		int res = reviewMapper.insertReview(dto);
-		ModelAndView mav = new ModelAndView();
-		String msg;
-		String url;
-
-		if (res > 0) {
-			return new ModelAndView("redirect:restaurant_content?rnum=" + rnum);
-		} else {
-			msg = "리뷰 등록실패!!";
-			url = "restaurant_content";
-			mav.addObject("msg", msg);
-			mav.addObject("url", url);
-			mav.setViewName("message");
-			return mav;
-		}
 	}
 
 	@RequestMapping(value = "/review_delete")
@@ -211,18 +117,6 @@ public class ReviewController {
 	public String review_guideview() {
 		return "review/guidelines";
 	}
-
-	// @RequestMapping(value="/restaurant_restaurantIMG")
-	// public ModelAndView restaurant_restaurantIMG(){
-	// //rnum을 가지고 가서 식당 목록을 뿌려주기 //최근 식당으로 등록된것 가져오기 쿼리문 작성해서 갖고오기
-	// //★최근 식당목록으로 뽑아온것이 아니라, 일단은 식당등록이 먼저된것에서부터 19개의 식당목록을 가져왔음! ->20개로 바꿀예정임
-	//
-	// List<RestaurantDTO> rlist = restaurantMapper.restaurant_restaurantIMG();
-	// ModelAndView mav = new ModelAndView();
-	// mav.addObject("rlist", rlist);
-	// mav.setViewName("restaurant/restaurantIMG");
-	// return mav;
-	// }
 
 	@RequestMapping(value = "/review_selectedres")
 	public ModelAndView review_selectedres(HttpServletRequest req) {
@@ -322,5 +216,107 @@ public class ReviewController {
 	// int res = reviewMapper.review_EstimateCount_update(Integer.parseInt(rvnum));
 	// return "review/";
 	// }
+	
+	@RequestMapping(value="/review_write")
+    public ModelAndView review_write(HttpServletRequest req) {
+       String rnum = req.getParameter("rnum");
+       String rname = restaurantMapper.review_write_getrname(Integer.parseInt(rnum));
+       System.out.println("review_write에서의 rname출력:" + rname);
+       String star = req.getParameter("star");
+       
+       //★EDIT부분★ 위에 받아온 파라미터값 rnum을 통해서 방금 작성한 리뷰의 정보들을 가져와서 write페이지에 뿌려주면됨. 
+       
+       ModelAndView mav = new ModelAndView();
+       mav.addObject("rnum", rnum);
+       mav.addObject("rname", rname);
+       mav.addObject("star", star);
+       mav.setViewName("review/write");
+       return mav;
+    }
+	
+	@RequestMapping(value="/review_restaurantIMG")
+    public ModelAndView review_restaurantIMG(){
+       //rnum을 가지고 가서 식당 목록을 뿌려주기 //최근 식당으로 등록된것 가져오기 쿼리문 작성해서 갖고오기 
+       //★최근 식당목록으로 뽑아온것이 아니라, 일단은 식당등록이 먼저된것에서부터 19개의 식당목록을 가져왔음! ->20개로 바꿀예정임 
+       
+       List<RestaurantDTO> rlist = restaurantMapper.review_restaurantIMG();
+       System.out.println("rlist 출력1" + rlist);
+       ModelAndView mav = new ModelAndView();
+       mav.addObject("rlist", rlist);
+       mav.setViewName("review/restaurantIMG");
+       return mav;
+    }
+	
+	@RequestMapping(value="/review_insert")
+    public ModelAndView review_insert(HttpServletRequest req, HttpSession session){
+       //★dto에 값 입력 내가 하는부분은 나중에 수정해야 할 부분임
+       
+       //★ if (res > 0)일때 /식당명/이름/위치(Korea, Seoul)/friend/리뷰수/별점/작성일/내용 가지고 가기!
+       
+       //로그인했을때의 그 이름을 통해서 나머지 값들을 꺼내서 보여줘야함  
+       ReviewDTO rvdto = new ReviewDTO();
+       
+        MemberDTO mdto = (MemberDTO)session.getAttribute("memberinfo");
+       int mnum = mdto.getMnum();
+       //reviewcount 구하기 추가 부분
+       int beforeReviewcount = memberMapper.getReviewCount(mnum);
+       int nowReviewcount = beforeReviewcount + 1;
+       memberMapper.updateReviewCount(mnum, nowReviewcount);
+       //===============================
+       String name = mdto.getName();
+       String rnum = req.getParameter("rnum");
+       String rname = req.getParameter("rname");
+       String gradepoint = req.getParameter("gradepoint");
+       String content = req.getParameter("content");
+       
+       String Get_InsertReviewDate = reviewMapper.Get_InsertReviewDate();
+       
+       rvdto.setRnum(0);
+       rvdto.setMnum(mnum);
+       rvdto.setContent(content);
+       rvdto.setGradepoint(Integer.parseInt(gradepoint));
+       rvdto.setFilenum(3);
+       rvdto.setIp(req.getRemoteAddr());
+       rvdto.setRecentreview("n");
+       
+       int res = reviewMapper.insertReview(rvdto);
+       ModelAndView mav = new ModelAndView();
+       String msg;
+       String url;
+       
+       
+       //리뷰 작성했을때 위에 프로필과함께 작성한리뷰 restaurantIMG페이지에 띄워주기 
+       List<RestaurantDTO> rlist = restaurantMapper.review_restaurantIMG();
+       System.out.println("rlist 출력2" + rlist);
+       
+       if(res > 0) {
+          mav.addObject("rnum", rnum);
+          //reviewcount 담아주기 ============================
+          mdto.setReviewcount(nowReviewcount);
+          mav.addObject("reviewcount", nowReviewcount);
+          //===========================================
+          mav.addObject("name", name);
+          mav.addObject("rname", rname);
+          mav.addObject("gradepoint", gradepoint);
+          mav.addObject("content", content);
+          mav.addObject("joindate", Get_InsertReviewDate); 
+          
+          
+          mav.addObject("mode","write");
+          mav.addObject("rlist", rlist);
+          mav.setViewName("review/restaurantIMG");
+          return mav;
+       }else {
+          msg = "리뷰 등록 실패!!";
+          url = "review_write";
+          mav.addObject("msg", msg);
+          mav.addObject("url", url);
+          mav.setViewName("message");
+          return mav;
+       }
+       
+    }
+	
+	
 
 }

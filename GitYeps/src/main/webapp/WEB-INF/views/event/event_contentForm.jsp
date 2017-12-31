@@ -86,7 +86,7 @@
 										</span>
 										<span id="event_content_photo_tooltip_wrap">
 											<span id="event_content_photo_tootip">
-												Add Photo
+												Update Photo
 											</span>
 										</span>
 										<c:if test="${empty fileList}">
@@ -213,6 +213,28 @@
 						${fn:replace(eventDTO.event_content,crcn,br)}
 					</p>
 					<div id="event_content_description_bottom">
+						<div id="event_content_description_bottom_fill">
+							<c:if test="${eventDTO.mnum == sessionScope.memberinfo.mnum || sessionScope.memberinfo.ismaster eq 'y' || sessionScope.memberinfo.ismanager eq 'y'}">
+							<a href="javascript:deleteEvent('${eventDTO.evnum}')">
+								<span aria-hidden="true" style="width: 18px; height: 18px;" class="trashbox">
+									<svg class="icon_svg">
+										<path d="M3 5V3h4V2h4v1h4v2H3zm11 9c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V6h10v8zM8 8.5a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5zm3 0a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5z"></path>
+									</svg>
+								</span>
+								삭제
+							</a>
+							
+							<a href="event_edit?evnum=${eventDTO.evnum}">
+								<span aria-hidden="true" style="width: 18px; height: 18px;" class="share">
+									<svg class="icon_svg">
+										<path d="M17.714 6.43L13 10.356v-3.03c-1 0-5.097 1.47-6.286 3.62.274-3.08 4.286-5.5 6.286-5.5V2.5l4.714 3.93zM3 4v10h11v-2.5l1-1V15H2V3h8.5l-1 1H3z"></path>
+									</svg>
+								</span>
+								수정
+							</a>
+							</c:if>
+						</div>
+					
 						<div id="event_content_description_bottom_flag_box">
 							<!-- 눌렀을 때 관리자한테 메세지 보내는 기능 해야함 -->
 							<a id="event_content_description_bottom_flag_icon_action" href="#" data-popup-open="popup-1">
@@ -246,7 +268,7 @@
 						
 						<ol id="event_content_comment_list">
 						<c:forEach var="event_reviewDTO" items="${eventReview_list}">
-							<c:forEach var="event_memberDTO" items="${eventReview_writer_list}">
+							<c:forEach var="event_memberDTO" items="${eventReview_writer_list}" varStatus="status">
 								<c:if test="${event_reviewDTO.mnum == event_memberDTO.mnum}">
 								<li>
 									<div id="event_topic_reply">
@@ -254,8 +276,13 @@
 											<div id="event_reply_user_info_block">
 												<div id="event_reply_user_info_photo_wrapper">
 													<div id="event_reply_user_photo">
-														<a href="#">
-															<img src="https://s3-media3.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/90s.jpg" width="60" height="60" id="event_reply_user_img">
+														<a href="member_details?mnum=${event_memberDTO.mnum}">
+															<c:if test="${empty eventReview_writer_profileList.get(status.index).filename}">
+																<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" width="60" height="60" id="event_reply_user_img">
+															</c:if>
+															<c:if test="${!empty eventReview_writer_profileList.get(status.index).filename}">
+																<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${eventReview_writer_profileList.get(status.index).filename}" width="60" height="60" id="event_reply_user_img">
+															</c:if>
 														</a>
 													</div>
 												</div>
@@ -263,8 +290,13 @@
 												<div id="event_reply_user_info">
 													<ul>
 														<li id="event_reply_user_name">
-															<a id="event_reply_user_name" href="#">
-																${event_memberDTO.email}
+															<a id="event_reply_user_name" href="member_details?mnum=${event_memberDTO.mnum}">
+																<c:if test="${empty event_memberDTO.nickname}">
+																	${event_memberDTO.email}
+																</c:if>
+																<c:if test="${!empty event_memberDTO.nickname}">
+																	${event_memberDTO.nickname}
+																</c:if>
 															</a>
 														</li>
 													
@@ -697,12 +729,12 @@
 													<c:if test="${this_week_eventDTO.evnum == this_week_fileDTO.evnum}">
 														<c:if test="${this_week_fileDTO.filename == 'nothing'}">
 															<a href="event_content?evnum=${this_week_eventDTO.evnum}" style="margin: 0; padding: 0; border: 0; cursor: pointer;">
-																<img src="getImage/event_square.png" style="outline: none; border-radius: 4px; vertical-align: middle; margin: 0; padding: 0; border: 0; height: 60px; width: 60px;">
+																<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png" style="outline: none; border-radius: 4px; vertical-align: middle; margin: 0; padding: 0; border: 0; height: 60px; width: 60px;">
 															</a>
 														</c:if>
 														<c:if test="${this_week_fileDTO.filename != 'nothing'}">
 															<a href="event_content?evnum=${this_week_eventDTO.evnum}" style="margin: 0; padding: 0; border: 0; cursor: pointer;">
-																<img src="getImage/${this_week_fileDTO.filename}" style="outline: none; border-radius: 4px; vertical-align: middle; margin: 0; padding: 0; border: 0; height: 60px; width: 60px;">
+																<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${this_week_fileDTO.filename}" style="outline: none; border-radius: 4px; vertical-align: middle; margin: 0; padding: 0; border: 0; height: 60px; width: 60px;">
 															</a>
 														</c:if>
 													</c:if>
@@ -766,7 +798,7 @@
 									<div class="photo_popup_grid_main_photo_area_footer">
 										<ul class="photo_popup_footer_inner">
 											<li>
-												<a href="event_browseAll_photo">
+												<a href="event_browseAll_photo?evnum=${eventDTO.evnum}">
 													<span class="icon" style="opacity: 0.7; filter: drop-shadow(0 0 4px rgba(0,0,0,0.3)); margin-right: 3px !important; fill: currentColor; width: 18px; height: 18px;">
 														<svg class="icon_svg" height="100%" width="100%" viewBox="0 0 18 18">
 															<path d="M10 15v-5h5v5h-5zm0-12h5v5h-5V3zm-7 7h5v5H3v-5zm0-7h5v5H3V3z"></path>
@@ -777,7 +809,7 @@
 											</li>
 											
 											
-											<li style="width: 17%;">
+											<li>
 												<span class="photo_popup_footer_page_count">
 													<span class="photo_popup_footer_current">
 														1
@@ -1050,10 +1082,10 @@
 						'<div style="display: inline-block;">',
 							'<div id="map_inner_eventphoto" style="float: left;">',
 								'<c:if test="${empty fileList[0].filename}">',
-									'<img src="getImage/event_square.png" style="outline: none; width: 100px; height: 100px;">',
+									'<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png" style="outline: none; width: 100px; height: 100px; border-radius: 4px;">',
 								'</c:if>',
 								'<c:if test="${!empty fileList[0].filename}">',
-									'<img src="getImage/${fileList[0].filename}" style="outline: none; width: 100px; height: 100px;">',
+									'<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${fileList[0].filename}" style="outline: none; width: 100px; height: 100px; border-radius: 4px;">',
 								'</c:if>',
 							'</div>',
 							'<div id="map_inner_eventname" style="margin-left: 5px; float: left; width: 150px; heght: 100px; font-size: 12px;">',
@@ -1091,7 +1123,7 @@
 		
 		for(var i = 0; i < list.length; i++) {
 			var img = document.createElement('img');
-			img.src = 'getImage/' + list[i];
+			img.src = 'https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/' + list[i];
 			img.style.cursor = 'pointer';
 			img.style.width = '100%';
 			img.style.height = '100%';
@@ -1123,6 +1155,14 @@
 			return true;
 		}
 		
+		function deleteEvent(evnum) {
+			if(confirm("이벤트에 등록된 모든 자료를 삭제합니다. 계속 하시겠습니까?")) {
+				location.href="event_delete?evnum=" + evnum;
+			} else {
+				return;
+			}
+		}
+		
 	</script>
 	<script>
    		//----- OPEN   		
@@ -1131,7 +1171,7 @@
 			list.push("${fileDTO.filename}");
 		</c:forEach>
 		for(var i = 0; i < list.length; i++) {
-			var img = $("<img>").attr("src", "getImage/" + list[i]).css('vertical-align', 'middle').css('display', 'inline-block').css('max-width', '100%').css('max-height', '100%');
+			var img = $("<img>").attr("src", "https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/" + list[i]).css('vertical-align', 'middle').css('display', 'inline-block').css('max-width', '100%').css('max-height', '100%');
 			$('#popup_slideshow_img').append(img);
 		}
     	$('[data-popup-open]').on('click', function(e)  {
@@ -1144,6 +1184,7 @@
          			return;
         		}
         	} else if(targeted_popup_class == 'photo_popup') {
+        		$('.photo_popup_footer_current').text('1');
         		var count = 1;
         		$('#prev').on('click', function() {
         			count--;

@@ -17,7 +17,6 @@
 			return false;
 		}
 		if(authenform.authnum.value==authNum){
-			alert("인증완료");
 			setEmail(email1,email2);
 		}
 	}

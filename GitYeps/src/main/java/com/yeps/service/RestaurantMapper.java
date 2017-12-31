@@ -16,11 +16,18 @@ public class RestaurantMapper {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public List<RestaurantDTO> listRest(int start, int end) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("start", start);
-		map.put("end", end);
-		return sqlSession.selectList("listRestaurant", map);
+	public List<RestaurantDTO> listRest(int start,int end,String mode){
+	    Map<String, Object> map = new HashMap<String, Object>();
+	    map.put("start", start);
+	    map.put("end", end);
+	    if(mode.equals("delivery")) {
+	    	return sqlSession.selectList("listRestaurant_delivery",map);
+	    }else if(mode.equals("reserv")) {
+	    	return sqlSession.selectList("listRestaurant_reserv",map);
+	    }else if(mode.equals("takeout")) {
+	    	return sqlSession.selectList("listRestaurant_takeout",map);
+	    }
+	    return sqlSession.selectList("listRestaurant",map);
 	}
 
 	public int insertRest(RestaurantDTO dto) {
@@ -28,10 +35,13 @@ public class RestaurantMapper {
 	}
 
 	public RestaurantDTO getRest(int rnum) {
-		RestaurantDTO dto = sqlSession.selectOne("getRest", rnum);
-		return dto;
+		return sqlSession.selectOne("getRest", rnum);
 	}
-
+	
+	public RestaurantDTO getNewRestaurant() {
+		return sqlSession.selectOne("getNewRestaurant");
+	}
+	
 	public int getCount() {
 		return sqlSession.selectOne("getCount");
 	}
@@ -49,12 +59,13 @@ public class RestaurantMapper {
 	public String review_write_getrname(int rnum) {
 		return sqlSession.selectOne("review_write_getrname", rnum);
 	}
-
-	public List<RestaurantDTO> listRestReview(int start, int end) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("start", start);
-		map.put("end", end);
-		return sqlSession.selectList("listRestaurantReview", map);
+	
+	public RestaurantDTO GetRestaurantName_R(int GETrnum) {
+		return sqlSession.selectOne("GetRestaurantName_R", GETrnum);
+	}
+	
+	public List<RestaurantDTO> review_restaurantIMG() {
+	      return sqlSession.selectList("review_restaurantIMG");
 	}
 
 }

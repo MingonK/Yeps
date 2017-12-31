@@ -1,6 +1,8 @@
 package com.yeps.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,17 +33,13 @@ public class ReviewMapper {
 	}
 
 	public ReviewDTO getReview(int rvnum) {
-		try {
-			return sqlSession.selectOne("getReview", rvnum);
-		 }catch(Exception e) {
-			 return null;
-		 }
+		return sqlSession.selectOne("getReview", rvnum);
 	}
 
 	public int new_BestGradePoint() {
 		return sqlSession.selectOne("new_BestGradePoint");
 	}
-	
+
 	public String getSelectedRestaurant_Rname(int rnum) {
 		return sqlSession.selectOne("getgetSelectedRestaurant_Rname", rnum);
 	}
@@ -49,53 +47,66 @@ public class ReviewMapper {
 	public List<ReviewDTO> getSelectedRestaurant_Rv(int rnum) {
 		return sqlSession.selectList("getSelectedRestaurant_Rv", rnum);
 	}
-	
-//	public List<Integer> getSelectedRestaurant_Rv_M(int rnum){
-//		return sqlSession.selectList("getSelectedRestaurant_Rv_M", rnum);
-//	}
-	
-//	public List<MemberDTO> getSelectedRestaurant_M(int rnum){
-//		return sqlSession.selectList("getSelectedRestaurant_M", rnum);
-//	}
-
 
 	public ReviewDTO review_mylist_info(int NBPmnum) {
 		return sqlSession.selectOne("review_mylist_info", NBPmnum);
 	}
 
-	public int review_mylist_updatedata(int NBPmnum) {
-		return sqlSession.selectOne("review_mylist_updatedata", NBPmnum);
+	public int review_mylist_updatedata(int rvnum) {
+		return sqlSession.update("review_mylist_updatedata", rvnum);
 	}
-	
+
 	public int GetRestaurantName_Rv(int NBPmnum) {
 		return sqlSession.selectOne("GetRestaurantName_Rv", NBPmnum);
 	}
-	
+
 	public List<ReviewDTO> recentReviewInfo() {
-			return sqlSession.selectList("recentReviewInfo");
+		return sqlSession.selectList("recentReviewInfo");
 	}
 
-	public List<ReviewDTO> numList(int reviewIntList){
-		return sqlSession.selectList("numList", reviewIntList);
+	public ReviewDTO numList(int reviewIntList) {
+		return sqlSession.selectOne("numList", reviewIntList);
 	}
-	
-	public List<ReviewDTO> previous_reviews_Num(){
+
+	public List<ReviewDTO> previous_reviews_Num() {
 		return sqlSession.selectList("previous_reviews_Num");
 	}
-	
-	public List<ReviewDTO> previous_Rv(){
+
+	public List<ReviewDTO> previous_Rv() {
 		return sqlSession.selectList("previous_Rv");
 	}
-	
-	public List<ReviewDTO> review_keyword(String SearchKeyword){
+
+	public List<ReviewDTO> review_keyword(String SearchKeyword) {
 		return sqlSession.selectList("review_keyword", SearchKeyword);
 	}
 
-	
-//	public int review_EstimateCount_update(int rvnum) {
-//		return sqlSession.update("review_EstimateCount_update", rvnum);
-//	}
-	
-	
-	
+	public ReviewDTO getLastReview(int rnum) {
+		return sqlSession.selectOne("getLastReview", rnum);
+	}
+
+	public int getReviewCount(int rnum) {
+		return sqlSession.selectOne("getReviewCount", rnum);
+	}
+
+	public int getStarAvg(int rnum) {
+		if (sqlSession.selectOne("getStarAvg", rnum) == null) {
+			return 0;
+		}
+		return sqlSession.selectOne("getStarAvg", rnum);
+	}
+
+	public List<Integer> getSelectedRestaurant_Rv_M(int rnum) {
+		return sqlSession.selectList("getSelectedRestaurant_Rv_M", rnum);
+	}
+
+	public List<ReviewDTO> listRestReview(int start, int end) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		return sqlSession.selectList("listRestaurantReview", map);
+	}
+
+	public String Get_InsertReviewDate() {
+		return sqlSession.selectOne("Get_InsertReviewDate");
+	}
 }

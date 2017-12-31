@@ -48,24 +48,41 @@
 							</div>
 						</div>
 						
-						<c:if test="${!empty myUploadFileList}">
+						<c:if test="${!empty uploadFileList}">
 							<div id="sucess_file_upload_header">
 								<h2>Photos</h2>
 							</div>
 							<div id="user_photo_edit_container">
-							<c:forEach var="fileDTO" items="${myUploadFileList}">
+							<c:forEach var="fileDTO" items="${uploadFileList}" varStatus="status">
 								<div id="user_photo_edit">
 									<div id="user_photo_edit_top">
 										<div id="user_photo_area">
 											<div id="user_photo_box" style="position: relative;">
-												<img src="getImage/${fileDTO.filename}" alt="event_photo" id="photo_box_img" width="168px" height="168px">
+												<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${fileDTO.filename}" alt="event_photo" id="photo_box_img" width="168px" height="168px">
 											</div>
 										</div>
 										<div id="user_photo_write_info">
 											<p>
 												From 
 												<a href="member_details" style="font-weight: bold;">
-													${sessionScope.memberinfo.email}
+													<c:choose>
+														<c:when test="${sessionScope.memberinfo.ismanager eq 'y' ||  sessionScope.memberinfo.ismaster eq 'y'}">
+															<c:if test="${empty registMemberList.get(status.index).nickname}">
+																${registMemberList.get(status.index).email}
+															</c:if>
+															<c:if test="${!empty registMemberList.get(status.index).nickname}">
+																${registMemberList.get(status.index).nickname}
+															</c:if>
+														</c:when>
+														<c:otherwise>
+															<c:if test="${empty sessionScope.memberinfo.nickname}">
+																${sessionScope.memberinfo.email}
+															</c:if>
+															<c:if test="${not empty sessionScope.memberinfo.nickname}">
+																${sessionScope.memberinfo.nickname}
+															</c:if>
+														</c:otherwise>
+													</c:choose>													
 												</a>
 											</p> 
 											<form name="event_photo_delete_form" id="info_photo" action="event_delete_photo" method="post">
@@ -76,29 +93,22 @@
 										</div>
 									</div>
 									
-									<form id="photo_description" method="post" style="margin-bottom: 18px; display: block;" enctype="multipart/form-data">
-										<input type="hidden" name="evnum" id="evnum">
-										<input type="hidden" name="mnum" id="mnum">
-										<input type="hidden" name="filenum" id="filenum">
-										<label>Description</label>
-										<div id="description_container">
-											<textarea rows="4" name="file_content">${fileDTO.file_content}</textarea>
-										</div>
-										<button type="submit" id="Save_button">
-											<span>Save</span>
-										</button>
-									</form>
+<!-- 									<form id="photo_description" method="post" style="margin-bottom: 18px; display: block;" enctype="multipart/form-data"> -->
+<%-- 										<input type="hidden" name="evnum" id="evnum" value="${eventDTO.evnum}"> --%>
+<%-- 										<input type="hidden" name="mnum" id="mnum" value="${sessionScope.mnum}"> --%>
+<%-- 										<input type="hidden" name="filenum" id="filenum" value="${fileDTO.filenum}"> --%>
+<!-- 										<label>Description</label> -->
+<!-- 										<div id="description_container"> -->
+<%-- 											<textarea rows="4" name="file_content">${fileDTO.file_content}</textarea> --%>
+<!-- 										</div> -->
+<!-- 										<button type="submit" id="Save_button"> -->
+<!-- 											<span>Save</span> -->
+<!-- 										</button> -->
+<!-- 									</form> -->
 								</div>
 							</c:forEach>	
 							</div>
 						</c:if>
-						
-						
-						
-<!-- 						<div id="sucess_file_upload_header"> -->
-<!-- 							<h2>Photos</h2> -->
-<!-- 						</div> -->
-<!-- 						<div id="user_photo_edit_cotainer"></div> -->
 					</div>
 				</div>
 			</div>
@@ -111,7 +121,6 @@
  			
 			var data = new FormData();
  			for(var i = 0; i < files.length; i++) {
- 				alert(files[i].name);
  				var pathpoint = files[i].name.lastIndexOf('.');
 				var filepoint = files[i].name.substring(pathpoint+1, files[i].length);
 				var filetype = filepoint.toLowerCase();
@@ -276,10 +285,8 @@
 			})
 		});
 		
-		$(document).on('click', '#Save_button', function(e) {
-			$('#evnum').val('${eventDTO.evnum}');
-			$('#mnum').val('${sessionScope.memberinfo.mnum}');
-			$('#photo_description').attr('action', 'event_updatePro_photo');
-		});
+// 		$(document).on('click', '#Save_button', function(e) {
+// 			$('#photo_description').attr('action', 'event_updatePro_photo');
+// 		});
 	</script>
 <%@ include file="../bottom.jsp"%>
