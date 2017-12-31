@@ -187,28 +187,27 @@ public class ReviewController {
 		return "/qna/restaurant_qna";
 	}
 
-	// @RequestMapping(value="/review_keyword")
-	// public ModelAndView review_keyword(HttpServletRequest req) {
-	// String SearchKeyword = req.getParameter("SearchKeyword");
-	// String rname = req.getParameter("rname");
-	// List<ReviewDTO> SearchedDTO_Rv= reviewMapper.review_keyword(SearchKeyword);
-	//
-	// List<MemberDTO> SearchedDTO_M = new ArrayList<MemberDTO>();
-	// for(int i=0; i<SearchedDTO_Rv.size(); i++) {
-	// int mnum = SearchedDTO_Rv.get(i).getMnum();
-	// SearchedDTO_M.addAll(memberMapper.SearchedDTO_M(mnum));
-	// }
-	//
-	// ModelAndView mav = new ModelAndView();
-	// mav.addObject("rname", rname);
-	// mav.addObject("selectedDataRV", SearchedDTO_Rv); //한 페이지에서 변수명에 따라 다른값보여주기위해서
-	// selectedDataRV적었음
-	// mav.addObject("selectedDataM", SearchedDTO_M); //한 페이지에서 변수명에 따라 다른값보여주기위해서
-	// selectedDataRV적었음
-	// mav.setViewName("review/selectedres");
-	// return mav;
-	//
-	// }
+	@RequestMapping(value="/review_keyword")
+	public ModelAndView review_keyword(HttpServletRequest req) {
+		String SearchKeyword = req.getParameter("SearchKeyword");
+		String rname = req.getParameter("rname");
+		List<ReviewDTO> SearchedDTO_Rv= reviewMapper.review_keyword(SearchKeyword);
+
+		List<MemberDTO> SearchedDTO_M = new ArrayList<MemberDTO>();
+		for(int i=0; i<SearchedDTO_Rv.size(); i++) {
+			int mnum = SearchedDTO_Rv.get(i).getMnum();
+			SearchedDTO_M.addAll(memberMapper.SearchedDTO_M(mnum));
+		}
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("rname", rname);
+		mav.addObject("selectedDataRV", SearchedDTO_Rv); //한 페이지에서 변수명에 따라 다른값보여주기위해서
+		mav.addObject("selectedDataM", SearchedDTO_M); //한 페이지에서 변수명에 따라 다른값보여주기위해서
+		
+		mav.setViewName("restaurant/restaurant_content");
+		return mav;
+
+	}
 
 	// @RequestMapping(value="/review_EstimateCount_update")
 	// public String review_EstimateCount_update(HttpServletRequest req) {
