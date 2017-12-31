@@ -1,7 +1,6 @@
 package com.yeps.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,16 +11,10 @@ import java.util.UUID;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -170,7 +163,7 @@ public class RestaurantController {
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
-			int res=fileMapper.insertFile(dto);
+			int res = fileMapper.insertFile(dto);
 			if(res>0) {
 				msg="사진 등록 성공";
 				url="restaurant_content?rnum="+rnum;
@@ -213,7 +206,7 @@ public class RestaurantController {
 		List<ReviewDTO> LastReview=new ArrayList<ReviewDTO>();
 		for(int i=0;i<list.size();i++) {
 			LastReview.add(reviewMapper.getLastReview(list.get(i).getRnum()));
-			reviewCount.add(reviewMapper.getReviewCount(list.get(i).getRnum()));
+			reviewCount.add(reviewMapper.getRestaurantReviewCount(list.get(i).getRnum()));
 			StarAvg.add(reviewMapper.getStarAvg(list.get(i).getRnum()));
 		}
 		
@@ -255,7 +248,7 @@ public class RestaurantController {
 		List<ReviewDTO> LastReview=new ArrayList<ReviewDTO>();
 		for(int i=0;i<list.size();i++) {
 			LastReview.add(reviewMapper.getLastReview(list.get(i).getRnum()));
-			reviewCount.add(reviewMapper.getReviewCount(list.get(i).getRnum()));
+			reviewCount.add(reviewMapper.getRestaurantReviewCount(list.get(i).getRnum()));
 			StarAvg.add(reviewMapper.getStarAvg(list.get(i).getRnum()));
 		}
 
@@ -273,7 +266,7 @@ public class RestaurantController {
 	
 	@RequestMapping(value="/restaurant_content")
 	public ModelAndView contentRest(@RequestParam int rnum,@RequestParam(defaultValue="1")int curPage){
-		int count = reviewMapper.getReviewCount(rnum);
+		int count = reviewMapper.getRestaurantReviewCount(rnum);
 		int pageScale=10;
 		int blockScale=10;
 		YepsPager YepsPager = new YepsPager(count, curPage,pageScale,blockScale); 
@@ -289,7 +282,7 @@ public class RestaurantController {
 		RestaurantDTO getRest = restaurantMapper.getRest(rnum);//가게 1개 정보
 		List<FileDTO> uploadFileList = restaurantMapper.getFileList(rnum);//가게 업로드 파일
 		int getImageCount=restaurantMapper.getImageCount(rnum);//가게 업로드 파일 갯수
-		int reviewCount=reviewMapper.getReviewCount(rnum);
+		int reviewCount=reviewMapper.getRestaurantReviewCount(rnum);
 		
 		
         List<ReviewDTO> reviewList = reviewMapper.getSelectedRestaurant_Rv(rnum);//가게 리뷰
@@ -327,7 +320,7 @@ public class RestaurantController {
 	    int end = YepsPager.getPageEnd();
 		RestaurantDTO dto = restaurantMapper.getRest(rnum);
 		List<FileDTO> uploadFileList = restaurantMapper.getFileList(rnum);
-		int reviewCount=reviewMapper.getReviewCount(rnum);
+		int reviewCount=reviewMapper.getRestaurantReviewCount(rnum);
 		
 		ModelAndView mav=new ModelAndView();
 		
