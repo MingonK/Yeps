@@ -259,7 +259,7 @@ public class ReviewController {
         MemberDTO mdto = (MemberDTO)session.getAttribute("memberinfo");
        int mnum = mdto.getMnum();
        //reviewcount 구하기 추가 부분
-       int beforeReviewcount = memberMapper.getReviewCount(mnum);
+       int beforeReviewcount = memberMapper.getMemberReviewCount(mnum);
        int nowReviewcount = beforeReviewcount + 1;
        memberMapper.updateReviewCount(mnum, nowReviewcount);
        //===============================

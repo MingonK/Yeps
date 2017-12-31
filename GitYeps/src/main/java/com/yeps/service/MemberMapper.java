@@ -56,11 +56,7 @@ public class MemberMapper {
 	}
 
 	public MemberDTO getMemberProfile(int mnum) {
-		try {
-			return sqlSession.selectOne("getMemberProfile", mnum);
-		} catch (Exception e) {
-			return null;
-		}
+		return sqlSession.selectOne("getMemberProfile", mnum);
 	}
 
 	public boolean checkJumin(MemberDTO dto) {
@@ -198,8 +194,8 @@ public class MemberMapper {
         return sqlSession.update("reviewCount",map);
      }
      
-     public int getReviewCount(int mnum) {
-        return sqlSession.selectOne("getReviewCount",mnum);
+     public int getMemberReviewCount(int mnum) {
+        return sqlSession.selectOne("getMemberReviewCount",mnum);
      }
 
 }

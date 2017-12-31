@@ -84,8 +84,8 @@ public class ReviewMapper {
 		return sqlSession.selectOne("getLastReview", rnum);
 	}
 
-	public int getReviewCount(int rnum) {
-		return sqlSession.selectOne("getReviewCount", rnum);
+	public int getRestaurantReviewCount(int rnum) {
+		return sqlSession.selectOne("getRestaurantReviewCount", rnum);
 	}
 
 	public int getStarAvg(int rnum) {
