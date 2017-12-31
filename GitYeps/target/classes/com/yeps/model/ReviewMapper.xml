@@ -15,7 +15,7 @@
   	</select>
  	
 	<insert id="insertReview" parameterType="ReviewDTO">
-  		insert into yeps_review values (yeps_review_seq.nextval, #{rnum}, #{mnum}, #{content}, sysdate, #{gradepoint}, #{filenum}, #{ip}, #{recentreview}, #{useful}, #{funny}, #{cool})
+  		insert into yeps_review values (yeps_review_seq.nextval, #{rnum}, #{mnum}, #{content}, sysdate, #{gradepoint}, #{filenum}, #{ip}, #{recentreview})
   	</insert>
   	
   	<delete id="deleteReview" parameterType="int">
