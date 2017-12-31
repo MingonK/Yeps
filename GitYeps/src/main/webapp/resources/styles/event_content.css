@@ -101,7 +101,7 @@
 #photo_slideshow_slide {
 	width: 100%; max-height: none; border-top-left-radius: 3px; border-bottom-left-radius: 3px; position: absolute; 
 	top: 0; right: 0; bottom: 0; left: 0; max-width: 100%; background-repeat: no-repeat; background-position: center center; 
-	background-size: cover; transform: translateZ(0);
+	background-size: cover; transform: translateZ(0); background-image: url("https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png");
 }
 
 #photo_slideshow_slide #slideshow_img {
@@ -237,7 +237,7 @@
 }
 
 #event_content_description_bottom_flag_box {
-	padding-left: 579px; vertical-align: bottom; box-sizing: border-box; display: table-cell; white-space: nowrap;
+	vertical-align: bottom; box-sizing: border-box; display: table-cell; white-space: nowrap;
 }
 
 #event_content_description_bottom_flag_icon_action {
@@ -961,6 +961,7 @@
 
 .photo_popup_footer_inner > li > a {
 	color: #999;
+	margin-left: 20px;
 }
 
 .photo_popup_footer_inner > li > a:hover {
@@ -970,8 +971,9 @@
 
 .photo_popup_footer_page_count {
 	display: block;
-    text-align: center;
+    text-align: right;
     font-weight: normal;
+    padding-right: 20px;
 }
 
 #event_reply_user_img {
@@ -1061,16 +1063,60 @@
 	overflow: visible !important;
 }
 
+#event_content_description_bottom_fill {
+	vertical-align: bottom;
+	width: 100%;
+	box-sizing: border-box;
+    display: table-cell;
+    
+}
 
+#event_content_description_bottom_fill a {
+	color: #666;
+	padding: 5px 8px;
+    font-size: 12px;
+    line-height: 1.5em;
+    text-decoration: none !important;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+    cursor: pointer;
+    border: 1px solid;
+    font-weight: bold;
+    text-align: center;
+    border-color: #ccc;
+    color: #666;
+    background-color: #f7f7f7;
+    background: linear-gradient(#fff, #f7f7f7);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    border-radius: 3px;
+    font: inherit;
+}
 
+#event_content_description_bottom_fill a:last-child {
+	display: inline-block;
+    vertical-align: middle;
+    margin-left: 12px;
+    text-decoration: none !important;
+    margin: 0;
+    cursor: pointer;
+    text-align: center;
+}
 
+#event_content_description_bottom_fill a:hover {
+	background: white;
+}
 
-
-
-
-
-
-
+.trashbox, .share {
+	margin: -9px 0;
+	margin-right: 3px !important;
+	fill: currentColor;
+	display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    overflow: hidden;
+    top: -.1em;
+}
 
 
 
