@@ -271,7 +271,7 @@ public class ReviewController {
        
        String Get_InsertReviewDate = reviewMapper.Get_InsertReviewDate();
        
-       rvdto.setRnum(0);
+       rvdto.setRnum(Integer.parseInt(rnum));
        rvdto.setMnum(mnum);
        rvdto.setContent(content);
        rvdto.setGradepoint(Integer.parseInt(gradepoint));
