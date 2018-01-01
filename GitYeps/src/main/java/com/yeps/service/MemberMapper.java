@@ -169,8 +169,8 @@ public class MemberMapper {
 		return sqlSession.selectList("getSelectedRestaurant_M", mnum);
 	}
 
-	public MemberDTO getMemberInfo(int mnum) {
-		return sqlSession.selectOne("getMemberInfo", mnum);
+	public MemberDTO getMemberForEmail(String email) {
+		return sqlSession.selectOne("getMemberForEmail", email);
 	}
 
 	public List<MemberDTO> previous_M(int mnum) {
