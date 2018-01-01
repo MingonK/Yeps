@@ -35,7 +35,7 @@
 									<div class="review_text_star_wrap" align="left">
 										<div class="review_text_star_container" align="left">
 											<fieldset style="vertical-align: middle; display: inline-block; margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit;">
-												<div class="review_write_Gradepoint_div">
+												<div class="review_write_Gradepoint_div" style="cursor: pointer;">
                   										<img id="image1" onmouseover="javascript:show('1')" onclick="javascript:mark('1')" onmouseout="javascript:noshow('1')" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/gradepoint_no_color.png"> 
                   										<img id="image2" onmouseover="javascript:show('2')" onclick="javascript:mark('2')" onmouseout="javascript:noshow('2')" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/gradepoint_no_color.png"> 
                  										<img id="image3" onmouseover="javascript:show('3')" onclick="javascript:mark('3')" onmouseout="javascript:noshow('3')" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/gradepoint_no_color.png"> 
