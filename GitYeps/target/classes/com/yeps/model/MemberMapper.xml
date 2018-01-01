@@ -33,7 +33,7 @@
    </select>
    
    <insert id="insertMember" parameterType="MemberDTO">
-      insert into yeps_member (mnum, name, ssn1, ssn2, email, passwd, joindate, reviewcount, imagecount, ismaster,ismanager, controlcate, controlevent, controlmember, controlstore, controlreview, salt) 
+      insert into yeps_member (mnum, name, ssn1, ssn2, email, passwd, reg_date, reviewcount, imagecount, ismaster,ismanager, controlcate, controlevent, controlmember, controlstore, controlreview, salt) 
       values(yeps_member_seq.nextval,#{name},#{ssn1},#{ssn2},#{email},#{passwd},sysdate,0,0,'n','n','n','n','n','n','n',#{salt})
    </insert>
    
@@ -46,11 +46,11 @@
    </delete>
    
    <select id="loginMember" parameterType="MemberDTO" resultType="MemberDTO">
-        select mnum,email,name,nickname,address,ismaster,ismanager,imagecount,reviewcount,joindate from yeps_member where email = #{email} and passwd = #{passwd}
+        select mnum,email,name,nickname,address,ismaster,ismanager,imagecount,reviewcount,reg_date from yeps_member where email = #{email} and passwd = #{passwd}
     </select>
     
     <select id="getMemberByMnum" parameterType="int" resultType="MemberDTO">
-        select mnum,email,name,nickname,address,imagecount,reviewcount,joindate from yeps_member where mnum = #{mnum}
+        select mnum,email,name,nickname,address,imagecount,reviewcount,reg_date from yeps_member where mnum = #{mnum}
     </select>
     
     <select id="getSaltByEmail" parameterType="MemberDTO" resultType="String">
@@ -87,13 +87,6 @@
       delete from yeps_member where mnum = #{mnum} and passwd=#{passwd}
    </delete>
    
-   
-   
-   
-   <!-- -->
-
-
-
     <select id="mylist_info" parameterType="int" resultType="MemberDTO">
         select * from yeps_member where mnum = #{NBPmnum}
      </select>

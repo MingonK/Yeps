@@ -2,49 +2,40 @@ package com.yeps.controller;
 
 
 
+
 import java.util.Date;
+
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yeps.model.MemberDTO;
 import com.yeps.model.MessageDTO;
-import com.yeps.service.YepsPager;
 import com.yeps.service.EventMapper;
 import com.yeps.service.MemberMapper;
 import com.yeps.service.MessageMapper;
+import com.yeps.service.YepsPager;
 
 @Controller
 public class MessageController {
 
    @Autowired
    private MessageMapper yepsMessageMapper;
-
    @Autowired
    private MemberMapper memberMapper;
-
    @Autowired
    private EventMapper eventMapper;
-
-   private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
    public ModelAndView pagingMessageList(HttpServletRequest req, @RequestParam String lMode, String email) {
       ModelAndView mav = new ModelAndView();
@@ -232,7 +223,7 @@ public class MessageController {
       }
 
       ModelAndView mav = new ModelAndView();
-      String msg = null, lMode = null, receiver = null, email = null, url = null;
+      String msg = null, lMode = null, receiver = null, email = null;
       int res = 0;
       String issue = req.getParameter("issue");
       MemberDTO member = (MemberDTO) req.getSession().getAttribute("memberinfo");
@@ -276,7 +267,6 @@ public class MessageController {
 
          if (sEvnum != null) {
             int evnum = Integer.parseInt(sEvnum);
-            HashMap<String, Object> map = new HashMap<String, Object>();
             String eventname = eventMapper.getEventContent(evnum).getEventname();
 
             String eventReason = req.getParameter("reason_field");
@@ -423,14 +413,13 @@ public class MessageController {
    @RequestMapping(value = "message_moveToLocker")
    public ModelAndView message_moveToLocker(HttpServletRequest req, String[] check) {
       ModelAndView mav = new ModelAndView();
-      String msg = null, lMode = null, url = null;
+      String msg = null, lMode = null;
       MemberDTO member = (MemberDTO) req.getSession().getAttribute("memberinfo");
       if (member == null) {
          mav.setViewName("MainPage");
          return mav;
       }
       String email = member.getEmail();
-      int mnum = member.getMnum();
       if (check == null) {
          msg = "선택된 메시지가 없습니다. 다시 확인하세요.";
          mav.addObject("msg", msg);
@@ -466,7 +455,6 @@ public class MessageController {
       }
       
       String email = member.getEmail();
-      int mnum = member.getMnum();
       if (check == null) {
          msg = "선택된 메시지가 없습니다. 다시 확인하세요.";
          mav.setViewName("historyBack");
