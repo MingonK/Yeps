@@ -197,5 +197,10 @@ public class MemberMapper {
      public int getMemberReviewCount(int mnum) {
         return sqlSession.selectOne("getMemberReviewCount",mnum);
      }
+     
+  // 12월 31일 상우 추가
+ 	public List<MemberDTO> SearchedDTO_M(int mnum) {
+ 		return sqlSession.selectList("SearchedDTO_M", mnum);
+ 	}
 
 }
