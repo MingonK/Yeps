@@ -109,4 +109,9 @@ public class ReviewMapper {
 	public String Get_InsertReviewDate() {
 		return sqlSession.selectOne("Get_InsertReviewDate");
 	}
+
+	// 12월 31일 지원 추가
+	public List<Integer> gethotAndNewReview() {
+		return sqlSession.selectList("gethotAndNewReview");
+	}
 }

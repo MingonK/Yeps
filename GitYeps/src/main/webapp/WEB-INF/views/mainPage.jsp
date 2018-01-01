@@ -38,7 +38,7 @@
 								</li>
 								<li class="mainpage_header_message mainpage_header_top_items">
 									<a href="yeps_message" class="mainpage_header_link">
-										Message
+										Message 
 									</a>
 								</li>
 							</ul>
@@ -661,6 +661,7 @@
 					
 					<div class="mainpage_new_businesses_list">
 					<!-- 3개만 출력하는 반복문일 가능성 높음 -->
+						<c:forEach var="RestaurantDTO" items="${hotAndNewSet}" varStatus="status">
 						<div class="mainpage_new_businesses">
 							<div class="mainpage_new_businesses_card">
 								<div class="mainpage_new_businesses_card_photo">
@@ -676,18 +677,18 @@
 										<div>
 											<span>
 												<a href="#">
-													<span>매장이름1</span>
+													<span>${RestaurantDTO.rname}</span>
 												</a>
 											</span>
 										</div>
 									</h3>
 									
 									<div class="mainpage_new_business_rating">
-										<div class="mainpage_new_business_rating_star">
-											<img class="offscreen" height="303" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png" width="84" style="vertical-align: middle;">
+										<div class="mainpage_review_rating pre_div_star${starAvg.get(status.index)}" title="4.0 star rating">
+											<img class="pre_starimg1" height="303" width="84" alt="4.0 star rating" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/stars.png" >
 										</div>
 										<span class="mainpage_new_business_review_count">
-											리뷰갯수
+											${reviewCount.get(status.index)} reviews
 										</span>
 									</div>
 									
@@ -704,7 +705,7 @@
 									</div>
 									
 									<div class="new_business_store_location">
-										<span>매장 주소 간단히</span>
+										<span>${RestaurantDTO.roadAddrPart1}</span>
 									</div>
 									
 									<p class="new_business_open_date">
@@ -718,136 +719,11 @@
 								</div>
 							</div>
 						</div>
-						
-						
-						
-						
-						<div class="mainpage_new_businesses">
-							<div class="mainpage_new_businesses_card">
-								<div class="mainpage_new_businesses_card_photo">
-									<div class="mainpage_new_businesses_photo_box" style="background-image: url(https://s3-media1.fl.yelpcdn.com/bphoto/sioF_Kn_ZZvhdvLZvV6iUg/l.jpg);">
-										<a href="#" style="display: block;" class="new_businesses_photo_box_link">
-											<img class="photo_box_img" height="400" src="https://s3-media1.fl.yelpcdn.com/bphoto/sioF_Kn_ZZvhdvLZvV6iUg/l.jpg" width="600">
-										</a>
-									</div>
-								</div>
-								
-								<div class="mainpage_new_businesses_card_content">
-									<h3 class="new_businesses_card_content_title">
-										<div>
-											<span>
-												<a href="#">
-													<span>매장이름2</span>
-												</a>
-											</span>
-										</div>
-									</h3>
-									
-									<div class="mainpage_new_business_rating">
-										<div class="mainpage_new_business_rating_star">
-											<img class="offscreen" height="303" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png" width="84" style="vertical-align: middle;">
-										</div>
-										<span class="mainpage_new_business_review_count">
-											리뷰갯수
-										</span>
-									</div>
-									
-									<div class="new_business_price_foodstyle">
-										<!-- 가격표시 없으면 표시 안함 -->
-										<span>
-											<span style="letter-spacing: 1px; white-space: nowrap;">
-												가격범위 표시
-											</span>
-										</span>
-										<span>
-											푸드스타일
-										</span>
-									</div>
-									
-									<div class="new_business_store_location">
-										<span>매장 주소 간단히</span>
-									</div>
-									
-									<p class="new_business_open_date">
-										<span class="icon 18x18_frame" style="width: 18px; height: 18px; fill: currentColor; overflow: hidden;">
-											<svg class="icon_svg" id="18x18_frame">
-												<path d="M11.508 3.743c1.173 2.43-.465 2.27-.696 3.88C10.082 2.758 5.947 1.5 5.947 1.5c2.045 2.697-1.9 4.784-3.63 8.33-1.47 3.016 2.533 5.44 4.67 6.67-2.15-2.993-.563-5.02 1.612-6.793-.81 2.448.5 2.934 1.043 3.944.71-.31 1.028-1.3 1.1-1.79.954 1.31 1.465 2.97-.248 4.64 8.302-3.77 5.977-9.743 1.007-12.752z"></path>
-											</svg>
-										</span>
-										오픈한지 얼마나 됐는지
-									</p>
-								</div>
-							</div>
-						</div>
-						
-						
-						
-						
-						
-						
-						<div class="mainpage_new_businesses">
-							<div class="mainpage_new_businesses_card">
-								<div class="mainpage_new_businesses_card_photo">
-									<div class="mainpage_new_businesses_photo_box" style="background-image: url(https://s3-media1.fl.yelpcdn.com/bphoto/sioF_Kn_ZZvhdvLZvV6iUg/l.jpg);">
-										<a href="#" style="display: block;" class="new_businesses_photo_box_link">
-											<img class="photo_box_img" height="400" src="https://s3-media1.fl.yelpcdn.com/bphoto/sioF_Kn_ZZvhdvLZvV6iUg/l.jpg" width="600">
-										</a>
-									</div>
-								</div>
-								
-								<div class="mainpage_new_businesses_card_content">
-									<h3 class="new_businesses_card_content_title">
-										<div>
-											<span>
-												<a href="#">
-													<span>매장이름3</span>
-												</a>
-											</span>
-										</div>
-									</h3>
-									
-									<div class="mainpage_new_business_rating">
-										<div class="mainpage_new_business_rating_star">
-											<img class="offscreen" height="303" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png" width="84" style="vertical-align: middle;">
-										</div>
-										<span class="mainpage_new_business_review_count">
-											리뷰갯수
-										</span>
-									</div>
-									
-									<div class="new_business_price_foodstyle">
-										<!-- 가격표시 없으면 표시 안함 -->
-										<span>
-											<span style="letter-spacing: 1px; white-space: nowrap;">
-												가격범위 표시
-											</span>
-										</span>
-										<span>
-											푸드스타일
-										</span>
-									</div>
-									
-									<div class="new_business_store_location">
-										<span>매장 주소 간단히</span>
-									</div>
-									
-									<p class="new_business_open_date">
-										<span class="icon 18x18_frame" style="width: 18px; height: 18px; fill: currentColor; overflow: hidden;">
-											<svg class="icon_svg" id="18x18_frame">
-												<path d="M11.508 3.743c1.173 2.43-.465 2.27-.696 3.88C10.082 2.758 5.947 1.5 5.947 1.5c2.045 2.697-1.9 4.784-3.63 8.33-1.47 3.016 2.533 5.44 4.67 6.67-2.15-2.993-.563-5.02 1.612-6.793-.81 2.448.5 2.934 1.043 3.944.71-.31 1.028-1.3 1.1-1.79.954 1.31 1.465 2.97-.248 4.64 8.302-3.77 5.977-9.743 1.007-12.752z"></path>
-											</svg>
-										</span>
-										오픈한지 얼마나 됐는지
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-					
-					<div style="margin-top: 12px!important; text-align: center!important;">
-						<a href="#">더 많은 최신 식당 보기</a>
-					</div>
+						</c:forEach>					
+				</div>
+				
+				<div style="margin-top: 12px!important; text-align: center!important;">
+					<a href="#">더 많은 최신 식당 보기</a>
 				</div>
 			</div>
 		</div>
@@ -862,7 +738,7 @@
 					<div class="mainpage_browes_categories_content">
 						<div class="mainpage_browes_categories_content_partial_wrap">
 							<div class="mainpage_browes_categories_content_unit">
-								<a href="#" class="mainpage_browes_categories_content_link">
+								<a href="restaurant_list" class="mainpage_browes_categories_content_link">
 									<img class="mainpage_browes_categories_content_img"  width="72" src="https://s3-media1.fl.yelpcdn.com/assets/srv0/homepage/80b92cd513f0/assets/img/categories/72x72_restaurants.png">
 									<h3 class="mainpage_browes_categories_content_title">Restaurants</h3>
 								</a>
@@ -1131,7 +1007,7 @@
 			<div class="un_named">
 				<div class="mainpage_home_container_section">
 				<!-- 크기 잘못됨, 다시 체크하면서 수정할 것 -->
-					<div style="margin: 0 -15px; width: 100%; height:auto; overflow: hidden;">
+					<div style="width: 100%; height:auto; overflow: hidden;">
 						<div class="mainpage_review_of_the_day">
 							<div class="review_of_the_day_container">
 								<h3 class="review_of_the_day_title">Review of the Day</h3>
@@ -1141,11 +1017,11 @@
 											<div>
 												<a href="#">
 												<!-- 만약 아이디에 사진 없다면 이거 띄우도록 이프 문! -->
-													<c:if test="${review_of_the_day_userPhoto == null}">
+													<c:if test="${review_of_the_day_reviewDTO.memberDTO.memberPhotoDTO.filename == null}">
 														<img class="review_of_the_day_writer_img" height="60" widgh="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" style="border-radius: 4px;">
 													</c:if>
-													<c:if test="${review_of_the_day_userPhoto != null}">
-														<img class="review_of_the_day_writer_img" height="60" widgh="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${review_of_the_day_userPhoto.filename}" style="border-radius: 4px;">
+													<c:if test="${review_of_the_day_reviewDTO.memberDTO.memberPhotoDTO.filename != null}">
+														<img class="review_of_the_day_writer_img" height="60" widgh="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${review_of_the_day_reviewDTO.memberDTO.memberPhotoDTO.filename}" style="border-radius: 4px;">
 													</c:if>
 												</a>
 											</div>
@@ -1154,7 +1030,7 @@
 										<div class="review_of_the_day_writer_info">
 											<strong style="font-weight: 700;">
 												<a href="#" class="review_of_the_day_writer">
-													${review_of_the_day_memberDTO.email}
+													${review_of_the_day_reviewDTO.memberDTO.email}
 												</a>
 											</strong>
 											<ul class="review_of_the_day_writer_status">												
@@ -1164,14 +1040,14 @@
 															<path d="M13 3H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1.505 9.643l-2.526-1.55L6.526 12.7 7 9.934 5 7.977l2.766-.404L8.97 4.7l1.264 2.873L13 7.977l-2 1.957.495 2.71z"></path>
 														</svg>
 													</span>
-													<b>${review_of_the_day_memberDTO.reviewcount}</b>
+													<b>${review_of_the_day_reviewDTO.memberDTO.reviewcount}</b>
 												</li>
 											</ul>
 											<div class="where_write_review">
 												Wrote a review for
 												<div style="display: inline;">
 													<span>
-														<a href="#" style="font-weight: 700;">
+														<a href="restaurant_content?rnum=${review_of_the_day_restaurantDTO.rnum}&rname=${review_of_the_day_restaurantDTO.rname}" style="font-weight: 700;">
 															${review_of_the_day_restaurantDTO.rname}
 														</a>
 													</span>
@@ -1192,7 +1068,7 @@
 											</div>
 										</div>
 										<span>
-											${review_of_the_day_reviewDTO.joindate} 작성
+											${review_of_the_day_reviewDTO.reg_date} 작성
 										</span>
 									</div>
 									
@@ -1211,93 +1087,93 @@
 							</div>
 						</div>
 						
-						<div class="mainpage_recent_list">
-							<div class="js-fresh-lists">
-								<h3 class="recent_list_title">Recent Lists</h3>
-								<div class="recent_list_wrap_container">
-									<div class="recent_list_wrap">
-										<div class="recent_list_unit">
-											<ul class="recent_list_set">
-											<!-- 3번 반복 !!!!!! -->
-												<li class="recent_list_item">
-													<div class="recent_list_item_block">
-														<div class="recent_list_item_photo_area">
-															<div class="recent_list_item_photo_box">
-																<!-- 등록된 사진이 없다면 !!!!!!!!!!!!! -->
-																<div class="recent_list_item_photo" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png);">
-																	<a href="#" style="display: block;">
-																		<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png" class="recent_list_photo" width="90" height="90">
-																	</a>
-																</div>
-															</div>
-														</div>
+<!-- 						<div class="mainpage_recent_list"> -->
+<!-- 							<div class="js-fresh-lists"> -->
+<!-- 								<h3 class="recent_list_title">Recent Lists</h3> -->
+<!-- 								<div class="recent_list_wrap_container"> -->
+<!-- 									<div class="recent_list_wrap"> -->
+<!-- 										<div class="recent_list_unit"> -->
+<!-- 											<ul class="recent_list_set"> -->
+<!-- 											3번 반복 !!!!!! -->
+<!-- 												<li class="recent_list_item"> -->
+<!-- 													<div class="recent_list_item_block"> -->
+<!-- 														<div class="recent_list_item_photo_area"> -->
+<!-- 															<div class="recent_list_item_photo_box"> -->
+<!-- 																등록된 사진이 없다면 !!!!!!!!!!!!! -->
+<!-- 																<div class="recent_list_item_photo" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png);"> -->
+<!-- 																	<a href="#" style="display: block;"> -->
+<!-- 																		<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png" class="recent_list_photo" width="90" height="90"> -->
+<!-- 																	</a> -->
+<!-- 																</div> -->
+<!-- 															</div> -->
+<!-- 														</div> -->
 														
-														<div class="recent_list_item_info_area">
-															<p class="recent_list_item_title">
-																<a href="#" style="font-weight: 700;">
-																	제목
-																</a>
-															</p>
+<!-- 														<div class="recent_list_item_info_area"> -->
+<!-- 															<p class="recent_list_item_title"> -->
+<!-- 																<a href="#" style="font-weight: 700;"> -->
+<!-- 																	제목 -->
+<!-- 																</a> -->
+<!-- 															</p> -->
 															
-															<p class="recent_list_item_description">
-																내용
-															</p>
+<!-- 															<p class="recent_list_item_description"> -->
+<!-- 																내용 -->
+<!-- 															</p> -->
 															
-															<div class="recent_list_item_owner">
-																By
-																<a href="#">
-																	작성자
-																</a>
-															</div>
-														</div>
-													</div>
-												</li>
+<!-- 															<div class="recent_list_item_owner"> -->
+<!-- 																By -->
+<!-- 																<a href="#"> -->
+<!-- 																	작성자 -->
+<!-- 																</a> -->
+<!-- 															</div> -->
+<!-- 														</div> -->
+<!-- 													</div> -->
+<!-- 												</li> -->
 												
-												<li class="recent_list_item">
-													<div class="recent_list_item_block">
-														<div class="recent_list_item_photo_area">
-															<div class="recent_list_item_photo_box">
-																<!-- 등록된 사진이 없다면 !!!!!!!!!!!!! -->
-																<div class="recent_list_item_photo" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png);">
-																	<a href="#" style="display: block;">
-																		<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png" class="recent_list_photo" width="90" height="90">
-																	</a>
-																</div>
-															</div>
-														</div>
+<!-- 												<li class="recent_list_item"> -->
+<!-- 													<div class="recent_list_item_block"> -->
+<!-- 														<div class="recent_list_item_photo_area"> -->
+<!-- 															<div class="recent_list_item_photo_box"> -->
+<!-- 																등록된 사진이 없다면 !!!!!!!!!!!!! -->
+<!-- 																<div class="recent_list_item_photo" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png);"> -->
+<!-- 																	<a href="#" style="display: block;"> -->
+<!-- 																		<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png" class="recent_list_photo" width="90" height="90"> -->
+<!-- 																	</a> -->
+<!-- 																</div> -->
+<!-- 															</div> -->
+<!-- 														</div> -->
 														
-														<div class="recent_list_item_info_area">
-															<p class="recent_list_item_title">
-																<a href="#" style="font-weight: 700;">
-																	제목
-																</a>
-															</p>
+<!-- 														<div class="recent_list_item_info_area"> -->
+<!-- 															<p class="recent_list_item_title"> -->
+<!-- 																<a href="#" style="font-weight: 700;"> -->
+<!-- 																	제목 -->
+<!-- 																</a> -->
+<!-- 															</p> -->
 															
-															<p class="recent_list_item_description">
-																내용
-															</p>
+<!-- 															<p class="recent_list_item_description"> -->
+<!-- 																내용 -->
+<!-- 															</p> -->
 															
-															<div class="recent_list_item_owner">
-																By
-																<a href="#">
-																	작성자
-																</a>
-															</div>
-														</div>
-													</div>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</div>
+<!-- 															<div class="recent_list_item_owner"> -->
+<!-- 																By -->
+<!-- 																<a href="#"> -->
+<!-- 																	작성자 -->
+<!-- 																</a> -->
+<!-- 															</div> -->
+<!-- 														</div> -->
+<!-- 													</div> -->
+<!-- 												</li> -->
+<!-- 											</ul> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
 								
-								<p style="text-align: center!important; margin-bottom: 12px;">
-									<a href="#">
-										Browse more lists
-									</a>
-								</p>
-							</div>
-						</div>
+<!-- 								<p style="text-align: center!important; margin-bottom: 12px;"> -->
+<!-- 									<a href="#"> -->
+<!-- 										Browse more lists -->
+<!-- 									</a> -->
+<!-- 								</p> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
 					</div>
 				</div>
 				
@@ -1318,11 +1194,11 @@
 											<div class="recent_activity_unit_header_user_profile">
 												<div class="photo_box">
 													<a href="member_details?mnum=${reviewDTO.mnum}">
-														<c:if test="${empty memberPhotoList.get(status.index).filename}">
+														<c:if test="${empty reviewDTO.memberDTO.memberPhotoDTO.filename}">
 															<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" height="30" width="30" style="border-radius: 4px;">
 														</c:if>
-														<c:if test="${!empty memberPhotoList.get(status.index).filename}">
-															<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${memberPhotoList.get(status.index).filename}" height="30" width="30" style="border-radius: 4px;">
+														<c:if test="${!empty reviewDTO.memberDTO.memberPhotoDTO.filename}">
+															<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${reviewDTO.memberDTO.memberPhotoDTO.filename}" height="30" width="30" style="border-radius: 4px;">
 														</c:if>
 														
 													</a>
@@ -1331,11 +1207,11 @@
 											
 											<div class="recent_activity_unit_header_user_profile" style="width: 100%;">
 												<a href="member_details?mnum=${reviewDTO.mnum}">
-													<c:if test="${empty get_mnameList.get(status.index).nickname}">
-														<strong>${get_mnameList.get(status.index).email}</strong>
+													<c:if test="${empty reviewDTO.memberDTO.nickname}">
+														<strong>${reviewDTO.memberDTO.email}</strong>
 													</c:if>
-													<c:if test="${!empty get_mnameList.get(status.index).nickname}">
-														<strong>${get_mnameList.get(status.index).nickname}</strong>
+													<c:if test="${!empty reviewDTO.memberDTO.nickname}">
+														<strong>${reviewDTO.memberDTO.nickname}</strong>
 													</c:if>
 												</a>
 												<br>
@@ -1363,7 +1239,7 @@
 													<span>
 														<a href="restaurant_content?rnum=${reviewDTO.rnum}" style="font-weight: 700;">
 															<span>
-																${get_rnameList.get(status.index).rname}
+																${reviewDTO.restaurantDTO.rname}
 															</span>
 														</a>
 													</span>
@@ -1416,7 +1292,7 @@
 			</div>
 		</div>
 	</div>
-	
+</div>
 	
 	
 	
@@ -1490,7 +1366,7 @@
 	
 	$(document).on('click', '#show_more_activity', function() {
 		var height = parseInt($('.recent_activity_line').css('max-height'));
- 		$('.recent_activity_line').css("max-height", height*2);
+ 		$('.recent_activity_line').css("max-height", height+700);
 	})
 	
 	</script>
