@@ -15,8 +15,12 @@ public class FileMapper {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public int insertFile(FileDTO dto) {
-		return sqlSession.insert("insertFile", dto);
+	public int insertFile(FileDTO dto, String mode) {
+		if(mode.equals("main")) {
+			return sqlSession.insert("insertMainFile", dto);
+		} else {
+			return sqlSession.insert("insertFile", dto);
+		}
 	}
 	
 	public FileDTO getFile(String filename, int filenum) {
@@ -24,10 +28,6 @@ public class FileMapper {
 		map.put("filename", filename);
 		map.put("filenum", filenum);
 		return sqlSession.selectOne("getFile", map);
-	}
-	
-	public int deleteFile(int filenum) {
-		return sqlSession.delete("deleteFile", filenum);
 	}
 	
 	public int deleteFileToFilename(String filename) {
@@ -56,7 +56,49 @@ public class FileMapper {
 		return sqlSession.selectOne("getFYIEventFile", evnum);
 	}
 	
-	public int deleteFileToEvnum(int evnum) {
-		return sqlSession.delete("deleteFileToEvnum", evnum);
+	public int deleteAllFile(int evnum) {
+		return sqlSession.delete("deleteAllFile", evnum);
+	}
+	
+	public boolean isExistEventMainPhoto(int evnum) {
+		try {
+			int num = sqlSession.selectOne("isExistEventMainPhoto", evnum);
+			if (num > 0) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
+	public int deleteFile(String filename, int evnum, String ismainphoto) {
+		if (ismainphoto.equals("y")) {
+			int res = sqlSession.delete("deleteFileToFilename", filename);
+			List<FileDTO> list = sqlSession.selectList("getTargetEventFiles", evnum);
+			if (list.size() > 0) {
+				FileDTO dto = list.get(0);
+				HashMap<String, Object> map = new HashMap<String, Object>();
+				map.put("filenum", dto.getFilenum());
+				map.put("evnum", dto.getEvnum());
+				sqlSession.update("setEventMainPhoto", map);
+			}
+			return res;
+		} else {
+			return sqlSession.delete("deleteFileToFilename", filename);
+		}
+	}
+	
+	public int changeEventMainPhoto(int evnum, int filenum) {
+		int res = sqlSession.update("changeEventMainPhoto", evnum);
+		if (res > 0) {
+			HashMap<String, Integer> map = new HashMap<String, Integer>();
+			map.put("evnum", evnum);
+			map.put("filenum", filenum);
+			return sqlSession.update("setEventMainPhoto", map);
+		} else {
+			return 0;
+		}
 	}
 }

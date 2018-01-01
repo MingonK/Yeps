@@ -65,6 +65,9 @@
 									<c:when test="${eventDTO.event_category eq 'family_kids'}">
 										가족 & 어린이
 									</c:when>
+									<c:when test="${eventDTO.event_category eq 'other'}">
+										기타
+									</c:when>
 								</c:choose>
 							</a>
 						</span>
@@ -1081,12 +1084,14 @@
 					'<div style="padding: 8px; background: white;">',
 						'<div style="display: inline-block;">',
 							'<div id="map_inner_eventphoto" style="float: left;">',
-								'<c:if test="${empty fileList[0].filename}">',
+								'<a href="event_content?evnum=${eventDTO.evnum}">',
+								'<c:if test="${empty photoInMap.filename}">',
 									'<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png" style="outline: none; width: 100px; height: 100px; border-radius: 4px;">',
 								'</c:if>',
-								'<c:if test="${!empty fileList[0].filename}">',
-									'<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${fileList[0].filename}" style="outline: none; width: 100px; height: 100px; border-radius: 4px;">',
+								'<c:if test="${!empty photoInMap.filename}">',
+									'<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photoInMap.filename}" style="outline: none; width: 100px; height: 100px; border-radius: 4px;">',
 								'</c:if>',
+								'</a>',
 							'</div>',
 							'<div id="map_inner_eventname" style="margin-left: 5px; float: left; width: 150px; heght: 100px; font-size: 12px;">',
 								'<a href="event_content?evnum=${eventDTO.evnum}">${eventDTO.eventname}</a>',
@@ -1171,7 +1176,7 @@
 			list.push("${fileDTO.filename}");
 		</c:forEach>
 		for(var i = 0; i < list.length; i++) {
-			var img = $("<img>").attr("src", "https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/" + list[i]).css('vertical-align', 'middle').css('display', 'inline-block').css('max-width', '100%').css('max-height', '100%');
+			var img = $("<img>").attr("src", "https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/" + list[i]).css('position', 'static');
 			$('#popup_slideshow_img').append(img);
 		}
     	$('[data-popup-open]').on('click', function(e)  {
