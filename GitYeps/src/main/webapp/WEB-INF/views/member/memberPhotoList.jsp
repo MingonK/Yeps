@@ -6,9 +6,11 @@
 <head>
    <title>Member Photo List - Yeps</title>
    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
+   <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css"/>"/>
    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/member_update_photo.css?ver=1"/>"/>
    <script src="//code.jquery.com/jquery.min.js"></script>
    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+   <script src="http://malsup.github.com/jquery.cycle2.js"></script>
 </head>
 <body ondragstart="return false">
 <%@ include file="../top.jsp"%>
@@ -90,8 +92,8 @@
 					<ul class="photo-box-grid photo-box-grid--small">
 						<c:forEach var="memberPhotoDTO" items="${memberPhotoList}">
 							<li>
-								<div class="photo-box">
-									<img src="getImage/${memberPhotoDTO.filename}" alt="member_photo" id="photo_box_img" width="150px" height="150px">
+								<div class="photo-box" data-popup-open="photo_popup">
+									<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${memberPhotoDTO.filename}" alt="member_photo" id="photo_box_img" width="150px" height="150px">
 									<c:if test="${memberPhotoDTO.ismainphoto =='y'}">
 										<div class="photo-box-overlay">
 											<div class="photo-box-overlay_caption">메인사진</div>
@@ -163,7 +165,78 @@
       </div>
 </div>
 
+
+
+
+
+
+	<div class="photo_content_popup" data-popup="photo_popup">
+    	<div class="photo_popup-inner" style="z-index: 1;">
+    	    <div id="photo_content_popup_close" data-popup-close="photo_popup">
+    	    	Close
+    	    	<span class="icon popup_close_icon" style="width: 24px; height: 24px; margin-left: 3px !important; fill: currentColor;">
+    	    		<svg class="icon_svg" height="100%" viewBox="0 0 24 24" width="100%">
+    	    			<path d="M17.657 19.07L12 13.415 6.343 19.07 4.93 17.658 10.585 12 4.93 6.343 6.342 4.93 12 10.585l5.657-5.657L19.07 6.34 13.416 12l5.657 5.657-1.413 1.414z"></path>
+    	    		</svg>
+    	    	</span>
+    	    </div>
+			<div class="photo_content_popup_wrapper">
+				<div class="photo_content_popup_container">
+					<div class="photo_content_popup_container">
+						<div class="photo_popup_container">
+							<div class="photo_popup_grid">
+								<div class="photo_popup_grid_main">
+									<span class="ms-arrow msa-previous" id="prev"></span>
+    								<span class="ms-arrow msa-next" id="next"></span>
+									<div id="popup_slideshow_img" class="cycle-slideshow" data-cycle-fx="scrollHorz" data-cycle-prev="#prev" data-cycle-next="#next" data-cycle-timeout="0">
+									</div>
+									
+									<div class="photo_popup_grid_main_photo_area_footer">
+										<ul class="photo_popup_footer_inner">
+											<li>
+												<a href="#" data-popup-close="photo_popup">
+													<span class="icon" style="opacity: 0.7; filter: drop-shadow(0 0 4px rgba(0,0,0,0.3)); margin-right: 3px !important; fill: currentColor; width: 18px; height: 18px;">
+														<svg class="icon_svg" height="100%" width="100%" viewBox="0 0 18 18">
+															<path d="M10 15v-5h5v5h-5zm0-12h5v5h-5V3zm-7 7h5v5H3v-5zm0-7h5v5H3V3z"></path>
+														</svg>
+													</span>
+													Browse all
+												</a>
+											</li>
+											
+											
+											<li>
+												<span class="photo_popup_footer_page_count">
+													<span class="photo_popup_footer_current">
+														1
+													</span>
+													of
+													<span class="photo_popup_footer_total"></span>
+												</span>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+    	    
+
+    	</div>
+	</div>
+
 <script type="text/javascript">
+	var list = new Array();
+	<c:forEach var="memberPhotoDTO" items="${memberPhotoList}">
+		list.push("${memberPhotoDTO.filename}");
+	</c:forEach>
+	for(var i = 0; i < list.length; i++) {
+		var img = $("<img>").attr("src", "https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/" + list[i]).css('vertical-align', 'middle').css('display', 'inline-block').css('max-width', '100%').css('max-height', '100%');
+		$('#popup_slideshow_img').append(img);
+	}
+	
 	$(document).ready(function() {
 		var mode = '${mode}';
 		if(mode == 'successUpdate'){
@@ -197,6 +270,46 @@
 			$(this).parents().submit();
 		});
 		
+		$('[data-popup-open]').on('click', function(e)  {
+        	var targeted_popup_class = jQuery(this).attr('data-popup-open');
+        	$('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+        	
+        	$('.photo_popup_footer_current').text('1');
+        	var count = 1;
+        	
+        	$('#prev').on('click', function() {
+        		count--;
+        		if(count <= 0) {
+        			count = list.length;
+        		}
+        		$('.photo_popup_footer_current').text(count);
+        	})
+        	
+        	$('#next').on('click', function() {
+        		count++;
+        		if(count > list.length) {
+        			count = 1;
+        		}
+        		$('.photo_popup_footer_current').text(count);
+        	})
+        	$('.photo_popup_footer_total').text(list.length);
+        	
+        	
+        	$('body').css('overflow','hidden');
+ 			e.stopPropagation();
+        	e.preventDefault();
+    	});
+ 
+    	//----- CLOSE
+    	$('[data-popup-close]').on('click', function(e)  {
+        	var targeted_popup_class = jQuery(this).attr('data-popup-close');
+        	$('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+        	$('body').css('overflow','auto');
+
+        	e.stopPropagation();
+        	e.preventDefault();
+    	});
 	});
 </script>
+
 <%@include file="../bottom.jsp"%>

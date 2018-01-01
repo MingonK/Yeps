@@ -182,10 +182,19 @@ public class MemberController {
 
 			int res = memberMapper.insertMember(dto);
 			if (res > 0) {
-				msg = "회원등록성공!! 메인페이지로 이동합니다.";
+				msg = "환영합니다.";
 				url = "main";
-
+				MemberDTO newMemberDTO = memberMapper.getMemberForEmail(dto.getEmail());
+				
+				MemberPhotoDTO memberPhotoDTO = new MemberPhotoDTO();
+				memberPhotoDTO.setFilenum(0);
+				memberPhotoDTO.setMnum(newMemberDTO.getMnum());
+				memberPhotoDTO.setFilename("30s.jpg");
+				memberPhotoDTO.setFilesize(707);
+				memberPhotoDTO.setOrigin_filename("30s.jpg");
+				memberPhotoMapper.insertMemberPhoto(memberPhotoDTO, "main");
 				MemberDTO getLoginMemberDTO = memberMapper.loginMember(dto);
+				
 				if (getLoginMemberDTO.getIsmaster().equals("y")) {
 					session.setAttribute("memberinfo", getLoginMemberDTO);
 					msg = "마스터 아이디로 로그인 하셨습니다";

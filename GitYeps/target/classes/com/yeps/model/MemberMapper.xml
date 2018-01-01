@@ -46,11 +46,11 @@
    </delete>
    
    <select id="loginMember" parameterType="MemberDTO" resultType="MemberDTO">
-        select mnum,email,name,nickname,address,ismaster,ismanager,imagecount,reviewcount,reg_date from yeps_member where email = #{email} and passwd = #{passwd}
+        select mnum,email,name,nickname,address,ismaster,ismanager,imagecount,reviewcount,joindate from yeps_member where email = #{email} and passwd = #{passwd}
     </select>
     
     <select id="getMemberByMnum" parameterType="int" resultType="MemberDTO">
-        select mnum,email,name,nickname,address,imagecount,reviewcount,reg_date from yeps_member where mnum = #{mnum}
+        select mnum,email,name,nickname,address,imagecount,reviewcount,joindate from yeps_member where mnum = #{mnum}
     </select>
     
     <select id="getSaltByEmail" parameterType="MemberDTO" resultType="String">
@@ -87,12 +87,19 @@
       delete from yeps_member where mnum = #{mnum} and passwd=#{passwd}
    </delete>
    
+   
+   
+   
+   <!-- -->
+
+
+
     <select id="mylist_info" parameterType="int" resultType="MemberDTO">
         select * from yeps_member where mnum = #{NBPmnum}
      </select>
 
-   <select id="getMemberInfo" parameterType="int" resultType="MemberDTO">
-      select * from yeps_member where mnum= #{mnum}
+   <select id="getMemberForEmail" parameterType="String" resultType="MemberDTO">
+      select * from yeps_member where email = #{email}
    </select>
 
    <select id="previous_M" parameterType="int" resultType="MemberDTO">
@@ -118,7 +125,7 @@
    
    <!-- 12월 29일 추가 -->
 	<select id="SearchedDTO_M" parameterType="int" resultType="MemberDTO"> 
-		select *from yeps_member where mnum= #{mnum} 
+		select * from yeps_member where mnum= #{mnum} 
 	</select>
    
    	<update id="reviewCount" parameterType="java.util.HashMap">

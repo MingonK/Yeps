@@ -175,7 +175,7 @@
                                  <img class="resIMG_img_4" height="303" width="84" alt="3.0 star rating" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/stars.png">
                               </div>
                               <span class="resIMG_span_12">
-                                 ${joindate}
+                                 ${reg_date}
                               </span>
                            </div>
                         </div>
