@@ -344,3 +344,58 @@
 				</div>
 			</div>
 		</div>
+		<script>
+$(document).on("mouseenter","#footer_list_block",function(){
+        $('#header_page_footer_dropdown').attr('id', 'header_page_footer_dropdown_view');
+        $('#footer_list_li_unit_after').attr('id', 'footer_list_li_unit_after_active');
+        $('#header_page_footer_dropdown_wrap').css('pointer-events', 'auto');
+     });
+     
+     $(document).on("mouseleave","#footer_list_block",function(){
+        $('#header_page_footer_dropdown_view').attr('id', 'header_page_footer_dropdown');
+        $('#footer_list_li_unit_after_active').attr('id', 'footer_list_li_unit_after');
+        $('#header_page_footer_dropdown_wrap').css('pointer-events', 'none');
+     });
+     
+     $(document).on("click","#page_header_inputs",function(){
+        $('#main_search_suggestion_container').show();
+        $('#find_label').css('border-radius', '4px 0 0 0');
+     });
+     
+     $(document).on("click","#page_header_location_inputs",function(){
+        $('#main_location_suggestion_container').show();
+     });
+
+     $(document).on("click",".drop-menu-link",function(e){
+        $('#topbar-account-wrap').toggle();
+        e.stopPropagation();
+        e.preventDefault();
+     });
+     
+     $(document).on('click', function(e) {
+    	 if($(e.target).hasClass('drop-menu')) {
+    		 e.stopPropagation();
+    	     e.preventDefault();
+    	 }
+    	 
+  		if(!$(e.target).hasClass('drop-menu')) {
+  			$('#topbar-account-wrap').hide();
+  		}
+  	});
+     
+     $(document).on('click',"html", function(e) {
+    	 if($(e.target).hasClass('drop-menu-link')) {
+         	e.stopPropagation();
+            e.preventDefault();
+         }
+         if(!$(e.target).hasClass("page_header_inputs"))   {
+            $('#main_search_suggestion_container').hide();
+            $('#find_label').css('border-radius', '4px 0 0 4px');
+         }
+         if(!$(e.target).hasClass("page_header_location_inputs")) {
+            $('#main_location_suggestion_container').hide();
+         }
+     });
+     
+     
+</script>
