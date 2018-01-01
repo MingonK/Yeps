@@ -662,7 +662,9 @@ public class MemberController {
 		dto.setPasswd(passwd);
 
 		MemberDTO getLoginMemberDTO = memberMapper.loginMember(dto);
+		
 		if (getLoginMemberDTO != null) {
+			System.out.println("1");
 			if (getLoginMemberDTO.getIsmaster().equals("y")) {
 				session.setAttribute("memberinfo", getLoginMemberDTO);
 				map.put("msg", "마스터 아이디로 로그인 하셨습니다");
@@ -676,6 +678,7 @@ public class MemberController {
 			session.setAttribute("mainPhoto", mainPhoto);
 
 		} else {
+			System.out.println("2");
 			map.put("msg", "비밀번호를 확인해주세요.");
 		}
 		return map;

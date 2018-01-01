@@ -86,23 +86,22 @@
     <div class="login_check_wrap">
        <div class="login_check">
           <div class="login_check_head">
-             <div class="login_check_head_alpha">
+             <div id="login_check_head_beta">
+                <div class="login_check_head_beta_closebtn popup-close" role="button" tabindex="0" data-popup-close="popup-1">×</div>
              </div>
-            <div id="login_check_head_beta">
-               <div class="login_check_head_beta_closebtn popup-close" role="button" tabindex="0" data-popup-close="popup-1">×</div>
-            </div>
-         </div>
-         <div class="login_check_body">
-         
-            <div id="login" align="center"> <!-- 로그인 Div -->
-               <div id="member_header">
-                  <h2>Log In to YEPS</h2>
-                  <p class="subheading">New to YEPS? 
-                  <a class="signup-link u-pseudo-link">Sign up</a>
-                  <p class="legal-copy">By logging in, you agree to YEPS 
-                  <a class="legal-link" href="https://www.yelp.com/static?p=tos">Terms of Service</a>
-                     and <a class="legal-link" href="/tos/privacy_en_us_20160131">Privacy Policy</a>.
-                  </p>
+          </div>
+          <div class="login_check_body">
+          
+        <!--     로그인 Div      -->
+             <div id="login" align="center"> 
+                <div id="member_header">
+                   <h2>Log In to YEPS</h2>
+                   <p class="subheading">New to YEPS? 
+                   <a class="signup-link u-pseudo-link">Sign up</a>
+                   <p class="legal-copy">By logging in, you agree to YEPS 
+                   <a class="legal-link" href="https://www.yelp.com/static?p=tos">Terms of Service</a>
+                      and <a class="legal-link" href="/tos/privacy_en_us_20160131">Privacy Policy</a>.
+                   </p>
                </div>
    
                <div id="member_body">
@@ -302,16 +301,12 @@ $(function() {
    function openwindow() {
       window.open("guidelines","guideview","channelmode=no, directoryies=no, width=500, height=520, status=no, scrollbars=yes, location=no, toolbar=no, menubar=no, resizable=no")
    }
-
-   
    
    var star = '${star}';
-   
    $(document).ready(function() {   
       show(star)
       document.review_writeF.gradepoint.value = star;
    });
-   
 
    function show(gradepoint) {
       var i;
@@ -326,7 +321,7 @@ $(function() {
 
          var e = document.getElementById('gradepointText');
          var stateMsg;
-
+         
          for (i = 1; i <= gradepoint; i++) {
             image = 'image' + i;
             el = document.getElementById(image);
