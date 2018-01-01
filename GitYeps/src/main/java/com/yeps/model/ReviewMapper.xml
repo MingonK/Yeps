@@ -146,7 +146,7 @@
         		, P.ismainphoto
         from	yeps_review R, yeps_member M, yeps_member_photos P
         where	R.mnum = M.mnum and R.mnum = P.mnum and R.rvnum = (select max(rvnum) from yeps_review where gradepoint=(select max(gradepoint) from yeps_review))
-        and		R.mnum = #{mnum}
+        and		P.ismainphoto = 'y' and R.mnum = #{mnum} 
   	</select>
   	
   	
@@ -187,10 +187,9 @@
         		, M.reviewcount
         		, M.nickname
         		, P.filename
-        		, P.ismainphoto
         		, RT.rname
         from	yeps_review R, yeps_member M, yeps_member_photos P, yeps_restaurant RT
-        where	R.mnum = M.mnum and R.mnum = P.mnum and R.rnum = RT.rnum
+        where	R.mnum = M.mnum and R.mnum = P.mnum and R.rnum = RT.rnum and P.ismainphoto = 'y'
         order by R.rvnum desc
 	</select>
    
