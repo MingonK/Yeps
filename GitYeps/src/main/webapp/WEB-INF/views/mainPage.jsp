@@ -1006,11 +1006,14 @@
 		<div class="under_review_content_container">
 			<div class="un_named">
 				<div class="mainpage_home_container_section">
-				<!-- 크기 잘못됨, 다시 체크하면서 수정할 것 -->
 					<div style="width: 100%; height:auto; overflow: hidden;">
 						<div class="mainpage_review_of_the_day">
 							<div class="review_of_the_day_container">
 								<h3 class="review_of_the_day_title">Review of the Day</h3>
+								<c:if test="${empty review_of_the_day_reviewDTO}">
+									등록된 리뷰가 없습니다.
+								</c:if>
+								<c:if test="${!empty review_of_the_day_reviewDTO}">
 								<div class="review_of_the_day_content">
 									<div class="review_of_the_day_writer_container">
 										<div class="review_of_the_day_writer_photo_box">
@@ -1076,6 +1079,7 @@
 										${fn:replace(review_of_the_day_reviewDTO.content,crcn,br)}
 									</p>
 								</div>
+								</c:if>
 								
 								<p style="text-align: center!important; margin-bottom: 12px;">
 									<a href="#">
