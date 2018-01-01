@@ -240,12 +240,12 @@
 										<a href="yeps_message" class="header-nav_link" id="messages-icon" data-analytics-label="messages_icon">
                                  			<span aria-label="Messages" style="width: 24px; height: 24px;" class="icon icon--24-speech icon--size-24 icon--white icon--fallback-inverted">
                                      			<svg class="icon_svg">
-                                         			<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#24x24_speech">
-                                             			<svg id="24x24_speech" height="100%" viewBox="0 0 24 24" width="100%">
+                                         		<!-- 	<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#24x24_speech">
+                                             			<svg id="24x24_speech" height="100%" viewBox="0 0 24 24" width="100%"> -->
                                                  			<path d="M18 3H6C4.34 3 3 4.34 3 6v7c0 1.66 1.34 3 3 3h2v5l5-5h5c1.66 0 3-1.34 3-3V6c0-1.66-1.34-3-3-3z"></path>
                                              			</svg>
-                                         			</use>
-                                    			</svg>
+                                         		<!-- 	</use>
+                                    			</svg> -->
                                  			</span>
                                				<c:if test="${ not empty sessionScope.noneCount && sessionScope.noneCount > 0}">
                                  				<span class="ybadge ybadge--notification ">${sessionScope.noneCount}</span>
