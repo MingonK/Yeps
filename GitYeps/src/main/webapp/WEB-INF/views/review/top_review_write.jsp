@@ -16,7 +16,7 @@
              <div class="review_template_write_div4">
                 <div class="review_template_write_div5">
                    <div class="review_template_write_div6">
-                      <a class="review_template_write_a_3" href="#">
+                      <a class="review_template_write_a_3" href="main">
                          Yelp
                       </a>   
                    </div>
