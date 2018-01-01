@@ -513,7 +513,7 @@
 								</li>
 								<li id="footer_list_li_review">
 									<div>
-										<a href="#" id="footer_list_li_unit"> 
+										<a href="review_restaurantIMG" id="footer_list_li_unit"> 
 											Write a Review
 										</a>
 									</div>

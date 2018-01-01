@@ -28,7 +28,7 @@
 					
 					
 					<div>
-						<form name="review_writeF" action="review_insert?rname=${rname}&rnum=${rnum}" method="post"
+						<form name="review_writeF" action="review_insert?rname=${rname}&rnum=${rnum}&mode=${mode}" method="post"
            						onsubmit="return ContentAndGradepointCheck()">
 							<div>
 								<div class="review_input">

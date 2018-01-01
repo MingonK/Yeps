@@ -219,14 +219,16 @@ public class ReviewController {
 	
 	@RequestMapping(value="/review_write")
     public ModelAndView review_write(HttpServletRequest req) {
+	   ModelAndView mav = new ModelAndView();
        String rnum = req.getParameter("rnum");
+       String mode = req.getParameter("mode");
        String rname = restaurantMapper.review_write_getrname(Integer.parseInt(rnum));
        System.out.println("review_write에서의 rname출력:" + rname);
        String star = req.getParameter("star");
        
        //★EDIT부분★ 위에 받아온 파라미터값 rnum을 통해서 방금 작성한 리뷰의 정보들을 가져와서 write페이지에 뿌려주면됨. 
-       
-       ModelAndView mav = new ModelAndView();
+       System.out.println(mode);
+       mav.addObject("mode", mode);
        mav.addObject("rnum", rnum);
        mav.addObject("rname", rname);
        mav.addObject("star", star);
@@ -243,6 +245,7 @@ public class ReviewController {
        System.out.println("rlist 출력1" + rlist);
        ModelAndView mav = new ModelAndView();
        mav.addObject("rlist", rlist);
+       mav.addObject("set", "review");
        mav.setViewName("review/restaurantIMG");
        return mav;
     }
@@ -256,13 +259,21 @@ public class ReviewController {
        //로그인했을때의 그 이름을 통해서 나머지 값들을 꺼내서 보여줘야함  
        ReviewDTO rvdto = new ReviewDTO();
        
+       String mode = req.getParameter("mode");//수정인지 처음 쓰기인지 구분하기 2017.12.31
+       
         MemberDTO mdto = (MemberDTO)session.getAttribute("memberinfo");
        int mnum = mdto.getMnum();
+       System.out.println(mode);
        //reviewcount 구하기 추가 부분
+       int nowReviewcount = 0;
        int beforeReviewcount = memberMapper.getMemberReviewCount(mnum);
-       int nowReviewcount = beforeReviewcount + 1;
+       
+       if(mode.equals("write")) {//리뷰쓰기 일때
+       nowReviewcount = beforeReviewcount + 1;
        memberMapper.updateReviewCount(mnum, nowReviewcount);
+       }
        //===============================
+  
        String name = mdto.getName();
        String rnum = req.getParameter("rnum");
        String rname = req.getParameter("rname");
@@ -291,9 +302,15 @@ public class ReviewController {
        
        if(res > 0) {
           mav.addObject("rnum", rnum);
+          System.out.println("$");
           //reviewcount 담아주기 ============================
-          mdto.setReviewcount(nowReviewcount);
-          mav.addObject("reviewcount", nowReviewcount);
+          if(mode.equals("update")) {
+        	  System.out.println("2 " + beforeReviewcount );
+              mdto.setReviewcount(beforeReviewcount);
+          }else if(mode.equals("write")) {
+        	  System.out.println("3 " + nowReviewcount );
+        	  mdto.setReviewcount(nowReviewcount);
+          }
           //===========================================
           mav.addObject("name", name);
           mav.addObject("rname", rname);
