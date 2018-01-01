@@ -410,7 +410,7 @@
 											</a>									
 										</div>
 									</c:if>
-									<c:if test="${fileDTO.filename != 'nothing'}">
+									<c:if test="${fileDTO.filename != 'nothing' && fileDTO.ismainphoto == 'y'}">
 										<div class="event_list_photo_box" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${fileDTO.filename});">
 											<a href="event_content?evnum=${eventDTO.evnum}">
 												<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${fileDTO.filename}" height="300" width="300" class="event_list_photo_box_img">

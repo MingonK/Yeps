@@ -163,7 +163,7 @@ public class RestaurantController {
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
-			int res = fileMapper.insertFile(dto);
+			int res = fileMapper.insertFile(dto, "main");
 			if(res>0) {
 				msg="사진 등록 성공";
 				url="restaurant_content?rnum="+rnum;
