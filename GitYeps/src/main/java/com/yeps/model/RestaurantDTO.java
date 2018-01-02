@@ -6,7 +6,7 @@ public class RestaurantDTO {
 	private int cnum;
 	private String rname;
 	private String zipNo ;
-	private String filename;
+	private String rest_filename;
 	private String roadAddrPart1;
 	private String addrDetail;
 	private String roadAddrPart2;
@@ -62,11 +62,11 @@ public class RestaurantDTO {
 	public void setZipNo(String zipNo) {
 		this.zipNo = zipNo;
 	}
-	public String getFilename() {
-		return filename;
+	public String getRest_filename() {
+		return rest_filename;
 	}
-	public void setFilename(String filename) {
-		this.filename = filename;
+	public void setRest_filename(String rest_filename) {
+		this.rest_filename = rest_filename;
 	}
 	public String getRoadAddrPart1() {
 		return roadAddrPart1;

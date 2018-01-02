@@ -150,7 +150,7 @@
   	</select>
   	
   	
-  	<resultMap type="reviewDTO" id="recentReviewMap">
+  	<resultMap type="ReviewDTO" id="recentReviewMap">
   		<id column="rvnum" property="rvnum"/>
 		<result column="rnum" property="rnum"></result>
 		<result column="content" property="content"></result>
@@ -172,6 +172,7 @@
 		<association javaType="RestaurantDTO" property="restaurantDTO">
 			<id column="rnum" property="rnum"></id>
 			<result column="rname" property="rname"></result>
+			<result column="rest_filename" property="rest_filename"></result>
 		</association>
   	</resultMap>
    
@@ -188,6 +189,7 @@
         		, M.nickname
         		, P.filename
         		, RT.rname
+        		, RT.rest_filename
         from	yeps_review R, yeps_member M, yeps_member_photos P, yeps_restaurant RT
         where	R.mnum = M.mnum and R.mnum = P.mnum and R.rnum = RT.rnum and P.ismainphoto = 'y'
         order by R.rvnum desc

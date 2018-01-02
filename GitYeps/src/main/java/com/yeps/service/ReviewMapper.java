@@ -49,7 +49,7 @@ public class ReviewMapper {
 	}
 
 	public ReviewDTO review_mylist_info(int NBPmnum) {
-		return sqlSession.selectOne("review_mylist_info", NBPmnum);
+		return sqlSession.selectOne("review_mylist_info", NBPmnum); 
 	}
 
 	public int review_mylist_updatedata(int rvnum) {

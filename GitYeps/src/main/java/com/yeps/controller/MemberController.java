@@ -182,8 +182,9 @@ public class MemberController {
 
 			int res = memberMapper.insertMember(dto);
 			if (res > 0) {
-				msg = "환영합니다.";
+				msg = "회원등록성공!! 메인페이지로 이동합니다.";
 				url = "main";
+				
 				MemberDTO newMemberDTO = memberMapper.getMemberForEmail(dto.getEmail());
 				
 				MemberPhotoDTO memberPhotoDTO = new MemberPhotoDTO();
@@ -193,8 +194,8 @@ public class MemberController {
 				memberPhotoDTO.setFilesize(707);
 				memberPhotoDTO.setOrigin_filename("30s.jpg");
 				memberPhotoMapper.insertMemberPhoto(memberPhotoDTO, "main");
+
 				MemberDTO getLoginMemberDTO = memberMapper.loginMember(dto);
-				
 				if (getLoginMemberDTO.getIsmaster().equals("y")) {
 					session.setAttribute("memberinfo", getLoginMemberDTO);
 					msg = "마스터 아이디로 로그인 하셨습니다";
@@ -338,7 +339,7 @@ public class MemberController {
 				url = "main";
 			} else {
 				session.setAttribute("memberinfo", getLoginMemberDTO);
-				mav.setViewName("mainPage");
+				mav.setViewName("redirect: main");
 				MemberPhotoDTO mainPhoto = memberPhotoMapper.getMemberMainPhoto(getLoginMemberDTO.getMnum());
 				session.setAttribute("mainPhoto", mainPhoto);
 				return mav;
@@ -671,9 +672,7 @@ public class MemberController {
 		dto.setPasswd(passwd);
 
 		MemberDTO getLoginMemberDTO = memberMapper.loginMember(dto);
-		
 		if (getLoginMemberDTO != null) {
-			System.out.println("1");
 			if (getLoginMemberDTO.getIsmaster().equals("y")) {
 				session.setAttribute("memberinfo", getLoginMemberDTO);
 				map.put("msg", "마스터 아이디로 로그인 하셨습니다");
@@ -687,7 +686,6 @@ public class MemberController {
 			session.setAttribute("mainPhoto", mainPhoto);
 
 		} else {
-			System.out.println("2");
 			map.put("msg", "비밀번호를 확인해주세요.");
 		}
 		return map;

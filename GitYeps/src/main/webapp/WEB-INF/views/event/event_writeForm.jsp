@@ -173,9 +173,9 @@
 
 
 					<div style="width: 100%; border-bottom: 1px solid #e6e6e6; margin-bottom: 10px;">
-						<label>매장 주소</label><small style="margin-left: 10px;color: #999;">등록 당시 주소 상세기입(매장 명 포함), 자동으로 이벤트와 연결됩니다.</small>
+						<label>매장 주소</label><small style="margin-left: 10px;color: #999;">새로운 주소 입력 시 해당 주소로 등록됩니다.</small>
 						<div style="margin: 6px 0 18px;">
-							<input type="text" name="store_address" placeholder="주소를 입력하세요." onclick="javascript:jusoPop()" style="width: 100%; padding-left: 10px; height: 30px; border: 1px solid #999; border-radius: 3px; font-size: 14px;">
+							<input type="text" name="store_address" placeholder="등록 당시 주소 상세기입(매장 명 포함), 자동으로 이벤트와 연결됩니다." onclick="javascript:jusoPop()" style="width: 100%; padding-left: 10px; height: 30px; border: 1px solid #999; border-radius: 3px; font-size: 14px;">
 							<input type="hidden" name="zipNo">
 							<input type="hidden" name="roadAddrPart1">
 							<input type="hidden" name="roadAddrPart2">

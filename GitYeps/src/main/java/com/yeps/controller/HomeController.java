@@ -54,19 +54,13 @@ public class HomeController {
 		List<Integer> starAvg = new ArrayList<Integer>();
 
 		Iterator<RestaurantDTO> it = hotAndNewSet.iterator();
-		
-		int count = 0;
 		while(it.hasNext()) {
 			RestaurantDTO dto = it.next();
-			if(count < 3) {
 				reviewCount.add(reviewMapper.getRestaurantReviewCount(dto.getRnum()));
 				starAvg.add(reviewMapper.getStarAvg(dto.getRnum()));
-			} else {
-				break;
-			}
-			count++;
 		}
 		
+//		restaurantMapper.getRandomImage();
 		mav.addObject("recentReviewInfoList", recentReviewInfoList);
 		mav.addObject("review_of_the_day_restaurantDTO", review_of_the_day_restaurantDTO);
 		mav.addObject("review_of_the_day_reviewDTO", review_of_the_day_reviewDTO);
@@ -105,17 +99,10 @@ public class HomeController {
 		List<Integer> starAvg = new ArrayList<Integer>();
 
 		Iterator<RestaurantDTO> it = hotAndNewSet.iterator();
-		
-		int count = 0;
 		while(it.hasNext()) {
 			RestaurantDTO dto = it.next();
-			if(count < 3) {
-				reviewCount.add(reviewMapper.getRestaurantReviewCount(dto.getRnum()));
-				starAvg.add(reviewMapper.getStarAvg(dto.getRnum()));
-			} else {
-				break;
-			}
-			count++;
+			reviewCount.add(reviewMapper.getRestaurantReviewCount(dto.getRnum()));
+			starAvg.add(reviewMapper.getStarAvg(dto.getRnum()));
 		}
 
 		mav.addObject("recentReviewInfoList", recentReviewInfoList);

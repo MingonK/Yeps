@@ -71,5 +71,18 @@ public class RestaurantMapper {
 	public RestaurantDTO getHotAndNewRestaurant(int rnum) {
 		return sqlSession.selectOne("getHotAndNewRestaurant", rnum);
 	}
-
+	
+	
+	// -------------- 이벤트랑 레스토랑 연결 ---------------------------
+	public RestaurantDTO findRestaurant(String zipNo, String roadAddrPart1, String roadAddrPart2, String addrDetail) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("zipNo", zipNo);
+		map.put("roadAddrPart1", roadAddrPart1);
+		map.put("roadAddrPart2", roadAddrPart2);
+		map.put("addrDetail", addrDetail);
+		return sqlSession.selectOne("findRestaurant", map);
+	}
+	
+	// 메인페이지 랜덤 사진 가져오기
+	
 }

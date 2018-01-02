@@ -144,7 +144,7 @@
 	
 	
 	<div class="loading_wapper">
-		<div class="loading_img" style="top: 400; left: 500;">
+		<div class="loading_img" style="top: 300; left: 650;">
 		</div>
 	</div>
 	
@@ -194,26 +194,24 @@
  				processData: false,
  				contentType: false,
  				success: function(responseData) {
- 						if(responseData.failed) {
- 							alert("업로드할 수 없는 파일이 존재합니다.");
- 							return false;
- 						} else if (responseData.created_fail) {
- 							alert(responseData.created_fail);
- 							return false;
- 						} else if (responseData.upload_failed) {
- 							alert(responseData.upload_failed)
- 							return false;
- 						}
+ 					if(responseData.failed) {
+ 						alert("업로드할 수 없는 파일이 존재합니다.");
+ 						return false;
+ 					} else if (responseData.created_fail) {
+ 						alert(responseData.created_fail);
+ 						return false;
+ 					} else if (responseData.upload_failed) {
+ 						alert(responseData.upload_failed)
+ 						return false;
+ 					} else if (responseData.update) {
+ 						alert(responseData.update);
+ 						$('#result_photo_status_text').text('사진을 등록했습니다.');
+						$('#result_photo_status_text').show();
+ 					}
+ 	 				$('#sucess_file_upload_header').show();
+ 	 				$('#user_photo_edit_container').show();
  					var uploadFiles = responseData.fileList;
  					location.reload();
- 					
- 					$('#result_photo_status_text').hide();
- 					$('#sucess_file_upload_header').show();
- 					$('#user_photo_edit_container').show();
- 				},
- 				error: function() {
- 					alert("아작스 에러");
- 					return false;
  				}
  			});		
  		}
@@ -294,26 +292,24 @@
 						processData: false,
 						contentType: false,
 						success: function(responseData) {
-								if(responseData.failed) {
-									alert("업로드할 수 없는 파일이 존재합니다.");
-									return false;
-								} else if (responseData.created_fail) {
-									alert(responseData.created_fail);
-									return false;
-								} else if (responseData.upload_failed) {
-									alert(responseData.upload_failed)
-									return false;
-								}
-							var uploadFiles = responseData.fileList;
-							window.location.reload();
-							
-							$('#result_photo_status_text').hide();
-							$('#sucess_file_upload_header').show();
-							$('#user_photo_edit_container').show();
-						},
-						error: function() {
-							alert("아작스 에러");
+							if(responseData.failed) {
+								alert("업로드할 수 없는 파일이 존재합니다.");
+								return false;
+							} else if (responseData.created_fail) {
+								alert(responseData.created_fail);
 							return false;
+							} else if (responseData.upload_failed) {
+								alert(responseData.upload_failed)
+								return false;
+							} else if (responseData.update) {
+		 						alert(responseData.update);
+		 						$('#result_photo_status_text').text('사진을 등록했습니다.');
+								$('#result_photo_status_text').show();
+		 					}
+							$('#sucess_file_upload_header').show();
+		 	 				$('#user_photo_edit_container').show();
+		 					var uploadFiles = responseData.fileList;
+		 					location.reload();
 						}
 					});
 				});

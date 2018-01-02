@@ -214,7 +214,7 @@
 											<div class="midea-avata"style="border-right: 12px solid transparent; border-left: none;">
 												<div class="photo-box" >
 													<a href="restaurant_content?rnum=${dto.rnum }" class="js-analytics-click" style="color: #0073bb;text-decoration: none;    cursor: pointer;">
-														<img width="90px" height="90px" src="getImage/${dto.filename }" style="outline: none;border-radius: 4px;vertical-align: middle;">	
+														<img width="90px" height="90px" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${dto.filename }" style="outline: none;border-radius: 4px;vertical-align: middle;">	
         											</a>
 												</div>
 											</div>

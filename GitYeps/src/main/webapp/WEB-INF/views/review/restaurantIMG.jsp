@@ -175,7 +175,7 @@
                                  <img class="resIMG_img_4" height="303" width="84" alt="3.0 star rating" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/stars.png">
                               </div>
                               <span class="resIMG_span_12">
-                                 ${reg_date}
+                                 ${joindate}
                               </span>
                            </div>
                         </div>
@@ -194,7 +194,7 @@
                            </span>
                            Add to list
                         </a>
-                        <a class="resIMG_a_5" href="review_write?rnum=${rnum}&mode='update'">
+                        <a class="resIMG_a_5" href="review_write?rnum=${rnum}">
                            <span class="resIMG_span_14">
                               <svg class="resIMG_svg_7">
                                  <path d="M15.96 4.505a2.094 2.094 0 0 0-.577-1.89 2.103 2.103 0 0 0-2.973.002l-1.487 1.487-7.436 7.436L2 16l4.46-1.487 7.437-7.436 1.487-1.487c.308-.308.5-.688.577-1.085zm-10.067 9.09l-2.23.742.743-2.23 7.26-7.26 1.487 1.487-7.26 7.26z"></path>
@@ -340,7 +340,6 @@
                                </ul>
                                     <input type="hidden" name="rnum" value="${dto.rnum}">   
                                     <input type="hidden" name="star" class="star">
-                                    <input type="hidden" name="mode" value="write">
                            </fieldset>
                           </form>
                         </div>

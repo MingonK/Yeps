@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<insert id="insertRestaurant" parameterType="RestaurantDTO">
-		insert into yeps_restaurant values(yeps_restaurant_seq.nextval,0,#{rname},#{filename},#{zipNo},#{roadAddrPart1},#{addrDetail},#{roadAddrPart2},
+		insert into yeps_restaurant values(yeps_restaurant_seq.nextval,0,#{rname},#{rest_filename},#{zipNo},#{roadAddrPart1},#{addrDetail},#{roadAddrPart2},
 		#{raddress},#{hp2},#{hp3},#{foodstyle},#{mon, jdbcType=VARCHAR},#{tue, jdbcType=VARCHAR},#{wed, jdbcType=VARCHAR},#{thu, jdbcType=VARCHAR},
 		#{fri, jdbcType=VARCHAR},#{sat, jdbcType=VARCHAR},#{sun,jdbcType=VARCHAR},
 		#{reststyle},#{reserv},#{delivery},#{takeout},#{parking},#{kidszone},#{groupreserv},#{noise},#{alcohol},#{waiting},
@@ -67,6 +67,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      <!-- 12월 31일 지원 추가 -->
 	<select id="getHotAndNewRestaurant" resultType="RestaurantDTO">
 		select * from yeps_restaurant where rnum=#{rnum}
+	</select>
+	
+	<!-- 이벤트랑 연결 -->
+	<select id="findRestaurant" parameterType="java.util.HashMap" resultType="RestaurantDTO">
+		select * from yeps_restaurant where zipNo = #{zipNo} and roadAddrPart1 = #{roadAddrPart1} and roadAddrPart2 = #{roadAddrPart2} and addrDetail = #{addrDetail}
 	</select>
 </mapper>
 

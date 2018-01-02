@@ -58,4 +58,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    <select id="isExistEventMainPhoto" parameterType="int" resultType="int">
       select count(*) from yeps_files where evnum = #{evnum} and ismainphoto = 'y'
    </select>
+   
+	<select id="getPagedEventFiles" parameterType="java.util.HashMap" resultType="FileDTO">
+		select * from (select rownum rn, A.* from (select * from yeps_files where evnum = #{evnum} order by filenum desc)A) where rn between #{start} and #{end}
+	</select>
 </mapper>

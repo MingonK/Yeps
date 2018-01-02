@@ -11,7 +11,6 @@
 <html>
 <head>
 	<title>Yeps!</title>
-	<link rel="shortcut icon" type="image⁄x-icon" href="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/gradepoint_yes_color.png">
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/mainPage.css"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css"/>"/>
@@ -665,11 +664,20 @@
 						<div class="mainpage_new_businesses">
 							<div class="mainpage_new_businesses_card">
 								<div class="mainpage_new_businesses_card_photo">
-									<div class="mainpage_new_businesses_photo_box" style="background-image: url(https://s3-media1.fl.yelpcdn.com/bphoto/sioF_Kn_ZZvhdvLZvV6iUg/l.jpg);">
+								<c:if test="${empty RestaurantDTO.rest_filename}">
+									<div class="mainpage_new_businesses_photo_box" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png);">
 										<a href="#" style="display: block;" class="new_businesses_photo_box_link">
-											<img class="photo_box_img" height="400" src="https://s3-media1.fl.yelpcdn.com/bphoto/sioF_Kn_ZZvhdvLZvV6iUg/l.jpg" width="600">
+											<img class="photo_box_img" height="400" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png" width="600">
 										</a>
 									</div>
+								</c:if>
+								<c:if test="${!empty RestaurantDTO.rest_filename}">
+									<div class="mainpage_new_businesses_photo_box" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${RestaurantDTO.rest_filename});">
+										<a href="#" style="display: block;" class="new_businesses_photo_box_link">
+											<img class="photo_box_img" height="400" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${RestaurantDTO.rest_filename}" width="600">
+										</a>
+									</div>
+								</c:if>
 								</div>
 								
 								<div class="mainpage_new_businesses_card_content">
@@ -714,7 +722,7 @@
 												<path d="M11.508 3.743c1.173 2.43-.465 2.27-.696 3.88C10.082 2.758 5.947 1.5 5.947 1.5c2.045 2.697-1.9 4.784-3.63 8.33-1.47 3.016 2.533 5.44 4.67 6.67-2.15-2.993-.563-5.02 1.612-6.793-.81 2.448.5 2.934 1.043 3.944.71-.31 1.028-1.3 1.1-1.79.954 1.31 1.465 2.97-.248 4.64 8.302-3.77 5.977-9.743 1.007-12.752z"></path>
 											</svg>
 										</span>
-										오픈한지 얼마나 됐는지
+										${RestaurantDTO.rest_regdate} opened
 									</p>
 								</div>
 							</div>
@@ -1009,7 +1017,7 @@
 					<div style="width: 100%; height:auto; overflow: hidden;">
 						<div class="mainpage_review_of_the_day">
 							<div class="review_of_the_day_container">
-								<h3 class="review_of_the_day_title">Review of the Day</h3>
+								<h2 class="review_of_the_day_title">Review of the Day</h2>
 								<c:if test="${empty review_of_the_day_reviewDTO}">
 									등록된 리뷰가 없습니다.
 								</c:if>
@@ -1230,11 +1238,20 @@
 									<!-- 만약 사진이 있으면 보이고 없으면 안보이고 -->
 									<div class="recent_activity_unit_content">
 										<div class="recent_activity_unit_content_photo">
-											<div class="photo_box_background" style="background-image: url(https://s3-media4.fl.yelpcdn.com/bphoto/jsDmbW9Eaqgyc0Kbw4TUvg/l.jpg)">
+											<c:if test="${empty reviewDTO.restaurantDTO.rest_filename}">
+											<div class="photo_box_background" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png)">
 												<a href="#" style="display: block;">
-													<img class="recent_activity_photo_box" height="400" src="https://s3-media4.fl.yelpcdn.com/bphoto/jsDmbW9Eaqgyc0Kbw4TUvg/l.jpg" width="600">
+													<img class="recent_activity_photo_box" height="400" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png" width="600">
 												</a>
 											</div>
+											</c:if>
+											<c:if test="${!empty reviewDTO.restaurantDTO.rest_filename}">
+											<div class="photo_box_background" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${reviewDTO.restaurantDTO.rest_filename})">
+												<a href="#" style="display: block;">
+													<img class="recent_activity_photo_box" height="400" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${reviewDTO.restaurantDTO.rest_filename}" width="600">
+												</a>
+											</div>
+											</c:if>
 										</div>
 										
 										<div class="recent_activity_unit_content_text_body">

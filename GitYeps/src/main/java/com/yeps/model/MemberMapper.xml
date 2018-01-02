@@ -98,8 +98,8 @@
         select * from yeps_member where mnum = #{NBPmnum}
      </select>
 
-   <select id="getMemberForEmail" parameterType="String" resultType="MemberDTO">
-      select * from yeps_member where email = #{email}
+   <select id="getMemberForEmail" parameterType="int" resultType="MemberDTO">
+      select * from yeps_member where email= #{email}
    </select>
 
    <select id="previous_M" parameterType="int" resultType="MemberDTO">

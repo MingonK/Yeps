@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yeps.model.MemberDTO;
+import com.yeps.model.ReviewDTO;
 
 @Service
 public class MemberMapper {
@@ -157,20 +158,19 @@ public class MemberMapper {
 	/*--------------------------------------------*/
 
 	public MemberDTO mylist_info(int NBPmnum) {
-		try {
-			return sqlSession.selectOne("mylist_info", NBPmnum);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+		return sqlSession.selectOne("mylist_info", NBPmnum);
 	}
+	
+//	public MemberDTO mylist_info(int NBPmnum) {
+//		return sqlSession.selectOne("mylist_info", NBPmnum);
+//	}
 
 	public List<MemberDTO> getSelectedRestaurant_M(int mnum) {
 		return sqlSession.selectList("getSelectedRestaurant_M", mnum);
 	}
 
 	public MemberDTO getMemberForEmail(String email) {
-		return sqlSession.selectOne("getMemberForEmail", email);
+		return sqlSession.selectOne("getMemberForMemberEmail", email);
 	}
 
 	public List<MemberDTO> previous_M(int mnum) {
@@ -186,21 +186,20 @@ public class MemberMapper {
 			return null;
 		}
 	}
-	
-	public int updateReviewCount(int mnum, int reviewcount) {
-        HashMap<String ,Object> map = new HashMap<String ,Object>();
-       map.put("mnum", mnum);
-       map.put("reviewcount", reviewcount);
-        return sqlSession.update("reviewCount",map);
-     }
-     
-     public int getMemberReviewCount(int mnum) {
-        return sqlSession.selectOne("getMemberReviewCount",mnum);
-     }
-     
-  // 12월 31일 상우 추가
- 	public List<MemberDTO> SearchedDTO_M(int mnum) {
- 		return sqlSession.selectList("SearchedDTO_M", mnum);
- 	}
 
+	public int updateReviewCount(int mnum, int reviewcount) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("mnum", mnum);
+		map.put("reviewcount", reviewcount);
+		return sqlSession.update("reviewCount", map);
+	}
+
+	public int getMemberReviewCount(int mnum) {
+		return sqlSession.selectOne("getMemberReviewCount", mnum);
+	}
+
+	// 12월 31일 상우 추가
+	public List<MemberDTO> SearchedDTO_M(int mnum) {
+		return sqlSession.selectList("SearchedDTO_M", mnum);
+	}
 }

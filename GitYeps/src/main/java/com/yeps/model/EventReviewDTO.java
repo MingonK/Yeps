@@ -8,6 +8,8 @@ public class EventReviewDTO {
 	private String eventReview_content;
 	private String eventReview_writedate;
 	private String ip;
+	private MemberDTO memberDTO;
+	private EventDTO eventDTO;
 	
 	public int getEventReview_num() {
 		return eventReview_num;
@@ -50,5 +52,17 @@ public class EventReviewDTO {
 	}
 	public void setIp(String ip) {
 		this.ip = ip;
+	}
+	public MemberDTO getMemberDTO() {
+		return memberDTO;
+	}
+	public void setMemberDTO(MemberDTO memberDTO) {
+		this.memberDTO = memberDTO;
+	}
+	public EventDTO getEventDTO() {
+		return eventDTO;
+	}
+	public void setEventDTO(EventDTO eventDTO) {
+		this.eventDTO = eventDTO;
 	}
 }

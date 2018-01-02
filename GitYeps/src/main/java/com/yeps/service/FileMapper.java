@@ -101,4 +101,12 @@ public class FileMapper {
 			return 0;
 		}
 	}
+	
+	public List<FileDTO> getPagedEventFiles(int evnum, int start, int end) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("evnum", evnum);
+		map.put("start", start);
+		map.put("end", end);
+		return sqlSession.selectList("getPagedEventFiles", map);
+	}
 }
