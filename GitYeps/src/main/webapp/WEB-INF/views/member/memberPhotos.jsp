@@ -70,6 +70,11 @@
          </div>
       </div>
    </div>
+   
+   <div class="loading_wapper">
+		<div class="loading_img">
+		</div>
+	</div>
     <script type="text/javascript">
        function fileCheck() {
           var fileObject = document.getElementById('file_browser_input');
@@ -96,6 +101,14 @@
                return false;
             }
           }
+          
+          $(document).ajaxStart(function() {
+				$('.loading_wapper').fadeIn(500);
+			})
+			
+			$(document).ajaxStop(function() {
+				$('.loading_wapper').fadeOut(500);
+			})
    
           var url = "member_fileUpLoad";
           $.ajax({

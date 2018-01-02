@@ -65,6 +65,9 @@
 									<c:when test="${eventDTO.event_category eq 'family_kids'}">
 										가족 & 어린이
 									</c:when>
+									<c:when test="${eventDTO.event_category eq 'other'}">
+										기타
+									</c:when>
 								</c:choose>
 							</a>
 						</span>
@@ -125,18 +128,33 @@
 											
 											<div style="-webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;">
 												<div id="storename_line">
-													<a href="#" style="font-weight: bold;">음식점명(식당 상세보기로 이동)</a>
+													<c:if test="${empty restaurantDTO.rname}">
+													<a href="event_content?evnum=${eventDTO.evnum}" style="font-weight: bold;">
+														${eventDTO.eventname}
+													</a>
+													</c:if>
+													<c:if test="${!empty restaurantDTO.rname}">
+													<a href="restaurant_content?rnum=${restaurantDTO.rnum}" style="font-weight: bold;">	
+														${restaurantDTO.rname}
+													</a>
+													</c:if>
 												</div>
 											
 												<div id="estimation_line">
-													<div id="rating_star">
-														<img id="rating_star_img" width="84px" height="303px" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png">
+												<c:if test="${!empty restaurantDTO}">
+													<div class="rating_star restList-star-rating-${starAVG}">
+														<img class="rating_star_img offscreen" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png"width="84" height="303"style="clip: rect(0, 0, 0, 0); position: absolute; left: -9999px; top: auto; overflow: hidden; width: 1px; height: 1px; vertical-align: middle;">
 													</div>
-													<span>리뷰 총 갯수</span> 											
+													<span>${reviewCount} reviews</span>	
+												</c:if>									
 												</div>
 										
 												<address id="event_store_address">${eventDTO.store_address}</address>
-												<span id="event_store_phone_numbebr">--- 전화번호 ---</span>
+												<span id="event_store_phone_numbebr">
+													<c:if test="${!empty restaurantDTO.hp2}">
+														${restaurantDTO.raddress}) ${restaurantDTO.hp2} - ${restaurantDTO.hp3} 
+													</c:if>
+												</span>
 											</div>
 										</div>
 									</li>
@@ -268,20 +286,20 @@
 						
 						<ol id="event_content_comment_list">
 						<c:forEach var="event_reviewDTO" items="${eventReview_list}">
-							<c:forEach var="event_memberDTO" items="${eventReview_writer_list}" varStatus="status">
-								<c:if test="${event_reviewDTO.mnum == event_memberDTO.mnum}">
+<%-- 							<c:forEach var="event_memberDTO" items="${eventReview_writer_list}" varStatus="status"> --%>
+<%-- 								<c:if test="${event_reviewDTO.mnum == event_memberDTO.mnum}"> --%>
 								<li>
 									<div id="event_topic_reply">
 										<div id="event_reply_user_info_wrapper">
 											<div id="event_reply_user_info_block">
 												<div id="event_reply_user_info_photo_wrapper">
 													<div id="event_reply_user_photo">
-														<a href="member_details?mnum=${event_memberDTO.mnum}">
-															<c:if test="${empty eventReview_writer_profileList.get(status.index).filename}">
+														<a href="member_details?mnum=${event_reviewDTO.memberDTO.mnum}">
+															<c:if test="${empty event_reviewDTO.memberDTO.memberPhotoDTO.filename}">
 																<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" width="60" height="60" id="event_reply_user_img">
 															</c:if>
-															<c:if test="${!empty eventReview_writer_profileList.get(status.index).filename}">
-																<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${eventReview_writer_profileList.get(status.index).filename}" width="60" height="60" id="event_reply_user_img">
+															<c:if test="${!empty event_reviewDTO.memberDTO.memberPhotoDTO.filename}">
+																<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${event_reviewDTO.memberDTO.memberPhotoDTO.filename}" width="60" height="60" id="event_reply_user_img">
 															</c:if>
 														</a>
 													</div>
@@ -290,18 +308,18 @@
 												<div id="event_reply_user_info">
 													<ul>
 														<li id="event_reply_user_name">
-															<a id="event_reply_user_name" href="member_details?mnum=${event_memberDTO.mnum}">
-																<c:if test="${empty event_memberDTO.nickname}">
-																	${event_memberDTO.email}
+															<a id="event_reply_user_name" href="member_details?mnum=${event_reviewDTO.memberDTO.mnum}">
+																<c:if test="${empty event_reviewDTO.memberDTO.nickname}">
+																	${event_reviewDTO.memberDTO.email}
 																</c:if>
-																<c:if test="${!empty event_memberDTO.nickname}">
-																	${event_memberDTO.nickname}
+																<c:if test="${!empty event_reviewDTO.memberDTO.nickname}">
+																	${event_reviewDTO.memberDTO.nickname}
 																</c:if>
 															</a>
 														</li>
 													
 														<li id="event_reply_user_location">
-															<c:forTokens items="${event_memberDTO.address}" delims=" " begin="1" end="2" var="addr">
+															<c:forTokens items="${event_reviewDTO.memberDTO.address}" delims=" " begin="1" end="2" var="addr">
                                                               <b> ${addr}</b>
                                                             </c:forTokens>
 														</li>
@@ -325,7 +343,7 @@
 																	<path d="M13 3H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1.505 9.643l-2.526-1.55L6.526 12.7 7 9.934 5 7.977l2.766-.404L8.97 4.7l1.264 2.873L13 7.977l-2 1.957.495 2.71z"></path>
 																</svg>
 															</span>
-															<b>999</b> reviews
+															<b>${event_reviewDTO.memberDTO.reviewcount}</b> reviews
 														</li>
 													</ul>
 												</div>
@@ -361,8 +379,8 @@
 										</div>
 									</div>
 								</li>
-								</c:if>
-							</c:forEach>
+<%-- 								</c:if> --%>
+<%-- 							</c:forEach> --%>
 						</c:forEach>
 						</ol>
 						
@@ -1081,12 +1099,14 @@
 					'<div style="padding: 8px; background: white;">',
 						'<div style="display: inline-block;">',
 							'<div id="map_inner_eventphoto" style="float: left;">',
-								'<c:if test="${empty fileList[0].filename}">',
+								'<a href="event_content?evnum=${eventDTO.evnum}">',
+								'<c:if test="${empty photoInMap.filename}">',
 									'<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png" style="outline: none; width: 100px; height: 100px; border-radius: 4px;">',
 								'</c:if>',
-								'<c:if test="${!empty fileList[0].filename}">',
-									'<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${fileList[0].filename}" style="outline: none; width: 100px; height: 100px; border-radius: 4px;">',
+								'<c:if test="${!empty photoInMap.filename}">',
+									'<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photoInMap.filename}" style="outline: none; width: 100px; height: 100px; border-radius: 4px;">',
 								'</c:if>',
+								'</a>',
 							'</div>',
 							'<div id="map_inner_eventname" style="margin-left: 5px; float: left; width: 150px; heght: 100px; font-size: 12px;">',
 								'<a href="event_content?evnum=${eventDTO.evnum}">${eventDTO.eventname}</a>',
@@ -1171,7 +1191,7 @@
 			list.push("${fileDTO.filename}");
 		</c:forEach>
 		for(var i = 0; i < list.length; i++) {
-			var img = $("<img>").attr("src", "https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/" + list[i]).css('vertical-align', 'middle').css('display', 'inline-block').css('max-width', '100%').css('max-height', '100%');
+			var img = $("<img>").attr("src", "https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/" + list[i]).css('position', 'static');
 			$('#popup_slideshow_img').append(img);
 		}
     	$('[data-popup-open]').on('click', function(e)  {

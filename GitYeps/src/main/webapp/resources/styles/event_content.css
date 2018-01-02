@@ -857,12 +857,10 @@
 	border-radius: 6px 6px 6px 6px;
     cursor: pointer;
     overflow: hidden;
-    height: 655px;
+    height: 100%;
     text-align: center;
     font-size: 0;
     user-select: none;
-    margin: 0 60px;
-    padding: 10px;
 }
 
 #popup_slideshow_img:after {
@@ -874,11 +872,33 @@
 }
 
 .cycle-slideshow {
-	
+	border-radius: 6px 0 0 6px;
+    background: rgba(0,0,0,0.7);
+    overflow: hidden;
+    height: 100%;
+    text-align: center;
+    font-size: 0;
+}
+
+#popup_slideshow_img .cycle-slide-active {
+	position: static !important;
+	width: 500;
+    margin: 0 auto;
+    display: inline-block !important;
 }
 
 .cycle-slideshow img {
-	width: 900px;
+	display: inline-block;
+    vertical-align: middle;
+    max-width: 100%;
+    max-height: 100%;
+	margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    text-align: center;
+    width: 0;
 }
 
 .ms-arrow {
@@ -1119,6 +1139,66 @@
 }
 
 
+.restList-star-rating-0{
+   float: left; margin-right:6px;
+   position: relative; overflow: hidden;
+   background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+   width: 102px; height: 18px; background-position: 0 -240px; background-size: 132px 560px; display: inline-block; vertical-align: middle;
+}
 
+.restList-star-rating-1{
+   float: left; margin-right:6px;
+   position: relative; overflow: hidden;
+   background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+   width: 102px; height: 18px; background-position: 0 -258px; background-size: 132px 560px; display: inline-block; vertical-align: middle;
+}
+.restList-star-rating-1.5{
+   float: left; margin-right:6px;
+   position: relative; overflow: hidden;
+   background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+   width: 102px; height: 18px; background-position: 0 -276px; background-size: 132px 560px; display: inline-block; vertical-align: middle;
+}
+.restList-star-rating-2{
+   float: left; margin-right:6px;
+   position: relative; overflow: hidden;
+   background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+   width: 102px; height: 18px; background-position: 0 -294px; background-size: 132px 560px; display: inline-block; vertical-align: middle;
+}
+.restList-star-rating-2.5{
+   float: left; margin-right:6px;
+   position: relative; overflow: hidden;
+   background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+   width: 102px; height: 18px; background-position: 0 -312px; background-size: 132px 560px; display: inline-block; vertical-align: middle;
+}
+.restList-star-rating-3{
+   float: left; margin-right:6px;
+   position: relative; overflow: hidden;
+   background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+   width: 102px; height: 18px; background-position: 0 -330px; background-size: 132px 560px; display: inline-block; vertical-align: middle;
+}
+.restList-star-rating-3.5{
+   float: left; margin-right:6px;
+   position: relative; overflow: hidden;
+   background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+   width: 102px; height: 18px; background-position: 0 -348px; background-size: 132px 560px; display: inline-block; vertical-align: middle;
+}
+.restList-star-rating-4{
+   float: left; margin-right:6px;
+   position: relative; overflow: hidden;
+   background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+   width: 102px; height: 18px; background-position: 0 -366px; background-size: 132px 560px; display: inline-block; vertical-align: middle;
+}
+.restList-star-rating-4.5{
+   float: left; margin-right:6px;
+   position: relative; overflow: hidden;
+   background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+   width: 102px; height: 18px; background-position: 0 -384px; background-size: 132px 560px; display: inline-block; vertical-align: middle;
+}
+.restList-star-rating-5{
+   float: left; margin-right:6px;
+   position: relative; overflow: hidden;
+   background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+   width: 102px; height: 18px; background-position: 0 -402px; background-size: 132px 560px; display: inline-block; vertical-align: middle;
+}
 
 

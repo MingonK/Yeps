@@ -7,12 +7,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -31,12 +29,13 @@ import com.yeps.model.EventDTO;
 import com.yeps.model.EventReviewDTO;
 import com.yeps.model.FileDTO;
 import com.yeps.model.MemberDTO;
-import com.yeps.model.MemberPhotoDTO;
+import com.yeps.model.RestaurantDTO;
 import com.yeps.service.EventMapper;
 import com.yeps.service.EventReviewMapper;
 import com.yeps.service.FileMapper;
 import com.yeps.service.MemberMapper;
-import com.yeps.service.MemberPhotoMapper;
+import com.yeps.service.RestaurantMapper;
+import com.yeps.service.ReviewMapper;
 import com.yeps.service.S3Connection;
 import com.yeps.service.YepsPager;
 
@@ -52,11 +51,9 @@ public class EventController {
 	@Autowired
 	private MemberMapper memberMapper;
 	@Autowired
-	private MemberPhotoMapper memberPhotoMapper;
-	
-	
-	@Resource(name = "uploadPath")
-	private String uploadPath;
+	private RestaurantMapper restaurantMapper;
+	@Autowired
+	private ReviewMapper reviewMapper;
 
 	@RequestMapping(value = "/event_list")
 	public ModelAndView listEvent(HttpServletRequest req) {
@@ -94,7 +91,7 @@ public class EventController {
 		List<FileDTO> fileList = new ArrayList<FileDTO>();
 		for (int i = 0; i < eventList.size(); i++) {
 			FileDTO dto = fileMapper.getFYIEventFile(eventList.get(i).getEvnum());
-			if(dto == null) {
+			if (dto == null) {
 				FileDTO dtoForNull = new FileDTO();
 				dtoForNull.setFilename("nothing");
 				dtoForNull.setEvnum(eventList.get(i).getEvnum());
@@ -103,12 +100,12 @@ public class EventController {
 				fileList.add(dto);
 			}
 		}
-		
+
 		List<EventDTO> thisWeek_random_eventList = eventMapper.getRandom_EventList();
 		List<FileDTO> thisWeek_random_fileList = new ArrayList<FileDTO>();
 		for (int i = 0; i < thisWeek_random_eventList.size(); i++) {
 			FileDTO dto = fileMapper.getFYIEventFile(thisWeek_random_eventList.get(i).getEvnum());
-			if(dto == null) {
+			if (dto == null) {
 				FileDTO dtoForNull = new FileDTO();
 				dtoForNull.setFilename("nothing");
 				dtoForNull.setEvnum(thisWeek_random_eventList.get(i).getEvnum());
@@ -117,7 +114,7 @@ public class EventController {
 				thisWeek_random_fileList.add(dto);
 			}
 		}
-		
+
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("mode", mode);
 		mav.addObject("set", "events");
@@ -149,13 +146,13 @@ public class EventController {
 	public ModelAndView insertEvent(HttpServletRequest req, @ModelAttribute EventDTO dto, BindingResult result) {
 		dto.setIp(req.getRemoteAddr());
 		dto.setStart_date(dto.getStart_date() + ", " + getDateDay(dto.getStart_date()));
-		if(dto.getEnd_date() != null) {
+		if (dto.getEnd_date() != null) {
 			dto.setEnd_date(dto.getEnd_date() + ", " + getDateDay(dto.getEnd_date()));
 		}
 		HttpSession session = req.getSession();
 		MemberDTO loginMember = (MemberDTO) session.getAttribute("memberinfo");
 		dto.setMnum(loginMember.getMnum());
-		
+
 		if (dto.getEventname() == null || dto.getEventname().trim().equals("") || dto.getEvent_content() == null
 				|| dto.getEvent_content().trim().equals("") || dto.getDiscount() == null
 				|| dto.getDiscount().trim().equals("")) {
@@ -165,26 +162,26 @@ public class EventController {
 		ModelAndView mav = new ModelAndView();
 		boolean check = eventMapper.RedundancyCheck(dto.getEventname());
 		if (check) {
+
 			int res = eventMapper.insertEvent(dto);
 			if (res > 0) {
 				int evnum = eventMapper.getEvnum(dto.getEventname(), dto.getStore_address());
+				mav.addObject("set", "events");
 				mav.addObject("url", "event_update_photo?evnum=" + evnum);
 				mav.setViewName("usingOnlyURL");
-				return mav;
 			} else {
 				mav.addObject("msg", "이벤트 등록에 실패했습니다.");
 				mav.addObject("url", "event_list");
+				mav.addObject("set", "events");
 				mav.setViewName("message");
-				return mav;
 			}
 		} else {
 			mav.addObject("msg", "이미 등록된 이벤트입니다.");
 			mav.setViewName("historyBack");
-			return mav;
 		}
+		return mav;
 	}
-	
-	
+
 	public String getDateDay(String date) {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -229,23 +226,23 @@ public class EventController {
 		}
 		return convertedString;
 	}
-	
+
 	@RequestMapping(value = "/event_delete")
 	public ModelAndView deleteEvent(HttpServletRequest req) {
 		String evnum = req.getParameter("evnum");
-		if(evnum == null || evnum.trim().equals("")) {
+		if (evnum == null || evnum.trim().equals("")) {
 			return new ModelAndView("redirect: event_list");
 		}
-		
+
 		ModelAndView mav = new ModelAndView();
 		List<FileDTO> fileList = fileMapper.getTargetEventFiles(Integer.parseInt(evnum));
-		for(int i = 0; i < fileList.size(); i++) {
+		for (int i = 0; i < fileList.size(); i++) {
 			S3Connection.getInstance().deleteObject("yepsbucket", "images/" + fileList.get(i).getFilename());
 		}
-		int result = fileMapper.deleteFileToEvnum(Integer.parseInt(evnum));
-		if(result > 0) {
+		int result = fileMapper.deleteAllFile(Integer.parseInt(evnum));
+		if (result > 0) {
 			result = eventMapper.deleteEvent(Integer.parseInt(evnum));
-			if(result > 0) {
+			if (result > 0) {
 				mav.addObject("url", "event_list");
 				mav.setViewName("usingOnlyURL");
 			}
@@ -254,70 +251,69 @@ public class EventController {
 			mav.addObject("url", "event_list");
 			mav.setViewName("message");
 		}
+		mav.addObject("set", "events");
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/event_edit", method = RequestMethod.GET)
 	public ModelAndView EditEvent(HttpServletRequest req) {
 		String evnum = req.getParameter("evnum");
-		if(evnum == null || evnum.trim().equals("")) {
+		if (evnum == null || evnum.trim().equals("")) {
 			return new ModelAndView("redirect: event_list");
 		}
-		
+
 		ModelAndView mav = new ModelAndView();
 		EventDTO getEventDTO = eventMapper.getEventContent(Integer.parseInt(evnum));
 		String[] start_date = getEventDTO.getStart_date().split(",");
 		String[] end_date = getEventDTO.getEnd_date().split(",");
 		getEventDTO.setStart_date(start_date[0]);
 		getEventDTO.setEnd_date(end_date[0]);
-		
+
 		mav.addObject("getEventDTO", getEventDTO);
 		mav.addObject("set", "events");
 		mav.setViewName("event/event_editForm");
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/event_edit", method = RequestMethod.POST)
 	public ModelAndView EditProEvent(HttpServletRequest req, @ModelAttribute EventDTO dto, BindingResult result) {
 		dto.setStart_date(dto.getStart_date() + ", " + getDateDay(dto.getStart_date()));
-		if(dto.getEnd_date() != null) {
+		if (dto.getEnd_date() != null) {
 			dto.setEnd_date(dto.getEnd_date() + ", " + getDateDay(dto.getEnd_date()));
 		}
-		
+
 		HttpSession session = req.getSession();
 		MemberDTO loginMember = (MemberDTO) session.getAttribute("memberinfo");
 		dto.setMnum(loginMember.getMnum());
-		
+
 		if (dto.getEventname() == null || dto.getEventname().trim().equals("") || dto.getEvent_content() == null
 				|| dto.getEvent_content().trim().equals("") || dto.getDiscount() == null
 				|| dto.getDiscount().trim().equals("")) {
 			return new ModelAndView("redirect: event_list");
 		}
-		
+
 		ModelAndView mav = new ModelAndView();
 		int res = eventMapper.updateEvent(dto);
-		if(res > 0) {
+		if (res > 0) {
 			int evnum = eventMapper.getEvnum(dto.getEventname(), dto.getStore_address());
 			mav.addObject("url", "event_update_photo?evnum=" + evnum);
 			mav.setViewName("usingOnlyURL");
 			return mav;
 		} else {
+			mav.addObject("set", "events");
 			mav.addObject("msg", "이벤트 수정을 실패하였습니다.");
 			mav.addObject("url", "event_list");
 			mav.setViewName("message");
 			return mav;
 		}
-		
+
 	}
-	
-	
-	
 
 	@RequestMapping(value = "/event_update_photo")
 	public ModelAndView insertPhoto_Event(HttpServletRequest req) {
 		String evnum = req.getParameter("evnum");
+		String mode = req.getParameter("mode");
 		if (evnum == null || evnum.trim().equals("")) {
-			// 이 때 404 페이지 띄워야 함.
 			return new ModelAndView("redirect: event_list");
 		}
 
@@ -325,16 +321,17 @@ public class EventController {
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
 		EventDTO eventDTO = eventMapper.getEventContent(Integer.parseInt(evnum));
 		ModelAndView mav = new ModelAndView();
-		
+
 		if (eventDTO == null) {
 			mav.setViewName("redirect: event_write");
 			return mav;
 		}
-		
-		if(memberDTO.getIsmanager().equals("y") || memberDTO.getIsmaster().equals("y")) {
+
+		if (memberDTO.getIsmanager().equals("y") || memberDTO.getIsmaster().equals("y")
+				|| eventDTO.getMnum() == memberDTO.getMnum()) {
 			List<FileDTO> allUploadFileList = fileMapper.getTargetEventFiles(eventDTO.getEvnum());
 			List<MemberDTO> registMemberList = new ArrayList<MemberDTO>();
-			for(int i = 0; i < allUploadFileList.size(); i++) {
+			for (int i = 0; i < allUploadFileList.size(); i++) {
 				registMemberList.add(memberMapper.getMemberProfile(allUploadFileList.get(i).getMnum()));
 			}
 			mav.addObject("registMemberList", registMemberList);
@@ -343,11 +340,12 @@ public class EventController {
 			List<FileDTO> myUploadFileList = fileMapper.getfileListForMe(eventDTO.getEvnum(), memberDTO.getMnum());
 			mav.addObject("uploadFileList", myUploadFileList);
 		}
-				
+
+		mav.addObject("mode", mode);
 		mav.addObject("eventDTO", eventDTO);
 		mav.addObject("set", "events");
 		mav.setViewName("event/event_update_photo");
-		return mav;	
+		return mav;
 	}
 
 	@RequestMapping(value = "/event_fileUpLoad")
@@ -358,17 +356,21 @@ public class EventController {
 			// 404페이지 띄워야함.. jsp페이지에서 처리해주자
 			return null;
 		}
-		
+
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest) req;
+		HttpSession session = req.getSession();
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
+
+		return uploadFileLoop(mr, memberDTO, Integer.parseInt(evnum));
+	}
+
+	public HashMap<String, Object> uploadFileLoop(MultipartHttpServletRequest mr, MemberDTO memberDTO, int evnum) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		Iterator<String> it = mr.getFileNames();
 		String origin_fileName = null;
 		int fileSize = 0;
-		HashMap<String, Object> map = new HashMap<String, Object>();
 		List<FileDTO> fileList = new ArrayList<FileDTO>();
-		map.put("uploadPath", uploadPath);
-		HttpSession session = req.getSession();
-		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
-		
+
 		while (it.hasNext()) {
 			MultipartFile mf = mr.getFile(it.next());
 			origin_fileName = mf.getOriginalFilename();
@@ -376,20 +378,28 @@ public class EventController {
 			String genId = UUID.randomUUID().toString();
 			String contentType = getExtension(origin_fileName);
 			String saveFileName = genId + "." + contentType;
-			
+
 			File file = new File(saveFileName);
 			if (mf.getSize() != 0) {
 				try {
 					mf.transferTo(file);
-					S3Connection.getInstance().putObjectAsync("yepsbucket", "images/" + saveFileName, file, "image/" + contentType);
-					
+					S3Connection.getInstance().putObjectAsync("yepsbucket", "images/" + saveFileName, file,
+							"image/" + contentType);
+
 					FileDTO fileDTO = new FileDTO();
-					fileDTO.setEvnum(Integer.parseInt(evnum));
+					fileDTO.setEvnum(evnum);
 					fileDTO.setMnum(memberDTO.getMnum());
 					fileDTO.setFilename(saveFileName);
 					fileDTO.setOrigin_filename(origin_fileName);
 					fileDTO.setFilesize(fileSize);
-					int result = fileMapper.insertFile(fileDTO);
+					boolean isExistMainPhoto = fileMapper.isExistEventMainPhoto(evnum);
+					int result = 0;
+					if (!isExistMainPhoto) {
+						result = fileMapper.insertFile(fileDTO, "main");
+					} else {
+						result = fileMapper.insertFile(fileDTO, "not");
+					}
+
 					if (result > 0) {
 						FileDTO insert_after_getFileDTO = fileMapper.getFile(saveFileName, 0);
 						fileList.add(insert_after_getFileDTO);
@@ -410,7 +420,8 @@ public class EventController {
 				map.put("upload_failed", "업로드할 수 없는 파일이 존재합니다.");
 			}
 		}
-		map.put("evnum", Integer.parseInt(evnum));
+		map.put("update", "사진을 등록하였습니다.");
+		map.put("evnum", evnum);
 		map.put("fileList", fileList);
 		return map;
 	}
@@ -424,48 +435,32 @@ public class EventController {
 			return "";
 		}
 	}
-	
+
 	@RequestMapping(value = "/event_delete_photo")
 	public ModelAndView DeletePhoto_Event(HttpServletRequest req) {
 		String filename = req.getParameter("filename");
 		String evnum = req.getParameter("evnum");
-		
+		String isMainPhoto = req.getParameter("ismainphoto");
+
 		HttpSession session = req.getSession();
-		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
-		
-		if (filename == null || filename.trim().equals("") || evnum == null || evnum.trim().equals("")) {
+		if (session == null) {
+			return new ModelAndView("redirect: member_login");
+		}
+		if (filename == null || filename.trim().equals("") || evnum == null || evnum.trim().equals("")
+				|| isMainPhoto == null || isMainPhoto.trim().equals("")) {
 			return new ModelAndView("redirect: event_update_photo");
 		}
-		
+
 		ModelAndView mav = new ModelAndView();
-		
 		EventDTO eventDTO = eventMapper.getEventContent(Integer.parseInt(evnum));
 		if (eventDTO == null) {
 			mav.setViewName("redirect: event_write");
 			return mav;
 		}
-		
-		List<FileDTO> myUploadFileList = null;
+
 		S3Connection.getInstance().deleteObject("yepsbucket", "images/" + filename);
-		int result = fileMapper.deleteFileToFilename(filename);
-		if(result > 0) {
-			if(memberDTO.getIsmanager().equals("y") || memberDTO.getIsmaster().equals("y")) {
-				List<FileDTO> allUploadFileList = fileMapper.getTargetEventFiles(eventDTO.getEvnum());
-				List<MemberDTO> registMemberList = new ArrayList<MemberDTO>();
-				for(int i = 0; i < allUploadFileList.size(); i++) {
-					registMemberList.add(memberMapper.getMemberProfile(allUploadFileList.get(i).getMnum()));
-				}
-				mav.addObject("registMemberList", registMemberList);
-				mav.addObject("uploadFileList", allUploadFileList);
-			} else {
-				myUploadFileList = fileMapper.getfileListForMe(eventDTO.getEvnum(), memberDTO.getMnum());
-				mav.addObject("uploadFileList", myUploadFileList);
-			}
-			mav.addObject("delete", "delete");
-		}
-		
-		mav.addObject("eventDTO", eventDTO);
-		mav.setViewName("event/event_update_photo");
+		fileMapper.deleteFile(filename, Integer.parseInt(evnum), isMainPhoto);
+		mav.setViewName("redirect: event_update_photo?evnum=" + Integer.parseInt(evnum) + "&mode=delete");
 		return mav;
 	}
 
@@ -479,13 +474,21 @@ public class EventController {
 		ModelAndView mav = new ModelAndView();
 		EventDTO eventDTO = eventMapper.getEventContent(Integer.parseInt(evnum));
 		List<FileDTO> fileList = fileMapper.getTargetEventFiles(Integer.parseInt(evnum));
-		
+		FileDTO photoInMap = fileMapper.getFYIEventFile(Integer.parseInt(evnum));
+		RestaurantDTO restaurantDTO = restaurantMapper.findRestaurant(eventDTO.getZipNo(), eventDTO.getRoadAddrPart1(),
+				eventDTO.getRoadAddrPart2(), eventDTO.getAddrDetail());
+		if (restaurantDTO != null) {
+			int reviewCount = reviewMapper.getRestaurantReviewCount(restaurantDTO.getRnum());
+			int starAVG = reviewMapper.getStarAvg(restaurantDTO.getRnum());
+			mav.addObject("starAVG", starAVG);
+			mav.addObject("reviewCount", reviewCount);
+		}
 		List<EventDTO> thisWeek_EventList = eventMapper.getThisWeek_EventList();
 		List<FileDTO> thisWeek_EventFileList = new ArrayList<FileDTO>();
-		if(thisWeek_EventList != null) {
+		if (thisWeek_EventList != null) {
 			for (int i = 0; i < thisWeek_EventList.size(); i++) {
 				FileDTO dto = fileMapper.getFYIEventFile(thisWeek_EventList.get(i).getEvnum());
-				if(dto == null) {
+				if (dto == null) {
 					FileDTO dtoForNull = new FileDTO();
 					dtoForNull.setFilename("nothing");
 					dtoForNull.setEvnum(thisWeek_EventList.get(i).getEvnum());
@@ -495,19 +498,12 @@ public class EventController {
 				}
 			}
 		}
-		
+
 		List<EventReviewDTO> eventReview_list = eventReviewMapper.listEventReview(Integer.parseInt(evnum));
 
-		HashSet<MemberDTO> eventReview_writer_list = new HashSet<MemberDTO>();
-		List<MemberPhotoDTO> eventReview_writer_profileList = new ArrayList<MemberPhotoDTO>(); 
-		for (int i = 0; i < eventReview_list.size(); i++) {
-			eventReview_writer_list.add(memberMapper.getMemberProfile(eventReview_list.get(i).getMnum()));
-			eventReview_writer_profileList.add(memberPhotoMapper.getMemberMainPhoto(eventReview_list.get(i).getMnum()));
-		}
-
-		mav.addObject("eventReview_writer_profileList", eventReview_writer_profileList);
-		mav.addObject("eventReview_writer_list", eventReview_writer_list);
+		mav.addObject("restaurantDTO", restaurantDTO);
 		mav.addObject("eventReview_list", eventReview_list);
+		mav.addObject("photoInMap", photoInMap);
 		mav.addObject("fileList", fileList);
 		mav.addObject("eventDTO", eventDTO);
 		mav.addObject("thisWeek_EventList", thisWeek_EventList);
@@ -517,51 +513,73 @@ public class EventController {
 		return mav;
 	}
 
-//	@RequestMapping(value = "/event_updatePro_photo")
-//	public ModelAndView insertPro_Photo_Event(HttpServletRequest req) {
-//		String evnum = req.getParameter("evnum");
-//		String mnum = req.getParameter("mnum");
-//		String filenum = req.getParameter("filenum");
-//		String filecontent = req.getParameter("filecontent");
-//		System.out.println("데이터 확인: " + evnum + ", " + mnum + ", " + filenum + ", " + filecontent);
-//
-//		if (evnum == null || evnum.trim().equals("") || filenum == null || filenum.trim().equals("") || mnum == null
-//				|| mnum.trim().equals("")) {
-//			System.out.println("1");
-//			return new ModelAndView("redirect: event_list");
-//		}
-//		System.out.println("2");
-//		ModelAndView mav = new ModelAndView();
-//		int result = fileMapper.updateFileContent(Integer.parseInt(filenum), filecontent);
-//		if (result > 0) {
-//			System.out.println("3");
-//			EventDTO eventDTO = eventMapper.getEventContent(Integer.parseInt(evnum));
-//			List<FileDTO> myUploadFileList = fileMapper.getfileListForMe(eventDTO.getEvnum(), Integer.parseInt(mnum));
-//			mav.addObject("eventDTO", eventDTO);
-//			mav.addObject("myUploadFileList", myUploadFileList);
-//			mav.addObject("set", "events");
-//			mav.setViewName("event/event_update_photo");
-//		} else {
-//			System.out.println("4");
-//			mav.addObject("msg", "사진 등록 오류발생.");
-//			mav.addObject("url", "event_update_photo?evnum=" + evnum);
-//			mav.setViewName("message");
-//		}
-//		System.out.println("5");
-//		return mav;
-//	}
+	@RequestMapping(value = "/event_main_photo")
+	public ModelAndView eventMainPhoto(HttpServletRequest req, HttpSession session) {
+		String evnum = req.getParameter("evnum");
+		String filenum = req.getParameter("filenum");
+		String mnum = req.getParameter("mnum");
+
+		if (evnum == null || evnum.trim().equals("") || filenum == null || filenum.trim().equals("") || mnum == null
+				|| mnum.trim().equals("")) {
+			return new ModelAndView("redirect: event_update_photo?evnum=" + evnum);
+		}
+
+		ModelAndView mav = new ModelAndView();
+		MemberDTO loginMember = (MemberDTO) session.getAttribute("memberinfo");
+		EventDTO eventDTO = eventMapper.getEventContent(Integer.parseInt(evnum));
+
+		if (loginMember.getMnum() == Integer.parseInt(mnum) || loginMember.getIsmanager().equals("y")
+				|| loginMember.getIsmaster().equals("y")) {
+			fileMapper.changeEventMainPhoto(Integer.parseInt(evnum), Integer.parseInt(filenum));
+			mav.addObject("mode", "update");
+		}
+
+		mav.addObject("set", "events");
+		mav.addObject("eventDTO", eventDTO);
+		mav.setViewName("redirect: event_update_photo?evnum=" + Integer.parseInt(evnum) + "&mode=update");
+		return mav;
+	}
 
 	@RequestMapping(value = "/event_browseAll_photo")
 	public ModelAndView eventBrowseAll(HttpServletRequest req) {
 		String evnum = req.getParameter("evnum");
-		
-		if(evnum == null || evnum.trim().equals("")) {
+		int curPage = req.getParameter("curPage") != null ? Integer.parseInt(req.getParameter("curPage")) : 1;
+		int count = 0;
+		YepsPager yepsPager = null;
+		int start = 0;
+		int end = 0;
+
+		if (evnum == null || evnum.trim().equals("")) {
 			return new ModelAndView("redirect: event_list");
 		}
-		
-		List<FileDTO> fileList = fileMapper.getTargetEventFiles(Integer.parseInt(evnum));
-		
-		return null;
+
+		yepsPager = new YepsPager(count, curPage, 30, 5);
+		start = yepsPager.getPageBegin();
+		end = yepsPager.getPageEnd();
+
+		List<FileDTO> fileList = fileMapper.getPagedEventFiles(Integer.parseInt(evnum), start, end);
+		MemberDTO loginMemberDTO = (MemberDTO) req.getSession().getAttribute("memberinfo");
+		boolean find = false;
+		if (loginMemberDTO != null) {
+			for (int i = 0; i < fileList.size(); i++) {
+				if (fileList.get(i).getMnum() == loginMemberDTO.getMnum()) {
+					find = true;
+				}
+			}
+		}
+		EventDTO eventDTO = eventMapper.getEventContent(Integer.parseInt(evnum));
+		ModelAndView mav = new ModelAndView();
+
+		mav.addObject("set", "events");
+		mav.addObject("curPage", curPage);
+		mav.addObject("count", count);
+		mav.addObject("yepsPager", yepsPager);
+		mav.addObject("find", find);
+		mav.addObject("fileCount", fileList.size());
+		mav.addObject("fileList", fileList);
+		mav.addObject("eventDTO", eventDTO);
+		mav.setViewName("event/event_browseAll");
+		return mav;
 	}
 
 	@RequestMapping(value = "/event_report")

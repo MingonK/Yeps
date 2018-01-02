@@ -27,11 +27,12 @@ public class MessageController {
 
 	@Autowired
 	private MessageMapper yepsMessageMapper;
+
 	@Autowired
 	private MemberMapper memberMapper;
+
 	@Autowired
 	private EventMapper eventMapper;
-
 
 	public ModelAndView pagingMessageList(HttpServletRequest req, @RequestParam String lMode, String email) {
 		ModelAndView mav = new ModelAndView();
@@ -82,13 +83,14 @@ public class MessageController {
 			cnt = sCount;
 		}
 		int pageScale = 10, blockScale = 5;
-		YepsPager yPager = new YepsPager(cnt, curPage, pageScale, blockScale);
-		int start = yPager.getPageBegin();
-		int end = yPager.getPageEnd();
+		YepsPager yepsPager = new YepsPager(cnt, curPage, pageScale, blockScale);
+		int start = yepsPager.getPageBegin();
+		int end = yepsPager.getPageEnd();
+
 		int num = count - pageScale * (curPage - 1) + 1;
 
 		if (lMode == null || email == null) {
-			mav.setViewName("MainPage");
+			mav.setViewName("mainPage");
 			return mav;
 		}
 
@@ -98,7 +100,7 @@ public class MessageController {
 		map.put("lMode", lMode);
 		map.put("list", list); // list
 		map.put("count", count);
-		map.put("yepsPager", yPager);
+		map.put("yepsPager", yepsPager);
 
 		mav.addObject("mCount", mCount);
 		mav.addObject("lCount", lCount);
@@ -119,22 +121,28 @@ public class MessageController {
 		}
 
 		// lMode에 따라 보내질 페이지를 구분한다.
+		String where = null;
 		if (lMode.equals("allLocker") || lMode.equals("readLocker") || lMode.equals("noneLocker")) {
-			mav.setViewName("message/messageLocker");
+			where = "locker";
+			mav.addObject("where", where);
+			mav.addObject("mode", "locker");
 
 		} else if (lMode.equals("alertMsg") || lMode.equals("readAlert") || lMode.equals("noneAlert")) {
+			where = "alert";
+			mav.addObject("where", where);
 
-			mav.setViewName("message/messageAlert");
 		} else {
 			String mode = req.getParameter("mode");
-
+			where = "yeps";
+			mav.addObject("where", where);
 			if (mode == null) {
 				mav.addObject("mode", "receive");
 			} else {
 				mav.addObject("mode", mode);
 			}
-			mav.setViewName("message/yepsMessage");
+
 		}
+		mav.setViewName("message/yepsMessage");
 		mav.addObject("set", "message");
 		mav.addObject("key", key);// key 값 지정
 		return mav;
@@ -145,6 +153,7 @@ public class MessageController {
 		ModelAndView mav = new ModelAndView();
 		String msg = null, key = null;
 		String lMode = req.getParameter("lMode");
+		
 		MemberDTO member = (MemberDTO) req.getSession().getAttribute("memberinfo");
 		if (member == null) {
 			msg = "로그인 먼저 해주세요. 로그인 페이지로 이동합니다.";
@@ -162,35 +171,6 @@ public class MessageController {
 		mav = pagingMessageList(req, lMode, email);
 		mav.addObject("set", "message");
 		mav.addObject("key", key);// key 값 지정
-		return mav;
-	}
-
-	@RequestMapping(value = "message_locker")
-	public ModelAndView message_locker(HttpServletRequest req) throws Exception {
-		ModelAndView mav = new ModelAndView();
-		String lMode = "allLocker";
-		MemberDTO member = (MemberDTO) req.getSession().getAttribute("memberinfo");
-		if (member == null) {
-			mav.setViewName("MainPage");
-			return mav;
-		}
-		String email = member.getEmail();
-		mav = pagingMessageList(req, lMode, email);
-		mav.addObject("set", "message");
-		return mav;
-	}
-
-	@RequestMapping(value = "message_alert")
-	public ModelAndView message_alert(HttpServletRequest req) throws Exception {
-		ModelAndView mav = new ModelAndView();
-		String lMode = "alertMsg";
-		MemberDTO member = (MemberDTO) req.getSession().getAttribute("memberinfo");
-		if (member == null) {
-			mav.setViewName("MainPage");
-			return mav;
-		}
-		String email = member.getEmail();
-		mav = pagingMessageList(req, lMode, email);
 		return mav;
 	}
 
@@ -245,7 +225,7 @@ public class MessageController {
 		MemberDTO member = (MemberDTO) req.getSession().getAttribute("memberinfo");
 
 		if (member == null) {
-			mav.setViewName("MainPage");
+			mav.setViewName("mainPage");
 			return mav;
 		}
 		int mnum = member.getMnum();
@@ -334,9 +314,10 @@ public class MessageController {
 	public ModelAndView message_search(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
 		String filterMode = req.getParameter("filter");
+		
 		MemberDTO member = (MemberDTO) req.getSession().getAttribute("memberinfo");
 		if (member == null) {
-			mav.setViewName("MainPage");
+			mav.setViewName("mainPage");
 			return mav;
 		}
 
@@ -355,17 +336,15 @@ public class MessageController {
 			mav = pagingMessageList(req, lMode, email);
 
 		} else if (filterMode.equals("allLocker")) {
-
-			mav.setViewName("redirect:message_locker");
+			lMode = "allLocker";
+			mav = pagingMessageList(req, lMode, email);
 		} else if (filterMode.equals("readLocker")) {
 			lMode = "readLocker";
 			mav = pagingMessageList(req, lMode, email);
-			mav.setViewName("message/messageLocker");
 
 		} else if (filterMode.equals("noneLocker")) {
 			lMode = "noneLocker";
 			mav = pagingMessageList(req, lMode, email);
-			mav.setViewName("message/messageLocker");
 
 		} else if (filterMode.equals("alertMsg")) {
 			lMode = filterMode;
@@ -400,7 +379,7 @@ public class MessageController {
 		ModelAndView mav = new ModelAndView();
 		MemberDTO member = (MemberDTO) req.getSession().getAttribute("memberinfo");
 		if (member == null) {
-			mav.setViewName("MainPage");
+			mav.setViewName("mainPage");
 			return mav;
 		}
 		String email = member.getEmail();
@@ -432,11 +411,10 @@ public class MessageController {
 		String msg = null, lMode = null;
 		MemberDTO member = (MemberDTO) req.getSession().getAttribute("memberinfo");
 		if (member == null) {
-			mav.setViewName("MainPage");
+			mav.setViewName("mainPage");
 			return mav;
 		}
 		String email = member.getEmail();
-		
 		if (check == null) {
 			msg = "선택된 메시지가 없습니다. 다시 확인하세요.";
 			mav.addObject("msg", msg);
@@ -467,7 +445,7 @@ public class MessageController {
 		String msg = null, lMode = null;
 		MemberDTO member = (MemberDTO) req.getSession().getAttribute("memberinfo");
 		if (member == null) {
-			mav.setViewName("MainPage");
+			mav.setViewName("mainPage");
 			return mav;
 		}
 
@@ -492,7 +470,6 @@ public class MessageController {
 
 		lMode = "allLocker";
 		mav = pagingMessageList(req, lMode, email);
-		mav.setViewName("message/messageLocker");
 		return mav;
 	}
 

@@ -7,7 +7,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.yeps.model">
 	<insert id="insertFile" parameterType="FileDTO">
 		insert into yeps_files values (yeps_files_seq.nextval, #{mnum, jdbcType=INTEGER}, #{rnum, jdbcType=INTEGER}, #{rvnum, jdbcType=INTEGER}, 
-										#{evnum, jdbcType=INTEGER}, #{filename}, #{origin_filename}, #{filesize}, #{file_content, jdbcType=VARCHAR}, sysdate)
+										#{evnum, jdbcType=INTEGER}, #{filename}, #{origin_filename}, #{filesize}, #{file_content, jdbcType=VARCHAR}, sysdate, 'n')
+	</insert>
+	
+	<insert id="insertMainFile" parameterType="FileDTO">
+		insert into yeps_files values (yeps_files_seq.nextval, #{mnum, jdbcType=INTEGER}, #{rnum, jdbcType=INTEGER}, #{rvnum, jdbcType=INTEGER}, 
+										#{evnum, jdbcType=INTEGER}, #{filename}, #{origin_filename}, #{filesize}, #{file_content, jdbcType=VARCHAR}, sysdate, 'y')
 	</insert>
 	
 	<update id="updateFileContent" parameterType="java.util.HashMap">
@@ -18,9 +23,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from yeps_files where filename = #{filename, jdbcType=VARCHAR} or filenum = #{filenum, jdbcType=INTEGER} order by filenum desc
 	</select>
 	
-	<delete id="deleteFile" parameterType="int">
-		delete yeps_files where filenum = #{filenum}
-	</delete>
+<!-- 	<delete id="deleteFile" parameterType="int"> -->
+<!-- 		delete yeps_files where filenum = #{filenum} -->
+<!-- 	</delete> -->
 	
 	<delete id="deleteFileToFilename" parameterType="String">
 		delete yeps_files where filename = #{filename}
@@ -31,14 +36,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getFYIEventFile" parameterType="int" resultType="FileDTO">
-		select * from yeps_files where evnum = #{evnum} and rownum = 1 order by filenum desc
+		select * from yeps_files where evnum = #{evnum} and ismainphoto='y'
 	</select>
 	
 	<select id="getTargetEventFiles" parameterType="int" resultType="FileDTO">
 		select * from yeps_files where evnum = #{evnum} order by filenum desc
 	</select>
 	
-	<delete id="deleteFileToEvnum" parameterType="int">
+	<delete id="deleteAllFile" parameterType="int">
 		delete yeps_files where evnum = #{evnum}
 	</delete>
+	
+	<update id="changeEventMainPhoto" parameterType="java.util.HashMap">
+		update yeps_files set ismainphoto='n' where evnum = #{evnum}
+	</update>
+	
+	<update id="setEventMainPhoto" parameterType="java.util.HashMap">
+      update yeps_files set ismainphoto='y' where evnum=#{evnum} and filenum=#{filenum}
+   </update>
+   
+   <select id="isExistEventMainPhoto" parameterType="int" resultType="int">
+      select count(*) from yeps_files where evnum = #{evnum} and ismainphoto = 'y'
+   </select>
+   
+	<select id="getPagedEventFiles" parameterType="java.util.HashMap" resultType="FileDTO">
+		select * from (select rownum rn, A.* from (select * from yeps_files where evnum = #{evnum} order by filenum desc)A) where rn between #{start} and #{end}
+	</select>
 </mapper>

@@ -45,11 +45,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<select id="getThisWeek_EventList" resultType="EventDTO">
-		select * from yeps_event where end_date >= to_char(sysdate+7, 'yyyymmdd') or to_char(sysdate-7, 'yyyymmdd') >= start_date and 5 >= rownum order by event_register_date asc
+		select * from yeps_event where to_char(sysdate+7, 'yyyymmdd') >= end_date or to_char(sysdate-7, 'yyyymmdd') >= start_date and 5 >= rownum order by event_register_date asc
  	</select>
  	
  	<select id="getRandom_EventList" resultType="EventDTO">
- 		select * from yeps_event where end_date >= to_char(sysdate+7, 'yyyymmdd') or to_char(sysdate-7, 'yyyymmdd') >= start_date and 3 >= rownum order by dbms_random.value
+ 		select * from yeps_event where to_char(sysdate+7, 'yyyymmdd') >= end_date or to_char(sysdate-7, 'yyyymmdd') >= start_date and 3 >= rownum order by dbms_random.value
  	</select>
  	
  	<delete id="deleteEvent" parameterType="int">

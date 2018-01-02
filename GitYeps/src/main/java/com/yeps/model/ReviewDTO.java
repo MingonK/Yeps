@@ -4,18 +4,15 @@ public class ReviewDTO {
 	
 	private int rvnum;
 	private int rnum;         
-	private int mnum;         
-	private String writer;
+	private int mnum;
 	private String content;
-	private String joindate;
+	private String reg_date;
 	private int gradepoint;
 	private int filenum;	
 	private String ip;
 	private String recentreview;
-	private int useful;
-	private int funny;
-	private int cool;
-	
+	private MemberDTO memberDTO;
+	private RestaurantDTO restaurantDTO;
 	
 	public int getRvnum() {
 		return rvnum;
@@ -35,23 +32,17 @@ public class ReviewDTO {
 	public void setMnum(int mnum) {
 		this.mnum = mnum;
 	}
-	public String getWriter() {
-		return writer;
-	}
-	public void setWriter(String writer) {
-		this.writer = writer;
-	}
 	public String getContent() {
 		return content;
 	}
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getJoindate() {
-		return joindate;
+	public String getReg_date() {
+		return reg_date;
 	}
-	public void setJoindate(String joindate) {
-		this.joindate = joindate;
+	public void setReg_date(String reg_date) {
+		this.reg_date = reg_date;
 	}
 	public int getGradepoint() {
 		return gradepoint;
@@ -77,25 +68,16 @@ public class ReviewDTO {
 	public void setRecentreview(String recentreview) {
 		this.recentreview = recentreview;
 	}
-	public int getUseful() {
-		return useful;
+	public MemberDTO getMemberDTO() {
+		return memberDTO;
 	}
-	public void setUseful(int useful) {
-		this.useful = useful;
+	public void setMemberDTO(MemberDTO memberDTO) {
+		this.memberDTO = memberDTO;
 	}
-	public int getFunny() {
-		return funny;
+	public RestaurantDTO getRestaurantDTO() {
+		return restaurantDTO;
 	}
-	public void setFunny(int funny) {
-		this.funny = funny;
-	}
-	public int getCool() {
-		return cool;
-	}
-	public void setCool(int cool) {
-		this.cool = cool;
-	}
-	
-	
-	
+	public void setRestaurantDTO(RestaurantDTO restaurantDTO) {
+		this.restaurantDTO = restaurantDTO;
+	}	
 }

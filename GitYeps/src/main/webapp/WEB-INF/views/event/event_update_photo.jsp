@@ -9,12 +9,11 @@
 	<script src="//code.jquery.com/jquery.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 </head>
-<body ondragstart="return false">
-	<%@ include file="../top.jsp"%>
+<%@ include file="../top.jsp"%>
 	<div id="insert_photo_super_wrap">
 		<div id="insert_photo_middle_wrap">
 			<div id="result_photo_status_text">
-				<p>Your photo has been removed.</p>
+				<p>사진을 성공적으로 삭제했습니다.</p>
 			</div>
 			<div id="insert_photo_main_wrap">
 				<div id="main_header">
@@ -59,37 +58,65 @@
 										<div id="user_photo_area">
 											<div id="user_photo_box" style="position: relative;">
 												<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${fileDTO.filename}" alt="event_photo" id="photo_box_img" width="168px" height="168px">
+												<c:if test="${fileDTO.ismainphoto == 'y'}">
+												<div class="photo-box-overlay">
+													<div class="photo-box-overlay_caption">메인사진</div>
+												</div>
+												</c:if>
 											</div>
 										</div>
 										<div id="user_photo_write_info">
 											<p>
 												From 
 												<a href="member_details" style="font-weight: bold;">
+												<!-- 이름 출력 다시 생각해봐 -->
+													
 													<c:choose>
-														<c:when test="${sessionScope.memberinfo.ismanager eq 'y' ||  sessionScope.memberinfo.ismaster eq 'y'}">
+														<c:when test="${sessionScope.memberinfo.ismanager eq 'y' ||  sessionScope.memberinfo.ismaster eq 'y' || eventDTO.mnum == memberinfo.mnum}">
 															<c:if test="${empty registMemberList.get(status.index).nickname}">
 																${registMemberList.get(status.index).email}
 															</c:if>
 															<c:if test="${!empty registMemberList.get(status.index).nickname}">
 																${registMemberList.get(status.index).nickname}
 															</c:if>
+
+<%-- 															<c:forEach var="memberDTO" items="${registMemberList}"> --%>
+<%-- 																<c:if test="${memberDTO.mnum == fileDTO.mnum && empty memberDTO.nickname}"> --%>
+<%-- 																	${memberDTO.email} --%>
+<%-- 																</c:if> --%>
+<%-- 																<c:if test="${memberDTO.mnum == fileDTO.mnum && !empty memberDTO.nickname}"> --%>
+<%-- 																	${memberDTO.nickname} --%>
+<%-- 																</c:if> --%>
+<%-- 															</c:forEach> --%>
 														</c:when>
 														<c:otherwise>
-															<c:if test="${empty sessionScope.memberinfo.nickname}">
-																${sessionScope.memberinfo.email}
+															<c:if test="${memberinfo.mnum == fileDTO.mnum && empty memberinfo.nickname}">
+																${memberinfo.email}
 															</c:if>
-															<c:if test="${not empty sessionScope.memberinfo.nickname}">
-																${sessionScope.memberinfo.nickname}
+															<c:if test="${memberinfo.mnum == fileDTO.mnum && !empty memberinfo.nickname}">
+																${memberinfo.nickname}
 															</c:if>
 														</c:otherwise>
-													</c:choose>													
+													</c:choose>	
 												</a>
 											</p> 
+											
+											<c:if test="${memberinfo.ismaster eq 'y' || memberinfo.ismanager eq 'y' || eventDTO.mnum == memberinfo.mnum || fileDTO.mnum == memberinfo.mnum}">
 											<form name="event_photo_delete_form" id="info_photo" action="event_delete_photo" method="post">
 												<input type="hidden" name="filename" value="${fileDTO.filename}">
 												<input type="hidden" name="evnum" value="${eventDTO.evnum}">
-												<button id="delete_button">Delete</button> 
+												<input type="hidden" name="ismainphoto" value="${fileDTO.ismainphoto}">
+												<button id="delete_button">삭제</button> 
 											</form>
+											</c:if>
+											<c:if test="${(memberinfo.ismaster eq 'y' || memberinfo.ismanager eq 'y' || eventDTO.mnum == memberinfo.mnum) && fileDTO.ismainphoto eq 'n'}">
+											<form name="event_mainphoto_form" id="info_photo" action="event_main_photo" method="post" style="margin-top: 10px;">
+												<input type="hidden" name="filenum" value="${fileDTO.filenum}">
+												<input type="hidden" name="evnum" value="${eventDTO.evnum}">
+												<input type="hidden" name="mnum" value="${eventDTO.mnum}">
+												<button id="mainphoto_button">대표사진 변경</button> 
+											</form>
+											</c:if>
 										</div>
 									</div>
 									
@@ -114,6 +141,13 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	<div class="loading_wapper">
+		<div class="loading_img" style="top: 300; left: 650;">
+		</div>
+	</div>
+	
 	<script type="text/javascript">
  		function fileCheck() {
  			var fileObject = document.getElementById('file_browser_input');
@@ -140,6 +174,16 @@
 					return false;
 				}
  			}
+ 			
+ 			$(document).ajaxStart(function() {
+ 				$('body').css('overflow', 'hidden');
+				$('.loading_wapper').fadeIn(500);
+			})
+			
+			$(document).ajaxStop(function() {
+				$('body').css('overflow', 'auto');
+				$('.loading_wapper').fadeOut(500);
+			})
 	
  			var url = "event_fileUpLoad?evnum=${eventDTO.evnum}";
  			$.ajax({
@@ -150,26 +194,24 @@
  				processData: false,
  				contentType: false,
  				success: function(responseData) {
- 						if(responseData.failed) {
- 							alert("업로드할 수 없는 파일이 존재합니다.");
- 							return false;
- 						} else if (responseData.created_fail) {
- 							alert(responseData.created_fail);
- 							return false;
- 						} else if (responseData.upload_failed) {
- 							alert(responseData.upload_failed)
- 							return false;
- 						}
+ 					if(responseData.failed) {
+ 						alert("업로드할 수 없는 파일이 존재합니다.");
+ 						return false;
+ 					} else if (responseData.created_fail) {
+ 						alert(responseData.created_fail);
+ 						return false;
+ 					} else if (responseData.upload_failed) {
+ 						alert(responseData.upload_failed)
+ 						return false;
+ 					} else if (responseData.update) {
+ 						alert(responseData.update);
+ 						$('#result_photo_status_text').text('사진을 등록했습니다.');
+						$('#result_photo_status_text').show();
+ 					}
+ 	 				$('#sucess_file_upload_header').show();
+ 	 				$('#user_photo_edit_container').show();
  					var uploadFiles = responseData.fileList;
  					location.reload();
- 					
- 					$('#result_photo_status_text').hide();
- 					$('#sucess_file_upload_header').show();
- 					$('#user_photo_edit_container').show();
- 				},
- 				error: function() {
- 					alert("아작스 에러");
- 					return false;
  				}
  			});		
  		}
@@ -231,6 +273,16 @@
 						data.append('files'+i, files[i]);
 					}
 					
+					$(document).ajaxStart(function() {
+						$('body').css('overflow', 'hidden');
+						$('.loading_wapper').fadeIn(500);
+					})
+					
+					$(document).ajaxStop(function() {
+						$('body').css('overflow', 'auto');
+						$('.loading_wapper').fadeOut(500);
+					})
+					
 					var url = "event_fileUpLoad?evnum=${eventDTO.evnum}";
 					$.ajax({
 						url: url,
@@ -240,26 +292,24 @@
 						processData: false,
 						contentType: false,
 						success: function(responseData) {
-								if(responseData.failed) {
-									alert("업로드할 수 없는 파일이 존재합니다.");
-									return false;
-								} else if (responseData.created_fail) {
-									alert(responseData.created_fail);
-									return false;
-								} else if (responseData.upload_failed) {
-									alert(responseData.upload_failed)
-									return false;
-								}
-							var uploadFiles = responseData.fileList;
-							window.location.reload();
-							
-							$('#result_photo_status_text').hide();
-							$('#sucess_file_upload_header').show();
-							$('#user_photo_edit_container').show();
-						},
-						error: function() {
-							alert("아작스 에러");
+							if(responseData.failed) {
+								alert("업로드할 수 없는 파일이 존재합니다.");
+								return false;
+							} else if (responseData.created_fail) {
+								alert(responseData.created_fail);
 							return false;
+							} else if (responseData.upload_failed) {
+								alert(responseData.upload_failed)
+								return false;
+							} else if (responseData.update) {
+		 						alert(responseData.update);
+		 						$('#result_photo_status_text').text('사진을 등록했습니다.');
+								$('#result_photo_status_text').show();
+		 					}
+							$('#sucess_file_upload_header').show();
+		 	 				$('#user_photo_edit_container').show();
+		 					var uploadFiles = responseData.fileList;
+		 					location.reload();
 						}
 					});
 				});
@@ -268,8 +318,11 @@
 		});
 		
 		$(document).ready(function() {
-			var del = '${delete}';
-			if(del) {
+			var mode = '${mode}';
+			if(mode == 'delete') {
+				$('#result_photo_status_text').show();
+			} else if(mode == 'update'){
+				$('#result_photo_status_text').text('메인 사진을 성공적으로 변경했습니다.');
 				$('#result_photo_status_text').show();
 			} else {
 				$('#result_photo_status_text').hide();

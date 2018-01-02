@@ -233,7 +233,6 @@
 		list.push("${memberPhotoDTO.filename}");
 	</c:forEach>
 	for(var i = 0; i < list.length; i++) {
-// 		var img = $("<img>").attr("src", "getImage/" + list[i]).css('vertical-align', 'middle').css('display', 'inline-block').css('max-width', '100%').css('max-height', '100%');
 		var img = $("<img>").attr("src", "https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/" + list[i]).css('vertical-align', 'middle').css('display', 'inline-block').css('max-width', '100%').css('max-height', '100%');
 		$('#popup_slideshow_img').append(img);
 	}

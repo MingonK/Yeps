@@ -2,14 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<link rel="shortcut icon" type="image⁄x-icon" href="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/favicon.ico">
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css?ver=1"/>"/>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/mainPage.css?ver=1"/>"/>
-<%-- <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css?ver=1"/>"/> --%>
 <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 
-<body>
+<body ondragstart="return false">
 <input type="hidden" id="set" value="${set}">
 <div id="wrap" style="background: white;">
 <div id="page_header">
@@ -251,7 +251,7 @@
                                  				<span class="ybadge ybadge--notification ">${sessionScope.noneCount}</span>
                               				</c:if>
 										</a>
-										<a href="#" class="header-nav_link show-tooltip js-analytics-click" id="notifications-icon" data-analytics-label="notifications_icon">
+										<a href="member_details" class="header-nav_link show-tooltip js-analytics-click" id="notifications-icon" data-analytics-label="notifications_icon">
 											<span aria-label="Notifications" style="width: 24px; height: 24px;" class="icon icon--24-notification icon--size-24 icon--white icon--fallback-inverted">
 												<svg class="icon_svg">
 													<path d="M20.984 17.177A1 1 0 0 1 20 18H4a1 1 0 0 1-.348-1.938c2.43-.9 3.74-4.605 3.74-7.634 0-1.75 1.07-3.253 2.608-3.97V4a2 2 0 0 1 4 0v.457c1.538.718 2.61 2.22 2.61 3.97 0 3.03 1.31 6.734 3.738 7.635a1 1 0 0 1 .636 1.115zM12 22a3 3 0 0 1-3-3h6a3 3 0 0 1-3 3z"></path>
@@ -513,7 +513,7 @@
 								</li>
 								<li id="footer_list_li_review">
 									<div>
-										<a href="#" id="footer_list_li_unit"> 
+										<a href="review_restaurantIMG" id="footer_list_li_unit"> 
 											Write a Review
 										</a>
 									</div>

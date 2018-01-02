@@ -86,10 +86,10 @@ public class RestaurantController {
 		File file = new File(uploadPath, saveFileName);
 		try {
 			mf.transferTo(file);
-			dto.setFilename(saveFileName);
+			dto.setRest_filename(saveFileName);
 		} catch (Exception e) {
 			e.printStackTrace();
-			dto.setFilename("");
+			dto.setRest_filename("");
 		}
 		
 		int res=restaurantMapper.insertRest(dto);
@@ -167,7 +167,7 @@ public class RestaurantController {
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
-			int res = fileMapper.insertFile(dto);
+			int res = fileMapper.insertFile(dto, "");
 			if(res>0) {
 				msg="사진 등록 성공";
 				url="restaurant_content?rnum="+rnum;
@@ -267,8 +267,10 @@ public class RestaurantController {
 	
 	
 	@RequestMapping(value="/restaurant_content")
-	public ModelAndView contentRest(@RequestParam int rnum,@RequestParam(defaultValue="1")int curPage){
-		int count = reviewMapper.getRestaurantReviewCount(rnum);
+	public ModelAndView contentRest(HttpServletRequest req, @RequestParam(defaultValue="1")int curPage){
+		String rnum = req.getParameter("rnum");
+		
+		int count = reviewMapper.getRestaurantReviewCount(Integer.parseInt(rnum));
 		int pageScale=10;
 		int blockScale=10;
 		YepsPager YepsPager = new YepsPager(count, curPage,pageScale,blockScale); 
@@ -281,31 +283,31 @@ public class RestaurantController {
 	    map.put("count", count); // 레코드의 갯수
 	    map.put("YepsPager", YepsPager);
 		
-		RestaurantDTO getRest = restaurantMapper.getRest(rnum);//가게 1개 정보
-		List<FileDTO> uploadFileList = restaurantMapper.getFileList(rnum);//가게 업로드 파일
-		int getImageCount=restaurantMapper.getImageCount(rnum);//가게 업로드 파일 갯수
-		int reviewCount=reviewMapper.getRestaurantReviewCount(rnum);
+		RestaurantDTO getRest = restaurantMapper.getRest(Integer.parseInt(rnum));//가게 1개 정보
+		List<FileDTO> uploadFileList = restaurantMapper.getFileList(Integer.parseInt(rnum));//가게 업로드 파일
+		int getImageCount=restaurantMapper.getImageCount(Integer.parseInt(rnum));//가게 업로드 파일 갯수
+		int reviewCount=reviewMapper.getRestaurantReviewCount(Integer.parseInt(rnum));
 		
 		
-        List<ReviewDTO> reviewList = reviewMapper.getSelectedRestaurant_Rv(rnum);//가게 리뷰
-        List<Integer> rvmnumList = reviewMapper.getSelectedRestaurant_Rv_M(rnum);
-        int starAvg=reviewMapper.getStarAvg(rnum);
+        List<ReviewDTO> reviewList = reviewMapper.getSelectedRestaurant_Rv(Integer.parseInt(rnum));//가게 리뷰
+        List<Integer> rvmnumList = reviewMapper.getSelectedRestaurant_Rv_M(Integer.parseInt(rnum));
+        int starAvg=reviewMapper.getStarAvg(Integer.parseInt(rnum));
         
         List<MemberDTO> memberList = new ArrayList<MemberDTO>();
         for(int i=0; i<rvmnumList.size(); i++) {
            int mnum = rvmnumList.get(i);
            memberList.addAll(memberMapper.getSelectedRestaurant_M(mnum));
         }
-        
-        
+           
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("selectedDataM", memberList);
 		mav.addObject("map", map); 
 		mav.addObject("getRest", getRest);
 		mav.addObject("uploadFileList", uploadFileList);
 		mav.addObject("getImageCount",getImageCount);
 		mav.addObject("reviewCount",reviewCount);
 		mav.addObject("starAvg",starAvg);
-//	    mav.addObject("selectedDataM", memberList);
+	    mav.addObject("selectedDataM", memberList);
 	    mav.addObject("selectedDataRV", reviewList);
 		mav.setViewName("restaurant/restaurant_content");
 		return mav; 

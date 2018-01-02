@@ -98,8 +98,8 @@
         select * from yeps_member where mnum = #{NBPmnum}
      </select>
 
-   <select id="getMemberInfo" parameterType="int" resultType="MemberDTO">
-      select * from yeps_member where mnum= #{mnum}
+   <select id="getMemberForEmail" parameterType="int" resultType="MemberDTO">
+      select * from yeps_member where email= #{email}
    </select>
 
    <select id="previous_M" parameterType="int" resultType="MemberDTO">
@@ -125,7 +125,7 @@
    
    <!-- 12월 29일 추가 -->
 	<select id="SearchedDTO_M" parameterType="int" resultType="MemberDTO"> 
-		select *from yeps_member where mnum= #{mnum} 
+		select * from yeps_member where mnum= #{mnum} 
 	</select>
    
    	<update id="reviewCount" parameterType="java.util.HashMap">

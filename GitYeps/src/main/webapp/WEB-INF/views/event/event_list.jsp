@@ -159,74 +159,6 @@
 										<span class="data-dropdown-prefix" style="font-size: 14px;">Sort by: </span>
 										<span class="dropdow_toggle_text">
 											<c:choose>
-												<c:when test="${mode == popular}">
-													인기 순
-												</c:when>
-												<c:when test="${mode == 'recently'}">
-													최신 등록 순
-												</c:when>
-												<c:when test="${mode == 'free'}">
-													무료 이벤트
-												</c:when>
-												<c:otherwise>
-													인기 순
-												</c:otherwise>
-											</c:choose>
-										</span>
-										<span class="icon" style="left: -3px; width: 14px; height: 14px; fill: currentColor;">
-											<svg class="icon_svg" id="14x14_triangle_down" weight="100%" height="100%" viewbox="0 0 14 14">
-												<path d="M7 9L3.5 5h7L7 9z"></path>
-											</svg>
-										</span>
-									</a>
-								</div>
-								
-								<div class="event_browse_filter_itmes_dropdown_menu_container">
-									<div class="event_browse_filter_itmes_dropdown_menu">
-										<div class="event_browse_dropdown_menu_inner">
-											<ul class="event_browse_dropdown_menu_group">
-												<li class="event_browse_dropdown_menu_item">
-													<a href="event_list?mode=popular" class="dropdown_menu_item_link">
-														<span style="display: inline-block;">
-															인기 순
-														</span>
-													</a>
-												</li>
-												<li class="event_browse_dropdown_menu_item">
-													<a href="event_list?mode=recently" class="dropdown_menu_item_link">
-														<span style="display: inline-block;">
-															최신 등록 순
-														</span>
-													</a>
-												</li>
-												<li class="event_browse_dropdown_menu_item">
-													<a href="event_list?mode=date" class="dropdown_menu_item_link">
-														<span style="display: inline-block;">
-															등록 날짜 순
-														</span>
-													</a>
-												</li>
-												<li class="event_browse_dropdown_menu_item">
-													<a href="event_list?mode=free" class="dropdown_menu_item_link">
-														<span style="display: inline-block;">
-															무료 이벤트
-														</span>
-													</a>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
-				
-						
-						<li class="event_browse_filter_tap_items">
-							<div class="event_browse_filter_tap_items_dropdown">
-								<div class="event_browse_filter_itmes_dropdown_toggle">
-									<a class="dropdown_toggle_action" href="#" role="button" style="padding-right: 0;">
-										<span class="dropdow_toggle_text" style="font-weight: normal; font-size: 13px;">
-											<c:choose>
 												<c:when test="${empty mode}">
 													전체 목록
 												</c:when>
@@ -263,10 +195,25 @@
 												<c:when test="${mode == 'other'}">
 													기타
 												</c:when>
-												<c:otherwise>
-													전체 목록
-												</c:otherwise>
+												
+												<c:when test="${mode == 'free'}">
+													무료 이벤트
+												</c:when>
+												
 											</c:choose>
+											
+											
+											
+<%-- 											<c:when test="${mode == popular}"> --%>
+<!-- 													인기 순 -->
+<%-- 												</c:when> --%>
+<%-- 												<c:when test="${mode == 'recently'}"> --%>
+<!-- 													최신 등록 순 -->
+<%-- 												</c:when> --%>
+												
+<%-- 												<c:otherwise> --%>
+<!-- 													인기 순 -->
+<%-- 												</c:otherwise> --%>
 										</span>
 										<span class="icon" style="left: -3px; width: 14px; height: 14px; fill: currentColor;">
 											<svg class="icon_svg" id="14x14_triangle_down" weight="100%" height="100%" viewbox="0 0 14 14">
@@ -280,6 +227,29 @@
 									<div class="event_browse_filter_itmes_dropdown_menu">
 										<div class="event_browse_dropdown_menu_inner">
 											<ul class="event_browse_dropdown_menu_group">
+<!-- 												<li class="event_browse_dropdown_menu_item"> -->
+<!-- 													<a href="event_list?mode=popular" class="dropdown_menu_item_link"> -->
+<!-- 														<span style="display: inline-block;"> -->
+<!-- 															인기 순 -->
+<!-- 														</span> -->
+<!-- 													</a> -->
+<!-- 												</li> -->
+<!-- 												<li class="event_browse_dropdown_menu_item"> -->
+<!-- 													<a href="event_list?mode=recently" class="dropdown_menu_item_link"> -->
+<!-- 														<span style="display: inline-block;"> -->
+<!-- 															최신 등록 순 -->
+<!-- 														</span> -->
+<!-- 													</a> -->
+<!-- 												</li> -->
+<!-- 												<li class="event_browse_dropdown_menu_item"> -->
+<!-- 													<a href="event_list?mode=date" class="dropdown_menu_item_link"> -->
+<!-- 														<span style="display: inline-block;"> -->
+<!-- 															등록 날짜 순 -->
+<!-- 														</span> -->
+<!-- 													</a> -->
+<!-- 												</li> -->
+												
+											
 												<li class="event_browse_dropdown_menu_item">
 													<a href="event_list" class="dropdown_menu_item_link">
 														<span style="display: inline-block;">
@@ -363,13 +333,171 @@
 															기타
 														</span>
 													</a>
-												</li>					
+												</li>
+												<li class="event_browse_dropdown_menu_item">
+													<a href="event_list?mode=free" class="dropdown_menu_item_link">
+														<span style="display: inline-block;">
+															무료 이벤트
+														</span>
+													</a>
+												</li>
 											</ul>
 										</div>
 									</div>
 								</div>
 							</div>
 						</li>
+				
+						
+<!-- 						<li class="event_browse_filter_tap_items"> -->
+<!-- 							<div class="event_browse_filter_tap_items_dropdown"> -->
+<!-- 								<div class="event_browse_filter_itmes_dropdown_toggle"> -->
+<!-- 									<a class="dropdown_toggle_action" href="#" role="button" style="padding-right: 0;"> -->
+<!-- 										<span class="dropdow_toggle_text" style="font-weight: normal; font-size: 13px;"> -->
+<%-- 											<c:choose> --%>
+<%-- 												<c:when test="${empty mode}"> --%>
+<!-- 													전체 목록 -->
+<%-- 												</c:when> --%>
+<%-- 												<c:when test="${mode == 'music_concert'}"> --%>
+<!-- 													음악 & 콘서트 -->
+<%-- 												</c:when> --%>
+<%-- 												<c:when test="${mode == 'visualart'}"> --%>
+<!-- 													전시회 -->
+<%-- 												</c:when> --%>
+<%-- 												<c:when test="${mode == 'film'}"> --%>
+<!-- 													영화 & 시사회 -->
+<%-- 												</c:when> --%>
+<%-- 												<c:when test="${mode == 'book'}"> --%>
+<!-- 													도서 & 출판 -->
+<%-- 												</c:when> --%>
+<%-- 												<c:when test="${mode == 'fashion'}"> --%>
+<!-- 													패션 -->
+<%-- 												</c:when> --%>
+<%-- 												<c:when test="${mode == 'food'}"> --%>
+<!-- 													음식 -->
+<%-- 												</c:when> --%>
+<%-- 												<c:when test="${mode == 'festival'}"> --%>
+<!-- 													축제 & 행사 -->
+<%-- 												</c:when> --%>
+<%-- 												<c:when test="${mode == 'sports_activity'}"> --%>
+<!-- 													스포츠 & 야외활동 -->
+<%-- 												</c:when> --%>
+<%-- 												<c:when test="${mode == 'nightlife'}"> --%>
+<!-- 													야간 문화활동 -->
+<%-- 												</c:when> --%>
+<%-- 												<c:when test="${mode == 'family_kids'}"> --%>
+<!-- 													가족 & 어린이 -->
+<%-- 												</c:when> --%>
+<%-- 												<c:when test="${mode == 'other'}"> --%>
+<!-- 													기타 -->
+<%-- 												</c:when> --%>
+<%-- 												<c:otherwise> --%>
+<!-- 													전체 목록 -->
+<%-- 												</c:otherwise> --%>
+<%-- 											</c:choose> --%>
+<!-- 										</span> -->
+<!-- 										<span class="icon" style="left: -3px; width: 14px; height: 14px; fill: currentColor;"> -->
+<!-- 											<svg class="icon_svg" id="14x14_triangle_down" weight="100%" height="100%" viewbox="0 0 14 14"> -->
+<!-- 												<path d="M7 9L3.5 5h7L7 9z"></path> -->
+<!-- 											</svg> -->
+<!-- 										</span> -->
+<!-- 									</a> -->
+<!-- 								</div> -->
+								
+<!-- 								<div class="event_browse_filter_itmes_dropdown_menu_container"> -->
+<!-- 									<div class="event_browse_filter_itmes_dropdown_menu"> -->
+<!-- 										<div class="event_browse_dropdown_menu_inner"> -->
+<!-- 											<ul class="event_browse_dropdown_menu_group"> -->
+<!-- 												<li class="event_browse_dropdown_menu_item"> -->
+<!-- 													<a href="event_list" class="dropdown_menu_item_link"> -->
+<!-- 														<span style="display: inline-block;"> -->
+<!-- 															전체 목록 -->
+<!-- 														</span> -->
+<!-- 													</a> -->
+<!-- 												</li> -->
+<!-- 												<li class="event_browse_dropdown_menu_item"> -->
+<!-- 													<a href="event_list?mode=music_concert" class="dropdown_menu_item_link"> -->
+<!-- 														<span style="display: inline-block;"> -->
+<!-- 															음악 & 콘서트 -->
+<!-- 														</span> -->
+<!-- 													</a> -->
+<!-- 												</li> -->
+<!-- 												<li class="event_browse_dropdown_menu_item"> -->
+<!-- 													<a href="event_list?mode=visualart" class="dropdown_menu_item_link"> -->
+<!-- 														<span style="display: inline-block;"> -->
+<!-- 															전시회 -->
+<!-- 														</span> -->
+<!-- 													</a> -->
+<!-- 												</li> -->
+<!-- 												<li class="event_browse_dropdown_menu_item"> -->
+<!-- 													<a href="event_list?mode=film" class="dropdown_menu_item_link"> -->
+<!-- 														<span style="display: inline-block;"> -->
+<!-- 															영화 & 시사회 -->
+<!-- 														</span> -->
+<!-- 													</a> -->
+<!-- 												</li> -->
+<!-- 												<li class="event_browse_dropdown_menu_item"> -->
+<!-- 													<a href="event_list?mode=book" class="dropdown_menu_item_link"> -->
+<!-- 														<span style="display: inline-block;"> -->
+<!-- 															도서 & 출판 -->
+<!-- 														</span> -->
+<!-- 													</a> -->
+<!-- 												</li> -->
+<!-- 												<li class="event_browse_dropdown_menu_item"> -->
+<!-- 													<a href="event_list?mode=fashion" class="dropdown_menu_item_link"> -->
+<!-- 														<span style="display: inline-block;"> -->
+<!-- 															패션 -->
+<!-- 														</span> -->
+<!-- 													</a> -->
+<!-- 												</li> -->
+<!-- 												<li class="event_browse_dropdown_menu_item"> -->
+<!-- 													<a href="event_list?mode=food" class="dropdown_menu_item_link"> -->
+<!-- 														<span style="display: inline-block;"> -->
+<!-- 															음식 -->
+<!-- 														</span> -->
+<!-- 													</a> -->
+<!-- 												</li> -->
+<!-- 												<li class="event_browse_dropdown_menu_item"> -->
+<!-- 													<a href="event_list?mode=festival" class="dropdown_menu_item_link"> -->
+<!-- 														<span style="display: inline-block;"> -->
+<!-- 															축제 & 행사 -->
+<!-- 														</span> -->
+<!-- 													</a> -->
+<!-- 												</li> -->
+<!-- 												<li class="event_browse_dropdown_menu_item"> -->
+<!-- 													<a href="event_list?mode=sports_activity" class="dropdown_menu_item_link"> -->
+<!-- 														<span style="display: inline-block;"> -->
+<!-- 															스포츠 & 야외활동 -->
+<!-- 														</span> -->
+<!-- 													</a> -->
+<!-- 												</li> -->
+<!-- 												<li class="event_browse_dropdown_menu_item"> -->
+<!-- 													<a href="event_list?mode=nightlife" class="dropdown_menu_item_link"> -->
+<!-- 														<span style="display: inline-block;"> -->
+<!-- 															야간 문화활동 -->
+<!-- 														</span> -->
+<!-- 													</a> -->
+<!-- 												</li> -->
+<!-- 												<li class="event_browse_dropdown_menu_item"> -->
+<!-- 													<a href="event_list?mode=family_kids" class="dropdown_menu_item_link"> -->
+<!-- 														<span style="display: inline-block;"> -->
+<!-- 															가족 & 어린이 -->
+<!-- 														</span> -->
+<!-- 													</a> -->
+<!-- 												</li> -->
+<!-- 												<li class="event_browse_dropdown_menu_item"> -->
+<!-- 													<a href="event_list?mode=other" class="dropdown_menu_item_link"> -->
+<!-- 														<span style="display: inline-block;"> -->
+<!-- 															기타 -->
+<!-- 														</span> -->
+<!-- 													</a> -->
+<!-- 												</li>					 -->
+<!-- 											</ul> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</li> -->
 					</ul>
 				</div>
 			</div>
@@ -410,7 +538,7 @@
 											</a>									
 										</div>
 									</c:if>
-									<c:if test="${fileDTO.filename != 'nothing'}">
+									<c:if test="${fileDTO.filename != 'nothing' && fileDTO.ismainphoto == 'y'}">
 										<div class="event_list_photo_box" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${fileDTO.filename});">
 											<a href="event_content?evnum=${eventDTO.evnum}">
 												<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${fileDTO.filename}" height="300" width="300" class="event_list_photo_box_img">

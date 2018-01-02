@@ -63,6 +63,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="review_restaurantIMG" resultType="RestaurantDTO">
         select * from yeps_restaurant where 19 >= rownum 
      </select>
+     
+     <!-- 12월 31일 지원 추가 -->
+	<select id="getHotAndNewRestaurant" resultType="RestaurantDTO">
+		select * from yeps_restaurant where rnum=#{rnum}
+	</select>
+	
+	<!-- 이벤트랑 연결 -->
+	<select id="findRestaurant" parameterType="java.util.HashMap" resultType="RestaurantDTO">
+		select * from yeps_restaurant where zipNo = #{zipNo} and roadAddrPart1 = #{roadAddrPart1} and roadAddrPart2 = #{roadAddrPart2} and addrDetail = #{addrDetail}
+	</select>
 </mapper>
 
 

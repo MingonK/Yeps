@@ -11,6 +11,7 @@ public class FileDTO {
 	private int filesize;
 	private String file_content;
 	private String file_upload_date;
+	private String ismainphoto;
 	
 	public int getFilenum() {
 		return filenum;
@@ -71,6 +72,12 @@ public class FileDTO {
 	}
 	public void setFile_upload_date(String file_upload_date) {
 		this.file_upload_date = file_upload_date;
+	}
+	public String getIsmainphoto() {
+		return ismainphoto;
+	}
+	public void setIsmainphoto(String ismainphoto) {
+		this.ismainphoto = ismainphoto;
 	}
 	
 }

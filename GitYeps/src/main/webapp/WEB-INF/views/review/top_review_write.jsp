@@ -15,7 +15,7 @@
              <div class="review_template_write_div4">
                 <div class="review_template_write_div5">
                    <div class="review_template_write_div6">
-                      <a class="review_template_write_a_3" href="#">
+                      <a class="review_template_write_a_3" href="main">
                          Yelp
                       </a>   
                    </div>
@@ -33,12 +33,12 @@
                 <div class="review_template_write_div8">
                    <ul class="review_template_write_ul_1">
                       <li class="review_template_write_li_1">
-                         <a class="review_template_write_a_1" href="#">
+                         <a class="review_template_write_a_1" href="member_login">
                             Log In
                          </a>
                       </li>
                       <li class="review_template_write_li_2">
-                         <a class="review_template_write_a_2" href="#">
+                         <a class="review_template_write_a_2" href="member_login?mode=signup">
                             Sign Up
                          </a>
                       </li>

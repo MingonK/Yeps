@@ -49,7 +49,7 @@ public class ReviewMapper {
 	}
 
 	public ReviewDTO review_mylist_info(int NBPmnum) {
-		return sqlSession.selectOne("review_mylist_info", NBPmnum);
+		return sqlSession.selectOne("review_mylist_info", NBPmnum); 
 	}
 
 	public int review_mylist_updatedata(int rvnum) {
@@ -108,5 +108,10 @@ public class ReviewMapper {
 
 	public String Get_InsertReviewDate() {
 		return sqlSession.selectOne("Get_InsertReviewDate");
+	}
+
+	// 12월 31일 지원 추가
+	public List<Integer> gethotAndNewReview() {
+		return sqlSession.selectList("gethotAndNewReview");
 	}
 }

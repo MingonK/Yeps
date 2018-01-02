@@ -20,6 +20,7 @@ public class MemberDTO {
 	private String salt;
 	private String nickname;
 	private String address;
+	private MemberPhotoDTO memberPhotoDTO;
 
 	public int getMnum() {
 		return mnum;
@@ -171,6 +172,13 @@ public class MemberDTO {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public MemberPhotoDTO getMemberPhotoDTO() {
+		return memberPhotoDTO;
+	}
+
+	public void setMemberPhotoDTO(MemberPhotoDTO memberPhotoDTO) {
+		this.memberPhotoDTO = memberPhotoDTO;
 	}
 
 	@Override

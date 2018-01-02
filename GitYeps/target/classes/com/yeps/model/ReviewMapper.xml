@@ -15,7 +15,7 @@
   	</select>
  	
 	<insert id="insertReview" parameterType="ReviewDTO">
-  		insert into yeps_review values (yeps_review_seq.nextval, #{rnum}, #{mnum}, #{content}, sysdate, #{gradepoint}, #{filenum}, #{ip}, #{recentreview}, #{useful}, #{funny}, #{cool})
+  		insert into yeps_review values (yeps_review_seq.nextval, #{rnum}, #{mnum}, #{content}, sysdate, #{gradepoint}, #{filenum}, #{ip}, #{recentreview})
   	</insert>
   	
   	<delete id="deleteReview" parameterType="int">
@@ -38,9 +38,9 @@
   		select mnum from yeps_review where rnum = #{rnum}
   	</select>
   	
-  	<select id="review_mylist_info" parameterType="int" resultType="ReviewDTO">
-  		select * from yeps_review where mnum = #{NBPmnum} and rvnum = (select max(rvnum) from yeps_review where gradepoint=(select max(gradepoint) from yeps_review))
-  	</select>
+<!--   	<select id="review_mylist_info" parameterType="int" resultType="ReviewDTO"> -->
+<!--   		select * from yeps_review where mnum = #{NBPmnum} and rvnum = (select max(rvnum) from yeps_review where gradepoint=(select max(gradepoint) from yeps_review)) -->
+<!--   	</select> -->
   	
   	<update id="review_mylist_updatedata" parameterType="int">
   		update yeps_review set recentreview='y' where rvnum = #{rvnum}
@@ -50,9 +50,9 @@
   		select rnum from yeps_review where mnum = #{NBPmnum}
   	</select>
   	
-  	<select id="recentReviewInfo" resultType="ReviewDTO">
-  		select rvnum, gradepoint, content from yeps_review order by rvnum desc
-  	</select>
+<!--   	<select id="recentReviewInfo" resultType="ReviewDTO"> -->
+<!--   		select rvnum, gradepoint, content from yeps_review order by rvnum desc -->
+<!--   	</select> -->
   	
   	<select id="numList" parameterType="int" resultType="ReviewDTO">
   		select rnum, mnum from yeps_review where rvnum= #{reviewIntList}
@@ -99,5 +99,102 @@
 	<select id="getRestaurantReviewCount" resultType="int">
       select count(*) from yeps_review where rnum = #{rnum}
    </select>
+   
+   <!-- 12월 31일 핫앤 뉴 -->
+   <select id="gethotAndNewReview" resultType="int">
+      select rnum,count(*)*avg(gradepoint)/2 AS AVG from yeps_review group by rnum order by AVG asc
+   </select>
+   
+   
+   
+   
+   
+   
+   
+   
+   	<resultMap type="reviewDTO" id="reviewMap">
+		<id column="rvnum" property="rvnum"/>
+		<result column="rnum" property="rnum"></result>
+		<result column="content" property="content"></result>
+		<result column="reg_date" property="reg_date"></result>
+		<result column="gradepoint" property="gradepoint"></result>
+		
+		<association javaType="MemberDTO" property="memberDTO">
+			<id column="mnum" property="mnum"></id>
+			<result column="email" property="email"></result>
+			<result column="reviewcount" property="reviewcount"></result>
+			<result column="nickname" property="nickname"></result>
+			<association javaType="MemberPhotoDTO" property="memberPhotoDTO">
+				<id column="filenum" property="filenum"></id>
+				<result column="filename" property="filename"></result>
+				<result column="ismainphoto" property="ismainphoto"></result>
+			</association>
+		</association>
+	</resultMap>
+   
+   <select id="review_mylist_info" parameterType="int" resultMap="reviewMap">
+  		 select
+  		 		R.rvnum
+        		, R.rnum
+        		, R.content
+        		, R.reg_date
+        		, R.gradepoint
+        		, M.email
+        		, M.reviewcount
+        		, M.nickname
+        		, P.filename
+        		, P.ismainphoto
+        from	yeps_review R, yeps_member M, yeps_member_photos P
+        where	R.mnum = M.mnum and R.mnum = P.mnum and R.rvnum = (select max(rvnum) from yeps_review where gradepoint=(select max(gradepoint) from yeps_review))
+        and		P.ismainphoto = 'y' and R.mnum = #{mnum} 
+  	</select>
+  	
+  	
+  	<resultMap type="ReviewDTO" id="recentReviewMap">
+  		<id column="rvnum" property="rvnum"/>
+		<result column="rnum" property="rnum"></result>
+		<result column="content" property="content"></result>
+		<result column="reg_date" property="reg_date"></result>
+		<result column="gradepoint" property="gradepoint"></result>
+		
+		<association javaType="MemberDTO" property="memberDTO">
+			<id column="mnum" property="mnum"></id>
+			<result column="email" property="email"></result>
+			<result column="reviewcount" property="reviewcount"></result>
+			<result column="nickname" property="nickname"></result>
+			<association javaType="MemberPhotoDTO" property="memberPhotoDTO">
+				<id column="filenum" property="filenum"></id>
+				<result column="filename" property="filename"></result>
+				<result column="ismainphoto" property="ismainphoto"></result>
+			</association>
+		</association>
+		
+		<association javaType="RestaurantDTO" property="restaurantDTO">
+			<id column="rnum" property="rnum"></id>
+			<result column="rname" property="rname"></result>
+			<result column="rest_filename" property="rest_filename"></result>
+		</association>
+  	</resultMap>
+   
+   
+	<select id="recentReviewInfo" resultMap="recentReviewMap">
+  		 select
+  		 		R.rvnum
+        		, R.rnum
+        		, R.content
+        		, R.reg_date
+        		, R.gradepoint
+        		, M.email
+        		, M.reviewcount
+        		, M.nickname
+        		, P.filename
+        		, RT.rname
+        		, RT.rest_filename
+        from	yeps_review R, yeps_member M, yeps_member_photos P, yeps_restaurant RT
+        where	R.mnum = M.mnum and R.mnum = P.mnum and R.rnum = RT.rnum and P.ismainphoto = 'y'
+        order by R.rvnum desc
+	</select>
+   
+   
   	
 </mapper>		

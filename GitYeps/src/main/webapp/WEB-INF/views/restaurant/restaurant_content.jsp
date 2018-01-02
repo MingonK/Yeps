@@ -25,7 +25,7 @@
 						<div class="biz-main-info embossed-text-white"style="margin-top: 9px;text-shadow: 0 1px rgba(255,255,255,0.7);">
 							<div class="rating-info clearfix" style="margin-bottom: 9px;height:auto;overflow:hidden;">
 								<div class="biz-rating biz-rating-very-large clearfix" style="float: left; line-height: 24px; margin-bottom: 0;">
-									<div class="restContent-star-rating-${starAvg }">
+									<div class="restContent-star-rating-${starAvg}">
 										<img class="offscreen" height="303"
 										src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png"
 										width="84" alt="4.0 star rating"
@@ -362,9 +362,9 @@
 													<div class="restContent-arrange-middle" style="margin-bottom: 6px !important; display: table; min-width: 100%; table-layout: auto;">
 														<div class="restContent-feed-search" style="  vertical-align: middle;width: 100%;    box-sizing: border-box;display: table-cell;">
 															<div class="restContent-section-header-search" style="">
-																<form class="restContent-form" name="restContent" style="margin-bottom: 0;display: table;min-width: 100%;table-layout: auto;" action="" method="post">
+																<form class="restContent-form" name="restContent" style="margin-bottom: 0;display: table;min-width: 100%;table-layout: auto;" action="review_keyword?rname=${getRest.rname}" method="post">
 																<div class="restContent-arrange-unit" style="width: 100%;box-sizing: border-box;display: table-cell;vertical-align: top;">
-																	<input type="text" placeholder="Search within the reviews" name="review_name" value="" autocomplete="on" style="margin: 0; display: block; box-sizing: border-box; width: 100%; padding: 5px 9px; background: #fff; border: 1px solid #999; border-radius: 3px; font-size: 14px; line-height: 1.29em; color: inherit; font: inherit; font-weight: normal;">
+																	<input type="text" placeholder="Search within the reviews" name="SearchKeyword" autocomplete="on" style="margin: 0; display: block; box-sizing: border-box; width: 100%; padding: 5px 9px; background: #fff; border: 1px solid #999; border-radius: 3px; font-size: 14px; line-height: 1.29em; color: inherit; font: inherit; font-weight: normal;">
 																</div>
 																<div class="rsetContent-arrange-unit-button" style="box-sizing: border-box;display: table-cell;vertical-align: top;">
 																	<button type="submit" value="submit" class="restInsert-button" style="position: relative; left: -4px; width: calc(100% + 4px); border-radius: 0 3px 3px 0; box-shadow: none; padding: 5px 8px; font-size: 12px; line-height: 1.5em; color: white; border-color: #8d0005; background-color: #d90007; background: linear-gradient(#d90007, #c91400);">
@@ -412,7 +412,7 @@
 												<div class="restContent-review-widget" style="width:100%;overflow:hidden;height:auto;">
 													<div class="restContent-user" style="float: left;padding: 0 15px;min-height: 1px;    box-sizing: border-box;width: 37.5%;">
 														<div class="restContent-user-content" style="margin-top: -3px;">
-															<img src="https://s3-media4.fl.yelpcdn.com/assets/2/www/img/b5b7ea174ecb/writeareview/empty_profile.png" srcset="https://s3-media2.fl.yelpcdn.com/assets/2/www/img/0a027d2e0fcf/writeareview/empty_profile@2x.png 2x" width="148" height="68">
+															<img src="https://s3-media4.fl.yelpcdn.com/assets/2/www/img/b5b7ea174ecb/writeareview/empty_profile.png" height="68">
 														</div>
 													</div>
 												<div class="restContent-review-wrapper" style="float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 62.5%;">
@@ -459,8 +459,8 @@
 
 															</fieldset>
 														</div>
-														<a class="restContent-text-link" href="#" style="color: #0073bb;text-decoration: none;    cursor: pointer;    text-align: center !important;">
-										                    Start your review of <strong style="font-weight: bold;">Brenda's French Soul Food</strong>.
+														<a class="restContent-text-link" href="review_write?rnum=${getRest.rnum}" style="color: #0073bb;text-decoration: none;    cursor: pointer;    text-align: center !important;">
+										                    Start your review of <strong style="font-weight: bold;">${getRest.rname}</strong>.
 										                </a>
 														</div>
 													</div>
