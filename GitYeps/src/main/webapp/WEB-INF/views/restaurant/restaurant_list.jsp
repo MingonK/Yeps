@@ -203,7 +203,9 @@
 <!-- 		<div id="loading" > -->
 <!-- 		</div> -->
 <!-- 			<img id="loading-image" src="resources/img/loading.gif" alt="Loading..." /> -->
+
 			<div class="column-alpha2" style="width:700px; height:100%;display:inline-block;float:left;padding:0px 15px 0px 15px">
+
 				<ul style="list-style: none;display: block;">
 					<c:forEach var="dto" items="${map.list}" varStatus="status">
 						<li style="margin: 0;padding: 18px 0;border-top: 1px solid #e6e6e6;padding-top: 17px;display: list-item;text-align: -webkit-match-parent;">
@@ -214,7 +216,11 @@
 											<div class="midea-avata"style="border-right: 12px solid transparent; border-left: none;">
 												<div class="photo-box" >
 													<a href="restaurant_content?rnum=${dto.rnum }" class="js-analytics-click" style="color: #0073bb;text-decoration: none;    cursor: pointer;">
+<<<<<<< HEAD
 														<img width="90px" height="90px" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${dto.rest_filename}" style="outline: none;border-radius: 4px;vertical-align: middle;">	
+=======
+														<img width="90px" height="90px" src="getImage/${dto.rest_filename }" style="outline: none;border-radius: 4px;vertical-align: middle;">	
+>>>>>>> branch 'master' of https://github.com/MingonK/Yeps.git
         											</a>
 												</div>
 											</div>
@@ -357,7 +363,8 @@
 		            </div>
 		         </div>
 		      </div>
-		</div>
+		      
+		</div><!-- 리스트 -->
 
 
 
@@ -377,7 +384,7 @@
 	   var roadAddrPart1=new Array();
 	   var addrDetail=new Array();
 	   var roadAddrPart2=new Array();
-	   var filename=new Array();
+	   var rest_filename=new Array();
 	   var hp=new Array();
 	   
 	  	<c:forEach items="${map.list}" var="item" >
@@ -388,7 +395,11 @@
 			addrDetail.push("${item.addrDetail}");
 			roadAddrPart2.push("${item.roadAddrPart2}");
 			hp.push("${item.raddress}" + "-" + "${item.hp2}" + "-" + "${item.hp3}");
+<<<<<<< HEAD
 			filename.push("${item.rest_filename}");
+=======
+			rest_filename.push("${item.rest_filename}");
+>>>>>>> branch 'master' of https://github.com/MingonK/Yeps.git
 		</c:forEach>
 		
 
@@ -431,7 +442,11 @@
 							'</div>',
 					'</div>',
 					'<div class="right"style="width:100px;height:140px;float:left">',
+<<<<<<< HEAD
 						'<img width="90px" height="90px"src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/'+rest_filename[j]+'">',
+=======
+						'<img width="90px" height="90px"src="getImage/'+rest_filename[j]+'">',
+>>>>>>> branch 'master' of https://github.com/MingonK/Yeps.git
 					'</div>'
 					].join('')
 				var infowindow = new naver.maps.InfoWindow({
@@ -467,6 +482,9 @@
 			</div>
 		</div>
 	</div>
+	 <div class="loading_wapper" >
+      	<div class="loading_img" style="left: 500px;top: 400px;"></div>
+   	</div>
 
 
 <script>
@@ -492,6 +510,15 @@ $(document).ready(function(){
 	    $("input[name=feature]:checked").each(function() {
 			var mode = $(this).val();
 			var allData = { "mode": mode};
+			$(document).ajaxStart(function() {
+				$('body').css('overflow', 'hidden');
+	            $('.loading_wapper').fadeIn(500);
+	         })
+	         
+	         $(document).ajaxStop(function() {
+	        	 $('body').css('overflow', 'auto');
+	            $('.loading_wapper').fadeOut(500);
+	         })
 				 $.ajax({
 					 url : "restaurant_ajax",
 					 type : "post",
@@ -510,7 +537,11 @@ $(document).ready(function(){
 															'<div class="midea-avata" style="border-right: 12px solid transparent; border-left: none;">'+
 																'<div class="photo-box">'+
 																	'<a href="restaurant_content?rnum='+item.rnum+'" class="js-analytics-click" style="color: #0073bb;text-decoration: none;    cursor: pointer;">'+
+<<<<<<< HEAD
 																		'<img width="90px" height="90px" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/'+item.rest_filename+'" style="outline: none;border-radius: 4px;vertical-align: middle;">'+
+=======
+																		'<img width="90px" height="90px" src="getImage/'+item.rest_filename+'" style="outline: none;border-radius: 4px;vertical-align: middle;">'+
+>>>>>>> branch 'master' of https://github.com/MingonK/Yeps.git
 																	'</a>'+
 																'</div>'+
 															'</div>'+
@@ -580,6 +611,7 @@ $(document).ready(function(){
 			});
 	});
 });
+
 </script>
 <%@include file="../bottom.jsp" %>
 

@@ -13,9 +13,21 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
    vertical-align: baseline;
 }
 
+.layout-block:before, .layout-block:after {
+    content: " ";
+    display: table;
+}
 .clearfix:before, .clearfix:after {
     content: " ";
     display: table;
+}
+
+.clearfix:before, .clearfix:after {
+    content: " ";
+    display: table;
+}
+.layout-block:after {
+    clear: both;
 }
 
 .number {
@@ -757,6 +769,18 @@ overflow: hidden; width: 132px; height: 24px; background-position: 0 -216px;
 }
 
 
+
+<!--MenuInsert -->
+.restMenu-input{
+    box-sizing: border-box;
+    margin: 0 0 18px;
+    padding: 5px 9px;
+    background: #fff;
+    border: 1px solid #999;
+    border-radius: 3px;
+    font-size: 14px;
+    line-height: 1.29em;
+}
 
 
 

@@ -296,8 +296,8 @@ function test() {
 										<input class="restInsert-input" id="" name="rname" placeholder="가게 이름을 입력해주세요" type="text" value="지원의 집">	
 									</li>
 									<li class="restInsert-list">
-										<label for="filename" class="restInsert-label-bold">레스토랑 사진</label>
-										<input class="restInsert-input" id="filename" name="filename" placeholder="클릭!!" type="text" value="" onclick="">
+										<label for="rest_filename" class="restInsert-label-bold">레스토랑 사진</label>
+										<input class="restInsert-input" id="rest_filename" name="rest_filename" placeholder="클릭!!" type="text" value="" onclick="">
 									</li>
 									<li class="restInsert-list">
 										<label for="zipNo" class="restInsert-label-bold">우편번호</label>

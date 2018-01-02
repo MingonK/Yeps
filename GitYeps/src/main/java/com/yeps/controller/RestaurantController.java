@@ -121,9 +121,13 @@ public class RestaurantController {
 	}
 	
 	@RequestMapping(value="/restaurant_listMenu")
-	public String listMenu() {
+	public ModelAndView listMenu(HttpServletRequest req) {
+		String rname=req.getParameter("rname");
 		
-		return "restaurant/restaurant_listMenu";
+	    ModelAndView mav = new ModelAndView();
+	    mav.addObject("rname",rname);
+		mav.setViewName("restaurant/restaurant_listMenu");
+		return mav;
 	}
 	
 		
@@ -200,7 +204,7 @@ public class RestaurantController {
 	    
 		List<RestaurantDTO> list = restaurantMapper.listRest(start, end,"mode");
 		
-		List<Integer> reviewCount = new ArrayList<Integer>();
+		List<Integer>                reviewCount = new ArrayList<Integer>();
 		List<Integer> StarAvg=new ArrayList<Integer>();
 
 		List<ReviewDTO> LastReview=new ArrayList<ReviewDTO>();
@@ -210,8 +214,7 @@ public class RestaurantController {
 			StarAvg.add(reviewMapper.getStarAvg(list.get(i).getRnum()));
 		}
 		
-		RestaurantDTO test=restaurantMapper.getNewRestaurant();
-		System.out.println(test.getRnum());
+//		RestaurantDTO test=restaurantMapper.getNewRestaurant();
 
 	    HashMap<String, Object> map = new HashMap<String, Object>();
 	    map.put("list", list); // list
@@ -240,7 +243,6 @@ public class RestaurantController {
 	    int end = YepsPager.getPageEnd();
 	    
 		List<RestaurantDTO> list = restaurantMapper.listRest(start, end,mode);
-		System.out.println(mode+" ajax="+list.size());
 		
 		List<Integer> reviewCount = new ArrayList<Integer>();
 		List<Integer> StarAvg=new ArrayList<Integer>();
@@ -334,13 +336,6 @@ public class RestaurantController {
 		
 	}
 	
-	@RequestMapping(value="restaurant_content2", method=RequestMethod.POST) 
-	public @ResponseBody String test(@RequestParam(value="asd") String text) throws Exception {
-	       
-	     
-	     
-	     return "baba";  
-	}
 
 
 
