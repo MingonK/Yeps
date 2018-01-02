@@ -23,14 +23,25 @@ public class MenuController {
 	
 	@RequestMapping(value = "/restaurant_insertMenu")
 	public ModelAndView insertMenu(HttpServletRequest req,@ModelAttribute LargeMenuDTO large_dto,@ModelAttribute SmallMenuDTO small_dto) {
-		
+		String rnum=req.getParameter("rnum");
 		
 		for(int i=0;i<large_dto.getLargeMenuList().size();i++) {
-//			largeMenuMapper.insertLargeMenu()
-			System.out.println(large_dto.getLargeMenuList().get(i).getLarge_name());
+			large_dto.setLarge_name(large_dto.getLargeMenuList().get(i).getLarge_name());
+			large_dto.setRnum(Integer.parseInt(rnum));
+			largeMenuMapper.insertLargeMenu(large_dto);
+			for(int j=0;j<small_dto.getSmallMenuList().size();j++) {
+				small_dto.setSmall_name(small_dto.getSmallMenuList().get(j).getSmall_name());
+				small_dto.setSmall_content(small_dto.getSmallMenuList().get(j).getSmall_content());
+				small_dto.setSmall_price(small_dto.getSmallMenuList().get(j).getSmall_price());
+				smallMenuMapper.insertSmallMenu(small_dto);
+			}
 		}
+
+		
 		
 		ModelAndView mav=new ModelAndView();
+		
+		mav.setViewName("restaurant/restaurant_listMenu");
 		return mav; 
 	}
 }

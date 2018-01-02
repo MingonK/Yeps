@@ -32,6 +32,7 @@
 										<span>등록</span>
 									</button>
 									<a href="restaurant_list">취소</a>
+									<input type="hidden" name="rnum" value="${param.rnum }">
 								</div>
 					</form>
 					</div>
@@ -40,9 +41,10 @@
 
 <script>
 $(document).ready(function() {
+	var large_count=0;
 	$( ".large" ).click(function() {
 		var largeMenu=$("#restMenu-input").val();
-		int count=0;
+		
 		
 		if(largeMenu==""||largeMenu.indexOf(' ')>=0){
 			$("#restMenu-input").val('');
@@ -55,7 +57,7 @@ $(document).ready(function() {
 				'<h2 class="'+largeMenu+'" style="color: #333;word-wrap: break-word !important;word-break: break-word !important;overflow-wrap: break-word !important;font-weight: bold;margin-bottom: 6px;font-size: 21px;line-height: 1.28571em;    margin: 0 0 6px; display:inline-block;padding-right:6px;">'+
                     ''+largeMenu+''+
                 '</h2>'+
-                '<input type="hidden" name="largeMenuList['+count+'].large_name" value="'+largeMenu+'">'+
+                '<input type="hidden" name="largeMenuList['+large_count+'].large_name" value="'+largeMenu+'">'+
                 '<button type="button" class="'+largeMenu+'_add" value="'+largeMenu+'" style="padding: 5px 8px;font-size: 12px;line-height: 1.5em;border: 1px solid #ccc;">'+
 					'<span>추가</span>'+
 				'</button>'+
@@ -66,10 +68,11 @@ $(document).ready(function() {
 			);
 		$("#restMenu-input").val('');
 		count++;
+		alert("Large="+count)
 	});
 	
 		$('.menu-sections').on('click','button',function(e){
-			int count=0;
+			var count=0;
 			var name=$(this).val();
 			$('.'+name+'-list ').append(
 				'<div class="menu-item" style="border-top: 0;padding: 10px 0;">'+
@@ -88,8 +91,7 @@ $(document).ready(function() {
 // 			                            '<a href="#">Blue Cheese Garlic Bread</a>'+
 // 			                    '</h4>'+
 			                    '<input type="text" class="restMenu-input" style="width:200px;margin-bottom: 5px;" name="smallMenuList['+count+'].small_name">'+
-			                    '<textarea style="margin-bottom: 5px;display: block;" rows="2" cols="50" name="smallMenuList['+count+'].small_content"></textarea>'+
-// 			                    '<p class="menu-item-details-description" style="margin-bottom: 5px;display: block;">Fresh sourdough, topped with garlic, Pt. Reyes blue cheese and herbs</p>'+
+			                    '<textarea style="margin-bottom: 5px;display: block;overflow:auto;" rows="2" cols="50" name="smallMenuList['+count+'].small_content"></textarea>'+
 							'</div>'+
 							'<div class="menu-item-prices arrange_unit" style="text-align: right;padding-left: 90px;    box-sizing: border-box;display: table-cell;vertical-align: top;">'+
 								'<ul style="list-style: none;display: block;">'+
@@ -104,6 +106,7 @@ $(document).ready(function() {
 				'</div>'		
 			);
 			count++;
+			alert("Small="+count)
 			$(".restInsert-footer").css('display','inline');
 		});
 // 		$('.menu-sections').on('click','.small_remove',function(){

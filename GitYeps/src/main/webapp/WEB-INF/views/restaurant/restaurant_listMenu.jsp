@@ -21,7 +21,7 @@
 					<ul class="breadcrumbs" style="max-width: 100%;overflow: hidden !important;text-overflow: ellipsis !important;white-space: nowrap !important;word-wrap: normal !important;    list-style: none;    display: block;">
 						<li style="display: inline;margin-right: 3px;    text-align: -webkit-match-parent;">
 							<strong style=" font-weight: bold;">
-								<a href="#" style="font-weight: bold;color: #0073bb;text-decoration: none;cursor: pointer;">${rname}</a>
+								<a href="#" style="font-weight: bold;color: #0073bb;text-decoration: none;cursor: pointer;">${getRest.rname}</a>
 							</strong>
 						</li>	
 						<li style="display: inline;margin-right: 3px;    text-align: -webkit-match-parent;">
@@ -84,7 +84,7 @@
                 		</div>
 					</div>
 					<div class="column column-beta popular-section" style="float: left;padding: 0 15px;min-height: 1px;    box-sizing: border-box;width: 33.33333%;">
-						<a href="restaurant_insertMenuForm">메뉴 등록</a>
+						<a href="restaurant_insertMenuForm?rnum=${getRest.rnum }">메뉴 등록</a>
 					</div>
 				</div>
 			</div>

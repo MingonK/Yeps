@@ -122,10 +122,10 @@ public class RestaurantController {
 	
 	@RequestMapping(value="/restaurant_listMenu")
 	public ModelAndView listMenu(HttpServletRequest req) {
-		String rname=req.getParameter("rname");
-		
+		String rnum=req.getParameter("rnum");
+		RestaurantDTO dto=restaurantMapper.getRest(Integer.parseInt(rnum));
 	    ModelAndView mav = new ModelAndView();
-	    mav.addObject("rname",rname);
+	    mav.addObject("getRest",dto);
 		mav.setViewName("restaurant/restaurant_listMenu");
 		return mav;
 	}

@@ -855,7 +855,7 @@
 										</span>
 									</div>
 									<div class="restContent-iconed-list-story" style="display: table-cell;width: 100%;padding: 9px 0;border-bottom: 1px solid #e6e6e6;padding-bottom: 8px;">
-							            <b style="font-weight: bold;"><a style="color: #0073bb;text-decoration: none;" class="menu-explore js-menu-explore" href="restaurant_listMenu?rname=${getRest.rname}">Full menu</a></b>
+							            <b style="font-weight: bold;"><a style="color: #0073bb;text-decoration: none;" class="menu-explore js-menu-explore" href="restaurant_listMenu?rnum=${getRest.rnum}">Full menu</a></b>
 							        </div>
 							    </li>
 							    <li class="restContent-iconed-list-item" style="display: table;width: 100%;margin-bottom: 0;">
