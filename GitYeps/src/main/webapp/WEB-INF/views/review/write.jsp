@@ -16,9 +16,9 @@
 		<%@ include file="top_review_write.jsp" %> 
 		<div class="review_write_Big_div">
 		<!-- write부분 전체 div -->
-			<div class="review_write_BigInner_div">
+			<div class="review_write_BigInner_div" align="center">
 				<div class="content_inner">
-					<div class="content_innter_header">
+					<div class="content_innter_header" align="left">
 						<h2 class="content_innter_header_text">
 							<a href="review_selectedres?rnum=${rnum}" class="review_write_Rname_font">
 								${rname}
@@ -28,12 +28,12 @@
 					
 					
 					<div>
-						<form name="review_writeF" action="review_insert?rname=${rname}&rnum=${rnum}" method="post"
+						<form name="review_writeF" action="review_insert?rname=${rname}&rnum=${rnum}&mode=${mode}" method="post"
            						onsubmit="return ContentAndGradepointCheck()">
 							<div>
 								<div class="review_input">
-									<div class="review_text_star_wrap">
-										<div class="review_text_star_container">
+									<div class="review_text_star_wrap" align="left">
+										<div class="review_text_star_container" align="left">
 											<fieldset style="vertical-align: middle; display: inline-block; margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit;">
 												<div class="review_write_Gradepoint_div">
                   										<img id="image1" onmouseover="javascript:show('1')" onclick="javascript:mark('1')" onmouseout="javascript:noshow('1')" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/gradepoint_no_color.png"> 
@@ -62,7 +62,7 @@
 							</div>
 							
 							
-							<div class="writereview_footer">
+							<div class="writereview_footer" align="center">
 								<div class="footer_buttons_wrapper">
 									<div class="post_review_button">
 										<input class="review_write_Button" type="button" data-popup-open="popup-1" value="Post Review">
@@ -86,23 +86,22 @@
     <div class="login_check_wrap">
        <div class="login_check">
           <div class="login_check_head">
-             <div class="login_check_head_alpha">
+             <div id="login_check_head_beta">
+                <div class="login_check_head_beta_closebtn popup-close" role="button" tabindex="0" data-popup-close="popup-1">×</div>
              </div>
-            <div id="login_check_head_beta">
-               <div class="login_check_head_beta_closebtn popup-close" role="button" tabindex="0" data-popup-close="popup-1">×</div>
-            </div>
-         </div>
-         <div class="login_check_body">
-         
-            <div id="login" align="center"> <!-- 로그인 Div -->
-               <div id="member_header">
-                  <h2>Log In to YEPS</h2>
-                  <p class="subheading">New to YEPS? 
-                  <a class="signup-link u-pseudo-link">Sign up</a>
-                  <p class="legal-copy">By logging in, you agree to YEPS 
-                  <a class="legal-link" href="https://www.yelp.com/static?p=tos">Terms of Service</a>
-                     and <a class="legal-link" href="/tos/privacy_en_us_20160131">Privacy Policy</a>.
-                  </p>
+          </div>
+          <div class="login_check_body">
+          
+        <!--     로그인 Div      -->
+             <div id="login" align="center"> 
+                <div id="member_header">
+                   <h2>Log In to YEPS</h2>
+                   <p class="subheading">New to YEPS? 
+                   <a class="signup-link u-pseudo-link">Sign up</a>
+                   <p class="legal-copy">By logging in, you agree to YEPS 
+                   <a class="legal-link" href="https://www.yelp.com/static?p=tos">Terms of Service</a>
+                      and <a class="legal-link" href="/tos/privacy_en_us_20160131">Privacy Policy</a>.
+                   </p>
                </div>
    
                <div id="member_body">
@@ -302,16 +301,12 @@ $(function() {
    function openwindow() {
       window.open("guidelines","guideview","channelmode=no, directoryies=no, width=500, height=520, status=no, scrollbars=yes, location=no, toolbar=no, menubar=no, resizable=no")
    }
-
-   
    
    var star = '${star}';
-   
    $(document).ready(function() {   
       show(star)
       document.review_writeF.gradepoint.value = star;
    });
-   
 
    function show(gradepoint) {
       var i;
@@ -326,7 +321,7 @@ $(function() {
 
          var e = document.getElementById('gradepointText');
          var stateMsg;
-
+         
          for (i = 1; i <= gradepoint; i++) {
             image = 'image' + i;
             el = document.getElementById(image);
@@ -390,14 +385,14 @@ $(function() {
            document.findemailf.ssn1.value=document.findemailf.ssn1.value.replace(/[^0-9]/g,'')
        }
     }
-        
-    function numberOnly(){
-       if(event.keyCode < 47 || event.keyCode > 58 || event.keyCode>=96 && event.keyCode<=105){
-          return false; 
-       }
-    }
     
-    function checkPw(){
+    function numberOnly(){
+        if(event.keyCode < 47 || event.keyCode > 58 || event.keyCode>=96 && event.keyCode<=105){
+           return false; 
+        }
+     }
+    
+    function checkpw(){ 
        if(document.joinf.passwd.value == '' || document.joinf.passwd2.value == ''){
           document.joinf.passCheck.value=""
        }else{
@@ -546,6 +541,7 @@ $(function() {
                  var targeted_popup_class = $('.popup-close').attr('data-popup-close');
                  $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
                  memberinfo = responseData.memberinfo;
+                 window.location.reload() ;
               },
               error : function(request, status, error) {
                  alert("로그인 실패");

@@ -254,5 +254,19 @@ public class ReviewController {
 		}
 
 	}
+	
+    @RequestMapping(value="/review_restaurantFind")
+    public ModelAndView review_restaurantFind(HttpServletRequest req) {
+       String SearchFind = req.getParameter("SearchFind");
+       //String SearchNear = req.getParameter("SearchNear");
+    
+       //★일단 Find값으로만 검색했을때의 값을 불러오게 만들어놨음 //Near도 같이 검색되게끔해야하는데 디폴트값을 Korea, Seoul로 해놨기때문에 굳이 near은 검색안해될것같긴함.
+       List<RestaurantDTO> Find_Restaurant_Review_rdto = restaurantMapper.review_restaurantFind(SearchFind);
+       ModelAndView mav = new ModelAndView();         
+       mav.addObject("Find_Restaurant_Review_rdto", Find_Restaurant_Review_rdto);
+       mav.addObject("SearchFind", SearchFind);
+       mav.setViewName("/review/restaurantFind");
+       return mav;
+    }
 
 }
