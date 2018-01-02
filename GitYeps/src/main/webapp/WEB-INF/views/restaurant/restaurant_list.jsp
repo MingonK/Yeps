@@ -214,7 +214,7 @@
 											<div class="midea-avata"style="border-right: 12px solid transparent; border-left: none;">
 												<div class="photo-box" >
 													<a href="restaurant_content?rnum=${dto.rnum }" class="js-analytics-click" style="color: #0073bb;text-decoration: none;    cursor: pointer;">
-														<img width="90px" height="90px" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${dto.filename }" style="outline: none;border-radius: 4px;vertical-align: middle;">	
+														<img width="90px" height="90px" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${dto.rest_filename}" style="outline: none;border-radius: 4px;vertical-align: middle;">	
         											</a>
 												</div>
 											</div>
@@ -388,7 +388,7 @@
 			addrDetail.push("${item.addrDetail}");
 			roadAddrPart2.push("${item.roadAddrPart2}");
 			hp.push("${item.raddress}" + "-" + "${item.hp2}" + "-" + "${item.hp3}");
-			filename.push("${item.filename}");
+			filename.push("${item.rest_filename}");
 		</c:forEach>
 		
 
@@ -402,7 +402,7 @@
 					position : myaddr,
 					map : map,
 					icon : {
-						url : './getImage/pin_s_'+ (j + 1)+'.png',
+						url : 'https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/pin_s_'+ (j + 1)+'.png',
 						size : new naver.maps.Size(22, 30),
 						anchor : new naver.maps.Point(11, 30)
 					}
@@ -431,7 +431,7 @@
 							'</div>',
 					'</div>',
 					'<div class="right"style="width:100px;height:140px;float:left">',
-						'<img width="90px" height="90px"src="getImage/'+filename[j]+'">',
+						'<img width="90px" height="90px"src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/'+rest_filename[j]+'">',
 					'</div>'
 					].join('')
 				var infowindow = new naver.maps.InfoWindow({
@@ -510,7 +510,7 @@ $(document).ready(function(){
 															'<div class="midea-avata" style="border-right: 12px solid transparent; border-left: none;">'+
 																'<div class="photo-box">'+
 																	'<a href="restaurant_content?rnum='+item.rnum+'" class="js-analytics-click" style="color: #0073bb;text-decoration: none;    cursor: pointer;">'+
-																		'<img width="90px" height="90px" src="getImage/'+item.filename+'" style="outline: none;border-radius: 4px;vertical-align: middle;">'+
+																		'<img width="90px" height="90px" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/'+item.rest_filename+'" style="outline: none;border-radius: 4px;vertical-align: middle;">'+
 																	'</a>'+
 																'</div>'+
 															'</div>'+
