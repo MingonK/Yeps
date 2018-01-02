@@ -336,13 +336,6 @@ public class RestaurantController {
 		
 	}
 	
-	@RequestMapping(value="restaurant_content2", method=RequestMethod.POST) 
-	public @ResponseBody String test(@RequestParam(value="asd") String text) throws Exception {
-	       
-	     
-	     
-	     return "baba";  
-	}
 
 
 

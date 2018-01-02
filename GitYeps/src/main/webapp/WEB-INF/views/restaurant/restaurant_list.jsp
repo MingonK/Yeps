@@ -32,6 +32,7 @@
 							</span>
 						</div>
 						</div>
+						
 						<div class="filter-panel" style="font-size: 12px; line-height: 1.5em;position: relative;height:65px">
 							<div class="filter-bar suggested-filters" style="">
 								<ul class="suggested-filters_filter-list" style="padding-bottom: 18px;display: flex;flex-wrap: wrap;list-style: none;height:48px;">
@@ -215,11 +216,7 @@
 											<div class="midea-avata"style="border-right: 12px solid transparent; border-left: none;">
 												<div class="photo-box" >
 													<a href="restaurant_content?rnum=${dto.rnum }" class="js-analytics-click" style="color: #0073bb;text-decoration: none;    cursor: pointer;">
-<<<<<<< HEAD
 														<img width="90px" height="90px" src="getImage/${dto.rest_filename }" style="outline: none;border-radius: 4px;vertical-align: middle;">	
-=======
-														<img width="90px" height="90px" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${dto.filename }" style="outline: none;border-radius: 4px;vertical-align: middle;">	
->>>>>>> branch 'master' of http://github.com/MingonK/Yeps.git
         											</a>
 												</div>
 											</div>
@@ -362,6 +359,7 @@
 		            </div>
 		         </div>
 		      </div>
+		      
 		</div><!-- 리스트 -->
 
 
