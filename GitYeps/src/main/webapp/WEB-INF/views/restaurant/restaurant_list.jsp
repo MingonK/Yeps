@@ -493,10 +493,14 @@
 
 <script>
 $(document).ready(function(){
+	var mode;
 	$('.filters').on('change', function() {
 	    $('.filters').not(this).prop('checked', false);  
-	    $("input[name=feature]:checked").each(function() {
-			var mode = $(this).val();
+	    if($("input:checkbox[name='feature']").is(":checked") == true){
+            mode = $(this).val();
+          }else{
+             mode = "mode";
+          }
 			var allData = { "mode": mode};
 			$(document).ajaxStart(function() {
 				$('body').css('overflow', 'hidden');
@@ -592,7 +596,6 @@ $(document).ready(function(){
 				            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
 				        }
 				 });
-			});
 	});
 });
 
