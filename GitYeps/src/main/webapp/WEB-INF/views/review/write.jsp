@@ -28,7 +28,7 @@
 					
 					
 					<div>
-						<form name="review_writeF" action="review_insert?rname=${rname}&rnum=${rnum}&mode=${mode}" method="post"
+						<form name="review_writeF" action="review_insert?rname=${rname}&rnum=${rnum}&mode=${mode}&where=${where}" method="post"
            						onsubmit="return ContentAndGradepointCheck()">
 							<div>
 								<div class="review_input">
@@ -42,10 +42,11 @@
                  										<img id="image4" onmouseover="javascript:show('4')" onclick="javascript:mark('4')" onmouseout="javascript:noshow('4')" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/gradepoint_no_color.png"> 
                   										<img id="image5" onmouseover="javascript:show('5')" onclick="javascript:mark('5')" onmouseout="javascript:noshow('5')" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/gradepoint_no_color.png">
                     									<input type="hidden" name="gradepoint">
-              										</div>
-              										<p class="review_write_p_gradepointText" id="gradepointText">
+                    									<p class="review_write_p_gradepointText" id="gradepointText">
 													Select rating to get started
                  									</p> 
+              										</div>
+              										
 											</fieldset>
 										</div>
 									</div>
@@ -76,12 +77,8 @@
 		</div>
 	</div>   
 </div>   
-		
-      
    <!---------------------------------------------------------------------------->
    
-  
-
 <div class="popup" data-popup="popup-1">
     <div class="login_check_wrap">
        <div class="login_check">
@@ -252,10 +249,6 @@
       </div>
     </div>
 </div>
-
-
-
-
 <script>
    $(document).ready(function() {
       $('.review_write_Button').hover(function(e) {
@@ -353,7 +346,6 @@ $(function() {
    function noshow(gradepoint) {
       show(star)
       document.review_writeF.gradepoint.value = gradepoint;
-
    }
    
    function mark(gradepoint) {
@@ -546,7 +538,6 @@ $(function() {
               error : function(request, status, error) {
                  alert("로그인 실패");
               },
-              
          });
     }
            

@@ -162,10 +162,15 @@ public class ReviewController {
 		String rname = restaurantMapper.review_write_getrname(Integer.parseInt(rnum));
 		System.out.println("review_write에서의 rname출력:" + rname);
 		String star = req.getParameter("star");
+		String mode = req.getParameter("mode");
+	    String where = req.getParameter("where");
+		System.out.println("write1" + mode);
 
 		// ★EDIT부분★ 위에 받아온 파라미터값 rnum을 통해서 방금 작성한 리뷰의 정보들을 가져와서 write페이지에 뿌려주면됨.
 
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("mode", mode);
+		mav.addObject("where", where);
 		mav.addObject("rnum", rnum);
 		mav.addObject("rname", rname);
 		mav.addObject("star", star);
@@ -198,18 +203,23 @@ public class ReviewController {
 
 		MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo");
 		int mnum = mdto.getMnum();
-		// reviewcount 구하기 추가 부분
-		int beforeReviewcount = memberMapper.getMemberReviewCount(mnum);
-		int nowReviewcount = beforeReviewcount + 1;
-		memberMapper.updateReviewCount(mnum, nowReviewcount);
+		
 		// ===============================
+		String mode = req.getParameter("mode");
+		String where = req.getParameter("where");
 		String name = mdto.getName();
 		String rnum = req.getParameter("rnum");
 		String rname = req.getParameter("rname");
 		String gradepoint = req.getParameter("gradepoint");
 		String content = req.getParameter("content");
-
-		String Get_InsertReviewDate = reviewMapper.Get_InsertReviewDate();
+        String Get_InsertReviewDate = reviewMapper.Get_InsertReviewDate();
+        
+     // reviewcount 구하기 추가 부분
+     	int beforeReviewcount = memberMapper.getMemberReviewCount(mnum);
+     	int nowReviewcount = beforeReviewcount + 1;
+     	if(mode.equals("write")) {
+     	    memberMapper.updateReviewCount(mnum, nowReviewcount);
+     	}
 
 		rvdto.setRnum(Integer.parseInt(rnum));
 		rvdto.setMnum(mnum);
@@ -227,12 +237,18 @@ public class ReviewController {
 		// 리뷰 작성했을때 위에 프로필과함께 작성한리뷰 restaurantIMG페이지에 띄워주기
 		List<RestaurantDTO> rlist = restaurantMapper.review_restaurantIMG();
 		System.out.println("rlist 출력2" + rlist);
-
+        System.out.println("@@@@@@=" +    mode);
+        System.out.println("where=" + where);
 		if (res > 0) {
 			mav.addObject("rnum", rnum);
 			// reviewcount 담아주기 ============================
-			mdto.setReviewcount(nowReviewcount);
-			mav.addObject("reviewcount", nowReviewcount);
+			if(mode.equals("write")) {
+				
+			    mdto.setReviewcount(nowReviewcount);
+			}else if(mode.equals("update") || mode == null){
+				
+			   mdto.setReviewcount(beforeReviewcount);
+			}
 			// ===========================================
 			mav.addObject("name", name);
 			mav.addObject("rname", rname);

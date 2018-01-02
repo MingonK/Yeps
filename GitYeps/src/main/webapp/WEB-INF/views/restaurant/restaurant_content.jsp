@@ -54,13 +54,12 @@
 			                  	 	<a href="#" style="white-space: nowrap;color: #0073bb;text-decoration: none;">${getRest.foodstyle}</a>
 					    		</span>
 							</div>
-							
 						</div>
 					</div>
 					
 					<div class="biz-page-header-right u-relative"style="display: table;    position: relative !important;">
 						<div class="biz-page-actions nowrap"style="text-align: right;overflow: hidden;padding-bottom: 1px;margin-top: -1px;    white-space: nowrap;">
-						<a href="review_write" class="ybtn ybtn--primary war-button" style="color: #666; float: left; padding-left: 12px; margin: 0 12px 0 0; color: white; border-color: #8d0005; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3); background-color: #d90007; background: linear-gradient(#d90007, #c91400); display: inline-block; vertical-align: middle; cursor: pointer; border: 1px solid; font-weight: bold; text-align: center; user-select: none; font-size: 14px; line-height: 1.28571em; padding: 8px 19px 9px; border-radius: 3px;border-color: #8d0005;">
+						<a href="review_write?mode=write&where=rest" class="ybtn ybtn--primary war-button" style="color: #666; float: left; padding-left: 12px; margin: 0 12px 0 0; color: white; border-color: #8d0005; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3); background-color: #d90007; background: linear-gradient(#d90007, #c91400); display: inline-block; vertical-align: middle; cursor: pointer; border: 1px solid; font-weight: bold; text-align: center; user-select: none; font-size: 14px; line-height: 1.28571em; padding: 8px 19px 9px; border-radius: 3px;border-color: #8d0005;">
 							<span aria-hidden="true" style="width: 24px; height: 24px;" class="icon icon--24-star icon--size-24 icon--currentColor u-space-r-half icon--fallback-inverted">
 							    <svg id="24x24_star" height="100%" viewBox="0 0 24 24" width="100%">
 							    	<path d="M12 1.5l2.61 6.727 6.89.53-5.278 4.688 1.65 7.055L12 16.67 6.13 20.5l1.648-7.055L2.5 8.757l6.89-.53L12 1.5z"></path>
@@ -69,18 +68,17 @@
 							리뷰쓰기 
 						</a> 
 						<span class="ybtn-group clearfix" style="float: right;margin-top: 4px;"> 
-						<a class="ybtn ybtn--small add-photo-button" href="restaurant_uploadForm2?rnum=${getRest.rnum}" style="border-radius: 3px 0 0 3px; color: #666; position: relative; float: left; padding: 5px 8px; font-size: 12px; line-height: 1.5em; text-decoration: none !important; display: inline-block; vertical-align: middle; margin: 0; cursor: pointer; border: 1px solid; font-weight: bold; text-align: center; user-select: none; border-color: #ccc; color: #666; background-color: #f7f7f7; background: linear-gradient(#fff, #f7f7f7); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);">
-								<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-add-photo icon--size-18 icon--currentColor">
-							<svg id="18x18_add_photo" height="100%" viewBox="0 0 18 18"width="100%">
-						   		<path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 4.75a4.25 4.25 0 1 0 0 8.5 4.25 4.25 0 0 0 0-8.5zM11 10h-1v1a1 1 0 0 1-2 0v-1H7a1 1 0 0 1 0-2h1V7a1 1 0 0 1 2 0v1h1a1 1 0 0 1 0 2z"></path>
-						   </svg>
-							</span> 사진추가
-						</a>
+						   <a class="ybtn ybtn--small add-photo-button" href="restaurant_uploadForm2?rnum=${getRest.rnum}" style="border-radius: 3px 0 0 3px; color: #666; position: relative; float: left; padding: 5px 8px; font-size: 12px; line-height: 1.5em; text-decoration: none !important; display: inline-block; vertical-align: middle; margin: 0; cursor: pointer; border: 1px solid; font-weight: bold; text-align: center; user-select: none; border-color: #ccc; color: #666; background-color: #f7f7f7; background: linear-gradient(#fff, #f7f7f7); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);">
+							  <span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-add-photo icon--size-18 icon--currentColor">
+							     <svg id="18x18_add_photo" height="100%" viewBox="0 0 18 18"width="100%">
+						   		    <path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 4.75a4.25 4.25 0 1 0 0 8.5 4.25 4.25 0 0 0 0-8.5zM11 10h-1v1a1 1 0 0 1-2 0v-1H7a1 1 0 0 1 0-2h1V7a1 1 0 0 1 2 0v1h1a1 1 0 0 1 0 2z"></path>
+						         </svg>
+							  </span> 사진추가
+						   </a>
 						</span>
-						</div>
-						
-					</div>
-			</div>
+				     </div>
+				  </div>
+			   </div>
 		
 		<div class="biz-page-subheader" style="display: table;">
 					<div class="mapbox-container" style="width: 33.33333%;display: table-cell; vertical-align: middle;height:auto;overflow:hidden;">
@@ -121,8 +119,6 @@
 													</strong>
 											</div>
 										</li>
-												
-	
 									<li class="clearfix" style="margin-bottom: 3px;    display: list-item;text-align: -webkit-match-parent;">
 										<div>
 											<span class="icon" style="width: 18px; height: 18px;"> 
@@ -148,10 +144,7 @@
 											</span> <span class="phone">${getRest.raddress}-${getRest.hp2}-${getRest.hp3}</span>
 										</div>
 									</li>
-									
-									
 								</ul>
-								
 							</div>
 						</div>
 					</div>
@@ -173,8 +166,8 @@
 							        			</svg>
 								        	</use>
 								    	</svg>
-								</span>
-								See all ${getImageCount}
+								    </span>
+								        See all ${getImageCount}
 								</a>
 							</div>
 	
@@ -229,16 +222,13 @@
 <%-- 									</c:forEach> --%>
 <!-- 									</div> -->
 <!-- 								</div>  -->
-								
-							</div>
-						</div>
-	
-					</div>
-				</div>
-		
-		</div>
-	</div>
-</div>
+							    </div>
+						    </div>
+					    </div>
+				    </div>
+		        </div>
+	        </div>
+        </div>
 		<div class="restContent-super-container" style="width: 960px;height:100%; margin: 0 auto; padding: 0 15px; padding-top: 18px; padding-bottom: 36px;">
 				<div class="restContent-container" style="display:block;width:100%;overflow:hidden;height:auto;">
 					<div class="restContent-layout-block" style="margin-bottom: 0;position: relative;margin: 0 -15px;width:960px;overflow:hidden;height:auto;">
@@ -375,7 +365,7 @@
 																				        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_search_small"></use>
 																				    </svg>
 																				</span>
-																		</span>
+																		    </span>
 																		</span>
 																	</button>
 																</div>
@@ -424,49 +414,49 @@
 																class="star-selector js-star-selector"
 																data-original-rating="0" data-component-bound="true"
 																style="vertical-align: middle; display: inline-block; -webkit-margin-start: 2px; -webkit-margin-end: 2px; -webkit-padding-before: 0.35em; -webkit-padding-start: 0.75em; -webkit-padding-end: 0.75em; -webkit-padding-after: 0.625em; min-width: -webkit-min-content;">
-						 <form name="starpointF" method="post" action="review_write">
-						
-						<div>
-                        
-                           <ul id="star_rating" style="margin: 0px; padding: 0px; diplay: inline-block; width: 165px; height: 30px; overflow: hidden; list-style: none; vertical-align: middle;
-                               background: url(https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/a5aa4dca29f3/assets/img/stars/selector_stars.png) no-repeat;">
-      
-                              <li class="selector star-selector-li-1_4" data-label="Eek! Methinks not.">
-                                 <input id="rating-1" type="radio" value="1" name="rating" class="star-selector-input">
-                                 <label class="star-selector_label" for="rating-1">1 (Eek! Methinks not.)</label>
-                              </li>
-                              <li class="selector star-selector-li-1_4" data-label="Meh. I've experienced better.">
-                                 <input id="rating-2" type="radio" value="2" name="rating" class="star-selector-input">
-                                 <label class="star-selector_label" for="rating-2">2 (Meh. I've experienced better.)</label>
-                              </li>
-                              <li class="selector star-selector-li-1_4" data-label="3 (A-OK.)">
-                                 <input id="rating-3" type="radio" value="3" name="rating" class="star-selector-input">
-                                 <label class="star-selector_label" for="rating-3">3 (A-OK.)</label>
-                              </li>
-                              <li class="selector star-selector-li-1_4" data-label="4 (Yay! I'm a fan.)">
-                                 <input id="rating-4" type="radio" value="4"  name="rating" class="star-selector-input">
-                                 <label class="star-selector_label" for="rating-4">4 (Yay! I'm a fan.)</label>
-                              </li>
-                              <li class="selector star-selector-li-5" data-label="5 (Woohoo! As good as it gets!)">
-                                 <input id="rating-5" type="radio" value="5"  name="rating" class="star-selector-input">
-                                 <label class="star-selector_label" for="rating-5">5 (Woohoo! As good as it gets!)</label>
-                              </li>
-                           </ul>
-                                 <input type="hidden" name="rnum" value="${getRest.rnum}">   
-                                 <input type="hidden" name="star" id="star">
-                           </div>
-                           </form>
+													 <form name="starpointF" method="post" action="review_write">
+													<div>
+							                           <ul id="star_rating" style="margin: 0px; padding: 0px; diplay: inline-block; width: 165px; height: 30px; overflow: hidden; list-style: none; vertical-align: middle;
+							                               background: url(https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/a5aa4dca29f3/assets/img/stars/selector_stars.png) no-repeat;">
+							      
+							                              <li class="selector star-selector-li-1_4" data-label="Eek! Methinks not.">
+							                                 <input id="rating-1" type="radio" value="1" name="rating" class="star-selector-input">
+							                                 <label class="star-selector_label" for="rating-1">1 (Eek! Methinks not.)</label>
+							                              </li>
+							                              <li class="selector star-selector-li-1_4" data-label="Meh. I've experienced better.">
+							                                 <input id="rating-2" type="radio" value="2" name="rating" class="star-selector-input">
+							                                 <label class="star-selector_label" for="rating-2">2 (Meh. I've experienced better.)</label>
+							                              </li>
+							                              <li class="selector star-selector-li-1_4" data-label="3 (A-OK.)">
+							                                 <input id="rating-3" type="radio" value="3" name="rating" class="star-selector-input">
+							                                 <label class="star-selector_label" for="rating-3">3 (A-OK.)</label>
+							                              </li>
+							                              <li class="selector star-selector-li-1_4" data-label="4 (Yay! I'm a fan.)">
+							                                 <input id="rating-4" type="radio" value="4"  name="rating" class="star-selector-input">
+							                                 <label class="star-selector_label" for="rating-4">4 (Yay! I'm a fan.)</label>
+							                              </li>
+							                              <li class="selector star-selector-li-5" data-label="5 (Woohoo! As good as it gets!)">
+							                                 <input id="rating-5" type="radio" value="5"  name="rating" class="star-selector-input">
+							                                 <label class="star-selector_label" for="rating-5">5 (Woohoo! As good as it gets!)</label>
+							                              </li>
+							                           </ul>
+							                                 <input type="hidden" name="rnum" value="${getRest.rnum}">   
+							                                 <input type="hidden" name="star" id="star">
+							                                 <input type="hidden" name="mode" value="write">
+							                                 <input type="hidden" name="where" value="rest">
+							                           </div>
+							                           </form>
 
 															</fieldset>
 														</div>
-														<a class="restContent-text-link" href="review_write?rnum=${getRest.rnum}" style="color: #0073bb;text-decoration: none;    cursor: pointer;    text-align: center !important;">
+														<a class="restContent-text-link" href="review_write?rnum=${getRest.rnum}&mode=write&where=rest" style="color: #0073bb;text-decoration: none;    cursor: pointer;    text-align: center !important;">
 										                    Start your review of <strong style="font-weight: bold;">${getRest.rname}</strong>.
 										                </a>
-														</div>
 													</div>
 												</div>
-												</div>
-											</li>
+											</div>
+										</div>
+									</li>
 										
 								<c:forEach var="getReview" items="${selectedDataRV}">	
 									<li style="margin: 0; padding: 18px 0; border-bottom: 1px solid #e6e6e6; padding-bottom: 17px; display: list-item; text-align: -webkit-match-parent;">
