@@ -8,22 +8,19 @@
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=jD9qGVpvZh7Zobclojwp&submodules=geocoder"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/restStyle.css?ver=1"/>"/>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css?ver=1"/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css?ver=2"/>"/>
 
 <title>레스토랑</title>
 </head>
 <%@include file="../top.jsp" %>
 	<div class="main" style="background: white;">
 	<div class="top-shelf" style="overflow: hidden; min-width: 990px; padding-bottom: 24px; margin-bottom: -18px; z-index: 1; width: 100%; position: relative; padding-top: 15px;">
-		
 		<div class="content-container js-biz-details" style="width: 960px;margin: 0 auto;padding: 0 15px;">
-			
 			<div class="biz-page-header clearfix" style="position: relative;display: flex;-webkit-box-align: center;align-items: center;width: 100%;margin-bottom: 13px;font-size: 16px;line-height: 1.3125em;">
-			
 					<div class="biz-page-header-left claim-status" style="-webkit-box-flex: 1;flex: 1;min-width: 0;min-height: 0;padding-right: 30px;">
 						<div class="u-space-t1" style="margin-top: 6px !important;">
 						<h1
-							style="display: inline; padding-top: 6px; font-size: 36px; line-height: 1.16667em; margin-bottom: 6px; text-shadow: 0 1px rgba(255, 255, 255, 0.7); word-wrap: break-word !important; word-break: break-word !important; overflow-wrap: break-word !important; font-weight: bold; color: #333; margin: 0 0 6px;">${getRest.rname }</h1>
+							style="display: inline; padding-top: 0px; font-size: 36px; line-height: 1.16667em; margin-bottom: 6px; text-shadow: 0 1px rgba(255, 255, 255, 0.7); word-wrap: break-word !important; word-break: break-word !important; overflow-wrap: break-word !important; font-weight: bold; color: #333; margin: 0 0 6px;">${getRest.rname }</h1>
 					</div>
 						<div class="biz-main-info embossed-text-white"style="margin-top: 9px;text-shadow: 0 1px rgba(255,255,255,0.7);">
 							<div class="rating-info clearfix" style="margin-bottom: 9px;height:auto;overflow:hidden;">
@@ -36,14 +33,26 @@
 									</div>
 									<span class="review-count rating-qualifier" style="position: relative;display: block;float: left;color: #666;font-weight: normal;">${reviewCount} 리뷰</span>
 								</div>
+								<div class="rating-details" style="position: relative;top: 1px;float: left;margin-left: 9px;">
+							        <a href="#" class="chiclet-link chiclet-link--with-text show-tooltip js-rating-details" style="cursor: pointer; position: relative; padding: 0 6px;text-decoration: none;">
+							            <span aria-hidden="true" style="width: 14px; height: 14px;" class="icon icon--14-histogram icon--size-14 icon--currentColor">
+										  <svg id="14x14_histogram" height="100%" viewBox="0 0 14 14" width="100%">
+										  		<path d="M9 11V5h2v6H9zM6 3h2v8H6V3zM3 7h2v4H3V7z"></path>
+										  </svg>
+										</span>Details
+							            <span class="tooltip-wrapper">
+							                <span class="tooltip">Rating details</span>
+							            </span>
+							        </a>
+							    </div>
 							</div>
 							<div class="price-category" style="float: left;clear: both;">
 								<span class="bullet-after">
        								 <span class="business-attribute price-range" style="letter-spacing: 1px;white-space: nowrap;">￦￦</span>
         						</span>
         						<span class="category-str-list" style="margin-right: 6px;">
-			                    <a href="#" style="white-space: nowrap;color: #0073bb;text-decoration: none;">${getRest.foodstyle}</a>
-					    	</span>
+			                  	 	<a href="#" style="white-space: nowrap;color: #0073bb;text-decoration: none;">${getRest.foodstyle}</a>
+					    		</span>
 							</div>
 							
 						</div>
@@ -51,7 +60,7 @@
 					
 					<div class="biz-page-header-right u-relative"style="display: table;    position: relative !important;">
 						<div class="biz-page-actions nowrap"style="text-align: right;overflow: hidden;padding-bottom: 1px;margin-top: -1px;    white-space: nowrap;">
-						<a href="review_write" class="ybtn ybtn--primary war-button" style="color: #666; float: left; padding-left: 12px; margin: 0 12px 0 0; color: white; border-color: #8d0005; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3); background-color: #d90007; background: linear-gradient(#d90007, #c91400); display: inline-block; vertical-align: middle; cursor: pointer; border: 1px solid; font-weight: bold; text-align: center; user-select: none; font-size: 14px; line-height: 1.28571em; padding: 8px 19px 9px; border-radius: 3px;">
+						<a href="review_write" class="ybtn ybtn--primary war-button" style="color: #666; float: left; padding-left: 12px; margin: 0 12px 0 0; color: white; border-color: #8d0005; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3); background-color: #d90007; background: linear-gradient(#d90007, #c91400); display: inline-block; vertical-align: middle; cursor: pointer; border: 1px solid; font-weight: bold; text-align: center; user-select: none; font-size: 14px; line-height: 1.28571em; padding: 8px 19px 9px; border-radius: 3px;border-color: #8d0005;">
 							<span aria-hidden="true" style="width: 24px; height: 24px;" class="icon icon--24-star icon--size-24 icon--currentColor u-space-r-half icon--fallback-inverted">
 							    <svg id="24x24_star" height="100%" viewBox="0 0 24 24" width="100%">
 							    	<path d="M12 1.5l2.61 6.727 6.89.53-5.278 4.688 1.65 7.055L12 16.67 6.13 20.5l1.648-7.055L2.5 8.757l6.89-.53L12 1.5z"></path>
@@ -66,22 +75,6 @@
 						   		<path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 4.75a4.25 4.25 0 1 0 0 8.5 4.25 4.25 0 0 0 0-8.5zM11 10h-1v1a1 1 0 0 1-2 0v-1H7a1 1 0 0 1 0-2h1V7a1 1 0 0 1 2 0v1h1a1 1 0 0 1 0 2z"></path>
 						   </svg>
 							</span> 사진추가
-						</a>
-						
-						<a class="ybtn ybtn--small share-icon js-business-send-to-friend"href="#" style="margin-left: -1px; position: relative; float: left; border-radius: 0; padding: 5px 8px; font-size: 12px; line-height: 1.5em; display: inline-block; vertical-align: middle; text-decoration: none !important; margin: 0; cursor: pointer; border: 1px solid; font-weight: bold; text-align: center; user-select: none; border-color: #ccc; color: #666; background-color: #f7f7f7; background: linear-gradient(#fff, #f7f7f7); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);">
-							<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-share icon--size-18 icon--currentColor">
-							    <svg id="18x18_share" height="100%" viewBox="0 0 18 18" width="100%">
-							    	<path d="M17.714 6.43L13 10.356v-3.03c-1 0-5.097 1.47-6.286 3.62.274-3.08 4.286-5.5 6.286-5.5V2.5l4.714 3.93zM3 4v10h11v-2.5l1-1V15H2V3h8.5l-1 1H3z"></path>
-							    </svg>
-							</span>공유
-						</a>
-						
-						<a class="ybtn ybtn--small bookmark-button js-action-bar-bookmark-button not-bookmarked"href="#" style="margin-left: -1px; border-radius: 0 3px 3px 0; position: relative; float: left; padding: 5px 8px; font-size: 12px; line-height: 1.5em; display: inline-block; vertical-align: middle; text-decoration: none !important; transition: all 0.2s linear; margin: 0; cursor: pointer; border: 1px solid; font-weight: bold; text-align: center; user-select: none; border-color: #ccc; color: #666; background-color: #f7f7f7; background: linear-gradient(#fff, #f7f7f7); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);">
-							<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-bookmark icon--size-18 icon--currentColor">
-							    <svg id="18x18_bookmark" height="100%" viewBox="0 0 18 18" width="100%">
-							    	<path d="M14 2H4v14l5-4 5 4V2zm-3.13 7.957L8.978 8.794 7.148 10 7.5 7.926 6 6.458l2.074-.303L8.977 4l.948 2.155L12 6.458l-1.5 1.468.37 2.03z"></path>
-							    </svg>
-							</span>북마크
 						</a>
 						</span>
 						</div>
@@ -191,7 +184,7 @@
 									<div class="showcase-photo-box" style="height:100%;">
 									<c:forEach items="${uploadFileList}" var="upload" >
 										<a href="#" style="color: #0073bb;text-decoration: none;"> 
-											<img class="photo-box-img" style="display:inline-block;vertical-align: middle;" width="210" height="220" src="getImage/${upload.filename }">
+											<img class="photo-box-img" style="display:inline-block;vertical-align: middle;" width="210" height="220" src="getImage/${upload.rest_filename }">
 										</a>
 									</c:forEach>
 									</div>
@@ -221,7 +214,7 @@
 <!-- 									<div class="showcase-photo-box" style="height:100%;"> -->
 <%-- 									<c:forEach items="${uploadFileList}" var="upload"> --%>
 <!-- 										<a href="#" style="color: #0073bb;text-decoration: none;">  -->
-<%-- 											<img class="photo-box-img" style="transform: translateZ(0) rotate(0);display:block;vertical-align: middle;" width="250" height="220" src="getImage/${upload.filename }"> --%>
+<%-- 											<img class="photo-box-img" style="transform: translateZ(0) rotate(0);display:block;vertical-align: middle;" width="250" height="220" src="getImage/${upload.rest_filename }"> --%>
 <!-- 										</a> -->
 <%-- 									</c:forEach> --%>
 <!-- 									</div> -->
@@ -231,7 +224,7 @@
 <!-- 									<div class="showcase-photo-box" style="height:100%;"> -->
 <%-- 									<c:forEach items="${uploadFileList}" var="upload"> --%>
 <!-- 										<a href="#" style="color: #0073bb;text-decoration: none;">  -->
-<%-- 											<img class="photo-box-img" style="transform: translateZ(0) rotate(0);display:block;vertical-align: middle;" width="250" height="220" src="getImage/${upload.filename }"> --%>
+<%-- 											<img class="photo-box-img" style="transform: translateZ(0) rotate(0);display:block;vertical-align: middle;" width="250" height="220" src="getImage/${upload.rest_filename }"> --%>
 <!-- 										</a> -->
 <%-- 									</c:forEach> --%>
 <!-- 									</div> -->
@@ -719,8 +712,8 @@
 															    	<path d="M6 10V3c4.976 1.098 4.024-1 8 0v7c-4.024-.976-3.024 1.024-8 0zM4 2h1v14H4V2z"></path>
 														    	</svg>
 															</span>
-															<span class="tooltip-wrapper" style="position: absolute;left: -9999px;bottom: 100%;width: 250px;margin-left: -125px;margin-bottom: 5px;text-align: center;text-decoration: none;color: #999;white-space: nowrap;cursor: pointer;">
-													            <span class="tooltip" style="z-index: 1012;display: inline-block;position: relative;padding: 6px 9px;    vertical-align: middle;white-space: normal;font-size: 12px;pointer-events: none;font-weight: bold;line-height: 18px;    background: rgba(0,0,0,0.8);color: white;border-radius: 5px;text-shadow: none;text-align: left;cursor: default;box-shadow: 0 1px rgba(255,255,255,0.1);">
+															<span class="tooltip-wrapper">
+													            <span class="tooltip">
 													            	Report review
 													            </span>
 													        </span>
@@ -817,7 +810,6 @@
             </div>
          </div>
       </div>
-		
 									</div>
 								</div>
 							</div>
@@ -863,7 +855,7 @@
 										</span>
 									</div>
 									<div class="restContent-iconed-list-story" style="display: table-cell;width: 100%;padding: 9px 0;border-bottom: 1px solid #e6e6e6;padding-bottom: 8px;">
-							            <b style="font-weight: bold;"><a style="color: #0073bb;text-decoration: none;" class="menu-explore js-menu-explore" href="restaurant_listMenu">Full menu</a></b>
+							            <b style="font-weight: bold;"><a style="color: #0073bb;text-decoration: none;" class="menu-explore js-menu-explore" href="restaurant_listMenu?rname=${getRest.rname}">Full menu</a></b>
 							        </div>
 							    </li>
 							    <li class="restContent-iconed-list-item" style="display: table;width: 100%;margin-bottom: 0;">
