@@ -21,7 +21,7 @@
 					<div class="biz-page-header-left claim-status" style="-webkit-box-flex: 1;flex: 1;min-width: 0;min-height: 0;padding-right: 30px;">
 						<div class="u-space-t1" style="margin-top: 6px !important;">
 						<h1
-							style="display: inline; padding-top: 0px; font-size: 36px; line-height: 1.16667em; margin-bottom: 6px; text-shadow: 0 1px rgba(255, 255, 255, 0.7); word-wrap: break-word !important; word-break: break-word !important; overflow-wrap: break-word !important; font-weight: bold; color: #333; margin: 0 0 6px;">${getRest.rname }</h1>
+							style="display: inline; padding-top: 0px; font-size: 36px; line-height: 1.16667em; margin-bottom: 6px; text-shadow: 0 1px rgba(255, 255, 255, 0.7); word-wrap: break-word !important; word-break: break-word !important; overflow-wrap: break-word !important; font-weight: bold; color: #333; margin: 0 0 6px;">${getRest.rname}</h1>
 					</div>
 						<div class="biz-main-info embossed-text-white"style="margin-top: 9px;text-shadow: 0 1px rgba(255,255,255,0.7);">
 							<div class="rating-info clearfix" style="margin-bottom: 9px;height:auto;overflow:hidden;">
@@ -313,9 +313,9 @@
 													<div class="arrange arrange--middle u-space-b1"> <!-- 추가한 것 -->
 														<div class="restContent-arrange-middle">
 															<div class="restContent-feed-search" style="margin-right: 30px !important;">
-																<form class="restContent-form" name="restContent" onsubmit="return check()" style="margin-bottom: 0;display: table; min-width: 100%; table-layout: auto;" action="review_keyword" method="post">
+																<form class="restContent-form" name="restContent" onsubmit="return check()" style="margin-bottom: 0; display: table; min-width: 100%; table-layout: auto;" method="post">
 																	<div class="restContent-arrange-unit" style="width: 100%;box-sizing: border-box;display: table-cell;vertical-align: top;">
-																		<input type="text" placeholder="Search within the reviews" name="SearchKeyword" autocomplete="on" style="margin: 0; display: block; box-sizing: border-box; width: 100%; padding: 5.5px 9px; background: #fff; border: 1px solid #999; border-radius: 3px; font-size: 14px; line-height: 1.29em; color: inherit; font: inherit; font-weight: normal;">
+																		<input type="text" placeholder="Search within the reviews" name="SearchKeyword" id="SearchKeyword" autocomplete="on" style="margin: 0; display: block; box-sizing: border-box; width: 100%; padding: 5.5px 9px; background: #fff; border: 1px solid #999; border-radius: 3px; font-size: 14px; line-height: 1.29em; color: inherit; font: inherit; font-weight: normal;">
 																		<input type="hidden" name="rnum" value="${getRest.rnum}">
 																	</div>
 																	<div class="rsetContent-arrange-unit-button" style="box-sizing: border-box;display: table-cell;vertical-align: top;">
@@ -418,7 +418,7 @@
 										</div>
 									</li>
 										
-								<c:forEach var="getReview" items="${selectedDataRV}">	
+									<c:forEach var="getReview" items="${selectedDataRV}">	
 									<li>
 										<div class="restContent-review-with" style="margin: 0 -15px; display: flex;">
 											<div class="restContent-user" style="float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 37.5%;">
@@ -687,89 +687,89 @@
 									</c:forEach>
 								</ul>
 								<div class="event_list_paging_section" style="font-size: 14px;">
-         <div class="event_list_pagination_block">
-            <div class="event_list_pagination_wrap">
-               <div class="event_list_page_of_pages">
-                  <c:if test="${map.YepsPager.blockEnd == 0}">
-                     Page ${map.YepsPager.curPage} of 1
-                  </c:if>
-                  <c:if test="${map.YepsPager.blockEnd != 0}">
-                     Page ${map.YepsPager.curPage} of ${map.YepsPager.blockEnd}
-                  </c:if>
-               </div>
+         							<div class="event_list_pagination_block">
+            							<div class="event_list_pagination_wrap">
+               								<div class="event_list_page_of_pages">
+                  							<c:if test="${map.YepsPager.blockEnd == 0}">
+                  							    Page ${map.YepsPager.curPage} of 1
+                  							</c:if>
+                  							<c:if test="${map.YepsPager.blockEnd != 0}">
+                     							Page ${map.YepsPager.curPage} of ${map.YepsPager.blockEnd}
+                  							</c:if>
+              		 						</div>
 <!--                페이징 처리!! 현재페이지는 span이 되고 나머지는 a로 -->
-               <c:if test="${map.YepsPager.blockEnd != 1}">
-               <div class="event_list_page_link_wrapper">
-                  <div class="event_list_page_link_wrap">
+               							<c:if test="${map.YepsPager.blockEnd != 1}">
+               							<div class="event_list_page_link_wrapper">
+                  							<div class="event_list_page_link_wrap">
                   
-                  <c:if test="${map.YepsPager.curBlock > 1}">
-                     <div class="event_list_next_block">
-                        <a class="event_list_next_block_action" href="javascript:list('1')">
-                           <span>Start</span>
-                        </a>
-                     </div>
-                  </c:if>
+                  							<c:if test="${map.YepsPager.curBlock > 1}">
+                     							<div class="event_list_next_block">
+                        							<a class="event_list_next_block_action" href="javascript:list('1')">
+                           								<span>Start</span>
+                        							</a>
+                     							</div>
+                  							</c:if>
 
-                  <c:if test="${map.YepsPager.curBlock > 1}">
-                     <div class="event_list_next_block">
-                        <a class="event_list_next_block_action" href="javascript:list('${map.YepsPager.prevPage}')">
-                           <span style="width: 24px; height: 24px; fill: currentColor;" class="icon">
-                              <svg class="icon_svg">
-                                 <path d="M14.475 18.364l1.414-1.414L10.94 12l4.95-4.95-1.415-1.414L8.11 12l6.365 6.364z"></path>
-                              </svg>
-                           </span>
-                           <span>Previous</span>
-                        </a>
-                     </div>
-                  </c:if>
+                  							<c:if test="${map.YepsPager.curBlock > 1}">
+                     							<div class="event_list_next_block">
+                       								<a class="event_list_next_block_action" href="javascript:list('${map.YepsPager.prevPage}')">
+                           								<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">
+                              								<svg class="icon_svg">
+                                 								<path d="M14.475 18.364l1.414-1.414L10.94 12l4.95-4.95-1.415-1.414L8.11 12l6.365 6.364z"></path>
+                              								</svg>
+                           								</span>
+                           								<span>Previous</span>
+                        							</a>
+                     							</div>
+                  							</c:if>
                   
-                  <c:forEach var="num" begin="${map.YepsPager.blockBegin}" end="${map.YepsPager.blockEnd}">
-                     <div class="event_list_page_link_option">
-                     <c:choose>
-                        <c:when test="${num == map.YepsPager.curPage}">
-                           <span class="event_list_page_option_action">
-                              ${num}
-                           </span>
-                        </c:when>
-                        <c:otherwise>
-                           <a href="javascript:list('${num}')" class="event_list_page_option_link_action">
-                              ${num}
-                           </a>
-                        </c:otherwise>
-                     </c:choose>
-                     </div>
-                  </c:forEach>
-                  
-                  <c:if test="${map.YepsPager.curBlock <= map.YepsPager.totBlock}">
-                     <div class="event_list_next_block">
-                        <a class="event_list_next_block_action" href="javascript:list('${map.YepsPager.nextPage}')">
-                           <span>Next</span>
-                           <span style="width: 24px; height: 24px; fill: currentColor;" class="icon">
-                              <svg class="icon_svg">
-                                 <path d="M9.525 5.636L8.11 7.05 13.06 12l-4.95 4.95 1.415 1.414L15.89 12 9.524 5.636z"></path>
-                              </svg>
-                           </span>
-                        </a>
-                     </div>
-                  </c:if>
-                  
-                  <c:if test="${map.YepsPager.curPage <= map.YepsPager.totPage}">
-                     <div class="event_list_next_block">
-                        <a class="event_list_next_block_action" href="javascript:list('${map.YepsPager.totPage}')">
-                           <span>End</span>
-                        </a>
-                     </div>
-                  </c:if>
-                  </div>
-               </div>
-               </c:if>
-            </div>
-         </div>
-      </div>
-									</div>
-								</div>
+							                <c:forEach var="num" begin="${map.YepsPager.blockBegin}" end="${map.YepsPager.blockEnd}">
+							                   <div class="event_list_page_link_option">
+							                   <c:choose>
+							                      <c:when test="${num == map.YepsPager.curPage}">
+							                         <span class="event_list_page_option_action">
+							                            ${num}
+							                         </span>
+							                      </c:when>
+							                      <c:otherwise>
+							                         <a href="javascript:list('${num}')" class="event_list_page_option_link_action">
+							                            ${num}
+							                         </a>
+							                      </c:otherwise>
+							                   </c:choose>
+							                   </div>
+							                </c:forEach>
+							                
+							                <c:if test="${map.YepsPager.curBlock <= map.YepsPager.totBlock}">
+							                   <div class="event_list_next_block">
+							                      <a class="event_list_next_block_action" href="javascript:list('${map.YepsPager.nextPage}')">
+							                         <span>Next</span>
+							                         <span style="width: 24px; height: 24px; fill: currentColor;" class="icon">
+							                            <svg class="icon_svg">
+							                               <path d="M9.525 5.636L8.11 7.05 13.06 12l-4.95 4.95 1.415 1.414L15.89 12 9.524 5.636z"></path>
+							                            </svg>
+							                         </span>
+							                      </a>
+							                   </div>
+							                </c:if>
+							                
+							                <c:if test="${map.YepsPager.curPage <= map.YepsPager.totPage}">
+							                   <div class="event_list_next_block">
+							                      <a class="event_list_next_block_action" href="javascript:list('${map.YepsPager.totPage}')">
+							                         <span>End</span>
+							                      </a>
+							                   </div>
+							                </c:if>
+						                  </div>
+						               </div>
+						               </c:if>
+						            </div>
+						         </div>
+						      </div>
 							</div>
+						</div>
 					</div>
+				</div>
 				<div class="restContent-beta" style="padding: 0 30px 0 0; margin-right: -15px; float: left; min-height: 1px; box-sizing: border-box; width: 33.33333%;height:auto; box-shadow:-1px 0 0 #e6e6e6;display:inline-block;">
 					<div class="restContent-open-rail clearfix" style=" margin-left: -1px;padding-left: 1px;background: #fff;width:300px;height:auto;">
 						<div class="restContent-summary" style="padding: 3px 11px 3px 6px;margin-bottom: 18px;background: #f5f5f5;border: 1px solid #e6e6e6;border-radius: 4px;width:280px;height:auto;">
@@ -1019,8 +1019,12 @@
 					</div>
 				</div>	
 			</div>
-				</div>
 		</div>
+	</div>
+	
+	<div class="loading_wapper" >
+      	<div class="loading_img" style="left: 40%; top: 40%;"></div>
+   	</div>
 		
 		
 <script>
@@ -1090,12 +1094,367 @@
 
 <script type="text/javascript">
 //**원하는 페이지로 이동시 검색조건, 키워드 값을 유지하기 위해 
+var rnum = '${getRest.rnum}';
 function list(page){
-    location.href="restaurant_content?curPage="+page;
+	$(document).ajaxStart(function() {
+		$('body').css('overflow', 'hidden');
+		$('html').scrollTop(0);
+		$('.loading_wapper').fadeIn(500);
+	})
+					
+	$(document).ajaxStop(function() {
+		$('body').css('overflow', 'auto');
+		$('.loading_wapper').fadeOut(500);
+	})
+	
+    $.ajax({
+        type : 'post',
+        url : 'restaurant_content_ajax?curPage=' + page + '&rnum=' + rnum,
+        dataType : 'json',
+        success : function(responseData){
+           $('.restContent-reviews li:not(:first)').remove();
+           $.each(responseData.selectedDataRV,function(i,item){
+        	   var userId;
+        	   if(item.memberDTO.nickname == null) {
+        		   userId = item.memberDTO.email;
+        	   } else {
+        		   userId = item.memberDTO.nickname;
+        	   }
+        	   var address = item.memberDTO.address;
+        	   var addr = [];
+        	   if(address != null) {
+        		   addr = address.split(' ');
+        	   } else {
+        		   addr[0] = '';
+        		   addr[1] = '';
+        	   }
+        	   
+          	 $('.restContent-reviews').append(
+   	     			   '<li>' +
+   		     			   '<div class="restContent-review-with" style="margin: 0 -15px; display: flex;">' +
+   	    		 		   		'<div class="restContent-user" style="float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 37.5%;">' +
+   		     			   			'<div class="restContent-user-content" style="margin-top: -3px;">' +
+										'<div class="restContent-meida-block" style="font-size: 12px; line-height: 1.5em; position: relative; display: flex;">' +
+											'<div class="restContent-media-avatar" style="border-right-width: 9px;border-right: 6px solid transparent;border-left: none;">' +
+												'<div class="restContent-photo-box">' +
+													'<a href="#" style="color: #0073bb;">' +
+														'<img class="restContent-photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/' + item.memberDTO.memberPhotoDTO.filename + '" width="60">' +
+													'</a>' +
+												'</div>' +
+											'</div>' +
+											'<div class="restContent-media-story" style="-webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;">' +
+												'<ul class="restContent-user-info">' +
+													'<li class="restContent-user-name">' +
+														'<a href="#" class="restContent-user-display-name" style="font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; cursor: pointer;">' +
+															userId +
+														'</a>' +
+													'</li>' +
+													'<li class="restContnet-user-location">' +
+														'<b style="font-weight: bold;">' +
+															addr[0] + addr[1] +
+														'</b>' +
+													'</li>' +
+												'</ul>' +
+												'<ul class="restContent-user-stats">' +
+													'<li class="restContent-review-count" style="color: #666;display: list-item;text-align: -webkit-match-parent;">'+
+														'<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-review icon--size-18">'+
+														   '<svg class="icon_svg">'+
+														        '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_review">'+
+														        	'<svg id="18x18_review" height="100%" viewBox="0 0 18 18" width="100%">'+
+												    		    		'<path d="M13 3H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1.505 9.643l-2.526-1.55L6.526 12.7 7 9.934 5 7.977l2.766-.404L8.97 4.7l1.264 2.873L13 7.977l-2 1.957.495 2.71z"></path>'+
+													        	'</svg>'+
+													        '</use>'+
+													    '</svg>'+
+													'</span>'+
+													'<b style="font-weight: bold;"> ' + item.memberDTO.reviewcount + '</b> reviews'+
+												'</li>'+
+												'<li class="restContent-photo-count" style="color: #666;display: list-item;text-align: -webkit-match-parent;">'+
+													'<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-camera icon--size-18">'+
+													    '<svg class="icon_svg">'+
+													        '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_camera">'+
+														        	'<svg id="18x18_camera" height="100%" viewBox="0 0 18 18" width="100%">'+
+													        		'<path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 6.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path>'+
+													        	'</svg>'+
+													       ' </use>'+
+													    '</svg>'+
+													'</span>'+
+													'<b style="font-weight: bold;"> '+ item.memberDTO.imagecount +'</b> photos'+
+												'</li>'+
+											'</ul>'+
+										'</div>'+
+									'</div>'+
+									'<ul class="restContent-list-link">'+									
+										'<li>'+
+											'<a class="restContent-share-review" href="#" style="display: table; min-width: 100%; table-layout: auto; cursor: pointer;">'+
+												'<div class="action-link_icon arrange_unit" style="padding-top: 3px; padding-bottom: 3px; vertical-align: middle; padding-right: 12px; box-sizing: border-box; display: table-cell;">'+
+													'<span aria-hidden="true" style="fill: currentColor; width: 18px; height: 18px;" class="icon">'+
+													    '<svg class="icon_svg">'+
+													        '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_speech">'+
+													        	'<svg id="18x18_speech" height="100%" viewBox="0 0 18 18" width="100%">'+
+										        					'<path d="M2 4v6a2 2 0 0 0 2 2h1v3l4-3h5a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"></path>'+
+													        	'</svg>'+
+													        '</use>'+
+													   ' </svg>'+
+													'</span>'+
+												'</div>'+
+												'<div class="action-link_label arrange_unit arrange_unit--fill" style="display: table-cell;border-top: 1px solid #e6e6e6; padding-top: 3px; padding-bottom: 3px; vertical-align: middle; width: 100%;">'+
+													'Send message'+
+												'</div>'+
+											'</a>'+
+										'</li>'+
+									'</ul>'+
+								'</div>'+
+							'</div>'+			
+							'<div class="restContent-review-wrapper" style="float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 62.5%;">'+
+								'<div class="restContent-review-content" style="padding: 0 12px 6px 0; min-height: 156px; word-wrap: break-word !important; word-break: break-word !important; overflow-wrap: break-word !important;">'+
+									'<div class="restContent-review-rating" style="margin: 6px 0;width:100%;overflow:hidden;height:auto;">'+
+										'<div>'+
+											'<div class="restList-star-rating-'+item.gradepoint+'" >'+
+												'<img class="offscreen" '+
+													'src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/stars.png" '+
+													'width="84" height="303" alt="4.0 star rating" '+
+													'style="clip: rect(0, 0, 0, 0); position: absolute; left: -9999px; top: auto; overflow: hidden; width: 1px; height: 1px; vertical-align: middle;">'+
+											'</div>'+
+										'</div>'+
+										'<span class="restContent-rating-qualifier" style="display: block; float: left; color: #666; font-weight: normal;">'+
+											item.reg_date +
+										'</span>'+
+									'</div>'+
+									'<p lang="ko" style="margin-bottom: 12px;display:block;">'+
+										item.content +
+									'</p>'+
+								'</div>'+
+							'<div class="review-footer clearfix">'+
+						'</div>'+
+					'</div>'+
+				'</li>'
+           		);
+           });
+           
+           
+           $('.event_list_paging_section').empty();
+           var pagingHtml = "";
+           pagingHtml = '<div class="event_list_pagination_block">' + 
+           				'<div class="event_list_pagination_wrap">' + 
+           				'<div class="event_list_page_of_pages">';
+           if(responseData.YepsPager.blockEnd == 0) {
+        	   pagingHtml += 'Page ' + responseData.YepsPager.curPage + ' of 1';
+           } else {
+        	   pagingHtml += 'Page ' + responseData.YepsPager.curPage + ' of ' + responseData.YepsPager.blockEnd;
+           }
+           pagingHtml += '</div>';
+           if(responseData.YepsPager.blockEnd != 1) {
+        	   pagingHtml += '<div class="event_list_page_link_wrapper">';
+        	   pagingHtml += '<div class="event_list_page_link_wrap">';
+        	   if(responseData.YepsPager.curBlock > 1) {
+        		   pagingHtml += '<div class="event_list_next_block">';
+        		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+ 1 +')">';
+        		   pagingHtml += '<span>Start</span>';
+        		   pagingHtml += '</a>';
+        		   pagingHtml += '</div>';
+        	   }
+        	   
+        	   if(responseData.YepsPager.curBlock > 1) {
+        		   pagingHtml += '<div class="event_list_next_block">';
+        		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+responseData.YepsPager.prevPage+')">';
+        		   pagingHtml += '<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">';
+        		   pagingHtml += '<svg class="icon_svg">';
+        		   pagingHtml += '<path d="M14.475 18.364l1.414-1.414L10.94 12l4.95-4.95-1.415-1.414L8.11 12l6.365 6.364z"></path>';
+        		   pagingHtml += '</svg>';
+        		   pagingHtml += '</span>';
+        		   pagingHtml += '<span>Previous</span>';
+        		   pagingHtml += '</a>';
+        		   pagingHtml += '</div>';
+        	   }
+        	   
+        	   for(var num = responseData.YepsPager.blockBegin; num <= responseData.YepsPager.blockEnd; num++) {
+        		   pagingHtml += '<div class="event_list_page_link_option">';
+        		   if(num == responseData.YepsPager.curPage) {
+        			   pagingHtml += '<span class="event_list_page_option_action">';
+        			   pagingHtml += num;
+        			   pagingHtml += '</span>';
+        		   } else {
+        			   pagingHtml += '<a href="javascript:list('+ num +')" class="event_list_page_option_link_action">';
+        			   pagingHtml += num;
+        			   pagingHtml += '</a>';
+        		   }
+        		   pagingHtml += '</div>';
+        	   }
+        	   
+        	   if(responseData.YepsPager.curBlock <= responseData.YepsPager.totBlock) {
+        		   pagingHtml += '<div class="event_list_next_block">';
+        		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+responseData.YepsPager.nextPage+')">';
+        		   pagingHtml += '<span>Next</span>';
+        		   pagingHtml += '<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">';
+        		   pagingHtml += '<svg class="icon_svg">';
+        		   pagingHtml += '<path d="M9.525 5.636L8.11 7.05 13.06 12l-4.95 4.95 1.415 1.414L15.89 12 9.524 5.636z"></path>';
+        		   pagingHtml += '</svg>';
+        		   pagingHtml += '</span>';
+        		   pagingHtml += '</a>';
+        		   pagingHtml += '</div>';
+        	   }
+        	   if(responseData.YepsPager.curBlock <= responseData.YepsPager.totBlock) {
+        		   pagingHtml += '<div class="event_list_next_block">';
+        		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+responseData.YepsPager.totPage+')">';
+        		   pagingHtml += '<span>End</span>';
+        		   pagingHtml += '</a>';
+        		   pagingHtml += '</div>';
+        	   }
+        	   pagingHtml += '</div>';
+        	   pagingHtml += '</div>';
+           }
+           pagingHtml += '</div>';
+           pagingHtml += '</div>';
+           pagingHtml += '</div>';
+
+           $('.event_list_paging_section').append(pagingHtml);           
+        },
+        error : function(request, status, error) {
+           alert("불러오기 실패");
+        },
+   });
 }
 
-function check() {
+function check() {	
+	var queryString = $("form[name=restContent]").serialize();
+    $.ajax({
+         type : 'post',
+         url : 'restaurant_content_ajax?rnum='+rnum,
+         data : queryString,
+         dataType : 'json',
+         success : function(responseData){
+            $('#SearchKeyword').val(responseData.SearchKeyword);
+            $('.restContent-reviews li:not(:first)').remove();
+            $.each(responseData.selectedDataRV,function(i,item){
+         	   var userId;
+         	   if(item.memberDTO.nickname == null) {
+         		   userId = item.memberDTO.email;
+         	   } else {
+         		   userId = item.memberDTO.nickname;
+         	   }
+         	   var address = item.memberDTO.address;
+         	   var addr = [];
+         	   if(address != null) {
+         		   addr = address.split(' ');
+         	   } else {
+         		   addr[0] = '';
+         		   addr[1] = '';
+         	   }
+         	   
+         	   
+         	  $('.restContent-reviews').append(
+  	     			   '<li>' +
+  		     			   '<div class="restContent-review-with" style="margin: 0 -15px; display: flex;">' +
+  	    		 		   		'<div class="restContent-user" style="float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 37.5%;">' +
+  		     			   			'<div class="restContent-user-content" style="margin-top: -3px;">' +
+										'<div class="restContent-meida-block" style="font-size: 12px; line-height: 1.5em; position: relative; display: flex;">' +
+											'<div class="restContent-media-avatar" style="border-right-width: 9px;border-right: 6px solid transparent;border-left: none;">' +
+												'<div class="restContent-photo-box">' +
+													'<a href="#" style="color: #0073bb;">' +
+														'<img class="restContent-photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/' + item.memberDTO.memberPhotoDTO.filename + '" width="60">' +
+													'</a>' +
+												'</div>' +
+											'</div>' +
+											'<div class="restContent-media-story" style="-webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;">' +
+												'<ul class="restContent-user-info">' +
+													'<li class="restContent-user-name">' +
+														'<a href="#" class="restContent-user-display-name" style="font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; cursor: pointer;">' +
+															userId +
+														'</a>' +
+													'</li>' +
+													'<li class="restContnet-user-location">' +
+														'<b style="font-weight: bold;">' +
+															addr[0] + addr[1] +
+														'</b>' +
+													'</li>' +
+												'</ul>' +
+												'<ul class="restContent-user-stats">' +
+													'<li class="restContent-review-count" style="color: #666;display: list-item;text-align: -webkit-match-parent;">'+
+														'<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-review icon--size-18">'+
+														   '<svg class="icon_svg">'+
+														        '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_review">'+
+														        	'<svg id="18x18_review" height="100%" viewBox="0 0 18 18" width="100%">'+
+												    		    		'<path d="M13 3H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1.505 9.643l-2.526-1.55L6.526 12.7 7 9.934 5 7.977l2.766-.404L8.97 4.7l1.264 2.873L13 7.977l-2 1.957.495 2.71z"></path>'+
+													        	'</svg>'+
+													        '</use>'+
+													    '</svg>'+
+													'</span>'+
+													'<b style="font-weight: bold;"> ' + item.memberDTO.reviewcount + '</b> reviews'+
+												'</li>'+
+												'<li class="restContent-photo-count" style="color: #666;display: list-item;text-align: -webkit-match-parent;">'+
+													'<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-camera icon--size-18">'+
+													    '<svg class="icon_svg">'+
+													        '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_camera">'+
+														        	'<svg id="18x18_camera" height="100%" viewBox="0 0 18 18" width="100%">'+
+													        		'<path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 6.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path>'+
+													        	'</svg>'+
+													       ' </use>'+
+													    '</svg>'+
+													'</span>'+
+													'<b style="font-weight: bold;"> '+ item.memberDTO.imagecount +'</b> photos'+
+												'</li>'+
+											'</ul>'+
+										'</div>'+
+									'</div>'+
+									'<ul class="restContent-list-link">'+									
+										'<li>'+
+											'<a class="restContent-share-review" href="#" style="display: table; min-width: 100%; table-layout: auto; cursor: pointer;">'+
+												'<div class="action-link_icon arrange_unit" style="padding-top: 3px; padding-bottom: 3px; vertical-align: middle; padding-right: 12px; box-sizing: border-box; display: table-cell;">'+
+													'<span aria-hidden="true" style="fill: currentColor; width: 18px; height: 18px;" class="icon">'+
+													    '<svg class="icon_svg">'+
+													        '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_speech">'+
+													        	'<svg id="18x18_speech" height="100%" viewBox="0 0 18 18" width="100%">'+
+										        					'<path d="M2 4v6a2 2 0 0 0 2 2h1v3l4-3h5a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"></path>'+
+													        	'</svg>'+
+													        '</use>'+
+													   ' </svg>'+
+													'</span>'+
+												'</div>'+
+												'<div class="action-link_label arrange_unit arrange_unit--fill" style="display: table-cell;border-top: 1px solid #e6e6e6; padding-top: 3px; padding-bottom: 3px; vertical-align: middle; width: 100%;">'+
+													'Send message'+
+												'</div>'+
+											'</a>'+
+										'</li>'+
+									'</ul>'+
+								'</div>'+
+							'</div>'+			
+							'<div class="restContent-review-wrapper" style="float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 62.5%;">'+
+								'<div class="restContent-review-content" style="padding: 0 12px 6px 0; min-height: 156px; word-wrap: break-word !important; word-break: break-word !important; overflow-wrap: break-word !important;">'+
+									'<div class="restContent-review-rating" style="margin: 6px 0;width:100%;overflow:hidden;height:auto;">'+
+										'<div>'+
+											'<div class="restList-star-rating-'+item.gradepoint+'" >'+
+												'<img class="offscreen" '+
+													'src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/stars.png" '+
+													'width="84" height="303" alt="4.0 star rating" '+
+													'style="clip: rect(0, 0, 0, 0); position: absolute; left: -9999px; top: auto; overflow: hidden; width: 1px; height: 1px; vertical-align: middle;">'+
+											'</div>'+
+										'</div>'+
+										'<span class="restContent-rating-qualifier" style="display: block; float: left; color: #666; font-weight: normal;">'+
+											item.reg_date +
+										'</span>'+
+									'</div>'+
+									'<p lang="ko" style="margin-bottom: 12px;display:block;">'+
+										item.content +
+									'</p>'+
+								'</div>'+
+							'<div class="review-footer clearfix">'+
+						'</div>'+
+					'</div>'+
+				'</li>'
+          		);
+         	   
+         	   
+         	   
+         	   
+            });
+         	   
+         },
+         error : function(request, status, error) {
+            alert("불러오기 실패");
+         },
+    });
 	
+	return true;
 }
 </script>
 
