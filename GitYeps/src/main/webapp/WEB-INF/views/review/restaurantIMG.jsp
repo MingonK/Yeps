@@ -109,7 +109,7 @@
                            <div class="resIMG_div_51">
                               <div class="resIMG_div_52">
                                  <a class="resIMG_a_3" href="#">
-                                    <img class="resIMG_img_3" src="https://s3-media2.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/60s.jpg" srcset="https://s3-media2.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/ms.jpg 1.67x,https://s3-media2.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/120s.jpg 2.00x,https://s3-media2.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/90s.jpg 1.50x,https://s3-media2.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/168s.jpg 2.80x,https://s3-media2.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/180s.jpg 3.00x">   
+                                    <img class="resIMG_img_3" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${filename}">   
                                  </a>
                               </div>
                            </div>
@@ -117,7 +117,12 @@
                               <ul class="resIMG_ul_4">
                                  <li   class="resIMG_li_4">
                                     <a class="resIMG_a_4" href="#">
-                                       ${name}..
+                                       <c:if test="${empty nickname}">
+					   					   <a href="#">${email}</a>
+					   				   </c:if>
+					   				   <c:if test="${!empty nickname}">
+					   					   <a href="#">${nickname}</a>
+					   				   </c:if>
                                     </a>
                                  </li>
                                  <li class="resIMG_li_4">
