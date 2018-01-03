@@ -448,10 +448,47 @@ $(function() {
    
    
    var star = '${star}';
-   
-   $(document).ready(function() {   
-      show(star)
+   $(document).ready(function() {  
       document.review_writeF.gradepoint.value = star;
+      
+      $('.signup-link').click(function() {
+          if($("#login").css("display") == "none"){
+             $("#login").show();
+             $('#join').hide();
+          }else{
+             $("#login").hide();
+             $('#join').show();
+          }
+       });
+             
+       $('.login-link').click(function() {
+          $("#login").show();
+          $("#find_passwd").hide();
+          $('#find_email').hide();
+       });
+             
+       $('.forgot-email-link').click(function() {
+          $("#login").hide();
+          $("#find_passwd").hide();
+          $('#find_email').show();
+       });
+    
+       $('.forgot-passwd-link').click(function() {
+          $("#login").hide();
+          $('#find_email').hide();
+          $('#find_passwd').show();
+       });
+             
+       $('#member_email2').click(function(){
+          $('#emailpicker-div').toggle();
+       });
+             
+       $(document).mouseup(function (e){
+          var container=$("#emailpicker-div");
+          if(container.has(e.target).length===0){
+          container.hide(); 
+          }
+       });
    });
      
    
@@ -643,44 +680,7 @@ $(function() {
     }
            
     $(document).ready(function() {
-       $('.signup-link').click(function() {
-          if($("#login").css("display") == "none"){
-             $("#login").show();
-             $('#join').hide();
-          }else{
-             $("#login").hide();
-             $('#join').show();
-          }
-       });
-             
-       $('.login-link').click(function() {
-          $("#login").show();
-          $("#find_passwd").hide();
-          $('#find_email').hide();
-       });
-             
-       $('.forgot-email-link').click(function() {
-          $("#login").hide();
-          $("#find_passwd").hide();
-          $('#find_email').show();
-       });
-    
-       $('.forgot-passwd-link').click(function() {
-          $("#login").hide();
-          $('#find_email').hide();
-          $('#find_passwd').show();
-       });
-             
-       $('#member_email2').click(function(){
-          $('#emailpicker-div').toggle();
-       });
-             
-       $(document).mouseup(function (e){
-          var container=$("#emailpicker-div");
-          if(container.has(e.target).length===0){
-          container.hide(); 
-          }
-       });
+       
        
        
     });
