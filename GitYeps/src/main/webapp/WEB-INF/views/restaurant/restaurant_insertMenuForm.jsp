@@ -95,7 +95,7 @@ $(document).ready(function() {
 		$('.menu-sections').on('click','button',function(e){
 			
 			var name=$(this).val();
-			$('.'+name+'-list').children().length;
+			alert($('.'+name+'-list').children().length)
 			
 			$('.'+name+'-list ').append(
 				'<div class="menu-item" style="border-top: 0;padding: 10px 0;">'+

@@ -11,6 +11,7 @@
 <html>
 <head>
 	<title>Yeps!</title>
+	<link rel="shortcut icon" type="image⁄x-icon" href="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/mainPage.css"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css"/>"/>
@@ -1090,7 +1091,7 @@
 								</c:if>
 								
 								<p style="text-align: center!important; margin-bottom: 12px;">
-									<a href="#">
+									<a href="previous_reviews">
 										Read previous reviews
 									</a>
 								</p>

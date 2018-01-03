@@ -1,7 +1,8 @@
 package com.yeps.controller;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,6 +22,7 @@ import com.yeps.model.ReviewDTO;
 import com.yeps.service.MemberMapper;
 import com.yeps.service.RestaurantMapper;
 import com.yeps.service.ReviewMapper;
+import com.yeps.service.YepsPager;
 
 @Controller
 public class ReviewController {
@@ -89,39 +91,6 @@ public class ReviewController {
 		return "review/guidelines";
 	}
 
-	// @RequestMapping(value="/previous_reviews")
-	// public ModelAndView previous_reviews() {
-	// //rnum,mnum값을 뽑아서 각각의 Mapper를 통해 값을 받아와서 previous_review.jsp페이지에 출력
-	//
-	// List<ReviewDTO> numList = reviewMapper.previous_reviews_Num();
-	// for(int i=0; i<numList.size(); i++) {
-	//// System.out.println("numList Size 출력:" + numList.size());
-	//// System.out.println("getMnum 출력:"+numList.get(i).getMnum());
-	//// System.out.println("getRnum 출력:"+numList.get(i).getRnum());
-	// }
-	// //recentreview가 y인 reviewDTO를 꺼내왔음
-	// List<ReviewDTO> rvdto_y = reviewMapper.previous_Rv();
-	//
-	// List<MemberDTO> mdto_y = new ArrayList<MemberDTO>();
-	// for(int i=0; i<numList.size(); i++) {
-	// int mnum = numList.get(i).getMnum();
-	// mdto_y.addAll(memberMapper.previous_M(mnum)); //rvnum 이 일치할때 restaurantDTO를
-	// 한줄씩 꺼내와서 저장함.
-	// }
-	//
-	// List<RestaurantDTO> rdto_y = new ArrayList<RestaurantDTO>();
-	// for(int i=0; i<numList.size(); i++) {
-	// int rnum = numList.get(i).getRnum();
-	// rdto_y.addAll(restaurantMapper.previous_R(rnum));
-	// }
-	//
-	// ModelAndView mav = new ModelAndView();
-	// mav.addObject("rvdto_y", rvdto_y);
-	// mav.addObject("mdto_y", mdto_y);
-	// mav.addObject("rdto_y", rdto_y);
-	// mav.setViewName("review/previous_reviews");
-	// return mav;
-	// }
 
 	@RequestMapping(value = "/restaurant_qna")
 	public String restaurant_qna() {
@@ -129,22 +98,29 @@ public class ReviewController {
 	}
 
 	@RequestMapping(value="/review_keyword")
-	public ModelAndView review_keyword(HttpServletRequest req) {
+	public ModelAndView review_keyword(HttpServletRequest req, @RequestParam(defaultValue = "1") int curPage) {
 		String SearchKeyword = req.getParameter("SearchKeyword");
-		String rname = req.getParameter("rname");
-		List<ReviewDTO> SearchedDTO_Rv= reviewMapper.review_keyword(SearchKeyword);
+		String rnum = req.getParameter("rnum");
 
-		List<MemberDTO> SearchedDTO_M = new ArrayList<MemberDTO>();
-		for(int i=0; i<SearchedDTO_Rv.size(); i++) {
-			int mnum = SearchedDTO_Rv.get(i).getMnum();
-			SearchedDTO_M.addAll(memberMapper.SearchedDTO_M(mnum));
-		}
+		int count = reviewMapper.review_keywordCount(SearchKeyword);
+		int pageScale = 10;
+		int blockScale = 10;
+		YepsPager YepsPager = new YepsPager(count, curPage, pageScale, blockScale);
+		int start = YepsPager.getPageBegin();
+		int end = YepsPager.getPageEnd();
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("count", count); // 레코드의 갯수
+		map.put("YepsPager", YepsPager);
+
+		List<ReviewDTO> SearchedDTO_Rv= reviewMapper.review_keyword(SearchKeyword, Integer.parseInt(rnum), start, end);
+		RestaurantDTO getRest = restaurantMapper.getRest(Integer.parseInt(rnum));
 
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("rname", rname);
+		mav.addObject("map", map);
+		mav.addObject("rnum", rnum);
+		mav.addObject("getRest", getRest);
 		mav.addObject("selectedDataRV", SearchedDTO_Rv); //한 페이지에서 변수명에 따라 다른값보여주기위해서
-		mav.addObject("selectedDataM", SearchedDTO_M); //한 페이지에서 변수명에 따라 다른값보여주기위해서
-		
 		mav.setViewName("restaurant/restaurant_content");
 		return mav;
 
@@ -160,17 +136,11 @@ public class ReviewController {
 	public ModelAndView review_write(HttpServletRequest req) {
 		String rnum = req.getParameter("rnum");
 		String rname = restaurantMapper.review_write_getrname(Integer.parseInt(rnum));
-		System.out.println("review_write에서의 rname출력:" + rname);
 		String star = req.getParameter("star");
-		String mode = req.getParameter("mode");
-	    String where = req.getParameter("where");
-		System.out.println("write1" + mode);
 
 		// ★EDIT부분★ 위에 받아온 파라미터값 rnum을 통해서 방금 작성한 리뷰의 정보들을 가져와서 write페이지에 뿌려주면됨.
 
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("mode", mode);
-		mav.addObject("where", where);
 		mav.addObject("rnum", rnum);
 		mav.addObject("rname", rname);
 		mav.addObject("star", star);
@@ -203,23 +173,18 @@ public class ReviewController {
 
 		MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo");
 		int mnum = mdto.getMnum();
-		
+		// reviewcount 구하기 추가 부분
+		int beforeReviewcount = memberMapper.getMemberReviewCount(mnum);
+		int nowReviewcount = beforeReviewcount + 1;
+		memberMapper.updateReviewCount(mnum, nowReviewcount);
 		// ===============================
-		String mode = req.getParameter("mode");
-		String where = req.getParameter("where");
 		String name = mdto.getName();
 		String rnum = req.getParameter("rnum");
 		String rname = req.getParameter("rname");
 		String gradepoint = req.getParameter("gradepoint");
 		String content = req.getParameter("content");
-        String Get_InsertReviewDate = reviewMapper.Get_InsertReviewDate();
-        
-     // reviewcount 구하기 추가 부분
-     	int beforeReviewcount = memberMapper.getMemberReviewCount(mnum);
-     	int nowReviewcount = beforeReviewcount + 1;
-     	if(mode.equals("write")) {
-     	    memberMapper.updateReviewCount(mnum, nowReviewcount);
-     	}
+
+		String Get_InsertReviewDate = reviewMapper.Get_InsertReviewDate();
 
 		rvdto.setRnum(Integer.parseInt(rnum));
 		rvdto.setMnum(mnum);
@@ -237,18 +202,12 @@ public class ReviewController {
 		// 리뷰 작성했을때 위에 프로필과함께 작성한리뷰 restaurantIMG페이지에 띄워주기
 		List<RestaurantDTO> rlist = restaurantMapper.review_restaurantIMG();
 		System.out.println("rlist 출력2" + rlist);
-        System.out.println("@@@@@@=" +    mode);
-        System.out.println("where=" + where);
+
 		if (res > 0) {
 			mav.addObject("rnum", rnum);
 			// reviewcount 담아주기 ============================
-			if(mode.equals("write")) {
-				
-			    mdto.setReviewcount(nowReviewcount);
-			}else if(mode.equals("update") || mode == null){
-				
-			   mdto.setReviewcount(beforeReviewcount);
-			}
+			mdto.setReviewcount(nowReviewcount);
+			mav.addObject("reviewcount", nowReviewcount);
 			// ===========================================
 			mav.addObject("name", name);
 			mav.addObject("rname", rname);
@@ -270,19 +229,43 @@ public class ReviewController {
 		}
 
 	}
+
+
+
+	///////////////////1월3일 상우가 추가한 부분 
 	
-    @RequestMapping(value="/review_restaurantFind")
-    public ModelAndView review_restaurantFind(HttpServletRequest req) {
-       String SearchFind = req.getParameter("SearchFind");
-       //String SearchNear = req.getParameter("SearchNear");
-    
-       //★일단 Find값으로만 검색했을때의 값을 불러오게 만들어놨음 //Near도 같이 검색되게끔해야하는데 디폴트값을 Korea, Seoul로 해놨기때문에 굳이 near은 검색안해될것같긴함.
-       List<RestaurantDTO> Find_Restaurant_Review_rdto = restaurantMapper.review_restaurantFind(SearchFind);
-       ModelAndView mav = new ModelAndView();         
-       mav.addObject("Find_Restaurant_Review_rdto", Find_Restaurant_Review_rdto);
-       mav.addObject("SearchFind", SearchFind);
-       mav.setViewName("/review/restaurantFind");
-       return mav;
-    }
+	
+	@RequestMapping(value="/previous_reviews")
+	public ModelAndView previous_reviews(@RequestParam(defaultValue = "1") int curPage) {
+
+		//페이징처리하기위해서 갯수 가져오는곳 
+		int count = reviewMapper.getPreviousReviewCount();
+
+		int pageScale = 10;
+		int blockScale = 10;
+		YepsPager yepsPager = new YepsPager(count, curPage, pageScale, blockScale);
+		int start = yepsPager.getPageBegin();
+		int end = yepsPager.getPageEnd();
+		
+		int num = count - pageScale * (curPage - 1) + 1;
+		//recentreview가 y인 reviewDTO를 꺼내왔음 
+		List<ReviewDTO> rvdto_y = reviewMapper.previous_Rv(start, end);
+		
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("count", count);
+		map.put("start", start);
+		map.put("end", end);
+		map.put("yepsPager", yepsPager);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("num", num);
+		mav.addObject("map", map);
+		mav.addObject("rvdto_y", rvdto_y);
+		mav.setViewName("review/previous_reviews");
+		return mav;
+	}
+	
+
 
 }
