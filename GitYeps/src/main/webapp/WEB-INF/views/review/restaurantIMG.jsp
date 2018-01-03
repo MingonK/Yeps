@@ -117,7 +117,7 @@
                               <ul class="resIMG_ul_4">
                                  <li   class="resIMG_li_4">
                                     <a class="resIMG_a_4" href="#">
-                                       <c:if test="${empty nickname}">
+                                       <c:if test="${empty nickname}"> 
 					   					   <a href="#">${email}</a>
 					   				   </c:if>
 					   				   <c:if test="${!empty nickname}">

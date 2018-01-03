@@ -218,7 +218,7 @@ public class ReviewController {
 			mav.addObject("email", email);
 			mav.addObject("filename", filename);
 			mav.addObject("rname", rname);
-			mav.addObject("gradepoint", gradepoint);
+			mav.addObject("gradepoint", gradepoint); 
 			mav.addObject("content", content);
 			mav.addObject("joindate", Get_InsertReviewDate);
 
