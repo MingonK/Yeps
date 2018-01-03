@@ -13,21 +13,9 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
    vertical-align: baseline;
 }
 
-.layout-block:before, .layout-block:after {
-    content: " ";
-    display: table;
-}
 .clearfix:before, .clearfix:after {
     content: " ";
     display: table;
-}
-
-.clearfix:before, .clearfix:after {
-    content: " ";
-    display: table;
-}
-.layout-block:after {
-    clear: both;
 }
 
 .number {
@@ -216,6 +204,11 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
     content: " ";
     display: table;
 }
+
+.category-str-list a:hover {
+	text-decoration: underline;
+}
+
 .indexed-biz-archive .biz-listing-large:after {
     clear: both;
 }
@@ -768,43 +761,82 @@ overflow: hidden; width: 132px; height: 24px; background-position: 0 -216px;
    color: #333;    display: block;
 }
 
-
-
-<!--MenuInsert -->
-.restMenu-input{
-    box-sizing: border-box;
-    margin: 0 0 18px;
-    padding: 5px 9px;
-    background: #fff;
-    border: 1px solid #999;
-    border-radius: 3px;
-    font-size: 14px;
-    line-height: 1.29em;
+.main a:hover, .restContent-container a:hover {
+	text-decoration: underline;
 }
 
+.review_write {
+	text-decoration: none; float: left; margin: 0 12px 0 0; color: white; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3); 
+	background-color: #d90007; display: inline-block; cursor: pointer; border: 1px solid #8d0005; 
+	font-weight: bold; text-align: center; font-size: 14px; padding: 8px 20px 8px 15px; border-radius: 3px;
+}
 
+.review_write:hover {
+	background: #ed0008;
+}
 
+.add-photo-button {
+	border-radius: 3px 0 0 3px; color: #666; position: relative; float: left; padding: 5px 8px; font-size: 12px; line-height: 1.5em; 
+	text-decoration: none !important; display: inline-block; vertical-align: middle; margin: 0; cursor: pointer; border: 1px solid #ccc; 
+	font-weight: bold; text-align: center; background-color: #f7f7f7; 
+	background: linear-gradient(#fff, #f7f7f7); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
 
+.add-photo-button:hover {
+	background: white; 
+}
 
+.restContent-cta-button a {
+	padding-left: 24px; padding-right: 24px; color: white; padding: 5px 8px; font-size: 12px; 
+	line-height: 1.5em; text-decoration: none !important; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3); 
+	background-color: #ef5d10; display: inline-block; vertical-align: middle; 
+	margin: 0; cursor: pointer; border: 1px solid #a44100; font-weight: bold; text-align: center;
+	border-radius: 3px;
+}
 
+.restContent-cta-button a:hover {
+	background: #f06a23;
+}
 
+.arrange {
+	display: table;
+    min-width: 100%;
+    table-layout: auto;
+}
 
+.u-space-b1 {
+	margin-bottom: 6px !important;
+}
 
+.restContent-arrange-middle {
+	vertical-align: middle;
+	width: 100%;
+	box-sizing: border-box;
+    display: table-cell;
+}
 
+.restContent-reviews > li {
+	margin: 0; padding: 18px 0; border-bottom: 1px solid #e6e6e6; padding-bottom: 17px;
+}
 
+.restContent-review-widget:before, .restContent-review-widget:after, .restContent-review-with:before, .restContent-review-with:after {
+	content: " ";
+    display: table;
+}
 
+.restContent-review-widget:after {
+	clear: both;
+}
 
+.restContent-list-link {
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out; font-size: 12px; 
+	line-height: 1.5em; margin-top: 6px; font-weight: bold; list-style: none;
+}
 
-
-
-
-
-
-
-
-
-
-
+.restContent-reviews > li:hover .restContent-list-link {
+	opacity: 1;
+}
 
 
 
