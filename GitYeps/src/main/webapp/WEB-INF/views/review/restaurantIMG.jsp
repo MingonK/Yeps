@@ -267,11 +267,11 @@
                <div class="resIMG_div_29">
                   <div class="resIMG_div_30">
                      <div class="resIMG_div_31">
-                        <img class="resIMG_img_1" height="150" width="150" src="//s3-media2.fl.yelpcdn.com/bphoto/i2dT3NgbJ68PX9iHygsEfQ/ls.jpg">   
+                        <img class="resIMG_img_1" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${dto.rest_filename}">   
                      </div>
                      <div class="resIMG_div_32">
                         <h3 class="resIMG_h3_1">
-                           <a class="resIMG_a_1" href="#">
+                           <a class="resIMG_a_1" href="restaurant_content?rnum=${dto.rnum}">
                               <span class="resIMG_span_3">${dto.rname}</span>
                            </a>   
                         </h3>
