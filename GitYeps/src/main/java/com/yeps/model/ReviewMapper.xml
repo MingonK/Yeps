@@ -116,9 +116,9 @@
   		select rnum, mnum from yeps_review where recentreview='y'
   	</select>
   	
-  	<select id="previous_Rv" resultType="ReviewDTO">
-  		select *from yeps_review where recentreview= 'y'
-  	</select>
+<!--   	<select id="previous_Rv" resultType="ReviewDTO"> -->
+<!--   		select *from yeps_review where recentreview= 'y' -->
+<!--   	</select> -->
   	
   	
   	
