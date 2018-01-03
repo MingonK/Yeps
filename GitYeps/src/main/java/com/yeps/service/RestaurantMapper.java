@@ -72,9 +72,6 @@ public class RestaurantMapper {
 		return sqlSession.selectOne("getHotAndNewRestaurant", rnum);
 	}
 	
-	 public List<RestaurantDTO> review_restaurantFind(String SearchFind) {
-	      return sqlSession.selectList("review_restaurantFind", SearchFind);
-	   }
 	
 	// -------------- 이벤트랑 레스토랑 연결 ---------------------------
 	public RestaurantDTO findRestaurant(String zipNo, String roadAddrPart1, String roadAddrPart2, String addrDetail) {
@@ -86,7 +83,6 @@ public class RestaurantMapper {
 		return sqlSession.selectOne("findRestaurant", map);
 	}
 	
-	 
 	// 메인페이지 랜덤 사진 가져오기
 	
 }

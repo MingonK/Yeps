@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<title>${getRest.rname}</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js" ></script>
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=jD9qGVpvZh7Zobclojwp&submodules=geocoder"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -33,34 +34,34 @@
 									</div>
 									<span class="review-count rating-qualifier" style="position: relative;display: block;float: left;color: #666;font-weight: normal;">${reviewCount} 리뷰</span>
 								</div>
-								<div class="rating-details" style="position: relative;top: 1px;float: left;margin-left: 9px;">
-							        <a href="#" class="chiclet-link chiclet-link--with-text show-tooltip js-rating-details" style="cursor: pointer; position: relative; padding: 0 6px;text-decoration: none;">
-							            <span aria-hidden="true" style="width: 14px; height: 14px;" class="icon icon--14-histogram icon--size-14 icon--currentColor">
-										  <svg id="14x14_histogram" height="100%" viewBox="0 0 14 14" width="100%">
-										  		<path d="M9 11V5h2v6H9zM6 3h2v8H6V3zM3 7h2v4H3V7z"></path>
-										  </svg>
-										</span>Details
-							            <span class="tooltip-wrapper">
-							                <span class="tooltip">Rating details</span>
-							            </span>
-							        </a>
-							    </div>
+<!-- 								<div class="rating-details" style="position: relative;top: 1px;float: left;margin-left: 9px;"> -->
+<!-- 							        <a href="#" class="chiclet-link chiclet-link--with-text show-tooltip js-rating-details" style="cursor: pointer; position: relative; padding: 0 6px;text-decoration: none;"> -->
+<!-- 							            <span aria-hidden="true" style="width: 14px; height: 14px;" class="icon icon--14-histogram icon--size-14 icon--currentColor"> -->
+<!-- 										  <svg id="14x14_histogram" height="100%" viewBox="0 0 14 14" width="100%"> -->
+<!-- 										  		<path d="M9 11V5h2v6H9zM6 3h2v8H6V3zM3 7h2v4H3V7z"></path> -->
+<!-- 										  </svg> -->
+<!-- 										</span>Details -->
+<!-- 							            <span class="tooltip-wrapper"> -->
+<!-- 							                <span class="tooltip">Rating details</span> -->
+<!-- 							            </span> -->
+<!-- 							        </a> -->
+<!-- 							    </div> -->
 							</div>
 							<div class="price-category" style="float: left;clear: both;">
 								<span class="bullet-after">
        								 <span class="business-attribute price-range" style="letter-spacing: 1px;white-space: nowrap;">￦￦</span>
         						</span>
         						<span class="category-str-list" style="margin-right: 6px;">
-			                  	 	<a href="#" style="white-space: nowrap;color: #0073bb;text-decoration: none;">${getRest.foodstyle}</a>
+			                  	 	<a href="#" style="white-space: nowrap; color: #0073bb;">${getRest.foodstyle}</a>
 					    		</span>
 							</div>
 						</div>
 					</div>
 					
-					<div class="biz-page-header-right u-relative"style="display: table;    position: relative !important;">
-						<div class="biz-page-actions nowrap"style="text-align: right;overflow: hidden;padding-bottom: 1px;margin-top: -1px;    white-space: nowrap;">
-						<a href="review_write?mode=write&where=rest" class="ybtn ybtn--primary war-button" style="color: #666; float: left; padding-left: 12px; margin: 0 12px 0 0; color: white; border-color: #8d0005; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3); background-color: #d90007; background: linear-gradient(#d90007, #c91400); display: inline-block; vertical-align: middle; cursor: pointer; border: 1px solid; font-weight: bold; text-align: center; user-select: none; font-size: 14px; line-height: 1.28571em; padding: 8px 19px 9px; border-radius: 3px;border-color: #8d0005;">
-							<span aria-hidden="true" style="width: 24px; height: 24px;" class="icon icon--24-star icon--size-24 icon--currentColor u-space-r-half icon--fallback-inverted">
+					<div class="biz-page-header-right u-relative"style="display: table; position: relative !important;">
+						<div class="biz-page-actions nowrap"style="text-align: right; overflow: hidden; padding-bottom: 1px; margin-top: -1px; white-space: nowrap;">
+						<a href="review_write?rnum=${getRest.rnum}" style="text-decoration: none;" class="ybtn review_write">
+							<span aria-hidden="true" style="fill: white; width: 24px; height: 24px;" class="icon">
 							    <svg id="24x24_star" height="100%" viewBox="0 0 24 24" width="100%">
 							    	<path d="M12 1.5l2.61 6.727 6.89.53-5.278 4.688 1.65 7.055L12 16.67 6.13 20.5l1.648-7.055L2.5 8.757l6.89-.53L12 1.5z"></path>
 							    </svg>
@@ -68,9 +69,9 @@
 							리뷰쓰기 
 						</a> 
 						<span class="ybtn-group clearfix" style="float: right;margin-top: 4px;"> 
-						   <a class="ybtn ybtn--small add-photo-button" href="restaurant_uploadForm2?rnum=${getRest.rnum}" style="border-radius: 3px 0 0 3px; color: #666; position: relative; float: left; padding: 5px 8px; font-size: 12px; line-height: 1.5em; text-decoration: none !important; display: inline-block; vertical-align: middle; margin: 0; cursor: pointer; border: 1px solid; font-weight: bold; text-align: center; user-select: none; border-color: #ccc; color: #666; background-color: #f7f7f7; background: linear-gradient(#fff, #f7f7f7); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);">
+						   <a class="ybtn ybtn--small add-photo-button" href="restaurant_uploadForm2?rnum=${getRest.rnum}" style="">
 							  <span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-add-photo icon--size-18 icon--currentColor">
-							     <svg id="18x18_add_photo" height="100%" viewBox="0 0 18 18"width="100%">
+							     <svg id="18x18_add_photo" height="100%" viewBox="0 0 18 18" width="100%">
 						   		    <path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 4.75a4.25 4.25 0 1 0 0 8.5 4.25 4.25 0 0 0 0-8.5zM11 10h-1v1a1 1 0 0 1-2 0v-1H7a1 1 0 0 1 0-2h1V7a1 1 0 0 1 2 0v1h1a1 1 0 0 1 0 2z"></path>
 						         </svg>
 							  </span> 사진추가
@@ -80,7 +81,7 @@
 				  </div>
 			   </div>
 		
-		<div class="biz-page-subheader" style="display: table;">
+				<div class="biz-page-subheader" style="display: table;">
 					<div class="mapbox-container" style="width: 33.33333%;display: table-cell; vertical-align: middle;height:auto;overflow:hidden;">
 						<div class="mapbox" style="padding: 5px; background: #fff; border: 1px solid #ccc;">
 							<div class="mapbox-map" id="map2" style="height: 180px; border: 1px solid #ccc;">
@@ -99,7 +100,7 @@
 								            map: map
 								          });
 								      });
-								      </script>
+								 </script>
 							</div>
 							<div class="mapbox-text" style="min-height: 105px;">
 								<ul style="margin: 5px; list-style: none;    display: block;">
@@ -141,7 +142,8 @@
 														<path
 														d="M15.862 12.526l-2.91-1.68a.442.442 0 0 0-.486.087l-1.58 1.687a.857.857 0 0 1-.52.232s-1.083.03-3.13-1.985c-2.046-2.015-2.054-3.12-2.054-3.12 0-.17.094-.41.21-.533L6.85 5.656a.49.49 0 0 0 .08-.504L5.295 2.14c-.073-.155-.228-.18-.345-.058L2.26 4.924a1.07 1.07 0 0 0-.248.53s-.34 2.927 3.75 6.955c4.093 4.025 6.96 3.59 6.96 3.59.167-.027.4-.148.516-.27l2.684-2.845c.117-.123.09-.285-.062-.36z"></path>
 													</svg>
-											</span> <span class="phone">${getRest.raddress}-${getRest.hp2}-${getRest.hp3}</span>
+											</span> 
+											<span class="phone">${getRest.raddress}-${getRest.hp2}-${getRest.hp3}</span>
 										</div>
 									</li>
 								</ul>
@@ -157,7 +159,7 @@
 							<div class="showcase-footer-links"
 								style="position: absolute; right: 0; left: 0; top: 100%; padding: 6px 0;">
 								<a class="see-more u-pull-right"
-									href="restaurant_photoList?rnum=${getRest.rnum}" style="float: right !important; color: #0073bb; text-decoration: none; cursor: pointer;">
+									href="restaurant_photoList?rnum=${getRest.rnum}" style="float: right !important; color: #0073bb; cursor: pointer;">
 									<span aria-hidden="true" style="width: 18px; height: 18px;"class="icon icon--18-grid icon--size-18 u-space-r-half">
 										<svg class="icon_svg">
 								        	<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_grid">
@@ -177,7 +179,7 @@
 									<div class="showcase-photo-box" style="height:100%;">
 									<c:forEach items="${uploadFileList}" var="upload" >
 										<a href="#" style="color: #0073bb;text-decoration: none;"> 
-											<img class="photo-box-img" style="display:inline-block;vertical-align: middle;" width="210" height="220" src="getImage/${upload.rest_filename }">
+											<img class="photo-box-img" style="display:inline-block;vertical-align: middle;" width="210" height="220" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${upload.rest_filename }">
 										</a>
 									</c:forEach>
 									</div>
@@ -233,109 +235,69 @@
 				<div class="restContent-container" style="display:block;width:100%;overflow:hidden;height:auto;">
 					<div class="restContent-layout-block" style="margin-bottom: 0;position: relative;margin: 0 -15px;width:960px;overflow:hidden;height:auto;">
 					<div class="restContent-alpha" style="padding: 0 30px 0 0; margin-left: 15px; float: left; min-height: 1px; box-sizing: border-box;width: 66.66667%;height:100%;border-right: 1px solid #e6e6e6;display:inline-block;">
-						<div class="restContent-cta-widget"
-							style="margin-bottom: 30px; padding: 11px; background: #f5f5f5; border: 1px solid #e6e6e6; border-radius: 4px;">
-							<div class="restContent-arrange-middle"
-								style="margin-left: -12px; margin-right: -12px; border-collapse: separate; border-spacing: 12px 0;  min-width: 100%; table-layout: auto;">
-								<div class="restContent-cta-avatar"
-									style="margin-left: 6px; margin-right: 6px; border-collapse: collapse; border-spacing: 0 0; vertical-align: middle; box-sizing: border-box; display: table-cell;">
-									<span aria-hidden="true"
-										style="fill: #ea5c1d; width: 30px; height: 30px; display: inline-block; vertical-align: middle; position: relative; overflow: hidden; top: -.1em;"
-										class="restContent-icon">
-										<svg class="restContent-icon_svg"
-											style="fill: inherit; display: block; left: 0; top: 0; right: 0; bottom: 0; position: absolute; width: 100%; height: 100%; overflow: hidden;">
-											<path d="M25.5 24a1.5 1.5 0 0 1-1.5-1.5v-15a1.5 1.5 0 0 1 3 0v15a1.5 1.5 0 0 1-1.5 1.5zM17 24H8v-6.125l-3-.834V18a1 1 0 0 1-2 0v-6a1 1 0 0 1 2 0v.958l18-5V22.04l-6-1.664V24zm-2-4.18l-5-1.39V22h5v-2.18z"></path>
-										</svg>
-									</span>
-								</div>
-								<div class="restContent-cta-content"
-									style="margin-left: 6px; margin-right: 6px; border-collapse: collapse; border-spacing: 0 0; vertical-align: middle; width: 100%; box-sizing: border-box; display: table-cell;">
-									<h3 style="color: #333; word-wrap: break-word !important; word-break: break-word !important; overflow-wrap: break-word !important; font-weight: bold; font-size: 16px; line-height: 1.3125em; ">
-										Join Us! We Reserve Most Tables for Walk-in Guests
-									</h3>
-								</div>
-								<div class="restContent-cta-button"
-									style="white-space: nowrap; margin-left: 6px; margin-right: 6px; border-collapse: collapse; border-spacing: 0 0; vertical-align: middle; box-sizing: border-box; display: table-cell;">
-									<a href="#" style="padding-left: 24px; padding-right: 24px; color: white; color: #666; padding: 5px 8px; font-size: 12px; line-height: 1.5em; text-decoration: none !important; color: white; border-color: #a44100; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3); background-color: #ef5d10; display: inline-block; vertical-align: middle; margin: 0; cursor: pointer; border: 1px solid; font-weight: bold; text-align: center;">
-										Reserv Now
-									</a>
-								</div>
-							</div>
-						</div>
+<!-- 						<div class="restContent-cta-widget" -->
+<!-- 							style="margin-bottom: 30px; padding: 11px; background: #f5f5f5; border: 1px solid #e6e6e6; border-radius: 4px;"> -->
+<!-- 							<div class="restContent-arrange-middle" -->
+<!-- 								style="margin-left: -12px; margin-right: -12px; border-collapse: separate; border-spacing: 12px 0;  min-width: 100%; table-layout: auto;"> -->
+<!-- 								<div class="restContent-cta-avatar" -->
+<!-- 									style="margin-left: 6px; margin-right: 6px; border-collapse: collapse; border-spacing: 0 0; vertical-align: middle; box-sizing: border-box; display: table-cell;"> -->
+<!-- 									<span aria-hidden="true" -->
+<!-- 										style="fill: #ea5c1d; width: 30px; height: 30px; display: inline-block; vertical-align: middle; position: relative; overflow: hidden; top: -.1em;" -->
+<!-- 										class="restContent-icon"> -->
+<!-- 										<svg class="restContent-icon_svg" -->
+<!-- 											style="fill: inherit; display: block; left: 0; top: 0; right: 0; bottom: 0; position: absolute; width: 100%; height: 100%; overflow: hidden;"> -->
+<!-- 											<path d="M25.5 24a1.5 1.5 0 0 1-1.5-1.5v-15a1.5 1.5 0 0 1 3 0v15a1.5 1.5 0 0 1-1.5 1.5zM17 24H8v-6.125l-3-.834V18a1 1 0 0 1-2 0v-6a1 1 0 0 1 2 0v.958l18-5V22.04l-6-1.664V24zm-2-4.18l-5-1.39V22h5v-2.18z"></path> -->
+<!-- 										</svg> -->
+<!-- 									</span> -->
+<!-- 								</div> -->
+<!-- 								<div class="restContent-cta-content" -->
+<!-- 									style="margin-left: 6px; margin-right: 6px; border-collapse: collapse; border-spacing: 0 0; vertical-align: middle; width: 100%; box-sizing: border-box; display: table-cell;"> -->
+<!-- 									<h3 style="color: #333; word-wrap: break-word !important; word-break: break-word !important; overflow-wrap: break-word !important; font-weight: bold; font-size: 16px; line-height: 1.3125em; "> -->
+<!-- 										Join Us! We Reserve Most Tables for Walk-in Guests -->
+<!-- 									</h3> -->
+<!-- 								</div> -->
+<!-- 								<div class="restContent-cta-button" -->
+<!-- 									style="border-radius: 3px; white-space: nowrap; margin-left: 6px; margin-right: 6px; border-collapse: collapse; border-spacing: 0 0; vertical-align: middle; box-sizing: border-box; display: table-cell;"> -->
+<!-- 									<a href="#"> -->
+<!-- 										Reserv Now -->
+<!-- 									</a> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
 						<div class="restContent-review-highlights" style="position: relative;">
-							<div class="restContent-review-hightlights-content" >
-								<ul class="restContent-review-highlights-list"
-									style="list-style: none; margin-bottom: 24px;">
-									<li class="restContent-review-highlights-media-block" style="margin-bottom: 18px;    position: relative;display: flex;text-align: -webkit-match-parent;">
-										<div class="restContent-review-highlights-media-avatar"
-											style="border-right: 12px solid transparent; border-left: none;">
-											<div class="restcontent-review-highlights-photo-box">
-												<a href="#"
-													style="color: #0073bb; text-decoration: none; cursor: pointer;">
-													<img width="60px" height="60px" style="outline: none;border-radius: 4px;vertical-align: middle;" src="getImage/pepe.jpg">
-												</a>
-											</div>
-										</div>
-										<div class="restContent-review-highlights-media-story"
-											style="-webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;">
-											<p class="restContent-quote" style="    margin-bottom: 4px;">
-           										 “My friend ordered the <a href="#" style="font-weight: bold;color: #0073bb;text-decoration: none;"></a>
-           										  toast and he loved his so much he ordered a second.”
-           										  <a href="#" style="ont-size: 14px;color: #666;white-space: nowrap;text-decoration: none;">in 143 reviews</a>
-											</p>
-											<p class="restContent-highlight-sub-info" style="color: #666;margin-bottom: 4px;">
-												<a href="#" style="color: #0073bb; text-decoration: none;">$8 Blue Cheese Garlic Bread </a>
-											</p>
-										</div>
-									</li>
-									<li class="restContent-review-highlights-media-block" style="    margin-bottom: 18px;    position: relative;display: flex;text-align: -webkit-match-parent;">
-										<div class="restContent-review-highlights-media-avatar"
-											style="border-right: 12px solid transparent; border-left: none;">
-											<div class="restcontent-review-highlights-photo-box">
-												<a href="#"
-													style="color: #0073bb; text-decoration: none; cursor: pointer;">
-													<img width="60px" height="60px" style="outline: none;border-radius: 4px;vertical-align: middle;" src="getImage/businessman.png">
-												</a>
-											</div>
-										</div>
-										<div class="restContent-review-highlights-media-story"
-											style="-webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;">
-											<p class="restContent-quote" style="    margin-bottom: 4px;">
-           										 “My friend ordered the <a href="#" style="font-weight: bold;color: #0073bb;text-decoration: none;"></a>
-           										  toast and he loved his so much he ordered a second.”
-           										  <a href="#" style="ont-size: 14px;color: #666;white-space: nowrap;text-decoration: none;">in 143 reviews</a>
-											</p>
-											<p class="restContent-highlight-sub-info" style="color: #666;margin-bottom: 4px;">
-												<a href="#" style="color: #0073bb; text-decoration: none;">$8 Blue Cheese Garlic Bread </a>
-											</p>
-										</div>
-									</li>
-									<li class="restContent-review-highlights-media-block" style="    margin-bottom: 18px;    position: relative;display: flex;text-align: -webkit-match-parent;">
-										<div class="restContent-review-highlights-media-avatar"
-											style="border-right: 12px solid transparent; border-left: none;">
-											<div class="restcontent-review-highlights-photo-box">
-												<a href="#"
-													style="color: #0073bb; text-decoration: none; cursor: pointer;">
-													<img width="60px" height="60px" style="outline: none;border-radius: 4px;vertical-align: middle;" src="getImage/businessman.png">
-												</a>
-											</div>
-										</div>
-										<div class="restContent-review-highlights-media-story"
-											style="-webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;">
-											<p class="restContent-quote" style="    margin-bottom: 4px;">
-           										 “My friend ordered the <a href="#" style="font-weight: bold;color: #0073bb;text-decoration: none;"></a>
-           										  toast and he loved his so much he ordered a second.”
-           										  <a href="#" style="ont-size: 14px;color: #666;white-space: nowrap;text-decoration: none;">in 143 reviews</a>
-											</p>
-											<p class="restContent-highlight-sub-info" style="color: #666;margin-bottom: 4px;">
-												<a href="#" style="color: #0073bb; text-decoration: none;">$8 Blue Cheese Garlic Bread </a>
-											</p>
-										</div>
-									</li>
-								</ul>
-								<div class="restContent-review-highlight-action" style="margin: -12px 0 24px;">
-									<a href="#" class="show-more-url"style="color: #0073bb; text-decoration: none;">Show more review highlights</a>
+							<div class="restContent-review-hightlights-content">
+								<div style="border-bottom: 1px solid #e6e6e6;">
+									<h2 style="word-wrap: break-word !important; word-break: break-word !important; overflow-wrap: break-word !important; font-weight: bold; margin-bottom: 6px; font-size: 21px; line-height: 1.28571em; color: #d32323; margin: 0 0 6px;">
+										Review Highlights
+									</h2>
 								</div>
+								<ul class="restContent-review-highlights-list" style="list-style: none; margin: 24px 0;">
+									<c:forEach var="reviewDTO" items="${highlightReview}">
+									<li class="restContent-review-highlights-media-block" style="margin-bottom: 18px; position: relative;display: flex;text-align: -webkit-match-parent;">
+										<div class="restContent-review-highlights-media-avatar"
+											style="border-right: 12px solid transparent; border-left: none;">
+											<div class="restcontent-review-highlights-photo-box">
+												<a href="#" style="color: #0073bb; text-decoration: none; cursor: pointer;">
+													<img width="60px" height="60px" style="outline: none; border-radius: 4px; vertical-align: middle;" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${reviewDTO.memberDTO.memberPhotoDTO.filename}">
+												</a>
+											</div>
+										</div>
+										<div class="restContent-review-highlights-media-story"
+											style="-webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;">
+											<p class="restContent-quote" style="    margin-bottom: 4px;">
+           										${reviewDTO.content} 
+<!--            								 <a href="#" style="ont-size: 14px;color: #666;white-space: nowrap;text-decoration: none;">in 143 reviews</a> -->
+											</p>
+											<p class="restContent-highlight-sub-info" style="color: #666;margin-bottom: 4px;">
+												<a href="#" style="color: #0073bb;">${reviewDTO.restaurantDTO.rname}</a>
+											</p>
+										</div>
+									</li>
+									</c:forEach>
+								</ul>
+<!-- 								<div class="restContent-review-highlight-action" style="margin: -12px 0 24px;"> -->
+<!-- 									<a href="#" class="show-more-url"style="color: #0073bb;">Show more review highlights</a> -->
+<!-- 								</div> -->
 							</div>
 						</div>
 							<div>
@@ -344,35 +306,34 @@
 										<div class="restContent-feed-section-header" style="margin-bottom: 0;border-bottom: 1px solid #e6e6e6;">
 											<h2 style="word-wrap: break-word !important; word-break: break-word !important; overflow-wrap: break-word !important; font-weight: bold; margin-bottom: 6px; font-size: 21px; line-height: 1.28571em; color: #d32323; margin: 0 0 6px;">
 												Recommended Reviews 
-												<b style="font-weight: normal;color: #333;">for Fog Harbor Fish House</b>
+												<b style="font-weight: normal;color: #333;">for ${getRest.rname}</b>
 											</h2>
 											<div class="restContent-feed_filters" >
-												<div class="section-header_block" style="margin: 0px !important;display:table;">
-												
-													<div class="restContent-arrange-middle" style="margin-bottom: 6px !important; display: table; min-width: 100%; table-layout: auto;">
-														<div class="restContent-feed-search" style="  vertical-align: middle;width: 100%;    box-sizing: border-box;display: table-cell;">
-															<div class="restContent-section-header-search" style="">
-																<form class="restContent-form" name="restContent" style="margin-bottom: 0;display: table;min-width: 100%;table-layout: auto;" action="review_keyword?rname=${getRest.rname}" method="post">
-																<div class="restContent-arrange-unit" style="width: 100%;box-sizing: border-box;display: table-cell;vertical-align: top;">
-																	<input type="text" placeholder="Search within the reviews" name="SearchKeyword" autocomplete="on" style="margin: 0; display: block; box-sizing: border-box; width: 100%; padding: 5px 9px; background: #fff; border: 1px solid #999; border-radius: 3px; font-size: 14px; line-height: 1.29em; color: inherit; font: inherit; font-weight: normal;">
-																</div>
-																<div class="rsetContent-arrange-unit-button" style="box-sizing: border-box;display: table-cell;vertical-align: top;">
-																	<button type="submit" value="submit" class="restInsert-button" style="position: relative; left: -4px; width: calc(100% + 4px); border-radius: 0 3px 3px 0; box-shadow: none; padding: 5px 8px; font-size: 12px; line-height: 1.5em; color: white; border-color: #8d0005; background-color: #d90007; background: linear-gradient(#d90007, #c91400);">
-																		<span>
-																			<span class="restContent-icon" style="width: 18px; height: 18px; margin: -9px 0; fill: #fff; display: inline-block; vertical-align: middle; position: relative; overflow: hidden; top: -.1em;">
-																				<span aria-hidden="true" style="width: 18px; height: 18px;" class="restContent-icon18">
-																				    <svg class="icon_svg">
-																				        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_search_small"></use>
-																				    </svg>
-																				</span>
-																		    </span>
-																		</span>
-																	</button>
-																</div>
-															</form>
+												<div class="section-header_block" style="margin: 0px !important;">
+													<div class="arrange arrange--middle u-space-b1"> <!-- 추가한 것 -->
+														<div class="restContent-arrange-middle">
+															<div class="restContent-feed-search" style="margin-right: 30px !important;">
+																<form class="restContent-form" name="restContent" onsubmit="return check()" style="margin-bottom: 0;display: table; min-width: 100%; table-layout: auto;" action="review_keyword" method="post">
+																	<div class="restContent-arrange-unit" style="width: 100%;box-sizing: border-box;display: table-cell;vertical-align: top;">
+																		<input type="text" placeholder="Search within the reviews" name="SearchKeyword" autocomplete="on" style="margin: 0; display: block; box-sizing: border-box; width: 100%; padding: 5.5px 9px; background: #fff; border: 1px solid #999; border-radius: 3px; font-size: 14px; line-height: 1.29em; color: inherit; font: inherit; font-weight: normal;">
+																		<input type="hidden" name="rnum" value="${getRest.rnum}">
+																	</div>
+																	<div class="rsetContent-arrange-unit-button" style="box-sizing: border-box;display: table-cell;vertical-align: top;">
+																		<button type="submit" value="submit" class="restInsert-button" style="position: relative; left: -4px; width: calc(100% + 4px); border-radius: 0 3px 3px 0; box-shadow: none; padding: 5px 8px; font-size: 12px; line-height: 1.5em; color: white; border-color: #8d0005; background-color: #d90007; background: linear-gradient(#d90007, #c91400);">
+																			<span>
+																				<span class="restContent-icon" style="width: 18px; height: 18px; margin: -9px 0; fill: #fff; display: inline-block; vertical-align: middle; position: relative; overflow: hidden; top: -.1em;">
+																					<span aria-hidden="true" style="width: 18px; height: 18px;" class="restContent-icon18">
+																					    <svg class="icon_svg">
+																					        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_search_small"></use>
+																					    </svg>
+																					</span>
+																			    </span>
+																			</span>
+																		</button>
+																	</div>
+																</form>
 															</div>
 														</div>
-													</div>
 													<div class="restContent-arrange-unit-nowrap" style="vertical-align: middle;white-space: nowrap !important;box-sizing: border-box;display: table-cell;">
 														<div class="restContent-review-sort" style=" margin-left: -12px;">
 															<div class="restContent-dropdown" style="position: relative;display: inline-block;">
@@ -392,14 +353,15 @@
 															</div>
 														</div>
 													</div>
+													</div> <!-- 여기 추가한것 -->
 												</div>
 											</div>
 										</div>
 									</div>
 									<div class="restContent-review-list" style="position: relative;">
-										<ul class="restContent-reviews" style="list-style: none;    display: inline-block;">
-											<li style="margin: 0;padding: 18px 0;border-bottom: 1px solid #e6e6e6;padding-bottom: 17px;    display: list-item;text-align: -webkit-match-parent;">
-												<div class="restContent-review-widget" style="width:100%;overflow:hidden;height:auto;">
+										<ul class="restContent-reviews">
+											<li>
+												<div class="restContent-review-widget" style="margin: 0 -15px;">
 													<div class="restContent-user" style="float: left;padding: 0 15px;min-height: 1px;    box-sizing: border-box;width: 37.5%;">
 														<div class="restContent-user-content" style="margin-top: -3px;">
 															<img src="https://s3-media4.fl.yelpcdn.com/assets/2/www/img/b5b7ea174ecb/writeareview/empty_profile.png" height="68">
@@ -414,90 +376,97 @@
 																class="star-selector js-star-selector"
 																data-original-rating="0" data-component-bound="true"
 																style="vertical-align: middle; display: inline-block; -webkit-margin-start: 2px; -webkit-margin-end: 2px; -webkit-padding-before: 0.35em; -webkit-padding-start: 0.75em; -webkit-padding-end: 0.75em; -webkit-padding-after: 0.625em; min-width: -webkit-min-content;">
-													 <form name="starpointF" method="post" action="review_write">
-													<div>
-							                           <ul id="star_rating" style="margin: 0px; padding: 0px; diplay: inline-block; width: 165px; height: 30px; overflow: hidden; list-style: none; vertical-align: middle;
-							                               background: url(https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/a5aa4dca29f3/assets/img/stars/selector_stars.png) no-repeat;">
-							      
-							                              <li class="selector star-selector-li-1_4" data-label="Eek! Methinks not.">
-							                                 <input id="rating-1" type="radio" value="1" name="rating" class="star-selector-input">
-							                                 <label class="star-selector_label" for="rating-1">1 (Eek! Methinks not.)</label>
-							                              </li>
-							                              <li class="selector star-selector-li-1_4" data-label="Meh. I've experienced better.">
-							                                 <input id="rating-2" type="radio" value="2" name="rating" class="star-selector-input">
-							                                 <label class="star-selector_label" for="rating-2">2 (Meh. I've experienced better.)</label>
-							                              </li>
-							                              <li class="selector star-selector-li-1_4" data-label="3 (A-OK.)">
-							                                 <input id="rating-3" type="radio" value="3" name="rating" class="star-selector-input">
-							                                 <label class="star-selector_label" for="rating-3">3 (A-OK.)</label>
-							                              </li>
-							                              <li class="selector star-selector-li-1_4" data-label="4 (Yay! I'm a fan.)">
-							                                 <input id="rating-4" type="radio" value="4"  name="rating" class="star-selector-input">
-							                                 <label class="star-selector_label" for="rating-4">4 (Yay! I'm a fan.)</label>
-							                              </li>
-							                              <li class="selector star-selector-li-5" data-label="5 (Woohoo! As good as it gets!)">
-							                                 <input id="rating-5" type="radio" value="5"  name="rating" class="star-selector-input">
-							                                 <label class="star-selector_label" for="rating-5">5 (Woohoo! As good as it gets!)</label>
-							                              </li>
-							                           </ul>
-							                                 <input type="hidden" name="rnum" value="${getRest.rnum}">   
-							                                 <input type="hidden" name="star" id="star">
-							                                 <input type="hidden" name="mode" value="write">
-							                                 <input type="hidden" name="where" value="rest">
-							                           </div>
-							                           </form>
-
+													 			<form name="starpointF" method="post" action="review_write">
+																	<div>
+																		<ul id="star_rating" style="float: left; margin: 0px; padding: 0px; display: inline-block; width: 162px; height: 30px; overflow: hidden; vertical-align: middle;
+							                          				     background: url(https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/a5aa4dca29f3/assets/img/stars/selector_stars.png) no-repeat;">
+																			<li class="selector star-selector-li-1_4" data-label="Eek! Methinks not.">
+							                            				     	<input id="rating-1" type="radio" value="1" name="rating" class="star-selector-input" style="cursor: pointer; border: none; margin: 0; padding: 0; width: 30px; height: 30px; opacity: 0;">
+							                                					 	<label class="star-selector_label" for="rating-1">1 (Eek! Methinks not.)</label>
+							                             					</li>
+							                              					<li class="selector star-selector-li-1_4" data-label="Meh. I've experienced better.">
+							                                 					<input id="rating-2" type="radio" value="2" name="rating" class="star-selector-input">
+							                                 					<label class="star-selector_label" for="rating-2">2 (Meh. I've experienced better.)</label>
+							                              					</li>
+																			<li class="selector star-selector-li-1_4" data-label="3 (A-OK.)">
+																				<input id="rating-3" type="radio" value="3" name="rating" class="star-selector-input">
+							                                 					<label class="star-selector_label" for="rating-3">3 (A-OK.)</label>
+							                              					</li>
+							                              					<li class="selector star-selector-li-1_4" data-label="4 (Yay! I'm a fan.)">
+							                                 					<input id="rating-4" type="radio" value="4"  name="rating" class="star-selector-input">
+							                                 					<label class="star-selector_label" for="rating-4">4 (Yay! I'm a fan.)</label>
+							                              					</li>
+							                              					<li class="selector star-selector-li-5" data-label="5 (Woohoo! As good as it gets!)">
+							                                 					<input id="rating-5" type="radio" value="5"  name="rating" class="star-selector-input">
+							                                 					<label class="star-selector_label" for="rating-5">5 (Woohoo! As good as it gets!)</label>
+							                              					</li>
+							                           					</ul>
+							                                 			<input type="hidden" name="rnum" value="${getRest.rnum}">   
+							                                 			<input type="hidden" name="star" id="star">
+							                                 			<input type="hidden" name="mode" value="write">
+							                                 			<input type="hidden" name="where" value="rest">
+							                          				</div>
+							                           			</form>
 															</fieldset>
 														</div>
-														<a class="restContent-text-link" href="review_write?rnum=${getRest.rnum}&mode=write&where=rest" style="color: #0073bb;text-decoration: none;    cursor: pointer;    text-align: center !important;">
-										                    Start your review of <strong style="font-weight: bold;">${getRest.rname}</strong>.
-										                </a>
 													</div>
+													<a class="restContent-text-link" href="review_write?rnum=${getRest.rnum}&mode=write&where=rest" style="color: #0073bb; cursor: pointer; text-align: center !important;">
+														Start your review of <strong style="font-weight: bold;">${getRest.rname}</strong>.
+										            </a>
 												</div>
 											</div>
 										</div>
 									</li>
 										
 								<c:forEach var="getReview" items="${selectedDataRV}">	
-									<li style="margin: 0; padding: 18px 0; border-bottom: 1px solid #e6e6e6; padding-bottom: 17px; display: list-item; text-align: -webkit-match-parent;">
-										<div class="restContent-review-with" style="    width: 100%; overflow: hidden;height: auto;">
+									<li>
+										<div class="restContent-review-with" style="margin: 0 -15px; display: flex;">
 											<div class="restContent-user" style="float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 37.5%;">
 												<div class="restContent-user-content" style="margin-top: -3px;">
 													<div class="restContent-meida-block" style="font-size: 12px; line-height: 1.5em; position: relative; display: flex;">
 														<div class="restContent-media-avatar" style="border-right-width: 9px;border-right: 6px solid transparent;border-left: none;">
 															<div class="restContent-photo-box">
-																<a href="#" style="color: #0073bb;text-decoration: none;">
-																	<img alt="Meghan A." class="restContent-photo-box-img" height="60" src="https://s3-media2.fl.yelpcdn.com/photo/AiuQa6ZjRBfpPVSQGOinIw/60s.jpg" srcset="https://s3-media2.fl.yelpcdn.com/photo/AiuQa6ZjRBfpPVSQGOinIw/90s.jpg 1.50x,https://s3-media2.fl.yelpcdn.com/photo/AiuQa6ZjRBfpPVSQGOinIw/168s.jpg 2.80x,https://s3-media2.fl.yelpcdn.com/photo/AiuQa6ZjRBfpPVSQGOinIw/ms.jpg 1.67x,https://s3-media2.fl.yelpcdn.com/photo/AiuQa6ZjRBfpPVSQGOinIw/180s.jpg 3.00x,https://s3-media2.fl.yelpcdn.com/photo/AiuQa6ZjRBfpPVSQGOinIw/120s.jpg 2.00x" width="60">
+																<a href="#" style="color: #0073bb;">
+																	<img class="restContent-photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${getReview.memberDTO.memberPhotoDTO.filename}" width="60">
 																</a>
 															</div>
 														</div>
 														<div class="restContent-media-story" style="-webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;">
-															<ul class="restContent-user-info" style="list-style: none; -webkit-margin-before: 0px; -webkit-margin-after: 0px; display: block; -webkit-margin-start: 0px; -webkit-margin-end: 0px;">
-																<li class="restContent-user-name" style="display: list-item; text-align: -webkit-match-parent;">
-																	<a href="#" class="restContent-user-display-name" style="font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; text-decoration: none; cursor: pointer;">
-																		Meghan A.
+															<ul class="restContent-user-info">
+																<li class="restContent-user-name">
+																	<a href="#" class="restContent-user-display-name" style="font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; cursor: pointer;">
+																		<c:if test="${empty getReview.memberDTO.nickname}">
+																			${getReview.memberDTO.email}
+																		</c:if>
+																		<c:if test="${!empty getReview.memberDTO.nickname}">
+																			${getReview.memberDTO.nickname}
+																		</c:if>
 																	</a>
 																</li>
 																<li class="restContnet-user-location">
-																	<b style="font-weight: bold;">Phoenix, AZ</b>
+																	<b style="font-weight: bold;">
+																	<c:forTokens items="${getReview.memberDTO.address}" delims=" " begin="1" end="2" var="addr">
+                                                                    	${addr}
+                                                                  	</c:forTokens>	
+																	</b>
 																</li>
 															</ul>
-															<ul class="restContent-user-stats" style="list-style: none;display: block;">
-																<li class="restContent-friend" style="color: #666;display: list-item;text-align: -webkit-match-parent;">
-																	<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-friends icon--size-18">
-																	    <svg class="icon_svg">
-																	        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_friends">
-																	        	<svg id="18x18_friends" height="100%" viewBox="0 0 18 18" width="100%">
-																	        		<g>
-																	        			<path d="M7.904 9.43l-2.098 4.697a.9.9 0 0 1-1.612 0L2.096 9.43a.902.902 0 0 1 .806-1.305h4.196c.67 0 1.105.705.806 1.305zM5 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path>
-																	        			<path d="M15.904 9.43l-2.098 4.697a.89.89 0 0 1-.806.498.89.89 0 0 1-.806-.498L10.096 9.43a.902.902 0 0 1 .806-1.305h4.195c.67 0 1.106.705.807 1.305zM13 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" opacity=".502"></path>
-																	        		</g>
-																	        	</svg>
-																	        </use>
-																	    </svg>
-																	</span>
-																	<b style="font-weight: bold;">8</b> friends
-																</li>
+															<ul class="restContent-user-stats">
+<!-- 																<li class="restContent-friend" style="color: #666;display: list-item;text-align: -webkit-match-parent;"> -->
+<!-- 																	<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-friends icon--size-18"> -->
+<!-- 																	    <svg class="icon_svg"> -->
+<!-- 																	        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_friends"> -->
+<!-- 																	        	<svg id="18x18_friends" height="100%" viewBox="0 0 18 18" width="100%"> -->
+<!-- 																	        		<g> -->
+<!-- 																	        			<path d="M7.904 9.43l-2.098 4.697a.9.9 0 0 1-1.612 0L2.096 9.43a.902.902 0 0 1 .806-1.305h4.196c.67 0 1.105.705.806 1.305zM5 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path> -->
+<!-- 																	        			<path d="M15.904 9.43l-2.098 4.697a.89.89 0 0 1-.806.498.89.89 0 0 1-.806-.498L10.096 9.43a.902.902 0 0 1 .806-1.305h4.195c.67 0 1.106.705.807 1.305zM13 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" opacity=".502"></path> -->
+<!-- 																	        		</g> -->
+<!-- 																	        	</svg> -->
+<!-- 																	        </use> -->
+<!-- 																	    </svg> -->
+<!-- 																	</span> -->
+<!-- 																	<b style="font-weight: bold;">8</b> friends -->
+<!-- 																</li> -->
 																<li class="restContent-review-count" style="color: #666;display: list-item;text-align: -webkit-match-parent;">
 																	<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-review icon--size-18">
 																	    <svg class="icon_svg">
@@ -508,7 +477,7 @@
 																	        </use>
 																	    </svg>
 																	</span>
-																	<b style="font-weight: bold;">19</b>reviews
+																	<b style="font-weight: bold;">${getReview.memberDTO.reviewcount}</b> reviews
 																</li>
 																<li class="restContent-photo-count" style="color: #666;display: list-item;text-align: -webkit-match-parent;">
 																	<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-camera icon--size-18">
@@ -520,82 +489,82 @@
 																	        </use>
 																	    </svg>
 																	</span>
-																	<b style="font-weight: bold;">15</b> photos
+																	<b style="font-weight: bold;">${getReview.memberDTO.imagecount}</b> photos
 																</li>
 															</ul>
 														</div>
 													</div>
-													<ul class="restContent-list-link" style="transition: opacity 0.3s ease-in-out; font-size: 12px; line-height: 1.5em; margin-top: 6px; font-weight: bold; list-style: none; display: block;">
-														<li>
-															<a class="restContent-share-review" href="#" style="display: table; min-width: 100%; table-layout: auto; color: #0073bb; text-decoration: none; cursor: pointer;">
-																<div class="action-link_icon arrange_unit" style="padding-top: 3px; padding-bottom: 3px; vertical-align: middle; padding-right: 12px; box-sizing: border-box; display: table-cell;">
-																	<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-share icon--size-18 icon--currentColor">
-																	    <svg class="icon_svg">
-																	        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_share">
-																	        	<svg id="18x18_share" height="100%" viewBox="0 0 18 18" width="100%">
-																	        		<path d="M17.714 6.43L13 10.356v-3.03c-1 0-5.097 1.47-6.286 3.62.274-3.08 4.286-5.5 6.286-5.5V2.5l4.714 3.93zM3 4v10h11v-2.5l1-1V15H2V3h8.5l-1 1H3z"></path>
-																	        	</svg>
-																	        </use>
-																	    </svg>
-																	</span>
-																</div>
-																<div class="action-link_label arrange_unit arrange_unit--fill" style="border-top: 1px solid #e6e6e6; padding-top: 3px; padding-bottom: 3px; vertical-align: middle; width: 100%;">
-            														Share review
-																</div>
-														</a>
-														</li>
+													<ul class="restContent-list-link">
+<!-- 														<li> -->
+<!-- 															<a class="restContent-share-review" href="#" style="display: table; min-width: 100%; table-layout: auto; color: #0073bb; text-decoration: none; cursor: pointer;"> -->
+<!-- 																<div class="action-link_icon arrange_unit" style="padding-top: 3px; padding-bottom: 3px; vertical-align: middle; padding-right: 12px; box-sizing: border-box; display: table-cell;"> -->
+<!-- 																	<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-share icon--size-18 icon--currentColor"> -->
+<!-- 																	    <svg class="icon_svg"> -->
+<!-- 																	        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_share"> -->
+<!-- 																	        	<svg id="18x18_share" height="100%" viewBox="0 0 18 18" width="100%"> -->
+<!-- 																	        		<path d="M17.714 6.43L13 10.356v-3.03c-1 0-5.097 1.47-6.286 3.62.274-3.08 4.286-5.5 6.286-5.5V2.5l4.714 3.93zM3 4v10h11v-2.5l1-1V15H2V3h8.5l-1 1H3z"></path> -->
+<!-- 																	        	</svg> -->
+<!-- 																	        </use> -->
+<!-- 																	    </svg> -->
+<!-- 																	</span> -->
+<!-- 																</div> -->
+<!-- 																<div class="action-link_label arrange_unit arrange_unit--fill" style="border-top: 1px solid #e6e6e6; padding-top: 3px; padding-bottom: 3px; vertical-align: middle; width: 100%;"> -->
+<!--             														Share review -->
+<!-- 																</div> -->
+<!-- 														</a> -->
+<!-- 														</li> -->
 														
 
 														
-														<li>
-															<a class="restContent-share-review" href="#" style="display: table; min-width: 100%; table-layout: auto; color: #0073bb; text-decoration: none; cursor: pointer;">
-																<div class="action-link_icon arrange_unit" style="padding-top: 3px; padding-bottom: 3px; vertical-align: middle; padding-right: 12px; box-sizing: border-box; display: table-cell;">
-																	<span aria-hidden="true"
-																		style="width: 18px; height: 18px;"
-																		class="icon icon--18-embed icon--size-18 icon--currentColor">
-																		<svg class="icon_svg">
-														       				 <use
-																				xmlns:xlink="http://www.w3.org/1999/xlink"
-																				xlink:href="#18x18_embed">
-														       				 	<svg id="18x18_embed" height="100%"
-																				viewBox="0 0 18 18" width="100%">
-														       				 		<path
-																					d="M12.503 13.76a.717.717 0 0 1-.526.23.717.717 0 0 1-.526-.23.822.822 0 0 1 0-1.117l3.444-3.652-3.444-3.65a.822.822 0 0 1 0-1.116.714.714 0 0 1 1.053 0l4.495 4.77-4.495 4.767zm-5.954 0a.717.717 0 0 1-.528.23.718.718 0 0 1-.526-.23L1.002 8.99l4.495-4.768a.714.714 0 0 1 1.052 0c.29.308.29.808 0 1.116L3.105 8.99l3.442 3.653c.29.308.29.808 0 1.116z"></path>
-														       				 	</svg>
-														       				 </use>
-														    			</svg>
-																	</span>
-																</div>
-																<div class="action-link_label arrange_unit arrange_unit--fill" style="border-top: 1px solid #e6e6e6; padding-top: 3px; padding-bottom: 3px; vertical-align: middle; width: 100%;">
-            														Embed review
-																</div>
-														</a>
-														</li>
+<!-- 														<li> -->
+<!-- 															<a class="restContent-share-review" href="#" style="display: table; min-width: 100%; table-layout: auto; color: #0073bb; text-decoration: none; cursor: pointer;"> -->
+<!-- 																<div class="action-link_icon arrange_unit" style="padding-top: 3px; padding-bottom: 3px; vertical-align: middle; padding-right: 12px; box-sizing: border-box; display: table-cell;"> -->
+<!-- 																	<span aria-hidden="true" -->
+<!-- 																		style="width: 18px; height: 18px;" -->
+<!-- 																		class="icon icon--18-embed icon--size-18 icon--currentColor"> -->
+<!-- 																		<svg class="icon_svg"> -->
+<!-- 														       				 <use -->
+<!-- 																				xmlns:xlink="http://www.w3.org/1999/xlink" -->
+<!-- 																				xlink:href="#18x18_embed"> -->
+<!-- 														       				 	<svg id="18x18_embed" height="100%" -->
+<!-- 																				viewBox="0 0 18 18" width="100%"> -->
+<!-- 														       				 		<path -->
+<!-- 																					d="M12.503 13.76a.717.717 0 0 1-.526.23.717.717 0 0 1-.526-.23.822.822 0 0 1 0-1.117l3.444-3.652-3.444-3.65a.822.822 0 0 1 0-1.116.714.714 0 0 1 1.053 0l4.495 4.77-4.495 4.767zm-5.954 0a.717.717 0 0 1-.528.23.718.718 0 0 1-.526-.23L1.002 8.99l4.495-4.768a.714.714 0 0 1 1.052 0c.29.308.29.808 0 1.116L3.105 8.99l3.442 3.653c.29.308.29.808 0 1.116z"></path> -->
+<!-- 														       				 	</svg> -->
+<!-- 														       				 </use> -->
+<!-- 														    			</svg> -->
+<!-- 																	</span> -->
+<!-- 																</div> -->
+<!-- 																<div class="action-link_label arrange_unit arrange_unit--fill" style="border-top: 1px solid #e6e6e6; padding-top: 3px; padding-bottom: 3px; vertical-align: middle; width: 100%;"> -->
+<!--             														Embed review -->
+<!-- 																</div> -->
+<!-- 														</a> -->
+<!-- 														</li> -->
 														
 														
-														<li>
-															<a class="restContent-share-review" href="#" style="display: table; min-width: 100%; table-layout: auto; color: #0073bb; text-decoration: none; cursor: pointer;">
-																<div class="action-link_icon arrange_unit" style="padding-top: 3px; padding-bottom: 3px; vertical-align: middle; padding-right: 12px; box-sizing: border-box; display: table-cell;">
-																	<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-compliment icon--size-18 icon--currentColor">
-																	    <svg class="icon_svg">
-																	        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_compliment">
-																	        	<svg id="18x18_compliment" height="100%" viewBox="0 0 18 18" width="100%">
-																	        		<path d="M14.5 6.75a5.5 5.5 0 0 0-11 0 5.495 5.495 0 0 0 2.993 4.892L5.5 16.75l3.505-2 3.495 2-.993-5.108A5.495 5.495 0 0 0 14.5 6.75zm-5.5 4c-2.206 0-4-1.794-4-4s1.794-4 4-4 4 1.794 4 4-1.794 4-4 4z"></path>
-																	        	</svg>
-																	        </use>
-																	    </svg>
-																	</span>
-																</div>
-																<div class="action-link_label arrange_unit arrange_unit--fill" style="border-top: 1px solid #e6e6e6; padding-top: 3px; padding-bottom: 3px; vertical-align: middle; width: 100%;">
-            														Compliment
-																</div>
-														</a>
-														</li>
+<!-- 														<li> -->
+<!-- 															<a class="restContent-share-review" href="#" style="display: table; min-width: 100%; table-layout: auto; color: #0073bb; text-decoration: none; cursor: pointer;"> -->
+<!-- 																<div class="action-link_icon arrange_unit" style="padding-top: 3px; padding-bottom: 3px; vertical-align: middle; padding-right: 12px; box-sizing: border-box; display: table-cell;"> -->
+<!-- 																	<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-compliment icon--size-18 icon--currentColor"> -->
+<!-- 																	    <svg class="icon_svg"> -->
+<!-- 																	        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_compliment"> -->
+<!-- 																	        	<svg id="18x18_compliment" height="100%" viewBox="0 0 18 18" width="100%"> -->
+<!-- 																	        		<path d="M14.5 6.75a5.5 5.5 0 0 0-11 0 5.495 5.495 0 0 0 2.993 4.892L5.5 16.75l3.505-2 3.495 2-.993-5.108A5.495 5.495 0 0 0 14.5 6.75zm-5.5 4c-2.206 0-4-1.794-4-4s1.794-4 4-4 4 1.794 4 4-1.794 4-4 4z"></path> -->
+<!-- 																	        	</svg> -->
+<!-- 																	        </use> -->
+<!-- 																	    </svg> -->
+<!-- 																	</span> -->
+<!-- 																</div> -->
+<!-- 																<div class="action-link_label arrange_unit arrange_unit--fill" style="border-top: 1px solid #e6e6e6; padding-top: 3px; padding-bottom: 3px; vertical-align: middle; width: 100%;"> -->
+<!--             														Compliment -->
+<!-- 																</div> -->
+<!-- 														</a> -->
+<!-- 														</li> -->
 														
 														<li>
-															<a class="restContent-share-review" href="#" style="display: table; min-width: 100%; table-layout: auto; color: #0073bb; text-decoration: none; cursor: pointer;">
+															<a class="restContent-share-review" href="#" style="display: table; min-width: 100%; table-layout: auto; cursor: pointer;">
 																<div class="action-link_icon arrange_unit" style="padding-top: 3px; padding-bottom: 3px; vertical-align: middle; padding-right: 12px; box-sizing: border-box; display: table-cell;">
-																	<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-speech icon--size-18 icon--currentColor">
+																	<span aria-hidden="true" style="fill: currentColor; width: 18px; height: 18px;" class="icon">
 																    <svg class="icon_svg">
 																        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_speech">
 																        	<svg id="18x18_speech" height="100%" viewBox="0 0 18 18" width="100%">
@@ -605,30 +574,30 @@
 																    </svg>
 																</span>
 																</div>
-																<div class="action-link_label arrange_unit arrange_unit--fill" style="border-top: 1px solid #e6e6e6; padding-top: 3px; padding-bottom: 3px; vertical-align: middle; width: 100%;">
+																<div class="action-link_label arrange_unit arrange_unit--fill" style="display: table-cell;border-top: 1px solid #e6e6e6; padding-top: 3px; padding-bottom: 3px; vertical-align: middle; width: 100%;">
             														Send message
 																</div>
 														</a>
 														</li>
 														
-														<li>
-															<a class="restContent-share-review" href="#" style="display: table; min-width: 100%; table-layout: auto; color: #0073bb; text-decoration: none; cursor: pointer;">
-																<div class="action-link_icon arrange_unit" style="padding-top: 3px; padding-bottom: 3px; vertical-align: middle; padding-right: 12px; box-sizing: border-box; display: table-cell;">
-																	<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-following icon--size-18 icon--currentColor">
-																	    <svg class="icon_svg">
-																	        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_following">
-																	        	<svg id="18x18_following" height="100%" viewBox="0 0 18 18" width="100%">
-																	        		<path d="M16 13l-4 3v-2H9l1-2h2v-2l4 3zm-8.925 2.383c-.443.817-1.707.817-2.15 0L2.128 9.605C1.728 8.868 2.31 8 3.203 8h5.594c.893 0 1.474.868 1.075 1.605l-2.797 5.778zM6 7a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path>
-																	        	</svg>
-																	        </use>
-																	    </svg>
-																	</span>
-																</div>
-																<div class="action-link_label arrange_unit arrange_unit--fill" style="border-top: 1px solid #e6e6e6; padding-top: 3px; padding-bottom: 3px; vertical-align: middle; width: 100%;">
-            														Follow Lauramay N.
-																</div>
-														</a>
-														</li>
+<!-- 														<li> -->
+<!-- 															<a class="restContent-share-review" href="#" style="display: table; min-width: 100%; table-layout: auto; color: #0073bb; text-decoration: none; cursor: pointer;"> -->
+<!-- 																<div class="action-link_icon arrange_unit" style="padding-top: 3px; padding-bottom: 3px; vertical-align: middle; padding-right: 12px; box-sizing: border-box; display: table-cell;"> -->
+<!-- 																	<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-following icon--size-18 icon--currentColor"> -->
+<!-- 																	    <svg class="icon_svg"> -->
+<!-- 																	        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_following"> -->
+<!-- 																	        	<svg id="18x18_following" height="100%" viewBox="0 0 18 18" width="100%"> -->
+<!-- 																	        		<path d="M16 13l-4 3v-2H9l1-2h2v-2l4 3zm-8.925 2.383c-.443.817-1.707.817-2.15 0L2.128 9.605C1.728 8.868 2.31 8 3.203 8h5.594c.893 0 1.474.868 1.075 1.605l-2.797 5.778zM6 7a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path> -->
+<!-- 																	        	</svg> -->
+<!-- 																	        </use> -->
+<!-- 																	    </svg> -->
+<!-- 																	</span> -->
+<!-- 																</div> -->
+<!-- 																<div class="action-link_label arrange_unit arrange_unit--fill" style="border-top: 1px solid #e6e6e6; padding-top: 3px; padding-bottom: 3px; vertical-align: middle; width: 100%;"> -->
+<!--             														Follow Lauramay N. -->
+<!-- 																</div> -->
+<!-- 														</a> -->
+<!-- 														</li> -->
 													</ul>
 												</div>
 											</div>
@@ -636,10 +605,7 @@
 												<div class="restContent-review-content" style="padding: 0 12px 6px 0; min-height: 156px; word-wrap: break-word !important; word-break: break-word !important; overflow-wrap: break-word !important;">
 													<div class="restContent-review-rating" style="margin: 6px 0;width:100%;overflow:hidden;height:auto;">
 														<div>
-															<script>
-															
-															</script>
-															<div class="restList-star-rating-${getReview.gradepoint }" >
+															<div class="restList-star-rating-${getReview.gradepoint}" >
 															<img class="offscreen" 
 																src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png"
 																width="84" height="303" alt="4.0 star rating"
@@ -647,54 +613,54 @@
 														</div>
 														</div>
 														<span class="restContent-rating-qualifier" style="display: block; float: left; color: #666; font-weight: normal;">
-															${getReview.joindate }
+															${getReview.reg_date}
 														</span><!-- 날짜 -->
 													</div>
 													<p lang="ko" style="margin-bottom: 12px;display:block;">
-														${getReview.content }
+														${getReview.content}
 													</p>
 													</div><!--리뷰 내용 -->
 													
 												<div class="review-footer clearfix">
-													<div class="rateReview voting-feedback" style="float: left;margin-bottom: 0;font-size: 12px;line-height: 1.5em;color: #666;" style="white-space: nowrap;margin-bottom: 6px;font-weight: bold;    display: block;">
-														<p class="voting-intro voting-prompt saving-msg" data-component-bound="true" style="white-space: nowrap;margin-bottom: 6px;font-weight: bold;">
-															Was this review …?
-														</p>
-														<ul class="restContent-review-button" style="margin-top: -1px;    list-style: none;    display: block;">
-														<li class="vote-item inline-block" style="    margin-right: 6px;    display: inline-block;    text-align: -webkit-match-parent;">
-															<a class="ybtn ybtn--small useful js-analytics-click" style="color: #666; white-space: nowrap; padding: 5px 8px; font-size: 12px; line-height: 1.5em; text-decoration: none !important; display: inline-block; vertical-align: middle; margin: 0; cursor: pointer; border: 1px solid; font-weight: bold; text-align: center; user-select: none; border-color: #ccc; color: #666; background-color: #f7f7f7; background: linear-gradient(#fff, #f7f7f7); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); border-radius: 3px;">
-																<span aria-hidden="true" style="fill: #666666; width: 18px; height: 18px;" class="icon icon--18-useful-outline icon--size-18 icon--active-inverse button-content u-space-r-half">
-																    <svg id="18x18_useful_outline" height="100%" viewBox="0 0 18 18" width="100%">
-																    	<path d="M9 17c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM9 2C5.14 2 2 5.14 2 9s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm2 8.392V12H7v-1.608a3.982 3.982 0 0 1-2-3.445 4 4 0 0 1 8 0c0 1.477-.81 2.752-2 3.445zM8 5.25a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5zm1.003 9.747h-.006A1.997 1.997 0 0 1 7 13h4a1.997 1.997 0 0 1-1.997 1.997z"></path>
-																    </svg>
-																</span>
-																<span class="vote-type" style="font-weight: bold;margin-right: 3px;">Useful</span>
-															</a>
-														</li>
+<!-- 													<div class="rateReview voting-feedback" style="float: left;margin-bottom: 0;font-size: 12px;line-height: 1.5em;color: #666;" style="white-space: nowrap;margin-bottom: 6px;font-weight: bold;    display: block;"> -->
+<!-- 														<p class="voting-intro voting-prompt saving-msg" data-component-bound="true" style="white-space: nowrap;margin-bottom: 6px;font-weight: bold;"> -->
+<!-- 															Was this review …? -->
+<!-- 														</p> -->
+<!-- 														<ul class="restContent-review-button" style="margin-top: -1px;    list-style: none;    display: block;"> -->
+<!-- 														<li class="vote-item inline-block" style="    margin-right: 6px;    display: inline-block;    text-align: -webkit-match-parent;"> -->
+<!-- 															<a class="ybtn ybtn--small useful js-analytics-click" style="color: #666; white-space: nowrap; padding: 5px 8px; font-size: 12px; line-height: 1.5em; text-decoration: none !important; display: inline-block; vertical-align: middle; margin: 0; cursor: pointer; border: 1px solid; font-weight: bold; text-align: center; user-select: none; border-color: #ccc; color: #666; background-color: #f7f7f7; background: linear-gradient(#fff, #f7f7f7); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); border-radius: 3px;"> -->
+<!-- 																<span aria-hidden="true" style="fill: #666666; width: 18px; height: 18px;" class="icon icon--18-useful-outline icon--size-18 icon--active-inverse button-content u-space-r-half"> -->
+<!-- 																    <svg id="18x18_useful_outline" height="100%" viewBox="0 0 18 18" width="100%"> -->
+<!-- 																    	<path d="M9 17c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM9 2C5.14 2 2 5.14 2 9s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm2 8.392V12H7v-1.608a3.982 3.982 0 0 1-2-3.445 4 4 0 0 1 8 0c0 1.477-.81 2.752-2 3.445zM8 5.25a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5zm1.003 9.747h-.006A1.997 1.997 0 0 1 7 13h4a1.997 1.997 0 0 1-1.997 1.997z"></path> -->
+<!-- 																    </svg> -->
+<!-- 																</span> -->
+<!-- 																<span class="vote-type" style="font-weight: bold;margin-right: 3px;">Useful</span> -->
+<!-- 															</a> -->
+<!-- 														</li> -->
 														
-														<li class="vote-item inline-block" style="    margin-right: 6px;    display: inline-block;    text-align: -webkit-match-parent;">
-															<a class="ybtn ybtn--small useful js-analytics-click" style="color: #666; white-space: nowrap; padding: 5px 8px; font-size: 12px; line-height: 1.5em; text-decoration: none !important; display: inline-block; vertical-align: middle; margin: 0; cursor: pointer; border: 1px solid; font-weight: bold; text-align: center; user-select: none; border-color: #ccc; color: #666; background-color: #f7f7f7; background: linear-gradient(#fff, #f7f7f7); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); border-radius: 3px;">
-																<span aria-hidden="true" style="fill: #666666; width: 18px; height: 18px;" class="icon icon--18-useful-outline icon--size-18 icon--active-inverse button-content u-space-r-half">
-																    <svg id="18x18_funny_outline" height="100%" viewBox="0 0 18 18" width="100%">
-																    	<path d="M9 17c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM9 2C5.14 2 2 5.14 2 9s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm0 12a4.87 4.87 0 0 1-4.787-4h9.574A4.87 4.87 0 0 1 9 14zm2.5-5.625a1.376 1.376 0 1 1 0-2.75 1.376 1.376 0 0 1 0 2.75zm-5 0a1.376 1.376 0 1 1 0-2.75 1.376 1.376 0 0 1 0 2.75z"></path>
-																    </svg>
-																</span>
-																<span class="vote-type" style="font-weight: bold;margin-right: 3px;">Funny</span>
-															</a>
-														</li>
+<!-- 														<li class="vote-item inline-block" style="    margin-right: 6px;    display: inline-block;    text-align: -webkit-match-parent;"> -->
+<!-- 															<a class="ybtn ybtn--small useful js-analytics-click" style="color: #666; white-space: nowrap; padding: 5px 8px; font-size: 12px; line-height: 1.5em; text-decoration: none !important; display: inline-block; vertical-align: middle; margin: 0; cursor: pointer; border: 1px solid; font-weight: bold; text-align: center; user-select: none; border-color: #ccc; color: #666; background-color: #f7f7f7; background: linear-gradient(#fff, #f7f7f7); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); border-radius: 3px;"> -->
+<!-- 																<span aria-hidden="true" style="fill: #666666; width: 18px; height: 18px;" class="icon icon--18-useful-outline icon--size-18 icon--active-inverse button-content u-space-r-half"> -->
+<!-- 																    <svg id="18x18_funny_outline" height="100%" viewBox="0 0 18 18" width="100%"> -->
+<!-- 																    	<path d="M9 17c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM9 2C5.14 2 2 5.14 2 9s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm0 12a4.87 4.87 0 0 1-4.787-4h9.574A4.87 4.87 0 0 1 9 14zm2.5-5.625a1.376 1.376 0 1 1 0-2.75 1.376 1.376 0 0 1 0 2.75zm-5 0a1.376 1.376 0 1 1 0-2.75 1.376 1.376 0 0 1 0 2.75z"></path> -->
+<!-- 																    </svg> -->
+<!-- 																</span> -->
+<!-- 																<span class="vote-type" style="font-weight: bold;margin-right: 3px;">Funny</span> -->
+<!-- 															</a> -->
+<!-- 														</li> -->
 														
-														<li class="vote-item inline-block" style="    margin-right: 6px;    display: inline-block;    text-align: -webkit-match-parent;">
-															<a class="ybtn ybtn--small useful js-analytics-click" style="color: #666; white-space: nowrap; padding: 5px 8px; font-size: 12px; line-height: 1.5em; text-decoration: none !important; display: inline-block; vertical-align: middle; margin: 0; cursor: pointer; border: 1px solid; font-weight: bold; text-align: center; user-select: none; border-color: #ccc; color: #666; background-color: #f7f7f7; background: linear-gradient(#fff, #f7f7f7); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); border-radius: 3px;">
-																<span aria-hidden="true" style="fill: #666666; width: 18px; height: 18px;" class="icon icon--18-useful-outline icon--size-18 icon--active-inverse button-content u-space-r-half">
-																    <svg id="18x18_cool_outline" height="100%" viewBox="0 0 18 18" width="100%">
-																    	<path d="M9 17c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM9 2C5.14 2 2 5.14 2 9s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm6.026 5.335C14.766 8.797 13.5 10 11.986 10h-.003c-1.218 0-2.282-.764-2.767-1.813-.088-.19-.344-.242-.432-.052C8.3 9.185 7.234 10 6.016 10h-.003C4.5 10 3.195 8.83 2.973 7.35l-.093-.84c-.053-.242.192-.51.477-.51h11.286c.294 0 .508.332.477.56l-.094.775zm-2.068 4.154A4.28 4.28 0 0 1 9 14.144a4.28 4.28 0 0 1-3.958-2.657A6.81 6.81 0 0 0 9 12.753a6.81 6.81 0 0 0 3.958-1.265z"></path>
-															    	</svg>
-																</span>
-																<span class="vote-type" style="font-weight: bold;margin-right: 3px;">Cool</span>
-															</a>
-														</li>
-													</ul><!-- 좋아요 -->
-													</div>
+<!-- 														<li class="vote-item inline-block" style="    margin-right: 6px;    display: inline-block;    text-align: -webkit-match-parent;"> -->
+<!-- 															<a class="ybtn ybtn--small useful js-analytics-click" style="color: #666; white-space: nowrap; padding: 5px 8px; font-size: 12px; line-height: 1.5em; text-decoration: none !important; display: inline-block; vertical-align: middle; margin: 0; cursor: pointer; border: 1px solid; font-weight: bold; text-align: center; user-select: none; border-color: #ccc; color: #666; background-color: #f7f7f7; background: linear-gradient(#fff, #f7f7f7); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); border-radius: 3px;"> -->
+<!-- 																<span aria-hidden="true" style="fill: #666666; width: 18px; height: 18px;" class="icon icon--18-useful-outline icon--size-18 icon--active-inverse button-content u-space-r-half"> -->
+<!-- 																    <svg id="18x18_cool_outline" height="100%" viewBox="0 0 18 18" width="100%"> -->
+<!-- 																    	<path d="M9 17c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM9 2C5.14 2 2 5.14 2 9s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm6.026 5.335C14.766 8.797 13.5 10 11.986 10h-.003c-1.218 0-2.282-.764-2.767-1.813-.088-.19-.344-.242-.432-.052C8.3 9.185 7.234 10 6.016 10h-.003C4.5 10 3.195 8.83 2.973 7.35l-.093-.84c-.053-.242.192-.51.477-.51h11.286c.294 0 .508.332.477.56l-.094.775zm-2.068 4.154A4.28 4.28 0 0 1 9 14.144a4.28 4.28 0 0 1-3.958-2.657A6.81 6.81 0 0 0 9 12.753a6.81 6.81 0 0 0 3.958-1.265z"></path> -->
+<!-- 															    	</svg> -->
+<!-- 																</span> -->
+<!-- 																<span class="vote-type" style="font-weight: bold;margin-right: 3px;">Cool</span> -->
+<!-- 															</a> -->
+<!-- 														</li> -->
+<!-- 													</ul>좋아요 -->
+<!-- 													</div> -->
 													<div class="review-footer-actions pull-right clearfix" style="    margin-top: 23px;    float: right;">
 														<a class="chiclet-link show-tooltip js-analytics-click chiclet-link--flag" style="position: relative;display: inline-block;padding: 5px;border: 1px solid #ccc;border-radius: 3px;font-size: 12px;line-height: 1.5em;color: #999;background: transparent;box-shadow: none;white-space: nowrap;transition: all 0.3s ease;text-decoration: none;cursor: pointer;">
 															<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-flag icon--size-18 icon--currentColor">
@@ -876,7 +842,7 @@
 											월요일
 										</th>
 										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
-											<span style="white-space: nowrap;">${getRest.mon }</span>
+											<span style="white-space: nowrap;">${getRest.mon}</span>
 										</td>
 										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
@@ -885,7 +851,7 @@
 											화요일
 										</th>
 										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
-											<span style="white-space: nowrap;">${getRest.tue }</span>
+											<span style="white-space: nowrap;">${getRest.tue}</span>
 										</td>
 										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
@@ -894,7 +860,7 @@
 											수요일
 										</th>
 										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
-											<span style="white-space: nowrap;">${getRest.wed }</span>
+											<span style="white-space: nowrap;">${getRest.wed}</span>
 										</td>
 										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
@@ -903,7 +869,7 @@
 											목요일
 										</th>
 										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
-											<span style="white-space: nowrap;">${getRest.thu }</span>
+											<span style="white-space: nowrap;">${getRest.thu}</span>
 										</td>
 										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
@@ -912,7 +878,7 @@
 											금요일
 										</th>
 										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
-											<span style="white-space: nowrap;">${getRest.fri }</span>
+											<span style="white-space: nowrap;">${getRest.fri}</span>
 										</td>
 										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
@@ -921,7 +887,7 @@
 											토요일
 										</th>
 										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
-											<span style="white-space: nowrap;">${getRest.sat }</span>
+											<span style="white-space: nowrap;">${getRest.sat}</span>
 										</td>
 										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
@@ -930,7 +896,7 @@
 											일요일
 										</th>
 										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
-											<span style="white-space: nowrap;">${getRest.sun }</span>
+											<span style="white-space: nowrap;">${getRest.sun}</span>
 										</td>
 										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
@@ -1111,12 +1077,12 @@
       
       
       $('.selector').click(function(e){ 
-    	  
          var star = $(e.target).val();
          $('#star').val(star);
          $(this).parent().parent().parent().submit();
-         
       });
+      
+      
       
    });   
 </script>
@@ -1126,6 +1092,10 @@
 //**원하는 페이지로 이동시 검색조건, 키워드 값을 유지하기 위해 
 function list(page){
     location.href="restaurant_content?curPage="+page;
+}
+
+function check() {
+	
 }
 </script>
 

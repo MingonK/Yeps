@@ -208,29 +208,29 @@
 
 				<ul style="list-style: none;display: block;">
 					<c:forEach var="dto" items="${map.list}" varStatus="status">
-						<li style="margin: 0;padding: 18px 0;border-top: 1px solid #e6e6e6;padding-top: 17px;display: list-item;text-align: -webkit-match-parent;">
+						<li style="margin: 0;padding: 18px 0;border-top: 1px solid #e6e6e6; padding-top: 17px; display: list-item; text-align: -webkit-match-parent;">
 							<div class="search-result natural-search-result">
 								<div class="biz-listing-large" style="margin: 0 -15px;height:auto;overflow:hidden;">
-									<div class="main-attribute"style=" float: left;padding: 0 15px;min-height: 1px;    box-sizing: border-box;width: 62.5%;">
+									<div class="main-attribute"style=" float: left;padding: 0 15px; min-height: 1px; box-sizing: border-box;width: 62.5%;">
 										<div class="midea-block"style="position: relative;display: flex;">
 											<div class="midea-avata"style="border-right: 12px solid transparent; border-left: none;">
 												<div class="photo-box" >
-													<a href="restaurant_content?rnum=${dto.rnum }" class="js-analytics-click" style="color: #0073bb;text-decoration: none;    cursor: pointer;">
+													<a href="restaurant_content?rnum=${dto.rnum}" class="js-analytics-click" style="color: #0073bb; cursor: pointer;">
 														<img width="90px" height="90px" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${dto.rest_filename}" style="outline: none;border-radius: 4px;vertical-align: middle;">	
         											</a>
 												</div>
 											</div>
 											<div class="midea-story" style="-webkit-box-flex: 1; flex: 1;min-width: 0;min-height: 0;">
-													<h3 style="font-weight: normal;margin-bottom: 6px;    word-wrap: break-word !important;word-break: break-word !important;overflow-wrap: break-word !important;    font-size: 16px;line-height: 1.3125em;color: #d32323; display: block;">
-														<span class="indexed-biz-name" style="color: #333;    display: block;">
-															<a href="restaurant_content?rnum=${dto.rnum }" style="font-size: 16px;line-height: 1.3125em;    display: inline;    padding: 3px 0;    color: #0073bb;text-decoration: none;    cursor: pointer;">
-																<span>${dto.rname }</span>
+													<h3 style="font-weight: normal;margin-bottom: 6px; word-wrap: break-word !important;word-break: break-word !important;overflow-wrap: break-word !important;    font-size: 16px;line-height: 1.3125em;color: #d32323; display: block;">
+														<span class="indexed-biz-name" style="color: #333; display: block;">
+															<a href="restaurant_content?rnum=${dto.rnum}" style="font-size: 16px; line-height: 1.3125em; display: inline; padding: 3px 0; color: #0073bb; cursor: pointer;">
+																<span>${dto.rname}</span>
 															</a>
 														</span>
 													</h3>
 														<div class="biz-rating biz-rating-large clearfix" style="margin: 6px 0;overflow:hidden;height:auto;">
 															<div class="restList-star-rating-${map.StarAvg.get(status.index)}">
-																<img class="offscreen" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png"width="84" height="303"style="clip: rect(0, 0, 0, 0); position: absolute; left: -9999px; top: auto; overflow: hidden; width: 1px; height: 1px; vertical-align: middle;">
+																<img class="offscreen" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png" width="84" height="303"style="clip: rect(0, 0, 0, 0); position: absolute; left: -9999px; top: auto; overflow: hidden; width: 1px; height: 1px; vertical-align: middle;">
 															</div>
 															<span class="review-count rating-qualifier" style="display: block;float: left;color: #666;font-weight: normal;">${map.reviewCount.get(status.index)} 리뷰</span>
 														</div>
@@ -239,37 +239,37 @@
 																<span class="business-attribute price-range" style="letter-spacing: 1px; white-space: nowrap;">￦￦￦</span>
 														</span>
 														<span class="category-str-list">
-															<a href="#" style="color: #0073bb;text-decoration: none;    cursor: pointer;">${dto.foodstyle}</a>
+															<a href="#" style="color: #0073bb; cursor: pointer;">${dto.foodstyle}</a>
 														</span>
 													</div>
 											</div>
 										</div>
 									</div>
-									<div class="secondary-attributes" style="float: left;padding: 0 15px;min-height: 1px;box-sizing: border-box;width: 37.5%;margin-top: 3px;">
-										<address style="display: block;font-style: normal;">
+									<div class="secondary-attributes" style="float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 37.5%; margin-top: 3px;">
+										<address style="display: block; font-style: normal;">
 											${dto.roadAddrPart1}<br>
-											${dto.addrDetail }<br>
-											${dto.roadAddrPart2 }<br>
+											${dto.addrDetail}<br>
+											${dto.roadAddrPart2}<br>
 										</address>
-										<span class="offscreen" style="clip: rect(0 0 0 0);position: absolute;left: -9999px;top: auto;overflow: hidden;width: 1px;height: 1px;">Phone number</span>
-										<span class="hp">${dto.raddress}-${dto.hp2}-${dto.hp3 }</span>
+										<span class="offscreen" style="clip: rect(0 0 0 0); position: absolute; left: -9999px; top: auto; overflow: hidden; width: 1px; height: 1px;">Phone number</span>
+										<span class="hp">${dto.raddress}-${dto.hp2}-${dto.hp3}</span>
 									</div>
 								</div>
 										
 										<c:if test="${map.LastReview.get(status.index).content!=null}">
-										<div class="snippet-block media-block" style="margin-top: 12px;margin-bottom: 0; font-size: 13px;line-height: 1.38462em;    position: relative;    display: flex;">
-										<div class="media-avatar" style="border-right: 6px solid transparent;border-left: none;">
+										<div class="snippet-block media-block" style="margin-top: 12px; margin-bottom: 0; font-size: 13px; line-height: 1.38462em; position: relative; display: flex;">
+										<div class="media-avatar" style="border-right: 6px solid transparent; border-left: none;">
 											<div class="photo-box pb-30s">
-												<a href="restaurant_content?rnum=${dto.rnum }" style="color: #0073bb;text-decoration: none;    cursor: pointer;">
-													<img width="30px" height="30px" src="getImage/pepe.jpg" style="outline: none;margin-top: 3px;border-radius: 4px;    vertical-align: middle;">
+												<a href="restaurant_content?rnum=${dto.rnum}" style="color: #0073bb; cursor: pointer;">
+													<img width="30px" height="30px" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${map.LastReview.get(status.index).memberDTO.memberPhotoDTO.filename}" style="outline: none; margin-top: 3px; border-radius: 4px; vertical-align: middle;">
 												</a>
 											</div>
 										</div>
-										<div class="media-story" style="-webkit-box-flex: 1;flex: 1;min-width: 0;min-height: 0;">
+										<div class="media-story" style="-webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;">
 											<p style="margin-bottom: 0;display: block;">
 													${map.LastReview.get(status.index).content}	
 												<c:if test="${LastReview.review.content.length()>60 }">
-												<a href="#" style="white-space: nowrap;color: #0073bb;text-decoration: none;cursor: pointer;">read more</a>
+												<a href="#" style="white-space: nowrap; color: #0073bb; cursor: pointer;">read more</a>
 												</c:if>
 											</p>
 										</div>
@@ -569,23 +569,26 @@ $(document).ready(function(){
 														'</span>'+
 													'</div>'+
 												'</div>'+
-												'<c:if test="'+data.LastReview(i).content!=null+'">'+
+												
 													'<div class="snippet-block media-block" style="margin-top: 12px;margin-bottom: 0; font-size: 13px;line-height: 1.38462em;    position: relative;    display: flex;">'+
 														'<div class="media-avatar" style="border-right: 6px solid transparent;border-left: none;">'+
 															'<div class="photo-box pb-30s">'+
 																'<a href="restaurant_content?rnum='+item.rnum+'" style="color: #0073bb;text-decoration: none;    cursor: pointer;">'+
-																	'<img width="30px" height="30px" src="getImage/pepe.jpg" style="outline: none;margin-top: 3px;border-radius: 4px;    vertical-align: middle;">'+
+																	'<img width="30px" height="30px" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/'+data.LastReview[i].memberDTO.memberPhotoDTO.filename+'" style="outline: none;margin-top: 3px;border-radius: 4px;    vertical-align: middle;">'+
 																'</a>'+
 															'</div>'+
 														'</div>'+
+														
 														'<div class="media-story" style="-webkit-box-flex: 1;flex: 1;min-width: 0;min-height: 0;">'+
 															'<p style="margin-bottom: 0;display: block;">'+
 																''+data.LastReview[i].content+''+
-																'<a href="#" style="white-space: nowrap;color: #0073bb;text-decoration: none;cursor: pointer;">read more</a>'+
+																'<c:if test="${LastReview.review.content.length()>60 }">' +
+																	'<a href="#" style="white-space: nowrap;color: #0073bb;text-decoration: none;cursor: pointer;">read more</a>'+
+																'</c:if>' +
 															'</p>'+
 														'</div>'+
 													'</div>'+
-												'</c:if>'+
+												
 											'</div>'+
 										'</li>'
 										 );

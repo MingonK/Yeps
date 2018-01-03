@@ -37,6 +37,8 @@ public class RestaurantDTO {
 	private String standard;
 	private String busytime;	// 바쁜시간
 	private String rest_regdate;
+	private ReviewDTO reviewDTO;
+	private MemberDTO memberDTO;
 	
 	public int getRnum() {
 		return rnum;
@@ -247,5 +249,17 @@ public class RestaurantDTO {
 	}
 	public void setRest_regdate(String rest_regdate) {
 		this.rest_regdate = rest_regdate;
+	}
+	public ReviewDTO getReviewDTO() {
+		return reviewDTO;
+	}
+	public void setReviewDTO(ReviewDTO reviewDTO) {
+		this.reviewDTO = reviewDTO;
+	}
+	public MemberDTO getMemberDTO() {
+		return memberDTO;
+	}
+	public void setMemberDTO(MemberDTO memberDTO) {
+		this.memberDTO = memberDTO;
 	}
 }

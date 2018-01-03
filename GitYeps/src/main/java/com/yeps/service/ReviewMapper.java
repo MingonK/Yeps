@@ -44,8 +44,16 @@ public class ReviewMapper {
 		return sqlSession.selectOne("getgetSelectedRestaurant_Rname", rnum);
 	}
 
-	public List<ReviewDTO> getSelectedRestaurant_Rv(int rnum) {
-		return sqlSession.selectList("getSelectedRestaurant_Rv", rnum);
+	public List<ReviewDTO> getSelectedRestaurant_Rv(int rnum, int start, int end) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("rnum", rnum);
+		map.put("start", start);
+		map.put("end", end);
+		return sqlSession.selectList("getSelectedRestaurant_Rv", map);
+	}
+	
+	public List<ReviewDTO> getRandomRestaurant_Rv(int rnum) {
+		return sqlSession.selectList("getRandomRestaurant_Rv", rnum);
 	}
 
 	public ReviewDTO review_mylist_info(int NBPmnum) {
@@ -76,8 +84,17 @@ public class ReviewMapper {
 		return sqlSession.selectList("previous_Rv");
 	}
 
-	public List<ReviewDTO> review_keyword(String SearchKeyword) {
-		return sqlSession.selectList("review_keyword", SearchKeyword);
+	public List<ReviewDTO> review_keyword(String SearchKeyword, int rnum, int start, int end) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("SearchKeyword", SearchKeyword);
+		map.put("rnum", rnum);
+		map.put("start", start);
+		map.put("end", end);
+		return sqlSession.selectList("review_keyword", map);
+	}
+	
+	public int review_keywordCount(String SearchKeyword) {
+		return sqlSession.selectOne("review_keywordCount", SearchKeyword);
 	}
 
 	public ReviewDTO getLastReview(int rnum) {

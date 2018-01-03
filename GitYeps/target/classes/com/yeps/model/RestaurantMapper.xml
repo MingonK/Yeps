@@ -69,10 +69,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from yeps_restaurant where rnum=#{rnum}
 	</select>
 	
-	 <select id="review_restaurantFind" parameterType="String" resultType="RestaurantDTO">
-       select * from yeps_restaurant where rname like '%'||#{SearchFind}||'%'
-    </select>
-	
 	<!-- 이벤트랑 연결 -->
 	<select id="findRestaurant" parameterType="java.util.HashMap" resultType="RestaurantDTO">
 		select * from yeps_restaurant where zipNo = #{zipNo} and roadAddrPart1 = #{roadAddrPart1} and roadAddrPart2 = #{roadAddrPart2} and addrDetail = #{addrDetail}

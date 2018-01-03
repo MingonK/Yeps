@@ -194,39 +194,39 @@ public class RestaurantController {
 
 	@RequestMapping(value="/restaurant_list")
 	public ModelAndView listRest(@RequestParam(defaultValue="1") int curPage){
-	    int count = restaurantMapper.getCount();
-	    int pageScale=10;
-	    int blockScale=10;
-	    // 페이지 나누기 관련 처리
-	    YepsPager YepsPager = new YepsPager(count, curPage,pageScale,blockScale);
-	    int start = YepsPager.getPageBegin();
-	    int end = YepsPager.getPageEnd();
-	    
-		List<RestaurantDTO> list = restaurantMapper.listRest(start, end,"mode");
-		
-		List<Integer>                reviewCount = new ArrayList<Integer>();
-		List<Integer> StarAvg=new ArrayList<Integer>();
+		int count = restaurantMapper.getCount();
+		int pageScale = 10;
+		int blockScale = 10;
+		// 페이지 나누기 관련 처리
+		YepsPager YepsPager = new YepsPager(count, curPage, pageScale, blockScale);
+		int start = YepsPager.getPageBegin();
+		int end = YepsPager.getPageEnd();
 
-		List<ReviewDTO> LastReview=new ArrayList<ReviewDTO>();
-		for(int i=0;i<list.size();i++) {
+		List<RestaurantDTO> list = restaurantMapper.listRest(start, end, "mode");
+
+		List<Integer> reviewCount = new ArrayList<Integer>();
+		List<Integer> StarAvg = new ArrayList<Integer>();
+
+		List<ReviewDTO> LastReview = new ArrayList<ReviewDTO>();
+		for (int i = 0; i < list.size(); i++) {
 			LastReview.add(reviewMapper.getLastReview(list.get(i).getRnum()));
 			reviewCount.add(reviewMapper.getRestaurantReviewCount(list.get(i).getRnum()));
 			StarAvg.add(reviewMapper.getStarAvg(list.get(i).getRnum()));
 		}
-		
-//		RestaurantDTO test=restaurantMapper.getNewRestaurant();
 
-	    HashMap<String, Object> map = new HashMap<String, Object>();
-	    map.put("list", list); // list
-	    map.put("count", count); // 레코드의 갯수
-	    map.put("YepsPager", YepsPager);
-	    map.put("LastReview",LastReview);
-	    map.put("reviewCount",reviewCount);
-	    map.put("StarAvg",StarAvg);
-	    
-	    
-	    ModelAndView mav = new ModelAndView();
-	    mav.addObject("map", map); 
+//		RestaurantDTO test = restaurantMapper.getNewRestaurant();
+//		System.out.println(test.getRnum());
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list); // list
+		map.put("count", count); // 레코드의 갯수
+		map.put("YepsPager", YepsPager);
+		map.put("LastReview", LastReview);
+		map.put("reviewCount", reviewCount);
+		map.put("StarAvg", StarAvg);
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("map", map);
 		mav.setViewName("restaurant/restaurant_list");
 		return mav;
 	}
@@ -269,49 +269,38 @@ public class RestaurantController {
 	@RequestMapping(value="/restaurant_content")
 	public ModelAndView contentRest(HttpServletRequest req, @RequestParam(defaultValue="1")int curPage){
 		String rnum = req.getParameter("rnum");
-		
+
 		int count = reviewMapper.getRestaurantReviewCount(Integer.parseInt(rnum));
-		int pageScale=10;
-		int blockScale=10;
-		YepsPager YepsPager = new YepsPager(count, curPage,pageScale,blockScale); 
+		int pageScale = 10;
+		int blockScale = 10;
+		YepsPager YepsPager = new YepsPager(count, curPage, pageScale, blockScale);
 		int start = YepsPager.getPageBegin();
 		int end = YepsPager.getPageEnd();
-		List<ReviewDTO> list = reviewMapper.listRestReview(start, end);//가게 10개 뽑아오기
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
-	    map.put("list", list); // list
-	    map.put("count", count); // 레코드의 갯수
-	    map.put("YepsPager", YepsPager);
+		map.put("count", count); // 레코드의 갯수
+		map.put("YepsPager", YepsPager);
+
+		RestaurantDTO getRest = restaurantMapper.getRest(Integer.parseInt(rnum));// 가게 1개 정보
+		List<FileDTO> uploadFileList = restaurantMapper.getFileList(Integer.parseInt(rnum));// 가게 업로드 파일
 		
-		RestaurantDTO getRest = restaurantMapper.getRest(Integer.parseInt(rnum));//가게 1개 정보
-		List<FileDTO> uploadFileList = restaurantMapper.getFileList(Integer.parseInt(rnum));//가게 업로드 파일
-		int getImageCount=restaurantMapper.getImageCount(Integer.parseInt(rnum));//가게 업로드 파일 갯수
-		int reviewCount=reviewMapper.getRestaurantReviewCount(Integer.parseInt(rnum));
-		
-		
-        List<ReviewDTO> reviewList = reviewMapper.getSelectedRestaurant_Rv(Integer.parseInt(rnum));//가게 리뷰
-        List<Integer> rvmnumList = reviewMapper.getSelectedRestaurant_Rv_M(Integer.parseInt(rnum));
-        int starAvg=reviewMapper.getStarAvg(Integer.parseInt(rnum));
-        
-        List<MemberDTO> memberList = new ArrayList<MemberDTO>();
-        for(int i=0; i<rvmnumList.size(); i++) {
-           int mnum = rvmnumList.get(i);
-           memberList.addAll(memberMapper.getSelectedRestaurant_M(mnum));
-        }
-           
+		List<ReviewDTO> reviewList = reviewMapper.getSelectedRestaurant_Rv(Integer.parseInt(rnum), start, end);// 가게 리뷰
+		List<ReviewDTO> highlightReview = reviewMapper.getRandomRestaurant_Rv(Integer.parseInt(rnum));
+		int starAvg = reviewMapper.getStarAvg(Integer.parseInt(rnum));
+
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("selectedDataM", memberList);
-		mav.addObject("map", map); 
+		mav.addObject("map", map);
 		mav.addObject("getRest", getRest);
 		mav.addObject("uploadFileList", uploadFileList);
-		mav.addObject("getImageCount",getImageCount);
-		mav.addObject("reviewCount",reviewCount);
-		mav.addObject("starAvg",starAvg);
-	    mav.addObject("selectedDataM", memberList);
-	    mav.addObject("selectedDataRV", reviewList);
+		mav.addObject("getImageCount", uploadFileList.size());
+		mav.addObject("reviewCount", reviewList.size());
+		mav.addObject("highlightReview", highlightReview);
+		mav.addObject("starAvg", starAvg);
+		mav.addObject("selectedDataRV", reviewList);
 		mav.setViewName("restaurant/restaurant_content");
-		return mav; 
+		return mav;
 	}
+	
 	@RequestMapping(value="/restaurant_photoList")
 	public ModelAndView photoListRest(HttpServletRequest req,@RequestParam(defaultValue="1") int curPage) {
 		int rnum=Integer.parseInt(req.getParameter("rnum"));
