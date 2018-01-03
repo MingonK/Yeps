@@ -230,7 +230,11 @@
 							<c:when test="${empty sessionScope.memberinfo}">
 								<div id="page_header_signup_wrap">
 									<ul style="display: inline-block;">
-										<li style="display: list-item; text-align: -webkit-match-parent;"><a href="member_login?mode=signup" id="page_header_signup">Sign Up</a></li>
+										<li style="display: list-item; text-align: -webkit-match-parent;">
+											<a href="member_login?mode=signup" id="page_header_signup">
+												Sign Up
+											</a>
+										</li>
 									</ul>
 								</div>
 							</c:when>
@@ -261,7 +265,7 @@
 									</div>
 								</div>
 								
-								<div id="page_header_notifications_wrap">
+							<div id="page_header_notifications_wrap">
                            <div id="page_header_acount_notifications">
                               <div id="page_header_account">
                                  <div id="topbar-account-item" class="drop-menu-origin" data-component-bound="true">
