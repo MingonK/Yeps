@@ -37,6 +37,7 @@ public class MenuController {
 		String rnum=req.getParameter("rnum");
 		String small_length=req.getParameter("small_length");
 		
+		System.out.println(small_length);
 //		for(int i=0;i<large_dto.getLargeMenuList().size();i++) {
 //			large_dto.setLarge_name(large_dto.getLargeMenuList().get(i).getLarge_name());
 //			large_dto.setRnum(Integer.parseInt(rnum));
