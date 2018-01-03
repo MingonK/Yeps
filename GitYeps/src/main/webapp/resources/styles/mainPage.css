@@ -1008,6 +1008,9 @@
     max-height: 690;
     overflow: hidden;
     margin-bottom: 30px;
+    
+    transition: padding-top 0.2s ease-in-out, max-height 0.2s ease-in-out, opacity 0.2s ease-in-out;
+    animation-delay: 0.1s;
 }
 
 #show_more_activity:hover {
