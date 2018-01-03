@@ -21,7 +21,7 @@
 						<a href="main">Yeps</a>
 					</div>
 					<div id="yeps_search_arrange_wrap">
-						<form name="page_header_form" method="post" style="margin: 0; padding: 0; width: 100%;">
+						<form action="yeps_main_saerch" name="page_header_form" method="post" style="margin: 0; padding: 0; width: 100%;">
 							<div id="yeps_search_arrange">
 								<label id="find_label">
 									<span id="label_span">Find</span>
@@ -204,10 +204,16 @@
 							<div id="yeps_search_arrange" style="width: 32%; float: left;">
 								<label id="yeps_search_arrange_label">
 									<span id="search_input_span">
-										<input type="text" maxlength="80" id="page_header_searchDate_inputs" autocomplete="on" placeholder="검색어를 입력하세요.">
+										<input type="text" maxlength="80" id="page_header_searchDate_inputs" class="page_header_searchDate_inputs" name="searchword" autocomplete="off" placeholder="검색어를 입력하세요."">
 										<input type="hidden" maxlength="80" name="search_loc" value>
 									</span>
 								</label>
+								
+								<div class="search_arrange_suggestions">
+			                        <ul class="search_arrange_suggestions-list">
+				                        
+			                       </ul>
+			                    </div>
 							</div>
 							
 							<div id="header_searchbutton_container">
@@ -609,6 +615,39 @@
          if(!$(e.target).hasClass("page_header_location_inputs")) {
             $('#main_location_suggestion_container').hide();
          }
+         if(!$(e.target).hasClass("page_header_searchDate_inputs")){
+         	$(".search_arrange_suggestions").hide();
+          }
+          if($(e.target).hasClass("page_header_searchDate_inputs")){
+         	var searchData = document.getElementById("page_header_searchDate_inputs").value;
+      		if(searchData == null || searchData == ""){
+      			$(".search_arrange_suggestions-list-item").remove();
+      			$(".search_arrange_suggestions").hide();		
+      		}else{
+      	        $.ajax({
+      	            type : 'post',
+      	             url : 'search_auto_complete',
+      	             data : {searchData:searchData},
+      	             dataType : 'json',
+      	             success : function(responseData){
+      	            	 if(responseData.length == 0){
+      	            		 $(".search_arrange_suggestions").hide();
+      	            	 }else{
+      		            	 $(".search_arrange_suggestions-list-item").remove();
+      		            	 for(var i=0; i < responseData.length ; i++){
+      		            		var autoComple = responseData[i];
+      		            		$(".search_arrange_suggestions-list").append('<li class="search_arrange_suggestions-list-item"><input type="hidden" id="search_word" value="'+ autoComple +'"><div class="search_arrange_suggestions_media-block"><div class="search_arrange_suggestions_media-story"><span class="search_arrange_suggestion-detail"><span class="search_arrange_suggestion-detail search_arrange_suggestion-title"><b>'+ autoComple +'</b></span></span><small class="search_arrange_suggestion-detail search_arrange_suggestion-subtitle"></small></div></div></li>');
+      		            	 }
+      		            	 $(".search_arrange_suggestions").show();
+      	            	 }
+      	             },
+      	             error : function(request, status, error) {
+      	                alert("실패")
+      	             },
+      	             
+      	        });
+      		}
+          }
      });
      
      
@@ -629,12 +668,53 @@
 	
 	function clickMouse(obj) {
 		document.getElementById("page_header_inputs").value = obj;
-		document.page_header_form.action = "#";
-		document.page_header_form.submit();
+// 		document.page_header_form.action = "#";
+// 		document.page_header_form.submit();
 	}
 	function loc_clickMouse(obj) {
 		document.getElementById("page_header_location_inputs").value = obj;
-		document.page_header_form.action = "#";
-		document.page_header_form.submit();
+// 		document.page_header_form.action = "#";
+// 		document.page_header_form.submit();
 	}
+</script>
+
+<script type="text/javascript">
+	$("#page_header_searchDate_inputs").keyup(function() {
+		var searchData = document.getElementById("page_header_searchDate_inputs").value;
+		
+		if(searchData == null || searchData == ""){
+			$(".search_arrange_suggestions-list-item").remove();
+			$(".search_arrange_suggestions").hide();		
+		}else{
+	        $.ajax({
+	            type : 'post',
+	             url : 'search_auto_complete',
+	             data : {searchData:searchData},
+	             dataType : 'json',
+	             success : function(responseData){
+	            	 if(responseData.length == 0){
+	            		 $(".search_arrange_suggestions").hide();
+	            	 }else{
+		            	 $(".search_arrange_suggestions-list-item").remove();
+		            	 for(var i=0; i < responseData.length ; i++){
+		            		var autoComple = responseData[i];
+		            		$(".search_arrange_suggestions-list").append('<li class="search_arrange_suggestions-list-item"><input type="hidden" id="search_word" value="'+ autoComple +'"><div class="search_arrange_suggestions_media-block"><div class="search_arrange_suggestions_media-story"><span class="search_arrange_suggestion-detail"><span class="search_arrange_suggestion-detail search_arrange_suggestion-title"><b>'+ autoComple +'</b></span></span><small class="search_arrange_suggestion-detail search_arrange_suggestion-subtitle"></small></div></div></li>');
+		            	 }
+		            	 $(".search_arrange_suggestions").show();
+	            	 }
+	             },
+	             error : function(request, status, error) {
+	                alert("실패")
+	             },
+	             
+	        });
+		}
+	});
+	
+	$(document).on('click', '.search_arrange_suggestions-list-item', function() {
+		var searchword = $(this).children('#search_word').val();
+		$("#page_header_searchDate_inputs").val(searchword);
+		$(".search_arrange_suggestions").hide();
+		$("#page_header_searchDate_inputs").focus();
+	});
 </script>
