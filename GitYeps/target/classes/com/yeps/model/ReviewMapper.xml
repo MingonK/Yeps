@@ -314,6 +314,58 @@
         order by R.rvnum desc
 	</select>
    
+   <!-- 1월 3일 상우가 올린부분 -->
+   
+   <select id="getPreviousReviewCount" resultType="int">
+  		select count(*) from yeps_review where recentreview ='y'
+   </select>
+   
+   
+   
+   <resultMap type="reviewDTO" id="previousReviewMap">
+  		<id column="rvnum" property="rvnum"/>
+      	<result column="rnum" property="rnum"></result>
+      	<result column="content" property="content"></result>
+      	<result column="reg_date" property="reg_date"></result>
+      	<result column="gradepoint" property="gradepoint"></result>
+      
+      	<association javaType="MemberDTO" property="memberDTO">
+			<id column="mnum" property="mnum"></id>
+         	<result column="email" property="email"></result>
+         	<result column="reviewcount" property="reviewcount"></result>
+         	<result column="imagecount" property="imagecount"></result>
+         	<result column="nickname" property="nickname"></result>
+         	
+         	<association javaType="MemberPhotoDTO" property="memberPhotoDTO">
+            	<result column="filename" property="filename"></result>
+         	</association>
+      	</association>
+      	
+      	<association javaType="RestaurantDTO" property="restaurantDTO">
+      		<id column="rnum" property="rnum"></id>
+         	<result column="rname" property="rname"></result>
+      	</association>
+  	</resultMap>
+  	
+  	<select id="previous_Rv" resultMap="previousReviewMap">
+  		select * from (select rownum rn, A.* from (select 
+                    R.rvnum
+                    , R.rnum
+                    , R.content
+                    , R.reg_date
+                    , R.gradepoint
+                    , M.email
+                    , M.reviewcount
+                    , M.imagecount
+                    , M.nickname
+                    , M.mnum
+                    , RT.rname
+                    , P.filename
+      from yeps_review R, yeps_member M, yeps_member_photos P, yeps_restaurant RT 
+      where R.mnum = M.mnum and R.mnum = P.mnum and RT.rnum = R.rnum and ismainphoto = 'y' and recentreview = 'y'
+      order by rvnum desc)A) where rn between #{start} and #{end}
+  	</select>
+   
    
   	
 </mapper>		

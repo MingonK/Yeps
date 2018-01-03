@@ -1091,7 +1091,7 @@
 								</c:if>
 								
 								<p style="text-align: center!important; margin-bottom: 12px;">
-									<a href="#">
+									<a href="previous_reviews">
 										Read previous reviews
 									</a>
 								</p>

@@ -29,7 +29,7 @@
 	font-size: 21px;
 	line-height: 1.28571em;
 	color: #d32323;
-	margin: 0 0 6px;
+	margin: 10 0 6px;
 	display: block;
 }
 
@@ -216,6 +216,77 @@
 	color: #333;
 }
 
+.resFind_starimg-0{
+   float: left; margin-right:6px;
+   position: relative; overflow: hidden;
+   background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+   width: 102px; height: 18px; background-position: 0 -240px; background-size: 132px 560px; display: inline-block; vertical-align: middle;
+}
+
+.resFind_starimg-1{
+   float: left; margin-right:6px;
+   position: relative; overflow: hidden;
+   background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+   width: 102px; height: 18px; background-position: 0 -258px; background-size: 132px 560px; display: inline-block; vertical-align: middle;
+}
+
+.resFind_starimg-1.5{
+   float: left; margin-right:6px;
+   position: relative; overflow: hidden;
+   background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+   width: 102px; height: 18px; background-position: 0 -276px; background-size: 132px 560px; display: inline-block; vertical-align: middle;
+}
+
+.resFind_starimg-2{
+   float: left; margin-right:6px;
+   position: relative; overflow: hidden;
+   background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+   width: 102px; height: 18px; background-position: 0 -294px; background-size: 132px 560px; display: inline-block; vertical-align: middle;
+}
+
+.resFind_starimg-2.5{
+   float: left; margin-right:6px;
+   position: relative; overflow: hidden;
+   background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+   width: 102px; height: 18px; background-position: 0 -312px; background-size: 132px 560px; display: inline-block; vertical-align: middle;
+}
+
+.resFind_starimg-3{
+   float: left; margin-right:6px;
+   position: relative; overflow: hidden;
+   background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+   width: 102px; height: 18px; background-position: 0 -330px; background-size: 132px 560px; display: inline-block; vertical-align: middle;
+}
+
+.resFind_starimg-3.5{
+   float: left; margin-right:6px;
+   position: relative; overflow: hidden;
+   background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+   width: 102px; height: 18px; background-position: 0 -348px; background-size: 132px 560px; display: inline-block; vertical-align: middle;
+}
+.resFind_starimg-4{
+   float: left; margin-right:6px;
+   position: relative; overflow: hidden;
+   background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+   width: 102px; height: 18px; background-position: 0 -366px; background-size: 132px 560px; display: inline-block; vertical-align: middle;
+}
+
+.resFind_starimg-4.5{
+   float: left; margin-right:6px;
+   position: relative; overflow: hidden;
+   background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+   width: 102px; height: 18px; background-position: 0 -384px; background-size: 132px 560px; display: inline-block; vertical-align: middle;
+}
+
+.resFind_starimg-5{
+   float: left; margin-right:6px;
+   position: relative; overflow: hidden;
+   background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+   width: 102px; height: 18px; background-position: 0 -402px; background-size: 132px 560px; display: inline-block; vertical-align: middle;
+}
+
+
+
 .resFind_img_2 {
 	clip: rect(0, 0, 0, 0);
 	position: absolute;
@@ -328,21 +399,10 @@
 	viewBox: 0 0 18 18;
 }
 
-.resFind_svg_1
-:not
- 
-(
-:root
- 
-){
-overflow
-:
- 
-hidden
-;
-
-
+.resFind_svg_1:not(:root){
+	overflow: hidden;
 }
+
 .resFind_a_2 {
 	color: #666;
 	margin: 9px 0 0;
@@ -420,21 +480,10 @@ hidden
 	viewBox: 0 0 18 18;
 }
 
-.resFind_svg_2
-:not
- 
-(
-:root
- 
-){
-overflow
-:
- 
-hidden
-;
-
-
+.resFind_svg_2:not(:root){
+	overflow: hidden;
 }
+
 .resFind_div15 {
 	float: left;
 	padding: 0 15px;
@@ -457,7 +506,6 @@ hidden
 .resFind_span_6 {
 	clip: rect(0, 0, 0, 0);
 	position: absolute;
-	left: -9999px;
 	top: auto;
 	overflow: hidden;
 	width: 1px;
@@ -471,15 +519,6 @@ hidden
 	color: #333;
 }
 
-.resFind_li_2 {
-	margin: 0;
-	padding: 18px 0;
-	border-bottom: 1px solid #e6e6e6;
-	padding-bottom: 17px;
-	display: list-item;
-	text-align: -webkit-match-parent;
-	color: #333;
-}
 
 .resFind_div16 {
 	border-bottom: 1px solid #e6e6e6;
@@ -522,301 +561,101 @@ hidden
 	color: #333;
 }
 
-.resFind_div20 {
-	position: fixed;
+.resFind_div24 {
+	position: relative;
 	zoom: 1;
-	z-index: 1;
-	top: 0px;
-	padding-top: 10px;
-	left: 690px;
+	z-index: auto;
 	width: 298px;
 	display: block;
 	color: #333;
 }
 
-.resFind_div21 {
-	border: solid 1px #ccc;
+.resFind_div20 {
 	width: 300px;
-	height: 300px;
-	position: relative;
+	box-sizing: border-box;
+	margin-top: 24px;
+	background: white;
+	padding: 11px;
+	border: 1px solid #e6e6e6;
+	border-radius: 4px;
+	display: block;
+	color: #333;
+}
+
+.resFind_div21 {
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 11px;
+	margin-bottom: 12px;
 	display: block;
 	color: #333;
 }
 
 .resFind_div22 {
-	background-color: rgb(229, 227, 223);
-	position: relative;
-	overflow: hidden;
-	height: 100%;
-	width: 100%;
 	display: block;
 	color: #333;
 }
 
-.resFind_div23 {
-	height: 100%;
-	width: 100%;
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	background-color: rgb(229, 227, 223);
+.resFind_h3_2 {
+	word-wrap: break-word !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    font-weight: bold;
+    margin-bottom: 6px;
+    font-size: 16px;
+    line-height: 1.3125em;
+    color: #d32323;
+    margin: 0 0 6px;
+    display: block;
+}
+
+.resFind_p_1{
+	margin-bottom: 12px;
 	display: block;
 	color: #333;
 }
 
-.resFind_div24 {
-	position: absolute;
-	z-index: 0;
-	left: 0px;
-	top: 0px;
-	height: 100%;
-	width: 100%;
-	padding: 0px;
-	border-width: 0px;
-	margin: 0px;
-	font: 400 11px Roboto, Arial, sans-serif;
-	text-decoration: none;
-	vertical-align: baseline;
-	display: block;
-	color: #333;
+.resFind_a_3{
+	color: white;
+	padding: 5px 8px;
+    font-size: 12px;
+    line-height: 1.5em;
+    text-decoration: none !important;
+    border-color: #8d0005;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+    background-color: #d90007;
+    background: linear-gradient(#d90007, #c91400);
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+    cursor: pointer;
+    border: 1px solid;
+    font-weight: bold;
+    text-align: center;
+    user-select: none;
+    border-radius: 3px;
 }
 
-.resFind_div25 {
-	position: absolute;
-	z-index: 0;
-	left: 0px;
-	top: 0px;
-	height: 100%;
-	width: 100%;
-	padding: 0px;
-	border-width: 0px;
-	margin: 0px;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	vertical-align: baseline;
-	display: block;
-	color: #333;
+.resFind_a_3:hover, .resFind_a_3:visited{
+	color: #666;
 }
 
-.resFind_div26 {
-	z-index: 1;
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	width: 100%;
-	transform-origin: 0px 0px 0px;
-	transform: matrix(1, 0, 0, 1, 0, 0);
-	vertical-align: baseline;
+.resFind_div23{
 	display: block;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	color: #333;
+	    color: #333;
 }
 
-.resFind_div27 {
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	z-index: 100;
-	width: 100%;
-	display: block;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	color: #333;
+.resFind_a_4{
+    color: #0073bb;
+    text-decoration: none;
+    cursor: pointer;
 }
 
-.resFind_div28 {
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	z-index: 0;
-	vertical-align: baseline;
-	display: block;
-	color: #333;
-}
 
-.resFind_div29 {
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	z-index: 1;
-	visibility: inherit;
-	vertical-align: baseline;
-	display: block;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	color: #333;
-}
 
-.resFind_div30 {
-	width: 256px;
-	height: 256px;
-	position: absolute;
-	left: 10px;
-	top: 27px;
-	vertical-align: baseline;
-	display: block;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	color: #333;
-}
 
-.resFind_div31 {
-	width: 256px;
-	height: 256px;
-	position: absolute;
-	left: -246px;
-	top: 27px;
-	display: block;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	color: #333;
-}
 
-.resFind_div32 {
-	width: 256px;
-	height: 256px;
-	position: absolute;
-	left: 10px;
-	top: -229px;
-	display: block;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	color: #333;
-}
 
-.resFind_div33 {
-	width: 256px;
-	height: 256px;
-	position: absolute;
-	left: 10px;
-	top: 283px;
-	display: block;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	color: #333;
-}
 
-.resFind_div34 {
-	width: 256px;
-	height: 256px;
-	position: absolute;
-	left: 266px;
-	top: 27px;
-	display: block;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	color: #333;
-}
-
-.resFind_div35 {
-	width: 256px;
-	height: 256px;
-	position: absolute;
-	left: -246px;
-	top: -229px;
-	display: block;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	color: #333;
-}
-
-.resFind_div36 {
-	width: 256px;
-	height: 256px;
-	position: absolute;
-	left: -246px;
-	top: 283px;
-	display: block;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	color: #333;
-}
-
-.resFind_div37 {
-	width: 256px;
-	height: 256px;
-	position: absolute;
-	left: 266px;
-	top: -229px;
-	display: block;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	color: #333;
-}
-
-.resFind_div38 {
-	width: 256px;
-	height: 256px;
-	position: absolute;
-	left: 266px;
-	top: 283px;
-	display: block;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	color: #333;
-}
-
-.resFind_div39 {
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	z-index: 101;
-	width: 100%;
-	display: block;
-	display: block;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	color: #333;
-}
-
-.resFind_div40 {
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	z-index: 102;
-	width: 100%;
-	display: block;
-	display: block;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	color: #333;
-}
-
-.resFind_div41 {
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	z-index: 103;
-	width: 100%;
-	display: block;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	color: #333;
-}
-
-.resFind_div42 {
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	z-index: -1;
-	display: block;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	color: #333;
-}
-
-.resFind_div43 {
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	z-index: 1;
-	visibility: inherit;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	display: block;
-	color: #333;
-}
 
 .review_template_write_div1 {
 	padding: 12px 0;
@@ -858,8 +697,7 @@ hidden
 }
 
 .review_template_write_div6 {
-	background-image:
-		url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/default.png);
+	background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/default.png);
 	background-size: 80px 40px;
 	width: 80px;
 	height: 40px;
@@ -967,9 +805,9 @@ hidden
 }
 
 .review_template_write_a_1:hover {
-	background: rgba(51, 51, 51, .3);
+	background: rgba(51,51,51,.3);
 	color: #fff;
-	text-decoration: none;
+    text-decoration: none;
 }
 
 .review_template_write_li_2 {
@@ -1001,8 +839,8 @@ hidden
 
 .review_template_write_a_2:hover {
 	color: #fff;
-	text-decoration: none;
-	background: rgba(51, 51, 51, .3);
+    text-decoration: none;
+    background: rgba(51,51,51,.3);
 }
 
 .review_template_write_a_3 {
@@ -1045,7 +883,7 @@ hidden
 	color: #333;
 }
 
-.review_write_svg1:not (:root ){
+.review_write_svg1:not(:root){
 	overflow: hidden;
 }
 
@@ -1091,7 +929,7 @@ hidden
 }
 
 .review_write_BigInner_div {
-	max-width: 700px;
+	max-width: 960px;
 	margin: 0 auto;
 	padding: 0 15px;
 	min-height: calc(100vh - 64px);
@@ -1102,16 +940,16 @@ hidden
 
 .review_write_Textarea {
 	line-height: 1.44em;
-	border: 0;
-	outline: none;
-	padding-top: 5px;
-	width: 100%;
-	min-height: 258px;
-	color: inherit;
-	font: inherit;
-	margin: 0;
-	font-weight: 400;
-	resize: none;
+    border: 0;
+    outline: none;
+    padding: 0;
+    width: 100%;
+    min-height: 258px;
+    color: inherit;
+    font: inherit;
+    margin: 0;
+    font-weight: 400;
+    resize: none;
 }
 
 .review_write_Buttom_div {
@@ -1123,23 +961,23 @@ hidden
 }
 
 .review_write_Button {
-	box-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+	box-shadow: 0 1px 1px rgba(0,0,0,.3);
 	color: #fff;
-	background: linear-gradient(#d90007, #c91400);
-	padding: 12px 18px 13px;
-	font-size: 16px;
-	line-height: 1.3125em;
-	display: inline-block;
-	vertical-align: middle;
-	margin: 0;
-	cursor: pointer;
-	border: 1px solid #8d0005;
-	font-weight: 700;
-	text-align: center;
-	border-radius: 3px;
-	min-width: 240px;
-	height: 48px;
-	overflow: visible;
+    background: linear-gradient(#d90007,#c91400);
+    padding: 12px 18px 13px;
+    font-size: 16px;
+    line-height: 1.3125em;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+    cursor: pointer;
+    border: 1px solid #8d0005;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 3px;
+    min-width: 240px;
+    height: 48px;
+    overflow: visible;
 }
 
 .review_write_Button:hover {
@@ -1151,7 +989,7 @@ hidden
 	min-width: 1020px;
 	margin: 0;
 	padding: 0;
-	border: 1px solid red;
+	border: 0;
 	font-size: 100%;
 	vertical-align: baseline;
 	display: block;
@@ -1159,12 +997,10 @@ hidden
 }
 
 .pre_div2 {
-	padding-top: 15px;
-	padding-bottom: 36px;
 	width: 960px;
 	margin: 0 auto;
-	padding: 0 15px;
-	border: 1px solid red;
+	padding: 15px 15px 36px 15px;
+	border: 0;
 	font-size: 100%;
 	vertical-align: baseline;
 	display: block;
@@ -1185,7 +1021,7 @@ hidden
 .pre_div3 {
 	margin: 0;
 	padding: 0;
-	border: 1px solid red;
+	border: 0;
 	font-size: 100%;
 	vertical-align: baseline;
 	display: block;
@@ -1352,7 +1188,7 @@ hidden
 	cursor: pointer;
 }
 
-.pre_svg_11:not (:root ){
+.pre_svg_11:not(:root){
 	overflow: hidden;
 }
 
@@ -1502,22 +1338,15 @@ hidden
 	transition: opacity 0.3s ease-in-out;
 	font-size: 12px;
 	line-height: 1.5em;
-	margin-top: 6px;
-	font-weight: bold;
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	border: 0;
-	vertical-align: baseline;
-	-webkit-margin-before: 0px;
-	-webkit-margin-after: 0px;
 	display: block;
-	-webkit-margin-start: 0px;
-	-webkit-margin-end: 0px;
-	-webkit-padding-start: 40px;
 	text-align: -webkit-match-parent;
 	color: #333;
 }
+
+.pre_ul_small:hover{
+	opacity: 10;
+}
+
 
 .pre_div9-1-1-1 {
 	border-right-width: 9px;
@@ -1615,6 +1444,7 @@ hidden
 	vertical-align: baseline;
 	cursor: pointer;
 	text-align: -webkit-match-parent;
+	word-wrap: break-word;
 }
 
 .pre_li_small-2 {
@@ -1677,7 +1507,7 @@ hidden
 	text-align: -webkit-match-parent;
 }
 
-.pre_svg:not (:root ){
+.pre_svg:not(:root){
 	overflow: hidden;
 }
 
@@ -1726,7 +1556,7 @@ hidden
 	text-align: -webkit-match-parent;
 }
 
-.pre_svg_2:not (:root ){
+.pre_svg_2:not(:root){
 	overflow: hidden;
 }
 
@@ -1739,12 +1569,13 @@ hidden
 	display: list-item;
 	text-align: -webkit-match-parent;
 	color: #333;
+	list-style: none;
 }
 
 .pre_a_3 {
 	display: table;
 	min-width: 100%;
-	table-layout: auto;
+	table-layout: auto; 
 	color: #0073bb;
 	text-decoration: none;
 	cursor: pointer;
@@ -1758,10 +1589,6 @@ hidden
 	padding-right: 12px;
 	box-sizing: border-box;
 	display: table-cell;
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
 	color: #0073bb;
 	cursor: pointer;
 	text-align: -webkit-match-parent;
@@ -1776,10 +1603,6 @@ hidden
 	position: relative;
 	overflow: hidden;
 	top: -.1em;
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
 	color: #0073bb;
 	cursor: pointer;
 	text-align: -webkit-match-parent;
@@ -1818,21 +1641,21 @@ hidden
 	viewBox: 0 0 18 18;
 }
 
-.pre_svg_33:not (:root ){
+.pre_svg_33:not(:root){
 	overflow: hidden;
 }
 
 .pre_div111 {
+	border-top: 1px solid #e6e6e6;
 	padding-top: 3px;
 	padding-bottom: 3px;
 	vertical-align: middle;
 	width: 100%;
 	box-sizing: border-box;
 	display: table-cell;
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
+	color: #0073bb;
+	cursor: pointer;
+	text-align: -webkit-match-parent;
 }
 
 .pre_div222 {
@@ -2142,11 +1965,11 @@ hidden
 	overflow-wrap: break-word !important;
 }
 
-.pre_svg_44:not (:root ){
+.pre_svg_44:not(:root){
 	overflow: hidden;
 }
 
-.pre_svg_0044:not (:root ){
+.pre_svg_0044:not(:root){
 	overflow: hidden;
 }
 
@@ -2310,7 +2133,7 @@ hidden
 	bottom: 0;
 }
 
-.pre_svg_440:not (:root ){
+.pre_svg_440:not(:root){
 	overflow: hidden;
 }
 
@@ -2737,7 +2560,7 @@ hidden
 	font-size: 100%;
 }
 
-.pre_svg_page_33:not (:root ){
+.pre_svg_page_33:not(:root){
 	overflow: hidden;
 }
 
@@ -3232,7 +3055,7 @@ hidden
 	white-space: nowrap;
 }
 
-.resIMG_svg_1:not (:root ){
+.resIMG_svg_1:not(:root){
 	overflow: hidden;
 }
 
@@ -3516,7 +3339,7 @@ hidden
 	text-align: -webkit-match-parent;
 }
 
-.resIMG_svg_2:not (:root ){
+.resIMG_svg_2:not(:root){
 	overflow: hidden;
 }
 
@@ -3630,7 +3453,7 @@ hidden
 	text-align: center !important;
 }
 
-.resIMG_span_7:not (:root ){
+.resIMG_span_7:not(:root){
 	overflow: hidden;
 }
 
@@ -3667,7 +3490,7 @@ hidden
 	text-align: center !important;
 }
 
-.resIMG_svg_3:not (:root ){
+.resIMG_svg_3:not(:root){
 	overflow: hidden;
 }
 
@@ -3830,7 +3653,6 @@ hidden
 	border-radius: 4px;
 	display: block;
 	color: #333;
-	width: 100%;
 }
 
 .resIMG_div_44 {
@@ -4025,7 +3847,7 @@ hidden
 	viewBox: 0 0 18 18;
 }
 
-.resIMG_svg_4:not (:root ){
+.resIMG_svg_4:not(:root){
 	overflow: hidden;
 }
 
@@ -4076,8 +3898,8 @@ hidden
 	viewBox: 0 0 18 18;
 }
 
-.resIMG_svg_5:not (:root ){
-	overflow: hidden;
+.resIMG_svg_5:not(:root){
+	overflow : hidden;
 }
 
 .resIMG_b_3 {
@@ -4320,7 +4142,7 @@ hidden
 	viewBox: 0 0 18 18;
 }
 
-.resIMG_svg_6:not (:root ){
+.resIMG_svg_6:not(:root){
 	overflow: hidden;
 }
 
@@ -4371,7 +4193,7 @@ hidden
 	viewBox: 0 0 18 18;
 }
 
-.resIMG_svg_7:not (:root ){
+.resIMG_svg_7:not(:root){
 	overflow: hidden;
 }
 
@@ -4540,8 +4362,8 @@ hidden
 	viewBox: 0 0 24 24;
 }
 
-.resIMG_svg_8:not (:root ){
-	overflow: hidden;
+.resIMG_svg_8:not(:root){
+	overflow : hidden;
 }
 
 .resIMG_button_4 {
@@ -4674,7 +4496,7 @@ hidden
 	viewBox: 0 0 24 24;
 }
 
-.resIMG_svg_9:not (:root ){
+.resIMG_svg_9:not(:root){
 	overflow: hidden;
 }
 
@@ -4754,7 +4576,7 @@ hidden
 	viewBox: 0 0 18 18;
 }
 
-.resIMG_svg_10:not (:root ){
+.resIMG_svg_10:not(:root){
 	overflow: hidden;
 }
 
@@ -4951,73 +4773,73 @@ hidden
 
 .content_innter_header {
 	padding-top: 24px;
-	padding-bottom: 12px;
+    padding-bottom: 12px;
 }
 
 .content_innter_header_text {
-	font-size: 30px;
-	font-family: cambria; line-height : 1.16667em;
-	word-wrap: break-word !important;
-	word-break: break-word !important;
-	overflow-wrap: break-word !important;
-	font-weight: 700;
-	margin-bottom: 6px;
-	color: #d32323;
-	line-height: 1.16667em;
+	font-size: 36px;
+    line-height: 1.16667em;
+    word-wrap: break-word!important;
+    word-break: break-word!important;
+    overflow-wrap: break-word!important;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #d32323;
 }
 
 .review_input {
 	border: 1px solid #ccc;
-	border-radius: 5px;
-	cursor: text;
-	padding: 18px;
-	margin:0 auto;
-	max-width: 630px;
+    border-radius: 4px;
+    cursor: text;
+    padding: 18px;
+    max-width: 630px;
 }
 
 .review_text_star_wrap {
-	margin-bottom: 18px !important;
+	margin-bottom: 18px!important;
 	display: table;
-	min-width: 100%;
-	table-layout: auto;
+    min-width: 100%;
+    table-layout: auto;
 }
 
 .review_text_star_container {
 	vertical-align: baseline;
 	width: 100%;
 	box-sizing: border-box;
-	display: table-cell;
+    display: table-cell;
 }
 
 .review_write_alert_wrap {
 	background-color: #fff;
-	min-height: 18px;
-	margin-top: 18px;
+    min-height: 18px;
+    margin-top: 18px;
 }
 
 .review_write_alert {
 	color: #d32323;
-	transition: opacity .3s ease-in-out, transform .3s ease-in-out;
+    transition: opacity .3s ease-in-out,transform .3s ease-in-out;
 }
 
 .writereview_footer {
 	padding: 18px 0;
-	background-color: #fff;
-	position: relative;
-	height: 80px;
-	
+    background-color: #fff;
+    position: relative;
+    height: 80px;
 }
 
 .footer_buttons_wrapper {
 	display: table;
-	min-width: 100%;
-	table-layout: auto;
+    min-width: 100%;
+    table-layout: auto;
 }
 
 .post_review_button {
-	align: center;
 	vertical-align: middle;
 	width: 100%;
 	box-sizing: border-box;
-	display: table-cell;
+    display: table-cell;
 }
+
+
+
+

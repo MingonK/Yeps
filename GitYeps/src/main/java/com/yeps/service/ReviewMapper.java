@@ -131,4 +131,17 @@ public class ReviewMapper {
 	public List<Integer> gethotAndNewReview() {
 		return sqlSession.selectList("gethotAndNewReview");
 	}
+	
+	// 1월 3일 상우 추가 
+	public int getPreviousReviewCount() {
+		return sqlSession.selectOne("getPreviousReviewCount");
+	}
+
+	public List<ReviewDTO> previous_Rv(int start, int end){
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("start", start);
+		map.put("end", end);
+		return sqlSession.selectList("previous_Rv", map);
+	}
+	
 }
