@@ -276,7 +276,7 @@
                            </a>   
                         </h3>
                         <div class="resIMG_div_32-1">
-                           ${dto.raddress}
+                           ${dto.roadAddrPart1}
                         </div>
                         <div class="resIMG_div_33">
                           <form name="starpointF" method="get" action="review_write">
