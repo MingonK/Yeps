@@ -6,7 +6,7 @@
 <head>
 <title>타이틀을 입력해주세요.</title>
    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css?ver=1"/>" />
-   <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css?ver=2"/>"/>
+   <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css"/>"/>
    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/member.css?ver=2"/>"/>
    <script src="//code.jquery.com/jquery.min.js"></script>
    
@@ -16,9 +16,9 @@
 		<%@ include file="top_review_write.jsp" %> 
 		<div class="review_write_Big_div">
 		<!-- write부분 전체 div -->
-			<div class="review_write_BigInner_div" align="center">
+			<div class="review_write_BigInner_div">
 				<div class="content_inner">
-					<div class="content_innter_header" align="left">
+					<div class="content_innter_header">
 						<h2 class="content_innter_header_text">
 							<a href="review_selectedres?rnum=${rnum}" class="review_write_Rname_font">
 								${rname}
@@ -28,25 +28,35 @@
 					
 					
 					<div>
-						<form name="review_writeF" action="review_insert?rname=${rname}&rnum=${rnum}&mode=${mode}&where=${where}" method="post"
+						<form name="review_writeF" action="review_insert?rname=${rname}&rnum=${rnum}" method="post"
            						onsubmit="return ContentAndGradepointCheck()">
+           						<input type="hidden" name="gradepoint" id="gradepoint">
 							<div>
 								<div class="review_input">
-									<div class="review_text_star_wrap" align="left">
-										<div class="review_text_star_container" align="left">
+									<div class="review_text_star_wrap">
+										<div class="review_text_star_container">
 											<fieldset style="vertical-align: middle; display: inline-block; margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit;">
-												<div class="review_write_Gradepoint_div">
-                  										<img id="image1" onmouseover="javascript:show('1')" onclick="javascript:mark('1')" onmouseout="javascript:noshow('1')" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/gradepoint_no_color.png"> 
-                  										<img id="image2" onmouseover="javascript:show('2')" onclick="javascript:mark('2')" onmouseout="javascript:noshow('2')" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/gradepoint_no_color.png"> 
-                 										<img id="image3" onmouseover="javascript:show('3')" onclick="javascript:mark('3')" onmouseout="javascript:noshow('3')" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/gradepoint_no_color.png"> 
-                 										<img id="image4" onmouseover="javascript:show('4')" onclick="javascript:mark('4')" onmouseout="javascript:noshow('4')" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/gradepoint_no_color.png"> 
-                  										<img id="image5" onmouseover="javascript:show('5')" onclick="javascript:mark('5')" onmouseout="javascript:noshow('5')" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/gradepoint_no_color.png">
-                    									<input type="hidden" name="gradepoint">
-                    									<p class="review_write_p_gradepointText" id="gradepointText">
+												<ul id="star_rating" style="float: left; margin: 0px; padding: 0px; display: inline-block; width: 162px; height: 30px; overflow: hidden; vertical-align: middle; background: url(https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/a5aa4dca29f3/assets/img/stars/selector_stars.png) no-repeat;">
+													<li class="selector star-selector-li-1_4" data-label="Eek! Methinks not.">
+							                           	<input id="rating-1" type="radio" value="1" name="rating" class="star-selector-input" style="cursor: pointer; border: none; margin: 0; padding: 0; width: 30px; height: 30px; opacity: 0;">
+							                        </li>
+							                        <li class="selector star-selector-li-1_4" data-label="Meh. I've experienced better.">
+							                         	<input id="rating-2" type="radio" value="2" name="rating" class="star-selector-input">
+							                        </li>
+													<li class="selector star-selector-li-1_4" data-label="3 (A-OK.)">
+														<input id="rating-3" type="radio" value="3" name="rating" class="star-selector-input">
+							                        </li>
+							                        <li class="selector star-selector-li-1_4" data-label="4 (Yay! I'm a fan.)">
+							                          	<input id="rating-4" type="radio" value="4"  name="rating" class="star-selector-input">
+							                        </li>
+							                        <li class="selector star-selector-li-5" data-label="5 (Woohoo! As good as it gets!)">
+							                           	<input id="rating-5" type="radio" value="5"  name="rating" class="star-selector-input">
+							                        </li>
+												</ul>
+              									
+              									<p class="review_write_p_gradepointText" id="gradepointText">
 													Select rating to get started
-                 									</p> 
-              										</div>
-              										
+                 								</p> 
 											</fieldset>
 										</div>
 									</div>
@@ -63,7 +73,7 @@
 							</div>
 							
 							
-							<div class="writereview_footer" align="center">
+							<div class="writereview_footer">
 								<div class="footer_buttons_wrapper">
 									<div class="post_review_button">
 										<input class="review_write_Button" type="button" data-popup-open="popup-1" value="Post Review">
@@ -77,28 +87,33 @@
 		</div>
 	</div>   
 </div>   
+		
+      
    <!---------------------------------------------------------------------------->
    
+  
+
 <div class="popup" data-popup="popup-1">
     <div class="login_check_wrap">
        <div class="login_check">
           <div class="login_check_head">
-             <div id="login_check_head_beta">
-                <div class="login_check_head_beta_closebtn popup-close" role="button" tabindex="0" data-popup-close="popup-1">×</div>
+             <div class="login_check_head_alpha">
              </div>
-          </div>
-          <div class="login_check_body">
-          
-        <!--     로그인 Div      -->
-             <div id="login" align="center"> 
-                <div id="member_header">
-                   <h2>Log In to YEPS</h2>
-                   <p class="subheading">New to YEPS? 
-                   <a class="signup-link u-pseudo-link">Sign up</a>
-                   <p class="legal-copy">By logging in, you agree to YEPS 
-                   <a class="legal-link" href="https://www.yelp.com/static?p=tos">Terms of Service</a>
-                      and <a class="legal-link" href="/tos/privacy_en_us_20160131">Privacy Policy</a>.
-                   </p>
+            <div id="login_check_head_beta">
+               <div class="login_check_head_beta_closebtn popup-close" role="button" tabindex="0" data-popup-close="popup-1">×</div>
+            </div>
+         </div>
+         <div class="login_check_body">
+         
+            <div id="login" align="center"> <!-- 로그인 Div -->
+               <div id="member_header">
+                  <h2>Log In to YEPS</h2>
+                  <p class="subheading">New to YEPS? 
+                  <a class="signup-link u-pseudo-link">Sign up</a>
+                  <p class="legal-copy">By logging in, you agree to YEPS 
+                  <a class="legal-link" href="https://www.yelp.com/static?p=tos">Terms of Service</a>
+                     and <a class="legal-link" href="/tos/privacy_en_us_20160131">Privacy Policy</a>.
+                  </p>
                </div>
    
                <div id="member_body">
@@ -249,11 +264,146 @@
       </div>
     </div>
 </div>
+
+
+
+
 <script>
+
+	var star = '${star}';
+	if(star == 0){
+	    $('.selector').parent().addClass('i-selector-stars--extra-large-0');
+	 }else if(star == 1){
+	    $('.selector').parent().addClass('i-selector-stars--extra-large-1');
+	    $('#gradepointText').text('Eek! Methinks not.');
+	 }else if(star == 2){
+	    $('.selector').parent().addClass('i-selector-stars--extra-large-2');
+	    $('#gradepointText').text('Meh. Ive experienced better.');
+	 }else if(star == 3){
+	    $('.selector').parent().addClass('i-selector-stars--extra-large-3');
+	    $('#gradepointText').text('A-OK.');
+	 }else if(star == 4){
+	    $('.selector').parent().addClass('i-selector-stars--extra-large-4');
+	    $('#gradepointText').text('Yay! Im a fan.');
+	 }else if(star == 5){
+		 $('.selector').parent().addClass('i-selector-stars--extra-large-5');
+		 $('#gradepointText').text('Woohoo! As good as it gets!');
+	 }
+	
    $(document).ready(function() {
-      $('.review_write_Button').hover(function(e) {
-         $('.review_write_Button').css("background-color", "#ff0008");
-      })
+		$('.review_write_Button').hover(function(e) {
+			$('.review_write_Button').css("background-color", "#ff0008");
+		})
+      
+		$('.selector').hover(function(e) {
+			var star = $(e.target).val();
+			$(this).parent().removeClass('i-selector-stars--extra-large-0');
+			$(this).parent().removeClass('i-selector-stars--extra-large-1');
+			$(this).parent().removeClass('i-selector-stars--extra-large-2');
+			$(this).parent().removeClass('i-selector-stars--extra-large-3');
+			$(this).parent().removeClass('i-selector-stars--extra-large-4');
+			$(this).parent().removeClass('i-selector-stars--extra-large-5');
+	         
+			if(star == 0){
+				$(this).parent().addClass('i-selector-stars--extra-large-0');
+			}else if(star == 1){
+				$(this).parent().addClass('i-selector-stars--extra-large-1');
+				$('#gradepointText').text('Eek! Methinks not.');
+			}else if(star == 2){
+				$(this).parent().addClass('i-selector-stars--extra-large-2');
+				$('#gradepointText').text('Meh. Ive experienced better.');
+			}else if(star == 3){
+	            $(this).parent().addClass('i-selector-stars--extra-large-3');
+	            $('#gradepointText').text('A-OK.');
+	         }else if(star == 4){
+	            $(this).parent().addClass('i-selector-stars--extra-large-4');
+	            $('#gradepointText').text('Yay! Im a fan.');
+	         }else if(star == 5){
+	        	 $(this).parent().addClass('i-selector-stars--extra-large-5');
+	        	 $('#gradepointText').text('Woohoo! As good as it gets!');
+	         }
+	      });
+	      
+	         
+		$('.selector').mouseleave(function(){
+	         $(this).parent().removeClass('i-selector-stars--extra-large-0');
+	         $(this).parent().removeClass('i-selector-stars--extra-large-1');
+	         $(this).parent().removeClass('i-selector-stars--extra-large-2');
+	         $(this).parent().removeClass('i-selector-stars--extra-large-3');
+	         $(this).parent().removeClass('i-selector-stars--extra-large-4');
+	         $(this).parent().removeClass('i-selector-stars--extra-large-5');
+	         
+	         var clickStar = $('#gradepoint').val();
+	         if(clickStar == 1) {
+	        	 $('.selector').parent().addClass('i-selector-stars--extra-large-1');
+		     	    $('#gradepointText').text('Eek! Methinks not.');
+	         } else if(clickStar == 2) {
+	        	 $('.selector').parent().addClass('i-selector-stars--extra-large-2');
+		     	 $('#gradepointText').text('Meh. Ive experienced better.');
+	         } else if(clickStar == 3) {
+	        	 $('.selector').parent().addClass('i-selector-stars--extra-large-3');
+		     	 $('#gradepointText').text('A-OK.');
+	         } else if(clickStar == 4) {
+	        	 $('.selector').parent().addClass('i-selector-stars--extra-large-4');
+		     	 $('#gradepointText').text('Yay! Im a fan.');
+	         } else if(clickStar == 5) {
+	        	 $('.selector').parent().addClass('i-selector-stars--extra-large-5');
+	     		 $('#gradepointText').text('Woohoo! As good as it gets!');
+	         } else {
+	        	 if(star == 0){
+	 	     	    $('.selector').parent().addClass('i-selector-stars--extra-large-0');
+	 	     	 }else if(star == 1){
+	 	     	    $('.selector').parent().addClass('i-selector-stars--extra-large-1');
+	 	     	    $('#gradepointText').text('Eek! Methinks not.');
+	 	     	 }else if(star == 2){
+	 	     	    $('.selector').parent().addClass('i-selector-stars--extra-large-2');
+	 	     	    $('#gradepointText').text('Meh. Ive experienced better.');
+	 	     	 }else if(star == 3){
+	 	     	    $('.selector').parent().addClass('i-selector-stars--extra-large-3');
+	 	     	    $('#gradepointText').text('A-OK.');
+	 	     	 }else if(star == 4){
+	 	     	    $('.selector').parent().addClass('i-selector-stars--extra-large-4');
+	 	     	    $('#gradepointText').text('Yay! Im a fan.');
+	 	     	 }else if(star == 5){
+	 	     		 $('.selector').parent().addClass('i-selector-stars--extra-large-5');
+	 	     		 $('#gradepointText').text('Woohoo! As good as it gets!');
+	 	     	 }
+	         }
+	         
+		});
+		
+		$('.selector').click(function(e) {
+			var star = $(e.target).val();
+			if(star == 0){
+	     	    $('.selector').parent().addClass('i-selector-stars--extra-large-0');
+	     	 }else if(star == 1){
+	     	    $('.selector').parent().addClass('i-selector-stars--extra-large-1');
+	     	    $('#gradepoint').val('1');
+	     	    $('#gradepointText').text('Eek! Methinks not.');
+	     	 }else if(star == 2){
+	     	    $('.selector').parent().addClass('i-selector-stars--extra-large-2');
+	     	   $('#gradepoint').val('2');
+	     	    $('#gradepointText').text('Meh. Ive experienced better.');
+	     	 }else if(star == 3){
+	     	    $('.selector').parent().addClass('i-selector-stars--extra-large-3');
+	     	   $('#gradepoint').val('3');
+	     	    $('#gradepointText').text('A-OK.');
+	     	 }else if(star == 4){
+	     	    $('.selector').parent().addClass('i-selector-stars--extra-large-4');
+	     	   $('#gradepoint').val('4');
+	     	    $('#gradepointText').text('Yay! Im a fan.');
+	     	 }else if(star == 5){
+	     		 $('.selector').parent().addClass('i-selector-stars--extra-large-5');
+	     		$('#gradepoint').val('5');
+	     		 $('#gradepointText').text('Woohoo! As good as it gets!');
+	     	 }
+			e.stopPropagation();
+			e.preventDefault();
+			
+		});
+
+      
+      
    });
 </script>
 
@@ -294,65 +444,53 @@ $(function() {
    function openwindow() {
       window.open("guidelines","guideview","channelmode=no, directoryies=no, width=500, height=520, status=no, scrollbars=yes, location=no, toolbar=no, menubar=no, resizable=no")
    }
+
+   
    
    var star = '${star}';
-   $(document).ready(function() {   
-      show(star)
+   $(document).ready(function() {  
       document.review_writeF.gradepoint.value = star;
+      
+      $('.signup-link').click(function() {
+          if($("#login").css("display") == "none"){
+             $("#login").show();
+             $('#join').hide();
+          }else{
+             $("#login").hide();
+             $('#join').show();
+          }
+       });
+             
+       $('.login-link').click(function() {
+          $("#login").show();
+          $("#find_passwd").hide();
+          $('#find_email').hide();
+       });
+             
+       $('.forgot-email-link').click(function() {
+          $("#login").hide();
+          $("#find_passwd").hide();
+          $('#find_email').show();
+       });
+    
+       $('.forgot-passwd-link').click(function() {
+          $("#login").hide();
+          $('#find_email').hide();
+          $('#find_passwd').show();
+       });
+             
+       $('#member_email2').click(function(){
+          $('#emailpicker-div').toggle();
+       });
+             
+       $(document).mouseup(function (e){
+          var container=$("#emailpicker-div");
+          if(container.has(e.target).length===0){
+          container.hide(); 
+          }
+       });
    });
-
-   function show(gradepoint) {
-      var i;
-      var image;
-      var el;
-
-         for (i = 1; i <= 5; i++) {
-            image = 'image' + i;
-            el = document.getElementById(image);
-            el.src = "https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/gradepoint_no_color.png";
-         }
-
-         var e = document.getElementById('gradepointText');
-         var stateMsg;
-         
-         for (i = 1; i <= gradepoint; i++) {
-            image = 'image' + i;
-            el = document.getElementById(image);
-            el.src = "https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/gradepoint_yes_color.png";
-         }
-
-         switch (gradepoint) {
-         case '1':
-            stateMsg = "Eek! Methinks not.";
-            break;
-         case '2':
-            stateMsg = "Meh. I've experienced better.";
-            break;
-         case '3':
-            stateMsg = "A-OK.";
-            break;
-         case '4':
-            stateMsg = "Yay! I'm a fan.";
-            break;
-         case '5':
-            stateMsg = "Woohoo! As good as it gets!";
-            break;
-         default:
-            stateMsg = "";
-         }
-         e.innerHTML = stateMsg;
-   }
-
-   function noshow(gradepoint) {
-      show(star)
-      document.review_writeF.gradepoint.value = gradepoint;
-   }
-   
-   function mark(gradepoint) {
-      star = gradepoint;
-      show(star)
-      document.review_writeF.gradepoint.value = gradepoint;
-   }
+     
    
    $(function() { 
        $("#login").hide();
@@ -377,14 +515,14 @@ $(function() {
            document.findemailf.ssn1.value=document.findemailf.ssn1.value.replace(/[^0-9]/g,'')
        }
     }
-    
+        
     function numberOnly(){
-        if(event.keyCode < 47 || event.keyCode > 58 || event.keyCode>=96 && event.keyCode<=105){
-           return false; 
-        }
-     }
+       if(event.keyCode < 47 || event.keyCode > 58 || event.keyCode>=96 && event.keyCode<=105){
+          return false; 
+       }
+    }
     
-    function checkpw(){ 
+    function checkPw(){
        if(document.joinf.passwd.value == '' || document.joinf.passwd2.value == ''){
           document.joinf.passCheck.value=""
        }else{
@@ -533,7 +671,7 @@ $(function() {
                  var targeted_popup_class = $('.popup-close').attr('data-popup-close');
                  $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
                  memberinfo = responseData.memberinfo;
-                 window.location.reload() ;
+                 location.reload();
               },
               error : function(request, status, error) {
                  alert("로그인 실패");
@@ -542,44 +680,9 @@ $(function() {
     }
            
     $(document).ready(function() {
-       $('.signup-link').click(function() {
-          if($("#login").css("display") == "none"){
-             $("#login").show();
-             $('#join').hide();
-          }else{
-             $("#login").hide();
-             $('#join').show();
-          }
-       });
-             
-       $('.login-link').click(function() {
-          $("#login").show();
-          $("#find_passwd").hide();
-          $('#find_email').hide();
-       });
-             
-       $('.forgot-email-link').click(function() {
-          $("#login").hide();
-          $("#find_passwd").hide();
-          $('#find_email').show();
-       });
-    
-       $('.forgot-passwd-link').click(function() {
-          $("#login").hide();
-          $('#find_email').hide();
-          $('#find_passwd').show();
-       });
-             
-       $('#member_email2').click(function(){
-          $('#emailpicker-div').toggle();
-       })
-             
-       $(document).mouseup(function (e){
-          var container=$("#emailpicker-div");
-          if(container.has(e.target).length===0){
-          container.hide(); 
-          }
-       })
+       
+       
+       
     });
            
     //------------------------------------이메일 찾기

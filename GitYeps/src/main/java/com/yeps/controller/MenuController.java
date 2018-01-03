@@ -36,6 +36,11 @@ public class MenuController {
 	public ModelAndView insertMenu(HttpServletRequest req,@ModelAttribute LargeMenuDTO large_dto,@ModelAttribute SmallMenuDTO small_dto) {
 		String rnum=req.getParameter("rnum");
 		String small_length=req.getParameter("small_length");
+		String[] test=req.getParameterValues("small_length");
+		
+		for(String value : test) {
+			System.out.println(value);
+		}
 		
 		System.out.println(small_length);
 //		for(int i=0;i<large_dto.getLargeMenuList().size();i++) {
