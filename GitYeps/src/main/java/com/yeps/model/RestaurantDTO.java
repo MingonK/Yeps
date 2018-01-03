@@ -39,6 +39,7 @@ public class RestaurantDTO {
 	private String rest_regdate;
 	private ReviewDTO reviewDTO;
 	private MemberDTO memberDTO;
+	private int mnum;
 	
 	public int getRnum() {
 		return rnum;
@@ -261,5 +262,11 @@ public class RestaurantDTO {
 	}
 	public void setMemberDTO(MemberDTO memberDTO) {
 		this.memberDTO = memberDTO;
+	}
+	public int getMnum() {
+		return mnum;
+	}
+	public void setMnum(int mnum) {
+		this.mnum = mnum;
 	}
 }

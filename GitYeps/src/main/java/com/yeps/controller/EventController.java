@@ -64,25 +64,27 @@ public class EventController {
 		YepsPager yepsPager = null;
 		int start = 0;
 		int end = 0;
+		int pageScale = 15;
+		int blockScale = 10;
 
 		if (mode == null || mode.trim().equals("") || mode.trim().equals("recently")) {
 			count = eventMapper.getEventCount("normal");
-			yepsPager = new YepsPager(count, curPage, 15, 10);
+			yepsPager = new YepsPager(count, curPage, pageScale, blockScale);
 			start = yepsPager.getPageBegin();
 			end = yepsPager.getPageEnd();
 		} else if (mode.equals("free")) {
 			count = eventMapper.getEventCount("free");
-			yepsPager = new YepsPager(count, curPage, 15, 10);
+			yepsPager = new YepsPager(count, curPage, pageScale, blockScale);
 			start = yepsPager.getPageBegin();
 			end = yepsPager.getPageEnd();
 		} else if (mode.equals("date")) {
 			count = eventMapper.getEventCount("normal");
-			yepsPager = new YepsPager(count, curPage, 15, 10);
+			yepsPager = new YepsPager(count, curPage, pageScale, blockScale);
 			start = yepsPager.getPageBegin();
 			end = yepsPager.getPageEnd();
 		} else {
 			count = eventMapper.getEventCount(mode);
-			yepsPager = new YepsPager(count, curPage, 15, 10);
+			yepsPager = new YepsPager(count, curPage, pageScale, blockScale);
 			start = yepsPager.getPageBegin();
 			end = yepsPager.getPageEnd();
 		}
@@ -235,7 +237,7 @@ public class EventController {
 		}
 
 		ModelAndView mav = new ModelAndView();
-		List<FileDTO> fileList = fileMapper.getTargetEventFiles(Integer.parseInt(evnum));
+		List<FileDTO> fileList = fileMapper.getAllEventFiles(Integer.parseInt(evnum));
 		for (int i = 0; i < fileList.size(); i++) {
 			S3Connection.getInstance().deleteObject("yepsbucket", "images/" + fileList.get(i).getFilename());
 		}
@@ -329,7 +331,7 @@ public class EventController {
 
 		if (memberDTO.getIsmanager().equals("y") || memberDTO.getIsmaster().equals("y")
 				|| eventDTO.getMnum() == memberDTO.getMnum()) {
-			List<FileDTO> allUploadFileList = fileMapper.getTargetEventFiles(eventDTO.getEvnum());
+			List<FileDTO> allUploadFileList = fileMapper.getAllEventFiles(eventDTO.getEvnum());
 			List<MemberDTO> registMemberList = new ArrayList<MemberDTO>();
 			for (int i = 0; i < allUploadFileList.size(); i++) {
 				registMemberList.add(memberMapper.getMemberProfile(allUploadFileList.get(i).getMnum()));
@@ -473,7 +475,7 @@ public class EventController {
 
 		ModelAndView mav = new ModelAndView();
 		EventDTO eventDTO = eventMapper.getEventContent(Integer.parseInt(evnum));
-		List<FileDTO> fileList = fileMapper.getTargetEventFiles(Integer.parseInt(evnum));
+		List<FileDTO> fileList = fileMapper.getAllEventFiles(Integer.parseInt(evnum));
 		FileDTO photoInMap = fileMapper.getFYIEventFile(Integer.parseInt(evnum));
 		RestaurantDTO restaurantDTO = restaurantMapper.findRestaurant(eventDTO.getZipNo(), eventDTO.getRoadAddrPart1(),
 				eventDTO.getRoadAddrPart2(), eventDTO.getAddrDetail());

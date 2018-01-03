@@ -4,12 +4,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,11 +26,13 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yeps.model.FileDTO;
+import com.yeps.model.MemberDTO;
 import com.yeps.model.RestaurantDTO;
 import com.yeps.model.ReviewDTO;
 import com.yeps.service.FileMapper;
 import com.yeps.service.RestaurantMapper;
 import com.yeps.service.ReviewMapper;
+import com.yeps.service.S3Connection;
 import com.yeps.service.YepsPager;
 
 
@@ -288,7 +292,7 @@ public class RestaurantController {
 		String rnum = req.getParameter("rnum");
 		String SearchKeyword = req.getParameter("SearchKeyword");
 		int curPage = req.getParameter("curPage") != null ? Integer.parseInt(req.getParameter("curPage")) : 1;
-
+		
 		int pageScale = 10;
 		int blockScale = 10;
 		int count = 0;
@@ -318,11 +322,128 @@ public class RestaurantController {
 		map.put("selectedDataRV", targetRestaurant_reviews); //한 페이지에서 변수명에 따라 다른값보여주기위해서		
 		return map;
 	}
+	
+	@RequestMapping(value = "/restaurant_update_photo")
+	public ModelAndView updateRestaurantPhoto(HttpServletRequest req) {
+		String rnum = req.getParameter("rnum");
+		
+		if(rnum == null || rnum.trim().equals("")) {
+			return new ModelAndView("redirect: restaurant_list");
+		}
+		
+		RestaurantDTO restaurantDTO = restaurantMapper.getRest(Integer.parseInt(rnum));
+		HttpSession session = req.getSession();
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
+		ModelAndView mav = new ModelAndView();
+		
+		if (memberDTO.getIsmanager().equals("y") || memberDTO.getIsmaster().equals("y")
+				|| restaurantDTO.getMnum() == memberDTO.getMnum()) {
+			List<FileDTO> allUploadFileList = fileMapper.getAllRestaurantFiles(restaurantDTO.getRnum());
+			mav.addObject("uploadFileList", allUploadFileList);
+		} else {
+			List<FileDTO> myUploadFileList = fileMapper.getRest_fileListForMe(restaurantDTO.getRnum(), memberDTO.getMnum());
+			mav.addObject("uploadFileList", myUploadFileList);
+		}
+		
+		mav.addObject("restaurantDTO", restaurantDTO);
+		mav.setViewName("restaurant/restaurant_update_photo");		
+		return mav;
+	}
+	
+	
+	@RequestMapping(value = "/restaurant_fileUpLoad")
+	@ResponseBody
+	public HashMap<String, Object> fileUpLoad_event(HttpServletRequest req) {
+		String rnum = req.getParameter("rnum");
+		if (rnum == null || rnum.trim().equals("")) {
+			// 404페이지 띄워야함.. jsp페이지에서 처리해주자
+			return null;
+		}
+
+		MultipartHttpServletRequest mr = (MultipartHttpServletRequest) req;
+		HttpSession session = req.getSession();
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
+
+		return uploadFileLoop(mr, memberDTO, Integer.parseInt(rnum));
+	}
+
+	public HashMap<String, Object> uploadFileLoop(MultipartHttpServletRequest mr, MemberDTO memberDTO, int rnum) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		Iterator<String> it = mr.getFileNames();
+		String origin_fileName = null;
+		int fileSize = 0;
+		List<FileDTO> fileList = new ArrayList<FileDTO>();
+
+		while (it.hasNext()) {
+			MultipartFile mf = mr.getFile(it.next());
+			origin_fileName = mf.getOriginalFilename();
+			fileSize = (int) mf.getSize();
+			String genId = UUID.randomUUID().toString();
+			String contentType = getExtension(origin_fileName);
+			String saveFileName = genId + "." + contentType;
+
+			File file = new File(saveFileName);
+			if (mf.getSize() != 0) {
+				try {
+					mf.transferTo(file);
+					S3Connection.getInstance().putObjectAsync("yepsbucket", "images/" + saveFileName, file,
+							"image/" + contentType);
+
+					FileDTO fileDTO = new FileDTO();
+					fileDTO.setRnum(rnum);
+					fileDTO.setMnum(memberDTO.getMnum());
+					fileDTO.setFilename(saveFileName);
+					fileDTO.setOrigin_filename(origin_fileName);
+					fileDTO.setFilesize(fileSize);
+					boolean isExistMainPhoto = fileMapper.isExistRestaurantMainPhoto(rnum);
+					int result = 0;
+					if (!isExistMainPhoto) {
+						result = fileMapper.insertFile(fileDTO, "main");
+					} else {
+						result = fileMapper.insertFile(fileDTO, "not");
+					}
+
+					if (result > 0) {
+						FileDTO insert_after_getFileDTO = fileMapper.getFile(saveFileName, 0);
+						fileList.add(insert_after_getFileDTO);
+					} else {
+						fileMapper.deleteFileToFilename(saveFileName);
+						S3Connection.getInstance().deleteObject("yepsbucket", "images/" + saveFileName);
+						map.put("failed", "파일 등록에 실패했습니다. 잠시후 다시 시도해주세요.");
+						file.delete();
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+					origin_fileName = null;
+					fileSize = 0;
+					file = null;
+					map.put("created_fail", "파일 생성 실패, 잠시 후 다시 시도하세요.");
+				}
+			} else {
+				map.put("upload_failed", "업로드할 수 없는 파일이 존재합니다.");
+			}
+		}
+		map.put("update", "사진을 등록하였습니다.");
+		return map;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	@RequestMapping(value = "/restaurant_photoList")
 	public ModelAndView photoListRest(HttpServletRequest req, @RequestParam(defaultValue = "1") int curPage) {
 		int rnum = Integer.parseInt(req.getParameter("rnum"));
-
+		
+		if(rnum == 0 ) {
+			return new ModelAndView("redirect: restaurant_list");
+		}
+		
 		int count = restaurantMapper.getCount();
 		int pageScale = 10;
 		int blockScale = 10;

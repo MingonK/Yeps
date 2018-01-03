@@ -1,0 +1,91 @@
+#insert_photo_main {
+	float: left;
+    padding: 0 15px;
+    min-height: 1px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+#user_photo_intro > h2 {
+	word-wrap: break-word !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    font-weight: bold;
+    margin-bottom: 6px;
+    font-size: 21px;
+    line-height: 1.28571em;
+    color: #d32323;
+    margin: 0 0 6px;
+}
+
+#restaurant_photo_drop_container {
+	display: block;
+}
+
+#restaurant_photo_drop_container #file_drop_area {
+	width: 90%;
+	margin: 24px auto;
+	padding: 100px 0;
+	display: table;
+	box-sizing: border-box;
+    border: 3px dashed #999;
+    border-radius: 8px;
+    text-align: center;
+    pointer-events: none;
+}
+
+#file_upload_help_container {
+	margin-left: -15px;
+    margin-right: -15px;
+    padding: 48px 0;
+    display: flex;
+    border-collapse: separate;
+    border-spacing: 30px 0;
+    min-width: 100%;
+    table-layout: auto;
+}
+
+#file_upload_help_container #file_upload_help_units {
+	-webkit-box-flex: 1;
+	flex: 1;
+    min-width: 0;
+    min-height: 0;
+    display: block;
+    margin-left: 15px;
+    margin-right: 15px;
+    border-collapse: collapse;
+    border-spacing: 0 0;
+    box-sizing: border-box;
+    vertical-align: top;
+    text-align: center;
+}
+
+#file_upload_help_container #file_upload_help_units img {
+	vertical-align: middle;
+	margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+}
+
+#file_upload_help_text {
+	margin: 12px 24px;
+	color: #999;
+    font-weight: normal;
+}
+
+#insert_photo_super_wrap a:hover {
+	text-decoration: underline;
+}
+
+
+
+
+
+
+
+
+
+
+
