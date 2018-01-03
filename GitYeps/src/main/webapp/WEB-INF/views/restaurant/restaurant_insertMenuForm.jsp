@@ -17,10 +17,14 @@
 			<div class="restInsert-container" style="width:960px;height:100%;display:block;">
 						<h2 style="word-wrap: break-word !important;word-break: break-word !important;overflow-wrap: break-word !important; font-weight: bold;margin-bottom: 6px;font-size: 26px;line-height: 1.28571em;color: #d32323;">메뉴 등록</h2>
 					<div class="" style="position: relative;box-sizing: border-box;vertical-align: baseline;display: block;">
-<!-- 						<label class="restInsert-label-bold">카테고리 선택</label><br> -->
+					
+						
 						<input class="restMenu-input" id="restMenu-input" placeholder="메뉴 등록입니다." type="text" value="" style="width:200px;">
 						<button type="button" value="large" class="large" style="padding: 5px 8px;font-size: 12px;line-height: 1.5em;border: 1px solid #ccc;" >
 							<span>Add</span>
+						</button>
+						<button type="button" value="check" class="check" style="padding: 5px 8px;font-size: 12px;line-height: 1.5em;border: 1px solid #ccc;">
+							<span>Check</span>
 						</button>
 						</div>
 					<form name="MenuForm" enctype="multipart/form-data" method="post" action="restaurant_insertMenu"  style="margin-bottom: 18px;display: block;width:100%;height:100%;">
@@ -40,15 +44,33 @@
 			</div>
 
 <script>
+
+
+
+
 $(document).ready(function() {
 	var large_count=0;
+	var small_count=0;
+	var small_length=0;
+	
+	
+	$(".check").click(function(){
+		
+		small_length+=1;
+		alert(small_length)
+		
+	});
+	
+	
 	$( ".large" ).click(function() {
 		var largeMenu=$("#restMenu-input").val();
-		
 		
 		if(largeMenu==""||largeMenu.indexOf(' ')>=0){
 			$("#restMenu-input").val('');
 			$("#restMenu-input").focus();
+			return false;
+		}
+		if($('.'+largeMenu+'').length>0){
 			return false;
 		}
 		
@@ -63,17 +85,18 @@ $(document).ready(function() {
 				'</button>'+
 			'</div>'+
 			'<div class="'+largeMenu+'-list" style="margin-bottom: 18px !important;">'+
-			
+				'<input type="hidden" name="small_length" value="">'+
 			'</div>'
 			);
 		$("#restMenu-input").val('');
-		count++;
-		alert("Large="+count)
+		large_count++;
 	});
 	
 		$('.menu-sections').on('click','button',function(e){
-			var count=0;
+			
 			var name=$(this).val();
+			$('.'+name+'-list').children().length;
+			
 			$('.'+name+'-list ').append(
 				'<div class="menu-item" style="border-top: 0;padding: 10px 0;">'+
 					'<div class="arrange arrange--6" style="margin-left: -6px;margin-right: -6px;border-collapse: separate;border-spacing: 6px 0;display: table;min-width: 100%;table-layout: auto;">'+
@@ -87,17 +110,14 @@ $(document).ready(function() {
 					'<div class="arrange_unit arrange_unit--fill" style="margin-left: 3px;margin-right: 3px;border-collapse: collapse;border-spacing: 0 0;width: 100%;box-sizing: border-box;display: table-cell;vertical-align: top;">'+
 						'<div class="arrange" style="display: table;min-width: 100%;table-layout: auto;">'+
 							'<div class="arrange_unit arrange_unit--fill menu-item-details" style="width: 100%;box-sizing: border-box;display: table-cell;vertical-align: top;">'+
-// 								'<h4 style="word-wrap: break-word !important;word-break: break-word !important;overflow-wrap: break-word !important;font-weight: bold;margin-bottom: 6px;font-size: 14px;line-height: 1.28571em;color: #333;    margin: 0 0 3px;    display: block;">'+
-// 			                            '<a href="#">Blue Cheese Garlic Bread</a>'+
-// 			                    '</h4>'+
-			                    '<input type="text" class="restMenu-input" style="width:200px;margin-bottom: 5px;" name="smallMenuList['+count+'].small_name">'+
-			                    '<textarea style="margin-bottom: 5px;display: block;overflow:auto;" rows="2" cols="50" name="smallMenuList['+count+'].small_content"></textarea>'+
+			                    '<input type="text" class="restMenu-input" style="width:200px;margin-bottom: 5px;" name="smallMenuList['+small_count+'].small_name">'+
+			                    '<textarea style="margin-bottom: 5px;display: block;overflow:auto;" rows="2" cols="50" name="smallMenuList['+small_count+'].small_content"></textarea>'+
 							'</div>'+
-							'<div class="menu-item-prices arrange_unit" style="text-align: right;padding-left: 90px;    box-sizing: border-box;display: table-cell;vertical-align: top;">'+
+							'<div class="menu-item-prices arrange_unit" style="text-align:right;padding-left: 90px;box-sizing: border-box;display: table-cell;vertical-align: top;">'+
 								'<ul style="list-style: none;display: block;">'+
 									'<li class="menu-item-price-amount" style="font-size: 15px;font-weight: bold;display: list-item;">'+
-										'<input type="text" class="restMenu-input" style="width:70px" name="smallMenuList['+count+'].small_price">'+
-										'<span style="position:absolute ; ">￦</span>'+
+										'<input type="text" class="restMenu-input" style="width:70px" name="smallMenuList['+small_count+'].small_price">'+
+										'<span style="position:absolute;">￦</span>'+
 									'</li>'+
 								'</ul>'+
 							'</div>'+
@@ -105,8 +125,8 @@ $(document).ready(function() {
 					'</div>'+
 				'</div>'		
 			);
-			count++;
-			alert("Small="+count)
+			small_count++;
+			
 			$(".restInsert-footer").css('display','inline');
 		});
 // 		$('.menu-sections').on('click','.small_remove',function(){

@@ -162,10 +162,15 @@ public class ReviewController {
 		String rname = restaurantMapper.review_write_getrname(Integer.parseInt(rnum));
 		System.out.println("review_write에서의 rname출력:" + rname);
 		String star = req.getParameter("star");
+		String mode = req.getParameter("mode");
+	    String where = req.getParameter("where");
+		System.out.println("write1" + mode);
 
 		// ★EDIT부분★ 위에 받아온 파라미터값 rnum을 통해서 방금 작성한 리뷰의 정보들을 가져와서 write페이지에 뿌려주면됨.
 
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("mode", mode);
+		mav.addObject("where", where);
 		mav.addObject("rnum", rnum);
 		mav.addObject("rname", rname);
 		mav.addObject("star", star);
@@ -198,18 +203,23 @@ public class ReviewController {
 
 		MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo");
 		int mnum = mdto.getMnum();
-		// reviewcount 구하기 추가 부분
-		int beforeReviewcount = memberMapper.getMemberReviewCount(mnum);
-		int nowReviewcount = beforeReviewcount + 1;
-		memberMapper.updateReviewCount(mnum, nowReviewcount);
+		
 		// ===============================
+		String mode = req.getParameter("mode");
+		String where = req.getParameter("where");
 		String name = mdto.getName();
 		String rnum = req.getParameter("rnum");
 		String rname = req.getParameter("rname");
 		String gradepoint = req.getParameter("gradepoint");
 		String content = req.getParameter("content");
-
-		String Get_InsertReviewDate = reviewMapper.Get_InsertReviewDate();
+        String Get_InsertReviewDate = reviewMapper.Get_InsertReviewDate();
+        
+     // reviewcount 구하기 추가 부분
+     	int beforeReviewcount = memberMapper.getMemberReviewCount(mnum);
+     	int nowReviewcount = beforeReviewcount + 1;
+     	if(mode.equals("write")) {
+     	    memberMapper.updateReviewCount(mnum, nowReviewcount);
+     	}
 
 		rvdto.setRnum(Integer.parseInt(rnum));
 		rvdto.setMnum(mnum);
@@ -227,12 +237,18 @@ public class ReviewController {
 		// 리뷰 작성했을때 위에 프로필과함께 작성한리뷰 restaurantIMG페이지에 띄워주기
 		List<RestaurantDTO> rlist = restaurantMapper.review_restaurantIMG();
 		System.out.println("rlist 출력2" + rlist);
-
+        System.out.println("@@@@@@=" +    mode);
+        System.out.println("where=" + where);
 		if (res > 0) {
 			mav.addObject("rnum", rnum);
 			// reviewcount 담아주기 ============================
-			mdto.setReviewcount(nowReviewcount);
-			mav.addObject("reviewcount", nowReviewcount);
+			if(mode.equals("write")) {
+				
+			    mdto.setReviewcount(nowReviewcount);
+			}else if(mode.equals("update") || mode == null){
+				
+			   mdto.setReviewcount(beforeReviewcount);
+			}
 			// ===========================================
 			mav.addObject("name", name);
 			mav.addObject("rname", rname);
@@ -254,5 +270,19 @@ public class ReviewController {
 		}
 
 	}
+	
+    @RequestMapping(value="/review_restaurantFind")
+    public ModelAndView review_restaurantFind(HttpServletRequest req) {
+       String SearchFind = req.getParameter("SearchFind");
+       //String SearchNear = req.getParameter("SearchNear");
+    
+       //★일단 Find값으로만 검색했을때의 값을 불러오게 만들어놨음 //Near도 같이 검색되게끔해야하는데 디폴트값을 Korea, Seoul로 해놨기때문에 굳이 near은 검색안해될것같긴함.
+       List<RestaurantDTO> Find_Restaurant_Review_rdto = restaurantMapper.review_restaurantFind(SearchFind);
+       ModelAndView mav = new ModelAndView();         
+       mav.addObject("Find_Restaurant_Review_rdto", Find_Restaurant_Review_rdto);
+       mav.addObject("SearchFind", SearchFind);
+       mav.setViewName("/review/restaurantFind");
+       return mav;
+    }
 
 }

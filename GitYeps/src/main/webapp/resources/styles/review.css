@@ -3804,7 +3804,7 @@ hidden
 
 .resIMG_div_42 {
 	background: #daecd2;
-	width: 80%;
+	width: 100%;
 	box-sizing: border-box;
 	position: relative;
 	margin-bottom: 12px;
@@ -3830,7 +3830,7 @@ hidden
 	border-radius: 4px;
 	display: block;
 	color: #333;
-	width: 80%;
+	width: 100%;
 }
 
 .resIMG_div_44 {

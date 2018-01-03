@@ -1,6 +1,8 @@
 package com.yeps.service;
 
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,4 +20,7 @@ public class LargeMenuMapper {
 		return sqlSession.insert("insertLargeMenu",dto);
 	}
 	
+	public List<LargeMenuDTO> listLargeMenu(int rnum){
+		return sqlSession.selectList("listLargeMenu",rnum);
+	}
 }

@@ -54,6 +54,8 @@ public class RestaurantController {
 	
 	@Autowired
 	private MemberMapper memberMapper;
+	
+	
 
 	@RequestMapping(value="/jusoPopup")
 	public String jusoRest() throws Exception{
@@ -120,15 +122,7 @@ public class RestaurantController {
 		return "restaurant/restaurant_uploadForm2";
 	}
 	
-	@RequestMapping(value="/restaurant_listMenu")
-	public ModelAndView listMenu(HttpServletRequest req) {
-		String rnum=req.getParameter("rnum");
-		RestaurantDTO dto=restaurantMapper.getRest(Integer.parseInt(rnum));
-	    ModelAndView mav = new ModelAndView();
-	    mav.addObject("getRest",dto);
-		mav.setViewName("restaurant/restaurant_listMenu");
-		return mav;
-	}
+
 	
 		
 	@RequestMapping(value="/restaurant_upload",method=RequestMethod.POST)

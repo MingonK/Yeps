@@ -36,7 +36,7 @@
 				<div class="clearfix layout-block layout-a" style="margin: 0 -15px;">
 					<div class="column column-alpha" style="float: left;padding: 0 15px;min-height: 1px;    box-sizing: border-box;width: 66.66667%;">
 						<h1 style="    margin-bottom: 10px;font-size: 21px;    word-wrap: break-word !important;word-break: break-word !important;overflow-wrap: break-word !important;font-weight: bold;    line-height: 1.2em;color: #333;padding-top: 6px; ">
- 							${rname} 메뉴
+ 							${getRest.rname} 메뉴
                 		</h1>
                 		<ul class="sub-menus" style="    margin-bottom: 20px;    list-style: none;    display: block;">
                 			<li class="sub-menu inline-block" style="margin-right: 5px;display: inline-block;    text-align: -webkit-match-parent;">
@@ -47,7 +47,7 @@
                 			
                 			<div class="section-header section-header--no-spacing" style="margin-bottom: 0;border-bottom: 1px solid #e6e6e6;">
                 				<h2 class="alternate" style="color: #333;word-wrap: break-word !important;word-break: break-word !important;overflow-wrap: break-word !important;font-weight: bold;margin-bottom: 6px;font-size: 21px;line-height: 1.28571em;    margin: 0 0 6px;    display: block;">
-				                    Starters
+<%-- 				                    ${list.large_name} --%>
 				                </h2>
                 			</div>
                 			<div class="u-space-b3" style="margin-bottom: 18px !important;">

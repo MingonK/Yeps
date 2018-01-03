@@ -245,6 +245,9 @@ function jusoCallBack(roadAddrPart1, addrDetail, roadAddrPart2, zipNo) {
 }
 
 function test() {
+
+		
+	
 	var reststyle=new Array();
 	var reststyle_name = document.getElementsByName("reststyle");
 	for (var i = 0; i < reststyle_name.length; i++) {
@@ -263,7 +266,6 @@ function test() {
 	}
 	document.getElementById("alcohol").value =alcohol.join(',')
 	
-	alert("실행")
 	return true;
 }
 </script>
@@ -289,7 +291,7 @@ function test() {
 								<ul style="list-style:none;">
 									<li class="restInsert-list">
 										<label for="attr_BusinessName" class="restInsert-label-bold">가게 이름</label>
-										<input class="restInsert-input" id="" name="rname" placeholder="가게 이름을 입력해주세요" type="text" value="">	
+										<input class="restInsert-input" id="rname" name="rname" placeholder="가게 이름을 입력해주세요" type="text" value="">	
 									</li>
 									<li class="restInsert-list">
 									 <label for="attr_BusinessName" class="restInsert-label-bold">사진 선택</label>
@@ -491,14 +493,14 @@ function test() {
 									<li class="restInsert-list">
 										<label for="roadAddrPart1" class="restInsert-label-bold">좌석</label><br>
 										<div class="checkbox" style="width:370px;height:auto;">
-											<input class="magic-checkbox" type="checkbox" id="reststyle" name="reststyle" value="좌석" >
-											<label for="reststyle" class="restInsert-label" style="width:60px">좌석</label>
+											<input class="magic-checkbox" type="checkbox" id="reststyle" name="reststyle" value="좌식" >
+											<label for="reststyle" class="restInsert-label" style="width:60px">좌식</label>
 											
-											<input class="magic-checkbox" type="checkbox" id="reststyle2" name="reststyle" value="테이블석" >
-											<label for="reststyle2" class="restInsert-label" style="width:63px">테이블석</label>
+											<input class="magic-checkbox" type="checkbox" id="reststyle2" name="reststyle" value="테이블식" >
+											<label for="reststyle2" class="restInsert-label" style="width:63px">테이블식</label>
 											
-											<input class="magic-checkbox" type="checkbox" id="reststyle3" name="reststyle" value="야외석" >
-											<label for="reststyle3" class="restInsert-label"style="width:60px">야외석</label>
+											<input class="magic-checkbox" type="checkbox" id="reststyle3" name="reststyle" value="야외식" >
+											<label for="reststyle3" class="restInsert-label"style="width:60px">야외식</label>
 										</div>
 									
 									</li>
@@ -580,6 +582,7 @@ function test() {
 											
 											<input class="magic-checkbox" type="checkbox" id="alcohol4" name="alcohol" value="막걸리" >
 											<label for="alcohol4" class="restInsert-label" style="width:60px">막걸리</label>
+											
 										</div>
 									</li>
 									<li class="restInsert-list">
