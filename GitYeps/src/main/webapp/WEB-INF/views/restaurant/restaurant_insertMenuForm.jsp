@@ -75,7 +75,7 @@ $(document).ready(function() {
 		}
 		
 		$( ".menu-sections" ).append(
-    			'<div class="section-header section-header--no-spacing" style="margin-bottom: 0;border-bottom: 1px solid #e6e6e6;">'+
+    			'<div class="'+largeMenu+'-header" style="margin-bottom: 0;border-bottom: 1px solid #e6e6e6;">'+
 				'<h2 class="'+largeMenu+'" style="color: #333;word-wrap: break-word !important;word-break: break-word !important;overflow-wrap: break-word !important;font-weight: bold;margin-bottom: 6px;font-size: 21px;line-height: 1.28571em;    margin: 0 0 6px; display:inline-block;padding-right:6px;">'+
                     ''+largeMenu+''+
                 '</h2>'+
@@ -85,7 +85,7 @@ $(document).ready(function() {
 				'</button>'+
 			'</div>'+
 			'<div class="'+largeMenu+'-list" style="margin-bottom: 18px !important;">'+
-				'<input type="hidden" name="small_length" value="">'+
+				'<input type="hidden" name="small_length" value="'+$('.'+largeMenu+'-list').children().length+'">'+
 			'</div>'
 			);
 		$("#restMenu-input").val('');
@@ -95,7 +95,8 @@ $(document).ready(function() {
 		$('.menu-sections').on('click','button',function(e){
 			
 			var name=$(this).val();
-			alert($('.'+name+'-list').children().length)
+				
+			
 			
 			$('.'+name+'-list ').append(
 				'<div class="menu-item" style="border-top: 0;padding: 10px 0;">'+
