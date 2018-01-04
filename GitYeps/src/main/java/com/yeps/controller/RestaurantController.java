@@ -1,7 +1,6 @@
 package com.yeps.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -30,7 +29,6 @@ import com.yeps.model.MemberDTO;
 import com.yeps.model.RestaurantDTO;
 import com.yeps.model.ReviewDTO;
 import com.yeps.service.FileMapper;
-import com.yeps.service.MemberMapper;
 import com.yeps.service.RestaurantMapper;
 import com.yeps.service.ReviewMapper;
 import com.yeps.service.S3Connection;
@@ -47,12 +45,7 @@ public class RestaurantController {
 	@Autowired
 	private FileMapper fileMapper;
 	@Autowired
-	private ReviewMapper reviewMapper;
-	
-	@Autowired
-	private MemberMapper memberMapper;
-	
-	
+	private ReviewMapper reviewMapper;	
 
 	@RequestMapping(value = "/jusoPopup")
 	public String jusoRest() throws Exception {
@@ -107,27 +100,10 @@ public class RestaurantController {
 		return new ModelAndView("message");
 	}
 
-	@RequestMapping(value = "/restaurant_insertMenuForm")
-	public String insertMenu() {
-		return "restaurant/restaurant_insertMenuForm";
-	}
-
-	@RequestMapping(value = "/restaurant_uploadForm2")
-	public String uploadForm() {
-		return "restaurant/restaurant_uploadForm2";
-	}
-	
-
-	
-		
-		
-
 	@RequestMapping(value = "/restaurant_listMenu")
 	public String listMenu() {
-
 		return "restaurant/restaurant_listMenu";
 	}
-
 
 	public String getExtension(String fileName) {
 		int dotPosition = fileName.lastIndexOf('.');
@@ -217,7 +193,6 @@ public class RestaurantController {
 		String rnum = req.getParameter("rnum");
 		
 		int count = reviewMapper.getRestaurantReviewCount(Integer.parseInt(rnum));
-		System.out.println("처음 열릴때 카운트: " + count);
 		int pageScale = 10;
 		int blockScale = 10;
 		YepsPager YepsPager = new YepsPager(count, curPage, pageScale, blockScale);
@@ -265,7 +240,6 @@ public class RestaurantController {
 		YepsPager YepsPager = null;
 		if(SearchKeyword == null || SearchKeyword.trim().equals("")) {
 			count = reviewMapper.getRestaurantReviewCount(Integer.parseInt(rnum));
-			
 			YepsPager = new YepsPager(count, curPage, pageScale, blockScale);
 			start = YepsPager.getPageBegin();
 			end = YepsPager.getPageEnd();

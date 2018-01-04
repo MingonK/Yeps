@@ -28,11 +28,6 @@ public class MenuController {
 	@Autowired
 	private RestaurantMapper restaurantMapper;
 	
-	
-	
-	
-	
-	
 	@RequestMapping(value = "/restaurant_insertMenu")
 	public ModelAndView insertMenu(HttpServletRequest req,@ModelAttribute LargeMenuDTO large_dto,@ModelAttribute SmallMenuDTO small_dto) {
 		String rnum=req.getParameter("rnum");
