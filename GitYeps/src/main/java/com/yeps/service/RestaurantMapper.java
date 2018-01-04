@@ -84,4 +84,21 @@ public class RestaurantMapper {
 
 	// 메인페이지 랜덤 사진 가져오기
 
+
+
+	//////////////1월 4일 상우추가 
+	public int get_review_restaurantFind_Count(String SearchFind){
+		return sqlSession.selectOne("get_review_restaurantFind_Count", SearchFind);
+	}
+
+
+
+	public List<RestaurantDTO> review_restaurantFind(int start, int end, String SearchFind) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("SearchFind", SearchFind);
+		return sqlSession.selectList("review_restaurantFind", map);
+	}
+
 }

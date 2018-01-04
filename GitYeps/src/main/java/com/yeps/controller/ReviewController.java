@@ -329,6 +329,63 @@ public class ReviewController {
 		mav.setViewName("review/previous_reviews");
 		return mav;
 	}
+	
+	
+	///////////////////1월 4일 상우 
+	@RequestMapping(value="/review_restaurantFind")
+	public ModelAndView review_restaurantFind(HttpServletRequest req, 
+			@RequestParam(defaultValue = "1") int curPage) {
+
+		//★일단 Find값으로만 검색했을때의 값을 불러오게 만들어놨음 
+		//Near도 같이 검색되게끔해야하는데 디폴트값을 Korea, Seoul로 해놨기때문에 굳이 near은 검색안해될것같긴함.
+		String SearchFind = req.getParameter("SearchFind");
+		//String SearchNear = req.getParameter("SearchNear");
+		
+		int count = 0;
+		if(SearchFind == null || SearchFind.trim().equals("")) {
+				count = 0;
+	      }else {
+	         count = restaurantMapper.get_review_restaurantFind_Count(SearchFind);
+	         System.out.println("count 출력후 :" + count);
+	     }
+		
+		int pageScale = 10;
+		int blockScale = 10;
+		YepsPager yepsPager = new YepsPager(count, curPage, pageScale, blockScale);
+		int start = yepsPager.getPageBegin();
+	    int end = yepsPager.getPageEnd();
+	    
+	    int num = count - pageScale * (curPage - 1) + 1;
+		List<RestaurantDTO> Find_Restaurant_Review_Get_rdto = restaurantMapper.review_restaurantFind(start, end, SearchFind);
+		
+		System.out.println("rest_filename출력:" +Find_Restaurant_Review_Get_rdto.get(0).getRest_filename());
+		
+		//getRnumList reviewCount StarAvg 
+
+		List<Integer> reviewCount = new ArrayList<Integer>();
+		List<Integer> StarAvg = new ArrayList<Integer>();
+		for(int i=0; i<Find_Restaurant_Review_Get_rdto.size(); i++) {
+			reviewCount.add(reviewMapper.getRestaurantReviewCount(Find_Restaurant_Review_Get_rdto.get(i).getRnum()));
+			StarAvg.add(reviewMapper.getStarAvg(Find_Restaurant_Review_Get_rdto.get(i).getRnum()));
+		}
+		
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("Find_Restaurant_Review_Get_rdto", Find_Restaurant_Review_Get_rdto);
+		map.put("count", count);
+		map.put("start", start);
+		map.put("end", end);
+		map.put("yepsPager", yepsPager);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("num", num);			
+		mav.addObject("map", map);			
+		mav.addObject("reviewCount", reviewCount);
+		mav.addObject("StarAvg", StarAvg);
+		mav.addObject("SearchFind", SearchFind);
+		mav.setViewName("/review/restaurantFind");
+		return mav;
+	}
 
 
 }
