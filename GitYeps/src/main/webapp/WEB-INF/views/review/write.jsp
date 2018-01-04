@@ -4,7 +4,8 @@
 
 <html>
 <head>
-<title>타이틀을 입력해주세요.</title>
+<title>Write a Review</title>
+	<link rel="shortcut icon" type="image⁄x-icon" href="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/favicon.ico">
    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css?ver=1"/>" />
    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css"/>"/>
    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/member.css?ver=2"/>"/>
@@ -667,7 +668,6 @@ $(function() {
               data : queryString,
               dataType : 'json',
               success : function(responseData){
-                 alert(responseData.msg);
                  var targeted_popup_class = $('.popup-close').attr('data-popup-close');
                  $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
                  memberinfo = responseData.memberinfo;

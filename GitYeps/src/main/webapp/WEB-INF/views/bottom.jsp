@@ -10,12 +10,12 @@ pageEncoding="UTF-8"%>
 							<h3>About</h3>
 							<ul class="footer_ul">
 								<li class="footer_ul_li"><a href="qna_list">Yeps Support Center</a></li>
-								<li class="footer_ul_li"><a href="#">List2</a></li>
-								<li class="footer_ul_li"><a href="#">List3</a></li>
-								<li class="footer_ul_li"><a href="#">List4</a></li>
-								<li class="footer_ul_li"><a href="#">List5</a></li>
-								<li class="footer_ul_li"><a href="#">List6</a></li>
-								<li class="footer_ul_li"><a href="#">List7</a></li>
+<!-- 								<li class="footer_ul_li"><a href="#">List2</a></li> -->
+<!-- 								<li class="footer_ul_li"><a href="#">List3</a></li> -->
+<!-- 								<li class="footer_ul_li"><a href="#">List4</a></li> -->
+<!-- 								<li class="footer_ul_li"><a href="#">List5</a></li> -->
+<!-- 								<li class="footer_ul_li"><a href="#">List6</a></li> -->
+<!-- 								<li class="footer_ul_li"><a href="#">List7</a></li> -->
 							</ul>
 						</div>
 					</div>
@@ -24,10 +24,10 @@ pageEncoding="UTF-8"%>
 						<div class="footer_discover_menu">
 							<h3>Discover</h3>
 							<ul class="footer_ul">
-								<li class="footer_ul_li"><a href="#">List1</a></li>
-								<li class="footer_ul_li"><a href="#">List2</a></li>
-								<li class="footer_ul_li"><a href="#">List3</a></li>
-								<li class="footer_ul_li"><a href="#">List4</a></li>
+								<li class="footer_ul_li"><a href="#">Developer</a></li>
+<!-- 								<li class="footer_ul_li"><a href="#">List2</a></li> -->
+<!-- 								<li class="footer_ul_li"><a href="#">List3</a></li> -->
+<!-- 								<li class="footer_ul_li"><a href="#">List4</a></li> -->
 							</ul>
 						</div>
 					</div>
@@ -36,10 +36,10 @@ pageEncoding="UTF-8"%>
 						<div class="footer_yeps_for_businessowers_menu">
 							<h3>Yeps for Business Owners</h3>
 							<ul class="footer_ul">
-								<li class="footer_ul_li"><a href="#">List1</a></li>
-								<li class="footer_ul_li"><a href="#">List2</a></li>
-								<li class="footer_ul_li"><a href="#">List3</a></li>
-								<li class="footer_ul_li"><a href="#">List4</a></li>
+								<li class="footer_ul_li"><a href="#">Business Success Stories</a></li>
+<!-- 								<li class="footer_ul_li"><a href="#">List2</a></li> -->
+<!-- 								<li class="footer_ul_li"><a href="#">List3</a></li> -->
+<!-- 								<li class="footer_ul_li"><a href="#">List4</a></li> -->
 							</ul>
 						</div>
 					</div>
@@ -48,13 +48,13 @@ pageEncoding="UTF-8"%>
 						<div class="footer_Languages" style="margin-bottom: 24px;">
 							<h3>Languages</h3>
 							<ul class="footer_ul">
-								<li class="footer_ul_li">한국어</li>
+								<li class="footer_ul_li" style="text-decoration: none;">한국어</li>
 							</ul>
 						</div>
 						<div class="footer_Country">
 							<h3>Country</h3>
 							<ul class="footer_ul">
-								<li class="footer_ul_li">한국</li>
+								<li class="footer_ul_li" style="text-decoration: none;">한국</li>
 							</ul>
 						</div>
 					</div>

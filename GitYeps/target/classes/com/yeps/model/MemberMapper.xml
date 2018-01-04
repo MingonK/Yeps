@@ -137,6 +137,9 @@
 	</select>
    
    
-   
+   <!-- 1월 4일 추가 -->
+   <update id="updateImageCount" parameterType="java.util.HashMap">
+		update yeps_member set imagecount = imagecount + #{imageCount} where mnum = #{mnum}
+   </update>
    
 </mapper>

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yeps.model.MemberDTO;
+import com.yeps.model.MemberPhotoDTO;
 import com.yeps.model.RestaurantDTO;
 import com.yeps.model.ReviewDTO;
 import com.yeps.service.MemberMapper;
@@ -171,20 +172,20 @@ public class ReviewController {
 
 	@RequestMapping(value = "/review_insert")
 	public ModelAndView review_insert(HttpServletRequest req, HttpSession session) {
-		// ★dto에 값 입력 내가 하는부분은 나중에 수정해야 할 부분임
-
 		// ★ if (res > 0)일때 /식당명/이름/위치(Korea, Seoul)/friend/리뷰수/별점/작성일/내용 가지고 가기!
-
 		// 로그인했을때의 그 이름을 통해서 나머지 값들을 꺼내서 보여줘야함
 		ReviewDTO rvdto = new ReviewDTO();
 
-		MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo");
+		MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo");	
+		MemberPhotoDTO mpdto = (MemberPhotoDTO) session.getAttribute("mainPhoto");
 		int mnum = mdto.getMnum();
 
 		// ===============================
 		String mode = req.getParameter("mode");
 		String where = req.getParameter("where");
-		String name = mdto.getName();
+		String nickname = mdto.getNickname();
+		String email = mdto.getEmail();
+		String filename = mpdto.getFilename();
 		String rnum = req.getParameter("rnum");
 		String rname = req.getParameter("rname");
 		String gradepoint = req.getParameter("gradepoint");
@@ -228,11 +229,13 @@ public class ReviewController {
 			}
 			// ===========================================
 			mav.addObject("mode", "write");
-			mav.addObject("name", name);
+			mav.addObject("nickname", nickname);
+			mav.addObject("email", email);
+			mav.addObject("filename", filename);
 			mav.addObject("rname", rname);
 			mav.addObject("gradepoint", gradepoint);
 			mav.addObject("content", content);
-			mav.addObject("joindate", Get_InsertReviewDate);
+			mav.addObject("reg_date", Get_InsertReviewDate);
 			mav.addObject("rlist", rlist);
 			mav.setViewName("review/restaurantIMG");
 			return mav;
@@ -348,7 +351,7 @@ public class ReviewController {
 	    int num = count - pageScale * (curPage - 1) + 1;
 		List<RestaurantDTO> Find_Restaurant_Review_Get_rdto = restaurantMapper.review_restaurantFind(start, end, SearchFind);
 		
-		System.out.println("rest_filename출력:" +Find_Restaurant_Review_Get_rdto.get(0).getRest_filename());
+		//System.out.println("rest_filename출력:" +Find_Restaurant_Review_Get_rdto.get(0).getRest_filename());
 		
 		//getRnumList reviewCount StarAvg 
 

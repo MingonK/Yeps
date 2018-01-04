@@ -5,6 +5,7 @@
 <html>
 <head>
 	<title>Review Of The Day Archive for Seoul</title>
+	<link rel="shortcut icon" type="image⁄x-icon" href="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css?ver=2"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css?ver=3"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/message.css?ver=7"/>"/>
@@ -78,15 +79,15 @@
 					   					    	 </div>
 					   					    	 <div class="pre_div9-1-1-2">
 					   					    	 	<ul class="pre_ul_small_1">
-					   					    	 				<li class="pre_li_small-1">
-					   					    	 				<c:if test="${empty dto.memberDTO.nickname}">
-					   					    	 					<a class="pre_a_2" href="#">${dto.memberDTO.email}</a>
-					   					    	 				</c:if>
-					   					    	 				<c:if test="${!empty dto.memberDTO.nickname}">
-					   					    	 					<a class="pre_a_2" href="#">${dto.memberDTO.nickname}</a>
-					   					    	 				</c:if>
-					   					    	 				</li>			
-					   					    	 				<li class="pre_li_small-1"><b>Korea, Seoul</b></li>
+					   					    	 		<li class="pre_li_small-1">
+					   					    	 			<c:if test="${empty dto.memberDTO.nickname}">
+					   					    	 				<a class="pre_a_2" href="member_details?mnum=${dto.memberDTO.mnum}">${dto.memberDTO.email}</a>
+					   					    	 			</c:if>
+					   					    	 			<c:if test="${!empty dto.memberDTO.nickname}">
+					   					    	 				<a class="pre_a_2" href="member_details?mnum=${dto.memberDTO.mnum}">${dto.memberDTO.nickname}</a>
+					   					    	 			</c:if>
+					   					    	 		</li>			
+					   					    	 		<li class="pre_li_small-1"><b>Korea, Seoul</b></li>
 					   					    	 	</ul>	
 					   					    		<ul class="pre_ul_small_1">
 					   					    			<li class="pre_li_small-2">
@@ -95,6 +96,7 @@
 					   					    						<path d="M13 3H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1.505 9.643l-2.526-1.55L6.526 12.7 7 9.934 5 7.977l2.766-.404L8.97 4.7l1.264 2.873L13 7.977l-2 1.957.495 2.71z"></path>
 					   					    					</svg>
 					   					    				</span><b>${dto.memberDTO.reviewcount}</b> reviews
+					   					    			</li>	
 					   					    		</ul>
 					   					    	 </div>
 					   					    </div>
@@ -118,18 +120,18 @@
 			   					    </div>
 									<div class="pre_div222">
 										<p class="pre_p1">
-											<a class="pre_a99" href="#">
-											<c:if test="${empty dto.memberDTO.nickname}">
-												${dto.memberDTO.email}
-											</c:if>
-											<c:if test="${!empty dto.memberDTO.nickname}">
-												${dto.memberDTO.nickname}
-											</c:if>
+											<a class="pre_a99" href="member_details?mnum=${dto.memberDTO.mnum}">
+												<c:if test="${empty dto.memberDTO.nickname}">
+													${dto.memberDTO.email}
+												</c:if>
+												<c:if test="${!empty dto.memberDTO.nickname}">
+													${dto.memberDTO.nickname}
+												</c:if>
 											</a>
 											 wrote a 
 											<b class="pre_b">review</b>
 											 for     
-											<a class="pre_a99" href="#">${dto.restaurantDTO.rname}</a>
+											<a class="pre_a99" href="restaurant_content?rnum=${dto.restaurantDTO.rnum}">${dto.restaurantDTO.rname}</a>
 										</p>
 										<div class="pre_div_33">
 											<div class="pre_div_33-1">

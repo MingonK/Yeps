@@ -201,4 +201,12 @@ public class MemberMapper {
 	public List<MemberDTO> SearchedDTO_M(int mnum) {
 		return sqlSession.selectList("SearchedDTO_M", mnum);
 	}
+	
+	// 1월 4일 민곤 추가
+	public int updateImageCount(int mnum, int imageCount) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("mnum", mnum);
+		map.put("imageCount", imageCount);
+		return sqlSession.update("updateImageCount", map);
+	}
 }
