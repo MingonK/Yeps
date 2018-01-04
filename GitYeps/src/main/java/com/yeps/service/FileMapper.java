@@ -134,4 +134,11 @@ public class FileMapper {
 			return false;
 		}
 	}
+	
+	public int deleteRestaurantFile(String filename, int rnum) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("filename", filename);
+		map.put("rnum", rnum);
+		return sqlSession.delete("deleteRestaurantFile", map);
+	}
 }

@@ -388,6 +388,33 @@ public class RestaurantController {
 		return map;
 	}
 	
+	@RequestMapping(value="/restaurant_delete_ajax")
+	@ResponseBody
+	public HashMap<String, Object> deleteRestaurantPhoto(HttpServletRequest req) {
+		String rnum = req.getParameter("rnum");
+		String filename = req.getParameter("filename");
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		HttpSession session = req.getSession();
+		
+		if(rnum == null || rnum.trim().equals("") || filename == null || filename.trim().equals("")) {
+			map.put("url", "restaurant_list");
+			return map;
+		}
+		
+		if (session == null) {
+			map.put("url", "member_login");
+			return map;
+		}
+		
+		S3Connection.getInstance().deleteObject("yepsbucket", "images/" + filename);
+		fileMapper.deleteRestaurantFile(filename, Integer.parseInt(rnum));
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
+		memberDTO.setImagecount(memberDTO.getImagecount()-1);
+		session.setAttribute("memberinfo", memberDTO);
+		map.put("success", "success");
+		return map;
+	}
+	
 
 
 	@RequestMapping(value = "/restaurant_photoList")
@@ -418,10 +445,5 @@ public class RestaurantController {
 
 	}
 
-	@RequestMapping(value = "restaurant_content2", method = RequestMethod.POST)
-	public @ResponseBody String test(@RequestParam(value = "asd") String text) throws Exception {
-
-		return "baba";
-	}
 
 }

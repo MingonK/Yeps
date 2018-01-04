@@ -1354,7 +1354,7 @@
 	
 	
 	<div class="flag_content_popup" data-popup="popup-2">
-    	<div class="popup-inner" style="width: 465px; z-index: 1; height: auto !important;">
+    	<div class="popup-inner" style="width: 465px; z-index: 1; height: auto !important; max-height: none;">
     	    <div id="flag_content_popup_title">
     	    	<div id="flag_content_popup_close" data-popup-close="popup-2">
     				<h4 style="display: table-cell; padding: 0px 7px; font-size: 100%; font: inherit;">×</h4>

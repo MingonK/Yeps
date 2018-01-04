@@ -213,6 +213,16 @@
     position: relative;
 }
 
+#photo_box_action_link:hover {
+	background: rgba(0,0,0,0.6);
+    text-decoration: none;
+    color: #fff;
+}
+
+#photo_box_action_link:hover #tooltip_wrapper {
+	left: 16px;
+}
+
 #tooltip_wrapper {
 	position: absolute;
     left: -9999px;
