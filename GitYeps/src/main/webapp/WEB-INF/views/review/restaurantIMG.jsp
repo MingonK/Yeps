@@ -227,7 +227,11 @@
                      <div class="resIMG_div_32">
                         <h3 class="resIMG_h3_1">
                            <a class="resIMG_a_1" href="#">
-                              <span class="resIMG_span_3">${dto.rname}</span>
+                              <span class="resIMG_span_3">
+                              	<a href="restaurant_content?rnum=${dto.rnum}">
+                              		${dto.rname}
+                              	</a>
+                              </span>
                            </a>   
                         </h3>
                         <div class="resIMG_div_32-1">
