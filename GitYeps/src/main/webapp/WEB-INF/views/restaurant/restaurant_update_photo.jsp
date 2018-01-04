@@ -148,8 +148,47 @@
  						alert(responseData.upload_failed)
  						return false;
  					} else {
- 						alert(responseData.update)
- 						location.href="restaurant_photoList?rnum=${restaurantDTO.rnum}";
+ 						var size = responseData.fileList.length;
+ 						$('#user_photo_intro > h2 > a:not()').text('Your Photos');
+ 						$('#restaurant_photo_drop_container').empty();
+ 						$('#restaurant_photo_drop_container').append(
+ 							'<div id="finish_upload_header">' + 
+ 								'<div id="upload_title_wrap">' +
+ 									'<div id="upload_title_success">' +
+ 										'<span style="width: 18px; height: 18px; fill: #41a700;" class="icon">' +
+ 											'<svg class="icon_svg" height="100%" viewBox="0 0 18 18" width="100%">' +
+ 												'<path d="M7.232 14.273L1.93 8.97a1 1 0 1 1 1.413-1.414l3.89 3.89 7.424-7.426a1 1 0 0 1 1.414 1.414l-8.837 8.84z"></path>' +
+ 											'</svg>' +
+ 										'</span>' +
+ 										'<h3 id="upload_title_text">' +
+ 											'Perfect!' +
+ 											'<b>Next, check your '+ size + ' photos below</b>' +
+ 										'<h3>' +
+ 									'<div>' +
+ 								'<div>' +
+ 								
+ 								'<div id="finish_button_wrap">' +
+ 									'<div id="finish_button_container">' +
+ 										'<button type="submit" value="submit" id="finish_button">' +
+ 											'<span>Finish</span>' +
+ 										'</button>' +
+ 									'</div>' +
+ 								'</div>' +
+ 							'</div>' +
+ 							'<ul id="photo_box_grid_wide">' +
+ 								'<li>' +
+ 									
+ 								'</li>' +
+ 							'</ul>'
+ 										
+ 						
+ 						
+ 						
+ 						
+ 						
+ 						);
+ 						
+ 						
  					}
  				}
  			});		
@@ -238,11 +277,11 @@
 								alert(responseData.created_fail);
 								return false;
 							} else if (responseData.upload_failed) {
-								alert(responseData.upload_failed)
+								alert(responseData.upload_failed);
 								return false;
 							}  else {
-		 						alert(responseData.update)
-		 						location.href="restaurant_photoList?rnum=${restaurantDTO.rnum}";
+		 						alert(responseData.update);
+		 						location.href="restaurant_photo_check?rnum=${restaurantDTO.rnum}";
 		 					}
 						}
 					});

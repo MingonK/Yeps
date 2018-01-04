@@ -1272,24 +1272,28 @@ function list(page){
         url : 'restaurant_content_ajax?curPage=' + page + '&rnum=' + rnum + '&SearchKeyword=' + searchKeyword,
         dataType : 'json',
         success : function(responseData){
-           $('.restContent-reviews > li:not(:first)').detach();
-           $.each(responseData.selectedDataRV,function(i,item){
-        	   var userId;
-        	   if(item.memberDTO.nickname == null) {
-        		   userId = item.memberDTO.email;
-        	   } else {
-        		   userId = item.memberDTO.nickname;
-        	   }
-        	   var address = item.memberDTO.address;
-        	   var addr = [];
-        	   if(address != null) {
-        		   addr = address.split(' ');
-        	   } else {
-        		   addr[0] = '';
-        		   addr[1] = '';
-        	   }
+        	if(responseData.error) {
+        		alert(responseData.error);
+        		return false;
+        	}
+            $('.restContent-reviews > li:not(:first)').detach();
+            $.each(responseData.selectedDataRV,function(i,item){
+        	    var userId;
+        	    if(item.memberDTO.nickname == null) {
+        	 	    userId = item.memberDTO.email;
+        	    } else {
+        		    userId = item.memberDTO.nickname;
+        	    }
+        	    var address = item.memberDTO.address;
+        	    var addr = [];
+        	    if(address != null) {
+        		    addr = address.split(' ');
+        	    } else {
+        		    addr[0] = '';
+        		    addr[1] = '';
+        	    }
         	   
-          	 $('.restContent-reviews').append(
+          	$('.restContent-reviews').append(
    	     			   '<li>' +
    		     			   '<div class="restContent-review-with" style="margin: 0 -15px; display: flex;">' +
    	    		 		   		'<div class="restContent-user" style="float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 37.5%;">' +
