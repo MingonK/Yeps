@@ -288,7 +288,7 @@ function test() {
 		alert("예약을 선택해 주세요!!")
 		return false;
 	}
-	if(!document.getElementById("delivery").checked && !document.getElementById("delivery2").checked){
+	if(!document.getElementById("delivery1").checked && !document.getElementById("delivery2").checked){
 		alert("배달을 선택해 주세요!!")
 		return false;
 	}
