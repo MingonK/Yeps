@@ -61,7 +61,7 @@
 					
 					<div class="biz-page-header-right u-relative" style="display: table; position: relative !important;">
 						<div class="biz-page-actions nowrap"style="text-align: right; overflow: hidden; padding-bottom: 1px; margin-top: -1px; white-space: nowrap;">
-						<a href="review_write?rnum=${getRest.rnum}" style="text-decoration: none;" class="ybtn review_write">
+						<a href="review_write?rnum=${getRest.rnum}&mode=write$where=rest" style="text-decoration: none;" class="ybtn review_write">
 							<span aria-hidden="true" style="fill: white; width: 24px; height: 24px;" class="icon">
 							    <svg id="24x24_star" height="100%" viewBox="0 0 24 24" width="100%">
 							    	<path d="M12 1.5l2.61 6.727 6.89.53-5.278 4.688 1.65 7.055L12 16.67 6.13 20.5l1.648-7.055L2.5 8.757l6.89-.53L12 1.5z"></path>
@@ -378,7 +378,7 @@
 																class="star-selector js-star-selector"
 																data-original-rating="0" data-component-bound="true"
 																style="vertical-align: middle; display: inline-block; -webkit-margin-start: 2px; -webkit-margin-end: 2px; -webkit-padding-before: 0.35em; -webkit-padding-start: 0.75em; -webkit-padding-end: 0.75em; -webkit-padding-after: 0.625em; min-width: -webkit-min-content;">
-													 			<form name="starpointF" method="post" action="review_write">
+													 			<form name="starpointF" method="post" action="review_write?mode=write&where=rest">
 																	<div>
 																		<ul id="star_rating" style="float: left; margin: 0px; padding: 0px; display: inline-block; width: 162px; height: 30px; overflow: hidden; vertical-align: middle;
 							                          				     background: url(https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/a5aa4dca29f3/assets/img/stars/selector_stars.png) no-repeat;">

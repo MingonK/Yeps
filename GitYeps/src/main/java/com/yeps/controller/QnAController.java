@@ -54,15 +54,20 @@ public class QnAController {
 		} else {
 			list = qnaMapper.findQnA(start, end, searchString);
 		}
+		
+		int article_count = count - 10 * (curPage - 1);
+		System.out.println(article_count);
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("listQnA", list); // list
 		map.put("count", count); // 레코드의 갯수
 		map.put("yepsPager", yepsPager);
 		map.put("searchString", searchString);
+		map.put("curPage", curPage);
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("map", map);
+		mav.addObject("article_count", article_count);
 		mav.setViewName("qna/qnaList");
 		return mav;
 	}

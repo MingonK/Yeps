@@ -6,7 +6,7 @@
 <head>
 	<title>Review Of The Day Archive for Seoul</title>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css?ver=2"/>"/>
-	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css?ver=2"/>"/>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css?ver=3"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/message.css?ver=7"/>"/>
 	<script src="//code.jquery.com/jquery.min.js">
 	</script>

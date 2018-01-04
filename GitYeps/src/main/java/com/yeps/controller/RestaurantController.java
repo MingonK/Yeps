@@ -185,7 +185,9 @@ public class RestaurantController {
 	@RequestMapping(value = "/restaurant_content")
 	public ModelAndView contentRest(HttpServletRequest req, @RequestParam(defaultValue = "1") int curPage) {
 		String rnum = req.getParameter("rnum");
-
+		
+		
+		
 		int count = reviewMapper.getRestaurantReviewCount(Integer.parseInt(rnum));
 		int pageScale = 10;
 		int blockScale = 10;

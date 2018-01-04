@@ -109,7 +109,7 @@
                            <div class="resIMG_div_51">
                               <div class="resIMG_div_52">
                                  <a class="resIMG_a_3" href="#">
-                                    <img class="resIMG_img_3" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${filename}">   
+                                    <img class="resIMG_img_3" src="https://s3-media2.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/60s.jpg" srcset="https://s3-media2.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/ms.jpg 1.67x,https://s3-media2.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/120s.jpg 2.00x,https://s3-media2.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/90s.jpg 1.50x,https://s3-media2.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/168s.jpg 2.80x,https://s3-media2.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/180s.jpg 3.00x">   
                                  </a>
                               </div>
                            </div>
@@ -117,12 +117,7 @@
                               <ul class="resIMG_ul_4">
                                  <li   class="resIMG_li_4">
                                     <a class="resIMG_a_4" href="#">
-                                       <c:if test="${empty nickname}"> 
-					   					   <a href="#">${email}</a>
-					   				   </c:if>
-					   				   <c:if test="${!empty nickname}">
-					   					   <a href="#">${nickname}</a>
-					   				   </c:if>
+                                       ${name}..
                                     </a>
                                  </li>
                                  <li class="resIMG_li_4">
@@ -132,6 +127,18 @@
                                  </li>
                               </ul>
                               <ul class="resIMG_ul_4">
+                                 <li class="resIMG_li_5">
+                                    <span class="resIMG_span_10">
+                                       <svg class="resIMG_svg_4">
+                                          <g>
+                                             <path d="M7.904 9.43l-2.098 4.697a.9.9 0 0 1-1.612 0L2.096 9.43a.902.902 0 0 1 .806-1.305h4.196c.67 0 1.105.705.806 1.305zM5 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path>
+                                             <path d="M15.904 9.43l-2.098 4.697a.89.89 0 0 1-.806.498.89.89 0 0 1-.806-.498L10.096 9.43a.902.902 0 0 1 .806-1.305h4.195c.67 0 1.106.705.807 1.305zM13 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" opacity=".502"></path>   
+                                          </g>
+                                       </svg>
+                                    </span>
+                                    <b class="resIMG_b_3">1</b>
+                                    friend
+                                 </li>
                                  <li class="resIMG_li_5">
                                     <span class="resIMG_span_11">
                                        <svg class="resIMG_svg_5">
@@ -165,6 +172,14 @@
                         </p>
                      </div>
                      <div class="resIMG_div_60">
+                        <a class="resIMG_a_5" href="#">
+                           <span class="resIMG_span_13">
+                              <svg class="resIMG_svg_6">
+                                 <path d="M6 14v-2h10v2H6zM6 4h10v2H6V4zm-4 8h2v2H2v-2zm0-4h2v2H2V8zm0-4h2v2H2V4zm12 6H6V8h8v2z"></path>
+                              </svg>
+                           </span>
+                           Add to list
+                        </a>
                         <a class="resIMG_a_5" href="review_write?rnum=${rnum}&mode=update">
                            <span class="resIMG_span_14">
                               <svg class="resIMG_svg_7">
@@ -267,19 +282,19 @@
                <div class="resIMG_div_29">
                   <div class="resIMG_div_30">
                      <div class="resIMG_div_31">
-                        <img class="resIMG_img_1" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${dto.rest_filename}">   
+                        <img class="resIMG_img_1" height="150" width="150" src="//s3-media2.fl.yelpcdn.com/bphoto/i2dT3NgbJ68PX9iHygsEfQ/ls.jpg">   
                      </div>
                      <div class="resIMG_div_32">
                         <h3 class="resIMG_h3_1">
-                           <a class="resIMG_a_1" href="restaurant_content?rnum=${dto.rnum}">
+                           <a class="resIMG_a_1" href="#">
                               <span class="resIMG_span_3">${dto.rname}</span>
                            </a>   
                         </h3>
                         <div class="resIMG_div_32-1">
-                           ${dto.roadAddrPart1}
+                           ${dto.raddress}
                         </div>
                         <div class="resIMG_div_33">
-                          <form name="starpointF" method="get" action="review_write">
+                          <form name="starpointF" method="get" action="review_write?mode=write">
                            <fieldset class="resIMG_fieldset_1">
                               <legend class="resIMG_legend_1">
                                  Rating
@@ -337,7 +352,7 @@
            </c:forEach>
          </ul>
          <div class="resIMG_div_36">
-            <a class="resIMG_a_2" href="#">
+            <a class="resIMG_a_2">
                <span class="resIMG_span_7">
                   <svg class="resIMG_svg_3">
                      <path d="M18.364 9.525L16.95 8.11 12 13.06 7.05 8.11 5.636 9.526 12 15.89l6.364-6.365z"></path>
