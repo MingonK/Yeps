@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<script src="//code.jquery.com/jquery.min.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/qna.css"/>"/>
-
 <html>
 <head>
-   <title>Yeps - Q&A Support Center</title>
+	<title>Yeps - Q&A Support Center</title>
+	<link rel="shortcut icon" type="image⁄x-icon" href="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/favicon.ico">
+	<script src="//code.jquery.com/jquery.min.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_list.css"/>"/>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/qna.css"/>"/>
    <script type="text/javascript">
    var searchString = '${map.searchString}'
    $(document).ready(function() {
@@ -31,7 +32,7 @@
       <div id="qna_container">
          <div id="qna_container_arrange">
             <div id="yeps_img">
-               <a href="main" style="display: block;"><img src="getImage/Yelp_Logo.png" style="width: 80px; height: 40px;"></a>
+               <a href="main" style="display: block;"><img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/default.png" style="width: 80px; height: 40px;"></a>
             </div>
             <div id="arrange_unit">
                <h2 id="main-header_title">Support Center</h2>
@@ -54,7 +55,7 @@
             <div class="container">
                <div class="clearfix layout-block layout-n column--responsive">
                   <div class="column column-alpha column--responsive">
-                     <img alt="Yelp Support Center" class="sc-top-shelf-illustration responsive-visible-large-block" src="https://s3-media3.fl.yelpcdn.com/assets/2/www/img/3d4cc7502e4d/support/support-darwin.png">
+                     <img alt="Yelp Support Center" class="sc-top-shelf-illustration responsive-visible-large-block" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/support-darwin.png">
                   </div>
                   <div class="column column-beta column--responsive">
                      <div class="sc-top-shelf-search-block">

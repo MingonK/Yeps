@@ -4,6 +4,7 @@
 <html>
 <head>
    <title>Add a Member Photo - Yeps</title>
+   <link rel="shortcut icon" type="image⁄x-icon" href="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/favicon.ico">
    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/member_update_photo.css?ver=1"/>"/>
    <script src="//code.jquery.com/jquery.min.js"></script>

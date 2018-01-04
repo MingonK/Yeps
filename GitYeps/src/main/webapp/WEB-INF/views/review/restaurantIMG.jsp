@@ -337,7 +337,7 @@
            </c:forEach>
          </ul>
          <div class="resIMG_div_36">
-            <a class="resIMG_a_2" href="#">
+            <a class="resIMG_a_2">
                <span class="resIMG_span_7">
                   <svg class="resIMG_svg_3">
                      <path d="M18.364 9.525L16.95 8.11 12 13.06 7.05 8.11 5.636 9.526 12 15.89l6.364-6.365z"></path>
