@@ -3471,57 +3471,6 @@ hidden
 	text-align: -webkit-match-parent;
 }
 
-.resIMG_span_4 {
-	width: 18px;
-	height: 18px;
-	top: 0 !important;
-	fill: currentColor;
-	display: inline-block;
-	vertical-align: middle;
-	position: relative;
-	overflow: hidden;
-	color: #ccc;
-	border-collapse: collapse;
-	text-align: -webkit-match-parent;
-}
-
-.resIMG_span_4:before {
-	background: none;
-	content: "";
-	position: absolute;
-	display: block;
-	left: 0;
-}
-
-.resIMG_span_4:after {
-	content: "";
-	display: block;
-	position: absolute;
-	left: 0;
-	right: 0;
-	top: 0;
-	bottom: 0;
-}
-
-.resIMG_svg_2 {
-	overflow: hidden;
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	fill: inherit;
-	display: block;
-	left: 0;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	color: #ccc;
-	border-collapse: collapse;
-	text-align: -webkit-match-parent;
-}
-
-.resIMG_svg_2:not (:root ){
-	overflow: hidden;
-}
 
 .resIMG_span_5 {
 	text-align: right;
