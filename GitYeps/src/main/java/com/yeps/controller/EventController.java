@@ -267,10 +267,11 @@ public class EventController {
 		ModelAndView mav = new ModelAndView();
 		EventDTO getEventDTO = eventMapper.getEventContent(Integer.parseInt(evnum));
 		String[] start_date = getEventDTO.getStart_date().split(",");
-		String[] end_date = getEventDTO.getEnd_date().split(",");
 		getEventDTO.setStart_date(start_date[0]);
-		getEventDTO.setEnd_date(end_date[0]);
-
+		if (getEventDTO.getEnd_date() != null) {
+			String[] end_date = getEventDTO.getEnd_date().split(",");
+			getEventDTO.setEnd_date(end_date[0]);
+		}
 		mav.addObject("getEventDTO", getEventDTO);
 		mav.addObject("set", "events");
 		mav.setViewName("event/event_editForm");
