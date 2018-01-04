@@ -1351,8 +1351,6 @@
 	
 	
 	
-	
-
 	<script>
 	$(document).ready(function() {
 		$('#page_header_inputs').click(function() {

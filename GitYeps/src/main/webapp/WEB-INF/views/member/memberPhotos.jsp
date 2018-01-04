@@ -199,7 +199,7 @@
                
             $(document).ajaxStart(function() {
    				$('.loading_wapper').fadeIn(500);
-   			})
+   			}) 
    			
    			$(document).ajaxStop(function() {
    				$('.loading_wapper').fadeOut(500);

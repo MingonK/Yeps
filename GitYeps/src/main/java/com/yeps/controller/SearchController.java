@@ -1,5 +1,6 @@
 package com.yeps.controller;
 
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +8,6 @@ import java.util.List;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,12 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yeps.model.ContsDTO;
-import com.yeps.model.MemberDTO;
 import com.yeps.service.ContsMapper;
 import com.yeps.service.ContsSingleton;
 import com.yeps.service.Jaso;
 import com.yeps.service.RandomNum;
-import com.yeps.service.SHA256Util;
 
 @Controller
 public class SearchController {
@@ -68,15 +66,12 @@ public class SearchController {
 		Cookie[] cookies = req.getCookies();
 		List<String> locationList = new ArrayList<String>();
 		if(cookies!=null) {
-			System.out.println("1.들어옴" + cookies.length);
 			int j = 0;
 			for (int i = cookies.length-1 ; i>=0; i--) {
 				String name = cookies[i].getName(); 
 				try {
-					String value = URLEncoder.encode(cookies[i].getValue(),"utf-8");
-					System.out.println(name);
+					String value = URLDecoder.decode(cookies[i].getValue(),"utf-8");
 					if(name.contains("location")) {
-						System.out.println("2.들어옴");
 						locationList.add(value);
 						j+=1;
 						if(j == 5) {
@@ -108,7 +103,7 @@ public class SearchController {
 				for (Cookie cookie : cookies) {
 					String name = cookie.getName(); 
 					try {
-						String value = URLEncoder.encode(cookie.getValue(),"utf-8");
+						String value = URLDecoder.decode(cookie.getValue(),"utf-8");
 						if(name.contains("location") && value.equals(location)) {
 							isExistLocation = true;
 							break;
@@ -121,9 +116,8 @@ public class SearchController {
 			if(!isExistLocation) {
 				String authNum = ""; // RandomNum함수 호출해서 리턴값 저장
 				authNum = randomNum.getKey(7, false);
-				System.out.println("쿠키추가");
 				try {
-					Cookie cookie = new Cookie("location"+authNum, URLEncoder.encode(location,"utf-8"));
+					Cookie cookie = new Cookie("location"+authNum, URLEncoder.encode(location, "UTF-8"));
 					cookie.setMaxAge(60*60*24*30);	// 쿠키 유지 기간 - 30일
 					cookie.setPath("/");			// 모든 경로에서 접근 가능하도록 
 					resp.addCookie(cookie);			// 쿠키저장
