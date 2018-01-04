@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yeps.model.ContsDTO;
+import com.yeps.model.MemberDTO;
 import com.yeps.service.ContsMapper;
 import com.yeps.service.ContsSingleton;
 import com.yeps.service.Jaso;
@@ -91,7 +93,7 @@ public class SearchController {
 	}
 
 	@RequestMapping(value = "/yeps_main_saerch", method = RequestMethod.POST)
-	public ModelAndView MainSearchPro(HttpServletRequest req, HttpServletResponse resp) {
+	public ModelAndView MainSearchPro(HttpServletRequest req, HttpServletResponse resp, HttpSession session) {
 
 		ModelAndView mav = new ModelAndView();
 		String searchword = req.getParameter("searchword");
@@ -127,6 +129,12 @@ public class SearchController {
 
 			}
 		}
+			MemberDTO memberDTO =  (MemberDTO) session.getAttribute("memberinfo");
+			if(memberDTO != null && location.equals("Home")) {
+				String[] addr = memberDTO.getAddress().split(" ");
+				location = addr[1] + " " + addr[2] + " " +addr[3];
+				System.out.println(location);
+			}
 
 		if (searchword == null || searchword.trim().equals("")) {
 			// 검색어 없을 경우

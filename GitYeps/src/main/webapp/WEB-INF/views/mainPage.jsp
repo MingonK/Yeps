@@ -1363,12 +1363,11 @@
 					url : 'recent_location_list',
 					dataType : 'json',
 					success : function(responseData){
-						alert(responseData.length)
 						if(responseData != null){
 							$(".recent_location").remove();
 							for(var i=0; i < responseData.length ; i++){
 								var recentLocation = responseData[i];
-								$("#location_suggestion_container_list").append("<li class='suggestions-location-list-item recent_location' onmouseout='javascript:outMouse('location_icon')' onclick='javascript:loc_clickMouse('"+recentLocation+"')'><div class='location-media-block'><div class='location-media-avatar'><span id='location_icon' style='width: 24px; height: 24px;'><svg class='icon_svg'><path d='M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-18c-4.41 0-8 3.59-8 8s3.59 8 8 8 8-3.59 8-8-3.59-8-8-8zm3 11c-.19 0-.384-.055-.555-.168L11 12.535V7a1 1 0 0 1 2 0v4.465l2.555 1.703A1 1 0 0 1 15 15z'></path></svg></span></div><div class='location-media-story'><span class='suggestion-location-detail'><span class='suggestion-location-detail suggestion-location-name'>"+recentLocation+"</span></span></div></div></li>");
+								$("#location_suggestion_container_list").append("<li class='suggestions-location-list-item recent_location' onmouseout=\"javascript:outMouse('location_icon')\" onclick=\"javascript:loc_clickMouse('"+recentLocation+"')\"><div class='location-media-block'><div class='location-media-avatar'><span id='location_icon' style='width: 24px; height: 24px;'><svg class='icon_svg'><path d='M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-18c-4.41 0-8 3.59-8 8s3.59 8 8 8 8-3.59 8-8-3.59-8-8-8zm3 11c-.19 0-.384-.055-.555-.168L11 12.535V7a1 1 0 0 1 2 0v4.465l2.555 1.703A1 1 0 0 1 15 15z'></path></svg></span></div><div class='location-media-story'><span class='suggestion-location-detail'><span class='suggestion-location-detail suggestion-location-name'>"+recentLocation+"</span></span></div></div></li>");
 							}
 						}
 					},
@@ -1376,9 +1375,14 @@
 	                	alert("error : locationList")
 	             	},
 	        });
-			
-			
 			$('#main_location_suggestion_container').show();
+		})
+		
+		$(document).on('mouseover', '.suggestions-location-list-item', function() {
+			$(this).find('#location_icon').css('fill', 'white');
+		})
+		$(document).on('mouseleave', '.suggestions-location-list-item', function() {
+			$(this).find('#location_icon').css('fill', '#666');
 		})
 		
 		$('#mainpage_header_inner_category_block').hover(function() {
@@ -1540,13 +1544,6 @@
 		$("#page_header_searchDate_inputs").focus();
 	});
 
-	
-	$('.suggestions-location-list-item').hover(function() {
-		$(this).find('#location_icon').css('fill', 'white');
-	})
-	$('.suggestions-location-list-item').mouseleave(function() {
-		$(this).find('#location_icon').css('fill', '#666');
-	})
 </script>
 
 
