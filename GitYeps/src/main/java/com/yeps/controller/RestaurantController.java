@@ -99,11 +99,6 @@ public class RestaurantController {
 		return new ModelAndView("message");
 	}
 
-	@RequestMapping(value = "/restaurant_listMenu")
-	public String listMenu() {
-		return "restaurant/restaurant_listMenu";
-	}
-
 	public String getExtension(String fileName) {
 		int dotPosition = fileName.lastIndexOf('.');
 
