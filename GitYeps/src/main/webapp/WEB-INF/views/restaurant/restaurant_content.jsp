@@ -58,6 +58,8 @@
 						</div>
 					</div>
 					
+					
+				<c:if test="${empty existMyReview}">
 					<div class="biz-page-header-right u-relative" style="display: table; position: relative !important;">
 						<div class="biz-page-actions nowrap"style="text-align: right; overflow: hidden; padding-bottom: 1px; margin-top: -1px; white-space: nowrap;">
 						<a href="review_write?rnum=${getRest.rnum}&mode=write$where=rest" style="text-decoration: none;" class="ybtn review_write">
@@ -80,6 +82,36 @@
 						</span>
 				     </div>
 				  </div>
+				</c:if>
+				  
+				  <!-- 상우작업부분 div -->
+				  <c:if test="${!empty existMyReview}">
+				  <div class="biz-page-header-right u-relative" style="display: table; position: relative !important;">
+						<div class="biz-page-actions nowrap"style="text-align: right; overflow: hidden; padding-bottom: 1px; margin-top: -1px; white-space: nowrap;">
+						<a href="review_write?rnum=${getRest.rnum}&mode=write$where=rest" style="text-decoration: none;" class="ybtn review_write">
+							<span aria-hidden="true" style="fill: white; width: 24px; height: 24px;" class="icon">
+							    <svg id="24x24_star" height="100%" viewBox="0 0 24 24" width="100%">
+							    	<path d="M12 1.5l2.61 6.727 6.89.53-5.278 4.688 1.65 7.055L12 16.67 6.13 20.5l1.648-7.055L2.5 8.757l6.89-.53L12 1.5z"></path>
+							    </svg>
+							</span>
+							리뷰수정 
+						</a> 
+						<span class="ybtn-group clearfix" style="float: right;margin-top: 4px;"> 
+						   <a class="ybtn ybtn--small add-photo-button" href="restaurant_update_photo?rnum=${getRest.rnum}">
+							  <span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-add-photo icon--size-18 icon--currentColor">
+							     <svg id="18x18_add_photo" height="100%" viewBox="0 0 18 18" width="100%">
+						   		    <path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 4.75a4.25 4.25 0 1 0 0 8.5 4.25 4.25 0 0 0 0-8.5zM11 10h-1v1a1 1 0 0 1-2 0v-1H7a1 1 0 0 1 0-2h1V7a1 1 0 0 1 2 0v1h1a1 1 0 0 1 0 2z"></path>
+						         </svg>
+							  </span> 사진추가
+							  <a style="color: #0073bb;text-decoration: none;" class="menu-explore js-menu-explore" href="restaurant_listMenu?rnum=${getRest.rnum}">Full menu</a>
+						   </a>
+						</span>
+				     </div>
+				  </div>
+				  </c:if>
+				  
+				  
+				  
 			   </div>
 		
 				<div class="biz-page-subheader" style="display: table;">
@@ -361,6 +393,8 @@
 									</div>
 									<div class="restContent-review-list" style="position: relative;">
 										<ul class="restContent-reviews">
+										
+										<c:if test="${empty existMyReview}">
 											<li>
 												<div class="restContent-review-widget" style="margin: 0 -15px;">
 													<div class="restContent-user" style="float: left;padding: 0 15px;min-height: 1px;    box-sizing: border-box;width: 37.5%;">
@@ -418,8 +452,303 @@
 											</div>
 										</div>
 									</li>
+								</c:if>	
+									
+									
+									
+							   
+							
+									
+									
+									
+									
+									
+									
+									
 										
 									<c:forEach var="getReview" items="${selectedDataRV}">	
+									
+									
+									<!-- 상우 작업부분 li -->
+									<c:if test="${!empty existMyReview}">
+									<li>
+										<div class="restContent-review-with" style="margin: 0 -15px; display: flex;">
+											<div class="restContent-user" style="float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 37.5%;">
+												<div class="restContent-user-content" style="margin-top: -3px;">
+													<div class="restContent-meida-block" style="font-size: 12px; line-height: 1.5em; position: relative; display: flex;">
+														<div class="restContent-media-avatar" style="border-right-width: 9px;border-right: 6px solid transparent;border-left: none;">
+															<div class="restContent-photo-box">
+																<a href="#" style="color: #0073bb;">
+																	<img class="restContent-photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${getReview.memberDTO.memberPhotoDTO.filename}" width="60">
+																</a>
+															</div>
+														</div>
+														<div class="restContent-media-story" style="-webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;">
+															<ul class="restContent-user-info">
+																<li class="restContent-user-name">
+																	<a href="#" class="restContent-user-display-name" style="font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; cursor: pointer;">
+																		<c:if test="${empty getReview.memberDTO.nickname}">
+																			${getReview.memberDTO.email}
+																		</c:if>
+																		<c:if test="${!empty getReview.memberDTO.nickname}">
+																			${getReview.memberDTO.nickname}
+																		</c:if>
+																	</a>
+																</li>
+																<li class="restContnet-user-location">
+																	<b style="font-weight: bold;">
+																	<c:forTokens items="${getReview.memberDTO.address}" delims=" " begin="1" end="2" var="addr">
+                                                                    	${addr}
+                                                                  	</c:forTokens>	
+																	</b>
+																</li>
+															</ul>
+															<ul class="restContent-user-stats">
+<!-- 																<li class="restContent-friend" style="color: #666;display: list-item;text-align: -webkit-match-parent;"> -->
+<!-- 																	<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-friends icon--size-18"> -->
+<!-- 																	    <svg class="icon_svg"> -->
+<!-- 																	        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_friends"> -->
+<!-- 																	        	<svg id="18x18_friends" height="100%" viewBox="0 0 18 18" width="100%"> -->
+<!-- 																	        		<g> -->
+<!-- 																	        			<path d="M7.904 9.43l-2.098 4.697a.9.9 0 0 1-1.612 0L2.096 9.43a.902.902 0 0 1 .806-1.305h4.196c.67 0 1.105.705.806 1.305zM5 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path> -->
+<!-- 																	        			<path d="M15.904 9.43l-2.098 4.697a.89.89 0 0 1-.806.498.89.89 0 0 1-.806-.498L10.096 9.43a.902.902 0 0 1 .806-1.305h4.195c.67 0 1.106.705.807 1.305zM13 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" opacity=".502"></path> -->
+<!-- 																	        		</g> -->
+<!-- 																	        	</svg> -->
+<!-- 																	        </use> -->
+<!-- 																	    </svg> -->
+<!-- 																	</span> -->
+<!-- 																	<b style="font-weight: bold;">8</b> friends -->
+<!-- 																</li> -->
+																<li class="restContent-review-count" style="color: #666;display: list-item;text-align: -webkit-match-parent;">
+																	<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-review icon--size-18">
+																	    <svg class="icon_svg">
+																	        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_review">
+																	        	<svg id="18x18_review" height="100%" viewBox="0 0 18 18" width="100%">
+																	        		<path d="M13 3H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1.505 9.643l-2.526-1.55L6.526 12.7 7 9.934 5 7.977l2.766-.404L8.97 4.7l1.264 2.873L13 7.977l-2 1.957.495 2.71z"></path>
+																	        	</svg>
+																	        </use>
+																	    </svg>
+																	</span>
+																	<b style="font-weight: bold;">${getReview.memberDTO.reviewcount}</b> reviews
+																</li>
+																<li class="restContent-photo-count" style="color: #666;display: list-item;text-align: -webkit-match-parent;">
+																	<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-camera icon--size-18">
+																	    <svg class="icon_svg">
+																	        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_camera">
+																	        	<svg id="18x18_camera" height="100%" viewBox="0 0 18 18" width="100%">
+																	        		<path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 6.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path>
+																	        	</svg>
+																	        </use>
+																	    </svg>
+																	</span>
+																	<b style="font-weight: bold;">${getReview.memberDTO.imagecount}</b> photos
+																</li>
+															</ul>
+														</div>
+													</div>
+													<ul class="restContent-list-link">
+<!-- 														<li> -->
+<!-- 															<a class="restContent-share-review" href="#" style="display: table; min-width: 100%; table-layout: auto; color: #0073bb; text-decoration: none; cursor: pointer;"> -->
+<!-- 																<div class="action-link_icon arrange_unit" style="padding-top: 3px; padding-bottom: 3px; vertical-align: middle; padding-right: 12px; box-sizing: border-box; display: table-cell;"> -->
+<!-- 																	<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-share icon--size-18 icon--currentColor"> -->
+<!-- 																	    <svg class="icon_svg"> -->
+<!-- 																	        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_share"> -->
+<!-- 																	        	<svg id="18x18_share" height="100%" viewBox="0 0 18 18" width="100%"> -->
+<!-- 																	        		<path d="M17.714 6.43L13 10.356v-3.03c-1 0-5.097 1.47-6.286 3.62.274-3.08 4.286-5.5 6.286-5.5V2.5l4.714 3.93zM3 4v10h11v-2.5l1-1V15H2V3h8.5l-1 1H3z"></path> -->
+<!-- 																	        	</svg> -->
+<!-- 																	        </use> -->
+<!-- 																	    </svg> -->
+<!-- 																	</span> -->
+<!-- 																</div> -->
+<!-- 																<div class="action-link_label arrange_unit arrange_unit--fill" style="border-top: 1px solid #e6e6e6; padding-top: 3px; padding-bottom: 3px; vertical-align: middle; width: 100%;"> -->
+<!--             														Share review -->
+<!-- 																</div> -->
+<!-- 														</a> -->
+<!-- 														</li> -->
+														
+
+														
+<!-- 														<li> -->
+<!-- 															<a class="restContent-share-review" href="#" style="display: table; min-width: 100%; table-layout: auto; color: #0073bb; text-decoration: none; cursor: pointer;"> -->
+<!-- 																<div class="action-link_icon arrange_unit" style="padding-top: 3px; padding-bottom: 3px; vertical-align: middle; padding-right: 12px; box-sizing: border-box; display: table-cell;"> -->
+<!-- 																	<span aria-hidden="true" -->
+<!-- 																		style="width: 18px; height: 18px;" -->
+<!-- 																		class="icon icon--18-embed icon--size-18 icon--currentColor"> -->
+<!-- 																		<svg class="icon_svg"> -->
+<!-- 														       				 <use -->
+<!-- 																				xmlns:xlink="http://www.w3.org/1999/xlink" -->
+<!-- 																				xlink:href="#18x18_embed"> -->
+<!-- 														       				 	<svg id="18x18_embed" height="100%" -->
+<!-- 																				viewBox="0 0 18 18" width="100%"> -->
+<!-- 														       				 		<path -->
+<!-- 																					d="M12.503 13.76a.717.717 0 0 1-.526.23.717.717 0 0 1-.526-.23.822.822 0 0 1 0-1.117l3.444-3.652-3.444-3.65a.822.822 0 0 1 0-1.116.714.714 0 0 1 1.053 0l4.495 4.77-4.495 4.767zm-5.954 0a.717.717 0 0 1-.528.23.718.718 0 0 1-.526-.23L1.002 8.99l4.495-4.768a.714.714 0 0 1 1.052 0c.29.308.29.808 0 1.116L3.105 8.99l3.442 3.653c.29.308.29.808 0 1.116z"></path> -->
+<!-- 														       				 	</svg> -->
+<!-- 														       				 </use> -->
+<!-- 														    			</svg> -->
+<!-- 																	</span> -->
+<!-- 																</div> -->
+<!-- 																<div class="action-link_label arrange_unit arrange_unit--fill" style="border-top: 1px solid #e6e6e6; padding-top: 3px; padding-bottom: 3px; vertical-align: middle; width: 100%;"> -->
+<!--             														Embed review -->
+<!-- 																</div> -->
+<!-- 														</a> -->
+<!-- 														</li> -->
+														
+														
+<!-- 														<li> -->
+<!-- 															<a class="restContent-share-review" href="#" style="display: table; min-width: 100%; table-layout: auto; color: #0073bb; text-decoration: none; cursor: pointer;"> -->
+<!-- 																<div class="action-link_icon arrange_unit" style="padding-top: 3px; padding-bottom: 3px; vertical-align: middle; padding-right: 12px; box-sizing: border-box; display: table-cell;"> -->
+<!-- 																	<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-compliment icon--size-18 icon--currentColor"> -->
+<!-- 																	    <svg class="icon_svg"> -->
+<!-- 																	        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_compliment"> -->
+<!-- 																	        	<svg id="18x18_compliment" height="100%" viewBox="0 0 18 18" width="100%"> -->
+<!-- 																	        		<path d="M14.5 6.75a5.5 5.5 0 0 0-11 0 5.495 5.495 0 0 0 2.993 4.892L5.5 16.75l3.505-2 3.495 2-.993-5.108A5.495 5.495 0 0 0 14.5 6.75zm-5.5 4c-2.206 0-4-1.794-4-4s1.794-4 4-4 4 1.794 4 4-1.794 4-4 4z"></path> -->
+<!-- 																	        	</svg> -->
+<!-- 																	        </use> -->
+<!-- 																	    </svg> -->
+<!-- 																	</span> -->
+<!-- 																</div> -->
+<!-- 																<div class="action-link_label arrange_unit arrange_unit--fill" style="border-top: 1px solid #e6e6e6; padding-top: 3px; padding-bottom: 3px; vertical-align: middle; width: 100%;"> -->
+<!--             														Compliment -->
+<!-- 																</div> -->
+<!-- 														</a> -->
+<!-- 														</li> -->
+														
+														<li>
+															<a class="restContent-share-review" href="#" data-popup-open="writeMessage" style="display: table; min-width: 100%; table-layout: auto; cursor: pointer;">
+																<div class="action-link_icon arrange_unit" style="padding-top: 3px; padding-bottom: 3px; vertical-align: middle; padding-right: 12px; box-sizing: border-box; display: table-cell;">
+																	<span aria-hidden="true" style="fill: currentColor; width: 18px; height: 18px;" class="icon">
+																    <svg class="icon_svg">
+																        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_speech">
+																        	<svg id="18x18_speech" height="100%" viewBox="0 0 18 18" width="100%">
+																        		<path d="M2 4v6a2 2 0 0 0 2 2h1v3l4-3h5a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"></path>
+																        	</svg>
+																        </use>
+																    </svg>
+																</span>
+																</div>
+																<div class="action-link_label arrange_unit arrange_unit--fill" style="display: table-cell;border-top: 1px solid #e6e6e6; padding-top: 3px; padding-bottom: 3px; vertical-align: middle; width: 100%;">
+            														Send message
+																</div>
+														</a>
+														</li>
+														
+<!-- 														<li> -->
+<!-- 															<a class="restContent-share-review" href="#" style="display: table; min-width: 100%; table-layout: auto; color: #0073bb; text-decoration: none; cursor: pointer;"> -->
+<!-- 																<div class="action-link_icon arrange_unit" style="padding-top: 3px; padding-bottom: 3px; vertical-align: middle; padding-right: 12px; box-sizing: border-box; display: table-cell;"> -->
+<!-- 																	<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-following icon--size-18 icon--currentColor"> -->
+<!-- 																	    <svg class="icon_svg"> -->
+<!-- 																	        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_following"> -->
+<!-- 																	        	<svg id="18x18_following" height="100%" viewBox="0 0 18 18" width="100%"> -->
+<!-- 																	        		<path d="M16 13l-4 3v-2H9l1-2h2v-2l4 3zm-8.925 2.383c-.443.817-1.707.817-2.15 0L2.128 9.605C1.728 8.868 2.31 8 3.203 8h5.594c.893 0 1.474.868 1.075 1.605l-2.797 5.778zM6 7a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path> -->
+<!-- 																	        	</svg> -->
+<!-- 																	        </use> -->
+<!-- 																	    </svg> -->
+<!-- 																	</span> -->
+<!-- 																</div> -->
+<!-- 																<div class="action-link_label arrange_unit arrange_unit--fill" style="border-top: 1px solid #e6e6e6; padding-top: 3px; padding-bottom: 3px; vertical-align: middle; width: 100%;"> -->
+<!--             														Follow Lauramay N. -->
+<!-- 																</div> -->
+<!-- 														</a> -->
+<!-- 														</li> -->
+													</ul>
+												</div>
+											</div>
+											<div class="restContent-review-wrapper" style="float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 62.5%;">
+												<div class="restContent-review-content" style="padding: 0 12px 6px 0; min-height: 156px; word-wrap: break-word !important; word-break: break-word !important; overflow-wrap: break-word !important;">
+													<div class="restContent-review-rating" style="margin: 6px 0;width:100%;overflow:hidden;height:auto;">
+														<div>
+															<div class="restList-star-rating-${myReview.gradepoint}" >
+															<img class="offscreen" 
+																src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png"
+																width="84" height="303" alt="4.0 star rating"
+																style="clip: rect(0, 0, 0, 0); position: absolute; left: -9999px; top: auto; overflow: hidden; width: 1px; height: 1px; vertical-align: middle;">
+														</div>
+														</div>
+														<span class="restContent-rating-qualifier" style="display: block; float: left; color: #666; font-weight: normal;">
+															${myReview.reg_date}
+														</span><!-- 날짜 -->
+													</div>
+													<p lang="ko" style="margin-bottom: 12px;display:block;">
+														${myReview.content}
+													</p>
+													</div><!--리뷰 내용 -->
+													
+												<div class="review-footer clearfix">
+<!-- 													<div class="rateReview voting-feedback" style="float: left;margin-bottom: 0;font-size: 12px;line-height: 1.5em;color: #666;" style="white-space: nowrap;margin-bottom: 6px;font-weight: bold;    display: block;"> -->
+<!-- 														<p class="voting-intro voting-prompt saving-msg" data-component-bound="true" style="white-space: nowrap;margin-bottom: 6px;font-weight: bold;"> -->
+<!-- 															Was this review …? -->
+<!-- 														</p> -->
+<!-- 														<ul class="restContent-review-button" style="margin-top: -1px;    list-style: none;    display: block;"> -->
+<!-- 														<li class="vote-item inline-block" style="    margin-right: 6px;    display: inline-block;    text-align: -webkit-match-parent;"> -->
+<!-- 															<a class="ybtn ybtn--small useful js-analytics-click" style="color: #666; white-space: nowrap; padding: 5px 8px; font-size: 12px; line-height: 1.5em; text-decoration: none !important; display: inline-block; vertical-align: middle; margin: 0; cursor: pointer; border: 1px solid; font-weight: bold; text-align: center; user-select: none; border-color: #ccc; color: #666; background-color: #f7f7f7; background: linear-gradient(#fff, #f7f7f7); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); border-radius: 3px;"> -->
+<!-- 																<span aria-hidden="true" style="fill: #666666; width: 18px; height: 18px;" class="icon icon--18-useful-outline icon--size-18 icon--active-inverse button-content u-space-r-half"> -->
+<!-- 																    <svg id="18x18_useful_outline" height="100%" viewBox="0 0 18 18" width="100%"> -->
+<!-- 																    	<path d="M9 17c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM9 2C5.14 2 2 5.14 2 9s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm2 8.392V12H7v-1.608a3.982 3.982 0 0 1-2-3.445 4 4 0 0 1 8 0c0 1.477-.81 2.752-2 3.445zM8 5.25a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5zm1.003 9.747h-.006A1.997 1.997 0 0 1 7 13h4a1.997 1.997 0 0 1-1.997 1.997z"></path> -->
+<!-- 																    </svg> -->
+<!-- 																</span> -->
+<!-- 																<span class="vote-type" style="font-weight: bold;margin-right: 3px;">Useful</span> -->
+<!-- 															</a> -->
+<!-- 														</li> -->
+														
+<!-- 														<li class="vote-item inline-block" style="    margin-right: 6px;    display: inline-block;    text-align: -webkit-match-parent;"> -->
+<!-- 															<a class="ybtn ybtn--small useful js-analytics-click" style="color: #666; white-space: nowrap; padding: 5px 8px; font-size: 12px; line-height: 1.5em; text-decoration: none !important; display: inline-block; vertical-align: middle; margin: 0; cursor: pointer; border: 1px solid; font-weight: bold; text-align: center; user-select: none; border-color: #ccc; color: #666; background-color: #f7f7f7; background: linear-gradient(#fff, #f7f7f7); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); border-radius: 3px;"> -->
+<!-- 																<span aria-hidden="true" style="fill: #666666; width: 18px; height: 18px;" class="icon icon--18-useful-outline icon--size-18 icon--active-inverse button-content u-space-r-half"> -->
+<!-- 																    <svg id="18x18_funny_outline" height="100%" viewBox="0 0 18 18" width="100%"> -->
+<!-- 																    	<path d="M9 17c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM9 2C5.14 2 2 5.14 2 9s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm0 12a4.87 4.87 0 0 1-4.787-4h9.574A4.87 4.87 0 0 1 9 14zm2.5-5.625a1.376 1.376 0 1 1 0-2.75 1.376 1.376 0 0 1 0 2.75zm-5 0a1.376 1.376 0 1 1 0-2.75 1.376 1.376 0 0 1 0 2.75z"></path> -->
+<!-- 																    </svg> -->
+<!-- 																</span> -->
+<!-- 																<span class="vote-type" style="font-weight: bold;margin-right: 3px;">Funny</span> -->
+<!-- 															</a> -->
+<!-- 														</li> -->
+														
+<!-- 														<li class="vote-item inline-block" style="    margin-right: 6px;    display: inline-block;    text-align: -webkit-match-parent;"> -->
+<!-- 															<a class="ybtn ybtn--small useful js-analytics-click" style="color: #666; white-space: nowrap; padding: 5px 8px; font-size: 12px; line-height: 1.5em; text-decoration: none !important; display: inline-block; vertical-align: middle; margin: 0; cursor: pointer; border: 1px solid; font-weight: bold; text-align: center; user-select: none; border-color: #ccc; color: #666; background-color: #f7f7f7; background: linear-gradient(#fff, #f7f7f7); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); border-radius: 3px;"> -->
+<!-- 																<span aria-hidden="true" style="fill: #666666; width: 18px; height: 18px;" class="icon icon--18-useful-outline icon--size-18 icon--active-inverse button-content u-space-r-half"> -->
+<!-- 																    <svg id="18x18_cool_outline" height="100%" viewBox="0 0 18 18" width="100%"> -->
+<!-- 																    	<path d="M9 17c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM9 2C5.14 2 2 5.14 2 9s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm6.026 5.335C14.766 8.797 13.5 10 11.986 10h-.003c-1.218 0-2.282-.764-2.767-1.813-.088-.19-.344-.242-.432-.052C8.3 9.185 7.234 10 6.016 10h-.003C4.5 10 3.195 8.83 2.973 7.35l-.093-.84c-.053-.242.192-.51.477-.51h11.286c.294 0 .508.332.477.56l-.094.775zm-2.068 4.154A4.28 4.28 0 0 1 9 14.144a4.28 4.28 0 0 1-3.958-2.657A6.81 6.81 0 0 0 9 12.753a6.81 6.81 0 0 0 3.958-1.265z"></path> -->
+<!-- 															    	</svg> -->
+<!-- 																</span> -->
+<!-- 																<span class="vote-type" style="font-weight: bold;margin-right: 3px;">Cool</span> -->
+<!-- 															</a> -->
+<!-- 														</li> -->
+<!-- 													</ul>좋아요 -->
+<!-- 													</div> -->
+													<div class="review-footer-actions pull-right clearfix" style="margin-top: 23px; float: right;">
+														<a class="chiclet-link show-tooltip js-analytics-click chiclet-link--flag" data-popup-open="popup-2" style="position: relative;display: inline-block;padding: 5px;border: 1px solid #ccc;border-radius: 3px;font-size: 12px;line-height: 1.5em;color: #999;background: transparent;box-shadow: none;white-space: nowrap;transition: all 0.3s ease;text-decoration: none;cursor: pointer;">
+															<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-flag icon--size-18 icon--currentColor">
+															    <svg id="18x18_flag" height="100%" viewBox="0 0 18 18" width="100%">
+															    	<path d="M6 10V3c4.976 1.098 4.024-1 8 0v7c-4.024-.976-3.024 1.024-8 0zM4 2h1v14H4V2z"></path>
+														    	</svg>
+															</span>
+															<span class="tooltip-wrapper">
+													            <span class="tooltip">
+													            	Report review
+													            </span>
+													        </span>
+														</a>
+													</div>
+												</div>
+												
+												
+<!-- 												<div class="restContent-review-reply" style="margin-top: 18px; padding: 11px; background: #f5f5f5; border: 1px solid #e6e6e6; border-radius: 4px;"> -->
+													
+<!-- 												</div>사장 답변 -->
+											</div>
+										</div>
+									</li><!-- 리뷰 -->
+								</c:if>	
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
 									<li>
 										<div class="restContent-review-with" style="margin: 0 -15px; display: flex;">
 											<div class="restContent-user" style="float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 37.5%;">

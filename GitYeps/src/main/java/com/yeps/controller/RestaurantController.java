@@ -212,7 +212,7 @@ public class RestaurantController {
 		if(loginMember != null) {
 			existMyReview = reviewMapper.findMyReview(Integer.parseInt(rnum), loginMember.getMnum());
 		}
-
+		
 		if(existMyReview == null) {
 			// 내가 쓴 리뷰 존재 안할 때
 		} else {
