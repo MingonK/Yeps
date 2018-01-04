@@ -96,8 +96,11 @@ public class SearchController {
 	public ModelAndView MainSearchPro(HttpServletRequest req, HttpServletResponse resp, HttpSession session) {
 
 		ModelAndView mav = new ModelAndView();
-		String searchword = req.getParameter("searchword");
+		
+		String category = req.getParameter("category");
 		String location = req.getParameter("location");
+		String searchword = req.getParameter("searchword");
+		
 		if(location != null && !location.equals("Home")) {
 			Cookie[] cookies = req.getCookies();
 			boolean isExistLocation = false;
@@ -130,7 +133,7 @@ public class SearchController {
 			}
 		}
 			MemberDTO memberDTO =  (MemberDTO) session.getAttribute("memberinfo");
-			if(memberDTO != null && location.equals("Home")) {
+			if(memberDTO != null && location != null && location.equals("Home")) {
 				String[] addr = memberDTO.getAddress().split(" ");
 				location = addr[1] + " " + addr[2] + " " +addr[3];
 				System.out.println(location);
