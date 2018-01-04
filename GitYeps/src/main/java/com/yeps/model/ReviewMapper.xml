@@ -356,5 +356,31 @@
   	</select>
    
    
+   
+   
+   <resultMap type="reviewDTO" id="LastReviewMap">
+		<id column="rvnum" property="rvnum"/>
+		<result column="content" property="content"></result>
+		
+		<association javaType="MemberDTO" property="memberDTO">
+			<id column="mnum" property="mnum"></id>
+			<result column="mnum" property="mnum"></result>
+			<association javaType="MemberPhotoDTO" property="memberPhotoDTO">
+				<result column="filename" property="filename"></result>
+				<result column="ismainphoto" property="ismainphoto"></result>
+			</association>
+		</association>
+	</resultMap>
+ 
+	<select id="getLastReview" parameterType="int" resultMap="LastReviewMap"> 
+  		select * from (select 
+  								R.content
+  								, P.filename
+  								, M.mnum
+  					   from yeps_review R, yeps_member M, yeps_member_photos P
+  					   where R.mnum = M.mnum and M.mnum = P.mnum and P.ismainphoto = 'y' and rnum=#{rnum} 
+  					   order by rvnum desc) 
+  				 where rownum = 1 
+  	</select>
   	
 </mapper>		
