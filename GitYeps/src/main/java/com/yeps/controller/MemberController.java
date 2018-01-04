@@ -43,6 +43,7 @@ public class MemberController {
 	private MemberMapper memberMapper;
 	@Autowired
 	private RandomNum randomNum;
+	
 	@Autowired
 	private MemberPhotoMapper memberPhotoMapper;
 	@Autowired
