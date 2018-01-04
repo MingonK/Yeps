@@ -29,7 +29,7 @@
 	font-size: 21px;
 	line-height: 1.28571em;
 	color: #d32323;
-	margin: 0 0 6px;
+	margin: 10 0 6px;
 	display: block;
 }
 
@@ -216,6 +216,77 @@
 	color: #333;
 }
 
+.resFind_starimg-0{
+   float: left; margin-right:6px;
+   position: relative; overflow: hidden;
+   background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+   width: 102px; height: 18px; background-position: 0 -240px; background-size: 132px 560px; display: inline-block; vertical-align: middle;
+}
+
+.resFind_starimg-1{
+   float: left; margin-right:6px;
+   position: relative; overflow: hidden;
+   background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+   width: 102px; height: 18px; background-position: 0 -258px; background-size: 132px 560px; display: inline-block; vertical-align: middle;
+}
+
+.resFind_starimg-1.5{
+   float: left; margin-right:6px;
+   position: relative; overflow: hidden;
+   background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+   width: 102px; height: 18px; background-position: 0 -276px; background-size: 132px 560px; display: inline-block; vertical-align: middle;
+}
+
+.resFind_starimg-2{
+   float: left; margin-right:6px;
+   position: relative; overflow: hidden;
+   background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+   width: 102px; height: 18px; background-position: 0 -294px; background-size: 132px 560px; display: inline-block; vertical-align: middle;
+}
+
+.resFind_starimg-2.5{
+   float: left; margin-right:6px;
+   position: relative; overflow: hidden;
+   background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+   width: 102px; height: 18px; background-position: 0 -312px; background-size: 132px 560px; display: inline-block; vertical-align: middle;
+}
+
+.resFind_starimg-3{
+   float: left; margin-right:6px;
+   position: relative; overflow: hidden;
+   background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+   width: 102px; height: 18px; background-position: 0 -330px; background-size: 132px 560px; display: inline-block; vertical-align: middle;
+}
+
+.resFind_starimg-3.5{
+   float: left; margin-right:6px;
+   position: relative; overflow: hidden;
+   background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+   width: 102px; height: 18px; background-position: 0 -348px; background-size: 132px 560px; display: inline-block; vertical-align: middle;
+}
+.resFind_starimg-4{
+   float: left; margin-right:6px;
+   position: relative; overflow: hidden;
+   background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+   width: 102px; height: 18px; background-position: 0 -366px; background-size: 132px 560px; display: inline-block; vertical-align: middle;
+}
+
+.resFind_starimg-4.5{
+   float: left; margin-right:6px;
+   position: relative; overflow: hidden;
+   background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+   width: 102px; height: 18px; background-position: 0 -384px; background-size: 132px 560px; display: inline-block; vertical-align: middle;
+}
+
+.resFind_starimg-5{
+   float: left; margin-right:6px;
+   position: relative; overflow: hidden;
+   background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+   width: 102px; height: 18px; background-position: 0 -402px; background-size: 132px 560px; display: inline-block; vertical-align: middle;
+}
+
+
+
 .resFind_img_2 {
 	clip: rect(0, 0, 0, 0);
 	position: absolute;
@@ -328,21 +399,10 @@
 	viewBox: 0 0 18 18;
 }
 
-.resFind_svg_1
-:not
- 
-(
-:root
- 
-){
-overflow
-:
- 
-hidden
-;
-
-
+.resFind_svg_1:not(:root){
+	overflow: hidden;
 }
+
 .resFind_a_2 {
 	color: #666;
 	margin: 9px 0 0;
@@ -420,21 +480,10 @@ hidden
 	viewBox: 0 0 18 18;
 }
 
-.resFind_svg_2
-:not
- 
-(
-:root
- 
-){
-overflow
-:
- 
-hidden
-;
-
-
+.resFind_svg_2:not(:root){
+	overflow: hidden;
 }
+
 .resFind_div15 {
 	float: left;
 	padding: 0 15px;
@@ -457,7 +506,6 @@ hidden
 .resFind_span_6 {
 	clip: rect(0, 0, 0, 0);
 	position: absolute;
-	left: -9999px;
 	top: auto;
 	overflow: hidden;
 	width: 1px;
@@ -471,15 +519,6 @@ hidden
 	color: #333;
 }
 
-.resFind_li_2 {
-	margin: 0;
-	padding: 18px 0;
-	border-bottom: 1px solid #e6e6e6;
-	padding-bottom: 17px;
-	display: list-item;
-	text-align: -webkit-match-parent;
-	color: #333;
-}
 
 .resFind_div16 {
 	border-bottom: 1px solid #e6e6e6;
@@ -522,300 +561,93 @@ hidden
 	color: #333;
 }
 
-.resFind_div20 {
-	position: fixed;
+.resFind_div24 {
+	position: relative;
 	zoom: 1;
-	z-index: 1;
-	top: 0px;
-	padding-top: 10px;
-	left: 690px;
+	z-index: auto;
 	width: 298px;
 	display: block;
 	color: #333;
 }
 
-.resFind_div21 {
-	border: solid 1px #ccc;
+.resFind_div20 {
 	width: 300px;
-	height: 300px;
-	position: relative;
+	box-sizing: border-box;
+	margin-top: 24px;
+	background: white;
+	padding: 11px;
+	border: 1px solid #e6e6e6;
+	border-radius: 4px;
 	display: block;
 	color: #333;
+}
+
+.resFind_div21 {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 11px;
+    margin-bottom: 12px;
+    display: block;
+    color: #333;
 }
 
 .resFind_div22 {
-	background-color: rgb(229, 227, 223);
-	position: relative;
-	overflow: hidden;
-	height: 100%;
-	width: 100%;
-	display: block;
-	color: #333;
+    display: block;
+    color: #333;
 }
 
-.resFind_div23 {
-	height: 100%;
-	width: 100%;
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	background-color: rgb(229, 227, 223);
-	display: block;
-	color: #333;
+.resFind_h3_2 {
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    font-weight: bold;
+    margin-bottom: 6px;
+    font-size: 16px;
+    line-height: 1.3125em;
+    color: #d32323;
+    margin: 0 0 6px;
+    display: block;
 }
 
-.resFind_div24 {
-	position: absolute;
-	z-index: 0;
-	left: 0px;
-	top: 0px;
-	height: 100%;
-	width: 100%;
-	padding: 0px;
-	border-width: 0px;
-	margin: 0px;
-	font: 400 11px Roboto, Arial, sans-serif;
-	text-decoration: none;
-	vertical-align: baseline;
-	display: block;
-	color: #333;
+.resFind_p_1{
+    margin-bottom: 12px;
+    display: block;
+    color: #333;
 }
 
-.resFind_div25 {
-	position: absolute;
-	z-index: 0;
-	left: 0px;
-	top: 0px;
-	height: 100%;
-	width: 100%;
-	padding: 0px;
-	border-width: 0px;
-	margin: 0px;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	vertical-align: baseline;
-	display: block;
-	color: #333;
+.resFind_a_3{
+    color: white;
+    padding: 5px 8px;
+    font-size: 12px;
+    line-height: 1.5em;
+    text-decoration: none !important;
+    border-color: #8d0005;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+    background-color: #d90007;
+    background: linear-gradient(#d90007, #c91400);
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+    cursor: pointer;
+    border: 1px solid;
+    font-weight: bold;
+    text-align: center;
+    user-select: none;
+    border-radius: 3px;
 }
 
-.resFind_div26 {
-	z-index: 1;
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	width: 100%;
-	transform-origin: 0px 0px 0px;
-	transform: matrix(1, 0, 0, 1, 0, 0);
-	vertical-align: baseline;
-	display: block;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	color: #333;
+.resFind_a_3:hover, .resFind_a_3:visited{
+    color: white;
 }
 
-.resFind_div27 {
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	z-index: 100;
-	width: 100%;
-	display: block;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	color: #333;
+.resFind_div23{
+    display: block;
+    color: #333;
 }
 
-.resFind_div28 {
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	z-index: 0;
-	vertical-align: baseline;
-	display: block;
-	color: #333;
-}
-
-.resFind_div29 {
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	z-index: 1;
-	visibility: inherit;
-	vertical-align: baseline;
-	display: block;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	color: #333;
-}
-
-.resFind_div30 {
-	width: 256px;
-	height: 256px;
-	position: absolute;
-	left: 10px;
-	top: 27px;
-	vertical-align: baseline;
-	display: block;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	color: #333;
-}
-
-.resFind_div31 {
-	width: 256px;
-	height: 256px;
-	position: absolute;
-	left: -246px;
-	top: 27px;
-	display: block;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	color: #333;
-}
-
-.resFind_div32 {
-	width: 256px;
-	height: 256px;
-	position: absolute;
-	left: 10px;
-	top: -229px;
-	display: block;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	color: #333;
-}
-
-.resFind_div33 {
-	width: 256px;
-	height: 256px;
-	position: absolute;
-	left: 10px;
-	top: 283px;
-	display: block;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	color: #333;
-}
-
-.resFind_div34 {
-	width: 256px;
-	height: 256px;
-	position: absolute;
-	left: 266px;
-	top: 27px;
-	display: block;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	color: #333;
-}
-
-.resFind_div35 {
-	width: 256px;
-	height: 256px;
-	position: absolute;
-	left: -246px;
-	top: -229px;
-	display: block;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	color: #333;
-}
-
-.resFind_div36 {
-	width: 256px;
-	height: 256px;
-	position: absolute;
-	left: -246px;
-	top: 283px;
-	display: block;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	color: #333;
-}
-
-.resFind_div37 {
-	width: 256px;
-	height: 256px;
-	position: absolute;
-	left: 266px;
-	top: -229px;
-	display: block;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	color: #333;
-}
-
-.resFind_div38 {
-	width: 256px;
-	height: 256px;
-	position: absolute;
-	left: 266px;
-	top: 283px;
-	display: block;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	color: #333;
-}
-
-.resFind_div39 {
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	z-index: 101;
-	width: 100%;
-	display: block;
-	display: block;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	color: #333;
-}
-
-.resFind_div40 {
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	z-index: 102;
-	width: 100%;
-	display: block;
-	display: block;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	color: #333;
-}
-
-.resFind_div41 {
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	z-index: 103;
-	width: 100%;
-	display: block;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	color: #333;
-}
-
-.resFind_div42 {
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	z-index: -1;
-	display: block;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	color: #333;
-}
-
-.resFind_div43 {
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	z-index: 1;
-	visibility: inherit;
-	cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8,
-		default;
-	display: block;
-	color: #333;
+.resFind_a_4{
+    color: #0073bb;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .review_template_write_div1 {
