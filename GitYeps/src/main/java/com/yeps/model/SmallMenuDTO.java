@@ -7,7 +7,7 @@ public class SmallMenuDTO {
 	private List<SmallMenuDTO> smallMenuList;
 	private int small_menuNum;
 	private int rnum;
-	private int large_num;
+	private int large_menunum;
 	private String small_name;
 	private String small_content;
 	private int small_price;
@@ -30,11 +30,11 @@ public class SmallMenuDTO {
 	public void setRnum(int rnum) {
 		this.rnum = rnum;
 	}
-	public int getLarge_num() {
-		return large_num;
+	public int getlarge_menunum() {
+		return large_menunum;
 	}
-	public void setLarge_num(int large_num) {
-		this.large_num = large_num;
+	public void setlarge_menunum(int large_menunum) {
+		this.large_menunum = large_menunum;
 	}
 	public String getSmall_name() {
 		return small_name;

@@ -7,6 +7,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.yeps.model">
 	
 	<insert id="insertSmallMenu" parameterType="SmallMenuDTO">
-		inesrt into yeps_smallMenu(yeps_smallMenu_seq.nextval,#{rnum},#{large_name})
+		insert into yeps_smallMenu values(yeps_smallMenu_seq.nextval,#{large_menunum},#{small_name},#{small_content},#{small_price})
 	</insert>
+	<select id="listSmallMenu" resultType="SmallMenuDTO">
+		select * from yeps_smallMenu where large_menunum=#{large_menunum}
+	</select>
 </mapper>

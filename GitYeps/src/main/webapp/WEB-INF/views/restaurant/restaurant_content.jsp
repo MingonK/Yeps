@@ -76,6 +76,7 @@
 						   		    <path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 4.75a4.25 4.25 0 1 0 0 8.5 4.25 4.25 0 0 0 0-8.5zM11 10h-1v1a1 1 0 0 1-2 0v-1H7a1 1 0 0 1 0-2h1V7a1 1 0 0 1 2 0v1h1a1 1 0 0 1 0 2z"></path>
 						         </svg>
 							  </span> 사진추가
+							  <a style="color: #0073bb;text-decoration: none;" class="menu-explore js-menu-explore" href="restaurant_listMenu?rnum=${getRest.rnum}">Full menu</a>
 						   </a>
 						</span>
 				     </div>
@@ -812,7 +813,7 @@
 										</span>
 									</div>
 									<div class="restContent-iconed-list-story" style="display: table-cell;width: 100%;padding: 9px 0;border-bottom: 1px solid #e6e6e6;padding-bottom: 8px;">
-							            <b style="font-weight: bold;"><a style="color: #0073bb;text-decoration: none;" class="menu-explore js-menu-explore" href="restaurant_listMenu?rname=${getRest.rname}">Full menu</a></b>
+							            <b style="font-weight: bold;"><a style="color: #0073bb;text-decoration: none;" class="menu-explore js-menu-explore" href="restaurant_listMenu?rnum=${getRest.rnum}">Full menu</a></b>
 							        </div>
 							    </li>
 							    <li class="restContent-iconed-list-item" style="display: table;width: 100%;margin-bottom: 0;">

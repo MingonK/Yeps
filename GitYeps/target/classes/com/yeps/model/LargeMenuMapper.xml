@@ -6,7 +6,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.yeps.model">
 	
-	<insert id="insertLarageMenu" parameterType="LargeMenuDTO">
-		inesrt into yeps_larageMenu(yeps_largeMenu_seq.nextval,#{rnum},#{large_name})
+	<insert id="insertLargeMenu" parameterType="LargeMenuDTO">
+		insert into yeps_largeMenu values(yeps_largeMenu_seq.nextval,#{rnum},#{large_name})
 	</insert>
+	<select id="getLastLargeMenu" resultType="int">
+		select large_menunum from (select * from yeps_largeMenu order by rownum desc) where rownum = 1
+	</select>
+	
+	
+	<select id="listLargeMenu" resultType="LargeMenuDTO">
+		select * from yeps_largeMenu where rnum=#{rnum}
+	</select>
 </mapper>

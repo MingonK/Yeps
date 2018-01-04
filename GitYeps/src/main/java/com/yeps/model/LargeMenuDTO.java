@@ -4,7 +4,7 @@ import java.util.List;
 
 public class LargeMenuDTO {
 	private List<LargeMenuDTO> largeMenuList;
-	private int large_menuNum;
+	private int large_menunum;
 	private int rnum;
 	private String large_name;
 	
@@ -15,11 +15,11 @@ public class LargeMenuDTO {
 	public void setLargeMenuList(List<LargeMenuDTO> largeMenuList) {
 		this.largeMenuList = largeMenuList;
 	}
-	public int getLarge_menuNum() {
-		return large_menuNum;
+	public int getlarge_menunum() {
+		return large_menunum;
 	}
-	public void setLarge_menuNum(int large_menuNum) {
-		this.large_menuNum = large_menuNum;
+	public void setlarge_menunum(int large_menunum) {
+		this.large_menunum = large_menunum;
 	}
 	public int getRnum() {
 		return rnum;

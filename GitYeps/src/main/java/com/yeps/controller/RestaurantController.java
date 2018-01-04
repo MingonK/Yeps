@@ -30,6 +30,7 @@ import com.yeps.model.MemberDTO;
 import com.yeps.model.RestaurantDTO;
 import com.yeps.model.ReviewDTO;
 import com.yeps.service.FileMapper;
+import com.yeps.service.MemberMapper;
 import com.yeps.service.RestaurantMapper;
 import com.yeps.service.ReviewMapper;
 import com.yeps.service.S3Connection;
@@ -47,6 +48,11 @@ public class RestaurantController {
 	private FileMapper fileMapper;
 	@Autowired
 	private ReviewMapper reviewMapper;
+	
+	@Autowired
+	private MemberMapper memberMapper;
+	
+	
 
 	@RequestMapping(value = "/jusoPopup")
 	public String jusoRest() throws Exception {
@@ -110,6 +116,11 @@ public class RestaurantController {
 	public String uploadForm() {
 		return "restaurant/restaurant_uploadForm2";
 	}
+	
+
+	
+		
+		
 
 	@RequestMapping(value = "/restaurant_listMenu")
 	public String listMenu() {
@@ -117,56 +128,6 @@ public class RestaurantController {
 		return "restaurant/restaurant_listMenu";
 	}
 
-	@RequestMapping(value = "/restaurant_upload", method = RequestMethod.POST)
-	public ModelAndView uploadRest(HttpServletRequest req, @ModelAttribute FileDTO dto,
-			MultipartHttpServletRequest mhsq) throws IllegalStateException, IOException {
-		String msg = null, url = null;
-		String rnum = req.getParameter("rnum");
-
-		Map<String, MultipartFile> fileMap = mhsq.getFileMap();
-		for (MultipartFile multipartFile : fileMap.values()) {
-			String genId = UUID.randomUUID().toString();
-			String originalfileName = multipartFile.getOriginalFilename();
-			String saveFileName = genId + "." + getExtension(originalfileName);
-			String savePath = uploadPath + saveFileName; // 저장 될 파일 경로
-			int fileSize = (int) multipartFile.getSize();
-			multipartFile.transferTo(new File(savePath));
-			dto.setRnum(Integer.parseInt(rnum));
-			dto.setFilename(saveFileName);
-			dto.setFile_content("");
-			dto.setFilesize(fileSize);
-			dto.setOrigin_filename(originalfileName);
-		}
-
-		// MultipartHttpServletRequest mr = (MultipartHttpServletRequest) req;
-		// MultipartFile mf = mr.getFile("upload_file");
-		// String genId = UUID.randomUUID().toString();
-		// String origin_fileName = mf.getOriginalFilename();
-		// String saveFileName = genId + "." + getExtension(origin_fileName);
-		// int fileSize = (int) mf.getSize();
-		// File file = new File(uploadPath, saveFileName);
-		// try {
-		// mf.transferTo(file);
-		// dto.setFilename(saveFileName);
-		// dto.setFile_content("");
-		// dto.setFilesize(fileSize);
-		// dto.setOrigin_filename(origin_fileName);
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
-		int res = fileMapper.insertFile(dto, "");
-		if (res > 0) {
-			msg = "사진 등록 성공";
-			url = "restaurant_content?rnum=" + rnum;
-		} else {
-			msg = "사진 등록 실패";
-			url = "restaurant_list";
-		}
-
-		req.setAttribute("msg", msg);
-		req.setAttribute("url", url);
-		return new ModelAndView("restaurant/message");
-	}
 
 	public String getExtension(String fileName) {
 		int dotPosition = fileName.lastIndexOf('.');

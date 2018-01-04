@@ -1,6 +1,8 @@
 package com.yeps.service;
 
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,5 +19,7 @@ public class SmallMenuMapper {
 	public int insertSmallMenu(SmallMenuDTO dto) {
 		return sqlSession.insert("insertSmallMenu",dto);
 	}
-	
+	public List<SmallMenuDTO> listSmallMenu(int large_menunum){
+		return sqlSession.selectList("listSmallMenu",large_menunum);
+	}
 }
