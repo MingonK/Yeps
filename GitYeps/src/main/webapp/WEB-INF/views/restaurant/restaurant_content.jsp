@@ -1028,7 +1028,7 @@
     	<div class="popup-inner" style="width: 465px; z-index: 1; height: auto !important;">
     	    <div id="flag_content_popup_title">
     	    	<div id="flag_content_popup_close" data-popup-close="popup-2">
-    				<h4 style="display: table-cell; padding: 0px 7px;">×</h4>
+    				<h4 style="display: table-cell; padding: 0px 7px; font-size: 100%; font: inherit;">×</h4>
     			</div>
     	    	<h2>
     	    		부적절한 댓글 신고
@@ -1088,20 +1088,45 @@
 	
 	<!-- Message sendform -->
 <div class="popup" align="left" id="writeMessage" data-popup="writeMessage"  style="z-index: 1;">
-    <form name="sendform" method="post">
-	    <div class="popup-inner">
-	        <h4 align="left"  style="color: #d32323;">Send Message To</h4>
-	            <input type="text" id="sendformTo" name="receiver">
-	        <h4 align="left" style="color: #d32323;">Subject is</h4>
-	            <input type="text" name="title" id="sendformSubject" >
-	        <h4 align="left" style="color: #d32323;">Content is</h4>
-	            <textarea rows="4" name="content" id="sendformMessage"  placeholder="여기에 메시지를 입력하세요."></textarea>
-	            <button class="popup-send" id="sendMessage" type="button" data-popup-send="SendMessage" onclick="sendMessage()">SendMessage </button>
-			    <a data-popup-close="writeMessage" style="cursor:pointer;" href="#">  Close</a>
-				<a class="popup-close" data-popup-close="writeMessage" href="#" >X</a>
-	    </div>
-	</form>
-</div> 
+	<div class="popup-inner" style="width: 465px; z-index: 1; height: auto !important; max-height: 400px;">
+    	<div id="flag_content_popup_title">
+    	    <div id="flag_content_popup_close" data-popup-close="writeMessage">
+    			<h4 style="display: table-cell; padding: 0px 7px; font-size: 100%; font: inherit;">×</h4>
+    		</div>
+    		<h2>
+    	    	메세지 보내기
+    	    </h2>
+    	</div>
+    	
+    	<div id="flag_popup_description" style="padding: 12px 8px 0;">
+    		<div>
+    			<form name="sendform" method="post">
+    				<div>
+						<h4 align="left" style="color: #d32323;">Send Message To</h4>
+    	    			<input type="text" id="sendformTo" name="receiver" style="width: 95%; height: 20px;">
+    	    			<h4 align="left" style="color: #d32323;">Subject is</h4>
+	            		<input type="text" name="title" id="sendformSubject" style="width: 95%; height: 20px;">
+	        			<h4 align="left" style="color: #d32323;">Content is</h4>
+	            		<textarea rows="4" name="content" id="sendformMessage"  style="width: 95%;" placeholder="여기에 메시지를 입력하세요."></textarea>
+    	    		</div>
+    			</form>
+    		</div>
+    	</div>
+    	
+    	   	
+		<div id="flag_popup_footer">
+     		<div id="flag_popup_buttons">
+     			<button id="reply_flag_popup_submit_button" type="submit" value="submit" data-popup-send="SendMessage" onclick="sendMessage()">
+     				<span>메세지 보내기</span>
+     			</button>
+     			<a href="#" data-popup-close="writeMessage">
+    				Close
+    			</a>
+     		</div>
+     	</div>
+	</div>		
+</div>
+
 	
 	
 	
@@ -1111,9 +1136,9 @@
 		
 		
 <script>
-	 $(function() {
+	 jQuery(function($) {
 		//----- OPEN
-		$('[data-popup-open]').on('click', function(e)  {
+		$(document).on('click', '[data-popup-open]', function(e)  {
 			var targeted_popup_class = jQuery(this).attr('data-popup-open');
 			$('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
 			if(targeted_popup_class == 'popup-2') {
@@ -1134,7 +1159,7 @@
 		});
 	    
 		//----- CLOSE
-		$('[data-popup-close]').on('click', function(e)  {
+		$(document).on('click', '[data-popup-close]', function(e)  {
 			var targeted_popup_class = jQuery(this).attr('data-popup-close');
 			$('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
 			$('body').css('overflow','auto');
@@ -1320,7 +1345,7 @@ function list(page){
 									'</div>'+
 									'<ul class="restContent-list-link">'+									
 										'<li>'+
-											'<a class="restContent-share-review" href="#" style="display: table; min-width: 100%; table-layout: auto; cursor: pointer;">'+
+											'<a class="restContent-share-review" data-popup-open="writeMessage" href="#" style="display: table; min-width: 100%; table-layout: auto; cursor: pointer;">'+
 												'<div class="action-link_icon arrange_unit" style="padding-top: 3px; padding-bottom: 3px; vertical-align: middle; padding-right: 12px; box-sizing: border-box; display: table-cell;">'+
 													'<span aria-hidden="true" style="fill: currentColor; width: 18px; height: 18px;" class="icon">'+
 													    '<svg class="icon_svg">'+
@@ -1558,7 +1583,7 @@ function check() {
 									'</div>'+
 									'<ul class="restContent-list-link">'+									
 										'<li>'+
-											'<a class="restContent-share-review" href="#" style="display: table; min-width: 100%; table-layout: auto; cursor: pointer;">'+
+											'<a class="restContent-share-review" data-popup-open="writeMessage" href="#" style="display: table; min-width: 100%; table-layout: auto; cursor: pointer;">'+
 												'<div class="action-link_icon arrange_unit" style="padding-top: 3px; padding-bottom: 3px; vertical-align: middle; padding-right: 12px; box-sizing: border-box; display: table-cell;">'+
 													'<span aria-hidden="true" style="fill: currentColor; width: 18px; height: 18px;" class="icon">'+
 													    '<svg class="icon_svg">'+
