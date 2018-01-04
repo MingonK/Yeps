@@ -24,7 +24,7 @@ public class ReviewMapper {
       return sqlSession.insert("insertReview", dto);
    }
 
-   public int deleteReview(String rvnum) {
+   public int deleteReview(int rvnum) {
       return sqlSession.delete("deleteReview", rvnum);
    }
 

@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/restStyle.css?ver=1"/>"/>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css?ver=1"/>"/>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css?ver=2"/>"/>
-
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/message.css?ver=2"/>"/>
 <title>레스토랑</title>
 </head>
 <%@include file="../top.jsp" %>
@@ -564,7 +564,7 @@
 <!-- 														</li> -->
 														
 														<li>
-															<a class="restContent-share-review" href="#" style="display: table; min-width: 100%; table-layout: auto; cursor: pointer;">
+															<a class="restContent-share-review" href="#" data-popup-open="writeMessage" style="display: table; min-width: 100%; table-layout: auto; cursor: pointer;">
 																<div class="action-link_icon arrange_unit" style="padding-top: 3px; padding-bottom: 3px; vertical-align: middle; padding-right: 12px; box-sizing: border-box; display: table-cell;">
 																	<span aria-hidden="true" style="fill: currentColor; width: 18px; height: 18px;" class="icon">
 																    <svg class="icon_svg">
@@ -1087,6 +1087,23 @@
     	</div>
 	</div>
 	
+	<!-- Message sendform -->
+<div class="popup" align="left" id="writeMessage" data-popup="writeMessage"  style="z-index: 1;">
+    <form name="sendform" method="post">
+	    <div class="popup-inner">
+	        <h4 align="left"  style="color: #d32323;">Send Message To</h4>
+	            <input type="text" id="sendformTo" name="receiver">
+	        <h4 align="left" style="color: #d32323;">Subject is</h4>
+	            <input type="text" name="title" id="sendformSubject" >
+	        <h4 align="left" style="color: #d32323;">Content is</h4>
+	            <textarea rows="4" name="content" id="sendformMessage"  placeholder="여기에 메시지를 입력하세요."></textarea>
+	                <button class="popup-send" id="sendMessage" type="button" data-popup-send="SendMessage" onclick="sendMessage()">SendMessage </button>
+			        <a data-popup-close="writeMessage" style="cursor:pointer;" href="#">  Close</a>
+					<a class="popup-close" data-popup-close="writeMessage" href="#" >X</a>
+	    </div>
+	</form>
+</div> 
+	
 	
 	
 	<div class="loading_wapper" >
@@ -1095,6 +1112,8 @@
 		
 		
 <script>
+
+
 	 $(function() {
 		//----- OPEN
 		$('[data-popup-open]').on('click', function(e)  {
@@ -1127,6 +1146,27 @@
         	e.preventDefault();;
 			});
 		});   
+	 
+	 $('#sendMessage').click(function(){
+	    	
+	    	if($('#sendformTo').val()==''){
+	    	alert("받는 사람을 입력해주세요");
+	    	$('#sendformTo').focus()
+	    	return false;
+	    	
+	    	}else if($('#sendformSubject').val()==''){
+	    	alert("제목를 입력해주세요");
+	    	$('#sendformSubject').focus()
+	    	return false;
+	    	
+	    	}else if($('#sendformMessage').val()==''){
+	    	alert("내용을 입력해주세요");
+	    	$('#sendformMessage').focus()
+	    	return false;
+	    	}
+	        document.sendform.action = "message_send";
+	        document.sendform.submit(); 
+	    });
    
    $(document).on('mouseenter', '.selector', function(e) {
 	   var star = $(e.target).val();
