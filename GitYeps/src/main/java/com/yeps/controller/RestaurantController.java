@@ -207,6 +207,7 @@ public class RestaurantController {
 		RestaurantDTO getRest = restaurantMapper.getRest(Integer.parseInt(rnum));// 가게 1개 정보
 		List<FileDTO> uploadFileList = restaurantMapper.getFileList(Integer.parseInt(rnum));// 가게 업로드 파일
 		
+
 		ReviewDTO existMyReview = null;
 		if(loginMember != null) {
 			existMyReview = reviewMapper.findMyReview(Integer.parseInt(rnum), loginMember.getMnum());

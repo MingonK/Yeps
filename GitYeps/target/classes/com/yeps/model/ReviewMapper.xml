@@ -395,6 +395,7 @@
       where R.mnum = M.mnum and R.mnum = P.mnum and RT.rnum = R.rnum and ismainphoto = 'y' and recentreview = 'y'
       order by rvnum desc)A) where rn between #{start} and #{end}
   	</select>
+  
   	
    <select id="findMyReview" parameterType="java.util.HashMap" resultType="ReviewDTO">
    		select * from yeps_review where rnum = #{rnum} and mnum = #{mnum}
