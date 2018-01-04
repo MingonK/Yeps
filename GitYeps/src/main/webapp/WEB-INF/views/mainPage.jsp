@@ -271,8 +271,7 @@
 							<label id="find_label" class="mainpage_search">
 								<span id="label_span">Find</span>
 								<span id="label_input_span">
-									<input type="text" maxlength="64" id="page_header_inputs" class="page_header_inputs" autocomplete="off" value placeholder="분야별 검색" aria-autocomplete="list" tabindex="1" data-component-bound="true" readonly>
-									<input type="hidden" maxlength="64" data-component-bound="true" name="find_input" value>		
+									<input type="text" maxlength="64" name="category" id="page_header_inputs" class="page_header_inputs" autocomplete="off" placeholder="분야별 검색" aria-autocomplete="list" tabindex="1" data-component-bound="true" readonly>		
 								</span>
 							</label>
 							
