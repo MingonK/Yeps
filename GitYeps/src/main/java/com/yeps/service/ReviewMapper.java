@@ -154,15 +154,10 @@ public class ReviewMapper {
 	}
    
    // 2018. 1. 5일 민곤 추가
-   public boolean findMyReview(int rnum, int mnum) {
+   public ReviewDTO findMyReview(int rnum, int mnum) {
 	   HashMap<String, Integer> map = new HashMap<String, Integer>();
 	   map.put("rnum", rnum);
 	   map.put("mnum", mnum);
-	   ReviewDTO dto = sqlSession.selectOne("findMyReview", map);
-	   if(dto == null) {
-		   return false;
-	   } else {
-		   return true;
-	   }
+	   return sqlSession.selectOne("findMyReview", map);
    }
 }

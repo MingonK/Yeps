@@ -185,6 +185,9 @@ public class RestaurantController {
 	@RequestMapping(value = "/restaurant_content")
 	public ModelAndView contentRest(HttpServletRequest req, @RequestParam(defaultValue = "1") int curPage) {
 		String rnum = req.getParameter("rnum");
+		if(rnum == null || rnum.trim().equals("")) {
+			return new ModelAndView("redirect: restaurant_list");
+		}
 
 		int count = reviewMapper.getRestaurantReviewCount(Integer.parseInt(rnum));
 		int pageScale = 10;
@@ -199,22 +202,27 @@ public class RestaurantController {
 		
 		HttpSession session = req.getSession();
 		MemberDTO loginMember = (MemberDTO) session.getAttribute("memberinfo");
-
+		ModelAndView mav = new ModelAndView();
+		
 		RestaurantDTO getRest = restaurantMapper.getRest(Integer.parseInt(rnum));// 가게 1개 정보
 		List<FileDTO> uploadFileList = restaurantMapper.getFileList(Integer.parseInt(rnum));// 가게 업로드 파일
 		
-		boolean existMyReview = reviewMapper.findMyReview(Integer.parseInt(rnum), loginMember.getMnum());
-		List<ReviewDTO> reviewList = reviewMapper.getSelectedRestaurant_Rv(Integer.parseInt(rnum), start, end);// 가게 리뷰
-		if(existMyReview) {
-			// 내가 쓴 리뷰가 존재하니까 그거 하나만 따로 저장해 놓기
-		} else {
-			// 없으면 그냥 진행
+		ReviewDTO existMyReview = null;
+		if(loginMember != null) {
+			existMyReview = reviewMapper.findMyReview(Integer.parseInt(rnum), loginMember.getMnum());
 		}
 		
+		if(existMyReview == null) {
+			// 내가 쓴 리뷰 존재 안할 때
+		} else {
+			mav.addObject("myReview", existMyReview);
+		}
+		
+		List<ReviewDTO> reviewList = reviewMapper.getSelectedRestaurant_Rv(Integer.parseInt(rnum), start, end);// 가게 리뷰
 		List<ReviewDTO> highlightReview = reviewMapper.getRandomRestaurant_Rv(Integer.parseInt(rnum));
 		int starAvg = reviewMapper.getStarAvg(Integer.parseInt(rnum));
 
-		ModelAndView mav = new ModelAndView();
+		
 		mav.addObject("map", map);
 		mav.addObject("getRest", getRest);
 		mav.addObject("uploadFileList", uploadFileList);
@@ -233,14 +241,20 @@ public class RestaurantController {
 		String rnum = req.getParameter("rnum");
 		String SearchKeyword = req.getParameter("SearchKeyword");
 		int curPage = req.getParameter("curPage") != null ? Integer.parseInt(req.getParameter("curPage")) : 1;
-
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		if(rnum == null || rnum.trim().equals("")) {
+			map.put("error", "다시 시도해주세요.");
+			return map;
+		}
+		
 		int pageScale = 10;
 		int blockScale = 10;
 		int count = 0;
 		int start = 0;
 		int end = 0;
 		List<ReviewDTO> targetRestaurant_reviews = null;
-		HashMap<String, Object> map = new HashMap<String, Object>();
+		
 		YepsPager YepsPager = null;
 		if (SearchKeyword == null || SearchKeyword.trim().equals("")) {
 			count = reviewMapper.getRestaurantReviewCount(Integer.parseInt(rnum));
@@ -303,19 +317,20 @@ public class RestaurantController {
 
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest) req;
 		HttpSession session = req.getSession();
-		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
-
-		return uploadFileLoop(mr, memberDTO, Integer.parseInt(rnum));
+		return uploadFileLoop(mr, session, Integer.parseInt(rnum));
 	}
 
-	public HashMap<String, Object> uploadFileLoop(MultipartHttpServletRequest mr, MemberDTO memberDTO, int rnum) {
+	public HashMap<String, Object> uploadFileLoop(MultipartHttpServletRequest mr, HttpSession session, int rnum) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		Iterator<String> it = mr.getFileNames();
 		String origin_fileName = null;
 		int fileSize = 0;
 		List<FileDTO> fileList = new ArrayList<FileDTO>();
-
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
+		
+		int imageCount = 0;
 		while (it.hasNext()) {
+			imageCount++;
 			MultipartFile mf = mr.getFile(it.next());
 			origin_fileName = mf.getOriginalFilename();
 			fileSize = (int) mf.getSize();
@@ -351,6 +366,7 @@ public class RestaurantController {
 						fileMapper.deleteFileToFilename(saveFileName);
 						S3Connection.getInstance().deleteObject("yepsbucket", "images/" + saveFileName);
 						map.put("failed", "파일 등록에 실패했습니다. 잠시후 다시 시도해주세요.");
+						imageCount--;
 						file.delete();
 					}
 				} catch (Exception e) {
@@ -364,9 +380,14 @@ public class RestaurantController {
 				map.put("upload_failed", "업로드할 수 없는 파일이 존재합니다.");
 			}
 		}
+		memberDTO.setImagecount(memberDTO.getImagecount()+imageCount);
+		session.setAttribute("memberinfo", memberDTO);
+		map.put("fileList", fileList);
 		map.put("update", "사진을 등록하였습니다.");
 		return map;
 	}
+	
+
 
 	@RequestMapping(value = "/restaurant_photoList")
 	public ModelAndView photoListRest(HttpServletRequest req, @RequestParam(defaultValue = "1") int curPage) {
