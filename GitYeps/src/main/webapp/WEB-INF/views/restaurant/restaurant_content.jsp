@@ -1160,7 +1160,7 @@
        $(this).parent().removeClass('i-selector-stars--extra-large-5');
     });
    
-   $(document).on("click",".selector",function(){
+   $(document).on("click",".selector",function(e){
 	   var star = $(e.target).val();
        $('#star').val(star);
        $(this).parent().parent().parent().submit();
