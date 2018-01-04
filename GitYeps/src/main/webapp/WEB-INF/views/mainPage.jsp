@@ -417,13 +417,15 @@
 								<span id="label_span">Near</span>
 								<span id="label_input_span">
 									<input type="text" maxlength="80" name="location" id="page_header_location_inputs" class="page_header_location_inputs" autocomplete="off" placeholder="지역별 검색">
+									<input type="hidden" name="latitude" id="latitude" />
+									<input type="hidden" name="longitude" id="longitude" />
 								</span>
 							</label>
 							
 							<!-- 이 구간 안에 새로운 div로 지역검색할 수 있도록 지정해야함 -->
 							<div id="main_location_suggestion_container">
 								<ul id="location_suggestion_container_list">
-									<li id="suggestion_container_list_items_button" onmouseover="javascript:onMouse('location_icon')" onmouseout="javascript:outMouse('location_icon')" onclick="javascript:loc_clickMouse('최근 검색 지역')">
+									<li id="suggestion_container_list_items_button" onmouseover="javascript:onMouse('location_icon')" onmouseout="javascript:outMouse('location_icon')" onclick="javascript:loc_clickMouse('Current Location')">
 										<div id="list_items_unit" style="position: relative; display: flex;">
 											<div id="location">
 												<span id="location_icon" style="fill: #0073bb;">
@@ -434,7 +436,7 @@
 											</div>
 											<div id="suggestion_container_list_items_name">
 												<span>
-													최근 검색 지역
+													Current Location
 												</span>
 											</div>
 										</div>
@@ -1542,9 +1544,32 @@
 		$(".search_arrange_suggestions").hide();
 		$("#page_header_searchDate_inputs").focus();
 	});
-
+	
+	$(document).on('click', '#suggestion_container_list_items_button', function() {
+		var nav = null;
+		
+		 if (nav == null) {
+		      nav = window.navigator;
+		  }
+		  if (nav != null) {
+		      var geoloc = nav.geolocation;
+		      if (geoloc != null) {
+		          geoloc.getCurrentPosition(successCallback);
+		      }
+		      else {
+		          alert("geolocation not supported");
+		      }
+		  }
+		  else {
+		      alert("Navigator not found");
+		  }
+	});
+	
+	function successCallback(position){
+		document.getElementById("latitude").value = position.coords.latitude;
+		document.getElementById("longitude").value = position.coords.longitude;
+	}
 </script>
-
 
 <%@include file="bottom.jsp"%>
 

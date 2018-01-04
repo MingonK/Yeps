@@ -100,8 +100,12 @@ public class SearchController {
 		String category = req.getParameter("category");
 		String location = req.getParameter("location");
 		String searchword = req.getParameter("searchword");
+		String latitude = req.getParameter("latitude");
+		String longitude = req.getParameter("longitude");
 		
-		if(location != null && !location.equals("Home")) {
+		System.out.println(latitude + ", " + longitude);
+		
+		if(location != null && !location.equals("Home") && !location.equals("Current Location")) {
 			Cookie[] cookies = req.getCookies();
 			boolean isExistLocation = false;
 			if(cookies!=null) {
