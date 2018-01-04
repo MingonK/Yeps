@@ -206,7 +206,7 @@ function hour_add() {
 		document.getElementById("hours-display").appendChild(div).innerHTML = "<span>"+day[day2]+"    "+"</span>"+
 		"<span>"+start+"</span>"+"<span>"+"&nbsp-&nbsp"+"</span>"+"<span>"+end+"&nbsp"+"</span>"+
 		"<a href='javascript:void(0);' onclick='remove("+day2+")'>삭제</a>" +
-		"<input type='hidden' name='"+week[day2]+"' value='"+start+" "+end+"'/>";
+		"<input type='hidden' name='"+week[day2]+"' value='"+start+" - "+end+"'/>";
 	}
 }
 
@@ -245,11 +245,97 @@ function jusoCallBack(roadAddrPart1, addrDetail, roadAddrPart2, zipNo) {
 }
 
 function test() {
+	
+// 	var rname=document.getElementById("rname").value
+	if(document.getElementById("rname").value==""){
+		alert("가게 이름을 입력해주세요 !! ")
+		document.getElementById("rname").focus()
+		return false;
+	}
+	if(document.getElementById("input_file").value==""){
+		alert("사진을 등록 해주세요!!")
+		document.getElementById("input_file").focus()
+		return false;
+	}
+	
+	if(document.getElementById("zipNo").value==""||document.getElementById("roadAddrPart1").value==""||document.getElementById("addrDetail").value==""||document.getElementById("roadAddrPart2").value==""){
+		alert("주소를 입력 해주세요!!")
+		document.getElementById("zipNo").focus();
+		return false;
+	}
+	
+	if(document.getElementById("hp2").value==""||document.getElementById("hp3").value==""){
+		alert("전화번호를 입력 해주세요!!")
+		document.getElementById("hp2").focus();
+		return false;
+	}
+	
+	var parent = document.getElementById("hours-display");
+	
+	if(parent.childNodes.length<8){
+		alert("모든 요일을 입력 해주세요!!")
+		document.getElementById("day").focus();
+		return false;
+	}
+	
+	var reststyle_name = document.getElementsByName("reststyle");
+	if(!reststyle_name[0].checked && !reststyle_name[1].checked && !reststyle_name[2].checked){
+		alert("좌석 한개 이상 선택해 주세요!!")
+		return false;
+	}
+	
+	if(!document.getElementById("reserv").checked && !document.getElementById("reserv2").checked){
+		alert("예약을 선택해 주세요!!")
+		return false;
+	}
+	if(!document.getElementById("delivery").checked && !document.getElementById("delivery2").checked){
+		alert("배달을 선택해 주세요!!")
+		return false;
+	}
+	if(!document.getElementById("takeout1").checked && !document.getElementById("takeout2").checked){
+		alert("포장을 선택해 주세요!!")
+		return false;
+	}
+	if(!document.getElementById("parking").checked && !document.getElementById("parking2").checked){
+		alert("주차장을 선택해 주세요!!")
+		return false;
+	}
+	if(!document.getElementById("groupreserv").checked && !document.getElementById("groupreserv2").checked){
+		alert("단체예약을 선택해 주세요!!")
+		return false;
+	}
+	if(!document.getElementById("noise").checked && !document.getElementById("noise2").checked && !document.getElementById("noise3").checked){
+		alert("소음을 선택해 주세요!!")
+		return false;
+	}
+	if(!document.getElementById("kidszone").checked && !document.getElementById("kidszone2").checked ){
+		alert("키드존을 선택해 주세요!!")
+		return false;
+	}
+	if(!document.getElementById("waiting").checked && !document.getElementById("waiting2").checked ){
+		alert("대기실을 선택해 주세요!!")
+		return false;
+	}
+	if(!document.getElementById("wifi").checked && !document.getElementById("wifi2").checked ){
+		alert("WIFI를 선택해 주세요!!")
+		return false;
+	}
+	if(!document.getElementById("toilet").checked && !document.getElementById("toilet2").checked ){
+		alert("화장실을 선택해 주세요!!")
+		return false;
+	}
+	if(document.getElementById("tablecount").value==""){
+		alert("테이블 갯수를 작성 해주세요!!")
+		document.getElementById("tablecount").focus();
+		return false;
+	}	
+	
+	
 
-		
+	
+	
 	
 	var reststyle=new Array();
-	var reststyle_name = document.getElementsByName("reststyle");
 	for (var i = 0; i < reststyle_name.length; i++) {
 		if (reststyle_name[i].checked) {
 			reststyle.push(reststyle_name[i].value)
@@ -266,6 +352,7 @@ function test() {
 	}
 	document.getElementById("alcohol").value =alcohol.join(',')
 	
+	alert("실행")
 	return true;
 }
 </script>
@@ -302,7 +389,7 @@ function test() {
 									</li>
 									<li class="restInsert-list">
 										<label for="zipNo" class="restInsert-label-bold">우편번호</label>
-										<input class="restInsert-input" id="" name="zipNo" placeholder="" type="text" value="" onclick="goPopup();" readonly>	
+										<input class="restInsert-input" id="zipNo" name="zipNo" placeholder="" type="text" value="" onclick="goPopup();" readonly>	
 									</li>
 									<li class="restInsert-list">
 										<label id="roadAddrPart1-label" for="roadAddrPart1" class="restInsert-label-bold" style="display:none;">도로명 주소</label>
@@ -337,12 +424,12 @@ function test() {
 												<option value="063">063</option>
 												<option value="064">064</option>
 										</select>
-									<input class="restInsert-hp" type="text" name="hp2" value="" maxlength="4"  onkeypress="txtOnlyNum(event)" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" style="width:126.5px;">
-									- <input class="restInsert-hp" type="text" name="hp3" value="" maxlength="4"  onkeypress="txtOnlyNum(event)" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" style="width:126.5px;">
+									<input class="restInsert-hp" type="text" id="hp2" name="hp2" value="" maxlength="4"  onkeypress="txtOnlyNum(event)" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" style="width:126.5px;">
+									- <input class="restInsert-hp" type="text" id="hp3" name="hp3" value="" maxlength="4"  onkeypress="txtOnlyNum(event)" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" style="width:126.5px;">
 									</li>
 									<li class="restInsert-list">
 										<label for="foodstyle" class="restInsert-label-bold">음식 종류</label>
-										<input class="restInsert-input" id="" name="foodstyle" placeholder="" type="text" value="">	
+										<input class="restInsert-input" id="foodstyle" name="foodstyle" placeholder="" type="text" value="">	
 									</li>
 									<li class="restInsert-list">
 										<label for="day" class="restInsert-label-bold">영업시간</label>
@@ -583,6 +670,9 @@ function test() {
 											<input class="magic-checkbox" type="checkbox" id="alcohol4" name="alcohol" value="막걸리" >
 											<label for="alcohol4" class="restInsert-label" style="width:60px">막걸리</label>
 											
+											<input class="magic-checkbox" type="checkbox" id="alcohol5" name="alcohol" value="없음" >
+											<label for="alcohol5" class="restInsert-label" style="width:60px">없음</label>
+											
 										</div>
 									</li>
 									<li class="restInsert-list">
@@ -615,7 +705,7 @@ function test() {
 									</li>
 									<li class="restInsert-list">
 										<label for="roadAddrPart1" class="restInsert-label-bold">테이블 수</label><br>
-										<input class="restInsert-input" id="" name="tablecount" type="text" value="12" style="width:237px;display:inline-block;"maxlength="3" >
+										<input class="restInsert-input" id="tablecount" name="tablecount" type="text" value="12" style="width:237px;display:inline-block;"maxlength="3" >
 										<select class="restInsert-hp" name="standard"  style="width:147px;">
 											<option value="1">1</option>
 											<option value="2">2</option>

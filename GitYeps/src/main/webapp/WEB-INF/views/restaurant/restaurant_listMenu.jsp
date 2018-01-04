@@ -43,7 +43,7 @@
                 				<strong style="font-weight: bold;">메인 메뉴</strong>
                 			</li>
                 		</ul>
-	                		<div class="menu-sections" style="    margin-top: 15px;">
+	                		<div class="menu-sections" style="margin-top: 15px;">
                 		<c:forEach var="large" items="${largeList}" varStatus="status">
 	                			<div class="section-header section-header--no-spacing" style="margin-bottom: 0;border-bottom: 1px solid #e6e6e6;">
 	                				<h2 class="alternate" style="color: #333;word-wrap: break-word !important;word-break: break-word !important;overflow-wrap: break-word !important;font-weight: bold;margin-bottom: 6px;font-size: 21px;line-height: 1.28571em;    margin: 0 0 6px;    display: block;">
@@ -52,7 +52,7 @@
 	                			</div>
 	                				
 			                			<div class="u-space-b3" style="margin-bottom: 18px !important;">
-			                			<c:forEach var="small" items="${smallList.get(status.index)}" >
+			                			<c:forEach var="small" items="${smallList}" >
 			                				<div class="menu-item" style="border-top: 0;    padding: 10px 0;">
 			                					<div class="arrange arrange--6" style="    margin-left: -6px;margin-right: -6px;border-collapse: separate;border-spacing: 6px 0;    display: table;min-width: 100%;table-layout: auto;">
 			                						<div class="arrange_unit" style="    margin-left: 3px;margin-right: 3px;border-collapse: collapse;border-spacing: 0 0;    box-sizing: border-box;display: table-cell;vertical-align: top;">
