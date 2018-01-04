@@ -203,13 +203,13 @@ public class RestaurantController {
 		RestaurantDTO getRest = restaurantMapper.getRest(Integer.parseInt(rnum));// 가게 1개 정보
 		List<FileDTO> uploadFileList = restaurantMapper.getFileList(Integer.parseInt(rnum));// 가게 업로드 파일
 		
-		boolean existMyReview = reviewMapper.findMyReview(Integer.parseInt(rnum), loginMember.getMnum());
+		//boolean existMyReview = reviewMapper.findMyReview(Integer.parseInt(rnum), loginMember.getMnum());
 		List<ReviewDTO> reviewList = reviewMapper.getSelectedRestaurant_Rv(Integer.parseInt(rnum), start, end);// 가게 리뷰
-		if(existMyReview) {
-			// 내가 쓴 리뷰가 존재하니까 그거 하나만 따로 저장해 놓기
-		} else {
-			// 없으면 그냥 진행
-		}
+//		if(existMyReview) {
+//			// 내가 쓴 리뷰가 존재하니까 그거 하나만 따로 저장해 놓기
+//		} else {
+//			// 없으면 그냥 진행
+//		}
 		
 		List<ReviewDTO> highlightReview = reviewMapper.getRandomRestaurant_Rv(Integer.parseInt(rnum));
 		int starAvg = reviewMapper.getStarAvg(Integer.parseInt(rnum));
