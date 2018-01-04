@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yeps.model.FileDTO;
 import com.yeps.model.MemberDTO;
 import com.yeps.model.MemberPhotoDTO;
 import com.yeps.service.MemberMapper;
@@ -729,86 +730,56 @@ public class MemberController {
 	@RequestMapping(value = "/member_fileUpLoad")
 	@ResponseBody
 	public HashMap<String, Object> fileUpLoad_member(HttpServletRequest req) {
-
 		HttpSession session = req.getSession();
-		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest) req;
+		return uploadFileLoop(mr, session);
+	}
+	
+	public HashMap<String, Object> uploadFileLoop(MultipartHttpServletRequest mr, HttpSession session) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		Iterator<String> it = mr.getFileNames();
 		String origin_fileName = null;
 		int fileSize = 0;
-		HashMap<String, Object> map = new HashMap<String, Object>();
-
-		boolean isExistMainPhoto = memberPhotoMapper.isExistMemberMainPhoto(memberDTO.getMnum());
-
-		if (!isExistMainPhoto) {
-			if (it.hasNext()) {
-				MultipartFile mf = mr.getFile(it.next());
-				origin_fileName = mf.getOriginalFilename();
-				fileSize = (int) mf.getSize();
-				String genId = UUID.randomUUID().toString();
-				String contentType = getExtension(origin_fileName);
-				String saveFileName = genId + "." + contentType;
-				File file = new File(saveFileName);
-
-				if (mf.getSize() != 0) {
-					try {
-						mf.transferTo(file);
-						S3Connection.getInstance().putObjectAsync("yepsbucket", "images/" + saveFileName, file,
-								"image/" + contentType);
-						MemberPhotoDTO MemberPhotoDTO = new MemberPhotoDTO();
-						MemberPhotoDTO.setMnum(memberDTO.getMnum());
-						MemberPhotoDTO.setFilename(saveFileName);
-						MemberPhotoDTO.setOrigin_filename(origin_fileName);
-						MemberPhotoDTO.setFilesize(fileSize);
-						int result = memberPhotoMapper.insertMemberPhoto(MemberPhotoDTO, "main");
-						if (result > 0) {
-							map.put("success", "파일 등록 성공");
-						} else {
-							memberPhotoMapper.deleteMemberPhotoToFilename(saveFileName);
-							S3Connection.getInstance().deleteObject("yepsbucket", "images/" + saveFileName);
-							map.put("failed", "파일 등록에 실패했습니다. 잠시후 다시 시도해주세요.");
-							return map;
-						}
-					} catch (Exception e) {
-						e.printStackTrace();
-						origin_fileName = null;
-						fileSize = 0;
-						file = null;
-						map.put("created_fail", "파일 생성 실패, 잠시 후 다시 시도하세요.");
-						return map;
-					}
-				} else {
-					map.put("upload_failed", "업로드할 수 없는 파일이 존재합니다.");
-				}
-			}
-		}
-
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
+		
+		int imageCount = 0;
 		while (it.hasNext()) {
+			imageCount++;
 			MultipartFile mf = mr.getFile(it.next());
 			origin_fileName = mf.getOriginalFilename();
 			fileSize = (int) mf.getSize();
 			String genId = UUID.randomUUID().toString();
 			String contentType = getExtension(origin_fileName);
 			String saveFileName = genId + "." + contentType;
-			File file = new File(saveFileName);
 
+			File file = new File(saveFileName);
 			if (mf.getSize() != 0) {
 				try {
 					mf.transferTo(file);
 					S3Connection.getInstance().putObjectAsync("yepsbucket", "images/" + saveFileName, file,
 							"image/" + contentType);
+					
 					MemberPhotoDTO MemberPhotoDTO = new MemberPhotoDTO();
 					MemberPhotoDTO.setMnum(memberDTO.getMnum());
 					MemberPhotoDTO.setFilename(saveFileName);
 					MemberPhotoDTO.setOrigin_filename(origin_fileName);
 					MemberPhotoDTO.setFilesize(fileSize);
-					int result = memberPhotoMapper.insertMemberPhoto(MemberPhotoDTO, "");
+					
+					boolean isExistMainPhoto = memberPhotoMapper.isExistMemberMainPhoto(memberDTO.getMnum());
+					int result = 0;
+					if (!isExistMainPhoto) {
+						result = memberPhotoMapper.insertMemberPhoto(MemberPhotoDTO, "main");
+					} else {
+						result = memberPhotoMapper.insertMemberPhoto(MemberPhotoDTO, "");
+					}
+
 					if (result > 0) {
 						map.put("success", "파일 등록 성공");
 					} else {
 						memberPhotoMapper.deleteMemberPhotoToFilename(saveFileName);
 						S3Connection.getInstance().deleteObject("yepsbucket", "images/" + saveFileName);
 						map.put("failed", "파일 등록에 실패했습니다. 잠시후 다시 시도해주세요.");
+						imageCount--;
 						file.delete();
 					}
 				} catch (Exception e) {
@@ -822,6 +793,10 @@ public class MemberController {
 				map.put("upload_failed", "업로드할 수 없는 파일이 존재합니다.");
 			}
 		}
+		memberMapper.updateImageCount(memberDTO.getMnum(), imageCount);
+		memberDTO.setImagecount(memberDTO.getImagecount()+imageCount);
+		session.setAttribute("memberinfo", memberDTO);
+		
 		MemberPhotoDTO mainPhoto = memberPhotoMapper.getMemberMainPhoto(memberDTO.getMnum());
 		session.setAttribute("mainPhoto", mainPhoto);
 		map.put("mnum", memberDTO.getMnum());
@@ -928,6 +903,8 @@ public class MemberController {
 					ismainphoto);
 			if (res > 0) {
 				S3Connection.getInstance().deleteObject("yepsbucket", "images/" + filename);
+				memberDTO.setImagecount(memberDTO.getImagecount()-1);
+				session.setAttribute("memberinfo", memberDTO);
 				if (memberDTO.getMnum() == userDTO.getMnum()) { // 내 사진을 변경했는지(내 사진을 변경했다면 현재 나의 메인 사진을 바꿔줘야함)
 					MemberPhotoDTO mainPhoto = memberPhotoMapper.getMemberMainPhoto(memberDTO.getMnum());
 					session.setAttribute("mainPhoto", mainPhoto);

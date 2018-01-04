@@ -1124,7 +1124,7 @@
 		});
 
    
-   $('html').on('mouseenter', '.selector', function(e) {
+   $('#star_rating').on('mouseenter', '.selector', function(e) {
 	   var star = $(e.target).val();
        $(this).parent().removeClass('i-selector-stars--extra-large-0');
        $(this).parent().removeClass('i-selector-stars--extra-large-1');
@@ -1148,7 +1148,7 @@
        } 
    });
    
-   $('html').on("mouseleave",".selector",function(){
+   $('#star_rating').on("mouseleave",".selector",function(){
 	   $(this).parent().removeClass('i-selector-stars--extra-large-0');
        $(this).parent().removeClass('i-selector-stars--extra-large-1');
        $(this).parent().removeClass('i-selector-stars--extra-large-2');
@@ -1157,13 +1157,13 @@
        $(this).parent().removeClass('i-selector-stars--extra-large-5');
     });
    
-   $('html').on("click",".selector",function(e){
+   $('#star_rating').on("click",".selector",function(e){
 	   var star = $(e.target).val();
        $('#star').val(star);
        $(this).parent().parent().parent().submit();
     });
    
-   $('html').on("click","#reply_flag_popup_submit_button",function(){
+   $('#star_rating').on("click","#reply_flag_popup_submit_button",function(){
 	   $('#reply_flag_popup_form').submit();
     });
 
@@ -1417,7 +1417,7 @@ function list(page){
            pagingHtml += '</div>';
            pagingHtml += '</div>';
 
-           $('.event_list_paging_section').append(pagingHtml);           
+           $('.event_list_paging_section').append(pagingHtml);
         },
         error : function(request, status, error) {
            alert("불러오기 실패");
@@ -1461,7 +1461,6 @@ function check() {
          		   addr[0] = '';
          		   addr[1] = '';
          	   }
-         	   
          	   
          	  $('.restContent-reviews').append(
   	     			   '<li>' +

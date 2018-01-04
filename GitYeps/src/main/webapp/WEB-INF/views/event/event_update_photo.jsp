@@ -144,7 +144,7 @@
 	
 	
 	<div class="loading_wapper">
-		<div class="loading_img" style="top: 300; left: 650;">
+		<div class="loading_img" style="top: 40%; left: 45%;">
 		</div>
 	</div>
 	
