@@ -1207,7 +1207,7 @@ function list(page){
         url : 'restaurant_content_ajax?curPage=' + page + '&rnum=' + rnum + '&SearchKeyword=' + searchKeyword,
         dataType : 'json',
         success : function(responseData){
-           $('.restContent-reviews li:not(:first)').remove();
+           $('.restContent-reviews li:not(:first)').detach();
            $.each(responseData.selectedDataRV,function(i,item){
         	   var userId;
         	   if(item.memberDTO.nickname == null) {
@@ -1445,7 +1445,7 @@ function check() {
          dataType : 'json',
          success : function(responseData){
             $('#SearchKeyword').val(responseData.SearchKeyword);
-            $('.restContent-reviews li:not(:first)').remove();
+            $('.restContent-reviews li:not(:first)').detach();
             $.each(responseData.selectedDataRV,function(i,item){
          	   var userId;
          	   if(item.memberDTO.nickname == null) {

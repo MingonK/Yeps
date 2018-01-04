@@ -15,7 +15,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into yeps_eventreview values (yeps_eventreview_seq.nextval, #{evnum}, #{mnum}, (select email from yeps_member where mnum = #{mnum}), #{eventReview_content}, to_date(sysdate, 'yyyy/mm/dd hh24:mi:ss'), #{ip})
 	</insert>
 	
-	
+	<delete id="deleteAllEventReivew" parameterType="int">
+		delete yeps_eventreview where evnum = #{evnum}
+	</delete>
 	
 	
 	

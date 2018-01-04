@@ -60,6 +60,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		update yeps_event set start_date = #{start_date}, start_time = #{start_time}, end_date = #{end_date, jdbcType=VARCHAR}, end_time = #{end_time, jdbcType=VARCHAR}, 
  				store_address = #{store_address}, event_content = #{event_content}, discount = #{discount}, event_category = #{event_category}, 
  				filenum = #{filenum, jdbcType=INTEGER}, zipNo = #{zipNo}, roadAddrPart1 = #{roadAddrPart1}, roadAddrPart2 = #{roadAddrPart2, jdbcType=VARCHAR}, 
- 				addrDetail = #{addrDetail} where eventname = #{eventname} and store_address = #{store_address}
+ 				addrDetail = #{addrDetail} where eventname = #{eventname}
  	</update>
 </mapper>

@@ -1095,27 +1095,27 @@
 				}
 			});
 			var contentString = [
-				'<div>',
-					'<div style="padding: 8px; background: white;">',
-						'<div style="display: inline-block;">',
-							'<div id="map_inner_eventphoto" style="float: left;">',
-								'<a href="event_content?evnum=${eventDTO.evnum}">',
-								'<c:if test="${empty photoInMap.filename}">',
-									'<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png" style="outline: none; width: 100px; height: 100px; border-radius: 4px;">',
-								'</c:if>',
-								'<c:if test="${!empty photoInMap.filename}">',
-									'<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photoInMap.filename}" style="outline: none; width: 100px; height: 100px; border-radius: 4px;">',
-								'</c:if>',
-								'</a>',
-							'</div>',
-							'<div id="map_inner_eventname" style="margin-left: 5px; float: left; width: 150px; heght: 100px; font-size: 12px;">',
-								'<a href="event_content?evnum=${eventDTO.evnum}">${eventDTO.eventname}</a>',
-								'<div style="margin-top: 5px;">',
-									'${eventDTO.roadAddrPart1}' + '${eventDTO.roadAddrPart2}' + '${eventDTO.addrDetail}',
-								'</div>',
-							'</div>',
-						'</div>',
-					'</div>',
+				'<div>'+
+					'<div style="padding: 8px; background: white;">'+
+						'<div style="display: inline-block;">'+
+							'<div id="map_inner_eventphoto" style="float: left;">'+
+								'<a href="event_content?evnum=${eventDTO.evnum}">'+
+								'<c:if test="${empty photoInMap.filename}">'+
+									'<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png" style="outline: none; width: 100px; height: 100px; border-radius: 4px;">'+
+								'</c:if>'+
+								'<c:if test="${!empty photoInMap.filename}">'+
+									'<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photoInMap.filename}" style="outline: none; width: 100px; height: 100px; border-radius: 4px;">'+
+								'</c:if>'+
+								'</a>'+
+							'</div>'+
+							'<div id="map_inner_eventname" style="margin-left: 5px; float: left; width: 150px; heght: 100px; font-size: 12px;">'+
+								'<a href="event_content?evnum=${eventDTO.evnum}">${eventDTO.eventname}</a>'+
+								'<div style="margin-top: 5px;">'+
+									'${eventDTO.store_address}'+
+								'</div>'+
+							'</div>'+
+						'</div>'+
+					'</div>'+
 				'</div>'].join('');
 			
 			var infowindow = new naver.maps.InfoWindow({
