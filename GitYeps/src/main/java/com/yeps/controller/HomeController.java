@@ -80,7 +80,6 @@ public class HomeController {
 		int NBPmnum = reviewMapper.new_BestGradePoint();
 		ReviewDTO review_of_the_day_reviewDTO = reviewMapper.review_mylist_info(NBPmnum);
 		
-		reviewMapper.review_mylist_updatedata(review_of_the_day_reviewDTO.getRvnum());
 		RestaurantDTO review_of_the_day_restaurantDTO = null;
 		if (review_of_the_day_reviewDTO != null) {
 			reviewMapper.review_mylist_updatedata(review_of_the_day_reviewDTO.getRvnum());
