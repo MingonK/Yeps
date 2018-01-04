@@ -144,7 +144,7 @@ public class ReviewMapper {
       return sqlSession.selectList("previous_Rv", map);
    }
 
-   // 2017.1.4 승지 추가
+   // 2018.1.4 승지 추가
    public List<ReviewDTO> getMemberReview(int mnum, int start, int end){
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("mnum", mnum);
@@ -152,4 +152,17 @@ public class ReviewMapper {
 		map.put("end", end);
 		return sqlSession.selectList("getMemberReview",map);
 	}
+   
+   // 2018. 1. 5일 민곤 추가
+   public boolean findMyReview(int rnum, int mnum) {
+	   HashMap<String, Integer> map = new HashMap<String, Integer>();
+	   map.put("rnum", rnum);
+	   map.put("mnum", mnum);
+	   ReviewDTO dto = sqlSession.selectOne("findMyReview", map);
+	   if(dto == null) {
+		   return false;
+	   } else {
+		   return true;
+	   }
+   }
 }
