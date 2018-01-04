@@ -396,7 +396,9 @@
       order by rvnum desc)A) where rn between #{start} and #{end}
   	</select>
   	
-   
+   <select id="findMyReview" parameterType="java.util.HashMap" resultType="ReviewDTO">
+   		select * from yeps_review where rnum = #{rnum} and mnum = #{mnum}
+   </select>
    
   	
 </mapper>		
