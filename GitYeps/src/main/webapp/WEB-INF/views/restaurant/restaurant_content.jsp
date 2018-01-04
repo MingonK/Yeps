@@ -5,23 +5,13 @@
 <html>
 <head>
 	<title>${getRest.rname}</title>
-<<<<<<< HEAD
-<script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js" ></script>
-<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=jD9qGVpvZh7Zobclojwp&submodules=geocoder"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/restStyle.css?ver=1"/>"/>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css?ver=1"/>"/>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css?ver=2"/>"/>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/message.css?ver=2"/>"/>
-<title>레스토랑</title>
-=======
 	<script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js" ></script>
 	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=jD9qGVpvZh7Zobclojwp&submodules=geocoder"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/restStyle.css?ver=1"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css?ver=1"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css?ver=2"/>"/>
->>>>>>> branch 'master' of https://github.com/MingonK/Yeps.git
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/message.css?ver=2"/>"/>
 </head>
 <%@include file="../top.jsp" %>
 	<div class="main" style="background: white;">
@@ -672,7 +662,7 @@
 <!-- 														</li> -->
 <!-- 													</ul>좋아요 -->
 <!-- 													</div> -->
-													<div class="review-footer-actions pull-right clearfix" style="    margin-top: 23px;    float: right;">
+													<div class="review-footer-actions pull-right clearfix" style="margin-top: 23px; float: right;">
 														<a class="chiclet-link show-tooltip js-analytics-click chiclet-link--flag" data-popup-open="popup-2" style="position: relative;display: inline-block;padding: 5px;border: 1px solid #ccc;border-radius: 3px;font-size: 12px;line-height: 1.5em;color: #999;background: transparent;box-shadow: none;white-space: nowrap;transition: all 0.3s ease;text-decoration: none;cursor: pointer;">
 															<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-flag icon--size-18 icon--currentColor">
 															    <svg id="18x18_flag" height="100%" viewBox="0 0 18 18" width="100%">
@@ -1106,9 +1096,9 @@
 	            <input type="text" name="title" id="sendformSubject" >
 	        <h4 align="left" style="color: #d32323;">Content is</h4>
 	            <textarea rows="4" name="content" id="sendformMessage"  placeholder="여기에 메시지를 입력하세요."></textarea>
-	                <button class="popup-send" id="sendMessage" type="button" data-popup-send="SendMessage" onclick="sendMessage()">SendMessage </button>
-			        <a data-popup-close="writeMessage" style="cursor:pointer;" href="#">  Close</a>
-					<a class="popup-close" data-popup-close="writeMessage" href="#" >X</a>
+	            <button class="popup-send" id="sendMessage" type="button" data-popup-send="SendMessage" onclick="sendMessage()">SendMessage </button>
+			    <a data-popup-close="writeMessage" style="cursor:pointer;" href="#">  Close</a>
+				<a class="popup-close" data-popup-close="writeMessage" href="#" >X</a>
 	    </div>
 	</form>
 </div> 
@@ -1121,12 +1111,7 @@
 		
 		
 <script>
-<<<<<<< HEAD
-
-
 	 $(function() {
-=======
->>>>>>> branch 'master' of https://github.com/MingonK/Yeps.git
 		//----- OPEN
 		$('[data-popup-open]').on('click', function(e)  {
 			var targeted_popup_class = jQuery(this).attr('data-popup-open');
@@ -1155,12 +1140,10 @@
 			$('body').css('overflow','auto');
 			e.stopPropagation();
         	e.preventDefault();;
-<<<<<<< HEAD
 			});
 		});   
 	 
 	 $('#sendMessage').click(function(){
-	    	
 	    	if($('#sendformTo').val()==''){
 	    	alert("받는 사람을 입력해주세요");
 	    	$('#sendformTo').focus()
@@ -1178,13 +1161,10 @@
 	    	}
 	        document.sendform.action = "message_send";
 	        document.sendform.submit(); 
-	    });
-=======
-		});
+	 });
 
->>>>>>> branch 'master' of https://github.com/MingonK/Yeps.git
    
-   $('#star_rating').on('mouseenter', '.selector', function(e) {
+   $(document).on('mouseenter', '.selector', function(e) {
 	   var star = $(e.target).val();
        $(this).parent().removeClass('i-selector-stars--extra-large-0');
        $(this).parent().removeClass('i-selector-stars--extra-large-1');
@@ -1208,7 +1188,7 @@
        } 
    });
    
-   $('#star_rating').on("mouseleave",".selector",function(){
+   $(document).on("mouseleave",".selector",function(){
 	   $(this).parent().removeClass('i-selector-stars--extra-large-0');
        $(this).parent().removeClass('i-selector-stars--extra-large-1');
        $(this).parent().removeClass('i-selector-stars--extra-large-2');
@@ -1217,13 +1197,13 @@
        $(this).parent().removeClass('i-selector-stars--extra-large-5');
     });
    
-   $('#star_rating').on("click",".selector",function(e){
+   $(document).on("click",".selector",function(e){
 	   var star = $(e.target).val();
        $('#star').val(star);
        $(this).parent().parent().parent().submit();
     });
    
-   $('#star_rating').on("click","#reply_flag_popup_submit_button",function(){
+   $(document).on("click","#reply_flag_popup_submit_button",function(){
 	   $('#reply_flag_popup_form').submit();
     });
 
@@ -1267,7 +1247,7 @@ function list(page){
         url : 'restaurant_content_ajax?curPage=' + page + '&rnum=' + rnum + '&SearchKeyword=' + searchKeyword,
         dataType : 'json',
         success : function(responseData){
-           $('.restContent-reviews li:not(:first)').detach();
+           $('.restContent-reviews > li:not(:first)').detach();
            $.each(responseData.selectedDataRV,function(i,item){
         	   var userId;
         	   if(item.memberDTO.nickname == null) {
@@ -1505,7 +1485,7 @@ function check() {
          dataType : 'json',
          success : function(responseData){
             $('#SearchKeyword').val(responseData.SearchKeyword);
-            $('.restContent-reviews li:not(:first)').detach();
+            $('.restContent-reviews > li:not(:first)').detach();
             $.each(responseData.selectedDataRV,function(i,item){
          	   var userId;
          	   if(item.memberDTO.nickname == null) {
