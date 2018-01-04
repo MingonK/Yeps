@@ -3806,6 +3806,7 @@ hidden
 }
 
 .resIMG_div_42 {
+	margin: auto;
 	background: #daecd2;
 	width: 80%;
 	box-sizing: border-box;
@@ -3827,6 +3828,7 @@ hidden
 }
 
 .resIMG_div_43 {
+	margin: auto;
 	background: #fff;
 	padding: 18px 18px 24px;
 	border: 1px solid #e6e6e6;
@@ -4243,6 +4245,7 @@ hidden
 }
 
 .resIMG_p_3 {
+	text-align: left;
 	margin-bottom: 12px;
 	-webkit-locale: "en";
 	display: block;
@@ -4260,6 +4263,7 @@ hidden
 }
 
 .resIMG_a_5 {
+	margin-left: -140;
 	display: inline-block;
 	padding: 5px;
 	border: 1px solid #ccc;
