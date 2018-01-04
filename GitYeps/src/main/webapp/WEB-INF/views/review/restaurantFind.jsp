@@ -4,6 +4,7 @@
 <html>
 <head>
 	<title>Write a Review - Yeps</title>
+	<link rel="shortcut icon" type="image⁄x-icon" href="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css?ver=4"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css?ver=6"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/message.css?ver=4"/>"/>
@@ -168,7 +169,7 @@
    															</span>
    															Write a Review
    														</a>
-   														<a class="resFind_a_2" href="review_write?rnum=${rdto.rnum} & star=${0}">
+   														<a class="resFind_a_2" href="review_write?rnum=${rdto.rnum}">
    															<span class="resFind_span_5">
    																<svg class="resFind_svg_2">
    																	<path d="M8.94 1l2.373 5.387 5.187.758-3.75 3.67.928 5.077-4.737-2.907L4.367 16l.885-5.186-3.75-3.67 5.187-.757L8.94 1z"></path>
