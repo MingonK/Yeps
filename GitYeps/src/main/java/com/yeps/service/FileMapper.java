@@ -48,8 +48,8 @@ public class FileMapper {
 		return sqlSession.update("updateFileContent", map);
 	}
 	
-	public List<FileDTO> getTargetEventFiles(int evnum) {
-		return sqlSession.selectList("getTargetEventFiles", evnum);
+	public List<FileDTO> getAllEventFiles(int evnum) {
+		return sqlSession.selectList("getAllEventFiles", evnum);
 	}
 	
 	public FileDTO getFYIEventFile(int evnum) {
@@ -108,5 +108,31 @@ public class FileMapper {
 		map.put("start", start);
 		map.put("end", end);
 		return sqlSession.selectList("getPagedEventFiles", map);
+	}
+	
+	
+	// 레스토랑 파일 필요부분
+	public List<FileDTO> getAllRestaurantFiles(int rnum) {
+		return sqlSession.selectList("getAllRestaurantFiles", rnum);
+	}
+	
+	public List<FileDTO> getRest_fileListForMe(int rnum, int mnum) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("rnum", rnum);
+		map.put("mnum", mnum);
+		return sqlSession.selectList("getRest_fileListForMe", map);
+	}
+	
+	public boolean isExistRestaurantMainPhoto(int rnum) {
+		try {
+			int num = sqlSession.selectOne("isExistRestaurantMainPhoto", rnum);
+			if (num > 0) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			return false;
+		}
 	}
 }

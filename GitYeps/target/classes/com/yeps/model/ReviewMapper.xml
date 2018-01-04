@@ -40,8 +40,10 @@
 		
 		<association javaType="MemberDTO" property="memberDTO">
 			<id column="mnum" property="mnum"></id>
+			<result column="mnum" property="mnum"></result>
 			<result column="email" property="email"></result>
 			<result column="reviewcount" property="reviewcount"></result>
+			<result column="imagecount" property="imagecount"></result>
 			<result column="nickname" property="nickname"></result>
 			<association javaType="MemberPhotoDTO" property="memberPhotoDTO">
 				<id column="filenum" property="filenum"></id>
@@ -59,7 +61,9 @@
         		, R.reg_date
         		, R.gradepoint
         		, M.email
+        		, M.mnum
         		, M.reviewcount
+        		, M.imagecount
         		, M.nickname
         		, P.filename
         		, P.ismainphoto
@@ -75,6 +79,7 @@
 		
 		<association javaType="MemberDTO" property="memberDTO">
 			<id column="mnum" property="mnum"></id>
+			<result column="mnum" property="mnum"></result>
 			<association javaType="MemberPhotoDTO" property="memberPhotoDTO">
 				<result column="filename" property="filename"></result>
 				<result column="ismainphoto" property="ismainphoto"></result>
@@ -86,7 +91,7 @@
 		</association>
 	</resultMap>
   	<select id="getRandomRestaurant_Rv" parameterType="int" resultMap="HighlightReviewMap">
-  		select * from (select R.content, P.filename, RT.rname
+  		select * from (select R.content, P.filename, RT.rname, M.mnum
 		from yeps_review R, yeps_member M, yeps_member_photos P, yeps_restaurant RT
 		where R.rnum = RT.rnum and R.mnum = M.mnum and M.mnum = P.mnum and P.ismainphoto = 'y' and R.rnum = #{rnum}
 		order by dbms_random.value) where 3 >= rownum
@@ -132,6 +137,7 @@
 		
 		<association javaType="MemberDTO" property="memberDTO">
 			<id column="mnum" property="mnum"></id>
+			<result column="mnum" property="mnum"></result>
 			<result column="email" property="email"></result>
 			<result column="reviewcount" property="reviewcount"></result>
 			<result column="imagecount" property="imagecount"></result>
@@ -151,6 +157,7 @@
         		, R.reg_date
         		, R.gradepoint
         		, M.email
+        		, M.mnum
         		, M.reviewcount
         		, M.imagecount
         		, M.nickname
@@ -203,31 +210,7 @@
    </select>
    
    
-	<resultMap type="reviewDTO" id="LastReviewMap">
-		<id column="rvnum" property="rvnum"/>
-		<result column="content" property="content"></result>
-		
-		<association javaType="MemberDTO" property="memberDTO">
-			<id column="mnum" property="mnum"></id>
-			<association javaType="MemberPhotoDTO" property="memberPhotoDTO">
-				<result column="filename" property="filename"></result>
-				<result column="ismainphoto" property="ismainphoto"></result>
-			</association>
-		</association>
-	</resultMap>
- 
-	<select id="getLastReview" parameterType="int" resultMap="LastReviewMap"> 
-  		select * from (select 
-  								R.content
-  								, P.filename
-  					   from yeps_review R, yeps_member M, yeps_member_photos P
-  					   where R.mnum = M.mnum and M.mnum = P.mnum and P.ismainphoto = 'y' and rnum=#{rnum} 
-  					   order by rvnum desc) 
-  				 where rownum = 1 
-  	</select>
-   
-   
-   	<resultMap type="reviewDTO" id="reviewMap">
+	<resultMap type="reviewDTO" id="reviewMap">
 		<id column="rvnum" property="rvnum"/>
 		<result column="rnum" property="rnum"></result>
 		<result column="content" property="content"></result>
@@ -236,6 +219,7 @@
 		
 		<association javaType="MemberDTO" property="memberDTO">
 			<id column="mnum" property="mnum"></id>
+			<result column="mnum" property="mnum"></result>
 			<result column="email" property="email"></result>
 			<result column="reviewcount" property="reviewcount"></result>
 			<result column="imagecount" property="imagecount"></result>
@@ -256,6 +240,7 @@
         		, R.reg_date
         		, R.gradepoint
         		, M.email
+        		, M.mnum
         		, M.reviewcount
         		, M.imagecount
         		, M.nickname
@@ -276,6 +261,7 @@
 		
 		<association javaType="MemberDTO" property="memberDTO">
 			<id column="mnum" property="mnum"></id>
+			<result column="mnum" property="mnum"></result>
 			<result column="email" property="email"></result>
 			<result column="reviewcount" property="reviewcount"></result>
 			<result column="imagecount" property="imagecount"></result>
@@ -303,6 +289,7 @@
         		, R.reg_date
         		, R.gradepoint
         		, M.email
+        		, M.mnum
         		, M.reviewcount
         		, M.imagecount
         		, M.nickname
@@ -331,6 +318,7 @@
       
       	<association javaType="MemberDTO" property="memberDTO">
 			<id column="mnum" property="mnum"></id>
+			<result column="mnum" property="mnum"></result>
          	<result column="email" property="email"></result>
          	<result column="reviewcount" property="reviewcount"></result>
          	<result column="imagecount" property="imagecount"></result>
@@ -367,5 +355,31 @@
   	</select>
    
    
+   
+   
+   <resultMap type="reviewDTO" id="LastReviewMap">
+		<id column="rvnum" property="rvnum"/>
+		<result column="content" property="content"></result>
+		
+		<association javaType="MemberDTO" property="memberDTO">
+			<id column="mnum" property="mnum"></id>
+			<result column="mnum" property="mnum"></result>
+			<association javaType="MemberPhotoDTO" property="memberPhotoDTO">
+				<result column="filename" property="filename"></result>
+				<result column="ismainphoto" property="ismainphoto"></result>
+			</association>
+		</association>
+	</resultMap>
+ 
+	<select id="getLastReview" parameterType="int" resultMap="LastReviewMap"> 
+  		select * from (select 
+  								R.content
+  								, P.filename
+  								, M.mnum
+  					   from yeps_review R, yeps_member M, yeps_member_photos P
+  					   where R.mnum = M.mnum and M.mnum = P.mnum and P.ismainphoto = 'y' and rnum=#{rnum} 
+  					   order by rvnum desc) 
+  				 where rownum = 1 
+  	</select>
   	
 </mapper>		

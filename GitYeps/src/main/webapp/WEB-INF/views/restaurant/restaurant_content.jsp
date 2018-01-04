@@ -9,6 +9,7 @@
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=jD9qGVpvZh7Zobclojwp&submodules=geocoder"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/restStyle.css?ver=1"/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css?ver=1"/>"/>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css?ver=2"/>"/>
 
 <title>레스토랑</title>
@@ -21,7 +22,7 @@
 					<div class="biz-page-header-left claim-status" style="-webkit-box-flex: 1;flex: 1;min-width: 0;min-height: 0;padding-right: 30px;">
 						<div class="u-space-t1" style="margin-top: 6px !important;">
 						<h1
-							style="display: inline; padding-top: 0px; font-size: 36px; line-height: 1.16667em; margin-bottom: 6px; text-shadow: 0 1px rgba(255, 255, 255, 0.7); word-wrap: break-word !important; word-break: break-word !important; overflow-wrap: break-word !important; font-weight: bold; color: #333; margin: 0 0 6px;">${getRest.rname }</h1>
+							style="display: inline; padding-top: 0px; font-size: 36px; line-height: 1.16667em; margin-bottom: 6px; text-shadow: 0 1px rgba(255, 255, 255, 0.7); word-wrap: break-word !important; word-break: break-word !important; overflow-wrap: break-word !important; font-weight: bold; color: #333; margin: 0 0 6px;">${getRest.rname}</h1>
 					</div>
 						<div class="biz-main-info embossed-text-white"style="margin-top: 9px;text-shadow: 0 1px rgba(255,255,255,0.7);">
 							<div class="rating-info clearfix" style="margin-bottom: 9px;height:auto;overflow:hidden;">
@@ -58,7 +59,7 @@
 						</div>
 					</div>
 					
-					<div class="biz-page-header-right u-relative"style="display: table; position: relative !important;">
+					<div class="biz-page-header-right u-relative" style="display: table; position: relative !important;">
 						<div class="biz-page-actions nowrap"style="text-align: right; overflow: hidden; padding-bottom: 1px; margin-top: -1px; white-space: nowrap;">
 						<a href="review_write?rnum=${getRest.rnum}" style="text-decoration: none;" class="ybtn review_write">
 							<span aria-hidden="true" style="fill: white; width: 24px; height: 24px;" class="icon">
@@ -69,7 +70,7 @@
 							리뷰쓰기 
 						</a> 
 						<span class="ybtn-group clearfix" style="float: right;margin-top: 4px;"> 
-						   <a class="ybtn ybtn--small add-photo-button" href="restaurant_uploadForm2?rnum=${getRest.rnum}" style="">
+						   <a class="ybtn ybtn--small add-photo-button" href="restaurant_update_photo?rnum=${getRest.rnum}">
 							  <span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-add-photo icon--size-18 icon--currentColor">
 							     <svg id="18x18_add_photo" height="100%" viewBox="0 0 18 18" width="100%">
 						   		    <path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 4.75a4.25 4.25 0 1 0 0 8.5 4.25 4.25 0 0 0 0-8.5zM11 10h-1v1a1 1 0 0 1-2 0v-1H7a1 1 0 0 1 0-2h1V7a1 1 0 0 1 2 0v1h1a1 1 0 0 1 0 2z"></path>
@@ -314,13 +315,13 @@
 													<div class="arrange arrange--middle u-space-b1"> <!-- 추가한 것 -->
 														<div class="restContent-arrange-middle">
 															<div class="restContent-feed-search" style="margin-right: 30px !important;">
-																<form class="restContent-form" name="restContent" onsubmit="return check()" style="margin-bottom: 0;display: table; min-width: 100%; table-layout: auto;" action="review_keyword" method="post">
+																<form class="restContent-form" name="restContent" style="margin-bottom: 0; display: table; min-width: 100%; table-layout: auto;" method="post">
 																	<div class="restContent-arrange-unit" style="width: 100%;box-sizing: border-box;display: table-cell;vertical-align: top;">
-																		<input type="text" placeholder="Search within the reviews" name="SearchKeyword" autocomplete="on" style="margin: 0; display: block; box-sizing: border-box; width: 100%; padding: 5.5px 9px; background: #fff; border: 1px solid #999; border-radius: 3px; font-size: 14px; line-height: 1.29em; color: inherit; font: inherit; font-weight: normal;">
+																		<input type="text" placeholder="Search within the reviews" name="SearchKeyword" id="SearchKeyword" autocomplete="on" style="margin: 0; display: block; box-sizing: border-box; width: 100%; padding: 5.5px 9px; background: #fff; border: 1px solid #999; border-radius: 3px; font-size: 14px; line-height: 1.29em; color: inherit; font: inherit; font-weight: normal;">
 																		<input type="hidden" name="rnum" value="${getRest.rnum}">
 																	</div>
 																	<div class="rsetContent-arrange-unit-button" style="box-sizing: border-box;display: table-cell;vertical-align: top;">
-																		<button type="submit" value="submit" class="restInsert-button" style="position: relative; left: -4px; width: calc(100% + 4px); border-radius: 0 3px 3px 0; box-shadow: none; padding: 5px 8px; font-size: 12px; line-height: 1.5em; color: white; border-color: #8d0005; background-color: #d90007; background: linear-gradient(#d90007, #c91400);">
+																		<button type="button" value="submit" onclick="check()" class="restInsert-button" style="position: relative; left: -4px; width: calc(100% + 4px); border-radius: 0 3px 3px 0; box-shadow: none; padding: 5px 8px; font-size: 12px; line-height: 1.5em; color: white; border-color: #8d0005; background-color: #d90007; background: linear-gradient(#d90007, #c91400);">
 																			<span>
 																				<span class="restContent-icon" style="width: 18px; height: 18px; margin: -9px 0; fill: #fff; display: inline-block; vertical-align: middle; position: relative; overflow: hidden; top: -.1em;">
 																					<span aria-hidden="true" style="width: 18px; height: 18px;" class="restContent-icon18">
@@ -419,7 +420,7 @@
 										</div>
 									</li>
 										
-								<c:forEach var="getReview" items="${selectedDataRV}">	
+									<c:forEach var="getReview" items="${selectedDataRV}">	
 									<li>
 										<div class="restContent-review-with" style="margin: 0 -15px; display: flex;">
 											<div class="restContent-user" style="float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 37.5%;">
@@ -663,7 +664,7 @@
 <!-- 													</ul>좋아요 -->
 <!-- 													</div> -->
 													<div class="review-footer-actions pull-right clearfix" style="    margin-top: 23px;    float: right;">
-														<a class="chiclet-link show-tooltip js-analytics-click chiclet-link--flag" style="position: relative;display: inline-block;padding: 5px;border: 1px solid #ccc;border-radius: 3px;font-size: 12px;line-height: 1.5em;color: #999;background: transparent;box-shadow: none;white-space: nowrap;transition: all 0.3s ease;text-decoration: none;cursor: pointer;">
+														<a class="chiclet-link show-tooltip js-analytics-click chiclet-link--flag" data-popup-open="popup-2" style="position: relative;display: inline-block;padding: 5px;border: 1px solid #ccc;border-radius: 3px;font-size: 12px;line-height: 1.5em;color: #999;background: transparent;box-shadow: none;white-space: nowrap;transition: all 0.3s ease;text-decoration: none;cursor: pointer;">
 															<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-flag icon--size-18 icon--currentColor">
 															    <svg id="18x18_flag" height="100%" viewBox="0 0 18 18" width="100%">
 															    	<path d="M6 10V3c4.976 1.098 4.024-1 8 0v7c-4.024-.976-3.024 1.024-8 0zM4 2h1v14H4V2z"></path>
@@ -688,89 +689,89 @@
 									</c:forEach>
 								</ul>
 								<div class="event_list_paging_section" style="font-size: 14px;">
-         <div class="event_list_pagination_block">
-            <div class="event_list_pagination_wrap">
-               <div class="event_list_page_of_pages">
-                  <c:if test="${map.YepsPager.blockEnd == 0}">
-                     Page ${map.YepsPager.curPage} of 1
-                  </c:if>
-                  <c:if test="${map.YepsPager.blockEnd != 0}">
-                     Page ${map.YepsPager.curPage} of ${map.YepsPager.blockEnd}
-                  </c:if>
-               </div>
+         							<div class="event_list_pagination_block">
+            							<div class="event_list_pagination_wrap">
+               								<div class="event_list_page_of_pages">
+                  							<c:if test="${map.YepsPager.blockEnd == 0}">
+                  							    Page ${map.YepsPager.curPage} of 1
+                  							</c:if>
+                  							<c:if test="${map.YepsPager.blockEnd != 0}">
+                     							Page ${map.YepsPager.curPage} of ${map.YepsPager.blockEnd}
+                  							</c:if>
+              		 						</div>
 <!--                페이징 처리!! 현재페이지는 span이 되고 나머지는 a로 -->
-               <c:if test="${map.YepsPager.blockEnd != 1}">
-               <div class="event_list_page_link_wrapper">
-                  <div class="event_list_page_link_wrap">
+               							<c:if test="${map.YepsPager.blockEnd != 1}">
+               							<div class="event_list_page_link_wrapper">
+                  							<div class="event_list_page_link_wrap">
                   
-                  <c:if test="${map.YepsPager.curBlock > 1}">
-                     <div class="event_list_next_block">
-                        <a class="event_list_next_block_action" href="javascript:list('1')">
-                           <span>Start</span>
-                        </a>
-                     </div>
-                  </c:if>
+                  							<c:if test="${map.YepsPager.curBlock > 1}">
+                     							<div class="event_list_next_block">
+                        							<a class="event_list_next_block_action" href="javascript:list('1')">
+                           								<span>Start</span>
+                        							</a>
+                     							</div>
+                  							</c:if>
 
-                  <c:if test="${map.YepsPager.curBlock > 1}">
-                     <div class="event_list_next_block">
-                        <a class="event_list_next_block_action" href="javascript:list('${map.YepsPager.prevPage}')">
-                           <span style="width: 24px; height: 24px; fill: currentColor;" class="icon">
-                              <svg class="icon_svg">
-                                 <path d="M14.475 18.364l1.414-1.414L10.94 12l4.95-4.95-1.415-1.414L8.11 12l6.365 6.364z"></path>
-                              </svg>
-                           </span>
-                           <span>Previous</span>
-                        </a>
-                     </div>
-                  </c:if>
+                  							<c:if test="${map.YepsPager.curBlock > 1}">
+                     							<div class="event_list_next_block">
+                       								<a class="event_list_next_block_action" href="javascript:list('${map.YepsPager.prevPage}')">
+                           								<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">
+                              								<svg class="icon_svg">
+                                 								<path d="M14.475 18.364l1.414-1.414L10.94 12l4.95-4.95-1.415-1.414L8.11 12l6.365 6.364z"></path>
+                              								</svg>
+                           								</span>
+                           								<span>Previous</span>
+                        							</a>
+                     							</div>
+                  							</c:if>
                   
-                  <c:forEach var="num" begin="${map.YepsPager.blockBegin}" end="${map.YepsPager.blockEnd}">
-                     <div class="event_list_page_link_option">
-                     <c:choose>
-                        <c:when test="${num == map.YepsPager.curPage}">
-                           <span class="event_list_page_option_action">
-                              ${num}
-                           </span>
-                        </c:when>
-                        <c:otherwise>
-                           <a href="javascript:list('${num}')" class="event_list_page_option_link_action">
-                              ${num}
-                           </a>
-                        </c:otherwise>
-                     </c:choose>
-                     </div>
-                  </c:forEach>
-                  
-                  <c:if test="${map.YepsPager.curBlock <= map.YepsPager.totBlock}">
-                     <div class="event_list_next_block">
-                        <a class="event_list_next_block_action" href="javascript:list('${map.YepsPager.nextPage}')">
-                           <span>Next</span>
-                           <span style="width: 24px; height: 24px; fill: currentColor;" class="icon">
-                              <svg class="icon_svg">
-                                 <path d="M9.525 5.636L8.11 7.05 13.06 12l-4.95 4.95 1.415 1.414L15.89 12 9.524 5.636z"></path>
-                              </svg>
-                           </span>
-                        </a>
-                     </div>
-                  </c:if>
-                  
-                  <c:if test="${map.YepsPager.curPage <= map.YepsPager.totPage}">
-                     <div class="event_list_next_block">
-                        <a class="event_list_next_block_action" href="javascript:list('${map.YepsPager.totPage}')">
-                           <span>End</span>
-                        </a>
-                     </div>
-                  </c:if>
-                  </div>
-               </div>
-               </c:if>
-            </div>
-         </div>
-      </div>
-									</div>
-								</div>
+							                <c:forEach var="num" begin="${map.YepsPager.blockBegin}" end="${map.YepsPager.blockEnd}">
+							                   <div class="event_list_page_link_option">
+							                   <c:choose>
+							                      <c:when test="${num == map.YepsPager.curPage}">
+							                         <span class="event_list_page_option_action">
+							                            ${num}
+							                         </span>
+							                      </c:when>
+							                      <c:otherwise>
+							                         <a href="javascript:list('${num}')" class="event_list_page_option_link_action">
+							                            ${num}
+							                         </a>
+							                      </c:otherwise>
+							                   </c:choose>
+							                   </div>
+							                </c:forEach>
+							                
+							                <c:if test="${map.YepsPager.curBlock <= map.YepsPager.totBlock}">
+							                   <div class="event_list_next_block">
+							                      <a class="event_list_next_block_action" href="javascript:list('${map.YepsPager.nextPage}')">
+							                         <span>Next</span>
+							                         <span style="width: 24px; height: 24px; fill: currentColor;" class="icon">
+							                            <svg class="icon_svg">
+							                               <path d="M9.525 5.636L8.11 7.05 13.06 12l-4.95 4.95 1.415 1.414L15.89 12 9.524 5.636z"></path>
+							                            </svg>
+							                         </span>
+							                      </a>
+							                   </div>
+							                </c:if>
+							                
+							                <c:if test="${map.YepsPager.curPage <= map.YepsPager.totPage}">
+							                   <div class="event_list_next_block">
+							                      <a class="event_list_next_block_action" href="javascript:list('${map.YepsPager.totPage}')">
+							                         <span>End</span>
+							                      </a>
+							                   </div>
+							                </c:if>
+						                  </div>
+						               </div>
+						               </c:if>
+						            </div>
+						         </div>
+						      </div>
 							</div>
+						</div>
 					</div>
+				</div>
 				<div class="restContent-beta" style="padding: 0 30px 0 0; margin-right: -15px; float: left; min-height: 1px; box-sizing: border-box; width: 33.33333%;height:auto; box-shadow:-1px 0 0 #e6e6e6;display:inline-block;">
 					<div class="restContent-open-rail clearfix" style=" margin-left: -1px;padding-left: 1px;background: #fff;width:300px;height:auto;">
 						<div class="restContent-summary" style="padding: 3px 11px 3px 6px;margin-bottom: 18px;background: #f5f5f5;border: 1px solid #e6e6e6;border-radius: 4px;width:280px;height:auto;">
@@ -1020,8 +1021,77 @@
 					</div>
 				</div>	
 			</div>
-				</div>
 		</div>
+	</div>
+	
+	
+	<div class="flag_content_popup" data-popup="popup-2">
+    	<div class="popup-inner" style="width: 465px; z-index: 1; height: auto !important;">
+    	    <div id="flag_content_popup_title">
+    	    	<div id="flag_content_popup_close" data-popup-close="popup-2">
+    				<h4 style="display: table-cell; padding: 0px 7px;">×</h4>
+    			</div>
+    	    	<h2>
+    	    		부적절한 댓글 신고
+    	    	</h2>
+    	    </div>
+    	    <div id="reply_flag_content_popup_error_message">
+    	    	<span id="popup_error_message">
+    	    		<span id="popup_error_message_icon" style="color: #d32323">
+    	    			<svg>
+    	    				<path d="M9 1a8 8 0 1 0 0 16A8 8 0 0 0 9 1zM8 5a1 1 0 0 1 2 0v4a1 1 0 0 1-2 0V5zm1 9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"></path>
+    	    			</svg>
+    	    		</span>
+    	    		신고사유를 선택하고 내용을 상세하게 작성해주세요.
+    	    	</span>
+    	    </div>
+    	    
+    	    <div id="flag_popup_description" style="padding: 0 12px;">
+    	    	<div>
+    	    		<p style="margin: 12px 0;">이 댓글을 신고하는 이유를 선택하고 상세하게 설명해주세요.</p>
+    	    		<form name="reply_flag_popup_form" id="reply_flag_popup_form" action="#" method="post" onsubmit="return reply_report_check()" style="margin-bottoom: 0;">
+    	    			<div>
+    	    				<label id="reply_flag_popup_form_label" for="reason_field" style="display: inline-block; font-weight: bold; margin: 0 0 6px;">
+    	    					이유
+    	    				</label>
+    	    				<select id="reason_field">
+    	    					<option value="default" selected>신고 사유를 선택하세요.</option>
+    	    					<option value="inappropriate_post">부적절한 홍보 게시물</option>
+    	    					<option value="Eroticism">음란성, 선정성 또는 부적합한 내용</option>
+    	    					<option value="swear_word">특정인 대상의 비방/욕설</option>
+    	    					<option value="Privacy_infringement">명예훼손/사생활 침해 및 저작권침해 등</option>
+    	    					<option value="personal_information">개인정보 공개</option>
+    	    					<option value="plaster">같은 내용의 반복 게시 (도배)</option>
+    	    					<option value="other">기타</option>
+    	    				</select>
+    	    			</div>
+    	    			<div id="flag_popup_descripte_container">
+    	    				<div id="flag_popup_descripte">
+    	    					<label id="reply_flag_popup_descripte_alert">신고내용을 상세하게 작성해주세요.</label>
+    	    					<textarea id="reply_flag_popup_descripte_field" name="flag_popup_descripte_field"></textarea>
+    	    				</div>
+    	    			</div>
+    	    		</form>
+    	    	</div>
+    	    </div>
+     	  	<div id="flag_popup_footer">
+     	  		<div id="flag_popup_buttons">
+     	  			<button id="reply_flag_popup_submit_button" type="submit" value="submit">
+     	  				<span>제출하기</span>
+     	  			</button>
+     	  			<a href="#" data-popup-close="popup-2">
+    					Close
+    				</a>
+     	  		</div>
+     	  	</div>
+    	</div>
+	</div>
+	
+	
+	
+	<div class="loading_wapper" >
+      	<div class="loading_img" style="left: 40%; top: 40%;"></div>
+   	</div>
 		
 		
 <script>
@@ -1030,73 +1100,576 @@
 		$('[data-popup-open]').on('click', function(e)  {
 			var targeted_popup_class = jQuery(this).attr('data-popup-open');
 			$('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
-			e.preventDefault();
+			if(targeted_popup_class == 'popup-2') {
+        		var memberinfo ='${sessionScope.memberinfo}';
+        		if(!memberinfo.length) {
+         			$(location).attr("href", "event_report");
+         			return;
+        		}
+        	}
+			
+			
+			$('body').css('overflow','hidden');
+        	$('#reply_flag_content_popup_error_message').css('display', 'none');
+        	$('#reply_flag_popup_descripte_alert').css('color', 'black');
+        	$('#reply_flag_popup_form_label').css('color', 'black');
+        	$("#reason_field").val("default").prop("selected", true);
+ 			e.stopPropagation();
+        	e.preventDefault();
 		});
 	    
 		//----- CLOSE
 		$('[data-popup-close]').on('click', function(e)  {
 			var targeted_popup_class = jQuery(this).attr('data-popup-close');
 			$('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
-			e.preventDefault();
+			$('body').css('overflow','auto');
+			e.stopPropagation();
+        	e.preventDefault();;
 			});
-		});
-		 
-   $(document).ready(function() {
-      $('.selector').hover(function(e) {
-         var star = $(e.target).val();
-         $(this).parent().removeClass('i-selector-stars--extra-large-0');
-         $(this).parent().removeClass('i-selector-stars--extra-large-1');
-         $(this).parent().removeClass('i-selector-stars--extra-large-2');
-         $(this).parent().removeClass('i-selector-stars--extra-large-3');
-         $(this).parent().removeClass('i-selector-stars--extra-large-4');
-         $(this).parent().removeClass('i-selector-stars--extra-large-5');
-         
-         if(star == 0){
-            $(this).parent().addClass('i-selector-stars--extra-large-0');
-         }else if(star == 1){
-            $(this).parent().addClass('i-selector-stars--extra-large-1');
-         }else if(star == 2){
-            $(this).parent().addClass('i-selector-stars--extra-large-2');
-         }else if(star == 3){
-            $(this).parent().addClass('i-selector-stars--extra-large-3');
-         }else if(star == 4){
-            $(this).parent().addClass('i-selector-stars--extra-large-4');
-         }else if(star == 5){
-            $(this).parent().addClass('i-selector-stars--extra-large-5');
-         } 
-      });
-      
-         
-      $('.selector').mouseleave(function(){
-         $(this).parent().removeClass('i-selector-stars--extra-large-0');
-         $(this).parent().removeClass('i-selector-stars--extra-large-1');
-         $(this).parent().removeClass('i-selector-stars--extra-large-2');
-         $(this).parent().removeClass('i-selector-stars--extra-large-3');
-         $(this).parent().removeClass('i-selector-stars--extra-large-4');
-         $(this).parent().removeClass('i-selector-stars--extra-large-5');
-      });   
-      
-      
-      $('.selector').click(function(e){ 
-         var star = $(e.target).val();
-         $('#star').val(star);
-         $(this).parent().parent().parent().submit();
-      });
-      
-      
-      
-   });   
+		});   
+   
+   $(document).on('mouseenter', '.selector', function(e) {
+	   var star = $(e.target).val();
+       $(this).parent().removeClass('i-selector-stars--extra-large-0');
+       $(this).parent().removeClass('i-selector-stars--extra-large-1');
+       $(this).parent().removeClass('i-selector-stars--extra-large-2');
+       $(this).parent().removeClass('i-selector-stars--extra-large-3');
+       $(this).parent().removeClass('i-selector-stars--extra-large-4');
+       $(this).parent().removeClass('i-selector-stars--extra-large-5');
+       
+       if(star == 0){
+          $(this).parent().addClass('i-selector-stars--extra-large-0');
+       }else if(star == 1){
+          $(this).parent().addClass('i-selector-stars--extra-large-1');
+       }else if(star == 2){
+          $(this).parent().addClass('i-selector-stars--extra-large-2');
+       }else if(star == 3){
+          $(this).parent().addClass('i-selector-stars--extra-large-3');
+       }else if(star == 4){
+          $(this).parent().addClass('i-selector-stars--extra-large-4');
+       }else if(star == 5){
+          $(this).parent().addClass('i-selector-stars--extra-large-5');
+       } 
+   });
+   
+   $(document).on("mouseleave",".selector",function(){
+	   $(this).parent().removeClass('i-selector-stars--extra-large-0');
+       $(this).parent().removeClass('i-selector-stars--extra-large-1');
+       $(this).parent().removeClass('i-selector-stars--extra-large-2');
+       $(this).parent().removeClass('i-selector-stars--extra-large-3');
+       $(this).parent().removeClass('i-selector-stars--extra-large-4');
+       $(this).parent().removeClass('i-selector-stars--extra-large-5');
+    });
+   
+   $(document).on("click",".selector",function(e){
+	   var star = $(e.target).val();
+       $('#star').val(star);
+       $(this).parent().parent().parent().submit();
+    });
+   
+   $(document).on("click","#reply_flag_popup_submit_button",function(){
+	   $('#reply_flag_popup_form').submit();
+    });
+
 </script>
 
 
 <script type="text/javascript">
 //**원하는 페이지로 이동시 검색조건, 키워드 값을 유지하기 위해 
-function list(page){
-    location.href="restaurant_content?curPage="+page;
+var rnum = '${getRest.rnum}';
+
+function reply_report_check() {
+	var selected = document.getElementById('reason_field');
+	if(selected.options[selected.selectedIndex].value == "default") {
+		document.getElementById('reply_flag_content_popup_error_message').style.display = 'block';
+		document.getElementById('reply_flag_popup_form_label').style.color = '#d32323';
+		return false;
+	} else if(reply_flag_popup_form.reply_flag_popup_descripte_field.value == "") {
+		document.getElementById('reply_flag_content_popup_error_message').style.display = 'block';
+		document.getElementById('reply_flag_popup_form_label').style.color = '#d32323';
+		return false;
+	}
+	return true;
 }
 
-function check() {
+function list(page){
+	var searchKeyword = $('#SearchKeyword').val();
 	
+	$(document).ajaxStart(function() {
+		$('body').css('overflow', 'hidden');
+		$('html').scrollTop(0);
+		$('.loading_wapper').fadeIn(500);
+	})
+					
+	$(document).ajaxStop(function() {
+		$('body').css('overflow', 'auto');
+		$('.loading_wapper').fadeOut(500);
+	})
+	
+    $.ajax({
+        type : 'post',
+        url : 'restaurant_content_ajax?curPage=' + page + '&rnum=' + rnum + '&SearchKeyword=' + searchKeyword,
+        dataType : 'json',
+        success : function(responseData){
+           $('.restContent-reviews li:not(:first)').remove();
+           $.each(responseData.selectedDataRV,function(i,item){
+        	   var userId;
+        	   if(item.memberDTO.nickname == null) {
+        		   userId = item.memberDTO.email;
+        	   } else {
+        		   userId = item.memberDTO.nickname;
+        	   }
+        	   var address = item.memberDTO.address;
+        	   var addr = [];
+        	   if(address != null) {
+        		   addr = address.split(' ');
+        	   } else {
+        		   addr[0] = '';
+        		   addr[1] = '';
+        	   }
+        	   
+          	 $('.restContent-reviews').append(
+   	     			   '<li>' +
+   		     			   '<div class="restContent-review-with" style="margin: 0 -15px; display: flex;">' +
+   	    		 		   		'<div class="restContent-user" style="float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 37.5%;">' +
+   		     			   			'<div class="restContent-user-content" style="margin-top: -3px;">' +
+										'<div class="restContent-meida-block" style="font-size: 12px; line-height: 1.5em; position: relative; display: flex;">' +
+											'<div class="restContent-media-avatar" style="border-right-width: 9px;border-right: 6px solid transparent;border-left: none;">' +
+												'<div class="restContent-photo-box">' +
+													'<a href="member_details?mnum='+ item.memberDTO.mnum +'" style="color: #0073bb;">' +
+														'<img class="restContent-photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/' + item.memberDTO.memberPhotoDTO.filename + '" width="60">' +
+													'</a>' +
+												'</div>' +
+											'</div>' +
+											'<div class="restContent-media-story" style="-webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;">' +
+												'<ul class="restContent-user-info">' +
+													'<li class="restContent-user-name">' +
+														'<a href="#" class="restContent-user-display-name" style="font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; cursor: pointer;">' +
+															userId +
+														'</a>' +
+													'</li>' +
+													'<li class="restContnet-user-location">' +
+														'<b style="font-weight: bold;">' +
+															addr[0] + addr[1] +
+														'</b>' +
+													'</li>' +
+												'</ul>' +
+												'<ul class="restContent-user-stats">' +
+													'<li class="restContent-review-count" style="color: #666;display: list-item;text-align: -webkit-match-parent;">'+
+														'<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-review icon--size-18">'+
+														   '<svg class="icon_svg">'+
+														        '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_review">'+
+														        	'<svg id="18x18_review" height="100%" viewBox="0 0 18 18" width="100%">'+
+												    		    		'<path d="M13 3H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1.505 9.643l-2.526-1.55L6.526 12.7 7 9.934 5 7.977l2.766-.404L8.97 4.7l1.264 2.873L13 7.977l-2 1.957.495 2.71z"></path>'+
+													        	'</svg>'+
+													        '</use>'+
+													    '</svg>'+
+													'</span>'+
+													'<b style="font-weight: bold;"> ' + item.memberDTO.reviewcount + '</b> reviews'+
+												'</li>'+
+												'<li class="restContent-photo-count" style="color: #666;display: list-item;text-align: -webkit-match-parent;">'+
+													'<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-camera icon--size-18">'+
+													    '<svg class="icon_svg">'+
+													        '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_camera">'+
+														        	'<svg id="18x18_camera" height="100%" viewBox="0 0 18 18" width="100%">'+
+													        		'<path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 6.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path>'+
+													        	'</svg>'+
+													       ' </use>'+
+													    '</svg>'+
+													'</span>'+
+													'<b style="font-weight: bold;"> '+ item.memberDTO.imagecount +'</b> photos'+
+												'</li>'+
+											'</ul>'+
+										'</div>'+
+									'</div>'+
+									'<ul class="restContent-list-link">'+									
+										'<li>'+
+											'<a class="restContent-share-review" href="#" style="display: table; min-width: 100%; table-layout: auto; cursor: pointer;">'+
+												'<div class="action-link_icon arrange_unit" style="padding-top: 3px; padding-bottom: 3px; vertical-align: middle; padding-right: 12px; box-sizing: border-box; display: table-cell;">'+
+													'<span aria-hidden="true" style="fill: currentColor; width: 18px; height: 18px;" class="icon">'+
+													    '<svg class="icon_svg">'+
+													        '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_speech">'+
+													        	'<svg id="18x18_speech" height="100%" viewBox="0 0 18 18" width="100%">'+
+										        					'<path d="M2 4v6a2 2 0 0 0 2 2h1v3l4-3h5a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"></path>'+
+													        	'</svg>'+
+													        '</use>'+
+													   ' </svg>'+
+													'</span>'+
+												'</div>'+
+												'<div class="action-link_label arrange_unit arrange_unit--fill" style="display: table-cell;border-top: 1px solid #e6e6e6; padding-top: 3px; padding-bottom: 3px; vertical-align: middle; width: 100%;">'+
+													'Send message'+
+												'</div>'+
+											'</a>'+
+										'</li>'+
+									'</ul>'+
+								'</div>'+
+							'</div>'+			
+							'<div class="restContent-review-wrapper" style="float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 62.5%;">'+
+								'<div class="restContent-review-content" style="padding: 0 12px 6px 0; min-height: 156px; word-wrap: break-word !important; word-break: break-word !important; overflow-wrap: break-word !important;">'+
+									'<div class="restContent-review-rating" style="margin: 6px 0;width:100%;overflow:hidden;height:auto;">'+
+										'<div>'+
+											'<div class="restList-star-rating-'+item.gradepoint+'" >'+
+												'<img class="offscreen" '+
+													'src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/stars.png" '+
+													'width="84" height="303" alt="4.0 star rating" '+
+													'style="clip: rect(0, 0, 0, 0); position: absolute; left: -9999px; top: auto; overflow: hidden; width: 1px; height: 1px; vertical-align: middle;">'+
+											'</div>'+
+										'</div>'+
+										'<span class="restContent-rating-qualifier" style="display: block; float: left; color: #666; font-weight: normal;">'+
+											item.reg_date +
+										'</span>'+
+									'</div>'+
+									'<p lang="ko" style="margin-bottom: 12px;display:block;">'+
+										item.content +
+									'</p>'+
+								'</div>'+
+							'<div class="review-footer clearfix">'+
+							
+								'<div class="review-footer-actions pull-right clearfix" style="margin-top: 23px; float: right;">'+
+									'<a class="chiclet-link show-tooltip js-analytics-click chiclet-link--flag" data-popup-open="popup-2" style="position: relative;display: inline-block;padding: 5px;border: 1px solid #ccc;border-radius: 3px;font-size: 12px;line-height: 1.5em;color: #999;background: transparent;box-shadow: none;white-space: nowrap;transition: all 0.3s ease;text-decoration: none;cursor: pointer;">'+
+										'<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-flag icon--size-18 icon--currentColor">'+
+						    				'<svg id="18x18_flag" height="100%" viewBox="0 0 18 18" width="100%">'+
+						    					'<path d="M6 10V3c4.976 1.098 4.024-1 8 0v7c-4.024-.976-3.024 1.024-8 0zM4 2h1v14H4V2z"></path>'+
+					    					'</svg>'+
+										'</span>'+
+										'<span class="tooltip-wrapper">'+
+				            				'<span class="tooltip">'+
+				            					'Report review'+
+				            				'</span>'+
+				        				'</span>'+
+									'</a>'+
+								'</div>'+
+							'</div>'+
+						'</div>'+
+					'</li>'
+           		);
+           });
+           
+           
+           $('.event_list_paging_section').empty();
+           var pagingHtml = "";
+           pagingHtml = '<div class="event_list_pagination_block">' + 
+           				'<div class="event_list_pagination_wrap">' + 
+           				'<div class="event_list_page_of_pages">';
+           if(responseData.YepsPager.blockEnd == 0) {
+        	   pagingHtml += 'Page ' + responseData.YepsPager.curPage + ' of 1';
+           } else {
+        	   pagingHtml += 'Page ' + responseData.YepsPager.curPage + ' of ' + responseData.YepsPager.blockEnd;
+           }
+           pagingHtml += '</div>';
+           if(responseData.YepsPager.blockEnd != 1) {
+        	   pagingHtml += '<div class="event_list_page_link_wrapper">';
+        	   pagingHtml += '<div class="event_list_page_link_wrap">';
+        	   if(responseData.YepsPager.curBlock > 1) {
+        		   pagingHtml += '<div class="event_list_next_block">';
+        		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+ 1 +')">';
+        		   pagingHtml += '<span>Start</span>';
+        		   pagingHtml += '</a>';
+        		   pagingHtml += '</div>';
+        	   }
+        	   
+        	   if(responseData.YepsPager.curBlock > 1) {
+        		   pagingHtml += '<div class="event_list_next_block">';
+        		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+responseData.YepsPager.prevPage+')">';
+        		   pagingHtml += '<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">';
+        		   pagingHtml += '<svg class="icon_svg">';
+        		   pagingHtml += '<path d="M14.475 18.364l1.414-1.414L10.94 12l4.95-4.95-1.415-1.414L8.11 12l6.365 6.364z"></path>';
+        		   pagingHtml += '</svg>';
+        		   pagingHtml += '</span>';
+        		   pagingHtml += '<span>Previous</span>';
+        		   pagingHtml += '</a>';
+        		   pagingHtml += '</div>';
+        	   }
+        	   
+        	   for(var num = responseData.YepsPager.blockBegin; num <= responseData.YepsPager.blockEnd; num++) {
+        		   pagingHtml += '<div class="event_list_page_link_option">';
+        		   if(num == responseData.YepsPager.curPage) {
+        			   pagingHtml += '<span class="event_list_page_option_action">';
+        			   pagingHtml += num;
+        			   pagingHtml += '</span>';
+        		   } else {
+        			   pagingHtml += '<a href="javascript:list('+ num +')" class="event_list_page_option_link_action">';
+        			   pagingHtml += num;
+        			   pagingHtml += '</a>';
+        		   }
+        		   pagingHtml += '</div>';
+        	   }
+        	   
+        	   if(responseData.YepsPager.curBlock <= responseData.YepsPager.totBlock) {
+        		   pagingHtml += '<div class="event_list_next_block">';
+        		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+responseData.YepsPager.nextPage+')">';
+        		   pagingHtml += '<span>Next</span>';
+        		   pagingHtml += '<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">';
+        		   pagingHtml += '<svg class="icon_svg">';
+        		   pagingHtml += '<path d="M9.525 5.636L8.11 7.05 13.06 12l-4.95 4.95 1.415 1.414L15.89 12 9.524 5.636z"></path>';
+        		   pagingHtml += '</svg>';
+        		   pagingHtml += '</span>';
+        		   pagingHtml += '</a>';
+        		   pagingHtml += '</div>';
+        	   }
+        	   if(responseData.YepsPager.curBlock <= responseData.YepsPager.totBlock) {
+        		   pagingHtml += '<div class="event_list_next_block">';
+        		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+responseData.YepsPager.totPage+')">';
+        		   pagingHtml += '<span>End</span>';
+        		   pagingHtml += '</a>';
+        		   pagingHtml += '</div>';
+        	   }
+        	   pagingHtml += '</div>';
+        	   pagingHtml += '</div>';
+           }
+           pagingHtml += '</div>';
+           pagingHtml += '</div>';
+           pagingHtml += '</div>';
+
+           $('.event_list_paging_section').append(pagingHtml);           
+        },
+        error : function(request, status, error) {
+           alert("불러오기 실패");
+        },
+   });
+}
+
+function check() {	
+	var queryString = $("form[name=restContent]").serialize();
+	$(document).ajaxStart(function() {
+		$('body').css('overflow', 'hidden');
+		$('html').scrollTop(0);
+		$('.loading_wapper').fadeIn(500);
+	})
+					
+	$(document).ajaxStop(function() {
+		$('body').css('overflow', 'auto');
+		$('.loading_wapper').fadeOut(500);
+	})
+	
+    $.ajax({
+         type : 'post',
+         url : 'restaurant_content_ajax',
+         data : queryString,
+         dataType : 'json',
+         success : function(responseData){
+            $('#SearchKeyword').val(responseData.SearchKeyword);
+            $('.restContent-reviews li:not(:first)').remove();
+            $.each(responseData.selectedDataRV,function(i,item){
+         	   var userId;
+         	   if(item.memberDTO.nickname == null) {
+         		   userId = item.memberDTO.email;
+         	   } else {
+         		   userId = item.memberDTO.nickname;
+         	   }
+         	   var address = item.memberDTO.address;
+         	   var addr = [];
+         	   if(address != null) {
+         		   addr = address.split(' ');
+         	   } else {
+         		   addr[0] = '';
+         		   addr[1] = '';
+         	   }
+         	   
+         	   
+         	  $('.restContent-reviews').append(
+  	     			   '<li>' +
+  		     			   '<div class="restContent-review-with" style="margin: 0 -15px; display: flex;">' +
+  	    		 		   		'<div class="restContent-user" style="float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 37.5%;">' +
+  		     			   			'<div class="restContent-user-content" style="margin-top: -3px;">' +
+										'<div class="restContent-meida-block" style="font-size: 12px; line-height: 1.5em; position: relative; display: flex;">' +
+											'<div class="restContent-media-avatar" style="border-right-width: 9px;border-right: 6px solid transparent;border-left: none;">' +
+												'<div class="restContent-photo-box">' +
+													'<a href="#" style="color: #0073bb;">' +
+														'<img class="restContent-photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/' + item.memberDTO.memberPhotoDTO.filename + '" width="60">' +
+													'</a>' +
+												'</div>' +
+											'</div>' +
+											'<div class="restContent-media-story" style="-webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;">' +
+												'<ul class="restContent-user-info">' +
+													'<li class="restContent-user-name">' +
+														'<a href="#" class="restContent-user-display-name" style="font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; cursor: pointer;">' +
+															userId +
+														'</a>' +
+													'</li>' +
+													'<li class="restContnet-user-location">' +
+														'<b style="font-weight: bold;">' +
+															addr[0] + addr[1] +
+														'</b>' +
+													'</li>' +
+												'</ul>' +
+												'<ul class="restContent-user-stats">' +
+													'<li class="restContent-review-count" style="color: #666;display: list-item;text-align: -webkit-match-parent;">'+
+														'<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-review icon--size-18">'+
+														   '<svg class="icon_svg">'+
+														        '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_review">'+
+														        	'<svg id="18x18_review" height="100%" viewBox="0 0 18 18" width="100%">'+
+												    		    		'<path d="M13 3H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1.505 9.643l-2.526-1.55L6.526 12.7 7 9.934 5 7.977l2.766-.404L8.97 4.7l1.264 2.873L13 7.977l-2 1.957.495 2.71z"></path>'+
+													        	'</svg>'+
+													        '</use>'+
+													    '</svg>'+
+													'</span>'+
+													'<b style="font-weight: bold;"> ' + item.memberDTO.reviewcount + '</b> reviews'+
+												'</li>'+
+												'<li class="restContent-photo-count" style="color: #666;display: list-item;text-align: -webkit-match-parent;">'+
+													'<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-camera icon--size-18">'+
+													    '<svg class="icon_svg">'+
+													        '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_camera">'+
+														        	'<svg id="18x18_camera" height="100%" viewBox="0 0 18 18" width="100%">'+
+													        		'<path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 6.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path>'+
+													        	'</svg>'+
+													       ' </use>'+
+													    '</svg>'+
+													'</span>'+
+													'<b style="font-weight: bold;"> '+ item.memberDTO.imagecount +'</b> photos'+
+												'</li>'+
+											'</ul>'+
+										'</div>'+
+									'</div>'+
+									'<ul class="restContent-list-link">'+									
+										'<li>'+
+											'<a class="restContent-share-review" href="#" style="display: table; min-width: 100%; table-layout: auto; cursor: pointer;">'+
+												'<div class="action-link_icon arrange_unit" style="padding-top: 3px; padding-bottom: 3px; vertical-align: middle; padding-right: 12px; box-sizing: border-box; display: table-cell;">'+
+													'<span aria-hidden="true" style="fill: currentColor; width: 18px; height: 18px;" class="icon">'+
+													    '<svg class="icon_svg">'+
+													        '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_speech">'+
+													        	'<svg id="18x18_speech" height="100%" viewBox="0 0 18 18" width="100%">'+
+										        					'<path d="M2 4v6a2 2 0 0 0 2 2h1v3l4-3h5a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"></path>'+
+													        	'</svg>'+
+													        '</use>'+
+													   ' </svg>'+
+													'</span>'+
+												'</div>'+
+												'<div class="action-link_label arrange_unit arrange_unit--fill" style="display: table-cell;border-top: 1px solid #e6e6e6; padding-top: 3px; padding-bottom: 3px; vertical-align: middle; width: 100%;">'+
+													'Send message'+
+												'</div>'+
+											'</a>'+
+										'</li>'+
+									'</ul>'+
+								'</div>'+
+							'</div>'+			
+							'<div class="restContent-review-wrapper" style="float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 62.5%;">'+
+								'<div class="restContent-review-content" style="padding: 0 12px 6px 0; min-height: 156px; word-wrap: break-word !important; word-break: break-word !important; overflow-wrap: break-word !important;">'+
+									'<div class="restContent-review-rating" style="margin: 6px 0;width:100%;overflow:hidden;height:auto;">'+
+										'<div>'+
+											'<div class="restList-star-rating-'+item.gradepoint+'" >'+
+												'<img class="offscreen" '+
+													'src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/stars.png" '+
+													'width="84" height="303" alt="4.0 star rating" '+
+													'style="clip: rect(0, 0, 0, 0); position: absolute; left: -9999px; top: auto; overflow: hidden; width: 1px; height: 1px; vertical-align: middle;">'+
+											'</div>'+
+										'</div>'+
+										'<span class="restContent-rating-qualifier" style="display: block; float: left; color: #666; font-weight: normal;">'+
+											item.reg_date +
+										'</span>'+
+									'</div>'+
+									'<p lang="ko" style="margin-bottom: 12px;display:block;">'+
+										item.content +
+									'</p>'+
+								'</div>'+
+							'<div class="review-footer clearfix">'+
+							
+								'<div class="review-footer-actions pull-right clearfix" style="margin-top: 23px; float: right;">'+
+									'<a class="chiclet-link show-tooltip js-analytics-click chiclet-link--flag" data-popup-open="popup-2" style="position: relative;display: inline-block;padding: 5px;border: 1px solid #ccc;border-radius: 3px;font-size: 12px;line-height: 1.5em;color: #999;background: transparent;box-shadow: none;white-space: nowrap;transition: all 0.3s ease;text-decoration: none;cursor: pointer;">'+
+										'<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-flag icon--size-18 icon--currentColor">'+
+								    		'<svg id="18x18_flag" height="100%" viewBox="0 0 18 18" width="100%">'+
+								    			'<path d="M6 10V3c4.976 1.098 4.024-1 8 0v7c-4.024-.976-3.024 1.024-8 0zM4 2h1v14H4V2z"></path>'+
+							    			'</svg>'+
+										'</span>'+
+										'<span class="tooltip-wrapper">'+
+						            		'<span class="tooltip">'+
+						            			'Report review'+
+						            		'</span>'+
+						        		'</span>'+
+									'</a>'+
+								'</div>'+
+							'</div>'+
+						'</div>'+
+					'</li>'
+          		);
+         	   
+         	 $('.event_list_paging_section').empty();
+             var pagingHtml = "";
+             pagingHtml = '<div class="event_list_pagination_block">' + 
+             				'<div class="event_list_pagination_wrap">' + 
+             				'<div class="event_list_page_of_pages">';
+             if(responseData.YepsPager.blockEnd == 0) {
+          	   pagingHtml += 'Page ' + responseData.YepsPager.curPage + ' of 1';
+             } else {
+          	   pagingHtml += 'Page ' + responseData.YepsPager.curPage + ' of ' + responseData.YepsPager.blockEnd;
+             }
+             pagingHtml += '</div>';
+             if(responseData.YepsPager.blockEnd != 1) {
+          	   pagingHtml += '<div class="event_list_page_link_wrapper">';
+          	   pagingHtml += '<div class="event_list_page_link_wrap">';
+          	   if(responseData.YepsPager.curBlock > 1) {
+          		   pagingHtml += '<div class="event_list_next_block">';
+          		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+ 1 +')">';
+          		   pagingHtml += '<span>Start</span>';
+          		   pagingHtml += '</a>';
+          		   pagingHtml += '</div>';
+          	   }
+          	   
+          	   if(responseData.YepsPager.curBlock > 1) {
+          		   pagingHtml += '<div class="event_list_next_block">';
+          		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+responseData.YepsPager.prevPage+')">';
+          		   pagingHtml += '<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">';
+          		   pagingHtml += '<svg class="icon_svg">';
+          		   pagingHtml += '<path d="M14.475 18.364l1.414-1.414L10.94 12l4.95-4.95-1.415-1.414L8.11 12l6.365 6.364z"></path>';
+          		   pagingHtml += '</svg>';
+          		   pagingHtml += '</span>';
+          		   pagingHtml += '<span>Previous</span>';
+          		   pagingHtml += '</a>';
+          		   pagingHtml += '</div>';
+          	   }
+          	   
+          	   for(var num = responseData.YepsPager.blockBegin; num <= responseData.YepsPager.blockEnd; num++) {
+          		   pagingHtml += '<div class="event_list_page_link_option">';
+          		   if(num == responseData.YepsPager.curPage) {
+          			   pagingHtml += '<span class="event_list_page_option_action">';
+          			   pagingHtml += num;
+          			   pagingHtml += '</span>';
+          		   } else {
+          			   pagingHtml += '<a href="javascript:list('+ num +')" class="event_list_page_option_link_action">';
+          			   pagingHtml += num;
+          			   pagingHtml += '</a>';
+          		   }
+          		   pagingHtml += '</div>';
+          	   }
+          	   
+          	   if(responseData.YepsPager.curBlock <= responseData.YepsPager.totBlock) {
+          		   pagingHtml += '<div class="event_list_next_block">';
+          		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+responseData.YepsPager.nextPage+')">';
+          		   pagingHtml += '<span>Next</span>';
+          		   pagingHtml += '<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">';
+          		   pagingHtml += '<svg class="icon_svg">';
+          		   pagingHtml += '<path d="M9.525 5.636L8.11 7.05 13.06 12l-4.95 4.95 1.415 1.414L15.89 12 9.524 5.636z"></path>';
+          		   pagingHtml += '</svg>';
+          		   pagingHtml += '</span>';
+          		   pagingHtml += '</a>';
+          		   pagingHtml += '</div>';
+          	   }
+          	   if(responseData.YepsPager.curBlock <= responseData.YepsPager.totBlock) {
+          		   pagingHtml += '<div class="event_list_next_block">';
+          		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+responseData.YepsPager.totPage+')">';
+          		   pagingHtml += '<span>End</span>';
+          		   pagingHtml += '</a>';
+          		   pagingHtml += '</div>';
+          	   }
+          	   pagingHtml += '</div>';
+          	   pagingHtml += '</div>';
+             }
+             pagingHtml += '</div>';
+             pagingHtml += '</div>';
+             pagingHtml += '</div>';
+
+             $('.event_list_paging_section').append(pagingHtml);
+         	   
+         	   
+            });
+         	   
+         },
+         error : function(request, status, error) {
+            alert("불러오기 실패");
+         },
+    });
+	
+	return true;
 }
 </script>
 

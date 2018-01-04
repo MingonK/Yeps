@@ -58,6 +58,7 @@
             <mapping path="/restaurant_insert" />
             <mapping path="/restaurant_update" />
             <mapping path="/restaurant_delete" />
+            <mapping path="/restaurant_update_photo" />
             <!--  -->
             
             <!-- 리뷰 관련 -->

@@ -90,7 +90,7 @@
 												</c:if>
 											</a>
 										
-										<a href="#" class="header-nav_link show-tooltip js-analytics-click" id="notifications-icon" data-analytics-label="notifications_icon">
+										<a href="member_details?mnum=${memberinfo.mnum}" class="header-nav_link show-tooltip js-analytics-click" id="notifications-icon" data-analytics-label="notifications_icon">
 											<span aria-label="Notifications" style="width: 24px; height: 24px;" class="icon icon--24-notification icon--size-24 icon--white icon--fallback-inverted">
 												<svg class="icon_svg">
 													<path d="M20.984 17.177A1 1 0 0 1 20 18H4a1 1 0 0 1-.348-1.938c2.43-.9 3.74-4.605 3.74-7.634 0-1.75 1.07-3.253 2.608-3.97V4a2 2 0 0 1 4 0v.457c1.538.718 2.61 2.22 2.61 3.97 0 3.03 1.31 6.734 3.738 7.635a1 1 0 0 1 .636 1.115zM12 22a3 3 0 0 1-3-3h6a3 3 0 0 1-3 3z"></path>
@@ -673,14 +673,14 @@
 								<div class="mainpage_new_businesses_card_photo">
 								<c:if test="${empty RestaurantDTO.rest_filename}">
 									<div class="mainpage_new_businesses_photo_box" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png);">
-										<a href="#" style="display: block;" class="new_businesses_photo_box_link">
+										<a href="restaurant_content?rnum=${RestaurantDTO.rnum}" style="display: block;" class="new_businesses_photo_box_link">
 											<img class="photo_box_img" height="400" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png" width="600">
 										</a>
 									</div>
 								</c:if>
 								<c:if test="${!empty RestaurantDTO.rest_filename}">
 									<div class="mainpage_new_businesses_photo_box" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${RestaurantDTO.rest_filename});">
-										<a href="#" style="display: block;" class="new_businesses_photo_box_link">
+										<a href="restaurant_content?rnum=${RestaurantDTO.rnum}" style="display: block;" class="new_businesses_photo_box_link">
 											<img class="photo_box_img" height="400" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${RestaurantDTO.rest_filename}" width="600">
 										</a>
 									</div>
@@ -691,7 +691,7 @@
 									<h3 class="new_businesses_card_content_title">
 										<div>
 											<span>
-												<a href="#">
+												<a href="restaurant_content?rnum=${RestaurantDTO.rnum}">
 													<span>${RestaurantDTO.rname}</span>
 												</a>
 											</span>
@@ -1033,7 +1033,7 @@
 									<div class="review_of_the_day_writer_container">
 										<div class="review_of_the_day_writer_photo_box">
 											<div>
-												<a href="#">
+												<a href="member_details?mnum=${review_of_the_day_reviewDTO.memberDTO.mnum}">
 												<!-- 만약 아이디에 사진 없다면 이거 띄우도록 이프 문! -->
 													<c:if test="${review_of_the_day_reviewDTO.memberDTO.memberPhotoDTO.filename == null}">
 														<img class="review_of_the_day_writer_img" height="60" widgh="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" style="border-radius: 4px;">
@@ -1047,7 +1047,7 @@
 										
 										<div class="review_of_the_day_writer_info">
 											<strong style="font-weight: 700;">
-												<a href="#" class="review_of_the_day_writer">
+												<a href="member_details?mnum=${review_of_the_day_reviewDTO.memberDTO.mnum}" class="review_of_the_day_writer">
 													${review_of_the_day_reviewDTO.memberDTO.email}
 												</a>
 											</strong>
@@ -1212,7 +1212,7 @@
 										<div class="recent_activity_unit_header_content">
 											<div class="recent_activity_unit_header_user_profile">
 												<div class="photo_box">
-													<a href="member_details?mnum=${reviewDTO.mnum}">
+													<a href="member_details?mnum=${reviewDTO.memberDTO.mnum}">
 														<c:if test="${empty reviewDTO.memberDTO.memberPhotoDTO.filename}">
 															<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" height="30" width="30" style="border-radius: 4px;">
 														</c:if>
@@ -1225,7 +1225,7 @@
 											</div>
 											
 											<div class="recent_activity_unit_header_user_profile" style="width: 100%;">
-												<a href="member_details?mnum=${reviewDTO.mnum}">
+												<a href="member_details?mnum=${reviewDTO.memberDTO.mnum}">
 													<c:if test="${empty reviewDTO.memberDTO.nickname}">
 														<strong>${reviewDTO.memberDTO.email}</strong>
 													</c:if>
@@ -1247,14 +1247,14 @@
 										<div class="recent_activity_unit_content_photo">
 											<c:if test="${empty reviewDTO.restaurantDTO.rest_filename}">
 											<div class="photo_box_background" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png)">
-												<a href="#" style="display: block;">
+												<a href="restaurant_content?rnum=${reviewDTO.restaurantDTO.rnum}" style="display: block;">
 													<img class="recent_activity_photo_box" height="400" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png" width="600">
 												</a>
 											</div>
 											</c:if>
 											<c:if test="${!empty reviewDTO.restaurantDTO.rest_filename}">
 											<div class="photo_box_background" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${reviewDTO.restaurantDTO.rest_filename})">
-												<a href="#" style="display: block;">
+												<a href="restaurant_content?rnum=${reviewDTO.restaurantDTO.rnum}" style="display: block;">
 													<img class="recent_activity_photo_box" height="400" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${reviewDTO.restaurantDTO.rest_filename}" width="600">
 												</a>
 											</div>

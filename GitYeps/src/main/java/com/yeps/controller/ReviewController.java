@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yeps.model.MemberDTO;
+import com.yeps.model.MemberPhotoDTO;
 import com.yeps.model.RestaurantDTO;
 import com.yeps.model.ReviewDTO;
 import com.yeps.service.MemberMapper;
@@ -172,13 +173,17 @@ public class ReviewController {
 		ReviewDTO rvdto = new ReviewDTO();
 
 		MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo");
+		MemberPhotoDTO mpdto = (MemberPhotoDTO) session.getAttribute("mainPhoto");
 		int mnum = mdto.getMnum();
 		// reviewcount 구하기 추가 부분
 		int beforeReviewcount = memberMapper.getMemberReviewCount(mnum);
 		int nowReviewcount = beforeReviewcount + 1;
 		memberMapper.updateReviewCount(mnum, nowReviewcount);
 		// ===============================
-		String name = mdto.getName();
+		
+		String nickname = mdto.getNickname();
+		String email = mdto.getEmail();
+		String filename = mpdto.getFilename();
 		String rnum = req.getParameter("rnum");
 		String rname = req.getParameter("rname");
 		String gradepoint = req.getParameter("gradepoint");
@@ -209,9 +214,11 @@ public class ReviewController {
 			mdto.setReviewcount(nowReviewcount);
 			mav.addObject("reviewcount", nowReviewcount);
 			// ===========================================
-			mav.addObject("name", name);
+			mav.addObject("nickname", nickname);
+			mav.addObject("email", email);
+			mav.addObject("filename", filename);
 			mav.addObject("rname", rname);
-			mav.addObject("gradepoint", gradepoint);
+			mav.addObject("gradepoint", gradepoint); 
 			mav.addObject("content", content);
 			mav.addObject("joindate", Get_InsertReviewDate);
 

@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from yeps_files where evnum = #{evnum} and ismainphoto='y'
 	</select>
 	
-	<select id="getTargetEventFiles" parameterType="int" resultType="FileDTO">
+	<select id="getAllEventFiles" parameterType="int" resultType="FileDTO">
 		select * from yeps_files where evnum = #{evnum} order by filenum desc
 	</select>
 	
@@ -61,5 +61,54 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    
 	<select id="getPagedEventFiles" parameterType="java.util.HashMap" resultType="FileDTO">
 		select * from (select rownum rn, A.* from (select * from yeps_files where evnum = #{evnum} order by filenum desc)A) where rn between #{start} and #{end}
+	</select>
+	
+	
+	
+	
+	<!-- 	여기부터 레스토랑에서 필요한 파일 요청하는 부분 -->
+	
+	
+	<resultMap type="FileDTO" id="AllFileMap">
+		<id column="filenum" property="filenum"/>
+		<result column="filename" property="filename"></result>
+		<result column="file_upload_date" property="file_upload_date"></result>
+		<result column="mnum" property="mnum"></result>
+		<result column="rnum" property="rnum"></result>
+		
+		<association javaType="MemberDTO" property="memberDTO">
+			<id column="mnum" property="mnum"></id>
+			<result column="email" property="email"></result>
+			<result column="reviewcount" property="reviewcount"></result>
+			<result column="imagecount" property="imagecount"></result>
+			<result column="nickname" property="nickname"></result>
+			<result column="address" property="address"></result>
+		</association>
+	</resultMap>
+	
+	<select id="getAllRestaurantFiles" parameterType="int" resultMap="AllFileMap">
+		select 
+				F.filenum
+				, F.filename
+				, F.file_upload_date
+				, F.mnum
+				, F.rnum
+				, M.email
+				, M.nickname
+				, M.reviewcount
+				, M.imagecount
+				, M.address
+		from yeps_files F, yeps_member M
+		where F.mnum = M.mnum and F.rnum = #{rnum}
+		order by filenum desc
+	</select>
+	
+	
+	<select id="getRest_fileListForMe" parameterType="java.util.HashMap" resultType="FileDTO">
+		select * from yeps_files where rnum = #{rnum} and mnum = #{mnum}
+	</select> 
+	
+	<select id="isExistRestaurantMainPhoto" parameterType="int" resultType="int">
+		select count(*) from yeps_files where rnum = #{rnum} and ismainphoto = 'y'
 	</select>
 </mapper>
