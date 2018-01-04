@@ -10,10 +10,10 @@ import com.yeps.model.MenuDTO;
 
 @Service
 public class MenuMapper {
-	
+
 	@Autowired
 	private SqlSession sqlSession;
-	
+
 	public List<MenuDTO> listMenu() {
 		return sqlSession.selectList("menuList");
 	}

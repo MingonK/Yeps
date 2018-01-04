@@ -184,9 +184,9 @@ public class MemberController {
 			if (res > 0) {
 				msg = "회원등록성공!! 메인페이지로 이동합니다.";
 				url = "main";
-				
+
 				MemberDTO newMemberDTO = memberMapper.getMemberForEmail(dto.getEmail());
-				
+
 				MemberPhotoDTO memberPhotoDTO = new MemberPhotoDTO();
 				memberPhotoDTO.setFilenum(0);
 				memberPhotoDTO.setMnum(newMemberDTO.getMnum());
@@ -328,7 +328,7 @@ public class MemberController {
 			String email = getLoginMemberDTO.getEmail();
 			int noReadMessage = messageMapper.noneMessageCount(email);
 			session.setAttribute("noneCount", noReadMessage);
-			
+
 			if (getLoginMemberDTO.getIsmaster().equals("y")) {
 				session.setAttribute("memberinfo", getLoginMemberDTO);
 				msg = "마스터 아이디로 로그인 하셨습니다";
@@ -710,11 +710,11 @@ public class MemberController {
 			}
 			getPhotoList = memberPhotoMapper.getMemberPhotoList(Integer.parseInt(mnum));
 		}
-		
+
 		String email = memberDTO.getEmail();
 		int noneCount = messageMapper.noneMessageCount(email);
 		mav.addObject("noneCount", noneCount);
-		
+
 		mav.addObject("memberDTO", memberDTO);
 		mav.addObject("getPhotoList", getPhotoList);
 		mav.setViewName("member/memberDetails");

@@ -11,55 +11,55 @@ import com.yeps.model.FileDTO;
 
 @Service
 public class FileMapper {
-	
+
 	@Autowired
 	private SqlSession sqlSession;
-	
+
 	public int insertFile(FileDTO dto, String mode) {
-		if(mode.equals("main")) {
+		if (mode.equals("main")) {
 			return sqlSession.insert("insertMainFile", dto);
 		} else {
 			return sqlSession.insert("insertFile", dto);
 		}
 	}
-	
+
 	public FileDTO getFile(String filename, int filenum) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("filename", filename);
 		map.put("filenum", filenum);
 		return sqlSession.selectOne("getFile", map);
 	}
-	
+
 	public int deleteFileToFilename(String filename) {
 		return sqlSession.delete("deleteFileToFilename", filename);
 	}
-	
+
 	public List<FileDTO> getfileListForMe(int evnum, int mnum) {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("evnum", evnum);
 		map.put("mnum", mnum);
 		return sqlSession.selectList("getfileListForMe", map);
 	}
-	
+
 	public int updateFileContent(int filenum, String filecontent) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("filenum", filenum);
 		map.put("filecontent", filecontent);
 		return sqlSession.update("updateFileContent", map);
 	}
-	
+
 	public List<FileDTO> getAllEventFiles(int evnum) {
 		return sqlSession.selectList("getAllEventFiles", evnum);
 	}
-	
+
 	public FileDTO getFYIEventFile(int evnum) {
 		return sqlSession.selectOne("getFYIEventFile", evnum);
 	}
-	
+
 	public int deleteAllFile(int evnum) {
 		return sqlSession.delete("deleteAllFile", evnum);
 	}
-	
+
 	public boolean isExistEventMainPhoto(int evnum) {
 		try {
 			int num = sqlSession.selectOne("isExistEventMainPhoto", evnum);
@@ -72,7 +72,7 @@ public class FileMapper {
 			return false;
 		}
 	}
-	
+
 	public int deleteFile(String filename, int evnum, String ismainphoto) {
 		if (ismainphoto.equals("y")) {
 			int res = sqlSession.delete("deleteFileToFilename", filename);
@@ -89,7 +89,7 @@ public class FileMapper {
 			return sqlSession.delete("deleteFileToFilename", filename);
 		}
 	}
-	
+
 	public int changeEventMainPhoto(int evnum, int filenum) {
 		int res = sqlSession.update("changeEventMainPhoto", evnum);
 		if (res > 0) {
@@ -101,7 +101,7 @@ public class FileMapper {
 			return 0;
 		}
 	}
-	
+
 	public List<FileDTO> getPagedEventFiles(int evnum, int start, int end) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("evnum", evnum);
@@ -109,20 +109,19 @@ public class FileMapper {
 		map.put("end", end);
 		return sqlSession.selectList("getPagedEventFiles", map);
 	}
-	
-	
+
 	// 레스토랑 파일 필요부분
 	public List<FileDTO> getAllRestaurantFiles(int rnum) {
 		return sqlSession.selectList("getAllRestaurantFiles", rnum);
 	}
-	
+
 	public List<FileDTO> getRest_fileListForMe(int rnum, int mnum) {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("rnum", rnum);
 		map.put("mnum", mnum);
 		return sqlSession.selectList("getRest_fileListForMe", map);
 	}
-	
+
 	public boolean isExistRestaurantMainPhoto(int rnum) {
 		try {
 			int num = sqlSession.selectOne("isExistRestaurantMainPhoto", rnum);

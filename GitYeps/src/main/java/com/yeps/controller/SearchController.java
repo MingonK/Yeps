@@ -32,7 +32,7 @@ public class SearchController {
 
 	@RequestMapping(value = "/search_auto_complete", method = RequestMethod.POST)
 	@ResponseBody
-	public List<String> searchAutoComplete(@RequestParam(value="searchData") String searchData) {
+	public List<String> searchAutoComplete(@RequestParam(value = "searchData") String searchData) {
 
 		ContsSingleton conts = ContsSingleton.getContsSingletonObject();
 		List<ContsDTO> contsList = conts.getContsList();
@@ -40,29 +40,29 @@ public class SearchController {
 
 		List<String> autoCompleteList = new ArrayList<String>();
 
-		if(contsList != null) {
-			if(!initial.trim().equals("")) {
-				for(ContsDTO contsDTO : contsList) {
-					if(contsDTO.getConts_nm_div().contains(initial)) {
+		if (contsList != null) {
+			if (!initial.trim().equals("")) {
+				for (ContsDTO contsDTO : contsList) {
+					if (contsDTO.getConts_nm_div().contains(initial)) {
 						autoCompleteList.add(contsDTO.getConts_nm());
 					}
-					if(autoCompleteList.size() >=5) {
+					if (autoCompleteList.size() >= 5) {
 						break;
-					} 
+					}
 				}
 			}
 		}
 		return autoCompleteList;
 	}
-	
+
 	@RequestMapping(value = "/yeps_main_saerch", method = RequestMethod.POST)
 	public ModelAndView MainSearchPro(HttpServletRequest req) {
-		
+
 		ModelAndView mav = new ModelAndView();
 		String searchword = req.getParameter("searchword");
-		if(searchword == null || searchword.trim().equals("")) {
-			//검색어 없을 경우
-		}else {
+		if (searchword == null || searchword.trim().equals("")) {
+			// 검색어 없을 경우
+		} else {
 			ContsSingleton conts = ContsSingleton.getContsSingletonObject();
 			ContsDTO contsDTO = new ContsDTO();
 			String initial = jaso.getInitial(searchword);
@@ -72,5 +72,5 @@ public class SearchController {
 		}
 		return mav;
 	}
-	
+
 }

@@ -20,31 +20,32 @@ import com.yeps.service.SmallMenuMapper;
 
 @Controller
 public class MenuController {
-	
+
 	@Autowired
 	private LargeMenuMapper largeMenuMapper;
 	@Autowired
 	private SmallMenuMapper smallMenuMapper;
 	@Autowired
 	private RestaurantMapper restaurantMapper;
-	
+
 	@RequestMapping(value = "/restaurant_insertMenu")
-	public ModelAndView insertMenu(HttpServletRequest req,@ModelAttribute LargeMenuDTO large_dto,@ModelAttribute SmallMenuDTO small_dto) {
-		String rnum=req.getParameter("rnum");
-		String[] small=req.getParameterValues("small_length");
+	public ModelAndView insertMenu(HttpServletRequest req, @ModelAttribute LargeMenuDTO large_dto,
+			@ModelAttribute SmallMenuDTO small_dto) {
+		String rnum = req.getParameter("rnum");
+		String[] small = req.getParameterValues("small_length");
 		int[] small_length = new int[small.length];
-		for(int i =0; i<small.length; i++){
-			small_length[i]=Integer.parseInt(small[i]);
+		for (int i = 0; i < small.length; i++) {
+			small_length[i] = Integer.parseInt(small[i]);
 		}
-		int count=0;
-		
-		for(int i=0;i<large_dto.getLargeMenuList().size();i++) {
+		int count = 0;
+
+		for (int i = 0; i < large_dto.getLargeMenuList().size(); i++) {
 			large_dto.setLarge_name(large_dto.getLargeMenuList().get(i).getLarge_name());
 			large_dto.setRnum(Integer.parseInt(rnum));
 			largeMenuMapper.insertLargeMenu(large_dto);
-			int large_menunum=largeMenuMapper.getLastLargeMenu();
+			int large_menunum = largeMenuMapper.getLastLargeMenu();
 			System.out.println(large_menunum);
-			for(int j=0;j<small_length[i];j++) {
+			for (int j = 0; j < small_length[i]; j++) {
 				small_dto.setlarge_menunum(large_menunum);
 				small_dto.setSmall_name(small_dto.getSmallMenuList().get(count).getSmall_name());
 				small_dto.setSmall_content(small_dto.getSmallMenuList().get(count).getSmall_content());
@@ -54,31 +55,27 @@ public class MenuController {
 			}
 		}
 
-		
-		ModelAndView mav=new ModelAndView();
+		ModelAndView mav = new ModelAndView();
 		mav.setViewName("restaurant/restaurant_listMenu");
-		return mav; 
+		return mav;
 	}
-	
-	
-	@RequestMapping(value="/restaurant_listMenu")
+
+	@RequestMapping(value = "/restaurant_listMenu")
 	public ModelAndView listMenu(HttpServletRequest req) {
-		int rnum=Integer.parseInt(req.getParameter("rnum"));
-		RestaurantDTO dto=restaurantMapper.getRest(rnum);
-		
-		List<LargeMenuDTO> largeList=largeMenuMapper.listLargeMenu(rnum);
+		int rnum = Integer.parseInt(req.getParameter("rnum"));
+		RestaurantDTO dto = restaurantMapper.getRest(rnum);
+
+		List<LargeMenuDTO> largeList = largeMenuMapper.listLargeMenu(rnum);
 		List<SmallMenuDTO> smallList = new ArrayList<SmallMenuDTO>();
-		
-		for(int i=0;i<largeList.size();i++) {
+
+		for (int i = 0; i < largeList.size(); i++) {
 			smallList.addAll(smallMenuMapper.listSmallMenu(largeList.get(i).getlarge_menunum()));
 		}
-		
 
-		
-	    ModelAndView mav = new ModelAndView();
-	    mav.addObject("getRest",dto);
-	    mav.addObject("largeList",largeList);
-	    mav.addObject("smallList",smallList);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("getRest", dto);
+		mav.addObject("largeList", largeList);
+		mav.addObject("smallList", smallList);
 		mav.setViewName("restaurant/restaurant_listMenu");
 		return mav;
 	}

@@ -92,13 +92,12 @@ public class ReviewController {
 		return "review/guidelines";
 	}
 
-
 	@RequestMapping(value = "/restaurant_qna")
 	public String restaurant_qna() {
 		return "/qna/restaurant_qna";
 	}
 
-	@RequestMapping(value="/review_keyword")
+	@RequestMapping(value = "/review_keyword")
 	public ModelAndView review_keyword(HttpServletRequest req, @RequestParam(defaultValue = "1") int curPage) {
 		String SearchKeyword = req.getParameter("SearchKeyword");
 		String rnum = req.getParameter("rnum");
@@ -114,14 +113,14 @@ public class ReviewController {
 		map.put("count", count); // 레코드의 갯수
 		map.put("YepsPager", YepsPager);
 
-		List<ReviewDTO> SearchedDTO_Rv= reviewMapper.review_keyword(SearchKeyword, Integer.parseInt(rnum), start, end);
+		List<ReviewDTO> SearchedDTO_Rv = reviewMapper.review_keyword(SearchKeyword, Integer.parseInt(rnum), start, end);
 		RestaurantDTO getRest = restaurantMapper.getRest(Integer.parseInt(rnum));
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("map", map);
 		mav.addObject("rnum", rnum);
 		mav.addObject("getRest", getRest);
-		mav.addObject("selectedDataRV", SearchedDTO_Rv); //한 페이지에서 변수명에 따라 다른값보여주기위해서
+		mav.addObject("selectedDataRV", SearchedDTO_Rv); // 한 페이지에서 변수명에 따라 다른값보여주기위해서
 		mav.setViewName("restaurant/restaurant_content");
 		return mav;
 
@@ -180,7 +179,7 @@ public class ReviewController {
 		int nowReviewcount = beforeReviewcount + 1;
 		memberMapper.updateReviewCount(mnum, nowReviewcount);
 		// ===============================
-		
+
 		String nickname = mdto.getNickname();
 		String email = mdto.getEmail();
 		String filename = mpdto.getFilename();
@@ -218,7 +217,7 @@ public class ReviewController {
 			mav.addObject("email", email);
 			mav.addObject("filename", filename);
 			mav.addObject("rname", rname);
-			mav.addObject("gradepoint", gradepoint); 
+			mav.addObject("gradepoint", gradepoint);
 			mav.addObject("content", content);
 			mav.addObject("joindate", Get_InsertReviewDate);
 
@@ -237,15 +236,12 @@ public class ReviewController {
 
 	}
 
+	/////////////////// 1월3일 상우가 추가한 부분
 
-
-	///////////////////1월3일 상우가 추가한 부분 
-	
-	
-	@RequestMapping(value="/previous_reviews")
+	@RequestMapping(value = "/previous_reviews")
 	public ModelAndView previous_reviews(@RequestParam(defaultValue = "1") int curPage) {
 
-		//페이징처리하기위해서 갯수 가져오는곳 
+		// 페이징처리하기위해서 갯수 가져오는곳
 		int count = reviewMapper.getPreviousReviewCount();
 
 		int pageScale = 10;
@@ -253,18 +249,17 @@ public class ReviewController {
 		YepsPager yepsPager = new YepsPager(count, curPage, pageScale, blockScale);
 		int start = yepsPager.getPageBegin();
 		int end = yepsPager.getPageEnd();
-		
+
 		int num = count - pageScale * (curPage - 1) + 1;
-		//recentreview가 y인 reviewDTO를 꺼내왔음 
+		// recentreview가 y인 reviewDTO를 꺼내왔음
 		List<ReviewDTO> rvdto_y = reviewMapper.previous_Rv(start, end);
-		
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("count", count);
 		map.put("start", start);
 		map.put("end", end);
 		map.put("yepsPager", yepsPager);
-		
+
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("num", num);
 		mav.addObject("map", map);
@@ -272,7 +267,5 @@ public class ReviewController {
 		mav.setViewName("review/previous_reviews");
 		return mav;
 	}
-	
-
 
 }

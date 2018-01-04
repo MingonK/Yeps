@@ -51,13 +51,13 @@ public class ReviewMapper {
 		map.put("end", end);
 		return sqlSession.selectList("getSelectedRestaurant_Rv", map);
 	}
-	
+
 	public List<ReviewDTO> getRandomRestaurant_Rv(int rnum) {
 		return sqlSession.selectList("getRandomRestaurant_Rv", rnum);
 	}
 
 	public ReviewDTO review_mylist_info(int NBPmnum) {
-		return sqlSession.selectOne("review_mylist_info", NBPmnum); 
+		return sqlSession.selectOne("review_mylist_info", NBPmnum);
 	}
 
 	public int review_mylist_updatedata(int rvnum) {
@@ -92,7 +92,7 @@ public class ReviewMapper {
 		map.put("end", end);
 		return sqlSession.selectList("review_keyword", map);
 	}
-	
+
 	public int review_keywordCount(String SearchKeyword) {
 		return sqlSession.selectOne("review_keywordCount", SearchKeyword);
 	}
@@ -131,17 +131,17 @@ public class ReviewMapper {
 	public List<Integer> gethotAndNewReview() {
 		return sqlSession.selectList("gethotAndNewReview");
 	}
-	
-	// 1월 3일 상우 추가 
+
+	// 1월 3일 상우 추가
 	public int getPreviousReviewCount() {
 		return sqlSession.selectOne("getPreviousReviewCount");
 	}
 
-	public List<ReviewDTO> previous_Rv(int start, int end){
+	public List<ReviewDTO> previous_Rv(int start, int end) {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("start", start);
 		map.put("end", end);
 		return sqlSession.selectList("previous_Rv", map);
 	}
-	
+
 }

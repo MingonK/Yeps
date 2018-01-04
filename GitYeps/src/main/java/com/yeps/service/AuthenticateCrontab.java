@@ -1,6 +1,5 @@
 package com.yeps.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,21 +19,21 @@ public class AuthenticateCrontab {
 	@Scheduled(fixedDelay = 1000 * 10)
 	public void fixedDelayTask() {
 		ContsSingleton conts = ContsSingleton.getContsSingletonObject();
-		
+
 		List<ContsDTO> contsList = conts.getContsList();
-		if(contsList == null) {
-				contsList = contsMapper.getContsList();
-				conts.setContsList(contsList);
+		if (contsList == null) {
+			contsList = contsMapper.getContsList();
+			conts.setContsList(contsList);
 		}
-		
+
 		List<ContsDTO> contsUpdateList = conts.getContsUploadList();
-		if(contsUpdateList != null) {
+		if (contsUpdateList != null) {
 			int res = contsMapper.updateContsList(contsUpdateList);
-			if(res != -1) {
+			if (res != -1) {
 				conts.clearContsUploadList();
 				contsUpdateList.clear();
 			}
-			
+
 			contsList = contsMapper.getContsList();
 			conts.setContsList(contsList);
 		}

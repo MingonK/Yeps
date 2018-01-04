@@ -153,7 +153,7 @@ public class MessageController {
 		ModelAndView mav = new ModelAndView();
 		String msg = null, key = null;
 		String lMode = req.getParameter("lMode");
-		
+
 		MemberDTO member = (MemberDTO) req.getSession().getAttribute("memberinfo");
 		if (member == null) {
 			msg = "로그인 먼저 해주세요. 로그인 페이지로 이동합니다.";
@@ -314,7 +314,7 @@ public class MessageController {
 	public ModelAndView message_search(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
 		String filterMode = req.getParameter("filter");
-		
+
 		MemberDTO member = (MemberDTO) req.getSession().getAttribute("memberinfo");
 		if (member == null) {
 			mav.setViewName("mainPage");

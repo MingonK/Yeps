@@ -34,7 +34,6 @@ import com.yeps.service.ReviewMapper;
 import com.yeps.service.S3Connection;
 import com.yeps.service.YepsPager;
 
-
 @Controller
 public class RestaurantController {
 	@Resource(name = "uploadPath")
@@ -45,7 +44,7 @@ public class RestaurantController {
 	@Autowired
 	private FileMapper fileMapper;
 	@Autowired
-	private ReviewMapper reviewMapper;	
+	private ReviewMapper reviewMapper;
 
 	@RequestMapping(value = "/jusoPopup")
 	public String jusoRest() throws Exception {
@@ -137,8 +136,8 @@ public class RestaurantController {
 			StarAvg.add(reviewMapper.getStarAvg(list.get(i).getRnum()));
 		}
 
-//		RestaurantDTO test = restaurantMapper.getNewRestaurant();
-//		System.out.println(test.getRnum());
+		// RestaurantDTO test = restaurantMapper.getNewRestaurant();
+		// System.out.println(test.getRnum());
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list); // list
@@ -191,7 +190,7 @@ public class RestaurantController {
 	@RequestMapping(value = "/restaurant_content")
 	public ModelAndView contentRest(HttpServletRequest req, @RequestParam(defaultValue = "1") int curPage) {
 		String rnum = req.getParameter("rnum");
-		
+
 		int count = reviewMapper.getRestaurantReviewCount(Integer.parseInt(rnum));
 		int pageScale = 10;
 		int blockScale = 10;
@@ -205,7 +204,7 @@ public class RestaurantController {
 
 		RestaurantDTO getRest = restaurantMapper.getRest(Integer.parseInt(rnum));// 가게 1개 정보
 		List<FileDTO> uploadFileList = restaurantMapper.getFileList(Integer.parseInt(rnum));// 가게 업로드 파일
-		
+
 		List<ReviewDTO> reviewList = reviewMapper.getSelectedRestaurant_Rv(Integer.parseInt(rnum), start, end);// 가게 리뷰
 		List<ReviewDTO> highlightReview = reviewMapper.getRandomRestaurant_Rv(Integer.parseInt(rnum));
 		int starAvg = reviewMapper.getStarAvg(Integer.parseInt(rnum));
@@ -222,14 +221,14 @@ public class RestaurantController {
 		mav.setViewName("restaurant/restaurant_content");
 		return mav;
 	}
-	
-	@RequestMapping(value="/restaurant_content_ajax")
+
+	@RequestMapping(value = "/restaurant_content_ajax")
 	@ResponseBody
-	public HashMap<String,Object> listContentRefresh(HttpServletRequest req){
+	public HashMap<String, Object> listContentRefresh(HttpServletRequest req) {
 		String rnum = req.getParameter("rnum");
 		String SearchKeyword = req.getParameter("SearchKeyword");
 		int curPage = req.getParameter("curPage") != null ? Integer.parseInt(req.getParameter("curPage")) : 1;
-		
+
 		int pageScale = 10;
 		int blockScale = 10;
 		int count = 0;
@@ -238,7 +237,7 @@ public class RestaurantController {
 		List<ReviewDTO> targetRestaurant_reviews = null;
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		YepsPager YepsPager = null;
-		if(SearchKeyword == null || SearchKeyword.trim().equals("")) {
+		if (SearchKeyword == null || SearchKeyword.trim().equals("")) {
 			count = reviewMapper.getRestaurantReviewCount(Integer.parseInt(rnum));
 			YepsPager = new YepsPager(count, curPage, pageScale, blockScale);
 			start = YepsPager.getPageBegin();
@@ -252,42 +251,42 @@ public class RestaurantController {
 			targetRestaurant_reviews = reviewMapper.review_keyword(SearchKeyword, Integer.parseInt(rnum), start, end);
 			map.put("SearchKeyword", SearchKeyword);
 		}
-		
+
 		map.put("count", count); // 레코드의 갯수
 		map.put("YepsPager", YepsPager);
 		map.put("rnum", rnum);
-		map.put("selectedDataRV", targetRestaurant_reviews); //한 페이지에서 변수명에 따라 다른값보여주기위해서		
+		map.put("selectedDataRV", targetRestaurant_reviews); // 한 페이지에서 변수명에 따라 다른값보여주기위해서
 		return map;
 	}
-	
+
 	@RequestMapping(value = "/restaurant_update_photo")
 	public ModelAndView updateRestaurantPhoto(HttpServletRequest req) {
 		String rnum = req.getParameter("rnum");
-		
-		if(rnum == null || rnum.trim().equals("")) {
+
+		if (rnum == null || rnum.trim().equals("")) {
 			return new ModelAndView("redirect: restaurant_list");
 		}
-		
+
 		RestaurantDTO restaurantDTO = restaurantMapper.getRest(Integer.parseInt(rnum));
 		HttpSession session = req.getSession();
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
 		ModelAndView mav = new ModelAndView();
-		
+
 		if (memberDTO.getIsmanager().equals("y") || memberDTO.getIsmaster().equals("y")
 				|| restaurantDTO.getMnum() == memberDTO.getMnum()) {
 			List<FileDTO> allUploadFileList = fileMapper.getAllRestaurantFiles(restaurantDTO.getRnum());
 			mav.addObject("uploadFileList", allUploadFileList);
 		} else {
-			List<FileDTO> myUploadFileList = fileMapper.getRest_fileListForMe(restaurantDTO.getRnum(), memberDTO.getMnum());
+			List<FileDTO> myUploadFileList = fileMapper.getRest_fileListForMe(restaurantDTO.getRnum(),
+					memberDTO.getMnum());
 			mav.addObject("uploadFileList", myUploadFileList);
 		}
-		
+
 		mav.addObject("restaurantDTO", restaurantDTO);
-		mav.setViewName("restaurant/restaurant_update_photo");		
+		mav.setViewName("restaurant/restaurant_update_photo");
 		return mav;
 	}
-	
-	
+
 	@RequestMapping(value = "/restaurant_fileUpLoad")
 	@ResponseBody
 	public HashMap<String, Object> fileUpLoad_event(HttpServletRequest req) {
@@ -363,24 +362,15 @@ public class RestaurantController {
 		map.put("update", "사진을 등록하였습니다.");
 		return map;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	@RequestMapping(value = "/restaurant_photoList")
 	public ModelAndView photoListRest(HttpServletRequest req, @RequestParam(defaultValue = "1") int curPage) {
 		int rnum = Integer.parseInt(req.getParameter("rnum"));
-		
-		if(rnum == 0 ) {
+
+		if (rnum == 0) {
 			return new ModelAndView("redirect: restaurant_list");
 		}
-		
+
 		int count = restaurantMapper.getCount();
 		int pageScale = 10;
 		int blockScale = 10;

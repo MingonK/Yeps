@@ -15,32 +15,33 @@ import com.yeps.service.MasterMapper;
 
 @Controller
 public class MasterController {
-	
+
 	@Autowired
 	private MasterMapper masterMappger;
-	
-	@RequestMapping(value="master_index")
+
+	@RequestMapping(value = "master_index")
 	public String master_index() {
 		return "master/index";
 	}
-	
-	@RequestMapping(value="master_setAuthorization")
+
+	@RequestMapping(value = "master_setAuthorization")
 	public ModelAndView master_setAuthorization
-	//(HttpServletRequest req, @ModelAttribute List<String> select, @RequestParam String checkbox_all) {
+	// (HttpServletRequest req, @ModelAttribute List<String> select, @RequestParam
+	// String checkbox_all) {
 	(HttpServletRequest req) {
-		
+
 		String isManager = req.getParameter("isManager");
 		String[] select = req.getParameterValues("select");
 
-		if(select != null) {
-			for(int i=0 ;i < select.length; i++) {
+		if (select != null) {
+			for (int i = 0; i < select.length; i++) {
 				System.out.println("true목록:" + select[i]);
 			}
 		}
-		System.out.println("all권한 true:"+ isManager);
+		System.out.println("all권한 true:" + isManager);
 
 		ModelAndView mav = new ModelAndView();
-		if(select != null) {
+		if (select != null) {
 			mav.addObject("select", select);
 		}
 
@@ -49,29 +50,28 @@ public class MasterController {
 
 		return mav;
 
-//		int res = masterMappger.setAuthorization(select);
-//		String msg = "";
-//		String url = "";
-//		ModelAndView mav = new ModelAndView();
-//		
-//		if(res > 0) {
-//			msg = "권한부여 성공!!";
-//			//권한부여에 성공했으니까 권한부여된 목록들 나오게끔 정보 가지고 url(권한부여된 목록들 보이는 jsp페이지 만들기)로 가기
-//			url = "";
-//			mav.addObject("msg", msg);
-//			mav.addObject("url", url);
-//			mav.setViewName("message");
-//		}else{
-//			msg = "권한부여 실패!!";
-//			//다시 돌아가게 만드는 url주소 적어주기 
-//			url = "";
-//			mav.addObject("msg", msg);
-//			mav.addObject("url", url);
-//			mav.setViewName("message");
-//		}
-//		return mav;
+		// int res = masterMappger.setAuthorization(select);
+		// String msg = "";
+		// String url = "";
+		// ModelAndView mav = new ModelAndView();
+		//
+		// if(res > 0) {
+		// msg = "권한부여 성공!!";
+		// //권한부여에 성공했으니까 권한부여된 목록들 나오게끔 정보 가지고 url(권한부여된 목록들 보이는 jsp페이지 만들기)로 가기
+		// url = "";
+		// mav.addObject("msg", msg);
+		// mav.addObject("url", url);
+		// mav.setViewName("message");
+		// }else{
+		// msg = "권한부여 실패!!";
+		// //다시 돌아가게 만드는 url주소 적어주기
+		// url = "";
+		// mav.addObject("msg", msg);
+		// mav.addObject("url", url);
+		// mav.setViewName("message");
+		// }
+		// return mav;
 
-		
 	}
-	
+
 }

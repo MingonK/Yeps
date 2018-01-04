@@ -34,14 +34,14 @@ public class HomeController {
 		int NBPmnum = reviewMapper.new_BestGradePoint();
 		ReviewDTO review_of_the_day_reviewDTO = reviewMapper.review_mylist_info(NBPmnum);
 		RestaurantDTO review_of_the_day_restaurantDTO = null;
-		if(review_of_the_day_reviewDTO != null) {
+		if (review_of_the_day_reviewDTO != null) {
 			reviewMapper.review_mylist_updatedata(review_of_the_day_reviewDTO.getRvnum());
 			review_of_the_day_restaurantDTO = restaurantMapper
 					.GetRestaurantName_R(review_of_the_day_reviewDTO.getRnum());
 		}
-//		// 최근활동 리뷰/사진을 index page로 보내주기
-//		// ★미구현:설정된 위치지역일때의 정보들을 꺼내서 index에 뿌려주기
-//		// ★미구현:file 부분 미구현
+		// // 최근활동 리뷰/사진을 index page로 보내주기
+		// // ★미구현:설정된 위치지역일때의 정보들을 꺼내서 index에 뿌려주기
+		// // ★미구현:file 부분 미구현
 		List<ReviewDTO> recentReviewInfoList = reviewMapper.recentReviewInfo(); // rvnum, gradepoint, content값 가져오는dto
 
 		List<Integer> gethotAndNewReview = reviewMapper.gethotAndNewReview();
@@ -54,17 +54,17 @@ public class HomeController {
 		List<Integer> starAvg = new ArrayList<Integer>();
 
 		Iterator<RestaurantDTO> it = hotAndNewSet.iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			RestaurantDTO dto = it.next();
-				reviewCount.add(reviewMapper.getRestaurantReviewCount(dto.getRnum()));
-				starAvg.add(reviewMapper.getStarAvg(dto.getRnum()));
+			reviewCount.add(reviewMapper.getRestaurantReviewCount(dto.getRnum()));
+			starAvg.add(reviewMapper.getStarAvg(dto.getRnum()));
 		}
-		
-//		restaurantMapper.getRandomImage();
+
+		// restaurantMapper.getRandomImage();
 		mav.addObject("recentReviewInfoList", recentReviewInfoList);
 		mav.addObject("review_of_the_day_restaurantDTO", review_of_the_day_restaurantDTO);
 		mav.addObject("review_of_the_day_reviewDTO", review_of_the_day_reviewDTO);
-		
+
 		// Hot & New
 		mav.addObject("hotAndNewSet", hotAndNewSet);
 		mav.addObject("reviewCount", reviewCount);
@@ -79,14 +79,14 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView();
 		int NBPmnum = reviewMapper.new_BestGradePoint();
 		ReviewDTO review_of_the_day_reviewDTO = reviewMapper.review_mylist_info(NBPmnum);
-		
+
 		reviewMapper.review_mylist_updatedata(review_of_the_day_reviewDTO.getRvnum());
 		RestaurantDTO review_of_the_day_restaurantDTO = restaurantMapper
 				.GetRestaurantName_R(review_of_the_day_reviewDTO.getRnum());
 
-//		// 최근활동 리뷰/사진을 index page로 보내주기
-//		// ★미구현:설정된 위치지역일때의 정보들을 꺼내서 index에 뿌려주기
-//		// ★미구현:file 부분 미구현
+		// // 최근활동 리뷰/사진을 index page로 보내주기
+		// // ★미구현:설정된 위치지역일때의 정보들을 꺼내서 index에 뿌려주기
+		// // ★미구현:file 부분 미구현
 		List<ReviewDTO> recentReviewInfoList = reviewMapper.recentReviewInfo(); // rvnum, gradepoint, content값 가져오는dto
 
 		List<Integer> gethotAndNewReview = reviewMapper.gethotAndNewReview();
@@ -99,7 +99,7 @@ public class HomeController {
 		List<Integer> starAvg = new ArrayList<Integer>();
 
 		Iterator<RestaurantDTO> it = hotAndNewSet.iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			RestaurantDTO dto = it.next();
 			reviewCount.add(reviewMapper.getRestaurantReviewCount(dto.getRnum()));
 			starAvg.add(reviewMapper.getStarAvg(dto.getRnum()));
@@ -108,7 +108,7 @@ public class HomeController {
 		mav.addObject("recentReviewInfoList", recentReviewInfoList);
 		mav.addObject("review_of_the_day_restaurantDTO", review_of_the_day_restaurantDTO);
 		mav.addObject("review_of_the_day_reviewDTO", review_of_the_day_reviewDTO);
-		
+
 		// Hot & New
 		mav.addObject("hotAndNewSet", hotAndNewSet);
 		mav.addObject("reviewCount", reviewCount);

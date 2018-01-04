@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yeps.model.MemberDTO;
-import com.yeps.model.ReviewDTO;
 
 @Service
 public class MemberMapper {
@@ -160,10 +159,10 @@ public class MemberMapper {
 	public MemberDTO mylist_info(int NBPmnum) {
 		return sqlSession.selectOne("mylist_info", NBPmnum);
 	}
-	
-//	public MemberDTO mylist_info(int NBPmnum) {
-//		return sqlSession.selectOne("mylist_info", NBPmnum);
-//	}
+
+	// public MemberDTO mylist_info(int NBPmnum) {
+	// return sqlSession.selectOne("mylist_info", NBPmnum);
+	// }
 
 	public List<MemberDTO> getSelectedRestaurant_M(int mnum) {
 		return sqlSession.selectList("getSelectedRestaurant_M", mnum);
