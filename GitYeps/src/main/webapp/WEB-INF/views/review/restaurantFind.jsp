@@ -43,8 +43,8 @@
 					<div class="resIMG_div_6">
 						<h1 class="resIMG_h1_1">Your First Review Awaits</h1>
 						<h2 class="resIMG_h2_1">
-							<b class="resIMG_b_1">Review your favorite businesses and share your experiences with our community. Need a little help getting started?
-							   <a href="#">Check out these tips.</a>
+							<b class="resFind_b_2">
+								Review everything from your favorite burger to your dentist.	
 							</b>
 						</h2>
 						<form class="" name="review_restaurantFind_F" method="get" action="review_restaurantFind">
