@@ -1,5 +1,6 @@
 package com.yeps.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,34 +36,33 @@ public class MenuController {
 	@RequestMapping(value = "/restaurant_insertMenu")
 	public ModelAndView insertMenu(HttpServletRequest req,@ModelAttribute LargeMenuDTO large_dto,@ModelAttribute SmallMenuDTO small_dto) {
 		String rnum=req.getParameter("rnum");
-		String small_length=req.getParameter("small_length");
-		String[] test=req.getParameterValues("small_length");
-		
-		for(String value : test) {
-			System.out.println(value);
+		String[] small=req.getParameterValues("small_length");
+		int[] small_length = new int[small.length];
+		for(int i =0; i<small.length; i++){
+			small_length[i]=Integer.parseInt(small[i]);
 		}
+		int count=0;
 		
-		System.out.println(small_length);
-//		for(int i=0;i<large_dto.getLargeMenuList().size();i++) {
-//			large_dto.setLarge_name(large_dto.getLargeMenuList().get(i).getLarge_name());
-//			large_dto.setRnum(Integer.parseInt(rnum));
-//			largeMenuMapper.insertLargeMenu(large_dto);
-//			for(int j=0;j<small_dto.getSmallMenuList().size();j++) {
-
-		
-		
-//				small_dto.setSmall_menuNum(large_dto.getLargeMenuList().get(i).getlarge_menunum());
-//				small_dto.setSmall_name(small_dto.getSmallMenuList().get(j).getSmall_name());
-//				small_dto.setSmall_content(small_dto.getSmallMenuList().get(j).getSmall_content());
-//				small_dto.setSmall_price(small_dto.getSmallMenuList().get(j).getSmall_price());
-//				smallMenuMapper.insertSmallMenu(small_dto);
-//			}
-//		}
+		for(int i=0;i<large_dto.getLargeMenuList().size();i++) {
+			System.out.println("large_dto.getLargeMenuList().size()"+large_dto.getLargeMenuList().size());
+			large_dto.setLarge_name(large_dto.getLargeMenuList().get(i).getLarge_name());
+			large_dto.setRnum(Integer.parseInt(rnum));
+			largeMenuMapper.insertLargeMenu(large_dto);
+			int large_menunum=largeMenuMapper.getLastLargeMenu();
+			System.out.println(large_menunum);
+			for(int j=0;j<small_length[i];j++) {
+				small_dto.setlarge_menunum(large_menunum);
+				small_dto.setSmall_name(small_dto.getSmallMenuList().get(count).getSmall_name());
+				small_dto.setSmall_content(small_dto.getSmallMenuList().get(count).getSmall_content());
+				small_dto.setSmall_price(small_dto.getSmallMenuList().get(count).getSmall_price());
+				smallMenuMapper.insertSmallMenu(small_dto);
+				count++;
+			}
+		}
 
 		
 		ModelAndView mav=new ModelAndView();
-		
-		mav.setViewName("restaurant/restaurant_listMenu");
+		mav.setViewName("restaurant/restaurant_listMenu?rnum="+rnum);
 		return mav; 
 	}
 	
@@ -72,18 +72,19 @@ public class MenuController {
 		int rnum=Integer.parseInt(req.getParameter("rnum"));
 		RestaurantDTO dto=restaurantMapper.getRest(rnum);
 		
-		List<LargeMenuDTO> large=largeMenuMapper.listLargeMenu(rnum);
-		List<SmallMenuDTO> small=null;
+		List<LargeMenuDTO> largeList=largeMenuMapper.listLargeMenu(rnum);
+		List<SmallMenuDTO> smallList = null;
 		
-		for(int i=0;i<large.size();i++) {
-			small=smallMenuMapper.listSmallMenu(large.get(i).getlarge_menunum());
+		for(int i=0;i<largeList.size();i++) {
+			smallList.add(smallMenuMapper.listSmallMenu(largeList.get(i).getlarge_menunum()));
 		}
+		
 
 		
 	    ModelAndView mav = new ModelAndView();
 	    mav.addObject("getRest",dto);
-	    mav.addObject("large",large);
-	    mav.addObject("small",small);
+	    mav.addObject("largeList",largeList);
+	    mav.addObject("smallList",smallList);
 		mav.setViewName("restaurant/restaurant_listMenu");
 		return mav;
 	}

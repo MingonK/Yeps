@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/restStyle.css?ver=1"/>"/>
 </head>
 <%@include file="../top.jsp" %>
-	<div class="main-content-wrap main-content-wrap--full" style="    background: white;min-width: 1020px;height:100%;">
+	<div class="main-content-wrap main-content-wrap--full" style="    background: white;min-width: 1020px;">
 		<div class="menu-super-container" style="width: 960px;margin: 0 auto;padding:15 15 36 15px;height:100%;display:table;">
 			<div class="container biz-menu">
 				<div class="menu-header" style="    margin-bottom: 20px;border-bottom: 1px solid #ccc;padding-bottom: 10px;">
@@ -43,45 +43,48 @@
                 				<strong style="font-weight: bold;">메인 메뉴</strong>
                 			</li>
                 		</ul>
-                		<div class="menu-sections" style="    margin-top: 15px;">
-                			
-                			<div class="section-header section-header--no-spacing" style="margin-bottom: 0;border-bottom: 1px solid #e6e6e6;">
-                				<h2 class="alternate" style="color: #333;word-wrap: break-word !important;word-break: break-word !important;overflow-wrap: break-word !important;font-weight: bold;margin-bottom: 6px;font-size: 21px;line-height: 1.28571em;    margin: 0 0 6px;    display: block;">
-<%-- 				                    ${list.large_name} --%>
-				                </h2>
-                			</div>
-                			<div class="u-space-b3" style="margin-bottom: 18px !important;">
-                				<div class="menu-item" style="border-top: 0;    padding: 10px 0;">
-                					<div class="arrange arrange--6" style="    margin-left: -6px;margin-right: -6px;border-collapse: separate;border-spacing: 6px 0;    display: table;min-width: 100%;table-layout: auto;">
-                						<div class="arrange_unit" style="    margin-left: 3px;margin-right: 3px;border-collapse: collapse;border-spacing: 0 0;    box-sizing: border-box;display: table-cell;vertical-align: top;">
-                							<div class="photo-box biz-photo-box pb-60s">
-                								<a class="js-lightbox-media-link js-analytics-click" href="#" data-analytics-label="biz-photo" style="color: #0073bb;text-decoration: none;    cursor: pointer;">
-									                <img alt="" class="photo-box-img" height="60" src="https://s3-media3.fl.yelpcdn.com/bphoto/WbWYI1l--9F0c_xRIDLb7g/60s.jpg" width="60" style="outline: none; border-radius: 4px;vertical-align: middle; ">
-									            </a>
-                							</div>
-                						</div>
-                						<div class="arrange_unit arrange_unit--fill" style="    margin-left: 3px;margin-right: 3px;border-collapse: collapse;border-spacing: 0 0;    width: 100%;    box-sizing: border-box;display: table-cell;vertical-align: top;">
-                							<div class="arrange" style="display: table;min-width: 100%;table-layout: auto;">
-                								<div class="arrange_unit arrange_unit--fill menu-item-details" style="    width: 100%;    box-sizing: border-box;display: table-cell;vertical-align: top;">
-                									<h4 style="word-wrap: break-word !important;word-break: break-word !important;overflow-wrap: break-word !important;font-weight: bold;margin-bottom: 6px;font-size: 14px;line-height: 1.28571em;color: #333;    margin: 0 0 3px;    display: block;">
-						                                    <a href="/menu/fog-harbor-fish-house-san-francisco-2/item/blue-cheese-garlic-bread">Blue Cheese Garlic Bread</a>
-						                            </h4>
-						                            <p class="menu-item-details-description" style="    margin-bottom: 5px;    display: block;">Fresh sourdough, topped with garlic, Pt. Reyes blue cheese and herbs</p>
-                								</div>
-                								<div class="menu-item-prices arrange_unit" style="    text-align: right;padding-left: 90px;    box-sizing: border-box;display: table-cell;vertical-align: top;">
-                									<ul style="list-style: none;    display: block;">
-                										<li class="menu-item-price-amount" style="font-size: 15px;font-weight: bold;display: list-item;">
-                											3000￦
-                										</li>
-                									</ul>
-                								</div>
-                							</div>
-                						</div>
-                					</div>
-                				</div>
-                			</div>
-                			
-                		</div>
+	                		<div class="menu-sections" style="    margin-top: 15px;">
+                		<c:forEach var="large" items="${largeList}" varStatus="status">
+	                			<div class="section-header section-header--no-spacing" style="margin-bottom: 0;border-bottom: 1px solid #e6e6e6;">
+	                				<h2 class="alternate" style="color: #333;word-wrap: break-word !important;word-break: break-word !important;overflow-wrap: break-word !important;font-weight: bold;margin-bottom: 6px;font-size: 21px;line-height: 1.28571em;    margin: 0 0 6px;    display: block;">
+					                    ${large.large_name}
+					                </h2>
+	                			</div>
+	                				
+			                			<div class="u-space-b3" style="margin-bottom: 18px !important;">
+			                			<c:forEach var="small" items="${smallList.get(status.index)}" >
+			                				<div class="menu-item" style="border-top: 0;    padding: 10px 0;">
+			                					<div class="arrange arrange--6" style="    margin-left: -6px;margin-right: -6px;border-collapse: separate;border-spacing: 6px 0;    display: table;min-width: 100%;table-layout: auto;">
+			                						<div class="arrange_unit" style="    margin-left: 3px;margin-right: 3px;border-collapse: collapse;border-spacing: 0 0;    box-sizing: border-box;display: table-cell;vertical-align: top;">
+			                							<div class="photo-box biz-photo-box pb-60s">
+			                								<a class="js-lightbox-media-link js-analytics-click" href="#" data-analytics-label="biz-photo" style="color: #0073bb;text-decoration: none;    cursor: pointer;">
+												                <img alt="" class="photo-box-img" height="60" src="https://s3-media3.fl.yelpcdn.com/bphoto/WbWYI1l--9F0c_xRIDLb7g/60s.jpg" width="60" style="outline: none; border-radius: 4px;vertical-align: middle; ">
+												            </a>
+			                							</div>
+			                						</div>
+			                						<div class="arrange_unit arrange_unit--fill" style="    margin-left: 3px;margin-right: 3px;border-collapse: collapse;border-spacing: 0 0;    width: 100%;    box-sizing: border-box;display: table-cell;vertical-align: top;">
+			                							<div class="arrange" style="display: table;min-width: 100%;table-layout: auto;">
+			                								<div class="arrange_unit arrange_unit--fill menu-item-details" style="    width: 100%;    box-sizing: border-box;display: table-cell;vertical-align: top;">
+			                									<h4 style="word-wrap: break-word !important;word-break: break-word !important;overflow-wrap: break-word !important;font-weight: bold;margin-bottom: 6px;font-size: 14px;line-height: 1.28571em;color: #333;    margin: 0 0 3px;    display: block;">
+									                                    <a href="/menu/fog-harbor-fish-house-san-francisco-2/item/blue-cheese-garlic-bread">${small.small_name }</a>
+									                            </h4>
+									                            <p class="menu-item-details-description" style="    margin-bottom: 5px;    display: block;">${small.small_content}</p>
+			                								</div>
+			                								<div class="menu-item-prices arrange_unit" style="    text-align: right;padding-left: 90px;    box-sizing: border-box;display: table-cell;vertical-align: top;">
+			                									<ul style="list-style: none;    display: block;">
+			                										<li class="menu-item-price-amount" style="font-size: 15px;font-weight: bold;display: list-item;">
+			                											${small.small_price}￦
+			                										</li>
+			                									</ul>
+			                								</div>
+			                							</div>
+			                						</div>
+			                					</div>
+			                				</div>
+			                				</c:forEach>
+			                			</div>
+                		</c:forEach>
+	                		</div>
 					</div>
 					<div class="column column-beta popular-section" style="float: left;padding: 0 15px;min-height: 1px;    box-sizing: border-box;width: 33.33333%;">
 						<a href="restaurant_insertMenuForm?rnum=${getRest.rnum }">메뉴 등록</a>

@@ -38,20 +38,52 @@
 	
 	<interceptors>
         <interceptor>
+            <!-- 회원관련 -->
             <mapping path="/member_manager" />
             <mapping path="/member_delete" />
             <mapping path="/member_profile" />
+            <mapping path="/member_details" />
+            <mapping path="/member_photos" />
+            <mapping path="/member_photolist" />
+            <!--  -->
+            
+            <!-- Q&A 관련 -->
             <mapping path="/qna_write" />
             <mapping path="/qna_delete" />
             <mapping path="/qna_update" />
             <mapping path="/qna_reply" />
-            <mapping path="/event_write" />
+			<!--  -->
+			
+			<!-- 레스토랑 관련 -->
             <mapping path="/restaurant_insert" />
             <mapping path="/restaurant_update" />
             <mapping path="/restaurant_delete" />
+            <!--  -->
+            
+            <!-- 리뷰 관련 -->
             <mapping path="/review_insert" />
             <mapping path="/review_update" />
             <mapping path="/review_delete" />
+            <!--  -->
+            
+            <!-- 메세지 관련 -->
+            <mapping path="/yeps_message" />
+            <!--  -->
+            
+            <!-- 이벤트 관련 -->
+            <mapping path="/event_write" />
+            <mapping path="event_insert" />
+            <mapping path="/eventReview_insert" />
+            <mapping path="/event_report" />
+            <mapping path="/event_update_photo" />
+            <mapping path="/event_updatePro_photo" />
+            <mapping path="/event_fileUpLoad" />
+            <mapping path="/event_delete" />
+            <mapping path="/event_edit" />
+            <mapping path="/event_main_photo" />
+            <mapping path="/event_delete_photo" />
+            
+            <!--  -->
             
             <beans:bean class="com.yeps.service.LoginInterceptor"></beans:bean>            
         </interceptor>         

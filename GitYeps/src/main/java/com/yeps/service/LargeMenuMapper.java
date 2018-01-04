@@ -19,6 +19,10 @@ public class LargeMenuMapper {
 	public int insertLargeMenu(LargeMenuDTO dto) {
 		return sqlSession.insert("insertLargeMenu",dto);
 	}
+	public int getLastLargeMenu() {
+		return sqlSession.selectOne("getLastLargeMenu");
+	}
+	
 	
 	public List<LargeMenuDTO> listLargeMenu(int rnum){
 		return sqlSession.selectList("listLargeMenu",rnum);

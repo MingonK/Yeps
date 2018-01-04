@@ -55,8 +55,6 @@ $(document).ready(function() {
 	
 	$(".check").click(function(){
 		
-
-		
 	});
 	
 	
@@ -71,10 +69,7 @@ $(document).ready(function() {
 		if($('.'+largeMenu+'').length>0){
 			return false;
 		}
-		
-		
-		
-		
+
 		
 		$( ".menu-sections" ).append(
     			'<div class="'+largeMenu+'-header" style="margin-bottom: 0;border-bottom: 1px solid #e6e6e6;">'+
@@ -87,7 +82,8 @@ $(document).ready(function() {
 				'</button>'+
 			'</div>'+
 			'<div class="'+largeMenu+'-list" style="margin-bottom: 18px !important;">'+
-			
+				
+				'<input type="hidden" id="'+largeMenu+'" name="small_length" value="0">'+
 			'</div>'
 			);
 		$("#restMenu-input").val('');
@@ -98,6 +94,9 @@ $(document).ready(function() {
 			
 			var name=$(this).val();
 			var small_length=$('.'+name+'-list').children().length;	
+			
+			
+			$('input[id='+name+']').val(small_length);
 			
 			
 			$('.'+name+'-list ').append(
@@ -126,8 +125,7 @@ $(document).ready(function() {
 							'</div>'+
 						'</div>'+
 					'</div>'+
-				'</div>'+
-				'<input type="hidden" name="small_length" value="'+small_length+'">'
+				'</div>'
 			);																			   
 			small_count++;
 			
