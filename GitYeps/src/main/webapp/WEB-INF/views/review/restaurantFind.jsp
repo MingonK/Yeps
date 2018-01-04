@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <html>
 <head>
+	<title>Write a Review - Yeps</title>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css?ver=4"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css?ver=6"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/message.css?ver=4"/>"/>

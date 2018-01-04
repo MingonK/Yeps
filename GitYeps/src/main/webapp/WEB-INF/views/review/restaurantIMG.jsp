@@ -4,6 +4,7 @@
 
 <html>
 <head>
+   <title>Write a Review</title>
    <title>레스토랑 리스트 사진목록 + 리뷰 + 평점 달 수 있도록 구현해둔 곳</title>
    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css?ver=4"/>"/>
    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css?ver=6"/>"/>

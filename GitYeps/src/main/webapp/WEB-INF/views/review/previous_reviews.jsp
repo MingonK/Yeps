@@ -129,7 +129,7 @@
 											 wrote a 
 											<b class="pre_b">review</b>
 											 for     
-											<a class="pre_a99" href="#">${dto.restaurantDTO.rname}</a>
+											<a class="pre_a99" href="restaurant_content?rnum=${dto.restaurantDTO.rnum}">${dto.restaurantDTO.rname}</a>
 										</p>
 										<div class="pre_div_33">
 											<div class="pre_div_33-1">
