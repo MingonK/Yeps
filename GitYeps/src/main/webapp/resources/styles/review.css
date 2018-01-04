@@ -3352,6 +3352,8 @@ pre_li:hover .pre_ul_small{
 }
 
 .resIMG_img_1 {
+	height: 150px;
+    width: 150px;
 	vertical-align: middle;
 }
 
