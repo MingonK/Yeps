@@ -256,6 +256,7 @@ public class RestaurantController {
 		String rnum = req.getParameter("rnum");
 		
 		int count = reviewMapper.getRestaurantReviewCount(Integer.parseInt(rnum));
+		System.out.println("처음 열릴때 카운트: " + count);
 		int pageScale = 10;
 		int blockScale = 10;
 		YepsPager YepsPager = new YepsPager(count, curPage, pageScale, blockScale);
@@ -301,19 +302,20 @@ public class RestaurantController {
 		List<ReviewDTO> targetRestaurant_reviews = null;
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		YepsPager YepsPager = null;
-		if(SearchKeyword != null) {
+		if(SearchKeyword == null || SearchKeyword.trim().equals("")) {
+			count = reviewMapper.getRestaurantReviewCount(Integer.parseInt(rnum));
+			
+			YepsPager = new YepsPager(count, curPage, pageScale, blockScale);
+			start = YepsPager.getPageBegin();
+			end = YepsPager.getPageEnd();
+			targetRestaurant_reviews = reviewMapper.getSelectedRestaurant_Rv(Integer.parseInt(rnum), start, end);
+		} else {
 			count = reviewMapper.review_keywordCount(SearchKeyword);
 			YepsPager = new YepsPager(count, curPage, pageScale, blockScale);
 			start = YepsPager.getPageBegin();
 			end = YepsPager.getPageEnd();
 			targetRestaurant_reviews = reviewMapper.review_keyword(SearchKeyword, Integer.parseInt(rnum), start, end);
 			map.put("SearchKeyword", SearchKeyword);
-		} else {
-			count = reviewMapper.getRestaurantReviewCount(Integer.parseInt(rnum));
-			YepsPager = new YepsPager(count, curPage, pageScale, blockScale);
-			start = YepsPager.getPageBegin();
-			end = YepsPager.getPageEnd();
-			targetRestaurant_reviews = reviewMapper.getSelectedRestaurant_Rv(Integer.parseInt(rnum), start, end);
 		}
 		
 		map.put("count", count); // 레코드의 갯수
