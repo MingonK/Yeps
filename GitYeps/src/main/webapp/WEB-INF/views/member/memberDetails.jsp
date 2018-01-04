@@ -7,7 +7,11 @@
 <head>
 <title>Details</title>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/member.css?ver=1"/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/member.css?ver=2"/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/restStyle.css?ver=1"/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css?ver=1"/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css?ver=2"/>"/>
+
 <script src="//code.jquery.com/jquery.min.js?ver=1"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js?ver=2"></script>
 <script src="http://malsup.github.com/jquery.cycle2.js"></script>
@@ -260,9 +264,16 @@
 									<div class="member_feeds">
 										<ul class="content-list">
 											<li data-section-id="self">
-												<p class="member_no-recent-activity">
-													We don't have any recent activity for you right now.
-												</p>
+											 <!-- 작성한 리뷰가 있을 경우 -->
+							                  <c:if test="${ not empty reviewcount}" >
+							                      <p class="member_no-recent-activity" align="left"> 지금까지 <span style="color: red; font-weight: bold;"> ${reviewcount}</span>개의 review를 작성하였습니다.</p>
+  							                  </c:if>
+  							                  <!-- 작성한 리뷰가 없을 경우 -->
+                                              <c:if test="${ empty reviewcount}" >
+												  <p class="member_no-recent-activity" align="left">
+													  We don't have any recent activity for you right now.
+												  </p>
+											  </c:if>
 											</li>
 										</ul>
 									</div>
@@ -313,6 +324,96 @@
 					<div class="member_detals_section_header">
 						<h2 class="section-header_title">Reviews</h2>
 					</div>
+					
+					<div class="restContent-review-list" style="position: relative;">
+					    <ul style="list-style: none; display: block;">
+					    
+<!----------------------------------------------- 아작스 통해 붙여넣는 부분 -------------------------------------------------- -->
+					    
+					    </ul>
+					</div> 
+					
+					
+<!-- -----페이징 처리 시작 ------ -->					
+			   <!-- <div class="yeps_message_section" style="font-size: 14px; "> -->
+<!-- 	                       <div class="yeps_message_pagination_block"> -->
+<!-- 	                          <div class="yeps_message_pagination_wrap"> -->
+<!-- 	                              <div class="yeps_message_page_of_pages" > -->
+<%-- 	                                  <c:if test="${map.yepsPager.blockEnd == 0}"> --%>
+<%-- 	                                      Page ${map.yepsPager.curPage} of 1 --%>
+<%-- 	                                  </c:if> --%>
+<%-- 	                                  <c:if test="${map.yepsPager.blockEnd != 0}"> --%>
+<%-- 	                                      Page ${map.yepsPager.curPage} of ${map.yepsPager.blockEnd} --%>
+<%-- 	                                  </c:if> --%>
+<!-- 	                             </div> -->
+<!-- 	                      페이징 처리!! 현재페이지는 span이 되고 나머지는 a로    -->
+<%-- 	                         <c:if test="${map.yepsPager.blockEnd != 1}"> --%>
+<!-- 	                             <div class="yeps_message_page_link_wrapper" style="text-align: right;"> -->
+<!-- 	                                 <div class="yeps_message_page_link_wrap"> -->
+<%-- 	                                     <c:if test="${map.yepsPager.curBlock > 1}"> --%>
+<!-- 	                                         <div class="yeps_message_next_block"> -->
+<!-- 	                                             <a class="yeps_message_next_block_action" href="javascript:list('1')"> -->
+<!-- 	                                                 <span>Start</span> -->
+<!-- 	                                             </a> -->
+<!-- 	                                         </div> -->
+<%-- 	                                     </c:if> --%>
+<%-- 	                                 <c:if test="${map.yepsPager.curBlock > 1}"> --%>
+<!-- 	                                     <div class="yeps_message_next_block"> -->
+<%-- 	                                         <a class="yeps_message_next_block_action" href="javascript:list('${map.yepsPager.prevPage}','${map.lMode}')"> --%>
+<!-- 	                                             <span style="width: 24px; height: 24px; fill: currentColor;" class="icon"> -->
+<!-- 	                                                  <svg class="icon_svg"> -->
+<!-- 	                                                      <path d="M14.475 18.364l1.414-1.414L10.94 12l4.95-4.95-1.415-1.414L8.11 12l6.365 6.364z"></path> -->
+<!-- 	                                                  </svg> -->
+<!-- 	                                            </span> -->
+<!-- 	                                            <span>Previous</span> -->
+<!-- 	                                         </a> -->
+<!-- 	                                    </div> -->
+<%-- 	                                </c:if> --%>
+<%-- 	                                    <c:forEach var="num" begin="${map.yepsPager.blockBegin}" end="${map.yepsPager.blockEnd}"> --%>
+<!-- 	                                        <div class="yeps_message_page_link_option"> -->
+<%-- 		                                        <c:choose> --%>
+<%-- 		                                            <c:when test="${num == map.yepsPager.curPage}"> --%>
+<!-- 		                                                <span class="yeps_message_page_option_action"> -->
+<%-- 		                                                    ${num} --%>
+<!-- 		                                                </span> -->
+<%-- 		                                            </c:when> --%>
+<%-- 		                                            <c:otherwise> --%>
+<%-- 		                                                <a href="javascript:list('${num}','${map.lMode}')" class="yeps_message_page_option_link_action"> --%>
+<%-- 		                                                    ${num} --%>
+<!-- 		                                                </a> -->
+<%-- 		                                            </c:otherwise> --%>
+<%-- 		                                        </c:choose> --%>
+<!-- 		                                    </div> -->
+<%-- 	                                    </c:forEach> --%>
+<%-- 	                                <c:if test="${map.yepsPager.curBlock <= map.yepsPager.totBlock}"> --%>
+<!-- 	                                    <div class="yeps_message_next_block"> -->
+<%-- 	                                        <a class="yeps_message_next_block_action" href="javascript:list('${map.yepsPager.nextPage}','${map.lMode}')"> --%>
+<!-- 	                                            <span>Next</span> -->
+<!-- 	                                            <span style="width: 24px; height: 24px; fill: currentColor;" class="icon"> -->
+<!-- 	                                                <svg class="icon_svg"> -->
+<!-- 	                                                    <path d="M9.525 5.636L8.11 7.05 13.06 12l-4.95 4.95 1.415 1.414L15.89 12 9.524 5.636z"></path> -->
+<!-- 	                                                </svg> -->
+<!-- 	                                            </span> -->
+<!-- 	                                        </a> -->
+<!-- 	                                    </div> -->
+<%-- 	                                </c:if> --%>
+<%-- 	                            <c:if test="${map.yepsPager.curPage <= map.yepsPager.totPage}"> --%>
+<!-- 	                                <div class="yeps_message_next_block" style="display: inline-block;"> -->
+<%-- 	                                    <a class="yeps_message_next_block_action" href="javascript:list('${map.yepsPager.totPage}','${map.lMode}')"> --%>
+<!-- 	                                        <span>End</span> -->
+<!-- 	                                    </a> -->
+<!-- 	                                </div> -->
+<%-- 	                            </c:if> --%>
+<!-- 	                         </div> -->
+<!-- 	                     </div> -->
+<%-- 	                 </c:if> --%>
+<!-- 	             </div> -->
+<!-- 	         </div> -->
+<!-- 	      </div> -->
+
+
+
+
 					<p>It’s your turn ? review everything from your favorite burger to your favorite root canal. Write reviews to contribute to the Yelp community and help your friends find all the local gems that you love.</p>
 					<a href="review_write" class="ybtn ybtn-primary">Write a Review</a>
 					<div class="member_reviews-hero">
@@ -440,7 +541,167 @@
  	    	$(".details-column-beta_reviews").show();
  	    	$(".details-column-beta_events").hide();
  	    	$(".details-column-beta_tips").hide();
+ 	    	
+ 	   	var mnum = '${memberDTO.mnum}';
+	        $.ajax({
+             type : 'post',
+             url : 'review_member_ajax',
+             data : mnum,
+             dataType : 'json',
+             success : function(responseData){
+            	var num = responseData.num;
+              
+       	 $('.restContent-review-list ul li').remove(); 
+	 $.each(responseData.memberReview,function(i,item){
+		 $(".restContent-review-list ul").append(
+			
+				 '<li style="margin: 0; padding: 18px 0; border-bottom: 1px solid #e6e6e6; padding-bottom: 17px; display: list-item; text-align: -webkit-match-parent;">'+
+					'<div class="restContent-review-with" style="    width: 100%; overflow: hidden;height: auto;">'+
+						'<div class="restContent-user" style="float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 37.5%;">'+
+							'<div class="restContent-user-content" style="margin-top: 3px;">'+
+								'<div class="restContent-meida-block" style="font-size: 12px; line-height: 1.5em; position: relative; display: flex;">'+
+									'<div class="restContent-media-avatar" style="border-right-width: 9px;border-right: 6px solid transparent;border-left: none;">'+
+										'<div class="restContent-photo-box">'+
+											'<a href="#" style="color: #0073bb;text-decoration: none;">'+
+												'<img alt="Meghan A." class="restContent-photo-box-img" height="60" src="https://s3-media2.fl.yelpcdn.com/photo/AiuQa6ZjRBfpPVSQGOinIw/60s.jpg" srcset="https://s3-media2.fl.yelpcdn.com/photo/AiuQa6ZjRBfpPVSQGOinIw/90s.jpg 1.50x,https://s3-media2.fl.yelpcdn.com/photo/AiuQa6ZjRBfpPVSQGOinIw/168s.jpg 2.80x,https://s3-media2.fl.yelpcdn.com/photo/AiuQa6ZjRBfpPVSQGOinIw/ms.jpg 1.67x,https://s3-media2.fl.yelpcdn.com/photo/AiuQa6ZjRBfpPVSQGOinIw/180s.jpg 3.00x,https://s3-media2.fl.yelpcdn.com/photo/AiuQa6ZjRBfpPVSQGOinIw/120s.jpg 2.00x" width="60">'+
+											'</a>'+
+										'</div>'+
+									'</div>'+
+								 '<div class="restContent-media-story" style="-webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;">'+
+									 '<ul class="restContent-user-info" style="list-style: none; -webkit-margin-before: 0px; -webkit-margin-after: 0px; display: block; -webkit-margin-start: 0px; -webkit-margin-end: 0px;">'+
+											'<li class="restContent-user-name" style="display: list-item; text-align: -webkit-match-parent;">'+
+												'<a href="#" class="restContent-user-display-name" style="font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; text-decoration: none; cursor: pointer;">'+
+													 item.memberDTO.name + 
+												'</a>'+
+											'</li>'+
+											'<li class="restContnet-user-location">'+
+												'<b style="font-weight: bold;">'+   item.memberDTO.address + '</b>'+
+											'</li>'+
+										'</ul>'+
+										'<ul class="restContent-user-stats" style="list-style: none;display: block;">'+
+							
+											'<li class="restContent-review-count" style="color: #666;display: list-item;text-align: -webkit-match-parent;">'+
+												'<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-review icon--size-18">'+
+												    '<svg class="icon_svg">'+
+												        '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_review">'+
+												        	'<svg id="18x18_review" height="100%" viewBox="0 0 18 18" width="100%">'+
+												        		'<path d="M13 3H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1.505 9.643l-2.526-1.55L6.526 12.7 7 9.934 5 7.977l2.766-.404L8.97 4.7l1.264 2.873L13 7.977l-2 1.957.495 2.71z"></path>'+
+												        	'</svg>'+
+												        '</use>'+
+												    '</svg>'+
+												'</span>'+
+												'<b style="font-weight: bold;">'+ item.memberDTO.reviewcount + '</b>reviews'+
+											'</li>'+
+											'<li class="restContent-photo-count" style="color: #666;display: list-item;text-align: -webkit-match-parent;">'+
+												'<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-camera icon--size-18">'+
+												    '<svg class="icon_svg">'+
+												        '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_camera">'+
+												        	'<svg id="18x18_camera" height="100%" viewBox="0 0 18 18" width="100%">'+
+												        		'<path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 6.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path>'+
+												        	'</svg>'+
+												        '</use>'+
+												    '</svg>'+
+												'</span>'+
+												'<b style="font-weight: bold;">'+ item.memberDTO.imagecount + '</b> photos'+
+											'</li>'+
+										'</ul>'+
+									'</div>'+
+								'</div>'+
+								'<ul class="restContent-list-link" style="transition: opacity 0.3s ease-in-out; font-size: 12px; line-height: 1.5em; margin-top: 6px; font-weight: bold; list-style: none; display: block;">'+
+									'<li>'+
+										'<a class="restContent-share-review" href="#" style="display: table; min-width: 100%; table-layout: auto; color: #0073bb; text-decoration: none; cursor: pointer;">'+
+											'<div class="action-link_icon arrange_unit" style="padding-top: 3px; padding-bottom: 3px; vertical-align: middle; padding-right: 12px; box-sizing: border-box; display: table-cell;">'+
+												'<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-share icon--size-18 icon--currentColor">'+
+												    '<svg class="icon_svg">'+
+												     
+												        	'<svg id="18x18_share" height="100%" viewBox="0 0 18 18" width="100%">'+
+												        		'<path d="M17.714 6.43L13 10.356v-3.03c-1 0-5.097 1.47-6.286 3.62.274-3.08 4.286-5.5 6.286-5.5V2.5l4.714 3.93zM3 4v10h11v-2.5l1-1V15H2V3h8.5l-1 1H3z"></path>'+
+												        	'</svg>'+
+												       
+												    '</svg>'+
+												'</span>'+
+											'</div>'+
+											
+									    '</a>'+
+									'</li>'+
+									
+									
+									'<li>'+
+										'<a class="restContent-share-review" href="yeps_message" style="display: table; min-width: 100%; table-layout: auto; color: #0073bb; text-decoration: none; cursor: pointer;">'+
+											'<div class="action-link_icon arrange_unit" style="padding-top: 3px; padding-bottom: 3px; vertical-align: middle; padding-right: 12px; box-sizing: border-box; display: table-cell;">'+
+												'<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-speech icon--size-18 icon--currentColor">'+
+											    '<svg class="icon_svg">'+
+											       
+											        	'<svg id="18x18_speech" height="100%" viewBox="0 0 18 18" width="100%">'+
+											        		'<path d="M2 4v6a2 2 0 0 0 2 2h1v3l4-3h5a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"></path>'+
+											        	'</svg>'+
+											        
+											    '</svg>'+
+											'</span>'+
+											'</div>'+
+											'<div class="action-link_label arrange_unit arrange_unit--fill" style="border-top: 1px solid #e6e6e6; padding-top: 3px; padding-bottom: 3px; vertical-align: middle; width: 100%;">'+
+														'Send message'+
+											'</div>'+
+									    '</a>'+
+									'</li>'+
+								'</ul>'+
+							'</div>'+
+						'</div>'+
+						'<div class="restContent-review-wrapper" style="float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 62.5%;">'+
+							'<div class="restContent-review-content" style="padding: 0 12px 6px 0; min-height: 120px; word-wrap: break-word !important; word-break: break-word !important; overflow-wrap: break-word !important;">'+
+								'<div class="restContent-review-rating" style="margin: 6px 0;width:100%;overflow:hidden;height:auto;">'+
+									'<div>'+
+										
+										'<div class="restList-star-rating-${getReview.gradepoint }" >'+
+										'<img class="offscreen"'+ 
+											'src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png"'+
+											'width="84" height="303" alt="4.0 star rating"'+
+											'style="clip: rect(0, 0, 0, 0); position: absolute; left: -9999px; top: auto; overflow: hidden; width: 1px; height: 1px; vertical-align: middle;">'+
+									'</div>'+
+									'</div>'+
+									'<span class="restContent-rating-qualifier" style="display: block; float: left; color: #666; font-weight: normal;">'+
+										 item.memberDTO.joindate + 
+									'</span>'+
+								'</div>'+
+								'<p lang="ko" style="margin-bottom: 12px;display:block;">'+
+									item.content +
+								'</p>'+
+								'</div>'+
+								
+								
+								'<div class="clearfix">'+
+						           '<button type="button" style="float: left;" onclick="window.location=member_details" class="ybtn ybtn--small js-war-widget_finish-draft pull-left">Finish My Review</a>'+
+						              '<form action="review_delete?rvnum='+ item.rvnum + '" class="pull-right js-delete-review-draft-form" method="post" name="delete_draft">'+
+						               
+						                 '<input type="hidden" value="'+ item.rvnum + '" name="rvnum">'+
+						                 '<button type="submit" style="float: right;"class="chiclet-link u-cursor-pointer show-tooltip js-delete-review-draft">'+
+						                    '<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-trash icon--size-18 icon--currentColor">'+
+						                       '<svg class="icon_svg">'+
+												  '<path d="M3 5V3h4V2h4v1h4v2H3zm11 9c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V6h10v8zM8 8.5a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5zm3 0a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5z"></path>'+
+											
+						                       '</svg>'+
+						                    '</span>'+
+						                    '<span class="tooltip-wrapper">'+
+						                       '<span class="tooltip">Delete draft</span>'+
+						                    '</span>'+
+						                 '</button>'+
+						              '</form>'+
+						           '</div>'+
+						           
+						           
+						'</div>'+
+					'</div>'+
+				'</li>'
+				      );
+	             });
+   
+				 },
+	             error : function(request, status, error) {
+	             alert("실패 :" + "code:"+request.status+"\n\n"+"message:"+request.responseText+"\n\n"+"error:"+error); 
+	             },
+	         }); 
 	    })
+    
 	    
 	    $('#profile_events').click(function(e){
 	    	$(".details-column-beta_overview").hide();
@@ -454,6 +715,7 @@
  	    	$(".details-column-beta_reviews").hide();
  	    	$(".details-column-beta_events").hide();
  	    	$(".details-column-beta_tips").show();
+ 	    	$(".yeps_message_section").hide();
 	    })
 	 });
 </script>

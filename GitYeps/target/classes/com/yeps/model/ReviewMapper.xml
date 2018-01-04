@@ -222,13 +222,14 @@
    <select id="getMemberReview"  parameterType="java.util.HashMap" resultMap="MemberReviewMap">
       select * from (select rownum rn, A. * from(select
                R.content
+              ,R.rvnum
               ,M.name
               ,M.reviewcount
               ,M.imagecount
               ,M.address
               ,M.joindate
         from yeps_review R, yeps_member M where R.mnum = M.mnum and M.mnum = #{mnum} order by rvnum desc)A)
-        where rn between start=#{start} and end=#{end}
+        where rn between #{start} and #{end}
     </select>
    
 	<resultMap type="reviewDTO" id="LastReviewMap">
