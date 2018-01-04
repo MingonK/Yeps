@@ -374,8 +374,6 @@ public class EventController {
 
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest) req;
 		HttpSession session = req.getSession();
-		
-
 		return uploadFileLoop(mr, session, Integer.parseInt(evnum));
 	}
 
