@@ -9,7 +9,7 @@ pageEncoding="UTF-8"%>
 						<div class="footer_about_menu" style="border-collapse: separate;">
 							<h3>About</h3>
 							<ul class="footer_ul">
-								<li class="footer_ul_li"><a href="qna_list">QnA</a></li>
+								<li class="footer_ul_li"><a href="qna_list">Yeps Support Center</a></li>
 								<li class="footer_ul_li"><a href="#">List2</a></li>
 								<li class="footer_ul_li"><a href="#">List3</a></li>
 								<li class="footer_ul_li"><a href="#">List4</a></li>

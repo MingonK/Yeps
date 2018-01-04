@@ -19,7 +19,7 @@
 </script>
 </head>
 <body>
-<div class="qna-container">
+<div class="qna-container" style="background: white;">
    <div class="main-content-wrap header-top-addons clearfix webview-hidden">
       <div class="content-container">
          <a class="i-wrap ig-wrap-common_sprite i-18x18_review_fff-common_sprite-wrap ig-wrap-common_sprite-r header-link" href="main">

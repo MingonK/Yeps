@@ -73,6 +73,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findRestaurant" parameterType="java.util.HashMap" resultType="RestaurantDTO">
 		select * from yeps_restaurant where zipNo = #{zipNo} and roadAddrPart1 = #{roadAddrPart1} and roadAddrPart2 = #{roadAddrPart2} and addrDetail = #{addrDetail}
 	</select>
+	
+	<!-- 1월 4일 상우 추가 -->
+	<select id="get_review_restaurantFind_Count" parameterType="String" resultType="int">
+ 		select count(*) from yeps_restaurant where rname like '%'||#{SearchFind}||'%'
+ 	</select>
+
+ 	<select id="review_restaurantFind" parameterType="java.util.HashMap" resultType="RestaurantDTO">
+ 		select *from (select rownum rn,A.* from(select * from yeps_restaurant where rname like '%'||#{SearchFind}||'%' order by rnum desc)A) where rn between #{start} and #{end} 
+ 	</select>
+	
+	
+	
+	
+	
 </mapper>
 
 
