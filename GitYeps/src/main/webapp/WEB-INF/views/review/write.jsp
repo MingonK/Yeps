@@ -28,7 +28,7 @@
 					
 					
 					<div>
-						<form name="review_writeF" action="review_insert?rname=${rname}&rnum=${rnum}" method="post"
+						<form name="review_writeF" action="review_insert?rname=${rname}&rnum=${rnum}&mode=${mode}" method="post"
            						onsubmit="return ContentAndGradepointCheck()">
            						<input type="hidden" name="gradepoint" id="gradepoint">
 							<div>
@@ -667,6 +667,7 @@ $(function() {
               data : queryString,
               dataType : 'json',
               success : function(responseData){
+                 alert(responseData.msg);
                  var targeted_popup_class = $('.popup-close').attr('data-popup-close');
                  $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
                  memberinfo = responseData.memberinfo;
