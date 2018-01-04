@@ -120,12 +120,12 @@
 									<div class="pre_div222">
 										<p class="pre_p1">
 											<a class="pre_a99" href="#">
-											<c:if test="${empty dto.memberDTO.nickname}">
-												${dto.memberDTO.email}
-											</c:if>
-											<c:if test="${!empty dto.memberDTO.nickname}">
-												${dto.memberDTO.nickname}
-											</c:if>
+												<c:if test="${empty dto.memberDTO.nickname}">
+													${dto.memberDTO.email}
+												</c:if>
+												<c:if test="${!empty dto.memberDTO.nickname}">
+													${dto.memberDTO.nickname}
+												</c:if>
 											</a>
 											 wrote a 
 											<b class="pre_b">review</b>
