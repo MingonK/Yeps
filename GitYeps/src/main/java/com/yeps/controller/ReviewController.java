@@ -345,7 +345,7 @@ public class ReviewController {
 	    int num = count - pageScale * (curPage - 1) + 1;
 		List<RestaurantDTO> Find_Restaurant_Review_Get_rdto = restaurantMapper.review_restaurantFind(start, end, SearchFind);
 		
-		System.out.println("rest_filename출력:" +Find_Restaurant_Review_Get_rdto.get(0).getRest_filename());
+		//System.out.println("rest_filename출력:" +Find_Restaurant_Review_Get_rdto.get(0).getRest_filename());
 		
 		//getRnumList reviewCount StarAvg 
 
