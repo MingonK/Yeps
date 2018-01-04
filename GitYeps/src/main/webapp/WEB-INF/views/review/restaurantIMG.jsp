@@ -103,7 +103,12 @@
                            <div class="resIMG_div_51">
                               <div class="resIMG_div_52">
                                  <a class="resIMG_a_3" href="#">
-                                    <img class="resIMG_img_3" src="https://s3-media2.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/60s.jpg" srcset="https://s3-media2.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/ms.jpg 1.67x,https://s3-media2.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/120s.jpg 2.00x,https://s3-media2.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/90s.jpg 1.50x,https://s3-media2.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/168s.jpg 2.80x,https://s3-media2.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/180s.jpg 3.00x">   
+                                 	<c:if test="${empty filename}">
+                                 		<img class="resIMG_img_3" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png">
+                                 	</c:if>
+                                 	<c:if test="${!empty filename}">
+                                   		<img class="resIMG_img_3" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${filename}">
+                                   	</c:if>	    
                                  </a>
                               </div>
                            </div>
@@ -111,7 +116,12 @@
                               <ul class="resIMG_ul_4">
                                  <li   class="resIMG_li_4">
                                     <a class="resIMG_a_4" href="#">
-                                       ${name}..
+                                       <c:if test="${empty nickname}">
+					   						${email}
+					   				   </c:if>
+					   				   <c:if test="${!empty nickname}">
+					   					  	${nickname}
+					   				   </c:if>
                                     </a>
                                  </li>
                                  <li class="resIMG_li_4">
@@ -121,6 +131,8 @@
                                  </li>
                               </ul>
                               <ul class="resIMG_ul_4">
+                              
+                              <!--  
                                  <li class="resIMG_li_5">
                                     <span class="resIMG_span_10">
                                        <svg class="resIMG_svg_4">
@@ -133,6 +145,8 @@
                                     <b class="resIMG_b_3">1</b>
                                     friend
                                  </li>
+                             --> 
+                                 
                                  <li class="resIMG_li_5">
                                     <span class="resIMG_span_11">
                                        <svg class="resIMG_svg_5">
@@ -166,6 +180,8 @@
                         </p>
                      </div>
                      <div class="resIMG_div_60">
+                     
+                     	<!--  
                         <a class="resIMG_a_5" href="#">
                            <span class="resIMG_span_13">
                               <svg class="resIMG_svg_6">
@@ -174,6 +190,8 @@
                            </span>
                            Add to list
                         </a>
+                        -->
+                        
                         <a class="resIMG_a_5" href="review_write?rnum=${rnum}&mode=update">
                            <span class="resIMG_span_14">
                               <svg class="resIMG_svg_7">
