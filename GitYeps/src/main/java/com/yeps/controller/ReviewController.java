@@ -1,4 +1,5 @@
 package com.yeps.controller;
+import java.util.ArrayList;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yeps.model.MemberDTO;
@@ -92,12 +94,13 @@ public class ReviewController {
 		return "review/guidelines";
 	}
 
+
 	@RequestMapping(value = "/restaurant_qna")
 	public String restaurant_qna() {
 		return "/qna/restaurant_qna";
 	}
 
-	@RequestMapping(value = "/review_keyword")
+	@RequestMapping(value="/review_keyword")
 	public ModelAndView review_keyword(HttpServletRequest req, @RequestParam(defaultValue = "1") int curPage) {
 		String SearchKeyword = req.getParameter("SearchKeyword");
 		String rnum = req.getParameter("rnum");
@@ -110,17 +113,17 @@ public class ReviewController {
 		int end = YepsPager.getPageEnd();
 
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("count", count); // 레코드의 갯수
+		map.put("count", count); 
 		map.put("YepsPager", YepsPager);
 
-		List<ReviewDTO> SearchedDTO_Rv = reviewMapper.review_keyword(SearchKeyword, Integer.parseInt(rnum), start, end);
+		List<ReviewDTO> SearchedDTO_Rv= reviewMapper.review_keyword(SearchKeyword, Integer.parseInt(rnum), start, end);
 		RestaurantDTO getRest = restaurantMapper.getRest(Integer.parseInt(rnum));
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("map", map);
 		mav.addObject("rnum", rnum);
 		mav.addObject("getRest", getRest);
-		mav.addObject("selectedDataRV", SearchedDTO_Rv); // 한 페이지에서 변수명에 따라 다른값보여주기위해서
+		mav.addObject("selectedDataRV", SearchedDTO_Rv); //한 페이지에서 변수명에 따라 다른값보여주기위해서
 		mav.setViewName("restaurant/restaurant_content");
 		return mav;
 
@@ -137,11 +140,15 @@ public class ReviewController {
 		String rnum = req.getParameter("rnum");
 		String rname = restaurantMapper.review_write_getrname(Integer.parseInt(rnum));
 		String star = req.getParameter("star");
+		String mode = req.getParameter("mode");
+		String where = req.getParameter("where");
 
 		// ★EDIT부분★ 위에 받아온 파라미터값 rnum을 통해서 방금 작성한 리뷰의 정보들을 가져와서 write페이지에 뿌려주면됨.
 
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("mode", mode);
 		mav.addObject("rnum", rnum);
+		mav.addObject("where", where);
 		mav.addObject("rname", rname);
 		mav.addObject("star", star);
 		mav.setViewName("review/write");
@@ -164,22 +171,17 @@ public class ReviewController {
 
 	@RequestMapping(value = "/review_insert")
 	public ModelAndView review_insert(HttpServletRequest req, HttpSession session) {
-		// ★dto에 값 입력 내가 하는부분은 나중에 수정해야 할 부분임
-
 		// ★ if (res > 0)일때 /식당명/이름/위치(Korea, Seoul)/friend/리뷰수/별점/작성일/내용 가지고 가기!
-
 		// 로그인했을때의 그 이름을 통해서 나머지 값들을 꺼내서 보여줘야함
 		ReviewDTO rvdto = new ReviewDTO();
 
-		MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo");
+		MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo");	
 		MemberPhotoDTO mpdto = (MemberPhotoDTO) session.getAttribute("mainPhoto");
 		int mnum = mdto.getMnum();
-		// reviewcount 구하기 추가 부분
-		int beforeReviewcount = memberMapper.getMemberReviewCount(mnum);
-		int nowReviewcount = beforeReviewcount + 1;
-		memberMapper.updateReviewCount(mnum, nowReviewcount);
-		// ===============================
 
+		// ===============================
+		String mode = req.getParameter("mode");
+		String where = req.getParameter("where");
 		String nickname = mdto.getNickname();
 		String email = mdto.getEmail();
 		String filename = mpdto.getFilename();
@@ -187,8 +189,14 @@ public class ReviewController {
 		String rname = req.getParameter("rname");
 		String gradepoint = req.getParameter("gradepoint");
 		String content = req.getParameter("content");
-
 		String Get_InsertReviewDate = reviewMapper.Get_InsertReviewDate();
+
+		// reviewcount 구하기 추가 부분
+		int beforeReviewcount = memberMapper.getMemberReviewCount(mnum);
+		int nowReviewcount = beforeReviewcount + 1;
+		if(mode.equals("write")) {
+			memberMapper.updateReviewCount(mnum, nowReviewcount);
+		}
 
 		rvdto.setRnum(Integer.parseInt(rnum));
 		rvdto.setMnum(mnum);
@@ -206,22 +214,27 @@ public class ReviewController {
 		// 리뷰 작성했을때 위에 프로필과함께 작성한리뷰 restaurantIMG페이지에 띄워주기
 		List<RestaurantDTO> rlist = restaurantMapper.review_restaurantIMG();
 		System.out.println("rlist 출력2" + rlist);
-
+		System.out.println("mode=" + mode);
+		System.out.println("where=" + where);
 		if (res > 0) {
 			mav.addObject("rnum", rnum);
 			// reviewcount 담아주기 ============================
-			mdto.setReviewcount(nowReviewcount);
-			mav.addObject("reviewcount", nowReviewcount);
+			if(mode.equals("write")) {
+
+				mdto.setReviewcount(nowReviewcount);
+			}else if(mode.equals("update") || mode == null){
+
+				mdto.setReviewcount(beforeReviewcount);
+			}
 			// ===========================================
+			mav.addObject("mode", "write");
 			mav.addObject("nickname", nickname);
 			mav.addObject("email", email);
 			mav.addObject("filename", filename);
 			mav.addObject("rname", rname);
 			mav.addObject("gradepoint", gradepoint);
 			mav.addObject("content", content);
-			mav.addObject("joindate", Get_InsertReviewDate);
-
-			mav.addObject("mode", "write");
+			mav.addObject("reg_date", Get_InsertReviewDate);
 			mav.addObject("rlist", rlist);
 			mav.setViewName("review/restaurantIMG");
 			return mav;
@@ -236,12 +249,50 @@ public class ReviewController {
 
 	}
 
-	/////////////////// 1월3일 상우가 추가한 부분
 
-	@RequestMapping(value = "/previous_reviews")
+	@RequestMapping(value="/review_member_ajax")
+	@ResponseBody
+	public HashMap<String, Object> review_member(HttpServletRequest req, HttpSession session,@RequestParam(defaultValue = "1") int curPage) {
+        HashMap<String, Object> map = new HashMap<String, Object>();
+		String smnum = req.getParameter("mnum");
+
+		int mnum = 0;
+		if(smnum==null) {
+			MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo");
+			
+			if(mdto == null) {
+				map.put("msg", "로그인 먼저 해주세요.");
+				return map;
+			}
+			mnum = mdto.getMnum();
+			
+		}else {
+			mnum = Integer.parseInt(smnum);
+		}
+		
+		int reviewcount = memberMapper.getMemberReviewCount(mnum);
+		int pageScale = 10;
+		int blockScale = 5;
+		YepsPager YepsPager = new YepsPager(reviewcount, curPage, pageScale, blockScale);
+		int start = YepsPager.getPageBegin();
+		int end = YepsPager.getPageEnd();
+		int num = reviewcount - pageScale * (curPage - 1) + 1;
+	
+		List<ReviewDTO> memberReview = reviewMapper.getMemberReview(mnum,start,end);
+		map.put("num", num);
+		map.put("count", reviewcount); 
+		map.put("start", start);
+		map.put("end", end);
+		map.put("YepsPager", YepsPager);
+		map.put("memberReview", memberReview);
+		return map;
+	}
+
+
+	@RequestMapping(value="/previous_reviews")
 	public ModelAndView previous_reviews(@RequestParam(defaultValue = "1") int curPage) {
 
-		// 페이징처리하기위해서 갯수 가져오는곳
+		//페이징처리하기위해서 갯수 가져오는곳 
 		int count = reviewMapper.getPreviousReviewCount();
 
 		int pageScale = 10;
@@ -251,8 +302,9 @@ public class ReviewController {
 		int end = yepsPager.getPageEnd();
 
 		int num = count - pageScale * (curPage - 1) + 1;
-		// recentreview가 y인 reviewDTO를 꺼내왔음
+		//recentreview가 y인 reviewDTO를 꺼내왔음 
 		List<ReviewDTO> rvdto_y = reviewMapper.previous_Rv(start, end);
+
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("count", count);
@@ -267,5 +319,63 @@ public class ReviewController {
 		mav.setViewName("review/previous_reviews");
 		return mav;
 	}
+	
+	
+	///////////////////1월 4일 상우 
+	@RequestMapping(value="/review_restaurantFind")
+	public ModelAndView review_restaurantFind(HttpServletRequest req, 
+			@RequestParam(defaultValue = "1") int curPage) {
+
+		//★일단 Find값으로만 검색했을때의 값을 불러오게 만들어놨음 
+		//Near도 같이 검색되게끔해야하는데 디폴트값을 Korea, Seoul로 해놨기때문에 굳이 near은 검색안해될것같긴함.
+		String SearchFind = req.getParameter("SearchFind");
+		//String SearchNear = req.getParameter("SearchNear");
+		
+		int count = 0;
+		if(SearchFind == null || SearchFind.trim().equals("")) {
+				count = 0;
+	      }else {
+	         count = restaurantMapper.get_review_restaurantFind_Count(SearchFind);
+	         System.out.println("count 출력후 :" + count);
+	     }
+		
+		int pageScale = 10;
+		int blockScale = 10;
+		YepsPager yepsPager = new YepsPager(count, curPage, pageScale, blockScale);
+		int start = yepsPager.getPageBegin();
+	    int end = yepsPager.getPageEnd();
+	    
+	    int num = count - pageScale * (curPage - 1) + 1;
+		List<RestaurantDTO> Find_Restaurant_Review_Get_rdto = restaurantMapper.review_restaurantFind(start, end, SearchFind);
+		
+		//System.out.println("rest_filename출력:" +Find_Restaurant_Review_Get_rdto.get(0).getRest_filename());
+		
+		//getRnumList reviewCount StarAvg 
+
+		List<Integer> reviewCount = new ArrayList<Integer>();
+		List<Integer> StarAvg = new ArrayList<Integer>();
+		for(int i=0; i<Find_Restaurant_Review_Get_rdto.size(); i++) {
+			reviewCount.add(reviewMapper.getRestaurantReviewCount(Find_Restaurant_Review_Get_rdto.get(i).getRnum()));
+			StarAvg.add(reviewMapper.getStarAvg(Find_Restaurant_Review_Get_rdto.get(i).getRnum()));
+		}
+		
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("Find_Restaurant_Review_Get_rdto", Find_Restaurant_Review_Get_rdto);
+		map.put("count", count);
+		map.put("start", start);
+		map.put("end", end);
+		map.put("yepsPager", yepsPager);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("num", num);			
+		mav.addObject("map", map);			
+		mav.addObject("reviewCount", reviewCount);
+		mav.addObject("StarAvg", StarAvg);
+		mav.addObject("SearchFind", SearchFind);
+		mav.setViewName("/review/restaurantFind");
+		return mav;
+	}
+
 
 }

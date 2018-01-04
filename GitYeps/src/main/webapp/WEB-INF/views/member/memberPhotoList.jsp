@@ -5,6 +5,7 @@
 <html>
 <head>
    <title>Member Photo List - Yeps</title>
+   <link rel="shortcut icon" type="image⁄x-icon" href="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/favicon.ico">
    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css"/>"/>
    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/member_update_photo.css?ver=1"/>"/>

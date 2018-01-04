@@ -7,9 +7,9 @@
    <title>QnA</title>
    <script type="text/javascript">
       function qna_writeCheck(){
-         if (qnawritef.subject.value==""){
+         if (qnawritef.title.value==""){
             alert("제목을 입력해 주세요!!")
-            qnawritef.subject.focus()
+            qnawritef.title.focus()
             return false
          }
          if (qnawritef.content.value==""){

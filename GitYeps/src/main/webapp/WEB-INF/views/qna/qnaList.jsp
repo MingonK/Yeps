@@ -28,7 +28,7 @@
             </div>
             
             <div class="YblockPageMenu">
-               <ul>
+               <ul style="display:  flex;">
                   <li class="Yfirst Ycurrent" style="width: 50%;"><a href="qna_list?mode=faq">자주 묻는 질문</a></li>
                   <li class="Ylast" style="width: 50%;"><a href="qna_list?mode=qna">Q&A</a></li>
                </ul>
@@ -132,7 +132,8 @@
                   <c:forEach var="dto" items="${map.listQnA}">
                      <tr>
                         <td>
-                           ${dto.qnum}
+							${article_count}
+							<c:set var="article_count" value="${article_count-1}"/>
                         </td>
                         <td>
                         <c:choose>
@@ -201,42 +202,91 @@
                   </tbody>
                   </table>
    
-                  <div class="yepsPager">
-                  <c:if test="${map.yepsPager.curBlock > 1}">
-                     <a class="number" href="javascript:list('1')">[처음]</a>
-                        </c:if>
-                        <!-- **이전페이지 블록으로 이동 : 현재 페이지 블럭이 1보다 크면 [이전]하이퍼링크를 화면에 출력 -->
-                        <c:if test="${map.yepsPager.curBlock > 1}">
-                           <a class="number"
-                              href="javascript:list('${map.yepsPager.prevPage}')">[이전]</a>
-                        </c:if>
-                           <!-- **하나의 블럭에서 반복문 수행 시작페이지부터 끝페이지까지 -->
-                        <c:forEach var="num" begin="${map.yepsPager.blockBegin}"
-                           end="${map.yepsPager.blockEnd}">
-                           <!-- **현재페이지이면 하이퍼링크 제거 -->
-                           <c:choose>
-                              <c:when test="${num == map.yepsPager.curPage}">
-                                 <span class="number" style="color: red">${num}</span>&nbsp;
-                              </c:when>
-                           <c:otherwise>
-                                 <a class="number" href="javascript:list('${num}')">${num}</a>&nbsp;
-                           </c:otherwise>
-                           </c:choose>
-                        </c:forEach>
+                  		<div class="event_list_paging_section" style="font-size: 14px;">
+			<div class="event_list_pagination_block">
+				<div class="event_list_pagination_wrap">
+					<div class="event_list_page_of_pages">
+						<c:if test="${map.yepsPager.blockEnd == 0}">
+							Page ${map.curPage} of 1
+						</c:if>
+						<c:if test="${map.yepsPager.blockEnd != 0}">
+							Page ${map.curPage} of ${map.yepsPager.blockEnd}
+						</c:if>
+					</div>
+<!-- 					페이징 처리!! 현재페이지는 span이 되고 나머지는 a로 -->
+					<c:if test="${map.yepsPager.blockEnd != 1}">
+					<div class="event_list_page_link_wrapper">
+						<div class="event_list_page_link_wrap">
+						
+						<c:if test="${map.yepsPager.curBlock > 1}">
+							<div class="event_list_next_block">
+								<a class="event_list_next_block_action" href="javascript:list('1')">
+									<span>Start</span>
+								</a>
+							</div>
+						</c:if>
+
+						<c:if test="${map.yepsPager.curBlock > 1}">
+							<div class="event_list_next_block">
+								<a class="event_list_next_block_action" href="javascript:list('${map.yepsPager.prevPage}')">
+									<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">
+										<svg class="icon_svg">
+											<path d="M14.475 18.364l1.414-1.414L10.94 12l4.95-4.95-1.415-1.414L8.11 12l6.365 6.364z"></path>
+										</svg>
+									</span>
+									<span>Previous</span>
+								</a>
+							</div>
+						</c:if>
+						
+						
+						<c:forEach var="num" begin="${map.yepsPager.blockBegin}" end="${map.yepsPager.blockEnd}">
+							<div class="event_list_page_link_option">
+							<c:choose>
+								<c:when test="${num == map.yepsPager.curPage}">
+									<span class="event_list_page_option_action">
+										${num}
+									</span>
+								</c:when>
+								<c:otherwise>
+									<a href="javascript:list('${num}')" class="event_list_page_option_link_action">
+										${num}
+									</a>
+								</c:otherwise>
+							</c:choose>
+							</div>
+						</c:forEach>
+						
+						<c:if test="${map.yepsPager.curBlock <= map.yepsPager.totBlock}">
+							<div class="event_list_next_block">
+								<a class="event_list_next_block_action" href="javascript:list('${map.yepsPager.nextPage}')">
+									<span>Next</span>
+									<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">
+										<svg class="icon_svg">
+											<path d="M9.525 5.636L8.11 7.05 13.06 12l-4.95 4.95 1.415 1.414L15.89 12 9.524 5.636z"></path>
+										</svg>
+									</span>
+								</a>
+							</div>
+						</c:if>
+						
+						<c:if test="${map.yepsPager.curPage <= yepsPager.totPage}">
+							<div class="event_list_next_block">
+								<a class="event_list_next_block_action" href="javascript:list('${map.yepsPager.totPage}')">
+									<span>End</span>
+								</a>
+							</div>
+						</c:if>
+						
+							
+						</div>
+					</div>
+					</c:if>
+				</div>
+			</div>
+		</div>
                   
-                        <!-- **다음이지 블록으로 이동 : 현재 페이지 블럭이 전체 페이지 블럭보다 작거나 같으면 [다음]하이퍼링크를 화면에 출력 -->
-                        <c:if
-                           test="${map.yepsPager.curBlock <= map.yepsPager.totBlock}">
-                           <a class="number"
-                              href="javascript:list('${map.yepsPager.nextPage}')">[다음]</a>
-                        </c:if>
-                        
-                        <!-- **끝페이지로 이동 : 현재 페이지가 전체 페이지보다 작거나 같으면 [끝]하이퍼링크를 화면에 출력 -->
-                        <c:if test="${map.yepsPager.curPage <= map.yepsPager.totPage}">
-                           <a class="number"
-                              href="javascript:list('${map.yepsPager.totPage}')">[끝]</a>
-                        </c:if>
-                  </div>
+                  
                </div>
             </div>
          </div>

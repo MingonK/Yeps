@@ -79,11 +79,13 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView();
 		int NBPmnum = reviewMapper.new_BestGradePoint();
 		ReviewDTO review_of_the_day_reviewDTO = reviewMapper.review_mylist_info(NBPmnum);
-
-		reviewMapper.review_mylist_updatedata(review_of_the_day_reviewDTO.getRvnum());
-		RestaurantDTO review_of_the_day_restaurantDTO = restaurantMapper
-				.GetRestaurantName_R(review_of_the_day_reviewDTO.getRnum());
-
+		
+		RestaurantDTO review_of_the_day_restaurantDTO = null;
+		if (review_of_the_day_reviewDTO != null) {
+			reviewMapper.review_mylist_updatedata(review_of_the_day_reviewDTO.getRvnum());
+			review_of_the_day_restaurantDTO = restaurantMapper
+					.GetRestaurantName_R(review_of_the_day_reviewDTO.getRnum());
+		}
 		// // 최근활동 리뷰/사진을 index page로 보내주기
 		// // ★미구현:설정된 위치지역일때의 정보들을 꺼내서 index에 뿌려주기
 		// // ★미구현:file 부분 미구현

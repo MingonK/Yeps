@@ -27,4 +27,8 @@ public class EventReviewMapper {
 		map.put("ip", ip);
 		return sqlSession.insert("insertEventReview", map);
 	}
+	
+	public int deleteAllEventReivew(int evnum) {
+		return sqlSession.delete("deleteAllEventReivew", evnum);
+	}
 }

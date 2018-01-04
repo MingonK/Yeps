@@ -25,7 +25,7 @@
    </select>
    
    <insert id="insertQnA" parameterType="QnADTO">
-      insert into yeps_qna values(yeps_qna_seq.nextval,#{mnum},#{title},#{writer},#{content}, #{secret}, sysdate, 0, #{ip}, null)
+      insert into yeps_qna values(yeps_qna_seq.nextval,#{mnum},#{title},#{writer},#{content}, #{secret}, sysdate, 0, #{ip}, null, null)
    </insert>
    
    <update id="qnaReadCount" parameterType="int">

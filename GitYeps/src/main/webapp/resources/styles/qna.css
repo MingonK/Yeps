@@ -157,7 +157,7 @@ small {
     box-sizing: border-box;
     display: table-cell;
     overflow: hidden;
-    background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/48792dd29811/assets/img/logos_desktop/default.png);
+    background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/default.png);
     background-size: 80px 40px;
     background-repeat: no-repeat;
 }
@@ -412,7 +412,7 @@ img {
 
 .ig-common_sprite {
     top: 0px;
-    background-image: url(//s3-media1.fl.yelpcdn.com/assets/srv0/yelp_styleguide/d36a0875ec95/assets/img/sprites/common_sprite.png);
+    background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/common_sprite.png);
     background-repeat: no-repeat;
 }
 
@@ -434,7 +434,7 @@ img {
 .YblockPageMenu {
    height: 40px;
     padding-bottom: 3px;
-    background: url(http://apply-cdn.lg.com/common/images/bdr_shadow.gif) repeat-x left bottom;
+    background: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/bdr_shadow.gif) repeat-x left bottom;
     margin: 0 0 12px 0;
 }
 
@@ -459,7 +459,7 @@ img {
 .greenTab ul {
     display: inline-block;
     padding-bottom: 3px;
-    background: url(http://apply-cdn.lg.com/common/images/bdr_shadow.gif) repeat-x left bottom;
+    background: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/bdr_shadow.gif) repeat-x left bottom;
     margin: 0 0 25px 0;
 }
 
@@ -476,7 +476,6 @@ img {
 .greenTab li {
     float: left;
     border: 1px solid #e0dcd2;
-    border-left: none;
 }
 
 .greenTab li.Ycurrent a {
@@ -506,14 +505,14 @@ img {
 }
 
 .YaccordionList dl dt {
-    background: #f1eeee url(http://apply-cdn.lg.com/common/images/btn_accord_plus.png) no-repeat right center;
+    background: #f1eeee url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/btn_accord_plus.png) no-repeat right center;
     height: 45px;
     line-height: 45px;
     cursor: pointer;
 }
 
 .YaccordionList dl.Ycurrent dt {
-    background: #f1eeee url(http://apply-cdn.lg.com/common/images/btn_accord_minus.png) no-repeat right center;
+    background: #f1eeee url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/btn_accord_minus.png) no-repeat right center;
 }
 
 .YaccordionList dl dt a {
@@ -524,7 +523,7 @@ img {
 .YaccordionList dl dt strong {
     padding-left: 65px;
     min-width: 80px;
-    background: url(http://apply-cdn.lg.com/common/images/ico_accord_question.png) no-repeat 28px 14px;
+    background: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/ico_accord_question.png) no-repeat 28px 14px;
     display: inline-block;
     font-size: 13px;
 }
@@ -535,7 +534,7 @@ img {
 
 .YaccordionList dl dd {
     padding: 24px 45px 24px 65px;
-    background: url(http://apply-cdn.lg.com/common/images/ico_accord_answer.png) no-repeat 29px 25px;
+    background: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/ico_accord_answer.png) no-repeat 29px 25px;
 }
 
 
@@ -547,7 +546,6 @@ img {
 .YblockPageMenu li a {
     display: block;
     border: 1px solid #e0dcd2;
-    border-left: none;
     box-sizing: border-box;
     line-height: 38px;
     color: #313131;
@@ -573,7 +571,7 @@ img {
 .Yinformation > p {
    width : 80%;
     font-size: 13px;
-    background: url(http://apply-cdn.lg.com/common/images/bul_info.png) no-repeat left 5px;
+    background: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/bul_info.png) no-repeat left 5px;
     padding-left: 20px;
     line-height: 24px;
     margin : 0 0;
@@ -664,7 +662,7 @@ img {
     zoom: 1;
     margin-right: 4px;
     padding-right: 11px;
-    background: url(//pics.auction.co.kr/newStore/bg/bg_next.gif) no-repeat 100% 1px;
+    background: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/bg_next.gif) no-repeat 100% 1px;
 }
 
 .qna_view .qna_not_box {
@@ -764,7 +762,7 @@ img {
 }
 
 .blueone_write [type="text"], .blueone_write [type="password"], .blueone_write [type="email"], .blueone_write [type="url"], .blueone_write [type="tel"], .blueone_write textarea, .blueone_write select {
-   display: block;
+    display: block;
     box-sizing: border-box;
     width: 100%;
     margin: 0;
@@ -776,10 +774,11 @@ img {
     line-height: 1.29em;
     float:left;
     resize: none;
+    padding-left: 5px;
 }
 
 .blueone_content [type="text"], .blueone_content [type="password"], .blueone_content [type="email"], .blueone_content [type="url"], .blueone_content [type="tel"], .blueone_content textarea, .blueone_content select {
-    cursor : default;
+    cursor : text;
     background: white;
     display: block;
     border: none;
@@ -791,6 +790,7 @@ img {
     line-height: 1.29em;
     float:left;
     resize: none;
+    padding-left: 5px;
 }
 
 .qnawritebtn-full{

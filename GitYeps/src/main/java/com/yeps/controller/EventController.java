@@ -238,12 +238,20 @@ public class EventController {
 
 		ModelAndView mav = new ModelAndView();
 		List<FileDTO> fileList = fileMapper.getAllEventFiles(Integer.parseInt(evnum));
+		int imageCount = 0;
 		for (int i = 0; i < fileList.size(); i++) {
 			S3Connection.getInstance().deleteObject("yepsbucket", "images/" + fileList.get(i).getFilename());
+			imageCount++;
 		}
-		int result = fileMapper.deleteAllFile(Integer.parseInt(evnum));
-		if (result > 0) {
-			result = eventMapper.deleteEvent(Integer.parseInt(evnum));
+		HttpSession session = req.getSession();
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
+		memberDTO.setImagecount(memberDTO.getImagecount()-imageCount);
+		session.setAttribute("memberinfo", memberDTO);
+		
+		int fileDelete_result = fileMapper.deleteAllFile(Integer.parseInt(evnum));
+		int eventReviewDelete_result = eventReviewMapper.deleteAllEventReivew(Integer.parseInt(evnum));
+		if (fileDelete_result >= 0 && eventReviewDelete_result >= 0) {
+			int result = eventMapper.deleteEvent(Integer.parseInt(evnum));
 			if (result > 0) {
 				mav.addObject("url", "event_list");
 				mav.setViewName("usingOnlyURL");
@@ -267,10 +275,12 @@ public class EventController {
 		ModelAndView mav = new ModelAndView();
 		EventDTO getEventDTO = eventMapper.getEventContent(Integer.parseInt(evnum));
 		String[] start_date = getEventDTO.getStart_date().split(",");
-		String[] end_date = getEventDTO.getEnd_date().split(",");
+		
 		getEventDTO.setStart_date(start_date[0]);
-		getEventDTO.setEnd_date(end_date[0]);
-
+		if (getEventDTO.getEnd_date() != null) {
+			String[] end_date = getEventDTO.getEnd_date().split(",");
+			getEventDTO.setEnd_date(end_date[0]);
+		}
 		mav.addObject("getEventDTO", getEventDTO);
 		mav.addObject("set", "events");
 		mav.setViewName("event/event_editForm");
@@ -280,10 +290,13 @@ public class EventController {
 	@RequestMapping(value = "/event_edit", method = RequestMethod.POST)
 	public ModelAndView EditProEvent(HttpServletRequest req, @ModelAttribute EventDTO dto, BindingResult result) {
 		dto.setStart_date(dto.getStart_date() + ", " + getDateDay(dto.getStart_date()));
-		if (dto.getEnd_date() != null) {
+		
+		if(dto.getEnd_date() == null || dto.getEnd_date().trim().equals("")) {
+			dto.setEnd_date(null);
+		} else {
 			dto.setEnd_date(dto.getEnd_date() + ", " + getDateDay(dto.getEnd_date()));
 		}
-
+		
 		HttpSession session = req.getSession();
 		MemberDTO loginMember = (MemberDTO) session.getAttribute("memberinfo");
 		dto.setMnum(loginMember.getMnum());
@@ -361,19 +374,22 @@ public class EventController {
 
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest) req;
 		HttpSession session = req.getSession();
-		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
+		
 
-		return uploadFileLoop(mr, memberDTO, Integer.parseInt(evnum));
+		return uploadFileLoop(mr, session, Integer.parseInt(evnum));
 	}
 
-	public HashMap<String, Object> uploadFileLoop(MultipartHttpServletRequest mr, MemberDTO memberDTO, int evnum) {
+	public HashMap<String, Object> uploadFileLoop(MultipartHttpServletRequest mr, HttpSession session, int evnum) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		Iterator<String> it = mr.getFileNames();
 		String origin_fileName = null;
 		int fileSize = 0;
 		List<FileDTO> fileList = new ArrayList<FileDTO>();
-
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
+		
+		int imageCount = 0;
 		while (it.hasNext()) {
+			imageCount++;
 			MultipartFile mf = mr.getFile(it.next());
 			origin_fileName = mf.getOriginalFilename();
 			fileSize = (int) mf.getSize();
@@ -387,7 +403,7 @@ public class EventController {
 					mf.transferTo(file);
 					S3Connection.getInstance().putObjectAsync("yepsbucket", "images/" + saveFileName, file,
 							"image/" + contentType);
-
+										
 					FileDTO fileDTO = new FileDTO();
 					fileDTO.setEvnum(evnum);
 					fileDTO.setMnum(memberDTO.getMnum());
@@ -409,6 +425,7 @@ public class EventController {
 						fileMapper.deleteFileToFilename(saveFileName);
 						S3Connection.getInstance().deleteObject("yepsbucket", "images/" + saveFileName);
 						map.put("failed", "파일 등록에 실패했습니다. 잠시후 다시 시도해주세요.");
+						imageCount--;
 						file.delete();
 					}
 				} catch (Exception e) {
@@ -422,6 +439,10 @@ public class EventController {
 				map.put("upload_failed", "업로드할 수 없는 파일이 존재합니다.");
 			}
 		}
+		memberMapper.updateImageCount(memberDTO.getMnum(), imageCount);
+		memberDTO.setImagecount(memberDTO.getImagecount()+imageCount);
+		session.setAttribute("memberinfo", memberDTO);
+		
 		map.put("update", "사진을 등록하였습니다.");
 		map.put("evnum", evnum);
 		map.put("fileList", fileList);
@@ -462,6 +483,10 @@ public class EventController {
 
 		S3Connection.getInstance().deleteObject("yepsbucket", "images/" + filename);
 		fileMapper.deleteFile(filename, Integer.parseInt(evnum), isMainPhoto);
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
+		memberDTO.setImagecount(memberDTO.getImagecount()-1);
+		session.setAttribute("memberinfo", memberDTO);
+		
 		mav.setViewName("redirect: event_update_photo?evnum=" + Integer.parseInt(evnum) + "&mode=delete");
 		return mav;
 	}
@@ -479,12 +504,14 @@ public class EventController {
 		FileDTO photoInMap = fileMapper.getFYIEventFile(Integer.parseInt(evnum));
 		RestaurantDTO restaurantDTO = restaurantMapper.findRestaurant(eventDTO.getZipNo(), eventDTO.getRoadAddrPart1(),
 				eventDTO.getRoadAddrPart2(), eventDTO.getAddrDetail());
+		
 		if (restaurantDTO != null) {
 			int reviewCount = reviewMapper.getRestaurantReviewCount(restaurantDTO.getRnum());
 			int starAVG = reviewMapper.getStarAvg(restaurantDTO.getRnum());
 			mav.addObject("starAVG", starAVG);
 			mav.addObject("reviewCount", reviewCount);
 		}
+		
 		List<EventDTO> thisWeek_EventList = eventMapper.getThisWeek_EventList();
 		List<FileDTO> thisWeek_EventFileList = new ArrayList<FileDTO>();
 		if (thisWeek_EventList != null) {

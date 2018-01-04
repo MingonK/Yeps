@@ -4,6 +4,7 @@
 <html>
 <head>
    <title>Add a Member Photo - Yeps</title>
+   <link rel="shortcut icon" type="image⁄x-icon" href="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/favicon.ico">
    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/member_update_photo.css?ver=1"/>"/>
    <script src="//code.jquery.com/jquery.min.js"></script>
@@ -72,7 +73,7 @@
    </div>
    
    <div class="loading_wapper">
-		<div class="loading_img">
+		<div class="loading_img" style="margin: -20px -55px;">
 		</div>
 	</div>
     <script type="text/javascript">
@@ -195,6 +196,14 @@
                for(var i = 0; i < files.length; i++) {
                   data.append('files'+i, files[i]);
                }
+               
+            $(document).ajaxStart(function() {
+   				$('.loading_wapper').fadeIn(500);
+   			})
+   			
+   			$(document).ajaxStop(function() {
+   				$('.loading_wapper').fadeOut(500);
+   			})
                
                var url = "member_fileUpLoad";
                $.ajax({

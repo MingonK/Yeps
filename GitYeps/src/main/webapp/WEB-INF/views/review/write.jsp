@@ -4,7 +4,8 @@
 
 <html>
 <head>
-<title>타이틀을 입력해주세요.</title>
+<title>Write a Review</title>
+	<link rel="shortcut icon" type="image⁄x-icon" href="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/favicon.ico">
    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css?ver=1"/>" />
    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css"/>"/>
    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/member.css?ver=2"/>"/>
@@ -28,7 +29,7 @@
 					
 					
 					<div>
-						<form name="review_writeF" action="review_insert?rname=${rname}&rnum=${rnum}" method="post"
+						<form name="review_writeF" action="review_insert?rname=${rname}&rnum=${rnum}&mode=${mode}" method="post"
            						onsubmit="return ContentAndGradepointCheck()">
            						<input type="hidden" name="gradepoint" id="gradepoint">
 							<div>
