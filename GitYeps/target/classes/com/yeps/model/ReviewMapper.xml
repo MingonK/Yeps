@@ -343,7 +343,6 @@
                     , R.reg_date
                     , R.gradepoint
                     , M.email
-                    , M.mnum
                     , M.reviewcount
                     , M.imagecount
                     , M.nickname
