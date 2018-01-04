@@ -56,7 +56,6 @@ public class QnAController {
 		}
 		
 		int article_count = count - 10 * (curPage - 1);
-		System.out.println(article_count);
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("listQnA", list); // list
