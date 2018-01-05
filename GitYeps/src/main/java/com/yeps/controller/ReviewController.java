@@ -43,13 +43,13 @@ public class ReviewController {
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("set", "review");
-		mav.addObject("reviewList", list);
-		mav.setViewName("redirect:member_details");
+		mav.addObject("list", list);
+		mav.setViewName("review/list");
 		return mav;
 	}
 
 	@RequestMapping(value = "/review_delete")
-	public ModelAndView review_delete(HttpServletRequest req) {
+	public ModelAndView review_delete(HttpServletRequest req, HttpSession session) {
 		String rvnum = req.getParameter("rvnum");
 		int mnum = Integer.parseInt(req.getParameter("mnum"));
 		System.out.println(rvnum);
@@ -62,15 +62,17 @@ public class ReviewController {
 			int beforeReviewcount = memberMapper.getMemberReviewCount(mnum);
 			int nowReviewcount = beforeReviewcount - 1;
 			memberMapper.updateReviewCount(mnum, nowReviewcount);
-			
+			MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo");
+			mdto.setReviewcount(nowReviewcount);
+			System.out.println(nowReviewcount);
 			msg = "리뷰 삭제성공!!";
-			url = "review_list";
+			url = "member_details";
 			mav.addObject("msg", msg);
 			mav.addObject("url", url);
 			mav.setViewName("message");
 		} else {
 			msg = "리뷰 삭제실패!!";
-			url = "review_list";
+			url = "member_detalis";
 			mav.addObject("msg", msg);
 			mav.addObject("url", url);
 			mav.setViewName("message");
@@ -258,7 +260,7 @@ public class ReviewController {
 
 	@RequestMapping(value="/review_member_ajax")
 	@ResponseBody
-	public HashMap<String, Object> review_member(HttpServletRequest req, HttpSession session,@RequestParam(defaultValue = "1") int curPage) {
+	public HashMap<String, Object> review_member(HttpServletRequest req, HttpSession session) {
         HashMap<String, Object> map = new HashMap<String, Object>();
 		String smnum = req.getParameter("mnum");
 
@@ -275,7 +277,7 @@ public class ReviewController {
 		}else {
 			mnum = Integer.parseInt(smnum);
 		}
-		
+		int curPage = req.getParameter("curPage") != null ? Integer.parseInt(req.getParameter("curPage")) : 1;
 		int reviewcount = memberMapper.getMemberReviewCount(mnum);
 		int pageScale = 10;
 		int blockScale = 5;
@@ -289,9 +291,7 @@ public class ReviewController {
 		map.put("mnum",mnum);
 		map.put("num", num);
 		map.put("count", reviewcount); 
-		map.put("start", start);
-		map.put("end", end);
-		map.put("yepsPager", YepsPager);
+		map.put("YepsPager", YepsPager);
 		map.put("memberReview", memberReview);
 		return map;
 	}
