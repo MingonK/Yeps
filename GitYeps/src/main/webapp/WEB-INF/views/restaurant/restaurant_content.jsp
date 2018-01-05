@@ -498,7 +498,7 @@
 													</div>
 													<ul class="restContent-list-link">									
 														<li>
-															<a class="restContent-share-review" href="#" data-popup-open="writeMessage">
+															<a class="restContent-share-review" href="#" data-popup-open="writeMessage" alt="${getReview.memberDTO.email}">
 																<div class="action-link_icon arrange_unit">
 																	<span aria-hidden="true" style="fill: currentColor; width: 18px; height: 18px;" class="icon">
 																    	<svg class="icon_svg" id="18x18_speech" height="100%" viewBox="0 0 18 18" width="100%">
@@ -999,17 +999,19 @@
 		
 		
 <script>
-
 	 $(function() {
 		$(document).on('click', '[data-popup-open]', function(e)  {
+			var memberinfo ='${sessionScope.memberinfo}';
+        	if(!memberinfo.length) {
+         		$(location).attr("href", "event_report");
+         		return;
+        	}
 			var targeted_popup_class = jQuery(this).attr('data-popup-open');
 			$('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
-			if(targeted_popup_class == 'popup-2') {
-        		var memberinfo ='${sessionScope.memberinfo}';
-        		if(!memberinfo.length) {
-         			$(location).attr("href", "event_report");
-         			return;
-        		}
+        	
+        	if(targeted_popup_class == 'writeMessage') {
+        		var email = $(this).attr('alt');
+        		$('#sendformTo').val(email);
         	}
 			
 			$('body').css('overflow','hidden');

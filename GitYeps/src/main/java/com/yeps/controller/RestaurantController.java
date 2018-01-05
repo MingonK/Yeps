@@ -399,7 +399,9 @@ public class RestaurantController {
 	public ModelAndView uploadCheckRestaurant(HttpServletRequest req) {
 		String filename[] = req.getParameterValues("filename");
 		String rnum = req.getParameter("rnum");
-		
+		if(rnum == null || rnum.trim().equals("")) {
+			return new ModelAndView("redirect: restaurant_list");
+		}
 		RestaurantDTO dto = restaurantMapper.getRest(Integer.parseInt(rnum));
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("filenames", filename);
@@ -446,8 +448,8 @@ public class RestaurantController {
 		}
 
 		int count = fileMapper.getAllFileCount(rnum);
-		int pageScale = 10;
-		int blockScale = 30;
+		int pageScale = 30;
+		int blockScale = 10;
 		YepsPager YepsPager = new YepsPager(count, curPage, pageScale, blockScale);
 		int start = YepsPager.getPageBegin();
 		int end = YepsPager.getPageEnd();

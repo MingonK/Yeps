@@ -387,7 +387,7 @@
                                            </div>
                                           <ul class="drop-menu-group--nav drop-menu-group">
                                              <li class="drop-down-menu-link">
-                                                <a class="js-analytics-click arrange arrange--middle arrange--6" href="member_details" style="display: block; word-wrap: break-word;">
+                                                <a class="js-analytics-click arrange arrange--middle arrange--6" href="member_details?mnum=${sessionScope.memberinfo.mnum}" style="display: block; word-wrap: break-word;">
                                                    <strong class="arrange_unit">
                                                       <span aria-hidden="true" style="width: 24px; height: 24px;" class="icon icon--24-profile icon--size-24 u-space-r1">
                                                          <svg class="icon_svg">

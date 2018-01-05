@@ -301,6 +301,8 @@
 							} else if (responseData.upload_failed) {
 								alert(responseData.upload_failed)
 								return false;
+							} else if(responseData.url) {
+								window.location.href = responseData.url; 
 							} else if (responseData.update) {
 		 						alert(responseData.update);
 		 						$('#result_photo_status_text').text('사진을 등록했습니다.');
