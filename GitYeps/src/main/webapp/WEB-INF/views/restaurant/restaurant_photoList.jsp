@@ -90,7 +90,7 @@
 				</div>
 				<div class="media-landing js-media-landing" style="position: relative;">
 					<div class="media-landing_gallery photos" style="height:auto;overflow:hidden;">
-						<ul class="photo-box-grid photo-box-grid--highlight photo-box-grid--small clearfix lightbox-media-parent" style="margin-right: -12px; margin-top: 18px; display: flex;">
+						<ul class="photo-box-grid photo-box-grid--highlight photo-box-grid--small clearfix lightbox-media-parent" style="margin-right: -12px; margin-top: 18px; transform-style: preserve-3d;">
 							<c:forEach items="${uploadFileList}" var="upload">
 							<li style="transition: opacity 0.1s ease-out; width: 150px; float: left; margin: 0 12px 12px 0; display: list-item;">
 								<div class="photo-box photo-box--interactive" data-popup-open="photo_popup" style="height: 150px; position: relative;">
