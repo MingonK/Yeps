@@ -637,36 +637,13 @@
 						<div>
 							<ul class="mainpage_homecontainer_location_bar_center">
 							<!-- 아마 최신 검색 리스트 가져와서 반복문으로 6개 돌린 듯 -->
-								<li class="mainpage_location_bar_item">
-									<a href="#" class="mainpage_location_bar_item_link">
-										<span class="mainpage_location_bar_item_label">최근 검색지역1</span>
-									</a>
-								</li>
-								<li class="mainpage_location_bar_item">
-									<a href="#" class="mainpage_location_bar_item_link">
-										<span class="mainpage_location_bar_item_label">최근 검색지역2</span>
-									</a>
-								</li>
-								<li class="mainpage_location_bar_item">
-									<a href="#" class="mainpage_location_bar_item_link">
-										<span class="mainpage_location_bar_item_label">최근 검색지역3</span>
-									</a>
-								</li>
-								<li class="mainpage_location_bar_item">
-									<a href="#" class="mainpage_location_bar_item_link">
-										<span class="mainpage_location_bar_item_label">최근 검색지역4</span>
-									</a>
-								</li>
-								<li class="mainpage_location_bar_item">
-									<a href="#" class="mainpage_location_bar_item_link">
-										<span class="mainpage_location_bar_item_label">최근 검색지역5</span>
-									</a>
-								</li>
-								<li class="mainpage_location_bar_item">
-									<a href="#" class="mainpage_location_bar_item_link">
-										<span class="mainpage_location_bar_item_label">최근 검색지역6</span>
-									</a>
-								</li>
+								<c:forEach var="location" items="${locationList}">
+									<li class="mainpage_location_bar_item">
+										<a href="#" class="mainpage_location_bar_item_link">
+											<span class="mainpage_location_bar_item_label">${location}</span>
+										</a>
+									</li>
+								</c:forEach>
 								<!-- 아마 최신 검색 리스트 가져와서 반복문으로 6개 돌린 듯 -->
 								<li class="mainpage_location_bar_item">
 									<a href="#" class="mainpage_location_bar_item_link">
