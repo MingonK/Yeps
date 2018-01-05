@@ -795,7 +795,6 @@
 }
 
 .resFind_a_2 {
-	color: #666;
 	margin: 9px 0 0;
 	display: inline-block;
 	vertical-align: middle;
@@ -814,6 +813,19 @@
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 	padding: 8px 19px 9px;
 	border-radius: 3px;
+}
+
+.resFind_a_2:hover {
+	background: linear-gradient(#d90007, #c91400);
+	border-color: #8d0005;
+	color: white;
+	border: 1px solid;
+	border-color: #8d0005;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.resFind_a_2:hover .resFind_span_5{
+	fill: white;
 }
 
 .resFind_span_5 {
@@ -3346,7 +3358,6 @@
 	padding: 14px 8px;
 	font-size: 12px;
 	line-height: 1.5em;
-	color: #fff;
 	border-color: #8d0005;
 	box-shadow: 0 1px 1px rgba(0, 0, 0, .3);
 	background-color: #d90007;

@@ -17,4 +17,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="listLargeMenu" resultType="LargeMenuDTO">
 		select * from yeps_largeMenu where rnum=#{rnum}
 	</select>
+	
+	
+		<resultMap type="SmallMenuDTO" id="getLarge_SmallMenuMap">
+			<id column="small_menunum" property="small_menunum"/>
+			<result column="small_menunum" property="small_menunum"/>
+			<result column="large_menunum" property="large_menunum"></result>
+			<result column="small_name" property="small_name"></result>
+			<result column="small_content" property="small_content"></result>
+			<result column="small_price" property="small_price"></result>
+		
+		<association javaType="LargeMenuDTO" property="largeMenuDTO">
+		<id column="large_menunum" property="large_menunum"/>
+			<result column="large_menunum" property="large_menunum"/>
+			<result column="rnum" property="rnum"></result>
+			<result column="large_name" property="large_name"></result>
+		</association>
+	</resultMap>	
+	
+  	
+  	<select id="getLarge_SmallMenu" parameterType="java.util.HashMap" resultMap="getLarge_SmallMenuMap">
+  		select * from yeps_largeMenu L, yeps_smallMenu S where L.large_menunum = S.large_menunum and L.rnum=#{rnum} order by S.small_menunum asc
+  	</select>
 </mapper>

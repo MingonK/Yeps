@@ -185,6 +185,9 @@ public class RestaurantController {
 	@RequestMapping(value = "/restaurant_content")
 	public ModelAndView contentRest(HttpServletRequest req, @RequestParam(defaultValue = "1") int curPage) {
 		String rnum = req.getParameter("rnum");
+		
+		
+		
 		if(rnum == null || rnum.trim().equals("")) {
 			return new ModelAndView("redirect: restaurant_list");
 		}

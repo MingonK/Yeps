@@ -1,5 +1,6 @@
 package com.yeps.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yeps.model.LargeMenuDTO;
+import com.yeps.model.SmallMenuDTO;
 
 @Service
 public class LargeMenuMapper {
@@ -24,5 +26,11 @@ public class LargeMenuMapper {
 
 	public List<LargeMenuDTO> listLargeMenu(int rnum) {
 		return sqlSession.selectList("listLargeMenu", rnum);
+	}
+	
+	public List<SmallMenuDTO> getLarge_SmallMenu(int rnum){
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("rnum", rnum);
+		return sqlSession.selectList("getLarge_SmallMenu", map);
 	}
 }
