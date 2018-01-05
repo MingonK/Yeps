@@ -101,8 +101,9 @@ public class SearchController {
 		String searchword = req.getParameter("searchword");
 		String latitude = req.getParameter("latitude");
 		String longitude = req.getParameter("longitude");
-		if(latitude != null && longitude != null) {
-			if(location.equals("Current Location")) {
+
+		if(location.equals("Current Location")) {
+			if(latitude != null && !latitude.trim().equals("") && longitude != null && !longitude.trim().equals("")) {
 				try {
 					GpsToAddress gps = new GpsToAddress(Double.parseDouble(latitude), Double.parseDouble(longitude));
 					String[] addr = gps.getAddress().split(" ");
@@ -114,19 +115,34 @@ public class SearchController {
 				}catch(Exception e) {
 					e.printStackTrace();
 				}
-
+			}else {
+				System.out.println("null변환");
+				location = "";
 			}
 		}
-		if(location != null && !location.equals("Home")) {
+
+
+		MemberDTO memberDTO =  (MemberDTO) session.getAttribute("memberinfo");
+		if(memberDTO != null && location != null && !location.trim().equals("") && location.equals("Home")) {
+			String[] addr = memberDTO.getAddress().split(" ");
+			location = addr[1] + " " + addr[2] + " " +addr[3];
+		}
+
+		if(location != null && !location.trim().equals("") && !location.equals("Home")) {
 			Cookie[] cookies = req.getCookies();
-			boolean isExistLocation = false;
 			if(cookies!=null) {
 				for (Cookie cookie : cookies) {
 					String name = cookie.getName(); 
 					try {
 						String value = URLDecoder.decode(cookie.getValue(),"utf-8");
 						if(name.contains("location") && value.equals(location)) {
-							isExistLocation = true;
+							try {
+								cookie.setMaxAge(0);	
+								cookie.setPath("/");
+								resp.addCookie(cookie);			// 쿠키저장
+							}catch(Exception e){
+								System.out.println("쿠키 저장 실패");
+							}
 							break;
 						}
 					}catch(Exception e) {
@@ -134,7 +150,7 @@ public class SearchController {
 					}
 				}
 			}
-			if(!isExistLocation) {
+			if(location != null && !location.trim().equals("") && !location.equals("Current Location")) {
 				String authNum = ""; // RandomNum함수 호출해서 리턴값 저장
 				authNum = randomNum.getKey(7, false);
 				try {
@@ -145,18 +161,10 @@ public class SearchController {
 				}catch(Exception e){
 					System.out.println("쿠키 저장 실패");
 				}
-
 			}
 		}
-		MemberDTO memberDTO =  (MemberDTO) session.getAttribute("memberinfo");
-		if(memberDTO != null && location != null && location.equals("Home")) {
-			String[] addr = memberDTO.getAddress().split(" ");
-			location = addr[1] + " " + addr[2] + " " +addr[3];
-		}
 
-		if (searchword == null || searchword.trim().equals("")) {
-			// 검색어 없을 경우
-		} else {
+		if (searchword != null && !searchword.trim().equals("")) {
 			ContsSingleton conts = ContsSingleton.getContsSingletonObject();
 			ContsDTO contsDTO = new ContsDTO();
 			String initial = jaso.getInitial(searchword);
@@ -164,8 +172,32 @@ public class SearchController {
 			contsDTO.setConts_nm_div(initial);
 			conts.addContsUploadList(contsDTO);
 		}
+
+		//----------------------------여기부터 검색작업-------------------
+
+		if(category == null || category.trim().equals("")) {
+			category = "Restaurants";
+		}
+
+		if(location != null && !location.trim().equals("")) {
+			if(searchword != null && !searchword.trim().equals("")) {
+				// location, searchword 둘 다 널이 아닐때
+					
+			}else {
+				// searchword 널일때
+				
+			}
+		}else {
+			if(searchword != null && !searchword.trim().equals("")) {
+				// location 널일때
+				
+			}else {
+				// location, searchword 둘 다 널일때
+				
+			}
+		}
+
+
 		return mav;
 	}
-
-
 }
