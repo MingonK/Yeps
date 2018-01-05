@@ -5,7 +5,7 @@
 <html>
 <head>
 	<title>${getRest.rname}</title>
-<<<<<<< HEAD
+
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js" ></script>
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=jD9qGVpvZh7Zobclojwp&submodules=geocoder"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css?ver=2"/>"/>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/message.css?ver=2"/>"/>
 <title>레스토랑</title>
-=======
+
 	<script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js" ></script>
 	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=jD9qGVpvZh7Zobclojwp&submodules=geocoder"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -1121,12 +1121,11 @@
 		
 		
 <script>
-<<<<<<< HEAD
+
 
 
 	 $(function() {
-=======
->>>>>>> branch 'master' of https://github.com/MingonK/Yeps.git
+
 		//----- OPEN
 		$('[data-popup-open]').on('click', function(e)  {
 			var targeted_popup_class = jQuery(this).attr('data-popup-open');
@@ -1155,7 +1154,7 @@
 			$('body').css('overflow','auto');
 			e.stopPropagation();
         	e.preventDefault();;
-<<<<<<< HEAD
+
 			});
 		});   
 	 
@@ -1179,10 +1178,10 @@
 	        document.sendform.action = "message_send";
 	        document.sendform.submit(); 
 	    });
-=======
+
 		});
 
->>>>>>> branch 'master' of https://github.com/MingonK/Yeps.git
+
    
    $('html').on('mouseenter', '.selector', function(e) {
 	   var star = $(e.target).val();
