@@ -51,8 +51,8 @@
 					                </h2>
 	                			</div>
 			                			<div class="u-space-b3" style="margin-bottom: 18px !important;">
-<%-- 			                			<c:if test="${large.large_menunum==large.getSmallMenuDTO.large_menunum }"> --%>
-			                			<c:forEach begin="0" end="3">
+			                			<c:forEach var="small" items="${smallList}" varStatus="status2" begin="${count}" end="2">
+			                			<c:set var="count" value="${count+1}"/>
 			                				<div class="menu-item" style="border-top: 0;padding: 10px 0;">
 			                					<div class="arrange arrange--6" style="margin-left: -6px;margin-right: -6px;border-collapse: separate;border-spacing: 6px 0;    display: table;min-width: 100%;table-layout: auto;">
 			                						<div class="arrange_unit" style="margin-left: 3px;margin-right: 3px;border-collapse: collapse;border-spacing: 0 0;    box-sizing: border-box;display: table-cell;vertical-align: top;">
@@ -66,14 +66,14 @@
 			                							<div class="arrange" style="display: table;min-width: 100%;table-layout: auto;">
 			                								<div class="arrange_unit arrange_unit--fill menu-item-details" style="    width: 100%;    box-sizing: border-box;display: table-cell;vertical-align: top;">
 			                									<h4 style="word-wrap: break-word !important;word-break: break-word !important;overflow-wrap: break-word !important;font-weight: bold;margin-bottom: 6px;font-size: 14px;line-height: 1.28571em;color: #333;    margin: 0 0 3px;    display: block;">
-									                                    <a href="/menu/fog-harbor-fish-house-san-francisco-2/item/blue-cheese-garlic-bread">${large.getSmallMenuDTO().small_name}</a>
+									                                    <a href="/menu/fog-harbor-fish-house-san-francisco-2/item/blue-cheese-garlic-bread">${small.small_name} </a>
 									                            </h4>
-									                            <p class="menu-item-details-description" style="margin-bottom: 5px;display: block;">${large.getSmallMenuDTO().small_content}</p>
+									                            <p class="menu-item-details-description" style="margin-bottom: 5px;display: block;">${small.small_content}</p>
 			                								</div>
 			                								<div class="menu-item-prices arrange_unit" style="text-align: right;padding-left: 90px;box-sizing: border-box;display: table-cell;vertical-align: top;">
 			                									<ul style="list-style: none;    display: block;">
 			                										<li class="menu-item-price-amount" style="font-size: 15px;font-weight: bold;display: list-item;">
-			                											${large.getSmallMenuDTO().small_price}￦
+			                											${small.small_price}￦
 			                										</li>
 			                									</ul>
 			                								</div>
@@ -82,7 +82,6 @@
 			                					</div>
 			                				</div>
 			                				</c:forEach>
-<%-- 			                				</c:if> --%>
 			                			</div>
                 		</c:forEach>
 	                		</div>
