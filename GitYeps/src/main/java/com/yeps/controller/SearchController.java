@@ -84,8 +84,6 @@ public class SearchController {
 				}catch(Exception e) {
 					System.out.println("불러오기 실패");
 				}
-
-
 			}
 			return locationList;
 		}else {
