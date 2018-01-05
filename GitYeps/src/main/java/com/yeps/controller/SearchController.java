@@ -103,7 +103,7 @@ public class SearchController {
 		}
 	}
 
-	@RequestMapping(value = "/yeps_main_saerch", method = RequestMethod.POST)
+	@RequestMapping(value = "/yeps_main_saerch")
 	public ModelAndView MainSearchPro(HttpServletRequest req, HttpServletResponse resp, HttpSession session, @RequestParam(defaultValue = "1") int curPage) {
 
 		ModelAndView mav = new ModelAndView();
