@@ -212,7 +212,7 @@
 									<div class="showcase-photo-box" style="height:100%;">
 									<c:forEach items="${uploadFileList}" var="upload" >
 										<a href="#" style="color: #0073bb;text-decoration: none;"> 
-											<img class="photo-box-img" style="display:inline-block;vertical-align: middle;" width="210" height="220" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${upload.rest_filename }">
+											<img class="photo-box-img" style="display:inline-block;vertical-align: middle;" width="210" height="220" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${upload.filename}">
 										</a>
 									</c:forEach>
 									</div>

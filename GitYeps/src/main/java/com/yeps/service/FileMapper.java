@@ -141,4 +141,16 @@ public class FileMapper {
 		map.put("rnum", rnum);
 		return sqlSession.delete("deleteRestaurantFile", map);
 	}
+	
+	public List<FileDTO> getPagedFileList(int rnum, int start, int end) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("rnum", rnum);
+		map.put("start", start);
+		map.put("end", end);
+		return sqlSession.selectList("uploadFileList", rnum);
+	}
+	
+	public int getAllFileCount(int rnum) {
+		return sqlSession.selectOne("getAllFileCount", rnum);
+	}
 }
