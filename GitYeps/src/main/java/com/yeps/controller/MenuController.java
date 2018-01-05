@@ -34,7 +34,7 @@ public class MenuController {
 		if (rnum == null || rnum.trim().equals("")) {
 			return new ModelAndView("redirect:restaurant_list");
 		}
-		return new ModelAndView("restaurant_insertMenu");
+		return new ModelAndView("restaurant_insertMenu","rnum",rnum);
 		
 	}
 	

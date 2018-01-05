@@ -1351,11 +1351,11 @@ overflow: hidden; width: 132px; height: 24px; background-position: 0 -216px;
 	margin-right: 0.25em; display: inline;
 }
 
-
-
-
-
-
+.photo-box:hover {
+	opacity: 0.6;
+    transition: opacity 0.3s;
+    cursor: pointer;
+}
 
 
 
