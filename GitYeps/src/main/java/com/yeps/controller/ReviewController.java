@@ -51,6 +51,7 @@ public class ReviewController {
 	@RequestMapping(value = "/review_delete")
 	public ModelAndView review_delete(HttpServletRequest req) {
 		String rvnum = req.getParameter("rvnum");
+		int mnum = Integer.parseInt(req.getParameter("mnum"));
 		System.out.println(rvnum);
 		int res = reviewMapper.deleteReview(Integer.parseInt(rvnum));
 		ModelAndView mav = new ModelAndView();
@@ -58,6 +59,10 @@ public class ReviewController {
 		String url;
 
 		if (res > 0) {
+			int beforeReviewcount = memberMapper.getMemberReviewCount(mnum);
+			int nowReviewcount = beforeReviewcount - 1;
+			memberMapper.updateReviewCount(mnum, nowReviewcount);
+			
 			msg = "리뷰 삭제성공!!";
 			url = "review_list";
 			mav.addObject("msg", msg);
@@ -281,7 +286,7 @@ public class ReviewController {
 		
 	   /* int photocount = memberMapper.*/
 		List<ReviewDTO> memberReview = reviewMapper.getMemberReview(mnum,start,end);
-		
+		map.put("mnum",mnum);
 		map.put("num", num);
 		map.put("count", reviewcount); 
 		map.put("start", start);

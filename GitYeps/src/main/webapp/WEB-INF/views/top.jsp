@@ -26,8 +26,7 @@
 								<label id="find_label">
 									<span id="label_span">Find</span>
 									<span id="label_input_span">
-										<input type="text" maxlength="64" id="page_header_inputs" class="page_header_inputs" autocomplete="on" value placeholder="분야별 검색" aria-autocomplete="list" tabindex="1" data-component-bound="true">
-										<input type="hidden" maxlength="64" data-component-bound="true" name="find_input" value>		
+										<input type="text" maxlength="64" name="category" id="page_header_inputs" class="page_header_inputs" autocomplete="off" placeholder="분야별 검색" aria-autocomplete="list" tabindex="1" data-component-bound="true" readonly>		
 									</span>
 								</label>
 								
@@ -172,16 +171,16 @@
 								<label id="near_label">
 									<span id="label_span">Near</span>
 									<span id="label_input_span">
-										<input type="text" maxlength="80" id="page_header_location_inputs" class="page_header_location_inputs" autocomplete="off" placeholder="지역별 검색" 
-												aria-autocomplete="list" tabindex="2" data-component-bound="true">
-										<input type="hidden" maxlength="80" data-component-bound="true" name="find_loc" value="Las Vegas, NV">
+										<input type="text" maxlength="80" name="location" id="page_header_location_inputs" class="page_header_location_inputs" autocomplete="off" placeholder="지역별 검색">
+										<input type="hidden" name="latitude" id="latitude" />
+										<input type="hidden" name="longitude" id="longitude" />
 									</span>
 								</label>
 								
 								<!-- 이 구간 안에 새로운 div로 지역검색할 수 있도록 지정해야함 -->
 								<div id="main_location_suggestion_container">
 									<ul id="location_suggestion_container_list">
-										<li id="suggestion_container_list_items_button" onmouseover="javascript:onMouse('location_icon')" onmouseout="javascript:outMouse('location_icon')" onclick="javascript:loc_clickMouse('최근 검색 지역')">
+										<li id="suggestion_container_list_items_button" onmouseover="javascript:onMouse('location_icon')" onmouseout="javascript:outMouse('location_icon')" onclick="javascript:loc_clickMouse('Current Location')">
 											<div id="list_items_unit" style="position: relative; display: flex;">
 												<div id="location">
 													<span id="location_icon" style="fill: #0073bb;">
@@ -192,11 +191,38 @@
 												</div>
 												<div id="suggestion_container_list_items_name">
 													<span>
-														최근 검색 지역
+														Current Location
 													</span>
 												</div>
 											</div>
 										</li>
+										
+										<c:if test="${!empty sessionScope.memberinfo.address}">
+											<li class="suggestions-location-list-item saved-location" onmouseout="javascript:outMouse('location_icon')" onclick="javascript:loc_clickMouse('Home')">
+												<div class="location-media-block">
+													<div class="location-media-avatar">
+														<span id="location_icon" style="width: 24px; height: 24px;">
+															<svg class="icon_svg">
+																<path d="M12 2C8.13 2 5 5.13 5 9c0 2.61 1.43 4.88 3.54 6.08L12 22l3.46-6.92A6.987 6.987 0 0 0 19 9c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"></path>
+															</svg>
+														</span>
+													</div>
+													<div class="location-media-story">
+														<span class="suggestion-location-detail">
+															<span class="suggestion-location-detail suggestion-location-name">Home</span>
+														</span>
+														<small class="suggestion-location-detail suggestion-location-subtitle suggestion-location">
+															<c:forTokens items="${sessionScope.memberinfo.address}" delims=" " begin="1" end="2" var="addr">
+																${addr}
+															</c:forTokens><br>
+															<c:forTokens items="${sessionScope.memberinfo.address}" delims=" " begin="3" end="3" var="addr">
+																${addr}
+															</c:forTokens>
+														</small>
+													</div>
+												</div>
+											</li>
+										</c:if>
 									</ul>
 								</div>
 								
@@ -583,8 +609,32 @@
      });
      
      $(document).on("click","#page_header_location_inputs",function(){
-        $('#main_location_suggestion_container').show();
+    	 $.ajax({
+				type : 'post',
+					url : 'recent_location_list',
+					dataType : 'json',
+					success : function(responseData){
+						if(responseData != null){
+							$(".recent_location").remove();
+							for(var i=0; i < responseData.length ; i++){
+								var recentLocation = responseData[i];
+								$("#location_suggestion_container_list").append("<li class='suggestions-location-list-item recent_location' onmouseout=\"javascript:outMouse('location_icon')\" onclick=\"javascript:loc_clickMouse('"+recentLocation+"')\"><div class='location-media-block'><div class='location-media-avatar'><span id='location_icon' style='width: 24px; height: 24px;'><svg class='icon_svg'><path d='M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-18c-4.41 0-8 3.59-8 8s3.59 8 8 8 8-3.59 8-8-3.59-8-8-8zm3 11c-.19 0-.384-.055-.555-.168L11 12.535V7a1 1 0 0 1 2 0v4.465l2.555 1.703A1 1 0 0 1 15 15z'></path></svg></span></div><div class='location-media-story'><span class='suggestion-location-detail'><span class='suggestion-location-detail suggestion-location-name'>"+recentLocation+"</span></span></div></div></li>");
+							}
+						}
+					},
+	             	error : function(request, status, error) {
+	                	alert("error : locationList")
+	             	},
+	        });
+			$('#main_location_suggestion_container').show();
      });
+     
+	$(document).on('mouseover', '.suggestions-location-list-item', function() {
+		$(this).find('#location_icon').css('fill', 'white');
+	})
+	$(document).on('mouseleave', '.suggestions-location-list-item', function() {
+		$(this).find('#location_icon').css('fill', '#666');
+	})
 
      $(document).on("click",".drop-menu-link",function(e){
         $('#topbar-account-wrap').toggle();
@@ -717,4 +767,29 @@
 		$(".search_arrange_suggestions").hide();
 		$("#page_header_searchDate_inputs").focus();
 	});
+	
+	$(document).on('click', '#suggestion_container_list_items_button', function() {
+		var nav = null;
+		
+		 if (nav == null) {
+		      nav = window.navigator;
+		  }
+		  if (nav != null) {
+		      var geoloc = nav.geolocation;
+		      if (geoloc != null) {
+		          geoloc.getCurrentPosition(successCallback);
+		      }
+		      else {
+		          alert("geolocation not supported");
+		      }
+		  }
+		  else {
+		      alert("Navigator not found");
+		  }
+	});
+	
+	function successCallback(position){
+		document.getElementById("latitude").value = position.coords.latitude;
+		document.getElementById("longitude").value = position.coords.longitude;
+	}
 </script>

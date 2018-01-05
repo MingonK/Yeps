@@ -80,6 +80,41 @@
 								</div>
 							</div>
 						</div>
+						
+						
+						<div id="restaurant_photo_upload_container">
+							<div id="finish_upload_header">
+ 								<div id="upload_title_wrap">
+ 									<div id="upload_title_success">
+ 										<span style="width: 18px; height: 18px; fill: #41a700;" class="icon">
+ 											<svg class="icon_svg" height="100%" viewBox="0 0 18 18" width="100%">
+ 												<path d="M7.232 14.273L1.93 8.97a1 1 0 1 1 1.413-1.414l3.89 3.89 7.424-7.426a1 1 0 0 1 1.414 1.414l-8.837 8.84z"></path>
+ 											</svg>
+ 										</span>
+ 										<h3 id="upload_title_text">
+ 											Perfect!
+ 											<b>Next, check your size photos below</b>
+ 										</h3>
+ 									</div>
+ 								</div>
+ 								
+ 								<div id="finish_button_wrap">
+ 									<div id="finish_button_container">
+ 										<button type="submit" value="submit" id="finish_button">
+ 											<span>Finish</span>
+ 										</button>
+ 									</div>
+ 								</div>
+ 							</div>
+ 							<ul id="photo_box_grid_wide">
+ 								<!-- 반복문 돌 자리 -->
+ 							</ul>
+						</div>
+						
+						<form id="finishForm" action="restaurant_photoList" method="post">
+							<input type="hidden" name="rnum" value="${restaurantDTO.rnum}">
+						</form>
+						
 					</div>
 				</div>
 			</div>
@@ -93,6 +128,8 @@
 	</div>
 	
 	<script type="text/javascript">
+		var rnum ='${restaurantDTO.rnum}';
+		var rname = '${restaurantDTO.rname}';
  		function fileCheck() {
  			var fileObject = document.getElementById('file_browser_input');
  			var files = fileObject.files;
@@ -148,8 +185,41 @@
  						alert(responseData.upload_failed)
  						return false;
  					} else {
- 						alert(responseData.update)
- 						location.href="restaurant_photoList?rnum=${restaurantDTO.rnum}";
+ 						var size = responseData.fileList.length;
+ 						$(window).on('hashchange', function() {
+ 							$('#user_photo_intro > h2').empty();
+ 	 						$('#user_photo_intro > h2').append('<a href="restaurant_content?rnum="' + rnum + '>' + rname +' : </a> Your Photos');
+ 	 						$('#upload_title_text > b').text('Next, check your ' + size + ' photos below');
+ 	 						$('#restaurant_photo_drop_container').hide();
+ 	 						 						
+ 	 						$.each(responseData.fileList, function(i, item) {
+ 	 							$('#photo_box_grid_wide').append(
+ 	 								'<li id="uploaded_photo">' +
+ 	 									'<div id="photo_box">' +
+ 	 										'<img id="photo_box_img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/'+ item.filename +'">' +
+ 	 										'<div id="photo_box_delete">' +
+ 	 											'<a id="photo_box_action_link">' +
+ 	 												'<span style="width: 24px; height: 24px; fill: #fff;" class="icon">' +
+ 	 													'<svg class="icon_svg" height="100%" viewBox="0 0 24 24" width="100%">' + 
+ 	 														'<path d="M5 7V5a1 1 0 0 1 1-1h4V3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v1h4a1 1 0 0 1 1 1v2H5zm13 12a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3V8h12v11zm-8-8H9v8h1v-8zm5 0h-1v8h1v-8z"></path>' +
+ 	 													'</svg>' +
+ 	 												'</span>' +
+ 	 											
+ 	 												'<span id="tooltip_wrapper">' +
+ 														'<span id="tooltip">' +
+ 															'Delete' +
+ 														'</span>' +
+ 	 												'</span>' +
+ 	 											'</a>' +
+ 	 										'</div>' +
+ 	 									'</div>' +
+ 									'</li>'
+ 	 							);
+ 	 						})
+ 	 						$('#restaurant_photo_upload_container').show();
+ 							
+ 						}).trigger('hashchange');
+ 						
  					}
  				}
  			});		
@@ -158,6 +228,8 @@
 	
 	
 	<script>
+		var rnum ='${restaurantDTO.rnum}';
+		var rname = '${restaurantDTO.rname}';
 		$(function() {
 			var objDragAndDrop = $('#file_uploader_container');
 			objDragAndDrop.on('dragenter', function (e) {
@@ -238,12 +310,44 @@
 								alert(responseData.created_fail);
 								return false;
 							} else if (responseData.upload_failed) {
-								alert(responseData.upload_failed)
+								alert(responseData.upload_failed);
 								return false;
 							}  else {
-		 						alert(responseData.update)
-		 						location.href="restaurant_photoList?rnum=${restaurantDTO.rnum}";
-		 					}
+								var size = responseData.fileList.length;
+		 						$(window).on('hashchange', function() {
+		 							$('#user_photo_intro > h2').empty();
+		 	 						$('#user_photo_intro > h2').append('<a href="restaurant_content?rnum="' + rnum + '>' + rname +' : </a> Your Photos');
+		 	 						$('#upload_title_text > b').text('Next, check your ' + size + ' photos below');
+		 	 						$('#restaurant_photo_drop_container').hide();
+		 	 						 						
+		 	 						$.each(responseData.fileList, function(i, item) {
+		 	 							$('#photo_box_grid_wide').append(
+		 	 								'<li id="uploaded_photo">' +
+		 	 									'<div id="photo_box">' +
+		 	 										'<img id="photo_box_img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/'+ item.filename +'">' +
+		 	 										'<div id="photo_box_delete">' +
+		 	 											'<a id="photo_box_action_link">' +
+		 	 												'<span style="width: 24px; height: 24px; fill: #fff;" class="icon">' +
+		 	 													'<svg class="icon_svg" height="100%" viewBox="0 0 24 24" width="100%">' + 
+		 	 														'<path d="M5 7V5a1 1 0 0 1 1-1h4V3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v1h4a1 1 0 0 1 1 1v2H5zm13 12a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3V8h12v11zm-8-8H9v8h1v-8zm5 0h-1v8h1v-8z"></path>' +
+		 	 													'</svg>' +
+		 	 												'</span>' +
+		 	 											
+		 	 												'<span id="tooltip_wrapper">' +
+		 														'<span id="tooltip">' +
+		 															'Delete' +
+		 														'</span>' +
+		 	 												'</span>' +
+		 	 											'</a>' +
+		 	 										'</div>' +
+		 	 									'</div>' +
+		 									'</li>'
+		 	 							);
+		 	 						})
+		 	 						$('#restaurant_photo_upload_container').show();
+		 							
+		 						}).trigger('hashchange');
+							}
 						}
 					});
 				});
@@ -263,6 +367,40 @@
 				$('#file_browser_input').click();				
 			})
 		});
+		
+		
+		$(document).on('click', '#photo_box_action_link', function() {
+			var src = $(this).parent().parent().children('#photo_box_img').attr('src');
+			var pathpoint = src.lastIndexOf('/');
+			var filename = src.substring(pathpoint+1, src.length);
+			$(document).ajaxStart(function() {
+				$(this).parent().parent().parent().css('opacity', '1');
+			})
+			
+			$(document).ajaxStop(function() {
+				$(this).parent().parent().parent().css('opacity', '0.3');
+			})
+			$.ajax({
+		        type : 'post',
+		        url : 'restaurant_delete_ajax?rnum=' + rnum + '&filename=' + filename,
+		        dataType : 'json',
+		        async: false,
+		        success : function(responseData){
+		        	if(responseData.url) {
+		        		window.location = responseData.url; 
+ 		        	}
+		        	if(responseData.success) {
+		        		$(this).parent().parent().parent().css('opacity', '0');
+		        		$(this).parent().parent().parent().remove();
+		        	}
+		        }
+			});
+		});
+		
+		$(document).on('click', '#finish_button', function() {
+			$('#finishForm').submit();
+		})
+		
 		
 	</script>
 <%@ include file="../bottom.jsp"%>

@@ -111,4 +111,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="isExistRestaurantMainPhoto" parameterType="int" resultType="int">
 		select count(*) from yeps_files where rnum = #{rnum} and ismainphoto = 'y'
 	</select>
+	
+	<delete id="deleteRestaurantFile" parameterType="java.util.HashMap">
+		delete yeps_files where rnum = #{rnum} and filename = #{filename}
+	</delete>
 </mapper>

@@ -223,12 +223,52 @@
       select * from (select rownum rn, A. * from(select
                R.content
               ,R.rvnum
+              ,M.mnum
               ,M.name
               ,M.reviewcount
               ,M.imagecount
               ,M.address
               ,M.joindate
         from yeps_review R, yeps_member M where R.mnum = M.mnum and M.mnum = #{mnum} order by rvnum desc)A)
+        where rn between #{start} and #{end}
+    </select>
+    
+     <resultMap type="reviewDTO" id="restaurantReviewMap">
+       <id column="rvnum" property="rvnum"/>
+       <id column="rnum" property="rnum"/>
+       <id column="mnum" property="mnum"/>
+       <result column="content" property="content"></result>
+       <result column="gradepoint" property="gradepoint"></result>
+       <result column="reg_date" property="reg_date"></result>
+       
+       <association javaType="RestaurantDTO" property="restaurantDTO">
+           <id column="rnum" property="rnum"></id>
+           <result column="rname" property="rname"></result>
+           <result column="roadAddrPart1" property="roadAddrPart1"></result>
+           <result column="addrDetail" property="addrDetail"></result>
+           <result column="roadAddrPart2" property="roadAddrPart2"></result>
+           <result column="raddress" property="raddress"></result>
+           <result column="rest_filename" property="rest_filename"></result>
+	       <result column="hp3" property="hp3"></result>
+	       <result column="hp2" property="hp2"></result>
+       </association>
+   </resultMap>
+   
+    <select id="getRestaurantReview"  parameterType="java.util.HashMap" resultMap="restaurantReviewMap">
+      select * from (select rownum rn, A. * from(select
+               R.content
+              ,R.rnum
+              ,R.rvnum
+              ,RT.rnum
+              ,RT.rname
+              ,RT.roadAddrPart1
+              ,RT.roadAddrPart2
+              ,RT.raddress
+              ,RT.addrDetail
+              ,RT.rest_filename
+              ,RT.hp2
+              ,RT.hp3
+        from yeps_review R, yeps_restaurant RT where R.rnum = RT.rnum and R.mnum = #{mnum} order by rvnum desc)A)
         where rn between #{start} and #{end}
     </select>
    
@@ -395,8 +435,11 @@
       where R.mnum = M.mnum and R.mnum = P.mnum and RT.rnum = R.rnum and ismainphoto = 'y' and recentreview = 'y'
       order by rvnum desc)A) where rn between #{start} and #{end}
   	</select>
+  
   	
-   
+   <select id="findMyReview" parameterType="java.util.HashMap" resultType="ReviewDTO">
+   		select * from yeps_review where rnum = #{rnum} and mnum = #{mnum}
+   </select>
    
   	
 </mapper>		
