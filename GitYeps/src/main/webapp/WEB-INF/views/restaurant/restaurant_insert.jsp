@@ -288,7 +288,7 @@ function test() {
 		alert("예약을 선택해 주세요!!")
 		return false;
 	}
-	if(!document.getElementById("delivery").checked && !document.getElementById("delivery2").checked){
+	if(!document.getElementById("delivery1").checked && !document.getElementById("delivery2").checked){
 		alert("배달을 선택해 주세요!!")
 		return false;
 	}
@@ -427,6 +427,19 @@ function test() {
 									<input class="restInsert-hp" type="text" id="hp2" name="hp2" value="" maxlength="4"  onkeypress="txtOnlyNum(event)" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" style="width:126.5px;">
 									- <input class="restInsert-hp" type="text" id="hp3" name="hp3" value="" maxlength="4"  onkeypress="txtOnlyNum(event)" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" style="width:126.5px;">
 									</li>
+									
+									
+									<li class="restInsert-list">
+										<label for="foodstyle" class="restInsert-label-bold">카테고리 등록</label>
+										<select class="restInsert-day" id="category" name="category" style="width:390px">
+											<option value="Restaurants">레스토랑</option>
+											<option value="Bars">바</option>
+											<option value="Food">음식점</option>
+											<option value="Breakfast & Brunch">아침식사 & 브런치</option>
+											<option value="Coffee & Tea">카페</option>
+										</select>	
+									</li>
+									
 									<li class="restInsert-list">
 										<label for="foodstyle" class="restInsert-label-bold">음식 종류</label>
 										<input class="restInsert-input" id="foodstyle" name="foodstyle" placeholder="" type="text" value="">	

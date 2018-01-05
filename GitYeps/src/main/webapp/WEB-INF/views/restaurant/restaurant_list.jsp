@@ -269,11 +269,8 @@
 											<p style="margin-bottom: 0;display: block;">
 													${map.LastReview.get(status.index).content}	
 												<c:if test="${LastReview.review.content.length()>60 }">
-<<<<<<< HEAD
 													<a href="#" style="white-space: nowrap;color: #0073bb;text-decoration: none;cursor: pointer;">read more</a>
-=======
 												<a href="#" style="white-space: nowrap; color: #0073bb; cursor: pointer;">read more</a>
->>>>>>> branch 'master' of http://github.com/MingonK/Yeps.git
 												</c:if>
 											</p>
 										</div>
