@@ -207,7 +207,9 @@
     left: 16px;
 }
 
-
+.myreview_button_1:hover {
+	background: linear-gradient(#fff, #eee);
+}
 
 .myreview_span_1{
 	width: 18px;
