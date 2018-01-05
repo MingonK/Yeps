@@ -205,16 +205,17 @@ public class RestaurantController {
 		ModelAndView mav = new ModelAndView();
 		
 		RestaurantDTO getRest = restaurantMapper.getRest(Integer.parseInt(rnum));// 가게 1개 정보
-		List<FileDTO> uploadFileList = restaurantMapper.getFileList(Integer.parseInt(rnum));// 가게 업로드 파일
+		List<FileDTO> uploadFileList = fileMapper.getAllRestaurantFiles(Integer.parseInt(rnum));// 가게 업로드 파일
 		
+
 		ReviewDTO existMyReview = null;
+		System.out.println("existMyReview 출력 전:" + existMyReview);
 		if(loginMember != null) {
 			existMyReview = reviewMapper.findMyReview(Integer.parseInt(rnum), loginMember.getMnum());
+			System.out.println("existMyReview 출력 후:" + existMyReview);
 		}
 		
-		if(existMyReview == null) {
-			// 내가 쓴 리뷰 존재 안할 때
-		} else {
+		if(existMyReview != null) {
 			mav.addObject("myReview", existMyReview);
 		}
 		
@@ -387,6 +388,33 @@ public class RestaurantController {
 		return map;
 	}
 	
+	@RequestMapping(value="/restaurant_delete_ajax")
+	@ResponseBody
+	public HashMap<String, Object> deleteRestaurantPhoto(HttpServletRequest req) {
+		String rnum = req.getParameter("rnum");
+		String filename = req.getParameter("filename");
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		HttpSession session = req.getSession();
+		
+		if(rnum == null || rnum.trim().equals("") || filename == null || filename.trim().equals("")) {
+			map.put("url", "restaurant_list");
+			return map;
+		}
+		
+		if (session == null) {
+			map.put("url", "member_login");
+			return map;
+		}
+		
+		S3Connection.getInstance().deleteObject("yepsbucket", "images/" + filename);
+		fileMapper.deleteRestaurantFile(filename, Integer.parseInt(rnum));
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
+		memberDTO.setImagecount(memberDTO.getImagecount()-1);
+		session.setAttribute("memberinfo", memberDTO);
+		map.put("success", "success");
+		return map;
+	}
+	
 
 
 	@RequestMapping(value = "/restaurant_photoList")
@@ -397,30 +425,28 @@ public class RestaurantController {
 			return new ModelAndView("redirect: restaurant_list");
 		}
 
-		int count = restaurantMapper.getCount();
+		int count = fileMapper.getAllFileCount(rnum);
 		int pageScale = 10;
 		int blockScale = 10;
 		YepsPager YepsPager = new YepsPager(count, curPage, pageScale, blockScale);
 		int start = YepsPager.getPageBegin();
 		int end = YepsPager.getPageEnd();
 		RestaurantDTO dto = restaurantMapper.getRest(rnum);
-		List<FileDTO> uploadFileList = restaurantMapper.getFileList(rnum);
+		List<FileDTO> uploadFileList = fileMapper.getPagedFileList(rnum, start, end);
 		int reviewCount = reviewMapper.getRestaurantReviewCount(rnum);
+		int starAvg = reviewMapper.getStarAvg(rnum);
 
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("getRest", dto);
+		mav.addObject("starAvg", starAvg);
 		mav.addObject("uploadFileList", uploadFileList);
 		mav.addObject("reviewCount", reviewCount);
+		mav.addObject("photoCount", count);
 		mav.setViewName("restaurant/restaurant_photoList");
 		return mav;
 
 	}
 
-	@RequestMapping(value = "restaurant_content2", method = RequestMethod.POST)
-	public @ResponseBody String test(@RequestParam(value = "asd") String text) throws Exception {
-
-		return "baba";
-	}
 
 }
