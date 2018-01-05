@@ -250,7 +250,7 @@ public class EventController {
 		}
 		memberDTO.setImagecount(memberDTO.getImagecount()-imageCount);
 		session.setAttribute("memberinfo", memberDTO);
-		
+		memberMapper.updateImageCount(memberDTO.getMnum(), memberDTO.getMnum());
 		int fileDelete_result = fileMapper.deleteAllFile(Integer.parseInt(evnum));
 		int eventReviewDelete_result = eventReviewMapper.deleteAllEventReivew(Integer.parseInt(evnum));
 		if (fileDelete_result >= 0 && eventReviewDelete_result >= 0) {
@@ -451,8 +451,8 @@ public class EventController {
 				map.put("upload_failed", "업로드할 수 없는 파일이 존재합니다.");
 			}
 		}
-		memberMapper.updateImageCount(memberDTO.getMnum(), imageCount);
 		memberDTO.setImagecount(memberDTO.getImagecount()+imageCount);
+		memberMapper.updateImageCount(memberDTO.getMnum(), memberDTO.getMnum());
 		session.setAttribute("memberinfo", memberDTO);
 		
 		map.put("update", "사진을 등록하였습니다.");
@@ -498,7 +498,7 @@ public class EventController {
 		fileMapper.deleteFile(filename, Integer.parseInt(evnum), isMainPhoto);
 		memberDTO.setImagecount(memberDTO.getImagecount()-1);
 		session.setAttribute("memberinfo", memberDTO);
-		
+		memberMapper.updateImageCount(memberDTO.getMnum(), memberDTO.getMnum());
 		mav.setViewName("redirect: event_update_photo?evnum=" + Integer.parseInt(evnum) + "&mode=delete");
 		return mav;
 	}
