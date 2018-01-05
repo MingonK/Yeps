@@ -3,6 +3,7 @@ package com.yeps.controller;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -20,17 +21,28 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.yeps.model.ContsDTO;
 import com.yeps.model.MemberDTO;
+import com.yeps.model.RestaurantDTO;
+import com.yeps.model.ReviewDTO;
 import com.yeps.service.ContsMapper;
 import com.yeps.service.ContsSingleton;
 import com.yeps.service.GpsToAddress;
 import com.yeps.service.Jaso;
 import com.yeps.service.RandomNum;
+import com.yeps.service.RestaurantMapper;
+import com.yeps.service.ReviewMapper;
+import com.yeps.service.YepsPager;
 
 @Controller
 public class SearchController {
 
 	@Autowired
 	private ContsMapper contsMapper;
+	
+	@Autowired
+	private RestaurantMapper restaurantMapper;
+	
+	@Autowired
+	private ReviewMapper reviewMapper; 
 
 	@Autowired
 	private Jaso jaso;
@@ -101,8 +113,18 @@ public class SearchController {
 		String searchword = req.getParameter("searchword");
 		String latitude = req.getParameter("latitude");
 		String longitude = req.getParameter("longitude");
+		
+		if(category == null || category.trim().equals("")) {
+			category = null;
+		}
+		if(location == null || location.trim().equals("")) {
+			location = null;
+		}
+		if(searchword == null || searchword.trim().equals("")) {
+			searchword = null;
+		}
 
-		if(location.equals("Current Location")) {
+		if(location != null && location.equals("Current Location")) {
 			if(latitude != null && !latitude.trim().equals("") && longitude != null && !longitude.trim().equals("")) {
 				try {
 					GpsToAddress gps = new GpsToAddress(Double.parseDouble(latitude), Double.parseDouble(longitude));
@@ -123,12 +145,12 @@ public class SearchController {
 
 
 		MemberDTO memberDTO =  (MemberDTO) session.getAttribute("memberinfo");
-		if(memberDTO != null && location != null && !location.trim().equals("") && location.equals("Home")) {
+		if(memberDTO != null && location != null && location.equals("Home")) {
 			String[] addr = memberDTO.getAddress().split(" ");
 			location = addr[1] + " " + addr[2] + " " +addr[3];
 		}
 
-		if(location != null && !location.trim().equals("") && !location.equals("Home")) {
+		if(location != null  && !location.equals("Home")) {
 			Cookie[] cookies = req.getCookies();
 			if(cookies!=null) {
 				for (Cookie cookie : cookies) {
@@ -150,7 +172,7 @@ public class SearchController {
 					}
 				}
 			}
-			if(location != null && !location.trim().equals("") && !location.equals("Current Location")) {
+			if(location != null && !location.equals("Current Location")) {
 				String authNum = ""; // RandomNum함수 호출해서 리턴값 저장
 				authNum = randomNum.getKey(7, false);
 				try {
@@ -164,7 +186,7 @@ public class SearchController {
 			}
 		}
 
-		if (searchword != null && !searchword.trim().equals("")) {
+		if (searchword != null) {
 			ContsSingleton conts = ContsSingleton.getContsSingletonObject();
 			ContsDTO contsDTO = new ContsDTO();
 			String initial = jaso.getInitial(searchword);
@@ -175,28 +197,48 @@ public class SearchController {
 
 		//----------------------------여기부터 검색작업-------------------
 
-		if(category == null || category.trim().equals("")) {
-			category = "Restaurants";
+		HashMap<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("category", category);
+		searchMap.put("location", location);
+		searchMap.put("searchword", searchword);
+		
+		int curPage = 1;
+		int count = restaurantMapper.getCountBySearchMap(searchMap);
+		int pageScale = 10;
+		int blockScale = 10;
+		// 페이지 나누기 관련 처리
+		YepsPager YepsPager = new YepsPager(count, curPage, pageScale, blockScale);
+		int start = YepsPager.getPageBegin();
+		int end = YepsPager.getPageEnd();
+		
+		List<RestaurantDTO> list = restaurantMapper.listRestBySearchMap(start, end, searchMap);
+
+		List<Integer> reviewCount = new ArrayList<Integer>();
+		List<Integer> StarAvg = new ArrayList<Integer>();
+
+		List<ReviewDTO> LastReview = new ArrayList<ReviewDTO>();
+		for (int i = 0; i < list.size(); i++) {
+			LastReview.add(reviewMapper.getLastReview(list.get(i).getRnum()));
+			reviewCount.add(reviewMapper.getRestaurantReviewCount(list.get(i).getRnum()));
+			StarAvg.add(reviewMapper.getStarAvg(list.get(i).getRnum()));
 		}
 
-		if(location != null && !location.trim().equals("")) {
-			if(searchword != null && !searchword.trim().equals("")) {
-				// location, searchword 둘 다 널이 아닐때
-					
-			}else {
-				// searchword 널일때
-				
-			}
-		}else {
-			if(searchword != null && !searchword.trim().equals("")) {
-				// location 널일때
-				
-			}else {
-				// location, searchword 둘 다 널일때
-				
-			}
-		}
+		// RestaurantDTO test = restaurantMapper.getNewRestaurant();
+		// System.out.println(test.getRnum());
 
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("category", category);
+		map.put("location", location);
+		map.put("searchword", searchword);
+		
+		map.put("list", list); // list
+		map.put("count", count); // 레코드의 갯수
+		map.put("YepsPager", YepsPager);
+		map.put("LastReview", LastReview);
+		map.put("reviewCount", reviewCount);
+		map.put("StarAvg", StarAvg);
+		mav.addObject("map", map);
+		mav.setViewName("restaurant/restaurant_list");
 
 		return mav;
 	}
