@@ -102,6 +102,31 @@ public class SearchController {
 		String latitude = req.getParameter("latitude");
 		String longitude = req.getParameter("longitude");
 
+		if(location.equals("Current Location")) {
+			if(latitude != null && longitude != null) {
+				try {
+					GpsToAddress gps = new GpsToAddress(Double.parseDouble(latitude), Double.parseDouble(longitude));
+					String[] addr = gps.getAddress().split(" ");
+					if(addr.length >=3) {
+						location = addr[1] + " " + addr[2] + " " + addr[3];
+					}else {
+						location = addr[1] + " " + addr[2];
+					}
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}else {
+				location = null;
+			}
+		}
+
+
+		MemberDTO memberDTO =  (MemberDTO) session.getAttribute("memberinfo");
+		if(memberDTO != null && location != null && location.equals("Home")) {
+			String[] addr = memberDTO.getAddress().split(" ");
+			location = addr[1] + " " + addr[2] + " " +addr[3];
+		}
+		
 		if(location != null && !location.trim().equals("") && !location.equals("Home")) {
 			Cookie[] cookies = req.getCookies();
 			boolean isExistLocation = false;
@@ -132,32 +157,6 @@ public class SearchController {
 				}
 
 			}
-		}
-
-
-		if(location.equals("Current Location")) {
-			if(latitude != null && longitude != null) {
-				try {
-					GpsToAddress gps = new GpsToAddress(Double.parseDouble(latitude), Double.parseDouble(longitude));
-					String[] addr = gps.getAddress().split(" ");
-					if(addr.length >=3) {
-						location = addr[1] + " " + addr[2] + " " + addr[3];
-					}else {
-						location = addr[1] + " " + addr[2];
-					}
-				}catch(Exception e) {
-					e.printStackTrace();
-				}
-			}else {
-				location = null;
-			}
-		}
-
-
-		MemberDTO memberDTO =  (MemberDTO) session.getAttribute("memberinfo");
-		if(memberDTO != null && location != null && location.equals("Home")) {
-			String[] addr = memberDTO.getAddress().split(" ");
-			location = addr[1] + " " + addr[2] + " " +addr[3];
 		}
 
 		if (searchword != null && !searchword.trim().equals("")) {
