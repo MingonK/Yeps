@@ -259,11 +259,13 @@
 																		<span class="restContent-dropdown-toggle-text" data-dropdown-initial-text="Yeps Sort" style="font-weight: bold;">
 																			Yeps Sort
 																		</span>
-																		<span aria-hidden="true" style="width: 14px; height: 14px;" class="icon">
-																	  		<svg class="icon_svg" id="18x18_search_small" height="100%" viewBox="0 0 18 18" width="100%">
-																				<path d="M15.913 14.224a1.324 1.324 0 0 0-.3-.466h.01l-3.378-3.376a5.49 5.49 0 0 0 .802-2.857 5.523 5.523 0 1 0-5.522 5.52 5.49 5.49 0 0 0 2.856-.8l3.37 3.368.006.003a1.364 1.364 0 0 0 .93.384C15.41 16 16 15.41 16 14.684c0-.163-.032-.317-.086-.46zM7.525 10.94a3.422 3.422 0 0 1-3.418-3.416 3.422 3.422 0 0 1 3.418-3.417 3.422 3.422 0 0 1 3.416 3.417 3.42 3.42 0 0 1-3.413 3.416z"></path>
-																			</svg>
-																		</span>
+																		<span aria-hidden="true" style="width: 14px; height: 14px;" class="icon icon--14-triangle-down icon--size-14 icon--currentColor u-triangle-direction-down dropdown_arrow">
+                                                       						<svg class="icon_svg">
+                                                           						<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#14x14_triangle_down">
+                                                              						<svg id="18x18_search_small" height="100%" viewBox="0 0 18 18" width="100%"><path d="M15.913 14.224a1.324 1.324 0 0 0-.3-.466h.01l-3.378-3.376a5.49 5.49 0 0 0 .802-2.857 5.523 5.523 0 1 0-5.522 5.52 5.49 5.49 0 0 0 2.856-.8l3.37 3.368.006.003a1.364 1.364 0 0 0 .93.384C15.41 16 16 15.41 16 14.684c0-.163-.032-.317-.086-.46zM7.525 10.94a3.422 3.422 0 0 1-3.418-3.416 3.422 3.422 0 0 1 3.418-3.417 3.422 3.422 0 0 1 3.416 3.417 3.42 3.42 0 0 1-3.413 3.416z"></path></svg>
+                                                           						</use>
+                                                       						</svg>
+                                                   						</span>
 																	</a>
 																</div>
 															</div>

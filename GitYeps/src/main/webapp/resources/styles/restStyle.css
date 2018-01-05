@@ -1020,7 +1020,7 @@ overflow: hidden; width: 132px; height: 24px; background-position: 0 -216px;
 
 .restContent-dropdown-action {
 	color: #666; display: inline-block; line-height: 30px; padding: 0 12px; 
-	border-top: 3px solid transparent; border-bottom: 3px solid transparent; text-decoration: none;
+	border-top: 3px solid transparent; border-bottom: 3px solid transparent; text-decoration: none !important;
 }
 
 .restContent-user {
@@ -1039,7 +1039,7 @@ overflow: hidden; width: 132px; height: 24px; background-position: 0 -216px;
 	border: 0; vertical-align: middle; display: inline-block;
 }
 
-.star_rating {
+#star_rating {
 	float: left; margin: 0px; padding: 0px; display: inline-block; width: 162px; height: 30px; overflow: hidden; vertical-align: middle;
 	background: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/selector_stars.png) no-repeat;
 }
