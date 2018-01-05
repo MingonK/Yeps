@@ -422,7 +422,7 @@ public class RestaurantController {
 	public ModelAndView photoListRest(HttpServletRequest req, @RequestParam(defaultValue = "1") int curPage) {
 		int rnum = Integer.parseInt(req.getParameter("rnum"));
 
-		if (rnum == 0) {
+		if (rnum == 0) { 
 			return new ModelAndView("redirect: restaurant_list");
 		}
 

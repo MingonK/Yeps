@@ -141,12 +141,12 @@ public class ReviewController {
 	// return "review/";
 	// }
 
-	@RequestMapping(value = "/review_write")
+	@RequestMapping(value = "/review_write") 
 	public ModelAndView review_write(HttpServletRequest req) {
 
 		String rnum = req.getParameter("rnum");
 		if(rnum == null || rnum.trim().equals("")) {
-			return new ModelAndView("redirect: review_write");
+			return new ModelAndView("redirect: restaurant_list");
         }
 		
 		String rname = restaurantMapper.review_write_getrname(Integer.parseInt(rnum));

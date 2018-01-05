@@ -404,7 +404,7 @@
 															</div>									
 														</div>
 														<div class="myreview_div_5">
-															<p class="myreview_p_2">
+															<p class="myreview_p_2"> 
 																Started on ${myReview.reg_date}
 															</p>
 														</div>
