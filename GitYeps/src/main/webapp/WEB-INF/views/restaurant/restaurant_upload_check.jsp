@@ -96,13 +96,8 @@
 		var src = $(this).parent().parent().children('#photo_box_img').attr('src');
 		var pathpoint = src.lastIndexOf('/');
 		var filename = src.substring(pathpoint+1, src.length);
-		$(document).ajaxStart(function() {
-			$(this).parent().parent().parent().css('opacity', '1');
-		})
-		
-		$(document).ajaxStop(function() {
-			$(this).parent().parent().parent().css('opacity', '0.3');
-		})
+		$(this).parent().parent().parent().fadeOut(500);
+
 		$.ajax({
 			url : 'restaurant_delete_ajax?rnum=' + rnum + '&filename=' + filename,
 			dataType : 'json',
@@ -111,8 +106,7 @@
 					window.location = responseData.url; 
 				}
 				if(responseData.success) {
-		        	$(this).parent().parent().parent().css('opacity', '0');
-		        	$(this).parent().parent().parent().remove();
+		        	
 		        }
 			}
 		});
