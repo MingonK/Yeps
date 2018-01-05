@@ -59,59 +59,42 @@
 					</div>
 					
 					
-				<c:if test="${empty myReview}">
+				
 					<div class="biz-page-header-right u-relative" style="display: table; position: relative !important;">
 						<div class="biz-page-actions nowrap"style="text-align: right; overflow: hidden; padding-bottom: 1px; margin-top: -1px; white-space: nowrap;">
-						<a href="review_write?rnum=${getRest.rnum}&mode=write$where=rest" style="text-decoration: none;" class="ybtn review_write">
-							<span aria-hidden="true" style="fill: white; width: 24px; height: 24px;" class="icon">
-							    <svg id="24x24_star" height="100%" viewBox="0 0 24 24" width="100%">
-							    	<path d="M12 1.5l2.61 6.727 6.89.53-5.278 4.688 1.65 7.055L12 16.67 6.13 20.5l1.648-7.055L2.5 8.757l6.89-.53L12 1.5z"></path>
-							    </svg>
+							<c:if test="${empty myReview}">
+							<a href="review_write?rnum=${getRest.rnum}&mode=write$where=rest" style="text-decoration: none;" class="ybtn review_write">
+								<span aria-hidden="true" style="fill: white; width: 24px; height: 24px;" class="icon">
+							    	<svg id="24x24_star" height="100%" viewBox="0 0 24 24" width="100%">
+							    		<path d="M12 1.5l2.61 6.727 6.89.53-5.278 4.688 1.65 7.055L12 16.67 6.13 20.5l1.648-7.055L2.5 8.757l6.89-.53L12 1.5z"></path>
+							   		</svg>
+								</span>
+								리뷰쓰기 
+							</a>
+							</c:if>
+							<c:if test="${!empty myReview}">
+							<a href="review_write?rnum=${getRest.rnum}&mode=write$where=rest" style="text-decoration: none;" class="ybtn review_write">
+								<span aria-hidden="true" style="fill: white; width: 24px; height: 24px;" class="icon">
+							    	<svg id="24x24_star" height="100%" viewBox="0 0 24 24" width="100%">
+							    		<path d="M12 1.5l2.61 6.727 6.89.53-5.278 4.688 1.65 7.055L12 16.67 6.13 20.5l1.648-7.055L2.5 8.757l6.89-.53L12 1.5z"></path>
+							    	</svg>
+								</span>
+								리뷰수정 
+							</a> 
+							</c:if>
+							<span class="ybtn-group clearfix" style="float: right;margin-top: 4px;"> 
+						   	<a class="ybtn ybtn--small add-photo-button" href="restaurant_update_photo?rnum=${getRest.rnum}">
+							  	<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-add-photo icon--size-18 icon--currentColor">
+							     	<svg id="18x18_add_photo" height="100%" viewBox="0 0 18 18" width="100%">
+						   		    	<path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 4.75a4.25 4.25 0 1 0 0 8.5 4.25 4.25 0 0 0 0-8.5zM11 10h-1v1a1 1 0 0 1-2 0v-1H7a1 1 0 0 1 0-2h1V7a1 1 0 0 1 2 0v1h1a1 1 0 0 1 0 2z"></path>
+						         	</svg>
+							  	</span> 
+							  	사진추가
+							  	<a style="color: #0073bb;text-decoration: none;" class="menu-explore js-menu-explore" href="restaurant_listMenu?rnum=${getRest.rnum}">Full menu</a>
+						   		</a>
 							</span>
-							리뷰쓰기 
-						</a> 
-						<span class="ybtn-group clearfix" style="float: right;margin-top: 4px;"> 
-						   <a class="ybtn ybtn--small add-photo-button" href="restaurant_update_photo?rnum=${getRest.rnum}">
-							  <span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-add-photo icon--size-18 icon--currentColor">
-							     <svg id="18x18_add_photo" height="100%" viewBox="0 0 18 18" width="100%">
-						   		    <path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 4.75a4.25 4.25 0 1 0 0 8.5 4.25 4.25 0 0 0 0-8.5zM11 10h-1v1a1 1 0 0 1-2 0v-1H7a1 1 0 0 1 0-2h1V7a1 1 0 0 1 2 0v1h1a1 1 0 0 1 0 2z"></path>
-						         </svg>
-							  </span> 사진추가
-							  <a style="color: #0073bb;text-decoration: none;" class="menu-explore js-menu-explore" href="restaurant_listMenu?rnum=${getRest.rnum}">Full menu</a>
-						   </a>
-						</span>
-				     </div>
-				  </div>
-				</c:if>
-				  
-				  <!-- 상우작업부분 div -->
-				  <c:if test="${!empty myReview}">
-				  <div class="biz-page-header-right u-relative" style="display: table; position: relative !important;">
-						<div class="biz-page-actions nowrap"style="text-align: right; overflow: hidden; padding-bottom: 1px; margin-top: -1px; white-space: nowrap;">
-						<a href="review_write?rnum=${getRest.rnum}&mode=write$where=rest" style="text-decoration: none;" class="ybtn review_write">
-							<span aria-hidden="true" style="fill: white; width: 24px; height: 24px;" class="icon">
-							    <svg id="24x24_star" height="100%" viewBox="0 0 24 24" width="100%">
-							    	<path d="M12 1.5l2.61 6.727 6.89.53-5.278 4.688 1.65 7.055L12 16.67 6.13 20.5l1.648-7.055L2.5 8.757l6.89-.53L12 1.5z"></path>
-							    </svg>
-							</span>
-							리뷰수정 
-						</a> 
-						<span class="ybtn-group clearfix" style="float: right;margin-top: 4px;"> 
-						   <a class="ybtn ybtn--small add-photo-button" href="restaurant_update_photo?rnum=${getRest.rnum}">
-							  <span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-add-photo icon--size-18 icon--currentColor">
-							     <svg id="18x18_add_photo" height="100%" viewBox="0 0 18 18" width="100%">
-						   		    <path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 4.75a4.25 4.25 0 1 0 0 8.5 4.25 4.25 0 0 0 0-8.5zM11 10h-1v1a1 1 0 0 1-2 0v-1H7a1 1 0 0 1 0-2h1V7a1 1 0 0 1 2 0v1h1a1 1 0 0 1 0 2z"></path>
-						         </svg>
-							  </span> 사진추가
-							  <a style="color: #0073bb;text-decoration: none;" class="menu-explore js-menu-explore" href="restaurant_listMenu?rnum=${getRest.rnum}">Full menu</a>
-						   </a>
-						</span>
-				     </div>
-				  </div>
-				  </c:if>
-				  
-				  
-				  
+				     	</div>
+				  	</div>
 			   </div>
 		
 				<div class="biz-page-subheader" style="display: table;">
@@ -462,7 +445,7 @@
 														<div class="restContent-media-avatar" style="border-right-width: 9px;border-right: 6px solid transparent;border-left: none;">
 															<div class="restContent-photo-box">
 																<a href="#" style="color: #0073bb;">
-																	<img class="restContent-photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${getReview.memberDTO.memberPhotoDTO.filename}" width="60">
+																	<img class="restContent-photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${myReview.memberDTO.memberPhotoDTO.filename}" width="60">
 																</a>
 															</div>
 														</div>
@@ -470,17 +453,17 @@
 															<ul class="restContent-user-info">
 																<li class="restContent-user-name">
 																	<a href="#" class="restContent-user-display-name" style="font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; cursor: pointer;">
-																		<c:if test="${empty getReview.memberDTO.nickname}">
-																			${getReview.memberDTO.email}
+																		<c:if test="${empty myReview.memberDTO.nickname}">
+																			${myReview.memberDTO.email}
 																		</c:if>
-																		<c:if test="${!empty getReview.memberDTO.nickname}">
-																			${getReview.memberDTO.nickname}
+																		<c:if test="${!empty myReview.memberDTO.nickname}">
+																			${myReview.memberDTO.nickname}
 																		</c:if>
 																	</a>
 																</li>
 																<li class="restContnet-user-location">
 																	<b style="font-weight: bold;">
-																	<c:forTokens items="${getReview.memberDTO.address}" delims=" " begin="1" end="2" var="addr">
+																	<c:forTokens items="${myReview.memberDTO.address}" delims=" " begin="1" end="2" var="addr">
                                                                     	${addr}
                                                                   	</c:forTokens>	
 																	</b>
@@ -512,7 +495,7 @@
 																	        </use>
 																	    </svg>
 																	</span>
-																	<b style="font-weight: bold;">${getReview.memberDTO.reviewcount}</b> reviews
+																	<b style="font-weight: bold;">${myReview.memberDTO.reviewcount}</b> reviews
 																</li>
 																<li class="restContent-photo-count" style="color: #666;display: list-item;text-align: -webkit-match-parent;">
 																	<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-camera icon--size-18">
@@ -524,7 +507,7 @@
 																	        </use>
 																	    </svg>
 																	</span>
-																	<b style="font-weight: bold;">${getReview.memberDTO.imagecount}</b> photos
+																	<b style="font-weight: bold;">${myReview.memberDTO.imagecount}</b> photos
 																</li>
 															</ul>
 														</div>
@@ -726,7 +709,7 @@
 									<c:forEach var="getReview" items="${selectedDataRV}">	
 									
 									<!-- 상우 작업부분 li -->
-									
+									<c:if test="${myReview.memberDTO.email != getReview.memberDTO.email}">
 									<li>
 										<div class="restContent-review-with" style="margin: 0 -15px; display: flex;">
 											<div class="restContent-user" style="float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 37.5%;">
@@ -992,6 +975,7 @@
 											</div>
 										</div>
 									</li><!-- 리뷰 -->
+									</c:if>
 									</c:forEach>
 								</ul>
 								<div class="event_list_paging_section" style="font-size: 14px;">

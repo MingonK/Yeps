@@ -215,9 +215,7 @@ public class RestaurantController {
 			System.out.println("existMyReview 출력 후:" + existMyReview);
 		}
 		
-		if(existMyReview == null) {
-			// 내가 쓴 리뷰 존재 안할 때
-		} else {
+		if(existMyReview != null) {
 			mav.addObject("myReview", existMyReview);
 		}
 		
