@@ -1004,13 +1004,14 @@
 		$(document).on('click', '[data-popup-open]', function(e)  {
 			var targeted_popup_class = jQuery(this).attr('data-popup-open');
 			$('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
-			alert(targeted_popup_class);
-			if(targeted_popup_class == 'popup-2') {
-        		var memberinfo ='${sessionScope.memberinfo}';
-        		if(!memberinfo.length) {
-         			$(location).attr("href", "event_report");
-         			return;
-        		}
+        	var memberinfo ='${sessionScope.memberinfo}';
+        	if(!memberinfo.length) {
+         		$(location).attr("href", "event_report");
+         		return;
+        	}
+        	
+        	if(targeted_popup_class == 'writeMessage') {
+        		$('#sendformTo').val();
         	}
 			
 			$('body').css('overflow','hidden');
