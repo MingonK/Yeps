@@ -8,9 +8,6 @@
 <title>Details</title>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/member.css?ver=2"/>"/>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/restStyle.css?ver=1"/>"/>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css?ver=1"/>"/>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css?ver=2"/>"/>
 
 <script src="//code.jquery.com/jquery.min.js?ver=1"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js?ver=2"></script>
@@ -266,7 +263,7 @@
 											<li data-section-id="self">
 											 <!-- 작성한 리뷰가 있을 경우 -->
 							                  <c:if test="${ not empty reviewcount}" >
-							                      <p class="member_no-recent-activity" align="left"> 지금까지 <span style="color: red; font-weight: bold;"> ${reviewcount}</span>개의 review를 작성하였습니다.</p>
+							                      <h3 class="member_no-recent-activity" align="left"> 지금까지  <span style="color: red; font-weight: bold;"> ${reviewcount}</span> 개의 리뷰가 작성되었습니다.</h3>
   							                  </c:if>
   							                  <!-- 작성한 리뷰가 없을 경우 -->
                                               <c:if test="${ empty reviewcount}" >
@@ -321,19 +318,67 @@
 				</div>
 				
 				<div class="details-column-beta_reviews">
-					<div class="member_detals_section_header">
-						<h2 class="section-header_title">Reviews</h2>
-					</div>
-					
-					<div class="restContent-review-list" style="position: relative;">
-					    <ul style="list-style: none; display: block;">
-					    
-<!----------------------------------------------- 아작스 통해 붙여넣는 부분 -------------------------------------------------- -->
-					    
-					    </ul>
-					</div> 
-					
-					
+				   <div>
+					  <div class="restContent-review-list" style="position: relative;">
+					     <ul  class="review-drafts" style="list-style: none; display: block;">
+					    <!----------------------------------------------- 아작스 통해 붙여넣는 부분 -------------------------------------------------- -->
+				    
+					     </ul>
+					  </div>
+			       </div>
+			    
+			       
+				   <div class="member_reviews-hero">
+					   <div class="member_u-relative">
+						   <h2 class="section-header_title">Reviews</h2>
+					   <p>It’s your turn ? review everything from your favorite burger to your favorite root canal. Write reviews to contribute to the Yelp community and help your friends find all the local gems that you love.</p>
+						   <a href="review_restaurantIMG" class="ybtn ybtn-primary">Write a Review</a>
+									<img class="reviews-hero-img" src="https://s3-media3.fl.yelpcdn.com/assets/2/www/img/1f978654eb34/user_details/reviews-hero.png">
+									<div class="member_reviews-widget member_u-bg-color">
+										<div class="member_reviews-widget_action-bar">
+											<div class="member_reviews-widget_action-bar-buttons">
+												<a class="ybtn ybtn-primary war-button" href="javascript:;">
+													<span aria-hidden="true" style="width: 24px; height: 24px;" class="member_icon member_icon-currentColor">
+														<svg class="icon_svg">
+															<path d="M12 1.5l2.61 6.727 6.89.53-5.278 4.688 1.65 7.055L12 16.67 6.13 20.5l1.648-7.055L2.5 8.757l6.89-.53L12 1.5z"></path>
+														</svg>
+													</span>Write a Review
+												</a>
+												<span class="member_ybtn-group">
+													<a class="ybtn ybtn--small add-photo-button" href="javascript:;">
+														<span aria-hidden="true" style="width: 18px; height: 18px;" class="member_icon member_icon-currentColor">
+															<svg class="icon_svg">
+																<path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 4.75a4.25 4.25 0 1 0 0 8.5 4.25 4.25 0 0 0 0-8.5zM11 10h-1v1a1 1 0 0 1-2 0v-1H7a1 1 0 0 1 0-2h1V7a1 1 0 0 1 2 0v1h1a1 1 0 0 1 0 2z"></path>
+															</svg>
+														</span> Add Photo
+													</a>
+													<a class="ybtn ybtn--small share-icon" href="javascript:;">
+														<span aria-hidden="true" style="width: 18px; height: 18px;" class="member_icon member_icon-currentColor">
+															<svg class="icon_svg">
+																<path d="M17.714 6.43L13 10.356v-3.03c-1 0-5.097 1.47-6.286 3.62.274-3.08 4.286-5.5 6.286-5.5V2.5l4.714 3.93zM3 4v10h11v-2.5l1-1V15H2V3h8.5l-1 1H3z"></path>
+															</svg>
+														</span> Share
+													</a>
+													<a class="ybtn ybtn--small not-bookmarked" href="javascript:;">
+														<span aria-hidden="true" style="width: 18px; height: 18px;" class="member_icon member_icon-currentColor">
+															<svg class="icon_svg">
+																<path d="M14 2H4v14l5-4 5 4V2zm-3.13 7.957L8.978 8.794 7.148 10 7.5 7.926 6 6.458l2.074-.303L8.977 4l.948 2.155L12 6.458l-1.5 1.468.37 2.03z"></path>
+															</svg>
+														</span>
+														<span class="bookmark-icon_label">Bookmark</span>
+													</a>
+												</span>
+											</div>
+										</div>
+										<div class="reviews-widget--no-hover u-sticky u-absolute"></div>
+									</div>
+								</div>
+							</div>
+		        </div> 
+						  
+				
+				
+					      
 <!-- -----페이징 처리 시작 ------ -->					
 			   <!-- <div class="yeps_message_section" style="font-size: 14px; "> -->
 <!-- 	                       <div class="yeps_message_pagination_block"> -->
@@ -411,56 +456,7 @@
 <!-- 	         </div> -->
 <!-- 	      </div> -->
 
-
-
-
-					<p>It’s your turn ? review everything from your favorite burger to your favorite root canal. Write reviews to contribute to the Yelp community and help your friends find all the local gems that you love.</p>
-					<a href="review_write" class="ybtn ybtn-primary">Write a Review</a>
-					<div class="member_reviews-hero">
-						<div class="member_u-relative">
-							<img class="reviews-hero-img" src="https://s3-media3.fl.yelpcdn.com/assets/2/www/img/1f978654eb34/user_details/reviews-hero.png">
-							<div class="member_reviews-widget member_u-bg-color">
-								<div class="member_reviews-widget_action-bar">
-									<div class="member_reviews-widget_action-bar-buttons">
-										<a class="ybtn ybtn-primary war-button" href="javascript:;">
-											<span aria-hidden="true" style="width: 24px; height: 24px;" class="member_icon member_icon-currentColor">
-												<svg class="icon_svg">
-													<path d="M12 1.5l2.61 6.727 6.89.53-5.278 4.688 1.65 7.055L12 16.67 6.13 20.5l1.648-7.055L2.5 8.757l6.89-.53L12 1.5z"></path>
-												</svg>
-											</span>Write a Review
-										</a>
-										<span class="member_ybtn-group">
-											<a class="ybtn ybtn--small add-photo-button" href="javascript:;">
-												<span aria-hidden="true" style="width: 18px; height: 18px;" class="member_icon member_icon-currentColor">
-													<svg class="icon_svg">
-														<path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 4.75a4.25 4.25 0 1 0 0 8.5 4.25 4.25 0 0 0 0-8.5zM11 10h-1v1a1 1 0 0 1-2 0v-1H7a1 1 0 0 1 0-2h1V7a1 1 0 0 1 2 0v1h1a1 1 0 0 1 0 2z"></path>
-													</svg>
-												</span> Add Photo
-											</a>
-											<a class="ybtn ybtn--small share-icon" href="javascript:;">
-												<span aria-hidden="true" style="width: 18px; height: 18px;" class="member_icon member_icon-currentColor">
-													<svg class="icon_svg">
-														<path d="M17.714 6.43L13 10.356v-3.03c-1 0-5.097 1.47-6.286 3.62.274-3.08 4.286-5.5 6.286-5.5V2.5l4.714 3.93zM3 4v10h11v-2.5l1-1V15H2V3h8.5l-1 1H3z"></path>
-													</svg>
-												</span> Share
-											</a>
-											<a class="ybtn ybtn--small not-bookmarked" href="javascript:;">
-												<span aria-hidden="true" style="width: 18px; height: 18px;" class="member_icon member_icon-currentColor">
-													<svg class="icon_svg">
-														<path d="M14 2H4v14l5-4 5 4V2zm-3.13 7.957L8.978 8.794 7.148 10 7.5 7.926 6 6.458l2.074-.303L8.977 4l.948 2.155L12 6.458l-1.5 1.468.37 2.03z"></path>
-													</svg>
-												</span>
-												<span class="bookmark-icon_label">Bookmark</span>
-											</a>
-										</span>
-									</div>
-								</div>
-								<div class="reviews-widget--no-hover u-sticky u-absolute"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-				
+             
 				<div class="details-column-beta_events">
 					<div class="member_detals_section_header">
 						<h2>Events</h2>
@@ -550,148 +546,108 @@
              dataType : 'json',
              success : function(responseData){
             	var num = responseData.num;
+                var mnum = responseData.mnum;
               
        	 $('.restContent-review-list ul li').remove(); 
 	 $.each(responseData.memberReview,function(i,item){
 		 $(".restContent-review-list ul").append(
 			
-				 '<li style="margin: 0; padding: 18px 0; border-bottom: 1px solid #e6e6e6; padding-bottom: 17px; display: list-item; text-align: -webkit-match-parent;">'+
-					'<div class="restContent-review-with" style="    width: 100%; overflow: hidden;height: auto;">'+
-						'<div class="restContent-user" style="float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 37.5%;">'+
-							'<div class="restContent-user-content" style="margin-top: 3px;">'+
-								'<div class="restContent-meida-block" style="font-size: 12px; line-height: 1.5em; position: relative; display: flex;">'+
-									'<div class="restContent-media-avatar" style="border-right-width: 9px;border-right: 6px solid transparent;border-left: none;">'+
-										'<div class="restContent-photo-box">'+
-											'<a href="#" style="color: #0073bb;text-decoration: none;">'+
-												'<img alt="Meghan A." class="restContent-photo-box-img" height="60" src="https://s3-media2.fl.yelpcdn.com/photo/AiuQa6ZjRBfpPVSQGOinIw/60s.jpg" srcset="https://s3-media2.fl.yelpcdn.com/photo/AiuQa6ZjRBfpPVSQGOinIw/90s.jpg 1.50x,https://s3-media2.fl.yelpcdn.com/photo/AiuQa6ZjRBfpPVSQGOinIw/168s.jpg 2.80x,https://s3-media2.fl.yelpcdn.com/photo/AiuQa6ZjRBfpPVSQGOinIw/ms.jpg 1.67x,https://s3-media2.fl.yelpcdn.com/photo/AiuQa6ZjRBfpPVSQGOinIw/180s.jpg 3.00x,https://s3-media2.fl.yelpcdn.com/photo/AiuQa6ZjRBfpPVSQGOinIw/120s.jpg 2.00x" width="60">'+
-											'</a>'+
-										'</div>'+
-									'</div>'+
-								 '<div class="restContent-media-story" style="-webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;">'+
-									 '<ul class="restContent-user-info" style="list-style: none; -webkit-margin-before: 0px; -webkit-margin-after: 0px; display: block; -webkit-margin-start: 0px; -webkit-margin-end: 0px;">'+
-											'<li class="restContent-user-name" style="display: list-item; text-align: -webkit-match-parent;">'+
-												'<a href="#" class="restContent-user-display-name" style="font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; text-decoration: none; cursor: pointer;">'+
-													 item.memberDTO.name + 
-												'</a>'+
-											'</li>'+
-											'<li class="restContnet-user-location">'+
-												'<b style="font-weight: bold;">'+   item.memberDTO.address + '</b>'+
-											'</li>'+
-										'</ul>'+
-										'<ul class="restContent-user-stats" style="list-style: none;display: block;">'+
-							
-											'<li class="restContent-review-count" style="color: #666;display: list-item;text-align: -webkit-match-parent;">'+
-												'<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-review icon--size-18">'+
-												    '<svg class="icon_svg">'+
-												        '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_review">'+
-												        	'<svg id="18x18_review" height="100%" viewBox="0 0 18 18" width="100%">'+
-												        		'<path d="M13 3H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1.505 9.643l-2.526-1.55L6.526 12.7 7 9.934 5 7.977l2.766-.404L8.97 4.7l1.264 2.873L13 7.977l-2 1.957.495 2.71z"></path>'+
-												        	'</svg>'+
-												        '</use>'+
-												    '</svg>'+
-												'</span>'+
-												'<b style="font-weight: bold;">'+ item.memberDTO.reviewcount + '</b>reviews'+
-											'</li>'+
-											'<li class="restContent-photo-count" style="color: #666;display: list-item;text-align: -webkit-match-parent;">'+
-												'<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-camera icon--size-18">'+
-												    '<svg class="icon_svg">'+
-												        '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_camera">'+
-												        	'<svg id="18x18_camera" height="100%" viewBox="0 0 18 18" width="100%">'+
-												        		'<path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 6.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path>'+
-												        	'</svg>'+
-												        '</use>'+
-												    '</svg>'+
-												'</span>'+
-												'<b style="font-weight: bold;">'+ item.memberDTO.imagecount + '</b> photos'+
-											'</li>'+
-										'</ul>'+
-									'</div>'+
-								'</div>'+
-								'<ul class="restContent-list-link" style="transition: opacity 0.3s ease-in-out; font-size: 12px; line-height: 1.5em; margin-top: 6px; font-weight: bold; list-style: none; display: block;">'+
-									'<li>'+
-										'<a class="restContent-share-review" href="#" style="display: table; min-width: 100%; table-layout: auto; color: #0073bb; text-decoration: none; cursor: pointer;">'+
-											'<div class="action-link_icon arrange_unit" style="padding-top: 3px; padding-bottom: 3px; vertical-align: middle; padding-right: 12px; box-sizing: border-box; display: table-cell;">'+
-												'<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-share icon--size-18 icon--currentColor">'+
-												    '<svg class="icon_svg">'+
-												     
-												        	'<svg id="18x18_share" height="100%" viewBox="0 0 18 18" width="100%">'+
-												        		'<path d="M17.714 6.43L13 10.356v-3.03c-1 0-5.097 1.47-6.286 3.62.274-3.08 4.286-5.5 6.286-5.5V2.5l4.714 3.93zM3 4v10h11v-2.5l1-1V15H2V3h8.5l-1 1H3z"></path>'+
-												        	'</svg>'+
-												       
-												    '</svg>'+
-												'</span>'+
-											'</div>'+
-											
-									    '</a>'+
-									'</li>'+
+				 '<li class="review-draft" style="margin: 20; padding: 18px 0;  padding-bottom: 17px; display: list-item; text-align: -webkit-match-parent;">'+
+// 					'<div class="arrange" style="width: 100%; overflow: hidden; height: auto;">'+
+//  						'<div class="restContent-user" style="float: left; padding: 0 15px; min-height: 1px;  ">'+
+						    '<div class="media-block media-block--12 biz-listing-medium">'+
+				                '<div class="media-avatar">'+
+				                    '<div class="photo-box pb-60s">'+
+				                        '<a href="/biz/liholiho-yacht-club-san-francisco-2" class="js-analytics-click" data-analytics-label="biz-photo">'+
+				                            '<img alt="Liholiho Yacht Club" class="photo-box-img" height="60" src="https://s3-media1.fl.yelpcdn.com/bphoto/FK2X98w6z5naJyiQjsGTNA/60s.jpg" srcset="https://s3-media1.fl.yelpcdn.com/bphoto/FK2X98w6z5naJyiQjsGTNA/90s.jpg 1.50x,https://s3-media1.fl.yelpcdn.com/bphoto/FK2X98w6z5naJyiQjsGTNA/168s.jpg 2.80x,https://s3-media1.fl.yelpcdn.com/bphoto/FK2X98w6z5naJyiQjsGTNA/ms.jpg 1.67x,https://s3-media1.fl.yelpcdn.com/bphoto/FK2X98w6z5naJyiQjsGTNA/180s.jpg 3.00x,https://s3-media1.fl.yelpcdn.com/bphoto/FK2X98w6z5naJyiQjsGTNA/120s.jpg 2.00x" width="60">'+
+				          			    '</a>'+
+				    		        '</div>'+
+				         	    '</div>'+
+				            '<div class="media-story">'+
+				                '<div class="media-title clearfix">'+
+				                    '<a class="biz-name js-analytics-click" data-analytics-label="biz-name" href="/biz/liholiho-yacht-club-san-francisco-2" data-hovercard-id="K8YqsGXicOLOUcQXTzRrnw"><span>'+ item.restaurantDTO.rname + '    Liholiho Yacht Club</span></a>'+
+				                '</div>'+
+				                '<div class="price-category">'+
+				                    '<span class="category-str-list">'+
+				                        '<a href="/search?cflt=bars&amp;find_loc=San+Francisco%2C+CA">' + item.restaurantDTO.foodstyle + '  Bars</a>,'+
+				                        '<a href="/search?cflt=newamerican&amp;find_loc=San+Francisco%2C+CA">' + 
+				                        item.restaurantDTO.roadAddrPart1 + item.restaurantDTO.roadAddrPart2 + item.restaurantDTO.addrDetail + '    American (New)</a>,'+
+				                        '<a href="/search?cflt=seafood&amp;find_loc=San+Francisco%2C+CA">Seafood</a>'+
+				    				'</span>'+
+				    			 '</div>'+
+				                 '<address>'+
+				                      item.restaurantDTO.raddress + item.restaurantDTO.hp2 + item.restaurantDTO.hp3 +
+// 				                     '871 Sutter St<br>San Francisco, CA 94109'+
+				                 '</address>'+
+				             '</div>'+
+        		        '</div>'+
+				        '<div class="arrange_unit" align="right" style="margin-bottom: 10px;">'+
+			                '<p class="time-stamp nowrap review-draft_date-created text-right">'+
+			                    'Started on  '+  item.restaurantDTO.rest_regdate + 
+			                '</p>'+
+			                '<p lang="ko" style="margin-bottom: 12px; width: 100%; float: right; display: block;">'+
+							 item.content +
+						    '</p><br><br>'+
+			             '</div>'+
+			       
+			             '<div class="clearfix"  style="margin-bottom: 50px;">'+
+			             '<a  style="float: left;" href="member_details?mnum=' + mnum + '" class="yepsbyn ybtn--small js-war-widget_finish-draft pull-left">Finish My Review</a>'+
+			                 '<form action="review_delete?rvnum='+ item.rvnum + '&mnum=' + mnum + '" class="pull-right js-delete-review-draft-form" method="post" name="delete_draft">'+
+			               
+			                     '<input type="hidden" value="'+ item.rvnum + '" name="rvnum">'+
+			                     '<button type="submit" style="float: right;"class="chiclet-link u-cursor-pointer show-tooltip js-delete-review-draft">'+
+			                         '<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-trash icon--size-18 icon--currentColor">'+
+			                             '<svg class="icon_svg">'+
+									         '<path d="M3 5V3h4V2h4v1h4v2H3zm11 9c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V6h10v8zM8 8.5a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5zm3 0a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5z"></path>'+
+								
+			                             '</svg>'+
+			                         '</span>'+
+			                         '<span class="tooltip-wrapper">'+
+			                         '<span class="tooltip">Delete draft</span>'+
+			                      '</span>'+
+			                   '</button>'+
+			                '</form>'+
+			             '</div>'+
+		              '</div>'+
+// 						'<div class="restContent-media-story" style="-webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;"></div>'+
+// 							
+// 									'<a class="restContent-share-review" href="#" style="display: table; min-width: 100%; table-layout: auto; color: #0073bb; text-decoration: none; cursor: pointer;">'+
+// 										'<div class="action-link_icon arrange_unit" style="padding-top: 3px; padding-bottom: 3px; vertical-align: middle; padding-right: 12px; box-sizing: border-box; display: table-cell;">'+
+// 											'<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-share icon--size-18 icon--currentColor">'+
+// 												 '<svg class="icon_svg">'+
+// 											         '<svg id="18x18_share" height="100%" viewBox="0 0 18 18" width="100%">'+
+// 											        	 '<path d="M17.714 6.43L13 10.356v-3.03c-1 0-5.097 1.47-6.286 3.62.274-3.08 4.286-5.5 6.286-5.5V2.5l4.714 3.93zM3 4v10h11v-2.5l1-1V15H2V3h8.5l-1 1H3z"></path>'+
+// 											         '</svg>'+
+// 												 '</svg>'+
+// 											 '</span>'+
+// 										 '</div>'+ 
+// 										 '<div class="action-link_label arrange_unit arrange_unit--fill" style="border-top: 1px solid #e6e6e6; padding-top: 3px; padding-bottom: 3px; vertical-align: middle; width: 100%;">'+
+// 											            'Share review'+
+// 								         '</div>'+
+// 									 '</a>'+
+// 							
+// 						 '</div>'+
+// 			         '</div>'+
+// 					 '<div class="restContent-review-wrapper" style="float: left; padding: 0 10px; min-height: 1px; box-sizing: border-box; ">'+
+// 						 '<div class="restContent-review-content" style="padding: 0 12px 6px 0; min-height: 120px; word-wrap: break-word !important; word-break: break-word !important; overflow-wrap: break-word !important;">'+
+// 							 '<div class="restContent-review-rating" style="margin: 6px 0;width:100%;overflow:hidden;height:auto;">'+
+// 								 '<div>'+
+// 									 '<div class="restList-star-rating-${getReview.gradepoint }" >'+
+// 										 '<img class="offscreen"'+ 
+// 											'src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png"'+
+// 											'width="84" height="303" alt="4.0 star rating"'+
+// 											'style="clip: rect(0, 0, 0, 0); position: absolute; left: -9999px; top: auto; overflow: hidden; width: 1px; height: 1px; vertical-align: middle;">'+
+// 									 '</div>'+
+// 									 '</div>'+
 									
-									
-									'<li>'+
-										'<a class="restContent-share-review" href="yeps_message" style="display: table; min-width: 100%; table-layout: auto; color: #0073bb; text-decoration: none; cursor: pointer;">'+
-											'<div class="action-link_icon arrange_unit" style="padding-top: 3px; padding-bottom: 3px; vertical-align: middle; padding-right: 12px; box-sizing: border-box; display: table-cell;">'+
-												'<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-speech icon--size-18 icon--currentColor">'+
-											    '<svg class="icon_svg">'+
-											       
-											        	'<svg id="18x18_speech" height="100%" viewBox="0 0 18 18" width="100%">'+
-											        		'<path d="M2 4v6a2 2 0 0 0 2 2h1v3l4-3h5a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"></path>'+
-											        	'</svg>'+
-											        
-											    '</svg>'+
-											'</span>'+
-											'</div>'+
-											'<div class="action-link_label arrange_unit arrange_unit--fill" style="border-top: 1px solid #e6e6e6; padding-top: 3px; padding-bottom: 3px; vertical-align: middle; width: 100%;">'+
-														'Send message'+
-											'</div>'+
-									    '</a>'+
-									'</li>'+
-								'</ul>'+
-							'</div>'+
-						'</div>'+
-						'<div class="restContent-review-wrapper" style="float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 62.5%;">'+
-							'<div class="restContent-review-content" style="padding: 0 12px 6px 0; min-height: 120px; word-wrap: break-word !important; word-break: break-word !important; overflow-wrap: break-word !important;">'+
-								'<div class="restContent-review-rating" style="margin: 6px 0;width:100%;overflow:hidden;height:auto;">'+
-									'<div>'+
-										
-										'<div class="restList-star-rating-${getReview.gradepoint }" >'+
-										'<img class="offscreen"'+ 
-											'src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png"'+
-											'width="84" height="303" alt="4.0 star rating"'+
-											'style="clip: rect(0, 0, 0, 0); position: absolute; left: -9999px; top: auto; overflow: hidden; width: 1px; height: 1px; vertical-align: middle;">'+
-									'</div>'+
-									'</div>'+
-									'<span class="restContent-rating-qualifier" style="display: block; float: left; color: #666; font-weight: normal;">'+
-										 item.memberDTO.joindate + 
-									'</span>'+
-								'</div>'+
-								'<p lang="ko" style="margin-bottom: 12px;display:block;">'+
-									item.content +
-								'</p>'+
-								'</div>'+
+// 								 '</div>'+
+								
+// 								 '</div>'+
 								
 								
-								'<div class="clearfix">'+
-						           '<button type="button" style="float: left;" onclick="window.location=member_details" class="ybtn ybtn--small js-war-widget_finish-draft pull-left">Finish My Review</a>'+
-						              '<form action="review_delete?rvnum='+ item.rvnum + '" class="pull-right js-delete-review-draft-form" method="post" name="delete_draft">'+
-						               
-						                 '<input type="hidden" value="'+ item.rvnum + '" name="rvnum">'+
-						                 '<button type="submit" style="float: right;"class="chiclet-link u-cursor-pointer show-tooltip js-delete-review-draft">'+
-						                    '<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-trash icon--size-18 icon--currentColor">'+
-						                       '<svg class="icon_svg">'+
-												  '<path d="M3 5V3h4V2h4v1h4v2H3zm11 9c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V6h10v8zM8 8.5a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5zm3 0a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5z"></path>'+
-											
-						                       '</svg>'+
-						                    '</span>'+
-						                    '<span class="tooltip-wrapper">'+
-						                       '<span class="tooltip">Delete draft</span>'+
-						                    '</span>'+
-						                 '</button>'+
-						              '</form>'+
-						           '</div>'+
-						           
-						           
-						'</div>'+
-					'</div>'+
-				'</li>'
+// 						        '</div>'+
+					         '</div>'+
+				          '</li>'
 				      );
 	             });
    
