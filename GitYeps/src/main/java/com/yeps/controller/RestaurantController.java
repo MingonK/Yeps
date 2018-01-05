@@ -448,8 +448,8 @@ public class RestaurantController {
 		}
 
 		int count = fileMapper.getAllFileCount(rnum);
-		int pageScale = 10;
-		int blockScale = 30;
+		int pageScale = 30;
+		int blockScale = 10;
 		YepsPager YepsPager = new YepsPager(count, curPage, pageScale, blockScale);
 		int start = YepsPager.getPageBegin();
 		int end = YepsPager.getPageEnd();
