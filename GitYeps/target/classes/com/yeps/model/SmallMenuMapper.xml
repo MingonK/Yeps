@@ -10,6 +10,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into yeps_smallMenu values(yeps_smallMenu_seq.nextval,#{large_menunum},#{small_name},#{small_content},#{small_price})
 	</insert>
 	<select id="listSmallMenu" resultType="SmallMenuDTO">
-		select * from yeps_smallMenu where large_menunum=#{large_menunum}
+		select * from yeps_smallMenu where large_menunum=#{large_menunum} order by small_menunum asc
 	</select>
 </mapper>

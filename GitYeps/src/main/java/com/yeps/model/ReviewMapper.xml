@@ -34,6 +34,7 @@
   	<resultMap type="reviewDTO" id="getSelectedRestaurant_ReviewMap">
 		<id column="rvnum" property="rvnum"/>
 		<result column="rnum" property="rnum"></result>
+		<result column="mnum" property="mnum"></result>
 		<result column="content" property="content"></result>
 		<result column="reg_date" property="reg_date"></result>
 		<result column="gradepoint" property="gradepoint"></result>
@@ -54,6 +55,7 @@
   	<select id="getSelectedRestaurant_Rv" parameterType="java.util.HashMap" resultMap="getSelectedRestaurant_ReviewMap">
   		select * from (select rownum rn, A.* from (select
   		 		R.rvnum
+  		 		, R.mnum
         		, R.rnum
         		, R.content
         		, R.reg_date
@@ -75,6 +77,7 @@
 		
 		<association javaType="MemberDTO" property="memberDTO">
 			<id column="mnum" property="mnum"></id>
+			<result column="mnum" property="mnum"></result>
 			<association javaType="MemberPhotoDTO" property="memberPhotoDTO">
 				<result column="filename" property="filename"></result>
 				<result column="ismainphoto" property="ismainphoto"></result>
@@ -82,11 +85,12 @@
 		</association>
 		<association javaType="RestaurantDTO" property="restaurantDTO">
 			<id column="rnum" property="rnum"></id>
+			<result column="rnum" property="rnum"></result>
 			<result column="rname" property="rname"></result>
 		</association>
 	</resultMap>
   	<select id="getRandomRestaurant_Rv" parameterType="int" resultMap="HighlightReviewMap">
-  		select * from (select R.content, P.filename, RT.rname
+  		select * from (select R.content, P.filename, RT.rname, RT.rnum, M.mnum
 		from yeps_review R, yeps_member M, yeps_member_photos P, yeps_restaurant RT
 		where R.rnum = RT.rnum and R.mnum = M.mnum and M.mnum = P.mnum and P.ismainphoto = 'y' and R.rnum = #{rnum}
 		order by dbms_random.value) where 3 >= rownum
@@ -217,23 +221,38 @@
            <result column="address" property="address"></result>
            <result column="joindate" property="joindate"></result>
        </association>
+       <association javaType="RestaurantDTO" property="restaurantDTO">
+               <id column="rnum" property="rnum"></id>
+               <result column="rname" property="rname"></result> 
+               <result column="rest_regdate" property="rest_regdate"></result>
+               <result column="raddress" property="raddress"></result>
+       </association>
    </resultMap>
    
    <select id="getMemberReview"  parameterType="java.util.HashMap" resultMap="MemberReviewMap">
       select * from (select rownum rn, A. * from(select
                R.content
               ,R.rvnum
+              ,RT.rest_regdate
+              ,RT.rname
+              ,RT.roadAddrPart1
+              ,RT.roadAddrPart2
+              ,RT.addrDetail
+              ,RT.foodstyle
+              ,RT.hp2
+              ,RT.hp3
+              ,RT.raddress
               ,M.mnum
               ,M.name
               ,M.reviewcount
               ,M.imagecount
               ,M.address
               ,M.joindate
-        from yeps_review R, yeps_member M where R.mnum = M.mnum and M.mnum = #{mnum} order by rvnum desc)A)
+        from yeps_review R, yeps_member M, yeps_restaurant RT where R.mnum = M.mnum and R.rnum = RT.rnum and M.mnum = #{mnum} order by rvnum desc)A)
         where rn between #{start} and #{end}
     </select>
     
-     <resultMap type="reviewDTO" id="restaurantReviewMap">
+   <!--   <resultMap type="reviewDTO" id="restaurantReviewMap">
        <id column="rvnum" property="rvnum"/>
        <id column="rnum" property="rnum"/>
        <id column="mnum" property="mnum"/>
@@ -270,7 +289,7 @@
               ,RT.hp3
         from yeps_review R, yeps_restaurant RT where R.rnum = RT.rnum and R.mnum = #{mnum} order by rvnum desc)A)
         where rn between #{start} and #{end}
-    </select>
+    </select> -->
    
 	<resultMap type="reviewDTO" id="LastReviewMap">
 		<id column="rvnum" property="rvnum"/>
@@ -437,8 +456,42 @@
   	</select>
   
   	
-   <select id="findMyReview" parameterType="java.util.HashMap" resultType="ReviewDTO">
-   		select * from yeps_review where rnum = #{rnum} and mnum = #{mnum}
+  	<resultMap type="ReviewDTO" id="myReviewMap">
+  		<id column="rvnum" property="rvnum"/>
+      	<result column="rvnum" property="rvnum"></result>
+      	<result column="content" property="content"></result>
+      	<result column="reg_date" property="reg_date"></result>
+      	<result column="gradepoint" property="gradepoint"></result>
+      
+      	<association javaType="MemberDTO" property="memberDTO">
+			<id column="mnum" property="mnum"></id>
+			<result column="mnum" property="mnum"></result>
+         	<result column="email" property="email"></result>
+         	<result column="address" property="address"></result>
+         	<result column="reviewcount" property="reviewcount"></result>
+         	<result column="imagecount" property="imagecount"></result>
+         	<result column="nickname" property="nickname"></result>
+         	
+         	<association javaType="MemberPhotoDTO" property="memberPhotoDTO">
+            	<result column="filename" property="filename"></result>
+         	</association>
+      	</association>
+  	</resultMap>
+  	
+  	
+   <select id="findMyReview" parameterType="java.util.HashMap" resultMap="myReviewMap">
+   		select R.content
+   				, R.reg_date
+   				, R.gradepoint
+   				, M.email
+   				, M.address
+   				, M.reviewcount
+   				, M.imagecount
+   				, M.nickname
+   				, M.mnum
+   				, P.filename
+   		from yeps_review R, yeps_member M, yeps_member_photos P
+   		where R.mnum = M.mnum and M.mnum = P.mnum and P.ismainphoto='y' and R.rnum = #{rnum} and R.mnum = #{mnum}
    </select>
    
   	

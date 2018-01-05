@@ -14,20 +14,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{raddress},#{hp2},#{hp3},#{foodstyle},#{mon, jdbcType=VARCHAR},#{tue, jdbcType=VARCHAR},#{wed, jdbcType=VARCHAR},#{thu, jdbcType=VARCHAR},
 		#{fri, jdbcType=VARCHAR},#{sat, jdbcType=VARCHAR},#{sun,jdbcType=VARCHAR},
 		#{reststyle},#{reserv},#{delivery},#{takeout},#{parking},#{kidszone},#{groupreserv},#{noise},#{alcohol},#{waiting},
-		#{wifi},#{toilet},#{tablecount},#{standard},#{busytime},sysdate,#{mnum})
+		#{wifi},#{toilet},#{tablecount},#{standard},#{busytime},sysdate,#{mnum},#{category})
 	</insert>
 	
 	<select id="getRest" parameterType="int" resultType="RestaurantDTO" >
 		select * from yeps_restaurant where rnum = #{rnum}
 	</select>
 	
-	<select id="uploadFileList" resultType="FileDTO">
-		select * from yeps_files where rnum=#{rnum}
-	</select>
-	
 	<select id="getCount" resultType="int">
 		select count(*) from yeps_restaurant
 	</select>
+	
 	<select id="getImageCount" resultType="int">
 		select count(*) from yeps_files where rnum=#{rnum}
 	</select>

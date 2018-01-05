@@ -22,6 +22,7 @@ import com.yeps.model.ContsDTO;
 import com.yeps.model.MemberDTO;
 import com.yeps.service.ContsMapper;
 import com.yeps.service.ContsSingleton;
+import com.yeps.service.GpsToAddress;
 import com.yeps.service.Jaso;
 import com.yeps.service.RandomNum;
 
@@ -83,8 +84,6 @@ public class SearchController {
 				}catch(Exception e) {
 					System.out.println("불러오기 실패");
 				}
-
-
 			}
 			return locationList;
 		}else {
@@ -96,16 +95,29 @@ public class SearchController {
 	public ModelAndView MainSearchPro(HttpServletRequest req, HttpServletResponse resp, HttpSession session) {
 
 		ModelAndView mav = new ModelAndView();
-		
+
 		String category = req.getParameter("category");
 		String location = req.getParameter("location");
 		String searchword = req.getParameter("searchword");
 		String latitude = req.getParameter("latitude");
 		String longitude = req.getParameter("longitude");
-		
-		System.out.println(latitude + ", " + longitude);
-		
-		if(location != null && !location.equals("Home") && !location.equals("Current Location")) {
+		if(latitude != null && longitude != null) {
+			if(location.equals("Current Location")) {
+				try {
+					GpsToAddress gps = new GpsToAddress(Double.parseDouble(latitude), Double.parseDouble(longitude));
+					String[] addr = gps.getAddress().split(" ");
+					if(addr.length >=3) {
+						location = addr[1] + " " + addr[2] + " " + addr[3];
+					}else {
+						location = addr[1] + " " + addr[2];
+					}
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+
+			}
+		}
+		if(location != null && !location.equals("Home")) {
 			Cookie[] cookies = req.getCookies();
 			boolean isExistLocation = false;
 			if(cookies!=null) {
@@ -136,12 +148,11 @@ public class SearchController {
 
 			}
 		}
-			MemberDTO memberDTO =  (MemberDTO) session.getAttribute("memberinfo");
-			if(memberDTO != null && location != null && location.equals("Home")) {
-				String[] addr = memberDTO.getAddress().split(" ");
-				location = addr[1] + " " + addr[2] + " " +addr[3];
-				System.out.println(location);
-			}
+		MemberDTO memberDTO =  (MemberDTO) session.getAttribute("memberinfo");
+		if(memberDTO != null && location != null && location.equals("Home")) {
+			String[] addr = memberDTO.getAddress().split(" ");
+			location = addr[1] + " " + addr[2] + " " +addr[3];
+		}
 
 		if (searchword == null || searchword.trim().equals("")) {
 			// 검색어 없을 경우

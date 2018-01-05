@@ -176,7 +176,7 @@
    																</svg>
    															</span>
    															Write a Review
-   														</a>
+   														</a>													
    													</div>
    												</div>
    											</div>

@@ -565,27 +565,29 @@
 				         	    '</div>'+
 				            '<div class="media-story">'+
 				                '<div class="media-title clearfix">'+
-				                    '<a class="biz-name js-analytics-click" data-analytics-label="biz-name" href="/biz/liholiho-yacht-club-san-francisco-2" data-hovercard-id="K8YqsGXicOLOUcQXTzRrnw"><span>Liholiho Yacht Club</span></a>'+
+				                    '<a class="biz-name js-analytics-click" data-analytics-label="biz-name" href="/biz/liholiho-yacht-club-san-francisco-2" data-hovercard-id="K8YqsGXicOLOUcQXTzRrnw"><span>'+ item.restaurantDTO.rname + '    Liholiho Yacht Club</span></a>'+
 				                '</div>'+
 				                '<div class="price-category">'+
 				                    '<span class="category-str-list">'+
-				                        '<a href="/search?cflt=bars&amp;find_loc=San+Francisco%2C+CA">Bars</a>,'+
-				                        '<a href="/search?cflt=newamerican&amp;find_loc=San+Francisco%2C+CA">American (New)</a>,'+
+				                        '<a href="/search?cflt=bars&amp;find_loc=San+Francisco%2C+CA">' + item.restaurantDTO.foodstyle + '  Bars</a>,'+
+				                        '<a href="/search?cflt=newamerican&amp;find_loc=San+Francisco%2C+CA">' + 
+				                        item.restaurantDTO.roadAddrPart1 + item.restaurantDTO.roadAddrPart2 + item.restaurantDTO.addrDetail + '    American (New)</a>,'+
 				                        '<a href="/search?cflt=seafood&amp;find_loc=San+Francisco%2C+CA">Seafood</a>'+
 				    				'</span>'+
 				    			 '</div>'+
 				                 '<address>'+
-				                     '871 Sutter St<br>San Francisco, CA 94109'+
+				                      item.restaurantDTO.raddress + item.restaurantDTO.hp2 + item.restaurantDTO.hp3 +
+// 				                     '871 Sutter St<br>San Francisco, CA 94109'+
 				                 '</address>'+
 				             '</div>'+
         		        '</div>'+
 				        '<div class="arrange_unit" align="right" style="margin-bottom: 10px;">'+
 			                '<p class="time-stamp nowrap review-draft_date-created text-right">'+
-			                    'Started on  '+  item.memberDTO.joindate + 
+			                    'Started on  '+  item.restaurantDTO.rest_regdate + 
 			                '</p>'+
 			                '<p lang="ko" style="margin-bottom: 12px; width: 100%; float: right; display: block;">'+
 							 item.content +
-						    '</p>'+
+						    '</p><br><br>'+
 			             '</div>'+
 			       
 			             '<div class="clearfix"  style="margin-bottom: 50px;">'+
@@ -593,7 +595,7 @@
 			                 '<form action="review_delete?rvnum='+ item.rvnum + '&mnum=' + mnum + '" class="pull-right js-delete-review-draft-form" method="post" name="delete_draft">'+
 			               
 			                     '<input type="hidden" value="'+ item.rvnum + '" name="rvnum">'+
-			                     '<button type="submit" style="float: left;"class="chiclet-link u-cursor-pointer show-tooltip js-delete-review-draft">'+
+			                     '<button type="submit" style="float: right;"class="chiclet-link u-cursor-pointer show-tooltip js-delete-review-draft">'+
 			                         '<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-trash icon--size-18 icon--currentColor">'+
 			                             '<svg class="icon_svg">'+
 									         '<path d="M3 5V3h4V2h4v1h4v2H3zm11 9c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V6h10v8zM8 8.5a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5zm3 0a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5z"></path>'+

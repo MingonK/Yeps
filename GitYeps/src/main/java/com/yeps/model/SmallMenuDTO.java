@@ -5,35 +5,37 @@ import java.util.List;
 public class SmallMenuDTO {
 	
 	private List<SmallMenuDTO> smallMenuList;
-	private int small_menuNum;
-	private int rnum;
+	private int small_menunum;
 	private int large_menunum;
 	private String small_name;
 	private String small_content;
 	private int small_price;
+	private LargeMenuDTO largeMenuDTO;
 	
+	
+	
+	public LargeMenuDTO getLargeMenuDTO() {
+		return largeMenuDTO;
+	}
+	public void setLargeMenuDTO(LargeMenuDTO largeMenuDTO) {
+		this.largeMenuDTO = largeMenuDTO;
+	}
 	public List<SmallMenuDTO> getSmallMenuList() {
 		return smallMenuList;
 	}
 	public void setSmallMenuList(List<SmallMenuDTO> smallMenuList) {
 		this.smallMenuList = smallMenuList;
 	}
-	public int getSmall_menuNum() {
-		return small_menuNum;
+	public int getSmall_menunum() {
+		return small_menunum;
 	}
-	public void setSmall_menuNum(int small_menuNum) {
-		this.small_menuNum = small_menuNum;
+	public void setSmall_menunum(int small_menunum) {
+		this.small_menunum = small_menunum;
 	}
-	public int getRnum() {
-		return rnum;
-	}
-	public void setRnum(int rnum) {
-		this.rnum = rnum;
-	}
-	public int getlarge_menunum() {
+	public int getLarge_menunum() {
 		return large_menunum;
 	}
-	public void setlarge_menunum(int large_menunum) {
+	public void setLarge_menunum(int large_menunum) {
 		this.large_menunum = large_menunum;
 	}
 	public String getSmall_name() {
@@ -54,5 +56,7 @@ public class SmallMenuDTO {
 	public void setSmall_price(int small_price) {
 		this.small_price = small_price;
 	}
+	
+	
 	
 }

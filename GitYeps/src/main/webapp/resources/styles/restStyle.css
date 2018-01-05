@@ -1,18 +1,3 @@
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
-   blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn,
-   em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
-   b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
-   table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas,
-   details, embed, figure, figcaption, footer, header, hgroup, menu, nav,
-   output, ruby, section, summary, time, mark, audio, video {
-   margin: 0;
-   padding: 0;
-   border: 0;
-   font-size: 100%;
-   font: inherit;
-   vertical-align: baseline;
-}
-
 .clearfix:before, .clearfix:after {
     content: " ";
     display: table;
@@ -752,8 +737,31 @@ overflow: hidden; width: 132px; height: 24px; background-position: 0 -216px;
    border-right: 12px solid transparent; border-left: none;
 }
 .js-analytics-click{
-   color: #0073bb;text-decoration: none;    cursor: pointer;
+   color: #0073bb; text-decoration: none; cursor: pointer;
 }
+
+.chiclet-link {
+	position: relative;
+    display: inline-block;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 12px;
+    line-height: 1.5em;
+    color: #999;
+    background: transparent;
+    box-shadow: none;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.chiclet-link:hover {
+	color: #333;
+	background: linear-gradient(#fff, #eee);
+}
+
 .midea-story{
    -webkit-box-flex: 1; flex: 1;min-width: 0;min-height: 0;
 }
@@ -838,16 +846,24 @@ overflow: hidden; width: 132px; height: 24px; background-position: 0 -216px;
 	opacity: 1;
 }
 
+.main-content-wrap a:hover {
+	text-decoration: underline;
+}
 
+.restaurant_add_photo {
+	color: white; text-decoration: none !important; box-shadow: 0 1px 1px rgba(0,0,0,0.3); background-color: #d90007; 
+	background: linear-gradient(#d90007, #c91400); display: inline-block; vertical-align: middle; margin: 0; 
+	cursor: pointer; border: 1px solid #8d0005; font-weight: bold; text-align: center; font-size: 14px; 
+	line-height: 1.28571em; padding: 5px 19px 6px; border-radius: 3px;border-collapse: collapse; white-space: nowrap;
+}
 
+.restaurant_add_photo:hover {
+	background: red;
+}
 
-
-
-
-
-
-
-
+.cycle-carousel-wrap {
+	height: 100%;
+}
 
 
 

@@ -218,7 +218,7 @@
  	 						})
  	 						$('#restaurant_photo_upload_container').show();
  							
- 						}).trigger('hashchange');
+ 						});
  						
  					}
  				}
@@ -346,7 +346,7 @@
 		 	 						})
 		 	 						$('#restaurant_photo_upload_container').show();
 		 							
-		 						}).trigger('hashchange');
+		 						});
 							}
 						}
 					});

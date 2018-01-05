@@ -185,6 +185,9 @@ public class RestaurantController {
 	@RequestMapping(value = "/restaurant_content")
 	public ModelAndView contentRest(HttpServletRequest req, @RequestParam(defaultValue = "1") int curPage) {
 		String rnum = req.getParameter("rnum");
+		
+		
+		
 		if(rnum == null || rnum.trim().equals("")) {
 			return new ModelAndView("redirect: restaurant_list");
 		}
@@ -205,7 +208,7 @@ public class RestaurantController {
 		ModelAndView mav = new ModelAndView();
 		
 		RestaurantDTO getRest = restaurantMapper.getRest(Integer.parseInt(rnum));// 가게 1개 정보
-		List<FileDTO> uploadFileList = restaurantMapper.getFileList(Integer.parseInt(rnum));// 가게 업로드 파일
+		List<FileDTO> uploadFileList = fileMapper.getAllRestaurantFiles(Integer.parseInt(rnum));// 가게 업로드 파일
 		
 
 		ReviewDTO existMyReview = null;
@@ -213,9 +216,7 @@ public class RestaurantController {
 			existMyReview = reviewMapper.findMyReview(Integer.parseInt(rnum), loginMember.getMnum());
 		}
 		
-		if(existMyReview == null) {
-			// 내가 쓴 리뷰 존재 안할 때
-		} else {
+		if(existMyReview != null) {
 			mav.addObject("myReview", existMyReview);
 		}
 		
@@ -425,21 +426,26 @@ public class RestaurantController {
 			return new ModelAndView("redirect: restaurant_list");
 		}
 
-		int count = restaurantMapper.getCount();
+		int count = fileMapper.getAllFileCount(rnum);
 		int pageScale = 10;
-		int blockScale = 10;
+		int blockScale = 30;
 		YepsPager YepsPager = new YepsPager(count, curPage, pageScale, blockScale);
 		int start = YepsPager.getPageBegin();
 		int end = YepsPager.getPageEnd();
 		RestaurantDTO dto = restaurantMapper.getRest(rnum);
-		List<FileDTO> uploadFileList = restaurantMapper.getFileList(rnum);
+		List<FileDTO> uploadFileList = fileMapper.getPagedFileList(rnum, start, end);
 		int reviewCount = reviewMapper.getRestaurantReviewCount(rnum);
+		int starAvg = reviewMapper.getStarAvg(rnum);
 
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("getRest", dto);
+		mav.addObject("starAvg", starAvg);
+		mav.addObject("curPage", curPage);
+		mav.addObject("yepsPager", YepsPager);
 		mav.addObject("uploadFileList", uploadFileList);
 		mav.addObject("reviewCount", reviewCount);
+		mav.addObject("photoCount", count);
 		mav.setViewName("restaurant/restaurant_photoList");
 		return mav;
 

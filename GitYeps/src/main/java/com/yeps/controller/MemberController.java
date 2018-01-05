@@ -43,7 +43,7 @@ public class MemberController {
 	private MemberMapper memberMapper;
 	@Autowired
 	private RandomNum randomNum;
-	
+
 	@Autowired
 	private MemberPhotoMapper memberPhotoMapper;
 	@Autowired
@@ -693,6 +693,71 @@ public class MemberController {
 		return map;
 	}
 
+	@RequestMapping(value = "/member_join_ajax", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, String> joinMemberAjaxPro(HttpServletRequest req, @ModelAttribute MemberDTO dto, HttpSession session,
+			BindingResult result) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		if (result.hasErrors()) { // 에러가 날 경우를 대비해 BindingResult result를 만들어주고 여기에서 초기값을 잡아주면 된다.
+			dto.setMnum(0);
+			dto.setReviewcount(0);
+			dto.setImagecount(0);
+		}
+		if (dto.getName() == null || dto.getName().trim().equals("")) {
+			map.put("msg", "잘못된 접근입니다.");
+			return map;
+		}
+
+		String ssn2 = dto.getSsn2();
+		ssn2 = SHA256Util.getEncrypt(ssn2, "yeps"); // 주민번호 뒷자리는 salt값을 yeps로 줌
+		dto.setSsn2(ssn2);
+
+		boolean isExistJumin = memberMapper.checkJumin(dto);
+		if (isExistJumin) {
+			map.put("msg", "이미 가입된 회원입니다.");
+			return map;
+		} else {
+			dto.setEmail(req.getParameter("email1") + "@" + req.getParameter("email2"));
+			String salt = SHA256Util.generateSalt();
+			dto.setSalt(salt);
+			String passwd = dto.getPasswd();
+			passwd = SHA256Util.getEncrypt(passwd, salt);
+			dto.setPasswd(passwd);
+
+			int res = memberMapper.insertMember(dto);
+			if (res > 0) {
+				map.put("msg", "회원 가입 성공! 환영합니다");
+
+				MemberDTO newMemberDTO = memberMapper.getMemberForEmail(dto.getEmail());
+
+				MemberPhotoDTO memberPhotoDTO = new MemberPhotoDTO();
+				memberPhotoDTO.setFilenum(0);
+				memberPhotoDTO.setMnum(newMemberDTO.getMnum());
+				memberPhotoDTO.setFilename("30s.jpg");
+				memberPhotoDTO.setFilesize(707);
+				memberPhotoDTO.setOrigin_filename("30s.jpg");
+				memberPhotoMapper.insertMemberPhoto(memberPhotoDTO, "main");
+
+				MemberDTO getLoginMemberDTO = memberMapper.loginMember(dto);
+				if (getLoginMemberDTO.getIsmaster().equals("y")) {
+					session.setAttribute("memberinfo", getLoginMemberDTO);
+					map.put("msg", "마스터 아이디로 로그인 하셨습니다");
+				} else if (getLoginMemberDTO.getIsmanager().equals("y")) {
+					session.setAttribute("memberinfo", getLoginMemberDTO);
+					map.put("msg", "관리자 아이디로 로그인 하셨습니다.");
+				} else {
+					session.setAttribute("memberinfo", getLoginMemberDTO);
+				}
+				MemberPhotoDTO mainPhoto = memberPhotoMapper.getMemberMainPhoto(getLoginMemberDTO.getMnum());
+				session.setAttribute("mainPhoto", mainPhoto);
+
+			} else {
+				map.put("msg", "회원 가입에 실패했습니다.");
+			}
+		}
+		return map;
+	}
+
 	@RequestMapping(value = "/member_details", method = RequestMethod.GET)
 	public ModelAndView detailsMemberForm(HttpServletRequest req, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
@@ -736,14 +801,14 @@ public class MemberController {
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest) req;
 		return uploadFileLoop(mr, session);
 	}
-	
+
 	public HashMap<String, Object> uploadFileLoop(MultipartHttpServletRequest mr, HttpSession session) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		Iterator<String> it = mr.getFileNames();
 		String origin_fileName = null;
 		int fileSize = 0;
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
-		
+
 		int imageCount = 0;
 		while (it.hasNext()) {
 			imageCount++;
@@ -760,13 +825,13 @@ public class MemberController {
 					mf.transferTo(file);
 					S3Connection.getInstance().putObjectAsync("yepsbucket", "images/" + saveFileName, file,
 							"image/" + contentType);
-					
+
 					MemberPhotoDTO MemberPhotoDTO = new MemberPhotoDTO();
 					MemberPhotoDTO.setMnum(memberDTO.getMnum());
 					MemberPhotoDTO.setFilename(saveFileName);
 					MemberPhotoDTO.setOrigin_filename(origin_fileName);
 					MemberPhotoDTO.setFilesize(fileSize);
-					
+
 					boolean isExistMainPhoto = memberPhotoMapper.isExistMemberMainPhoto(memberDTO.getMnum());
 					int result = 0;
 					if (!isExistMainPhoto) {
@@ -798,7 +863,7 @@ public class MemberController {
 		memberMapper.updateImageCount(memberDTO.getMnum(), imageCount);
 		memberDTO.setImagecount(memberDTO.getImagecount()+imageCount);
 		session.setAttribute("memberinfo", memberDTO);
-		
+
 		MemberPhotoDTO mainPhoto = memberPhotoMapper.getMemberMainPhoto(memberDTO.getMnum());
 		session.setAttribute("mainPhoto", mainPhoto);
 		map.put("mnum", memberDTO.getMnum());

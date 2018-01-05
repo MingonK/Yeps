@@ -1670,6 +1670,7 @@ small {
 }
 
 .yepsbyn {
+    text-decoration: none !important;
     display: inline-block;
     vertical-align: middle;
     margin: 0;
@@ -1678,13 +1679,20 @@ small {
     font-weight: bold;
     text-align: center;
     user-select: none;
-    font-size: 14px;
-    line-height: 1.28571em;
-    border-color: #ffffff;
-
+    border-color: #ccc;
+    color: #666;
+    background-color: #f7f7f7;
+    background: linear-gradient(#fff, #f7f7f7);
     box-shadow: 0 1px 1px rgba(0,0,0,0.1);
-    padding: 8px 19px 9px;
     border-radius: 3px;
+    float: left;
+    padding: 5px 8px;
+    font-size: 12px;
+    line-height: 1.5em;
+}
+
+.yepsbyn:hover, .yepsbyn:visited {
+    background: linear-gradient(#fff, #fff);
 }
 
 .ybtn--small:not(.ybtn--social) {
@@ -1709,6 +1717,8 @@ small {
 }
 
 .chiclet-link {
+    cursor: pointer !important;
+    position: relative;
     display: inline-block;
     padding: 5px;
     border: 1px solid #ccc;
@@ -1719,8 +1729,20 @@ small {
     background: transparent;
     box-shadow: none;
     white-space: nowrap;
-    -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
+    overflow: visible;
+    align-items: flex-start;
+    text-align: center;
+    box-sizing: border-box;
+    text-rendering: auto;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    -webkit-writing-mode: horizontal-tb;
+    -webkit-appearance: button;
+}
 }
 
 button {
@@ -1771,7 +1793,7 @@ button {
     vertical-align: top;
 }  */
 
-.review-drafts>.review-draft:last-child {
+.review-drafts> .review-draft:last-child {
     padding-bottom: 0;
     margin-bottom: 0;
     border-bottom: 0;
