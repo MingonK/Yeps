@@ -5,13 +5,17 @@
 <html>
 <head>
 	<title>${getRest.rname}</title>
-	<script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js" ></script>
-	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=jD9qGVpvZh7Zobclojwp&submodules=geocoder"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/restStyle.css?ver=1"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css?ver=1"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css?ver=2"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/message.css?ver=2"/>"/>
+	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=jD9qGVpvZh7Zobclojwp&submodules=geocoder"></script>
+	<script src="//code.jquery.com/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script src="http://malsup.github.com/jquery.cycle2.js"></script>
+	<script src="http://malsup.github.io/jquery.cycle2.carousel.js"></script>
+	
 </head>
 <%@include file="../top.jsp" %>
 	<div class="main" style="background: white;">
@@ -57,7 +61,7 @@
 							    		<path d="M12 1.5l2.61 6.727 6.89.53-5.278 4.688 1.65 7.055L12 16.67 6.13 20.5l1.648-7.055L2.5 8.757l6.89-.53L12 1.5z"></path>
 							   		</svg>
 								</span>
-								리뷰쓰기 
+								Write a Review 
 							</a>
 							</c:if>
 							<c:if test="${!empty myReview}">
@@ -178,32 +182,9 @@
 							</div>
 	
 							<div class="showcase-photos">
-								<div class="js-photo photo photo-1"
-									data-media-id="VXaXWJEy7XSoyh1ij9zojA" data-media-index="17" style="z-index: 1000;display:inline-block;width: 100%;height: 220px;    box-shadow: none;transition: all 0.2s ease-out;transition-property: transform, box-shadow;">
-									<div class="showcase-photo-box" id="showcase-photo-box" style="width: 210px; height: 100%;">
-									<!-- 여기 팝업 오픈 -->
-<!-- 										<a href="#" style="color: #0073bb; text-decoration: none;">  -->
-<%-- 											<img class="photo-box-img" style="display:inline-block;vertical-align: middle;" width="210" height="220" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${upload.filename}"> --%>
-<!-- 										</a> -->
-									</div>
-<!-- 									<div class="photo-box-overlay js-overlay" style="opacity: 0; position: absolute; right: 0; bottom: 0; left: 0; padding: 3px 6px; border-radius: 0 0 4px 4px; background: #333; background: rgba(0, 0, 0, 0.5); color: white; font-size: 12px; line-height: 1.5em; font-weight: bold; overflow: hidden; -webkit-transition: all 0.3s ease-in-out; transition: all 0.3s ease-in-out;"> -->
-<!-- 										<div class="photo-box-overlay_caption" style="padding: 3px 6px 3px 1px; position: relative;    display: flex;transition: all 0.2s ease-out;"> -->
-<!-- 											<div class="media-avatar avatar" style="position: relative; border-right: 6px solid transparent; border-left: none;"> -->
-<!-- 												<div class="photo-box pb-30s"> -->
-<%-- 													<a href="restaurant_photoList?rnum=${getRest.rnum}" class="js-analytics-click" data-analytics-label="user-photo" style="    color: white;    text-decoration: none;    cursor: pointer;"> --%>
-<!-- 									   	            	<img class="photo-box-img" height="30" src="https://s3-media2.fl.yelpcdn.com/photo/SDnJqhDE0GRwI8pu4Gus2g/30s.jpg" width="30" -->
-<!-- 									                		style="outline: none; display: block; margin-top: 3px; border-radius: 4px; vertical-align: middle;"> -->
-<!-- 									        		</a> -->
-<!-- 												</div> -->
-<!-- 											</div> -->
-<!-- 											<div class="media-story" style="overflow: hidden; height: 36px; -webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;"> -->
-<!-- 												<a class="photo-desc" href="#" style="text-decoration: none; text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5); color: white; cursor: pointer;"> -->
-<!-- 													Photo of Yardbird Southern Table &amp; Bar - Las Vegas, NV, -->
-<!-- 													United States  -->
-<!-- 												</a> -->
-<!-- 											</div> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
+								<div class="cycle-slideshow responsive" id="showcase-photo-box" data-cycle-prev="#prev" data-cycle-next="#next" style="background: none; z-index: 1000; display:inline-block; width: 100%; height: 220px; box-shadow: none;" data-cycle-fx="carousel" data-cycle-timeout="2000" data-cycle-carousel-visible="3" data-cycle-carousel-fluid="true">
+									<span class="ms-arrow msa-previous" id="prev"></span>
+    								<span class="ms-arrow msa-next" id="next"></span>
 								</div>
 							</div>
 						</div>
@@ -211,7 +192,7 @@
 				  </div>
 		        </div>
 	        </div>
-        </div>
+        
 		<div class="restContent-super-container" style="width: 960px;height:100%; margin: 0 auto; padding: 0 15px; padding-top: 18px; padding-bottom: 36px;">
 			<div class="restContent-container" style="display:block;width:100%;overflow:hidden;height:auto;">
 				<div class="restContent-layout-block" style="margin-bottom: 0;position: relative;margin: 0 -15px;width:960px;overflow:hidden;height:auto;">
@@ -308,7 +289,6 @@
 									</div>
 									<div class="restContent-review-list" style="position: relative;">
 										<ul class="restContent-reviews">
-										
 										<c:if test="${empty myReview}">
 											<li>
 												<div class="restContent-review-widget" style="margin: 0 -15px;">
@@ -321,11 +301,7 @@
 													<div class="restContent-clearfix" style="text-align: center !important;padding: 11px; background: #f5f5f5;border: 1px solid #e6e6e6;border-radius: 4px;">
 														<div class="restcontent-star" style="margin-bottom: 12px !important;">
 															<div class="restContent-u-space" style="margin-bottom: 12px !important;border-bottom: 1px solid #ccc;">
-															<fieldset
-																data-war-url="/writeareview/biz/lJAGnYzku5zSaLnQ_T6_GQ?return_url=%2Fbiz%2FlJAGnYzku5zSaLnQ_T6_GQ"
-																class="star-selector js-star-selector"
-																data-original-rating="0" data-component-bound="true"
-																style="vertical-align: middle; display: inline-block; -webkit-margin-start: 2px; -webkit-margin-end: 2px; -webkit-padding-before: 0.35em; -webkit-padding-start: 0.75em; -webkit-padding-end: 0.75em; -webkit-padding-after: 0.625em; min-width: -webkit-min-content;">
+															<fieldset class="star-selector js-star-selector" style="border: 0; vertical-align: middle; display: inline-block;">
 													 			<form name="starpointF" method="post" action="review_write?mode=write&where=rest">
 																	<div>
 																		<ul id="star_rating" style="float: left; margin: 0px; padding: 0px; display: inline-block; width: 162px; height: 30px; overflow: hidden; vertical-align: middle;
@@ -1061,22 +1037,6 @@
 		
 		
 <script>
-
-	var list = new Array();
-	<c:forEach var="fileDTO" items="${uploadFileList}">
-		list.push("${fileDTO.filename}");
-	</c:forEach>
-
-	for(var i = 0; i < list.length; i++) {
-		var img = document.createElement('img');
-		img.src = 'https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/' + list[i];
-		img.style.cursor = 'pointer';
-		img.style.width = '100%';
-		img.style.height = '100%';
-		img.onclick = function() {location.href="#"};
-		document.getElementById('showcase-photo-box').appendChild(img);
-	}
-
 	 jQuery(function($) {
 		//----- OPEN
 		$(document).on('click', '[data-popup-open]', function(e)  {
@@ -1179,6 +1139,21 @@
 <script type="text/javascript">
 //**원하는 페이지로 이동시 검색조건, 키워드 값을 유지하기 위해 
 var rnum = '${getRest.rnum}';
+
+var list = new Array();
+<c:forEach var="fileDTO" items="${uploadFileList}">
+	list.push("${fileDTO.filename}");
+</c:forEach>
+
+for(var i = 0; i < list.length; i++) {
+	var img = document.createElement('img');
+	img.src = 'https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/' + list[i];
+	img.style.cursor = 'pointer';
+	img.style.width = '100%';
+	img.style.height = '100%';
+	img.onclick = function() {location.href="#"};
+	document.getElementById('showcase-photo-box').appendChild(img);
+}
 
 function reply_report_check() {
 	var selected = document.getElementById('reason_field');

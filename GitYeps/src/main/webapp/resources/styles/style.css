@@ -80,8 +80,8 @@ li {
 }
 
 h2, h3{
-	margin: 0; padding: 0;
-	color: #d32323;
+	margin: 0 !important; padding: 0 !important;
+	color: #d32323 !important;
 }
 
 #body {
@@ -361,7 +361,7 @@ h2, h3{
 }
 
 .footer_item h3 {
-	margin-bottom: 12px;
+	margin-bottom: 12px !important;
 }
 
 #main_search_suggestion_container, #main_location_suggestion_container {
