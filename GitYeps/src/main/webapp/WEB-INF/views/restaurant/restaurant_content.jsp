@@ -59,7 +59,7 @@
 					</div>
 					
 					
-				<c:if test="${empty existMyReview}">
+				<c:if test="${empty myReview}">
 					<div class="biz-page-header-right u-relative" style="display: table; position: relative !important;">
 						<div class="biz-page-actions nowrap"style="text-align: right; overflow: hidden; padding-bottom: 1px; margin-top: -1px; white-space: nowrap;">
 						<a href="review_write?rnum=${getRest.rnum}&mode=write$where=rest" style="text-decoration: none;" class="ybtn review_write">
@@ -85,7 +85,7 @@
 				</c:if>
 				  
 				  <!-- 상우작업부분 div -->
-				  <c:if test="${!empty existMyReview}">
+				  <c:if test="${!empty myReview}">
 				  <div class="biz-page-header-right u-relative" style="display: table; position: relative !important;">
 						<div class="biz-page-actions nowrap"style="text-align: right; overflow: hidden; padding-bottom: 1px; margin-top: -1px; white-space: nowrap;">
 						<a href="review_write?rnum=${getRest.rnum}&mode=write$where=rest" style="text-decoration: none;" class="ybtn review_write">
@@ -394,7 +394,7 @@
 									<div class="restContent-review-list" style="position: relative;">
 										<ul class="restContent-reviews">
 										
-										<c:if test="${empty existMyReview}">
+										<c:if test="${empty myReview}">
 											<li>
 												<div class="restContent-review-widget" style="margin: 0 -15px;">
 													<div class="restContent-user" style="float: left;padding: 0 15px;min-height: 1px;    box-sizing: border-box;width: 37.5%;">
@@ -470,7 +470,7 @@
 									
 									
 									<!-- 상우 작업부분 li -->
-									<c:if test="${!empty existMyReview}">
+									<c:if test="${!empty myReview}">
 									<li>
 										<div class="restContent-review-with" style="margin: 0 -15px; display: flex;">
 											<div class="restContent-user" style="float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 37.5%;">
