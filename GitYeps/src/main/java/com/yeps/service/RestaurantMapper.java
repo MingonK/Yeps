@@ -95,5 +95,89 @@ public class RestaurantMapper {
 		map.put("SearchFind", SearchFind);
 		return sqlSession.selectList("review_restaurantFind", map);
 	}
+	
+	//---------------1월 5일 민우 추가
+	public int getCountBySearchMap(HashMap<String,Object> searchMap) {
+		if(searchMap.get("category") != null) {
+			if(searchMap.get("location") != null) {
+				if(searchMap.get("searchword") != null) {
+					// category, location, searchword 셋 다 널이 아닐 경우
+					return sqlSession.selectOne("getCountByCLS", searchMap);
+				}else {
+					//  category, location 널이 아닐 경우
+					return sqlSession.selectOne("getCountByCL", searchMap);
+				}
+			}else {
+				if(searchMap.get("searchword") != null) {
+					// category, searchword 널이 아닐 경우
+					return sqlSession.selectOne("getCountByCS", searchMap);
+				}else {
+					// category 널이 아닐 때
+					return sqlSession.selectOne("getCountByC", searchMap);
+				}
+			}
+		}else {
+			if(searchMap.get("location") != null ) {
+				if(searchMap.get("searchword") != null ) {
+					//  location, searchword 널이 아닐 경우
+					return sqlSession.selectOne("getCountByLS", searchMap);
+				}else {
+					//  location 널이 아닐 경우
+					return sqlSession.selectOne("getCountByL", searchMap);
+				}
+			}else {
+				if(searchMap.get("searchword") != null ) {
+					//  searchword 널이 아닐 경우
+					return sqlSession.selectOne("getCountByS", searchMap);
+				}else {
+					//  전부 널일 경우	
+					return sqlSession.selectOne("getCount");
+				}
+			}
+		}
+	}
+	
+	public List<RestaurantDTO> listRestBySearchMap(int start, int end, HashMap<String,Object> searchMap){
+		searchMap.put("start", start);
+		searchMap.put("end", end);
+		
+		if(searchMap.get("category") != null) {
+			if(searchMap.get("location") != null) {
+				if(searchMap.get("searchword") != null) {
+					// category, location, searchword 셋 다 널이 아닐 경우
+					return sqlSession.selectList("listRestByCLS", searchMap);
+				}else {
+					//  category, location 널이 아닐 경우
+					return sqlSession.selectList("listRestByCL", searchMap);
+				}
+			}else {
+				if(searchMap.get("searchword") != null) {
+					// category, searchword 널이 아닐 경우
+					return sqlSession.selectList("listRestByCS", searchMap);
+				}else {
+					// category 널이 아닐 때
+					return sqlSession.selectList("listRestByC", searchMap);
+				}
+			}
+		}else {
+			if(searchMap.get("location") != null) {
+				if(searchMap.get("searchword") != null) {
+					//  location, searchword 널이 아닐 경우
+					return sqlSession.selectList("listRestByLS", searchMap);
+				}else {
+					//  location 널이 아닐 경우
+					return sqlSession.selectList("listRestByL", searchMap);
+				}
+			}else {
+				if(searchMap.get("searchword") != null) {
+					//  searchword 널이 아닐 경우
+					return sqlSession.selectList("listRestByS", searchMap);
+				}else {
+					//  전부 널일 경우	
+					return sqlSession.selectList("listRestaurant", searchMap);
+				}
+			}
+		}
+	}
 
 }

@@ -38,7 +38,7 @@
 										</div>
 										<div class="biz-passport_rating" style="margin-top: -3px; display:flex;">
 											<div class="biz-rating biz-rating-medium clearfix" style="margin-bottom: 0;margin: 3px 0;">
-												<div class="restList-star-rating-${starAvg}">
+												<div class="restPhoto-star-rating-${starAvg}">
 													<img class="offscreen" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png" width="84" height="303"style="clip: rect(0, 0, 0, 0); position: absolute; left: -9999px; top: auto; overflow: hidden; width: 1px; height: 1px; vertical-align: middle;">
 												</div>
 												<span class="review-count rating-qualifier" style="font-size: 12px;line-height: 1.5em;    display: block;float: left;color: #666;font-weight: normal;">
@@ -90,7 +90,7 @@
 				</div>
 				<div class="media-landing js-media-landing" style="position: relative;">
 					<div class="media-landing_gallery photos" style="height:auto;overflow:hidden;">
-						<ul class="photo-box-grid photo-box-grid--highlight photo-box-grid--small clearfix lightbox-media-parent" style="margin-right: -12px; margin-top: 18px; display: flex;">
+						<ul class="photo-box-grid photo-box-grid--highlight photo-box-grid--small clearfix lightbox-media-parent" style="margin-right: -12px; margin-top: 18px; transform-style: preserve-3d;">
 							<c:forEach items="${uploadFileList}" var="upload">
 							<li style="transition: opacity 0.1s ease-out; width: 150px; float: left; margin: 0 12px 12px 0; display: list-item;">
 								<div class="photo-box photo-box--interactive" data-popup-open="photo_popup" style="height: 150px; position: relative;">

@@ -4,26 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 	<title>${getRest.rname}</title>
-
-<script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js" ></script>
-<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=jD9qGVpvZh7Zobclojwp&submodules=geocoder"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/restStyle.css?ver=1"/>"/>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css?ver=1"/>"/>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css?ver=2"/>"/>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/message.css?ver=2"/>"/>
-<title>레스토랑</title>
-
-
-	<title>${getRest.rname}</title>
-
-	<script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js" ></script>
-	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=jD9qGVpvZh7Zobclojwp&submodules=geocoder"></script>
-
-	<title>${getRest.rname}</title>
-
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/restStyle.css?ver=1"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css?ver=1"/>"/>
@@ -34,7 +15,6 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 	<script src="http://malsup.github.com/jquery.cycle2.js"></script>
 	<script src="http://malsup.github.io/jquery.cycle2.carousel.js"></script>
-	
 </head>
 <%@include file="../top.jsp" %>
 	<div class="main" style="background: white;">
@@ -186,13 +166,15 @@
 								    See all ${getImageCount}
 								</a>
 							</div>
-	
+							
+							<c:if test="${!empty uploadFileList}">
 							<div class="showcase-photos">
 								<div class="cycle-slideshow responsive" id="showcase-photo-box" data-cycle-prev="#prev" data-cycle-next="#next" style="background: none; z-index: 1000; display:inline-block; width: 100%; height: 220px; box-shadow: none;" data-cycle-fx="carousel" data-cycle-timeout="2000" data-cycle-carousel-visible="3" data-cycle-carousel-fluid="true">
 									<span class="ms-arrow msa-previous" id="prev"></span>
     								<span class="ms-arrow msa-next" id="next"></span>
 								</div>
 							</div>
+							</c:if>
 						</div>
 					 </div>
 				  </div>
@@ -407,7 +389,7 @@
 													</div>
 												</div>
 											</div>
-											<div class="restContent-review-wrapper">
+											<div class="restContent-review-wrapper add_margin_top_div">
 												<p class="myreview_p_1">
 													Finish your review of 
 													<strong class="myreview_strong_1">${getRest.rname}</strong>
@@ -422,27 +404,20 @@
 															</div>									
 														</div>
 														<div class="myreview_div_5">
-															<p class="myreview_p_2">
+															<p class="myreview_p_2"> 
 																Started on ${myReview.reg_date}
-															</p>
+															</p> 
 														</div>
 													</div>
 													<p class="myreview_p_3">
 														${myReview.content}
 													</p>
 													<div class="myreview_div_6">
-<<<<<<< HEAD
-														<a class="myreview_a_1" href="/writeareview/biz/V7lXZKBDzScDeGB8JmnzSA?return_url=%2Fbiz%2FV7lXZKBDzScDeGB8JmnzSA">Finish My Review</a>
+
+														<a class="myreview_a_1" href="review_write?star=${myReview.gradepoint}&contentUpdate=${myReview.content}&rnum=${getRest.rnum}&updatemode=${updatemode}">리뷰수정</a>
 														<form class="myreview_formF" method="post">
 															<input class="myreview_input_1" type="hidden">
 															<input class="myreview_input_1" type="hidden">
-=======
-														<a class="myreview_a_1" href="#">리뷰수정</a>
-														<form class="myreview_formF" action="" method="post" name="">
-															<input class="myreview_input_1" type="hidden" name="" value="">
-															<input class="myreview_input_1" type="hidden" name="" value="">
-															<!-- myreview 휴지통 버튼 -->
->>>>>>> branch 'master' of https://github.com/MingonK/Yeps.git
 															<button class="myreview_button_1">
 																<span class="myreview_span_1">
 																	<svg class="myreview_svg_1">
@@ -523,13 +498,8 @@
 													</div>
 													<ul class="restContent-list-link">									
 														<li>
-<<<<<<< HEAD
-															<a class="restContent-share-review" href="javascript:inputReveiver()" data-popup-open="writeMessage" style="display: table; min-width: 100%; table-layout: auto; cursor: pointer;">
-																<div class="action-link_icon arrange_unit" style="padding-top: 3px; padding-bottom: 3px; vertical-align: middle; padding-right: 12px; box-sizing: border-box; display: table-cell;">
-=======
-															<a class="restContent-share-review" href="#" data-popup-open="writeMessage">
+															<a class="restContent-share-review" href="#" data-popup-open="writeMessage" alt="${getReview.memberDTO.email}">
 																<div class="action-link_icon arrange_unit">
->>>>>>> branch 'master' of https://github.com/MingonK/Yeps.git
 																	<span aria-hidden="true" style="fill: currentColor; width: 18px; height: 18px;" class="icon">
 																    	<svg class="icon_svg" id="18x18_speech" height="100%" viewBox="0 0 18 18" width="100%">
 																        	<path d="M2 4v6a2 2 0 0 0 2 2h1v3l4-3h5a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"></path>
@@ -1031,17 +1001,18 @@
 <script>
 
 	 $(function() {
-	 jQuery(function($) {
-
 		$(document).on('click', '[data-popup-open]', function(e)  {
+			var memberinfo ='${sessionScope.memberinfo}';
+        	if(!memberinfo.length) {
+         		$(location).attr("href", "event_report");
+         		return;
+        	}
 			var targeted_popup_class = jQuery(this).attr('data-popup-open');
 			$('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
-			if(targeted_popup_class == 'popup-2') {
-        		var memberinfo ='${sessionScope.memberinfo}';
-        		if(!memberinfo.length) {
-         			$(location).attr("href", "event_report");
-         			return;
-        		}
+        	
+        	if(targeted_popup_class == 'writeMessage') {
+        		var email = $(this).attr('alt');
+        		$('#sendformTo').val(email);
         	}
 			
 			$('body').css('overflow','hidden');
@@ -1124,8 +1095,8 @@
        $(this).parent().parent().parent().submit();
     });
    
-   $(document).on("click","#reply_flag_popup_submit_button",function(){
-	   $('#reply_flag_popup_form').submit();
+   $(document).on("click", "#reply_flag_popup_submit_button", function(){
+	   $("#reply_flag_popup_form").submit();
     });
 
 </script>
@@ -1207,20 +1178,20 @@ function list(page){
           	$('.restContent-reviews').append(
    	     			   '<li>' +
    		     			   '<div class="restContent-review-with" style="margin: 0 -15px; display: flex;">' +
-   	    		 		   		'<div class="restContent-user" style="float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 37.5%;">' +
+   	    		 		   		'<div class="restContent-user">' +
    		     			   			'<div class="restContent-user-content" style="margin-top: -3px;">' +
-										'<div class="restContent-meida-block" style="font-size: 12px; line-height: 1.5em; position: relative; display: flex;">' +
-											'<div class="restContent-media-avatar" style="border-right-width: 9px;border-right: 6px solid transparent;border-left: none;">' +
+										'<div class="restContent-meida-block">' +
+											'<div class="restContent-media-avatar">' +
 												'<div class="restContent-photo-box">' +
 													'<a href="member_details?mnum='+ item.memberDTO.mnum +'" style="color: #0073bb;">' +
 														'<img class="restContent-photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/' + item.memberDTO.memberPhotoDTO.filename + '" width="60">' +
 													'</a>' +
 												'</div>' +
 											'</div>' +
-											'<div class="restContent-media-story" style="-webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;">' +
+											'<div class="restContent-media-story">' +
 												'<ul class="restContent-user-info">' +
 													'<li class="restContent-user-name">' +
-														'<a href=member_details?mnum="'+ item.memberDTO.mnum +'" class="restContent-user-display-name" style="font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; cursor: pointer;">' +
+														'<a href=member_details?mnum="'+ item.memberDTO.mnum +'" class="restContent-user-display-name">' +
 															userId +
 														'</a>' +
 													'</li>' +
@@ -1231,8 +1202,8 @@ function list(page){
 													'</li>' +
 												'</ul>' +
 												'<ul class="restContent-user-stats">' +
-													'<li class="restContent-review-count" style="color: #666;display: list-item;text-align: -webkit-match-parent;">'+
-														'<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-review icon--size-18">'+
+													'<li class="restContent-review-count">'+
+														'<span style="fill: #f15c00; width: 18px; height: 18px;" class="icon">'+
 														   '<svg class="icon_svg">'+
 														        '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_review">'+
 														        	'<svg id="18x18_review" height="100%" viewBox="0 0 18 18" width="100%">'+
@@ -1243,11 +1214,11 @@ function list(page){
 													'</span>'+
 													'<b style="font-weight: bold;"> ' + item.memberDTO.reviewcount + '</b> reviews'+
 												'</li>'+
-												'<li class="restContent-photo-count" style="color: #666;display: list-item;text-align: -webkit-match-parent;">'+
-													'<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-camera icon--size-18">'+
+												'<li class="restContent-photo-count">'+
+													'<span style="fill: #f15c00; width: 18px; height: 18px;" class="icon">'+
 													    '<svg class="icon_svg">'+
 													        '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_camera">'+
-														        	'<svg id="18x18_camera" height="100%" viewBox="0 0 18 18" width="100%">'+
+														        '<svg id="18x18_camera" height="100%" viewBox="0 0 18 18" width="100%">'+
 													        		'<path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 6.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path>'+
 													        	'</svg>'+
 													       ' </use>'+
@@ -1260,9 +1231,9 @@ function list(page){
 									'</div>'+
 									'<ul class="restContent-list-link">'+									
 										'<li>'+
-											'<a class="restContent-share-review" data-popup-open="writeMessage" href="#" style="display: table; min-width: 100%; table-layout: auto; cursor: pointer;">'+
-												'<div class="action-link_icon arrange_unit" style="padding-top: 3px; padding-bottom: 3px; vertical-align: middle; padding-right: 12px; box-sizing: border-box; display: table-cell;">'+
-													'<span aria-hidden="true" style="fill: currentColor; width: 18px; height: 18px;" class="icon">'+
+											'<a class="restContent-share-review" data-popup-open="writeMessage" href="#">'+
+												'<div class="action-link_icon arrange_unit">'+
+													'<span style="fill: currentColor; width: 18px; height: 18px;" class="icon">'+
 													    '<svg class="icon_svg">'+
 													        '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_speech">'+
 													        	'<svg id="18x18_speech" height="100%" viewBox="0 0 18 18" width="100%">'+
@@ -1272,7 +1243,7 @@ function list(page){
 													   ' </svg>'+
 													'</span>'+
 												'</div>'+
-												'<div class="action-link_label arrange_unit arrange_unit--fill" style="display: table-cell;border-top: 1px solid #e6e6e6; padding-top: 3px; padding-bottom: 3px; vertical-align: middle; width: 100%;">'+
+												'<div class="action-link_label arrange_unit arrange_unit--fill">'+
 													'Send message'+
 												'</div>'+
 											'</a>'+
@@ -1280,18 +1251,15 @@ function list(page){
 									'</ul>'+
 								'</div>'+
 							'</div>'+			
-							'<div class="restContent-review-wrapper" style="float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 62.5%;">'+
-								'<div class="restContent-review-content" style="padding: 0 12px 6px 0; min-height: 156px; word-wrap: break-word !important; word-break: break-word !important; overflow-wrap: break-word !important;">'+
-									'<div class="restContent-review-rating" style="margin: 6px 0; width:100%; overflow:hidden; height:auto;">'+
+							'<div class="restContent-review-wrapper">'+
+								'<div class="restContent-review-content">'+
+									'<div class="restContent-review-rating">'+
 										'<div>'+
 											'<div class="restList-star-rating-'+item.gradepoint+'">'+
-												'<img class="offscreen" '+
-													'src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/stars.png" '+
-													'width="84" height="303" alt="4.0 star rating" '+
-													'style="clip: rect(0, 0, 0, 0); position: absolute; left: -9999px; top: auto; overflow: hidden; width: 1px; height: 1px; vertical-align: middle;">'+
+												'<img class="offscreen" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/stars.png" width="84" height="303">'+
 											'</div>'+
 										'</div>'+
-										'<span class="restContent-rating-qualifier" style="display: block; float: left; color: #666; font-weight: normal;">'+
+										'<span class="restContent-rating-qualifier">'+
 											item.reg_date +
 										'</span>'+
 									'</div>'+
@@ -1300,10 +1268,9 @@ function list(page){
 									'</p>'+
 								'</div>'+
 							'<div class="review-footer clearfix">'+
-							
 								'<div class="review-footer-actions pull-right clearfix" style="margin-top: 23px; float: right;">'+
-									'<a class="chiclet-link show-tooltip js-analytics-click chiclet-link--flag" data-popup-open="popup-2" style="position: relative;display: inline-block;padding: 5px;border: 1px solid #ccc;border-radius: 3px;font-size: 12px;line-height: 1.5em;color: #999;background: transparent;box-shadow: none;white-space: nowrap;transition: all 0.3s ease;text-decoration: none;cursor: pointer;">'+
-										'<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-flag icon--size-18 icon--currentColor">'+
+									'<a class="chiclet-link show-tooltip js-analytics-click chiclet-link--flag" data-popup-open="popup-2">'+
+										'<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon">'+
 						    				'<svg id="18x18_flag" height="100%" viewBox="0 0 18 18" width="100%">'+
 						    					'<path d="M6 10V3c4.976 1.098 4.024-1 8 0v7c-4.024-.976-3.024 1.024-8 0zM4 2h1v14H4V2z"></path>'+
 					    					'</svg>'+
@@ -1445,20 +1412,20 @@ function check() {
          	  $('.restContent-reviews').append(
   	     			   '<li>' +
   		     			   '<div class="restContent-review-with" style="margin: 0 -15px; display: flex;">' +
-  	    		 		   		'<div class="restContent-user" style="float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 37.5%;">' +
+  	    		 		   		'<div class="restContent-user">' +
   		     			   			'<div class="restContent-user-content" style="margin-top: -3px;">' +
-										'<div class="restContent-meida-block" style="font-size: 12px; line-height: 1.5em; position: relative; display: flex;">' +
-											'<div class="restContent-media-avatar" style="border-right-width: 9px;border-right: 6px solid transparent;border-left: none;">' +
+										'<div class="restContent-meida-block">' +
+											'<div class="restContent-media-avatar">' +
 												'<div class="restContent-photo-box">' +
-													'<a href=member_details?mnum="' + item.memberDTO.mnum + '" style="color: #0073bb;">' +
+													'<a href="member_details?mnum='+ item.memberDTO.mnum +'" style="color: #0073bb;">' +
 														'<img class="restContent-photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/' + item.memberDTO.memberPhotoDTO.filename + '" width="60">' +
 													'</a>' +
 												'</div>' +
 											'</div>' +
-											'<div class="restContent-media-story" style="-webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;">' +
+											'<div class="restContent-media-story">' +
 												'<ul class="restContent-user-info">' +
 													'<li class="restContent-user-name">' +
-														'<a href="member_details?mnum="' + item.memberDTO.mnum + 'class="restContent-user-display-name" style="font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; cursor: pointer;">' +
+														'<a href=member_details?mnum="'+ item.memberDTO.mnum +'" class="restContent-user-display-name">' +
 															userId +
 														'</a>' +
 													'</li>' +
@@ -1469,8 +1436,8 @@ function check() {
 													'</li>' +
 												'</ul>' +
 												'<ul class="restContent-user-stats">' +
-													'<li class="restContent-review-count" style="color: #666;display: list-item;text-align: -webkit-match-parent;">'+
-														'<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-review icon--size-18">'+
+													'<li class="restContent-review-count">'+
+														'<span style="fill: #f15c00; width: 18px; height: 18px;" class="icon">'+
 														   '<svg class="icon_svg">'+
 														        '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_review">'+
 														        	'<svg id="18x18_review" height="100%" viewBox="0 0 18 18" width="100%">'+
@@ -1481,11 +1448,11 @@ function check() {
 													'</span>'+
 													'<b style="font-weight: bold;"> ' + item.memberDTO.reviewcount + '</b> reviews'+
 												'</li>'+
-												'<li class="restContent-photo-count" style="color: #666;display: list-item;text-align: -webkit-match-parent;">'+
-													'<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-camera icon--size-18">'+
+												'<li class="restContent-photo-count">'+
+													'<span style="fill: #f15c00; width: 18px; height: 18px;" class="icon">'+
 													    '<svg class="icon_svg">'+
 													        '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_camera">'+
-														        	'<svg id="18x18_camera" height="100%" viewBox="0 0 18 18" width="100%">'+
+														        '<svg id="18x18_camera" height="100%" viewBox="0 0 18 18" width="100%">'+
 													        		'<path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 6.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path>'+
 													        	'</svg>'+
 													       ' </use>'+
@@ -1498,9 +1465,9 @@ function check() {
 									'</div>'+
 									'<ul class="restContent-list-link">'+									
 										'<li>'+
-											'<a class="restContent-share-review" data-popup-open="writeMessage" href="#" style="display: table; min-width: 100%; table-layout: auto; cursor: pointer;">'+
-												'<div class="action-link_icon arrange_unit" style="padding-top: 3px; padding-bottom: 3px; vertical-align: middle; padding-right: 12px; box-sizing: border-box; display: table-cell;">'+
-													'<span aria-hidden="true" style="fill: currentColor; width: 18px; height: 18px;" class="icon">'+
+											'<a class="restContent-share-review" data-popup-open="writeMessage" href="#">'+
+												'<div class="action-link_icon arrange_unit">'+
+													'<span style="fill: currentColor; width: 18px; height: 18px;" class="icon">'+
 													    '<svg class="icon_svg">'+
 													        '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#18x18_speech">'+
 													        	'<svg id="18x18_speech" height="100%" viewBox="0 0 18 18" width="100%">'+
@@ -1510,7 +1477,7 @@ function check() {
 													   ' </svg>'+
 													'</span>'+
 												'</div>'+
-												'<div class="action-link_label arrange_unit arrange_unit--fill" style="display: table-cell;border-top: 1px solid #e6e6e6; padding-top: 3px; padding-bottom: 3px; vertical-align: middle; width: 100%;">'+
+												'<div class="action-link_label arrange_unit arrange_unit--fill">'+
 													'Send message'+
 												'</div>'+
 											'</a>'+
@@ -1518,18 +1485,15 @@ function check() {
 									'</ul>'+
 								'</div>'+
 							'</div>'+			
-							'<div class="restContent-review-wrapper" style="float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 62.5%;">'+
-								'<div class="restContent-review-content" style="padding: 0 12px 6px 0; min-height: 156px; word-wrap: break-word !important; word-break: break-word !important; overflow-wrap: break-word !important;">'+
-									'<div class="restContent-review-rating" style="margin: 6px 0;width:100%;overflow:hidden;height:auto;">'+
+							'<div class="restContent-review-wrapper">'+
+								'<div class="restContent-review-content">'+
+									'<div class="restContent-review-rating">'+
 										'<div>'+
-											'<div class="restList-star-rating-'+item.gradepoint+'" >'+
-												'<img class="offscreen" '+
-													'src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/stars.png" '+
-													'width="84" height="303" alt="4.0 star rating" '+
-													'style="clip: rect(0, 0, 0, 0); position: absolute; left: -9999px; top: auto; overflow: hidden; width: 1px; height: 1px; vertical-align: middle;">'+
+											'<div class="restList-star-rating-'+item.gradepoint+'">'+
+												'<img class="offscreen" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/stars.png" width="84" height="303">'+
 											'</div>'+
 										'</div>'+
-										'<span class="restContent-rating-qualifier" style="display: block; float: left; color: #666; font-weight: normal;">'+
+										'<span class="restContent-rating-qualifier">'+
 											item.reg_date +
 										'</span>'+
 									'</div>'+
@@ -1538,19 +1502,18 @@ function check() {
 									'</p>'+
 								'</div>'+
 							'<div class="review-footer clearfix">'+
-							
 								'<div class="review-footer-actions pull-right clearfix" style="margin-top: 23px; float: right;">'+
-									'<a class="chiclet-link show-tooltip js-analytics-click chiclet-link--flag" data-popup-open="popup-2" style="position: relative;display: inline-block;padding: 5px;border: 1px solid #ccc;border-radius: 3px;font-size: 12px;line-height: 1.5em;color: #999;background: transparent;box-shadow: none;white-space: nowrap;transition: all 0.3s ease;text-decoration: none;cursor: pointer;">'+
-										'<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-flag icon--size-18 icon--currentColor">'+
-								    		'<svg id="18x18_flag" height="100%" viewBox="0 0 18 18" width="100%">'+
-								    			'<path d="M6 10V3c4.976 1.098 4.024-1 8 0v7c-4.024-.976-3.024 1.024-8 0zM4 2h1v14H4V2z"></path>'+
-							    			'</svg>'+
+									'<a class="chiclet-link show-tooltip js-analytics-click chiclet-link--flag" data-popup-open="popup-2">'+
+										'<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon">'+
+						    				'<svg id="18x18_flag" height="100%" viewBox="0 0 18 18" width="100%">'+
+						    					'<path d="M6 10V3c4.976 1.098 4.024-1 8 0v7c-4.024-.976-3.024 1.024-8 0zM4 2h1v14H4V2z"></path>'+
+					    					'</svg>'+
 										'</span>'+
 										'<span class="tooltip-wrapper">'+
-						            		'<span class="tooltip">'+
-						            			'Report review'+
-						            		'</span>'+
-						        		'</span>'+
+				            				'<span class="tooltip">'+
+				            					'Report review'+
+				            				'</span>'+
+				        				'</span>'+
 									'</a>'+
 								'</div>'+
 							'</div>'+

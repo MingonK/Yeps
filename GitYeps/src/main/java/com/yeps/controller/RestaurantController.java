@@ -185,9 +185,7 @@ public class RestaurantController {
 	@RequestMapping(value = "/restaurant_content")
 	public ModelAndView contentRest(HttpServletRequest req, @RequestParam(defaultValue = "1") int curPage) {
 		String rnum = req.getParameter("rnum");
-		
-		
-		
+
 		if(rnum == null || rnum.trim().equals("")) {
 			return new ModelAndView("redirect: restaurant_list");
 		}
@@ -283,6 +281,8 @@ public class RestaurantController {
 	@RequestMapping(value = "/restaurant_update_photo")
 	public ModelAndView updateRestaurantPhoto(HttpServletRequest req) {
 		String rnum = req.getParameter("rnum");
+		String mode = req.getParameter("mode");
+		String filecount = req.getParameter("filecount");
 
 		if (rnum == null || rnum.trim().equals("")) {
 			return new ModelAndView("redirect: restaurant_list");
@@ -303,6 +303,8 @@ public class RestaurantController {
 			mav.addObject("uploadFileList", myUploadFileList);
 		}
 
+		mav.addObject("filecount", filecount);
+		mav.addObject("mode", mode);
 		mav.addObject("restaurantDTO", restaurantDTO);
 		mav.setViewName("restaurant/restaurant_update_photo");
 		return mav;
@@ -385,8 +387,28 @@ public class RestaurantController {
 		memberDTO.setImagecount(memberDTO.getImagecount()+imageCount);
 		session.setAttribute("memberinfo", memberDTO);
 		map.put("fileList", fileList);
-		map.put("update", "사진을 등록하였습니다.");
+		String url = "restaurant_upload_check?rnum="+rnum;
+		for(int i = 0; i < fileList.size(); i++) {
+			url += "&filename=" + fileList.get(i).getFilename();
+		}
+		map.put("url", url);
 		return map;
+	}
+	
+	@RequestMapping(value="/restaurant_upload_check")
+	public ModelAndView uploadCheckRestaurant(HttpServletRequest req) {
+		String filename[] = req.getParameterValues("filename");
+		String rnum = req.getParameter("rnum");
+		if(rnum == null || rnum.trim().equals("")) {
+			return new ModelAndView("redirect: restaurant_list");
+		}
+		RestaurantDTO dto = restaurantMapper.getRest(Integer.parseInt(rnum));
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("filenames", filename);
+		mav.addObject("filesize", filename.length);
+		mav.addObject("restaurantDTO", dto);
+		mav.setViewName("restaurant/restaurant_upload_check");
+		return mav;
 	}
 	
 	@RequestMapping(value="/restaurant_delete_ajax")
@@ -396,20 +418,19 @@ public class RestaurantController {
 		String filename = req.getParameter("filename");
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		HttpSession session = req.getSession();
-		
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
 		if(rnum == null || rnum.trim().equals("") || filename == null || filename.trim().equals("")) {
 			map.put("url", "restaurant_list");
 			return map;
 		}
 		
-		if (session == null) {
+		if (memberDTO == null) {
 			map.put("url", "member_login");
 			return map;
 		}
 		
 		S3Connection.getInstance().deleteObject("yepsbucket", "images/" + filename);
 		fileMapper.deleteRestaurantFile(filename, Integer.parseInt(rnum));
-		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
 		memberDTO.setImagecount(memberDTO.getImagecount()-1);
 		session.setAttribute("memberinfo", memberDTO);
 		map.put("success", "success");
@@ -422,7 +443,7 @@ public class RestaurantController {
 	public ModelAndView photoListRest(HttpServletRequest req, @RequestParam(defaultValue = "1") int curPage) {
 		int rnum = Integer.parseInt(req.getParameter("rnum"));
 
-		if (rnum == 0) {
+		if (rnum == 0) {  
 			return new ModelAndView("redirect: restaurant_list");
 		}
 

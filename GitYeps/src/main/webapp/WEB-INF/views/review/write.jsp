@@ -26,10 +26,10 @@
 							</a>
 						</h2>
 					</div>
+					 
 					
-					
-					<div>
-						<form name="review_writeF" action="review_insert?rname=${rname}&rnum=${rnum}&mode=${mode}" method="post"
+					<div> 
+						<form name="review_writeF" action="review_insert?rname=${rname}&rnum=${rnum}&mode=${mode}&contentUpdate=${contentUpdate}" method="post"
            						onsubmit="return ContentAndGradepointCheck()">
            						<input type="hidden" name="gradepoint" id="gradepoint">
 							<div>
@@ -61,9 +61,13 @@
 											</fieldset>
 										</div>
 									</div>
-									<textarea class="review_write_Textarea" name="content" maxlength="5000" style="font-size: 18px; height: 100px;"
-									placeholder="Your review helps others learn about great local businesses.&#13;&#10; &#13;&#10;Please don't review this business if you received a freebie for writing this review, or if you're connected in any way to the owner or employees."></textarea>
-									
+									<c:if test="${empty contentUpdate}">
+										<textarea class="review_write_Textarea" name="content" maxlength="5000" style="font-size: 18px; height: 100px;"
+										placeholder="Your review helps others learn about great local businesses.&#13;&#10; &#13;&#10;Please don't review this business if you received a freebie for writing this review, or if you're connected in any way to the owner or employees."></textarea>
+									</c:if>
+									<c:if test="${!empty contentUpdate}">
+										<textarea class="review_write_Textarea" name="content" maxlength="5000" style="font-size: 18px; height: 100px;">${contentUpdate}</textarea>
+									</c:if>
 									<div class="review_write_alert_wrap">
 										<span>
 											<div class="review_write_alert">

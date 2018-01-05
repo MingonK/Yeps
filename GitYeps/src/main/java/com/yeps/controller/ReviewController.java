@@ -143,17 +143,28 @@ public class ReviewController {
 	// return "review/";
 	// }
 
-	@RequestMapping(value = "/review_write")
+	@RequestMapping(value = "/review_write") 
 	public ModelAndView review_write(HttpServletRequest req) {
+
 		String rnum = req.getParameter("rnum");
+		if(rnum == null || rnum.trim().equals("")) {
+			return new ModelAndView("redirect: restaurant_list");
+        }
+		
 		String rname = restaurantMapper.review_write_getrname(Integer.parseInt(rnum));
 		String star = req.getParameter("star");
 		String mode = req.getParameter("mode");
 		String where = req.getParameter("where");
 
 		// ★EDIT부분★ 위에 받아온 파라미터값 rnum을 통해서 방금 작성한 리뷰의 정보들을 가져와서 write페이지에 뿌려주면됨.
-
+		String updatemode = req.getParameter("updatemode");
+		String contentUpdate = req.getParameter("contentUpdate");
+		
 		ModelAndView mav = new ModelAndView();
+		if(updatemode != null) {
+			mav.addObject("contentUpdate", contentUpdate);
+		}
+
 		mav.addObject("mode", mode);
 		mav.addObject("rnum", rnum);
 		mav.addObject("where", where);
@@ -185,7 +196,12 @@ public class ReviewController {
 
 		MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo");	
 		MemberPhotoDTO mpdto = (MemberPhotoDTO) session.getAttribute("mainPhoto");
-		int mnum = mdto.getMnum();
+		int mnum = mdto.getMnum(); 
+		
+		String contentUpdate = req.getParameter("contentUpdate");
+		if(contentUpdate != null) {
+			//업데이트 쿼리문 작성 해주면 됨.★★★
+		}
 
 		// ===============================
 		String mode = req.getParameter("mode");
