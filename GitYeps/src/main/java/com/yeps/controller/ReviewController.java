@@ -200,10 +200,11 @@ public class ReviewController {
 		
 		String contentUpdate = req.getParameter("contentUpdate");
 		int gradepoint = Integer.parseInt(req.getParameter("gradepoint"));
-		String rnum = req.getParameter("rnum");
+		int rnum = Integer.parseInt(req.getParameter("rnum"));
 		if(contentUpdate != null) {
 			//업데이트 쿼리문 작성 해주면 됨.★★★
 			int res = reviewMapper.review_write_update(contentUpdate, gradepoint, rnum);
+			System.out.println("리뷰수정 결과값 출력:" + res);
 		}
 
 		// ===============================
@@ -223,7 +224,7 @@ public class ReviewController {
 			memberMapper.updateReviewCount(mnum, nowReviewcount);
 		}
 
-		rvdto.setRnum(Integer.parseInt(rnum));
+		rvdto.setRnum(rnum);
 		rvdto.setMnum(mnum);
 		rvdto.setContent(content);
 		rvdto.setGradepoint(gradepoint);
