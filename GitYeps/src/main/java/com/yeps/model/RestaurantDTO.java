@@ -41,8 +41,15 @@ public class RestaurantDTO {
 	private MemberDTO memberDTO;
 	private int mnum;
 	private String category;
+	private String price;
 	
 	
+	public String getPrice() {
+		return price;
+	}
+	public void setPrice(String price) {
+		this.price = price;
+	}
 	public String getCategory() {
 		return category;
 	}

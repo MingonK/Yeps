@@ -51,7 +51,7 @@
 					                </h2>
 	                			</div>
 			                			<div class="u-space-b3" style="margin-bottom: 18px !important;">
-			                			<c:forEach var="small" items="${smallList}" varStatus="status2" begin="${count}" end="2">
+			                			<c:forEach var="small" items="${smallList}" varStatus="status2" begin="${count}" end="${smallSize.get(status1.index)-1 }">
 			                			<c:set var="count" value="${count+1}"/>
 			                				<div class="menu-item" style="border-top: 0;padding: 10px 0;">
 			                					<div class="arrange arrange--6" style="margin-left: -6px;margin-right: -6px;border-collapse: separate;border-spacing: 6px 0;    display: table;min-width: 100%;table-layout: auto;">
@@ -87,7 +87,7 @@
 	                		</div>
 					</div>
 					<div class="column column-beta popular-section" style="float: left;padding: 0 15px;min-height: 1px;    box-sizing: border-box;width: 33.33333%;">
-						<a href="restaurant_insertMenuForm?rnum=${getRest.rnum }">메뉴 등록</a>
+						<a href="restaurant_insertMenuForm?rnum=${getRest.rnum}">메뉴 등록</a>
 					</div>
 				</div>
 			</div>

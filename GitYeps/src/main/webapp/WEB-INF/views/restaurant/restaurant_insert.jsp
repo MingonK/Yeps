@@ -168,7 +168,9 @@ function busy_add() {
 		document.getElementsByName("busytime").value=start +"&nbsp"+end;
 	}
 }
-
+function food_add(){
+	
+}
 function hour_add() {
 	var div = document.createElement("DIV");
 	var span = document.createElement("SPAN");
@@ -435,23 +437,40 @@ function test() {
 											<option value="Restaurants">레스토랑</option>
 											<option value="Bars">바</option>
 											<option value="Food">음식점</option>
-											<option value="Breakfast">아침식사 & 브런치</option>
-											<option value="Coffee">카페</option>
+											<option value="Breakfast & Brunch">아침식사 & 브런치</option>
+											<option value="Coffee & Tea">카페</option>
 										</select>	
 									</li>
 									
 									<li class="restInsert-list">
 										<label for="foodstyle" class="restInsert-label-bold">음식 종류</label>
-										<input class="restInsert-input" id="foodstyle" name="foodstyle" placeholder="" type="text" value="">	
-									</li>
-									<li class="restInsert-list">
-										<label for="day" class="restInsert-label-bold">영업시간</label>
-									<div class="restInsert-business-hours" style="width:450px;height:auto;">
-									
-										<div class="day-hours" id="hours-display" style="width:450px;height:auto;margin-bottom: 6px;">
+										<select class="restInsert-day" id="foodstyle" name="foodstyle" style="width:390px;">
+											<option value="한식">한식</option>
+											<option value="일식">일식</option>
+											<option value="중식">중식</option>
+										</select>
+										<div class="day-hours" id="food-display" style="width:460px;height:auto;margin-bottom: 6px;">
 												
 										</div>
-											<ul style="width:450px;heigth:55px; margin: -3px;display: block;font-size: 0;line-height: 1;text-align: left;    list-style: none;">
+									</li>
+									
+									<li class="restInsert-list">
+										<label for="foodstyle" class="restInsert-label-bold">가격 범위</label>
+										<select class="restInsert-day" id="price" name="price" style="width:390px">
+											<option value="￦">￦(10,000원 이하)</option>
+											<option value="￦￦">￦￦(10,000원~30,000원)</option>
+											<option value="￦￦￦">￦￦￦(30,000원~50,000원)</option>
+											<option value="￦￦￦￦">￦￦￦￦(50,000원 이상)</option>
+										</select>
+									</li>
+									
+									<li class="restInsert-list">
+										<label for="day" class="restInsert-label-bold">영업시간</label>
+									<div class="restInsert-business-hours" style="width:460px;height:auto;">
+										<div class="day-hours" id="hours-display" style="width:460px;height:auto;margin-bottom: 6px;">
+												
+										</div>
+											<ul style="width:460px;heigth:55px; margin: -3px;display: block;font-size: 0;line-height: 1;text-align: left;    list-style: none;">
 												<li class="restInsert-li">
 													<select class="restInsert-day" id="day">
 														<option value="0">월요일</option>
@@ -683,9 +702,6 @@ function test() {
 											<input class="magic-checkbox" type="checkbox" id="alcohol4" name="alcohol" value="막걸리" >
 											<label for="alcohol4" class="restInsert-label" style="width:60px">막걸리</label>
 											
-											<input class="magic-checkbox" type="checkbox" id="alcohol5" name="alcohol" value="없음" >
-											<label for="alcohol5" class="restInsert-label" style="width:60px">없음</label>
-											
 										</div>
 									</li>
 									<li class="restInsert-list">
@@ -733,10 +749,10 @@ function test() {
 									</li>
 									<li class="restInsert-list">
 										<label for="roadAddrPart1" class="restInsert-label-bold">바쁜시간</label><br>
-									<div class="restInsert-busy-hours" id="restInsert-busy-hours" style="width:450px;height:auto;">
+									<div class="restInsert-busy-hours" id="restInsert-busy-hours" style="width:460px;height:auto;">
 										<input type="hidden" name="busytime" value="">
-										<div class="busy-hours" id="busy-display" style="width:450px;height:auto;margin-bottom: 6px;"></div>
-											<ul style="width:450px;heigth:55px; margin: -3px;display: block;font-size: 0;line-height: 1;text-align: left;    list-style: none;">
+										<div class="busy-hours" id="busy-display" style="width:460px;height:auto;margin-bottom: 6px;"></div>
+											<ul style="width:460px;heigth:55px; margin: -3px;display: block;font-size: 0;line-height: 1;text-align: left;    list-style: none;">
 												<li class="restInsert-li">
 													<select class="restInsert-day" id="busy-day">
 														<option value="0">월요일</option>
