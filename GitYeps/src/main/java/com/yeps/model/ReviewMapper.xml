@@ -216,6 +216,8 @@
        <association javaType="MemberDTO" property="memberDTO">
            <id column="mnum" property="mnum"></id>
            <result column="name" property="name"></result>
+           <result column="nickname" property="nickname"></result>
+           <result column="email" property="email"></result>
            <result column="reviewcount" property="reviewcount"></result>
            <result column="imagecount" property="imagecount"></result>
            <result column="address" property="address"></result>
@@ -233,7 +235,9 @@
       select * from (select rownum rn, A. * from(select
                R.content
               ,R.rvnum
+              ,R.gradepoint
               ,RT.rest_regdate
+              ,RT.rnum
               ,RT.rname
               ,RT.roadAddrPart1
               ,RT.roadAddrPart2
@@ -244,6 +248,8 @@
               ,RT.raddress
               ,M.mnum
               ,M.name
+              ,M.nickname
+              ,M.email
               ,M.reviewcount
               ,M.imagecount
               ,M.address

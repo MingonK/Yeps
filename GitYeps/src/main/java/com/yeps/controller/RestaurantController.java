@@ -399,7 +399,9 @@ public class RestaurantController {
 	public ModelAndView uploadCheckRestaurant(HttpServletRequest req) {
 		String filename[] = req.getParameterValues("filename");
 		String rnum = req.getParameter("rnum");
-		
+		if(rnum == null || rnum.trim().equals("")) {
+			return new ModelAndView("redirect: restaurant_list");
+		}
 		RestaurantDTO dto = restaurantMapper.getRest(Integer.parseInt(rnum));
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("filenames", filename);
