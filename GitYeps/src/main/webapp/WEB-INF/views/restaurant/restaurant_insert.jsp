@@ -435,8 +435,8 @@ function test() {
 											<option value="Restaurants">레스토랑</option>
 											<option value="Bars">바</option>
 											<option value="Food">음식점</option>
-											<option value="Breakfast & Brunch">아침식사 & 브런치</option>
-											<option value="Coffee & Tea">카페</option>
+											<option value="Breakfast">아침식사 & 브런치</option>
+											<option value="Coffee">카페</option>
 										</select>	
 									</li>
 									
