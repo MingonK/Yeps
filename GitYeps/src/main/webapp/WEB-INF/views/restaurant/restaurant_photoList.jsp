@@ -7,6 +7,7 @@
 	<title>Photos for ${getRest.rname}</title>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/restStyle.css?ver=1"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_list.css?ver=1"/>"/>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css"/>"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <%@include file="../top.jsp" %>
@@ -49,13 +50,13 @@
 								</div>
 							</div>
 							<div class="arrange_unit nowrap media-header_actions" style="margin-left: 6px; margin-right: 6px; border-collapse: collapse; border-spacing: 0 0; vertical-align: bottom; box-sizing: border-box; display: table-cell; white-space: nowrap; ">
-								<a class="ybtn ybtn--primary u-space-r1" href="#" style="color: white; text-decoration: none !important; box-shadow: 0 1px 1px rgba(0,0,0,0.3); background-color: #d90007; background: linear-gradient(#d90007, #c91400); display: inline-block; vertical-align: middle; margin: 0; cursor: pointer; border: 1px solid #8d0005; font-weight: bold; text-align: center; font-size: 14px; line-height: 1.28571em; padding: 5px 19px 6px; border-radius: 3px;border-collapse: collapse; white-space: nowrap;">
+								<a class="ybtn ybtn--primary u-space-r1 restaurant_add_photo" href="restaurant_update_photo?rnum=${getRest.rnum}">
 									<span aria-hidden="true" style="fill: currentColor; width: 24px; height: 24px;" class="icon">
 									    <svg id="24x24_add_photo" height="100%" viewBox="0 0 24 24" width="100%">
 									    	<path d="M19 20H5a3 3 0 0 1-3-3V9a3 3 0 0 1 3-3h2.184A2.99 2.99 0 0 1 10 4h4a2.99 2.99 0 0 1 2.816 2H19a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3zM12.005 8.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9zM13 14v1a1 1 0 0 1-2 0v-1h-1a1 1 0 0 1 0-2h1v-1a1 1 0 0 1 2 0v1h1a1 1 0 0 1 0 2h-1z"></path>
 									    </svg>
 									</span>
-									사진 추가
+									Add Photos
 								</a>
 							</div>
 						</div>
@@ -66,7 +67,7 @@
 										<ul class="tab-nav js-tab-nav tab-nav--paged js-tab-nav--paged tab-nav--large js-tab-nav--large tab-nav--no-icon js-tab-nav--no-icon" style="display: inline; margin: 0 0 -1px; padding: 0; white-space: nowrap;">
 											<div class="paged-scroll-container js-paged-scroll-container inactive-left-arrow inactive-right-arrow has-single-page" style="    overflow: hidden;margin: 0 -15px;    user-select: none;position: relative;    display: flex;-webkit-box-direction: normal; -webkit-box-orient: horizontal; flex-direction: row;padding: 0px 18px; z-index: 2;">
 												<div class="paged-scroll-container_container" style="-webkit-box-flex: 1;flex-grow: 1;align-self: center;overflow: hidden;position: relative;white-space: nowrap;">
-													<div class="js-scroll-container scroll-container" style="    transform: translateX(0px);    display: flex;-webkit-box-direction: normal;-webkit-box-orient: horizontal;    flex-direction: row;    transition: transform 400ms;width: 100%;">
+													<div class="js-scroll-container scroll-container" style="transform: translateX(0px);    display: flex;-webkit-box-direction: normal;-webkit-box-orient: horizontal;    flex-direction: row;    transition: transform 400ms;width: 100%;">
 														<li class="tab-nav_item" style="display: table-cell; vertical-align: middle;">
 															<a href="#" class="tab-link" style="padding: 0 12px; padding-top: 6px; padding-bottom: 6px; color: #333; text-decoration: none; border-bottom: 3px solid #d32323; display: block; vertical-align: bottom; line-height: 1; white-space: nowrap; outline: 0;">
 																<span style="font-weight: bold; vertical-align: middle; line-height: 30px; display: inline-block;">
@@ -92,7 +93,7 @@
 						<ul class="photo-box-grid photo-box-grid--highlight photo-box-grid--small clearfix lightbox-media-parent" style="margin-right: -12px; margin-top: 18px; display: flex;">
 							<c:forEach items="${uploadFileList}" var="upload">
 							<li style="transition: opacity 0.1s ease-out; width: 150px; float: left; margin: 0 12px 12px 0; display: list-item;">
-								<div class="photo-box photo-box--interactive" style="height: 150px; position: relative;">
+								<div class="photo-box photo-box--interactive" data-popup-open="photo_popup" style="height: 150px; position: relative;">
 									<img class="photo-box-img" height="226" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${upload.filename}"  width="226" style="max-width: 100%; max-height: 100%; border-radius: 4px; vertical-align: middle;">
 									<a class="biz-shim js-lightbox-media-link js-analytics-click" data-analytics-label="biz-photo" href="#" style="display: block; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: white; opacity: 0;    color: #0073bb;text-decoration: none;    cursor: pointer;"></a>
 								</div>
@@ -191,11 +192,94 @@
 
 </div>
 
+
+	<div class="photo_content_popup" data-popup="photo_popup">
+    	<div class="photo_popup-inner" style="z-index: 1;">
+    	    <div id="photo_content_popup_close" data-popup-close="photo_popup">
+    	    	Close
+    	    	<span class="icon popup_close_icon" style="width: 24px; height: 24px; margin-left: 3px !important; fill: currentColor;">
+    	    		<svg class="icon_svg" height="100%" viewBox="0 0 24 24" width="100%">
+    	    			<path d="M17.657 19.07L12 13.415 6.343 19.07 4.93 17.658 10.585 12 4.93 6.343 6.342 4.93 12 10.585l5.657-5.657L19.07 6.34 13.416 12l5.657 5.657-1.413 1.414z"></path>
+    	    		</svg>
+    	    	</span>
+    	    </div>
+			<div class="photo_content_popup_wrapper">
+				<div class="photo_content_popup_container">
+					<div class="photo_content_popup_container">
+						<div class="photo_popup_container">
+							<div class="photo_popup_grid">
+								<div class="photo_popup_grid_main">
+									<div id="popup_slideshow_img">
+									</div>
+									
+									<div class="photo_popup_grid_main_photo_area_footer">
+										<ul class="photo_popup_footer_inner">
+											<li>
+												<a href="#" data-popup-close="photo_popup">
+													<span class="icon" style="opacity: 0.7; filter: drop-shadow(0 0 4px rgba(0,0,0,0.3)); margin-right: 3px !important; fill: currentColor; width: 18px; height: 18px;">
+														<svg class="icon_svg" height="100%" width="100%" viewBox="0 0 18 18">
+															<path d="M10 15v-5h5v5h-5zm0-12h5v5h-5V3zm-7 7h5v5H3v-5zm0-7h5v5H3V3z"></path>
+														</svg>
+													</span>
+													Browse all
+												</a>
+											</li>
+											
+											
+											<li>
+												<span class="photo_popup_footer_page_count">
+													<span class="photo_popup_footer_current">
+														1
+													</span>
+													of
+													<span class="photo_popup_footer_total">
+														1
+													</span>
+												</span>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+    	</div>
+	</div>
+
 <script>
     // **원하는 페이지로 이동시 검색조건, 키워드 값을 유지하기 위해 
     function list(page){
         location.href="restaurant_photoList?curPage="+page;
     }
+    
+  //----- OPEN   		
+	$('[data-popup-open]').on('click', function(e)  {
+    	var targeted_popup_class = jQuery(this).attr('data-popup-open');
+    	$('#popup_slideshow_img').empty();
+    	$('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+    	var src = jQuery(this).children().first().attr('src');
+    	var img = $("<img>").attr("src", src).css('position', 'static').css('vertical-align', 'middle');
+		$('#popup_slideshow_img').append(img);
+  
+    	$('body').css('overflow','hidden');
+			e.stopPropagation();
+    	e.preventDefault();
+	});
+
+	//----- CLOSE
+	$('[data-popup-close]').on('click', function(e)  {
+    	var targeted_popup_class = jQuery(this).attr('data-popup-close');
+    	$('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+    	$('body').css('overflow','auto');
+    	
+    	if(targeted_popup_class == 'photo_popup') {
+    		$('#slideimg').removeClass('cycle-slideshow');
+    	}
+    	e.stopPropagation();
+    	e.preventDefault();
+	});
 </script>
 </body>
 </html>

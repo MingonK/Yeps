@@ -180,13 +180,11 @@
 							<div class="showcase-photos">
 								<div class="js-photo photo photo-1"
 									data-media-id="VXaXWJEy7XSoyh1ij9zojA" data-media-index="17" style="z-index: 1000;display:inline-block;width: 100%;height: 220px;    box-shadow: none;transition: all 0.2s ease-out;transition-property: transform, box-shadow;">
-									<div class="showcase-photo-box" style="height:100%;">
-									<c:forEach items="${uploadFileList}" var="upload" >
+									<div class="showcase-photo-box" id="showcase-photo-box" style="width: 210px; height: 100%;">
 									<!-- 여기 팝업 오픈 -->
-										<a href="#" style="color: #0073bb; text-decoration: none;"> 
-											<img class="photo-box-img" style="display:inline-block;vertical-align: middle;" width="210" height="220" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${upload.filename}">
-										</a>
-									</c:forEach>
+<!-- 										<a href="#" style="color: #0073bb; text-decoration: none;">  -->
+<%-- 											<img class="photo-box-img" style="display:inline-block;vertical-align: middle;" width="210" height="220" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${upload.filename}"> --%>
+<!-- 										</a> -->
 									</div>
 <!-- 									<div class="photo-box-overlay js-overlay" style="opacity: 0; position: absolute; right: 0; bottom: 0; left: 0; padding: 3px 6px; border-radius: 0 0 4px 4px; background: #333; background: rgba(0, 0, 0, 0.5); color: white; font-size: 12px; line-height: 1.5em; font-weight: bold; overflow: hidden; -webkit-transition: all 0.3s ease-in-out; transition: all 0.3s ease-in-out;"> -->
 <!-- 										<div class="photo-box-overlay_caption" style="padding: 3px 6px 3px 1px; position: relative;    display: flex;transition: all 0.2s ease-out;"> -->
@@ -1063,6 +1061,22 @@
 		
 		
 <script>
+
+	var list = new Array();
+	<c:forEach var="fileDTO" items="${uploadFileList}">
+		list.push("${fileDTO.filename}");
+	</c:forEach>
+
+	for(var i = 0; i < list.length; i++) {
+		var img = document.createElement('img');
+		img.src = 'https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/' + list[i];
+		img.style.cursor = 'pointer';
+		img.style.width = '100%';
+		img.style.height = '100%';
+		img.onclick = function() {location.href="#"};
+		document.getElementById('showcase-photo-box').appendChild(img);
+	}
+
 	 jQuery(function($) {
 		//----- OPEN
 		$(document).on('click', '[data-popup-open]', function(e)  {
