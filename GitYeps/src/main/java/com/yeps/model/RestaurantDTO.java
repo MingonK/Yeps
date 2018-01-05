@@ -40,7 +40,15 @@ public class RestaurantDTO {
 	private ReviewDTO reviewDTO;
 	private MemberDTO memberDTO;
 	private int mnum;
+	private String category;
 	
+	
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
 	public int getRnum() {
 		return rnum;
 	}
