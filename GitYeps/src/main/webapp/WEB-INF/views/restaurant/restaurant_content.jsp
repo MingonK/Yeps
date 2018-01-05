@@ -250,14 +250,14 @@
 															</div>
 														</div>
 													<div class="restContent-arrange-unit-nowrap">
-														<div class="restContent-review-sort" style=" margin-left: -12px;">
-															<div class="restContent-dropdown" style="position: relative;display: inline-block;">
-																<div class="restcontent-dropdown-toggle" style="position: relative;">
-																	<a href="#" class="restContent-dropdown-action">
-																		<span class="restContent-dropdown_prefix">
+														<div class="feed_sort js-review-feed-sort" style="margin-left: -12px;">
+															<div class="dropdown js-dropdown dropdown--tab dropdown--arrow dropdown--hover dropdown--restricted" >
+																<div class="dropdown_toggle js-dropdown-toggle">
+																	<a href="javascript:void(0);" class="dropdown_toggle-action" style="text-decoration:none;">
+																		<span class="dropdown_prefix">
 																			Sort by
 																		</span>
-																		<span class="restContent-dropdown-toggle-text" data-dropdown-initial-text="Yeps Sort" style="font-weight: bold;">
+																		<span class="dropdown_toggle-text js-dropdown-toggle-text" data-dropdown-initial-text="Yeps Sort" style="font-weight: bold;">
 																			Yeps Sort
 																		</span>
 																		<span aria-hidden="true" style="width: 14px; height: 14px;" class="icon icon--14-triangle-down icon--size-14 icon--currentColor u-triangle-direction-down dropdown_arrow">
@@ -268,6 +268,16 @@
                                                        						</svg>
                                                    						</span>
 																	</a>
+																</div>
+																<div class="dropdown_menu-container">
+																	<div class="dropdown_menu js-dropdown-menu">
+																		<ul class="dropdown_menu-group" style="list-style: none;">
+																			<li class="dropdown_item">
+																				<a class="tab-link js-dropdown-link tab-link--dropdown js-tab-link--dropdown is-selected" href="javascript:;" style="text-decoration:none;"></a>
+																				<span class="tab-link_label" title="Yelp Sort">Yelp Sort</span>
+																			</li>
+																		</ul>
+																	</div>
 																</div>
 															</div>
 														</div>
@@ -1099,6 +1109,17 @@
 	   $("#reply_flag_popup_form").submit();
     });
 
+   
+   //리뷰 Sort
+//    $('.dropdown_toggle-action').click(function(){
+// 	   $(document).removeClass(".dropdown js-dropdown dropdown--tab dropdown--arrow dropdown--hover dropdown--restricted");
+// 	   $(document).addClass('.dropdown js-dropdown dropdown--tab dropdown--arrow dropdown--hover dropdown--restricted is-active');
+//    });
+   $(document).on("click", ".dropdown_toggle-action", function () {
+//        $(this).addClass("grown");
+       $(this).removeClass(".dropdown js-dropdown dropdown--tab dropdown--arrow dropdown--hover dropdown--restricted");
+   });
+   
 </script>
 
 
