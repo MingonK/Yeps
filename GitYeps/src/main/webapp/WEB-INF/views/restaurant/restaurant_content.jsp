@@ -4,7 +4,26 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 	<title>${getRest.rname}</title>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js" ></script>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=jD9qGVpvZh7Zobclojwp&submodules=geocoder"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/restStyle.css?ver=1"/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css?ver=1"/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css?ver=2"/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/message.css?ver=2"/>"/>
+<title>레스토랑</title>
+
+
+	<title>${getRest.rname}</title>
+
+	<script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js" ></script>
+	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=jD9qGVpvZh7Zobclojwp&submodules=geocoder"></script>
+
+	<title>${getRest.rname}</title>
+
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/restStyle.css?ver=1"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css?ver=1"/>"/>
@@ -504,8 +523,13 @@
 													</div>
 													<ul class="restContent-list-link">									
 														<li>
+<<<<<<< HEAD
+															<a class="restContent-share-review" href="javascript:inputReveiver()" data-popup-open="writeMessage" style="display: table; min-width: 100%; table-layout: auto; cursor: pointer;">
+																<div class="action-link_icon arrange_unit" style="padding-top: 3px; padding-bottom: 3px; vertical-align: middle; padding-right: 12px; box-sizing: border-box; display: table-cell;">
+=======
 															<a class="restContent-share-review" href="#" data-popup-open="writeMessage">
 																<div class="action-link_icon arrange_unit">
+>>>>>>> branch 'master' of https://github.com/MingonK/Yeps.git
 																	<span aria-hidden="true" style="fill: currentColor; width: 18px; height: 18px;" class="icon">
 																    	<svg class="icon_svg" id="18x18_speech" height="100%" viewBox="0 0 18 18" width="100%">
 																        	<path d="M2 4v6a2 2 0 0 0 2 2h1v3l4-3h5a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"></path>
@@ -999,17 +1023,16 @@
 	</div>		
 </div>
 
-	
-	
-	
 	<div class="loading_wapper" >
       	<div class="loading_img" style="left: 40%; top: 40%;"></div>
    	</div>
 		
 		
 <script>
+
+	 $(function() {
 	 jQuery(function($) {
-		//----- OPEN
+
 		$(document).on('click', '[data-popup-open]', function(e)  {
 			var targeted_popup_class = jQuery(this).attr('data-popup-open');
 			$('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
@@ -1036,7 +1059,8 @@
 			$('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
 			$('body').css('overflow','auto');
 			e.stopPropagation();
-        	e.preventDefault();;
+
+        	e.preventDefault();
 			});
 		});   
 	 
@@ -1058,8 +1082,8 @@
 	    	}
 	        document.sendform.action = "message_send";
 	        document.sendform.submit(); 
-	 });
 
+	    });
    
    $(document).on('mouseenter', '.selector', function(e) {
 	   var star = $(e.target).val();
