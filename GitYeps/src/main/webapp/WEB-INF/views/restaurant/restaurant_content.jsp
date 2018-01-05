@@ -4,26 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 	<title>${getRest.rname}</title>
-
-<script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js" ></script>
-<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=jD9qGVpvZh7Zobclojwp&submodules=geocoder"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/restStyle.css?ver=1"/>"/>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css?ver=1"/>"/>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css?ver=2"/>"/>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/message.css?ver=2"/>"/>
-<title>레스토랑</title>
-
-
-	<title>${getRest.rname}</title>
-
-	<script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js" ></script>
-	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=jD9qGVpvZh7Zobclojwp&submodules=geocoder"></script>
-
-	<title>${getRest.rname}</title>
-
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/restStyle.css?ver=1"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css?ver=1"/>"/>
@@ -34,7 +15,6 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 	<script src="http://malsup.github.com/jquery.cycle2.js"></script>
 	<script src="http://malsup.github.io/jquery.cycle2.carousel.js"></script>
-	
 </head>
 <%@include file="../top.jsp" %>
 	<div class="main" style="background: white;">
@@ -186,13 +166,15 @@
 								    See all ${getImageCount}
 								</a>
 							</div>
-	
+							
+							<c:if test="${!empty uploadFileList}">
 							<div class="showcase-photos">
 								<div class="cycle-slideshow responsive" id="showcase-photo-box" data-cycle-prev="#prev" data-cycle-next="#next" style="background: none; z-index: 1000; display:inline-block; width: 100%; height: 220px; box-shadow: none;" data-cycle-fx="carousel" data-cycle-timeout="2000" data-cycle-carousel-visible="3" data-cycle-carousel-fluid="true">
 									<span class="ms-arrow msa-previous" id="prev"></span>
     								<span class="ms-arrow msa-next" id="next"></span>
 								</div>
 							</div>
+							</c:if>
 						</div>
 					 </div>
 				  </div>
@@ -431,18 +413,11 @@
 														${myReview.content}
 													</p>
 													<div class="myreview_div_6">
-<<<<<<< HEAD
+
 														<a class="myreview_a_1" href="/writeareview/biz/V7lXZKBDzScDeGB8JmnzSA?return_url=%2Fbiz%2FV7lXZKBDzScDeGB8JmnzSA">Finish My Review</a>
 														<form class="myreview_formF" method="post">
 															<input class="myreview_input_1" type="hidden">
 															<input class="myreview_input_1" type="hidden">
-=======
-														<a class="myreview_a_1" href="#">리뷰수정</a>
-														<form class="myreview_formF" action="" method="post" name="">
-															<input class="myreview_input_1" type="hidden" name="" value="">
-															<input class="myreview_input_1" type="hidden" name="" value="">
-															<!-- myreview 휴지통 버튼 -->
->>>>>>> branch 'master' of https://github.com/MingonK/Yeps.git
 															<button class="myreview_button_1">
 																<span class="myreview_span_1">
 																	<svg class="myreview_svg_1">
@@ -523,13 +498,8 @@
 													</div>
 													<ul class="restContent-list-link">									
 														<li>
-<<<<<<< HEAD
-															<a class="restContent-share-review" href="javascript:inputReveiver()" data-popup-open="writeMessage" style="display: table; min-width: 100%; table-layout: auto; cursor: pointer;">
-																<div class="action-link_icon arrange_unit" style="padding-top: 3px; padding-bottom: 3px; vertical-align: middle; padding-right: 12px; box-sizing: border-box; display: table-cell;">
-=======
 															<a class="restContent-share-review" href="#" data-popup-open="writeMessage">
 																<div class="action-link_icon arrange_unit">
->>>>>>> branch 'master' of https://github.com/MingonK/Yeps.git
 																	<span aria-hidden="true" style="fill: currentColor; width: 18px; height: 18px;" class="icon">
 																    	<svg class="icon_svg" id="18x18_speech" height="100%" viewBox="0 0 18 18" width="100%">
 																        	<path d="M2 4v6a2 2 0 0 0 2 2h1v3l4-3h5a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"></path>
@@ -1031,8 +1001,6 @@
 <script>
 
 	 $(function() {
-	 jQuery(function($) {
-
 		$(document).on('click', '[data-popup-open]', function(e)  {
 			var targeted_popup_class = jQuery(this).attr('data-popup-open');
 			$('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
@@ -1124,8 +1092,8 @@
        $(this).parent().parent().parent().submit();
     });
    
-   $(document).on("click","#reply_flag_popup_submit_button",function(){
-	   $('#reply_flag_popup_form').submit();
+   $(document).on("click", "#reply_flag_popup_submit_button", function(){
+	   $("#reply_flag_popup_form").submit();
     });
 
 </script>
