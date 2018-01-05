@@ -286,8 +286,6 @@
 						
 						<ol id="event_content_comment_list">
 						<c:forEach var="event_reviewDTO" items="${eventReview_list}">
-<%-- 							<c:forEach var="event_memberDTO" items="${eventReview_writer_list}" varStatus="status"> --%>
-<%-- 								<c:if test="${event_reviewDTO.mnum == event_memberDTO.mnum}"> --%>
 								<li>
 									<div id="event_topic_reply">
 										<div id="event_reply_user_info_wrapper">
@@ -326,17 +324,6 @@
 													</ul>
 												
 													<ul>
-<!-- 														<li id="event_reply_user_friend_count"> -->
-<!-- 															<span id="event_subscription_icon"> -->
-<!-- 																<svg> -->
-<!-- 																	<g> -->
-<!-- 																		<path d="M7.904 9.43l-2.098 4.697a.9.9 0 0 1-1.612 0L2.096 9.43a.902.902 0 0 1 .806-1.305h4.196c.67 0 1.105.705.806 1.305zM5 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path> -->
-<!-- 																		<path d="M15.904 9.43l-2.098 4.697a.89.89 0 0 1-.806.498.89.89 0 0 1-.806-.498L10.096 9.43a.902.902 0 0 1 .806-1.305h4.195c.67 0 1.106.705.807 1.305zM13 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" opacity=".502"></path> -->
-<!-- 																	</g> -->
-<!-- 																</svg> -->
-<!-- 															</span> -->
-<!-- 															<b>999</b> friends -->
-<!-- 														</li> -->
 														<li id="event_reply_user_review_count">
 															<span>
 																<svg>
@@ -379,8 +366,6 @@
 										</div>
 									</div>
 								</li>
-<%-- 								</c:if> --%>
-<%-- 							</c:forEach> --%>
 						</c:forEach>
 						</ol>
 						
@@ -839,100 +824,11 @@
 										</ul>
 									</div>
 								</div>
-								
-								
-								
-<!-- 								<div class="photo_upload_user_wrraper"> -->
-<!-- 									<div class="photo_upload_user_container"> -->
-<!-- 										<div class="photo_upload_user_info"> -->
-<!-- 											<div class="photo_upload_user_info_item"> -->
-<!-- 												<div class="photo_user_passport"> -->
-<!-- 													<div class="photo_user_passport_block"> -->
-<!-- 														<div class="photo_user_passport_photo"> -->
-<!-- 															<div> -->
-<!-- 																<a href="#"> -->
-<!-- 																	<img height="30" width="30" src="https://s3-media4.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/60s.jpg" style="outline: none; margin-top: 3px; border-radius: 4px; vertical-align: middle;"> -->
-<!-- 																</a> -->
-<!-- 															</div> -->
-<!-- 														</div> -->
-														
-<!-- 														<div class="photo_user_passport_info_block"> -->
-<!-- 															<ul> -->
-<!-- 																<li> -->
-<!-- 																	<a href="#" style="font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; text-decoration: none;"> -->
-<!-- 																		유저 아이디																		 -->
-<!-- 																	</a> -->
-<!-- 																</li> -->
-<!-- 															</ul> -->
-															
-															
-<!-- 															<ul> -->
-<!-- 																<li class="friend-count" style="line-height: 1; display: inline-block; margin-right: 6px;"> -->
-<!-- 																	<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-friends icon--size-18"> -->
-<!-- 																		<svg class="icon_svg"> -->
-<!-- 																			<path d="M7.904 9.43l-2.098 4.697a.9.9 0 0 1-1.612 0L2.096 9.43a.902.902 0 0 1 .806-1.305h4.196c.67 0 1.105.705.806 1.305zM5 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path> -->
-<!-- 																			<path d="M15.904 9.43l-2.098 4.697a.89.89 0 0 1-.806.498.89.89 0 0 1-.806-.498L10.096 9.43a.902.902 0 0 1 .806-1.305h4.195c.67 0 1.106.705.807 1.305zM13 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" opacity=".502"></path> -->
-<!-- 																		</svg> -->
-<!-- 																	</span> -->
-<!-- 																	<b>0</b>	친구 수 -->
-<!-- 																</li> -->
-																
-<!-- 																<li class="review-count" style="line-height: 1; display: inline-block; margin-right: 6px;"> -->
-<!-- 																	<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-review icon--size-18"> -->
-<!-- 																		<svg class="icon_svg"> -->
-<!-- 																			<path d="M13 3H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1.505 9.643l-2.526-1.55L6.526 12.7 7 9.934 5 7.977l2.766-.404L8.97 4.7l1.264 2.873L13 7.977l-2 1.957.495 2.71z"></path> -->
-<!-- 																		</svg> -->
-<!-- 																	</span> -->
-<!-- 																	<b>0</b> 리뷰 수 -->
-<!-- 																</li> -->
-																
-<!-- 																<li class="photo-count" style="line-height: 1; display: inline-block; margin-right: 6px;"> -->
-<!--                 													<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-camera icon--size-18"> -->
-<!--     																	<svg class="icon_svg" height="100%" viewBox="0 0 18 18" width="100%"> -->
-<!--         																	<path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 6.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path> -->
-<!--     																	</svg> -->
-<!-- 																	</span> -->
-<!--                 													<b>0</b> -->
-<!--             													</li> -->
-<!-- 															</ul> -->
-<!-- 														</div> -->
-<!-- 													</div> -->
-<!-- 												</div> -->
-<!-- 											</div> -->
-											
-											
-<!-- 											<div class="photo_upload_user_info_footer"> -->
-<!-- 												<div style="margin-top: 6px;"> -->
-<!-- 													<div> -->
-<!-- 														사진에 적은 캡션 내용 -->
-<!-- 													</div> -->
-<!-- 												</div> -->
-												
-												
-<!-- 												<div style="margin-top: 6px;"> -->
-<!-- 													<span class="photo_upload_user_info_upload_date"> -->
-<!-- 														업로드 날짜 -->
-<!-- 													</span> -->
-<!-- 												</div> -->
-<!-- 											</div> -->
-<!-- 										</div> -->
-										
-										
-<!-- 										<div> -->
-											
-<!-- 										</div> -->
-										
-										
-										
-<!-- 									</div> -->
-<!-- 								</div> -->
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-    	    
-
     	</div>
 	</div>
 	

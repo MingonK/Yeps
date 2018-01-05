@@ -1,28 +1,27 @@
-.myreview_p_1{
+.myreview_p_1 {
 	margin-bottom: 12px;
-	    display: block;
-	        text-align: -webkit-match-parent;
-	        color: #333;
+	display: block;
+	text-align: -webkit-match-parent;
+	color: #333;
 }
 
-.myreview_strong_1{
+.myreview_strong_1 {
 	font-weight: bold;
 	text-align: -webkit-match-parent;
-	        color: #333;
+	color: #333;}
+
+.myreview_div_1 {
+	padding: 11px;
+	background: #f5f5f5;
+	border: 1px solid #e6e6e6;
+	border-radius: 4px;
+	display: block;
+	text-align: -webkit-match-parent;
 }
 
-.myreview_div_1{
-	    padding: 11px;
-    background: #f5f5f5;
-    border: 1px solid #e6e6e6;
-    border-radius: 4px;
-        display: block;
-            text-align: -webkit-match-parent;
-}
-
-.myreview_div_1:before{
-	    content: " ";
-    display: table;
+.myreview_div_1:before {
+	content: " ";
+	display: table;
 }
 
 .myreview_div_1:after{
@@ -369,20 +368,6 @@
 .myreview_button_1:hover .myreview_path_1 {
     color: #333;
     background: linear-gradient(#fff, #eee);
-}
-
-.myreview_a_2{
-	
-}
-
-.myreview_path_2{
-	
-}
-
-
-.myreview_a_2:hover .myreview_path_2 {
-	color: #333;
-
 }
 
 

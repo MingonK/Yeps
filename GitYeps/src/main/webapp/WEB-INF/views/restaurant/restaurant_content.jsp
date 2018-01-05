@@ -40,7 +40,7 @@
        								 <span class="business-attribute price-range" style="letter-spacing: 1px;white-space: nowrap;">￦￦</span>
         						</span>
         						<span class="category-str-list" style="margin-right: 6px;">
-			                  	 	<a href="#" style="white-space: nowrap; color: #0073bb;">${getRest.foodstyle}</a>
+			                  	 	${getRest.foodstyle}
 					    		</span>
 							</div>
 						</div>
@@ -180,33 +180,30 @@
 							<div class="showcase-photos">
 								<div class="js-photo photo photo-1"
 									data-media-id="VXaXWJEy7XSoyh1ij9zojA" data-media-index="17" style="z-index: 1000;display:inline-block;width: 100%;height: 220px;    box-shadow: none;transition: all 0.2s ease-out;transition-property: transform, box-shadow;">
-									<div class="showcase-photo-box" style="height:100%;">
-									<c:forEach items="${uploadFileList}" var="upload" >
-										<a href="#" style="color: #0073bb;text-decoration: none;"> 
-											<img class="photo-box-img" style="display:inline-block;vertical-align: middle;" width="210" height="220" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${upload.filename}">
-										</a>
-									</c:forEach>
+									<div class="showcase-photo-box" id="showcase-photo-box" style="width: 210px; height: 100%;">
+									<!-- 여기 팝업 오픈 -->
+<!-- 										<a href="#" style="color: #0073bb; text-decoration: none;">  -->
+<%-- 											<img class="photo-box-img" style="display:inline-block;vertical-align: middle;" width="210" height="220" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${upload.filename}"> --%>
+<!-- 										</a> -->
 									</div>
-								<div class="photo-box-overlay js-overlay"
-									style="opacity: 0; position: absolute; right: 0; bottom: 0; left: 0; padding: 3px 6px; border-radius: 0 0 4px 4px; background: #333; background: rgba(0, 0, 0, 0.5); color: white; font-size: 12px; line-height: 1.5em; font-weight: bold; overflow: hidden; -webkit-transition: all 0.3s ease-in-out; transition: all 0.3s ease-in-out;">
-									<div class="photo-box-overlay_caption" style="    padding: 3px 6px 3px 1px;    position: relative;    display: flex;transition: all 0.2s ease-out;">
-										<div class="media-avatar avatar" style="    position: relative;    border-right: 6px solid transparent; border-left: none;">
-											<div class="photo-box pb-30s">
-												<a href="#" class="js-analytics-click" data-analytics-label="user-photo" style="    color: white;    text-decoration: none;    cursor: pointer;">
-									                <img class="photo-box-img" height="30" src="https://s3-media2.fl.yelpcdn.com/photo/SDnJqhDE0GRwI8pu4Gus2g/30s.jpg" width="30"
-									                style="    outline: none;    display: block;    margin-top: 3px;    border-radius: 4px;    vertical-align: middle;">
-									        </a>
-											</div>
-										</div>
-										<div class="media-story"
-											style="overflow: hidden; height: 36px; -webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;">
-											<a class="photo-desc" href="#"
-												style="text-decoration: none; text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5); color: white; cursor: pointer;">
-												Photo of Yardbird Southern Table &amp; Bar - Las Vegas, NV,
-												United States </a>
-										</div>
-									</div>
-								</div>
+<!-- 									<div class="photo-box-overlay js-overlay" style="opacity: 0; position: absolute; right: 0; bottom: 0; left: 0; padding: 3px 6px; border-radius: 0 0 4px 4px; background: #333; background: rgba(0, 0, 0, 0.5); color: white; font-size: 12px; line-height: 1.5em; font-weight: bold; overflow: hidden; -webkit-transition: all 0.3s ease-in-out; transition: all 0.3s ease-in-out;"> -->
+<!-- 										<div class="photo-box-overlay_caption" style="padding: 3px 6px 3px 1px; position: relative;    display: flex;transition: all 0.2s ease-out;"> -->
+<!-- 											<div class="media-avatar avatar" style="position: relative; border-right: 6px solid transparent; border-left: none;"> -->
+<!-- 												<div class="photo-box pb-30s"> -->
+<%-- 													<a href="restaurant_photoList?rnum=${getRest.rnum}" class="js-analytics-click" data-analytics-label="user-photo" style="    color: white;    text-decoration: none;    cursor: pointer;"> --%>
+<!-- 									   	            	<img class="photo-box-img" height="30" src="https://s3-media2.fl.yelpcdn.com/photo/SDnJqhDE0GRwI8pu4Gus2g/30s.jpg" width="30" -->
+<!-- 									                		style="outline: none; display: block; margin-top: 3px; border-radius: 4px; vertical-align: middle;"> -->
+<!-- 									        		</a> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
+<!-- 											<div class="media-story" style="overflow: hidden; height: 36px; -webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;"> -->
+<!-- 												<a class="photo-desc" href="#" style="text-decoration: none; text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5); color: white; cursor: pointer;"> -->
+<!-- 													Photo of Yardbird Southern Table &amp; Bar - Las Vegas, NV, -->
+<!-- 													United States  -->
+<!-- 												</a> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
 								</div>
 							</div>
 						</div>
@@ -216,8 +213,8 @@
 	        </div>
         </div>
 		<div class="restContent-super-container" style="width: 960px;height:100%; margin: 0 auto; padding: 0 15px; padding-top: 18px; padding-bottom: 36px;">
-				<div class="restContent-container" style="display:block;width:100%;overflow:hidden;height:auto;">
-					<div class="restContent-layout-block" style="margin-bottom: 0;position: relative;margin: 0 -15px;width:960px;overflow:hidden;height:auto;">
+			<div class="restContent-container" style="display:block;width:100%;overflow:hidden;height:auto;">
+				<div class="restContent-layout-block" style="margin-bottom: 0;position: relative;margin: 0 -15px;width:960px;overflow:hidden;height:auto;">
 					<div class="restContent-alpha" style="padding: 0 30px 0 0; margin-left: 15px; float: left; min-height: 1px; box-sizing: border-box;width: 66.66667%;height:100%;border-right: 1px solid #e6e6e6;display:inline-block;">
 						<div class="restContent-review-highlights" style="position: relative;">
 							<div class="restContent-review-hightlights-content">
@@ -232,18 +229,18 @@
 										<div class="restContent-review-highlights-media-avatar"
 											style="border-right: 12px solid transparent; border-left: none;">
 											<div class="restcontent-review-highlights-photo-box">
-												<a href="#" style="color: #0073bb; text-decoration: none; cursor: pointer;">
+												<a href="member_details?mnum=${reviewDTO.memberDTO.mnum}" style="color: #0073bb; text-decoration: none; cursor: pointer;">
 													<img width="60px" height="60px" style="outline: none; border-radius: 4px; vertical-align: middle;" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${reviewDTO.memberDTO.memberPhotoDTO.filename}">
 												</a>
 											</div>
 										</div>
 										<div class="restContent-review-highlights-media-story"
 											style="-webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;">
-											<p class="restContent-quote" style="    margin-bottom: 4px;">
+											<p class="restContent-quote" style="margin-bottom: 4px;">
            										${reviewDTO.content} 
 											</p>
 											<p class="restContent-highlight-sub-info" style="color: #666;margin-bottom: 4px;">
-												<a href="#" style="color: #0073bb;">${reviewDTO.restaurantDTO.rname}</a>
+												<a href="restaurant_content?rnum=${reviewDTO.restaurantDTO.rnum}" style="color: #0073bb;">${reviewDTO.restaurantDTO.rname}</a>
 											</p>
 										</div>
 									</li>
@@ -379,7 +376,7 @@
 													<div class="restContent-meida-block" style="font-size: 12px; line-height: 1.5em; position: relative; display: flex;">
 														<div class="restContent-media-avatar" style="border-right-width: 9px;border-right: 6px solid transparent;border-left: none;">
 															<div class="restContent-photo-box">
-																<a href="#" style="color: #0073bb;">
+																<a href="member_details?mnum=${myReview.memberDTO.mnum}" style="color: #0073bb;">
 																	<img class="restContent-photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${myReview.memberDTO.memberPhotoDTO.filename}" width="60">
 																</a>
 															</div>
@@ -387,7 +384,7 @@
 														<div class="restContent-media-story" style="-webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;">
 															<ul class="restContent-user-info">
 																<li class="restContent-user-name">
-																	<a href="#" class="restContent-user-display-name" style="font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; cursor: pointer;">
+																	<a href="member_details?mnum=${myReview.memberDTO.mnum}" class="restContent-user-display-name" style="font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; cursor: pointer;">
 																		<c:if test="${empty myReview.memberDTO.nickname}">
 																			${myReview.memberDTO.email}
 																		</c:if>
@@ -498,7 +495,7 @@
 													<div class="restContent-meida-block" style="font-size: 12px; line-height: 1.5em; position: relative; display: flex;">
 														<div class="restContent-media-avatar" style="border-right-width: 9px;border-right: 6px solid transparent;border-left: none;">
 															<div class="restContent-photo-box">
-																<a href="#" style="color: #0073bb;">
+																<a href="member_details?mnum=${getReview.memberDTO.mnum}" style="color: #0073bb;">
 																	<img class="restContent-photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${getReview.memberDTO.memberPhotoDTO.filename}" width="60">
 																</a>
 															</div>
@@ -506,7 +503,7 @@
 														<div class="restContent-media-story" style="-webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;">
 															<ul class="restContent-user-info">
 																<li class="restContent-user-name">
-																	<a href="#" class="restContent-user-display-name" style="font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; cursor: pointer;">
+																	<a href="member_details?mnum=${getReview.memberDTO.mnum}" class="restContent-user-display-name" style="font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; cursor: pointer;">
 																		<c:if test="${empty getReview.memberDTO.nickname}">
 																			${getReview.memberDTO.email}
 																		</c:if>
@@ -595,7 +592,11 @@
 													
 												<div class="review-footer clearfix">
 													<div class="review-footer-actions pull-right clearfix" style="margin-top: 23px; float: right;">
+<<<<<<< HEAD
 														<a class="myreview_a_2" class="chiclet-link show-tooltip js-analytics-click chiclet-link--flag" data-popup-open="popup-2" style="position: relative;display: inline-block;padding: 5px;border: 1px solid #ccc;border-radius: 3px;font-size: 12px;line-height: 1.5em;color: #999;background: transparent;box-shadow: none;white-space: nowrap;transition: all 0.3s ease;text-decoration: none;cursor: pointer;">
+=======
+														<a class="chiclet-link show-tooltip js-analytics-click chiclet-link--flag" data-popup-open="popup-2">
+>>>>>>> branch 'master' of https://github.com/MingonK/Yeps.git
 															<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-flag icon--size-18 icon--currentColor">
 															    <svg id="18x18_flag" height="100%" viewBox="0 0 18 18" width="100%">
 															    	<path class="myreview_path_2" d="M6 10V3c4.976 1.098 4.024-1 8 0v7c-4.024-.976-3.024 1.024-8 0zM4 2h1v14H4V2z"></path>
@@ -834,7 +835,7 @@
 						</div>
 						<div class="restContent-menu-preview" style="margin-bottom: 24px;height:204px;">
 							<h3 class="restContent-menu-preview-heading" style="margin-bottom: 12px; font-weight: bold; font-size: 16px; line-height: 1.3125em; color: #d32323; margin: 0 0 6px;display: block;">
-								<a href="#" style="color: #d32323;text-decoration: none;cursor: pointer;">메뉴</a>
+								<a href="#" style="color: #d32323; cursor: pointer;">메뉴</a>
 							</h3>
 						</div>
 						<div class="restContent-business-info" style="height:1000px;margin-bottom: 24px;">
@@ -1064,6 +1065,22 @@
 		
 		
 <script>
+
+	var list = new Array();
+	<c:forEach var="fileDTO" items="${uploadFileList}">
+		list.push("${fileDTO.filename}");
+	</c:forEach>
+
+	for(var i = 0; i < list.length; i++) {
+		var img = document.createElement('img');
+		img.src = 'https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/' + list[i];
+		img.style.cursor = 'pointer';
+		img.style.width = '100%';
+		img.style.height = '100%';
+		img.onclick = function() {location.href="#"};
+		document.getElementById('showcase-photo-box').appendChild(img);
+	}
+
 	 jQuery(function($) {
 		//----- OPEN
 		$(document).on('click', '[data-popup-open]', function(e)  {
@@ -1237,7 +1254,7 @@ function list(page){
 											'<div class="restContent-media-story" style="-webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;">' +
 												'<ul class="restContent-user-info">' +
 													'<li class="restContent-user-name">' +
-														'<a href="#" class="restContent-user-display-name" style="font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; cursor: pointer;">' +
+														'<a href=member_details?mnum="'+ item.memberDTO.mnum +'" class="restContent-user-display-name" style="font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; cursor: pointer;">' +
 															userId +
 														'</a>' +
 													'</li>' +
@@ -1467,7 +1484,7 @@ function check() {
 										'<div class="restContent-meida-block" style="font-size: 12px; line-height: 1.5em; position: relative; display: flex;">' +
 											'<div class="restContent-media-avatar" style="border-right-width: 9px;border-right: 6px solid transparent;border-left: none;">' +
 												'<div class="restContent-photo-box">' +
-													'<a href="#" style="color: #0073bb;">' +
+													'<a href=member_details?mnum="' + item.memberDTO.mnum + '" style="color: #0073bb;">' +
 														'<img class="restContent-photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/' + item.memberDTO.memberPhotoDTO.filename + '" width="60">' +
 													'</a>' +
 												'</div>' +
@@ -1475,7 +1492,7 @@ function check() {
 											'<div class="restContent-media-story" style="-webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;">' +
 												'<ul class="restContent-user-info">' +
 													'<li class="restContent-user-name">' +
-														'<a href="#" class="restContent-user-display-name" style="font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; cursor: pointer;">' +
+														'<a href="member_details?mnum="' + item.memberDTO.mnum + 'class="restContent-user-display-name" style="font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; cursor: pointer;">' +
 															userId +
 														'</a>' +
 													'</li>' +
