@@ -1,28 +1,27 @@
-.myreview_p_1{
+.myreview_p_1 {
 	margin-bottom: 12px;
-	    display: block;
-	        text-align: -webkit-match-parent;
-	        color: #333;
+	display: block;
+	text-align: -webkit-match-parent;
+	color: #333;
 }
 
-.myreview_strong_1{
+.myreview_strong_1 {
 	font-weight: bold;
 	text-align: -webkit-match-parent;
-	        color: #333;
+	color: #333;}
+
+.myreview_div_1 {
+	padding: 11px;
+	background: #f5f5f5;
+	border: 1px solid #e6e6e6;
+	border-radius: 4px;
+	display: block;
+	text-align: -webkit-match-parent;
 }
 
-.myreview_div_1{
-	    padding: 11px;
-    background: #f5f5f5;
-    border: 1px solid #e6e6e6;
-    border-radius: 4px;
-        display: block;
-            text-align: -webkit-match-parent;
-}
-
-.myreview_div_1:before{
-	    content: " ";
-    display: table;
+.myreview_div_1:before {
+	content: " ";
+	display: table;
 }
 
 .myreview_div_1:after{
@@ -137,7 +136,7 @@
 }
 
 .myreview_a_1:hover, .myreview_a_1:visited {
-	color: #666;
+	background: linear-gradient(#fff, #fff);
 }
 
 .myreview_formF{
@@ -169,6 +168,8 @@
 }
 
 .myreview_button_1{
+	background: #f5f5f5;
+    border: 1px solid #e6e6e6;
 	cursor: pointer !important;
 	position: relative;
 	display: inline-block;
@@ -196,6 +197,12 @@
     -webkit-appearance: button;
 }
 
+.myreview_button_1:hover .myreview_span_2 {
+    left: 16px;
+}
+
+
+
 .myreview_span_1{
 	width: 18px;
     height: 18px;
@@ -217,6 +224,11 @@
     text-shadow: none;
     -webkit-writing-mode: horizontal-tb;
 }
+
+.myreview_span_1:hover{
+	fill: currentColor;
+}
+
 
 .myreview_span_1:before{
 	background: none;
@@ -329,11 +341,11 @@
     right: auto;
     bottom: auto;
     margin-left: -8px;
-        border-top-color: rgba(255,255,255,0.1);
+    border-top-color: rgba(255,255,255,0.1);
 }
 
 .myreview_span_3:after{
-	    display: block;
+	display: block;
     position: absolute;
     content: " ";
     width: 0;
@@ -348,6 +360,16 @@
     margin-left: -7px;
     border-top-color: rgba(0,0,0,0.8);
 }
+
+.myreview_path_1{
+	
+}
+
+.myreview_button_1:hover .myreview_path_1 {
+    color: #333;
+    background: linear-gradient(#fff, #eee);
+}
+
 
 
 

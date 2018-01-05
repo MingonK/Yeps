@@ -1040,3 +1040,7 @@ element.style {
 	background: #0073bb;
 	color: white;
 }
+
+.icon--currentColor {
+	fill: currentColor;
+}
