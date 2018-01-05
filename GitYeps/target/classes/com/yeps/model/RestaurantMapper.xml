@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{raddress},#{hp2},#{hp3},#{foodstyle},#{mon, jdbcType=VARCHAR},#{tue, jdbcType=VARCHAR},#{wed, jdbcType=VARCHAR},#{thu, jdbcType=VARCHAR},
 		#{fri, jdbcType=VARCHAR},#{sat, jdbcType=VARCHAR},#{sun,jdbcType=VARCHAR},
 		#{reststyle},#{reserv},#{delivery},#{takeout},#{parking},#{kidszone},#{groupreserv},#{noise},#{alcohol},#{waiting},
-		#{wifi},#{toilet},#{tablecount},#{standard},#{busytime},sysdate,#{mnum},#{category})
+		#{wifi},#{toilet},#{tablecount},#{standard},#{busytime},sysdate,#{mnum},#{category},#{price})
 	</insert>
 	
 	<select id="getRest" parameterType="int" resultType="RestaurantDTO" >
@@ -44,7 +44,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="listRestaurant_takeout" parameterType="RestaurantDTO" resultType="RestaurantDTO" > 
 		select * from (select rownum rn, A.* from (select * from yeps_restaurant where takeout='가능' order by rnum desc)A) where rn between #{start} and #{end} 
 	</select>
-
+	
+	
 	<select id="getNewRestaurant" parameterType="RestaurantDTO" resultType="RestaurantDTO" > 
 		select * from yeps_restaurant where rownum=1 order by rnum desc 
 	</select>
