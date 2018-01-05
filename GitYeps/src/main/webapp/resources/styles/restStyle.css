@@ -752,8 +752,31 @@ overflow: hidden; width: 132px; height: 24px; background-position: 0 -216px;
    border-right: 12px solid transparent; border-left: none;
 }
 .js-analytics-click{
-   color: #0073bb;text-decoration: none;    cursor: pointer;
+   color: #0073bb; text-decoration: none; cursor: pointer;
 }
+
+.chiclet-link {
+	position: relative;
+    display: inline-block;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 12px;
+    line-height: 1.5em;
+    color: #999;
+    background: transparent;
+    box-shadow: none;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.chiclet-link:hover {
+	color: #333;
+	background: linear-gradient(#fff, #eee);
+}
+
 .midea-story{
    -webkit-box-flex: 1; flex: 1;min-width: 0;min-height: 0;
 }
@@ -838,7 +861,9 @@ overflow: hidden; width: 132px; height: 24px; background-position: 0 -216px;
 	opacity: 1;
 }
 
-
+.main-content-wrap a:hover {
+	text-decoration: underline;
+}
 
 
 

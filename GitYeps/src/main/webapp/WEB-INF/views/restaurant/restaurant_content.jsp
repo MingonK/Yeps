@@ -40,7 +40,7 @@
        								 <span class="business-attribute price-range" style="letter-spacing: 1px;white-space: nowrap;">￦￦</span>
         						</span>
         						<span class="category-str-list" style="margin-right: 6px;">
-			                  	 	<a href="#" style="white-space: nowrap; color: #0073bb;">${getRest.foodstyle}</a>
+			                  	 	${getRest.foodstyle}
 					    		</span>
 							</div>
 						</div>
@@ -379,7 +379,7 @@
 													<div class="restContent-meida-block" style="font-size: 12px; line-height: 1.5em; position: relative; display: flex;">
 														<div class="restContent-media-avatar" style="border-right-width: 9px;border-right: 6px solid transparent;border-left: none;">
 															<div class="restContent-photo-box">
-																<a href="#" style="color: #0073bb;">
+																<a href="member_details?mnum=${myReview.memberDTO.mnum}" style="color: #0073bb;">
 																	<img class="restContent-photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${myReview.memberDTO.memberPhotoDTO.filename}" width="60">
 																</a>
 															</div>
@@ -387,7 +387,7 @@
 														<div class="restContent-media-story" style="-webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;">
 															<ul class="restContent-user-info">
 																<li class="restContent-user-name">
-																	<a href="#" class="restContent-user-display-name" style="font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; cursor: pointer;">
+																	<a href="member_details?mnum=${myReview.memberDTO.mnum}" class="restContent-user-display-name" style="font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; cursor: pointer;">
 																		<c:if test="${empty myReview.memberDTO.nickname}">
 																			${myReview.memberDTO.email}
 																		</c:if>
@@ -595,7 +595,7 @@
 													
 												<div class="review-footer clearfix">
 													<div class="review-footer-actions pull-right clearfix" style="margin-top: 23px; float: right;">
-														<a class="chiclet-link show-tooltip js-analytics-click chiclet-link--flag" data-popup-open="popup-2" style="position: relative;display: inline-block;padding: 5px;border: 1px solid #ccc;border-radius: 3px;font-size: 12px;line-height: 1.5em;color: #999;background: transparent;box-shadow: none;white-space: nowrap;transition: all 0.3s ease;text-decoration: none;cursor: pointer;">
+														<a class="chiclet-link show-tooltip js-analytics-click chiclet-link--flag" data-popup-open="popup-2">
 															<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-flag icon--size-18 icon--currentColor">
 															    <svg id="18x18_flag" height="100%" viewBox="0 0 18 18" width="100%">
 															    	<path d="M6 10V3c4.976 1.098 4.024-1 8 0v7c-4.024-.976-3.024 1.024-8 0zM4 2h1v14H4V2z"></path>

@@ -24,14 +24,14 @@
 								<div class="media-block media-block biz-passport--slim" style="    position: relative;    display: flex;">
 									<div class="media-avatar">
 										<div class="photo-box pb-30s">
-											<a href="#" class="js-analytics-click" style="color: #0073bb;text-decoration: none;cursor: pointer;">
+											<a href="restaurant_content?rnum=${getRest.rnum}" class="js-analytics-click" style="color: #0073bb;text-decoration: none;cursor: pointer;">
 												<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${getRest.rest_filename}" class="photo-box-img" width="30" height="30" style="outline: none;margin-top: 3px;border-radius: 4px;vertical-align: middle;">
 											</a>
 										</div>
 									</div>
 									<div class="media-story" style="-webkit-box-flex: 1;flex: 1;min-width: 0;min-height: 0;">
 										<div class="media-title clearfix">
-											<a href="#" class="biz-name js-analytics-click" style="font-weight: bold;color: #0073bb;text-decoration: none;cursor: pointer;">
+											<a href="restaurant_content?rnum=${getRest.rnum}" class="biz-name js-analytics-click" style="font-weight: bold; color: #0073bb; cursor: pointer;">
 												<span>${getRest.rname}</span>
 											</a>
 										</div>
