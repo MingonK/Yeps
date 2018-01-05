@@ -185,16 +185,13 @@ public class RestaurantController {
 	@RequestMapping(value = "/restaurant_content")
 	public ModelAndView contentRest(HttpServletRequest req, @RequestParam(defaultValue = "1") int curPage) {
 		String rnum = req.getParameter("rnum");
-<<<<<<< HEAD
 		
 		
 		
-=======
 		if(rnum == null || rnum.trim().equals("")) {
 			return new ModelAndView("redirect: restaurant_list");
 		}
 
->>>>>>> branch 'master' of http://github.com/MingonK/Yeps.git
 		int count = reviewMapper.getRestaurantReviewCount(Integer.parseInt(rnum));
 		int pageScale = 10;
 		int blockScale = 10;

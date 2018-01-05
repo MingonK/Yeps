@@ -7,17 +7,16 @@ public class LargeMenuDTO {
 	private int large_menunum;
 	private int rnum;
 	private String large_name;
-	
 	public List<LargeMenuDTO> getLargeMenuList() {
 		return largeMenuList;
 	}
 	public void setLargeMenuList(List<LargeMenuDTO> largeMenuList) {
 		this.largeMenuList = largeMenuList;
 	}
-	public int getlarge_menunum() {
+	public int getLarge_menunum() {
 		return large_menunum;
 	}
-	public void setlarge_menunum(int large_menunum) {
+	public void setLarge_menunum(int large_menunum) {
 		this.large_menunum = large_menunum;
 	}
 	public int getRnum() {
@@ -32,6 +31,9 @@ public class LargeMenuDTO {
 	public void setLarge_name(String large_name) {
 		this.large_name = large_name;
 	}
+	
+	
+	
 	
 	
 }

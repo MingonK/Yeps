@@ -66,12 +66,33 @@ public class MenuController {
 		RestaurantDTO dto = restaurantMapper.getRest(rnum);
 
 		
-		List<SmallMenuDTO> largeList=largeMenuMapper.getLarge_SmallMenu(rnum);
+		
+		
+		List<LargeMenuDTO>largeList=largeMenuMapper.listLargeMenu(rnum);		
+		
+		for(int i=0;i<largeList.size();i++) {
+			smallMenuMapper.listSmallMenu(largeList.get(i).getLarge_menunum());
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+//		List<SmallMenuDTO> smallList=largeMenuMapper.getLarge_SmallMenu(rnum);
+//		List<LargeMenuDTO> largeList = null;
+//		
+//		for(int i=0;i<smallList.size();i++) {
+//			smallList.get(i).getLargeMenuDTO().getLarge_name();
+//		
+//		}
 		
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("getRest", dto);
-		mav.addObject("largeList", largeList);
+//		mav.addObject("largeList", largeList);
 //		mav.addObject("smallList", smallList);
 //		mav.addObject("smallList_size",smallList_size);
 		mav.setViewName("restaurant/restaurant_listMenu");
