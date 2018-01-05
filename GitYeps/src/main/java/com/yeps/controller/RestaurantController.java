@@ -29,6 +29,7 @@ import com.yeps.model.MemberDTO;
 import com.yeps.model.RestaurantDTO;
 import com.yeps.model.ReviewDTO;
 import com.yeps.service.FileMapper;
+import com.yeps.service.MemberMapper;
 import com.yeps.service.RestaurantMapper;
 import com.yeps.service.ReviewMapper;
 import com.yeps.service.S3Connection;
@@ -45,6 +46,8 @@ public class RestaurantController {
 	private FileMapper fileMapper;
 	@Autowired
 	private ReviewMapper reviewMapper;
+	@Autowired
+	private MemberMapper memberMapper;
 
 	@RequestMapping(value = "/jusoPopup")
 	public String jusoRest() throws Exception {
@@ -385,6 +388,7 @@ public class RestaurantController {
 			}
 		}
 		memberDTO.setImagecount(memberDTO.getImagecount()+imageCount);
+		memberMapper.updateImageCount(memberDTO.getMnum(), memberDTO.getMnum());
 		session.setAttribute("memberinfo", memberDTO);
 		map.put("fileList", fileList);
 		String url = "restaurant_upload_check?rnum="+rnum;
@@ -433,6 +437,7 @@ public class RestaurantController {
 		fileMapper.deleteRestaurantFile(filename, Integer.parseInt(rnum));
 		memberDTO.setImagecount(memberDTO.getImagecount()-1);
 		session.setAttribute("memberinfo", memberDTO);
+		memberMapper.updateImageCount(memberDTO.getMnum(), memberDTO.getMnum());
 		map.put("success", "success");
 		return map;
 	}
