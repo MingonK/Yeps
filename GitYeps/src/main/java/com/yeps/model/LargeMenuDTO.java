@@ -8,7 +8,6 @@ public class LargeMenuDTO {
 	private int rnum;
 	private String large_name;
 	
-	
 	public List<LargeMenuDTO> getLargeMenuList() {
 		return largeMenuList;
 	}
@@ -33,5 +32,6 @@ public class LargeMenuDTO {
 	public void setLarge_name(String large_name) {
 		this.large_name = large_name;
 	}
+	
 	
 }

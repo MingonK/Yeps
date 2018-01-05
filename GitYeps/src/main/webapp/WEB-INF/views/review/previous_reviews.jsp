@@ -5,6 +5,7 @@
 <html>
 <head>
 	<title>Review Of The Day Archive for Seoul</title>
+	<link rel="shortcut icon" type="image⁄x-icon" href="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css?ver=2"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css?ver=3"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/message.css?ver=7"/>"/>
@@ -129,7 +130,7 @@
 											 wrote a 
 											<b class="pre_b">review</b>
 											 for     
-											<a class="pre_a99" href="#">${dto.restaurantDTO.rname}</a>
+											<a class="pre_a99" href="restaurant_content?rnum=${dto.restaurantDTO.rnum}">${dto.restaurantDTO.rname}</a>
 										</p>
 										<div class="pre_div_33">
 											<div class="pre_div_33-1">

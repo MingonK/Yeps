@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yeps.model.MemberDTO;
+import com.yeps.model.MemberPhotoDTO;
 import com.yeps.model.RestaurantDTO;
 import com.yeps.model.ReviewDTO;
 import com.yeps.service.MemberMapper;
@@ -177,13 +178,16 @@ public class ReviewController {
 		// 로그인했을때의 그 이름을 통해서 나머지 값들을 꺼내서 보여줘야함
 		ReviewDTO rvdto = new ReviewDTO();
 
-		MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo");
+		MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo");	
+		MemberPhotoDTO mpdto = (MemberPhotoDTO) session.getAttribute("mainPhoto");
 		int mnum = mdto.getMnum();
 
 		// ===============================
 		String mode = req.getParameter("mode");
 		String where = req.getParameter("where");
-		String name = mdto.getName();
+		String nickname = mdto.getNickname();
+		String email = mdto.getEmail();
+		String filename = mpdto.getFilename();
 		String rnum = req.getParameter("rnum");
 		String rname = req.getParameter("rname");
 		String gradepoint = req.getParameter("gradepoint");
@@ -227,7 +231,9 @@ public class ReviewController {
 			}
 			// ===========================================
 			mav.addObject("mode", "write");
-			mav.addObject("name", name);
+			mav.addObject("nickname", nickname);
+			mav.addObject("email", email);
+			mav.addObject("filename", filename);
 			mav.addObject("rname", rname);
 			mav.addObject("gradepoint", gradepoint);
 			mav.addObject("content", content);
@@ -345,7 +351,7 @@ public class ReviewController {
 	    int num = count - pageScale * (curPage - 1) + 1;
 		List<RestaurantDTO> Find_Restaurant_Review_Get_rdto = restaurantMapper.review_restaurantFind(start, end, SearchFind);
 		
-		System.out.println("rest_filename출력:" +Find_Restaurant_Review_Get_rdto.get(0).getRest_filename());
+		//System.out.println("rest_filename출력:" +Find_Restaurant_Review_Get_rdto.get(0).getRest_filename());
 		
 		//getRnumList reviewCount StarAvg 
 

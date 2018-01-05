@@ -5,14 +5,12 @@
 <html>
 <head>
 	<title>${getRest.rname}</title>
-<script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js" ></script>
-<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=jD9qGVpvZh7Zobclojwp&submodules=geocoder"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/restStyle.css?ver=1"/>"/>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css?ver=1"/>"/>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css?ver=2"/>"/>
-
-<title>레스토랑</title>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js" ></script>
+	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=jD9qGVpvZh7Zobclojwp&submodules=geocoder"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/restStyle.css?ver=1"/>"/>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css?ver=1"/>"/>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css?ver=2"/>"/>
 </head>
 <%@include file="../top.jsp" %>
 	<div class="main" style="background: white;">
@@ -366,7 +364,7 @@
 												<div class="restContent-review-widget" style="margin: 0 -15px;">
 													<div class="restContent-user" style="float: left;padding: 0 15px;min-height: 1px;    box-sizing: border-box;width: 37.5%;">
 														<div class="restContent-user-content" style="margin-top: -3px;">
-															<img src="https://s3-media4.fl.yelpcdn.com/assets/2/www/img/b5b7ea174ecb/writeareview/empty_profile.png" height="68">
+															<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/empty_profile.png" height="68">
 														</div>
 													</div>
 												<div class="restContent-review-wrapper" style="float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 62.5%;">
@@ -381,7 +379,7 @@
 													 			<form name="starpointF" method="post" action="review_write?mode=write&where=rest">
 																	<div>
 																		<ul id="star_rating" style="float: left; margin: 0px; padding: 0px; display: inline-block; width: 162px; height: 30px; overflow: hidden; vertical-align: middle;
-							                          				     background: url(https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/a5aa4dca29f3/assets/img/stars/selector_stars.png) no-repeat;">
+							                          				     background: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/selector_stars.png) no-repeat;">
 																			<li class="selector star-selector-li-1_4" data-label="Eek! Methinks not.">
 							                            				     	<input id="rating-1" type="radio" value="1" name="rating" class="star-selector-input" style="cursor: pointer; border: none; margin: 0; padding: 0; width: 30px; height: 30px; opacity: 0;">
 							                                					 	<label class="star-selector_label" for="rating-1">1 (Eek! Methinks not.)</label>
@@ -1095,7 +1093,6 @@
 		
 		
 <script>
-	 $(function() {
 		//----- OPEN
 		$('[data-popup-open]').on('click', function(e)  {
 			var targeted_popup_class = jQuery(this).attr('data-popup-open');
@@ -1107,7 +1104,6 @@
          			return;
         		}
         	}
-			
 			
 			$('body').css('overflow','hidden');
         	$('#reply_flag_content_popup_error_message').css('display', 'none');
@@ -1125,10 +1121,10 @@
 			$('body').css('overflow','auto');
 			e.stopPropagation();
         	e.preventDefault();;
-			});
-		});   
+		});
+
    
-   $(document).on('mouseenter', '.selector', function(e) {
+   $('html').on('mouseenter', '.selector', function(e) {
 	   var star = $(e.target).val();
        $(this).parent().removeClass('i-selector-stars--extra-large-0');
        $(this).parent().removeClass('i-selector-stars--extra-large-1');
@@ -1152,7 +1148,7 @@
        } 
    });
    
-   $(document).on("mouseleave",".selector",function(){
+   $('html').on("mouseleave",".selector",function(){
 	   $(this).parent().removeClass('i-selector-stars--extra-large-0');
        $(this).parent().removeClass('i-selector-stars--extra-large-1');
        $(this).parent().removeClass('i-selector-stars--extra-large-2');
@@ -1161,13 +1157,13 @@
        $(this).parent().removeClass('i-selector-stars--extra-large-5');
     });
    
-   $(document).on("click",".selector",function(e){
+   $('html').on("click",".selector",function(e){
 	   var star = $(e.target).val();
        $('#star').val(star);
        $(this).parent().parent().parent().submit();
     });
    
-   $(document).on("click","#reply_flag_popup_submit_button",function(){
+   $('html').on("click","#reply_flag_popup_submit_button",function(){
 	   $('#reply_flag_popup_form').submit();
     });
 
@@ -1306,9 +1302,9 @@ function list(page){
 							'</div>'+			
 							'<div class="restContent-review-wrapper" style="float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 62.5%;">'+
 								'<div class="restContent-review-content" style="padding: 0 12px 6px 0; min-height: 156px; word-wrap: break-word !important; word-break: break-word !important; overflow-wrap: break-word !important;">'+
-									'<div class="restContent-review-rating" style="margin: 6px 0;width:100%;overflow:hidden;height:auto;">'+
+									'<div class="restContent-review-rating" style="margin: 6px 0; width:100%; overflow:hidden; height:auto;">'+
 										'<div>'+
-											'<div class="restList-star-rating-'+item.gradepoint+'" >'+
+											'<div class="restList-star-rating-'+item.gradepoint+'">'+
 												'<img class="offscreen" '+
 													'src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/stars.png" '+
 													'width="84" height="303" alt="4.0 star rating" '+
@@ -1659,8 +1655,6 @@ function check() {
              pagingHtml += '</div>';
 
              $('.event_list_paging_section').append(pagingHtml);
-         	   
-         	   
             });
          	   
          },
@@ -1668,7 +1662,6 @@ function check() {
             alert("불러오기 실패");
          },
     });
-	
 	return true;
 }
 </script>

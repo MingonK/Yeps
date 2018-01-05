@@ -21,4 +21,5 @@ public class SmallMenuMapper {
 	public List<SmallMenuDTO> listSmallMenu(int large_menunum) {
 		return sqlSession.selectList("listSmallMenu", large_menunum);
 	}
+	
 }

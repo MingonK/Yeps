@@ -4,6 +4,7 @@
 
 <html>
 <head>
+   <title>Write a Review</title>
    <title>레스토랑 리스트 사진목록 + 리뷰 + 평점 달 수 있도록 구현해둔 곳</title>
    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css?ver=4"/>"/>
    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css?ver=6"/>"/>
@@ -87,8 +88,6 @@
          </div>
       </div>
    </div>
-   
-   
    <div class="resIMG_div_42" align="center">
       <p class="resIMG_p_2">
          Your review for
@@ -98,18 +97,18 @@
    </div>
    <div class="resIMG_div_43" align="center">
       <div class="resIMG_div_44">
-      <!--  
-         <div class="resIMG_div_45">
-            <div class="resIMG_div_46">
-               <div class="resIMG_div_47">
-      -->         
                   <div class="resIMG_div_48">
                      <div class="resIMG_div_49">
                         <div class="resIMG_div_50">
                            <div class="resIMG_div_51">
                               <div class="resIMG_div_52">
                                  <a class="resIMG_a_3" href="#">
-                                    <img class="resIMG_img_3" src="https://s3-media2.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/60s.jpg" srcset="https://s3-media2.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/ms.jpg 1.67x,https://s3-media2.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/120s.jpg 2.00x,https://s3-media2.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/90s.jpg 1.50x,https://s3-media2.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/168s.jpg 2.80x,https://s3-media2.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/180s.jpg 3.00x">   
+                                 	<c:if test="${empty filename}">
+                                 		<img class="resIMG_img_3" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png">
+                                 	</c:if>
+                                 	<c:if test="${!empty filename}">
+                                   		<img class="resIMG_img_3" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${filename}">
+                                   	</c:if>	    
                                  </a>
                               </div>
                            </div>
@@ -117,7 +116,12 @@
                               <ul class="resIMG_ul_4">
                                  <li   class="resIMG_li_4">
                                     <a class="resIMG_a_4" href="#">
-                                       ${name}..
+                                       <c:if test="${empty nickname}">
+					   						${email}
+					   				   </c:if>
+					   				   <c:if test="${!empty nickname}">
+					   					  	${nickname}
+					   				   </c:if>
                                     </a>
                                  </li>
                                  <li class="resIMG_li_4">
@@ -127,6 +131,8 @@
                                  </li>
                               </ul>
                               <ul class="resIMG_ul_4">
+                              
+                              <!--  
                                  <li class="resIMG_li_5">
                                     <span class="resIMG_span_10">
                                        <svg class="resIMG_svg_4">
@@ -139,6 +145,8 @@
                                     <b class="resIMG_b_3">1</b>
                                     friend
                                  </li>
+                             --> 
+                                 
                                  <li class="resIMG_li_5">
                                     <span class="resIMG_span_11">
                                        <svg class="resIMG_svg_5">
@@ -172,6 +180,8 @@
                         </p>
                      </div>
                      <div class="resIMG_div_60">
+                     
+                     	<!--  
                         <a class="resIMG_a_5" href="#">
                            <span class="resIMG_span_13">
                               <svg class="resIMG_svg_6">
@@ -180,6 +190,8 @@
                            </span>
                            Add to list
                         </a>
+                        -->
+                        
                         <a class="resIMG_a_5" href="review_write?rnum=${rnum}&mode=update">
                            <span class="resIMG_span_14">
                               <svg class="resIMG_svg_7">
@@ -190,84 +202,12 @@
                         </a>
                      </div>
                   </div>
-                  <!-- 
-               </div>
-            </div>   
-         </div>
-         -->
-         <!--  
-         <div class="resIMG_div_61">
-            <h3 class="resIMG_h3_2">
-               Share Your Review            
-            </h3>
-            <ul class="resIMG_ul_5">
-               <li class="resIMG_li_6">
-                  <button class="resIMG_button_3">
-                     <span class="resIMG_span_15">
-                        <div class="resIMG_div_62">
-                           <span class="resIMG_span_16">
-                              <svg class="resIMG_svg_8">
-                                 <path d="M21 6.417A7.364 7.364 0 0 1 18.88 7a3.708 3.708 0 0 0 1.623-2.044 7.41 7.41 0 0 1-2.346.896 3.693 3.693 0 0 0-6.292 3.368 10.483 10.483 0 0 1-7.612-3.858c-.318.545-.5 1.18-.5 1.856a3.69 3.69 0 0 0 1.643 3.074 3.674 3.674 0 0 1-1.673-.462v.047c0 1.79 1.273 3.28 2.962 3.62a3.714 3.714 0 0 1-1.667.064 3.697 3.697 0 0 0 3.45 2.57 7.41 7.41 0 0 1-4.587 1.58 7.8 7.8 0 0 1-.88-.05 10.45 10.45 0 0 0 5.66 1.66c6.8 0 10.51-5.627 10.51-10.507 0-.16 0-.32-.01-.48A7.496 7.496 0 0 0 21 6.418z"></path>
-                              </svg>
-                           </span>
-                            Share on Twitter
-                        </div>
-                     </span>
-                  </button>
-               </li>
-               <li class="resIMG_li_6">
-                  <button class="resIMG_button_4">
-                     <span class="resIMG_span_17">
-                        <div class="resIMG_div_63">
-                           <span class="resIMG_span_18">
-                              <svg class="resIMG_svg_9">
-                                 <path d="M13 21v-8h3.15l.412-3H13V7.547C13 6.62 13.65 6 14.98 6H17V3.126C16 3.086 15.493 3 14.323 3 11.88 3 10 4.49 10 7.23V10H7v3h3v8h3z"></path>
-                              </svg>
-                           </span>
-                            Share on Facebook
-                        </div>
-                     </span>
-                  </button>
-               </li>
-               <li class="resIMG_li_6">
-                  <div class="resIMG_div_64">
-                     <span class="resIMG_span_19">
-                        <span class="resIMG_span_20">
-                           <svg class="resIMG_svg_10">
-                              <path d="M14 15H4c-.55 0-1-.45-1-1V4c0-.55.45-1 1-1h3v1H4v10h10v-3h1v3c0 .55-.45 1-1 1zm-5.12-4.465L7.463 9.12l3.83-3.827L9 3h6v6l-2.293-2.293-3.828 3.828z"></path>
-                           </svg>
-                        </span>
-                     </span>
-                     <span class="resIMG_span_21">
-                        <input class="resIMG_input_3" type="text" value="http://www.yelp.com/biz/thai-villa-new-york-2?hrid=EAuO-fRaEqvFynouC-GEAg" readonly>
-                     </span> 
-                  </div>
-               </li>
-            </ul>
-         </div>
-         -->
       </div>
    </div>
    
    
    
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
+
    
    <div class="resIMG_div_27">
       <h2 class="resIMG_h2_2">
@@ -282,16 +222,20 @@
                <div class="resIMG_div_29">
                   <div class="resIMG_div_30">
                      <div class="resIMG_div_31">
-                        <img class="resIMG_img_1" height="150" width="150" src="//s3-media2.fl.yelpcdn.com/bphoto/i2dT3NgbJ68PX9iHygsEfQ/ls.jpg">   
+                        <img class="resIMG_img_1" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${dto.rest_filename}">   
                      </div>
                      <div class="resIMG_div_32">
                         <h3 class="resIMG_h3_1">
                            <a class="resIMG_a_1" href="#">
-                              <span class="resIMG_span_3">${dto.rname}</span>
+                              <span class="resIMG_span_3">
+                              	<a href="restaurant_content?rnum=${dto.rnum}">
+                              		${dto.rname}
+                              	</a>
+                              </span>
                            </a>   
                         </h3>
                         <div class="resIMG_div_32-1">
-                           ${dto.raddress}
+                           ${dto.roadAddrPart1}
                         </div>
                         <div class="resIMG_div_33">
                           <form name="starpointF" method="get" action="review_write?mode=write">
@@ -333,11 +277,6 @@
                         </div>
                         <div class="resIMG_div_34">
                            <div class="resIMG_div_35">
-                              <span class="resIMG_span_4" aria-hidden="true">
-                                 <svg class="resIMG_svg_2">
-                                    <path d="M10.414 9l4.043-4.043a1 1 0 0 0-1.414-1.414L9 7.586 4.957 3.543a1 1 0 0 0-1.414 1.414L7.586 9l-4.043 4.043a1 1 0 0 0 1.414 1.414L9 10.414l4.043 4.043a.997.997 0 0 0 1.414 0 1 1 0 0 0 0-1.414L10.414 9z"></path>
-                                 </svg>
-                              </span>
                               <span class="resIMG_span_5">
                                  <span class="resIMG_span_6">
                                     Ignore this suggestion for a while
