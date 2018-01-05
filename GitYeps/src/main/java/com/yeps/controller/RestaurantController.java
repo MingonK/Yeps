@@ -209,8 +209,10 @@ public class RestaurantController {
 		
 
 		ReviewDTO existMyReview = null;
+		System.out.println("existMyReview 출력 전:" + existMyReview);
 		if(loginMember != null) {
 			existMyReview = reviewMapper.findMyReview(Integer.parseInt(rnum), loginMember.getMnum());
+			System.out.println("existMyReview 출력 후:" + existMyReview);
 		}
 		
 		if(existMyReview == null) {
