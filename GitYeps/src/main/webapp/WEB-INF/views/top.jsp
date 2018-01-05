@@ -606,7 +606,6 @@
 		$('#page_header_location_inputs').val(location);
 		$('#page_header_searchDate_inputs').val(searchword);
 		
-		
 	});
 		$(document).on("mouseenter","#footer_list_block",function(){
         $('#header_page_footer_dropdown').attr('id', 'header_page_footer_dropdown_view');
