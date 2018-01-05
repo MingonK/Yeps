@@ -389,7 +389,7 @@
 													</div>
 												</div>
 											</div>
-											<div class="restContent-review-wrapper">
+											<div class="restContent-review-wrapper add_margin_top_div">
 												<p class="myreview_p_1">
 													Finish your review of 
 													<strong class="myreview_strong_1">${getRest.rname}</strong>
@@ -414,7 +414,7 @@
 													</p>
 													<div class="myreview_div_6">
 
-														<a class="myreview_a_1" href="/writeareview/biz/V7lXZKBDzScDeGB8JmnzSA?return_url=%2Fbiz%2FV7lXZKBDzScDeGB8JmnzSA">Finish My Review</a>
+														<a class="myreview_a_1" href="review_write?star=${myReview.gradepoint}&content=${myReview.content}&rnum=${getRest.rnum}&updatemode=${updatemode}">리뷰수정</a>
 														<form class="myreview_formF" method="post">
 															<input class="myreview_input_1" type="hidden">
 															<input class="myreview_input_1" type="hidden">
