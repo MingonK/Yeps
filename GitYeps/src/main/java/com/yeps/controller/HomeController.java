@@ -1,11 +1,15 @@
 package com.yeps.controller;
 
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,7 +32,7 @@ public class HomeController {
 	private RestaurantMapper restaurantMapper;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView home(Locale locale, Model model) {
+	public ModelAndView home(Locale locale, Model model, HttpServletRequest req) {
 		// 최고평점을 index page로 보내주기
 		ModelAndView mav = new ModelAndView();
 		int NBPmnum = reviewMapper.new_BestGradePoint();
@@ -59,6 +63,35 @@ public class HomeController {
 			reviewCount.add(reviewMapper.getRestaurantReviewCount(dto.getRnum()));
 			starAvg.add(reviewMapper.getStarAvg(dto.getRnum()));
 		}
+		
+		Cookie[] cookies = req.getCookies();
+		List<String> locationList = new ArrayList<String>();
+		if(cookies!=null) {
+			int j = 0;
+			for (int i = cookies.length-1 ; i>=0; i--) {
+				String name = cookies[i].getName(); 
+				try {
+					String value = URLDecoder.decode(cookies[i].getValue(),"utf-8");
+					if(name.contains("location")) {
+						String[] addr = value.split(" ");
+						
+						if(addr.length >=3) {
+							value= addr[1] + " " + addr[2];
+						}
+						locationList.add(value);
+						j+=1;
+						if(j == 6) {
+							break;
+						}
+					}
+				}catch(Exception e) {
+					System.out.println("불러오기 실패");
+				}
+			}
+		}
+		
+		//최근 검색 리스트
+		mav.addObject("locationList", locationList);
 
 		// restaurantMapper.getRandomImage();
 		mav.addObject("recentReviewInfoList", recentReviewInfoList);
@@ -74,7 +107,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/main")
-	public ModelAndView main() {
+	public ModelAndView main(HttpServletRequest req) {
 		// 최고평점을 index page로 보내주기
 		ModelAndView mav = new ModelAndView();
 		int NBPmnum = reviewMapper.new_BestGradePoint();
@@ -106,6 +139,35 @@ public class HomeController {
 			reviewCount.add(reviewMapper.getRestaurantReviewCount(dto.getRnum()));
 			starAvg.add(reviewMapper.getStarAvg(dto.getRnum()));
 		}
+		
+		Cookie[] cookies = req.getCookies();
+		List<String> locationList = new ArrayList<String>();
+		if(cookies!=null) {
+			int j = 0;
+			for (int i = cookies.length-1 ; i>=0; i--) {
+				String name = cookies[i].getName(); 
+				try {
+					String value = URLDecoder.decode(cookies[i].getValue(),"utf-8");
+					if(name.contains("location")) {
+						String[] addr = value.split(" ");
+						
+						if(addr.length >=3) {
+							value= addr[1] + " " +addr[2];
+						}
+						locationList.add(value);
+						j+=1;
+						if(j == 6) {
+							break;
+						}
+					}
+				}catch(Exception e) {
+					System.out.println("불러오기 실패");
+				}
+			}
+		}
+		
+		//최근 검색 리스트
+		mav.addObject("locationList", locationList);
 
 		mav.addObject("recentReviewInfoList", recentReviewInfoList);
 		mav.addObject("review_of_the_day_restaurantDTO", review_of_the_day_restaurantDTO);

@@ -21,13 +21,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from yeps_restaurant where rnum = #{rnum}
 	</select>
 	
-	<select id="uploadFileList" resultType="FileDTO">
-		select * from yeps_files where rnum=#{rnum}
-	</select>
-	
 	<select id="getCount" resultType="int">
 		select count(*) from yeps_restaurant
 	</select>
+	
 	<select id="getImageCount" resultType="int">
 		select count(*) from yeps_files where rnum=#{rnum}
 	</select>

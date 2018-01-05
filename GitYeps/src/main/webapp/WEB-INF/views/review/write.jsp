@@ -21,7 +21,7 @@
 				<div class="content_inner">
 					<div class="content_innter_header">
 						<h2 class="content_innter_header_text">
-							<a href="review_selectedres?rnum=${rnum}" class="review_write_Rname_font">
+							<a href="restaurant_content?rnum=${rnum}" target="_blank" class="review_write_Rname_font">
 								${rname}
 							</a>
 						</h2>
@@ -668,7 +668,6 @@ $(function() {
               data : queryString,
               dataType : 'json',
               success : function(responseData){
-                 alert(responseData.msg);
                  var targeted_popup_class = $('.popup-close').attr('data-popup-close');
                  $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
                  memberinfo = responseData.memberinfo;

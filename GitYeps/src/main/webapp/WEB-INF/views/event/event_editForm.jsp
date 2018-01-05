@@ -380,6 +380,10 @@
 						return false;
 					}
 				}
+			} else {
+				if(!confirm("마감일을 지정하지 않으시겠습니까?")) {
+					return false;
+				}
 			}
 			
 			if(event_register.store_address.value=="") {

@@ -1,3 +1,363 @@
+.myreview_p_1{
+	margin-bottom: 12px;
+	    display: block;
+	        text-align: -webkit-match-parent;
+	        color: #333;
+}
+
+.myreview_strong_1{
+	font-weight: bold;
+	text-align: -webkit-match-parent;
+	        color: #333;
+}
+
+.myreview_div_1{
+	    padding: 11px;
+    background: #f5f5f5;
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+        display: block;
+            text-align: -webkit-match-parent;
+}
+
+.myreview_div_1:before{
+	    content: " ";
+    display: table;
+}
+
+.myreview_div_1:after{
+	    content: " ";
+    display: table;
+        clear: both;
+}
+
+.myreview_div_2{
+	    display: table;
+    min-width: 100%;
+    table-layout: auto;
+        text-align: -webkit-match-parent;
+	color: #333;
+}
+
+.myreview_div_3{
+	    width: 100%;
+	        box-sizing: border-box;
+    display: table-cell;
+    vertical-align: top;
+        text-align: -webkit-match-parent;
+        color: #333;
+}
+ 
+.myreview_div_4{
+	    position: relative;
+    overflow: hidden;
+        width: 102px;
+    height: 18px;
+    background-position: 0 -402px;
+        background: url(https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png) no-repeat;
+    background-size: 132px 560px;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: -webkit-match-parent;
+        color: #333;
+}
+
+.myreview_div_5{
+	    box-sizing: border-box;
+    display: table-cell;
+    vertical-align: top;
+    text-align: -webkit-match-parent;
+        color: #333;
+}
+
+.myreview_p_2{
+	    font-size: 12px;
+    line-height: 1.5em;
+    color: #999;
+    white-space: nowrap;
+        text-align: right;
+            margin-bottom: 12px;
+                display: block;
+}
+
+.myreview_p_3{
+	    word-wrap: break-word !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+        margin-bottom: 12px;
+            display: block;
+            text-align: -webkit-match-parent;
+        color: #333;
+}
+
+.myreview_div_6{
+	    display: block;
+	    text-align: -webkit-match-parent;
+        color: #333;
+}
+
+.myreview_div_6:before{
+	    content: " ";
+    display: table;
+}
+
+.myreview_div_6:after{
+	    content: " ";
+    display: table;
+	    clear: both;
+}
+
+.myreview_a_1{
+	text-decoration: none !important;
+	display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+    cursor: pointer;
+    border: 1px solid;
+    font-weight: bold;
+    text-align: center;
+    user-select: none;
+    border-color: #ccc;
+    color: #666;
+    background-color: #f7f7f7;
+    background: linear-gradient(#fff, #f7f7f7);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    border-radius: 3px;
+    float: left;
+    padding: 5px 8px;
+    font-size: 12px;
+    line-height: 1.5em;
+}
+
+
+.myreview_a_1:not{
+	padding: 5px 8px;
+    font-size: 12px;
+    line-height: 1.5em;
+}
+
+.myreview_a_1:hover, .myreview_a_1:visited {
+	color: #666;
+}
+
+.myreview_formF{
+	float: right;
+	display: block;
+	text-align: -webkit-match-parent;
+	color: #333;
+}
+
+.myreview_input_1{
+    color: inherit;
+    font: inherit;
+    margin: 0;
+    font-weight: normal;
+    -webkit-appearance: initial;
+    background-color: initial;
+    cursor: default;
+    padding: initial;
+    border: initial;
+    display: none;
+    -webkit-rtl-ordering: logical;
+    text-rendering: auto;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    -webkit-writing-mode: horizontal-tb;
+}
+
+.myreview_button_1{
+	cursor: pointer !important;
+	position: relative;
+	display: inline-block;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 12px;
+    line-height: 1.5em;
+    color: #999;
+    background: transparent;
+    box-shadow: none;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    overflow: visible;
+    align-items: flex-start;
+    text-align: center;
+    box-sizing: border-box;
+    text-rendering: auto;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    -webkit-writing-mode: horizontal-tb;
+    -webkit-appearance: button;
+}
+
+.myreview_span_1{
+	width: 18px;
+    height: 18px;
+    fill: currentColor;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    overflow: hidden;
+    top: -.1em;
+    cursor: pointer !important;
+    color: #999;
+    white-space: nowrap;
+    text-align: center;
+    text-rendering: auto;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    -webkit-writing-mode: horizontal-tb;
+}
+
+.myreview_span_1:before{
+	background: none;
+	content: '';
+	position: absolute;
+    display: block;
+    left: 0;
+}
+
+.myreview_span_1:after{
+	content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.myreview_svg_1{
+	position: absolute;
+    width: 100%;
+    height: 100%;
+    fill: inherit;
+    display: block;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    cursor: pointer !important;
+    color: #999;
+	white-space: nowrap;
+	text-align: center;
+	text-rendering: auto;
+	letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    -webkit-writing-mode: horizontal-tb;
+    viewBox: 0 0 18 18;
+}
+
+.myreview_svg_1:not(:root){
+	overflow: hidden;
+}
+
+.myreview_span_2{
+	position: absolute;
+    left: -9999px;
+    bottom: 100%;
+    width: 250px;
+    margin-left: -125px;
+    margin-bottom: 5px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer !important;
+    color: #999;
+    white-space: nowrap;
+    text-rendering: auto;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+	-webkit-writing-mode: horizontal-tb;
+}
+
+.myreview_span_2:after{
+	z-index: 1013;
+}
+
+.myreview_span_3{
+	z-index: 1012;
+	display: inline-block;
+    position: relative;
+    padding: 6px 9px;
+    vertical-align: middle;
+    white-space: normal;
+    font-size: 12px;
+    pointer-events: none;
+    font-weight: bold;
+    line-height: 18px;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    border-radius: 5px;
+    text-shadow: none;
+    text-align: left;
+    cursor: default;
+    box-shadow: 0 1px rgba(255,255,255,0.1);
+    text-rendering: auto;
+                letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    -webkit-writing-mode: horizontal-tb;
+}
+
+.myreview_span_3:before{
+	    display: block;
+    position: absolute;
+    content: " ";
+    width: 0;
+    height: 0;
+    border: 8px solid transparent;
+    margin: auto;
+    z-index: 5;
+    left: 50%;
+    top: 100%;
+    right: auto;
+    bottom: auto;
+    margin-left: -8px;
+        border-top-color: rgba(255,255,255,0.1);
+}
+
+.myreview_span_3:after{
+	    display: block;
+    position: absolute;
+    content: " ";
+    width: 0;
+    height: 0;
+    border: 7px solid transparent;
+    margin: auto;
+    z-index: 5;
+    left: 50%;
+    top: 100%;
+    right: auto;
+    bottom: auto;
+    margin-left: -7px;
+    border-top-color: rgba(0,0,0,0.8);
+}
+
+
+
+
+
+
+
+
+
+
 .resFind_div1 {
 	background: white;
 	min-width: 1020px;
@@ -169,6 +529,15 @@
 	word-break: break-word !important;
 	overflow-wrap: break-word !important;
 	text-align: -webkit-match-parent;
+}
+
+.resFind_b_2{
+	font-size: 20;
+	font-weight: normal;
+    color: #333;
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
 }
 
 .resFind_span_1 {
@@ -1376,7 +1745,6 @@
 .pre_div9-1-1-1-1 {
 	margin: 0;
 	padding: 0;
-	border: 1px solid blue;
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;

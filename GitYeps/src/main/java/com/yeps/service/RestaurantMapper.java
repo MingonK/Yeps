@@ -8,7 +8,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.yeps.model.FileDTO;
 import com.yeps.model.RestaurantDTO;
 
 @Service
@@ -48,10 +47,6 @@ public class RestaurantMapper {
 
 	public int getImageCount(int rnum) {
 		return sqlSession.selectOne("getImageCount", rnum);
-	}
-
-	public List<FileDTO> getFileList(int rnum) {
-		return sqlSession.selectList("uploadFileList", rnum);
 	}
 
 	// ------------------------------------------------------------------

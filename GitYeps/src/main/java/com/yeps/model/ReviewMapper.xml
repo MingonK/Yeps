@@ -222,13 +222,14 @@
    <select id="getMemberReview"  parameterType="java.util.HashMap" resultMap="MemberReviewMap">
       select * from (select rownum rn, A. * from(select
                R.content
+              ,R.rvnum
               ,M.name
               ,M.reviewcount
               ,M.imagecount
               ,M.address
               ,M.joindate
         from yeps_review R, yeps_member M where R.mnum = M.mnum and M.mnum = #{mnum} order by rvnum desc)A)
-        where rn between start=#{start} and end=#{end}
+        where rn between #{start} and #{end}
     </select>
    
 	<resultMap type="reviewDTO" id="LastReviewMap">
@@ -394,8 +395,45 @@
       where R.mnum = M.mnum and R.mnum = P.mnum and RT.rnum = R.rnum and ismainphoto = 'y' and recentreview = 'y'
       order by rvnum desc)A) where rn between #{start} and #{end}
   	</select>
+  
   	
-   
+  	<resultMap type="ReviewDTO" id="myReviewMap">
+  		<id column="rvnum" property="rvnum"/>
+      	<result column="rvnum" property="rvnum"></result>
+      	<result column="content" property="content"></result>
+      	<result column="reg_date" property="reg_date"></result>
+      	<result column="gradepoint" property="gradepoint"></result>
+      
+      	<association javaType="MemberDTO" property="memberDTO">
+			<id column="mnum" property="mnum"></id>
+			<result column="mnum" property="mnum"></result>
+         	<result column="email" property="email"></result>
+         	<result column="address" property="address"></result>
+         	<result column="reviewcount" property="reviewcount"></result>
+         	<result column="imagecount" property="imagecount"></result>
+         	<result column="nickname" property="nickname"></result>
+         	
+         	<association javaType="MemberPhotoDTO" property="memberPhotoDTO">
+            	<result column="filename" property="filename"></result>
+         	</association>
+      	</association>
+  	</resultMap>
+  	
+  	
+   <select id="findMyReview" parameterType="java.util.HashMap" resultMap="myReviewMap">
+   		select R.content
+   				, R.reg_date
+   				, R.gradepoint
+   				, M.email
+   				, M.address
+   				, M.reviewcount
+   				, M.imagecount
+   				, M.nickname
+   				, M.mnum
+   				, P.filename
+   		from yeps_review R, yeps_member M, yeps_member_photos P
+   		where R.mnum = M.mnum and M.mnum = P.mnum and P.ismainphoto='y' and R.rnum = #{rnum} and R.mnum = #{mnum}
+   </select>
    
   	
 </mapper>		

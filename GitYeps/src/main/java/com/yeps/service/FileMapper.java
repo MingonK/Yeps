@@ -134,4 +134,23 @@ public class FileMapper {
 			return false;
 		}
 	}
+	
+	public int deleteRestaurantFile(String filename, int rnum) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("filename", filename);
+		map.put("rnum", rnum);
+		return sqlSession.delete("deleteRestaurantFile", map);
+	}
+	
+	public List<FileDTO> getPagedFileList(int rnum, int start, int end) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("rnum", rnum);
+		map.put("start", start);
+		map.put("end", end);
+		return sqlSession.selectList("getPagedFileList", map);
+	}
+	
+	public int getAllFileCount(int rnum) {
+		return sqlSession.selectOne("getAllFileCount", rnum);
+	}
 }

@@ -73,7 +73,7 @@
    </div>
    
    <div class="loading_wapper">
-		<div class="loading_img">
+		<div class="loading_img" style="margin: -20px -55px;">
 		</div>
 	</div>
     <script type="text/javascript">
@@ -196,6 +196,14 @@
                for(var i = 0; i < files.length; i++) {
                   data.append('files'+i, files[i]);
                }
+               
+            $(document).ajaxStart(function() {
+   				$('.loading_wapper').fadeIn(500);
+   			}) 
+   			
+   			$(document).ajaxStop(function() {
+   				$('.loading_wapper').fadeOut(500);
+   			})
                
                var url = "member_fileUpLoad";
                $.ajax({

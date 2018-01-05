@@ -111,4 +111,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="isExistRestaurantMainPhoto" parameterType="int" resultType="int">
 		select count(*) from yeps_files where rnum = #{rnum} and ismainphoto = 'y'
 	</select>
+	
+	<delete id="deleteRestaurantFile" parameterType="java.util.HashMap">
+		delete yeps_files where rnum = #{rnum} and filename = #{filename}
+	</delete>
+	
+	<select id="getPagedFileList" parameterType="java.util.HashMap" resultType="FileDTO">
+		select * from (select rownum rn, A.* from (select * from yeps_files where rnum=#{rnum} order by filenum desc)A) where rn between #{start} and #{end}
+	</select>
+	
+	<select id="getAllFileCount" parameterType="int" resultType="int">
+		select count(*) from yeps_files where rnum = #{rnum}
+	</select>
+
 </mapper>

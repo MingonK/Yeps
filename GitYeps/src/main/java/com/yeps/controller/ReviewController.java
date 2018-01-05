@@ -44,14 +44,15 @@ public class ReviewController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("set", "review");
 		mav.addObject("reviewList", list);
-		mav.setViewName("review/list");
+		mav.setViewName("redirect:member_details");
 		return mav;
 	}
 
 	@RequestMapping(value = "/review_delete")
 	public ModelAndView review_delete(HttpServletRequest req) {
 		String rvnum = req.getParameter("rvnum");
-		int res = reviewMapper.deleteReview(rvnum);
+		System.out.println(rvnum);
+		int res = reviewMapper.deleteReview(Integer.parseInt(rvnum));
 		ModelAndView mav = new ModelAndView();
 		String msg;
 		String url;
@@ -171,10 +172,7 @@ public class ReviewController {
 
 	@RequestMapping(value = "/review_insert")
 	public ModelAndView review_insert(HttpServletRequest req, HttpSession session) {
-		// ★dto에 값 입력 내가 하는부분은 나중에 수정해야 할 부분임
-
 		// ★ if (res > 0)일때 /식당명/이름/위치(Korea, Seoul)/friend/리뷰수/별점/작성일/내용 가지고 가기!
-
 		// 로그인했을때의 그 이름을 통해서 나머지 값들을 꺼내서 보여줘야함
 		ReviewDTO rvdto = new ReviewDTO();
 
@@ -237,7 +235,7 @@ public class ReviewController {
 			mav.addObject("rname", rname);
 			mav.addObject("gradepoint", gradepoint);
 			mav.addObject("content", content);
-			mav.addObject("joindate", Get_InsertReviewDate);
+			mav.addObject("reg_date", Get_InsertReviewDate);
 			mav.addObject("rlist", rlist);
 			mav.setViewName("review/restaurantIMG");
 			return mav;
@@ -280,13 +278,15 @@ public class ReviewController {
 		int start = YepsPager.getPageBegin();
 		int end = YepsPager.getPageEnd();
 		int num = reviewcount - pageScale * (curPage - 1) + 1;
-	
+		
+	   /* int photocount = memberMapper.*/
 		List<ReviewDTO> memberReview = reviewMapper.getMemberReview(mnum,start,end);
+		
 		map.put("num", num);
 		map.put("count", reviewcount); 
 		map.put("start", start);
 		map.put("end", end);
-		map.put("YepsPager", YepsPager);
+		map.put("yepsPager", YepsPager);
 		map.put("memberReview", memberReview);
 		return map;
 	}
