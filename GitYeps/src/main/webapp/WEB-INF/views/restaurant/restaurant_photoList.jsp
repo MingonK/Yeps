@@ -69,7 +69,7 @@
 												<div class="paged-scroll-container_container" style="-webkit-box-flex: 1;flex-grow: 1;align-self: center;overflow: hidden;position: relative;white-space: nowrap;">
 													<div class="js-scroll-container scroll-container" style="transform: translateX(0px);    display: flex;-webkit-box-direction: normal;-webkit-box-orient: horizontal;    flex-direction: row;    transition: transform 400ms;width: 100%;">
 														<li class="tab-nav_item" style="display: table-cell; vertical-align: middle;">
-															<a href="#" class="tab-link" style="padding: 0 12px; padding-top: 6px; padding-bottom: 6px; color: #333; text-decoration: none; border-bottom: 3px solid #d32323; display: block; vertical-align: bottom; line-height: 1; white-space: nowrap; outline: 0;">
+															<a href="restaurant_photoList?rnum=${getRest.rnum}" class="tab-link" style="padding: 0 12px; padding-top: 6px; padding-bottom: 6px; color: #333; text-decoration: none; border-bottom: 3px solid #d32323; display: block; vertical-align: bottom; line-height: 1; white-space: nowrap; outline: 0;">
 																<span style="font-weight: bold; vertical-align: middle; line-height: 30px; display: inline-block;">
 																	All Photos
 																</span>
@@ -264,7 +264,7 @@
 		$('#popup_slideshow_img').append(img);
   
     	$('body').css('overflow','hidden');
-			e.stopPropagation();
+		e.stopPropagation();
     	e.preventDefault();
 	});
 

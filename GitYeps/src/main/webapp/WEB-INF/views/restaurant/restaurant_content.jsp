@@ -999,7 +999,6 @@
 		
 		
 <script>
-
 	 $(function() {
 		$(document).on('click', '[data-popup-open]', function(e)  {
 			var memberinfo ='${sessionScope.memberinfo}';
