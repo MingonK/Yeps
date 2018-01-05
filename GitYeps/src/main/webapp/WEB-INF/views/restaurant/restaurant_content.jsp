@@ -568,7 +568,7 @@
 													
 												<div class="review-footer clearfix">
 													<div class="review-footer-actions pull-right clearfix" style="margin-top: 23px; float: right;">
-														<a class="myreview_a_2" class="chiclet-link show-tooltip js-analytics-click chiclet-link--flag" data-popup-open="popup-2" style="position: relative;display: inline-block;padding: 5px;border: 1px solid #ccc;border-radius: 3px;font-size: 12px;line-height: 1.5em;color: #999;background: transparent;box-shadow: none;white-space: nowrap;transition: all 0.3s ease;text-decoration: none;cursor: pointer;">
+														<a class="myreview_a_2 chiclet-link show-tooltip js-analytics-click chiclet-link--flag" data-popup-open="popup-2">
 															<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-flag icon--size-18 icon--currentColor">
 															    <svg id="18x18_flag" height="100%" viewBox="0 0 18 18" width="100%">
 															    	<path class="myreview_path_2" d="M6 10V3c4.976 1.098 4.024-1 8 0v7c-4.024-.976-3.024 1.024-8 0zM4 2h1v14H4V2z"></path>
