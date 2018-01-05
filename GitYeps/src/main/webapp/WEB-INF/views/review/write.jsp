@@ -149,7 +149,7 @@
                </div>
             
                <div id="member_body">
-                  <form name="joinf" class="memberf" method="POST" action="member_join" >
+                  <form name="joinf" class="memberf" method="POST">
                      <input name="name" placeholder="이름" required="required" type="text" autocomplete=off value="">
                      <ul class="inline-layout">
                         <li><input id="memberssn1"onkeypress="return numberOnly();" onkeyup="focusSsn2('join')" maxlength="6" placeholder="주민번호 앞자리" required="required" type="text" name="ssn1" autocomplete=off value="" /></li>
@@ -266,7 +266,10 @@
     </div>
 </div>
 
-
+<div class="loading_wapper">
+	<div class="loading_img" style="margin: -20px -55px;">
+	</div>
+</div>
 
 
 <script>
@@ -645,7 +648,32 @@ $(function() {
           alert("비밀번호는 영문,숫자,특수문자(!@$%^&* 만 허용)를 사용하여 6~16자까지 입력해주세요")
           return
        }
-       document.joinf.submit()
+       
+		$(document).ajaxStart(function() {
+			$('.loading_wapper').fadeIn(500);
+		}) 
+			
+		$(document).ajaxStop(function() {
+			$('.loading_wapper').fadeOut(500);
+		})
+			
+       var queryString = $("form[name=joinf]").serialize();
+       $.ajax({
+           type : 'post',
+            url : 'member_join_ajax',
+            data : queryString,
+            dataType : 'json',
+            success : function(responseData){
+            	alert(responseData.msg);
+               var targeted_popup_class = $('.popup-close').attr('data-popup-close');
+               $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+               memberinfo = responseData.memberinfo;
+               location.reload();
+            },
+            error : function(request, status, error) {
+               alert("회원가입 실패");
+            },
+       });
     }
     
     //------------------------------------로그인
@@ -660,6 +688,14 @@ $(function() {
           loginf.passwd.focus();
           return false;
        }
+       
+       $(document).ajaxStart(function() {
+			$('.loading_wapper').fadeIn(500);
+		}) 
+			
+		$(document).ajaxStop(function() {
+			$('.loading_wapper').fadeOut(500);
+		})
 
        var queryString = $("form[name=loginf]").serialize();
          $.ajax({
