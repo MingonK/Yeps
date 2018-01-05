@@ -85,47 +85,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 1월 5일 민우 추가 -->
 	<select id="getCountByCLS" parameterType="java.util.HashMap" resultType="int">
-		select count(*) from yeps_restaurant where category=#{category} and upper(roadAddrPart1) like '%'||upper(#{location})||'%' and upper(rname) like '%'||upper(#{searchword})||'%'
+		select count(*) from yeps_restaurant where category=#{category} and replace(upper(roadAddrPart1),' ','') like '%'||replace(upper(#{location}),' ','')||'%' and replace(upper(rname),' ','') like '%'||replace(upper(#{searchword}),' ','')||'%'
 	</select>
 	<select id="getCountByCL" parameterType="java.util.HashMap" resultType="int">
-		select count(*) from yeps_restaurant where category=#{category} and upper(roadAddrPart1) like '%'||upper(#{location})||'%'
+		select count(*) from yeps_restaurant where category=#{category} and replace(upper(roadAddrPart1),' ','') like '%'||replace(upper(#{location}),' ','')||'%'
 	</select>
 	<select id="getCountByCS" parameterType="java.util.HashMap" resultType="int">
-		select count(*) from yeps_restaurant where category=#{category} and upper(rname) like '%'||upper(#{searchword})||'%'
+		select count(*) from yeps_restaurant where category=#{category} and replace(upper(rname),' ','') like '%'||replace(upper(#{searchword}),' ','')||'%'
 	</select>
 	<select id="getCountByC" parameterType="java.util.HashMap" resultType="int">
 		select count(*) from yeps_restaurant where category=#{category}
 	</select>
 	<select id="getCountByLS" parameterType="java.util.HashMap" resultType="int">
-		select count(*) from yeps_restaurant where upper(roadAddrPart1) like '%'||upper(#{location})||'%' and upper(rname) like '%'||upper(#{searchword})||'%'
+		select count(*) from yeps_restaurant where replace(upper(roadAddrPart1),' ','') like '%'||replace(upper(#{location}),' ','')||'%' and replace(upper(rname),' ','') like '%'||replace(upper(#{searchword}),' ','')||'%'
 	</select>
 	<select id="getCountByL" parameterType="java.util.HashMap" resultType="int">
-		select count(*) from yeps_restaurant where upper(roadAddrPart1) like '%'||upper(#{location})||'%'
+		select count(*) from yeps_restaurant where replace(upper(roadAddrPart1),' ','') like '%'||replace(upper(#{location}),' ','')||'%'
 	</select>
 	<select id="getCountByS" parameterType="java.util.HashMap" resultType="int">
-		select count(*) from yeps_restaurant where upper(rname) like '%'||upper(#{searchword})||'%'
+		select count(*) from yeps_restaurant where replace(upper(rname),' ','') like '%'||replace(upper(#{searchword}),' ','')||'%'
 	</select>
 	
 	<select id="listRestByCLS" parameterType="java.util.HashMap" resultType="RestaurantDTO" > 
-		select * from (select rownum rn, A.* from (select * from yeps_restaurant where category=#{category} and upper(roadAddrPart1) like '%'||upper(#{location})||'%' and upper(rname) like '%'||upper(#{searchword})||'%' order by rnum desc)A) where rn between #{start} and #{end} 
+		select * from (select rownum rn, A.* from (select * from yeps_restaurant where category=#{category} and replace(upper(roadAddrPart1),' ','') like '%'||replace(upper(#{location}),' ','')||'%' and replace(upper(rname),' ','') like '%'||replace(upper(#{searchword}),' ','')||'%' order by rnum desc)A) where rn between #{start} and #{end} 
 	</select>
 	<select id="listRestByCL" parameterType="java.util.HashMap" resultType="RestaurantDTO" > 
-		select * from (select rownum rn, A.* from (select * from yeps_restaurant where category=#{category} and upper(roadAddrPart1) like '%'||upper(#{location})||'%' order by rnum desc)A) where rn between #{start} and #{end} 
+		select * from (select rownum rn, A.* from (select * from yeps_restaurant where category=#{category} and replace(upper(roadAddrPart1),' ','') like '%'||replace(upper(#{location}),' ','')||'%' order by rnum desc)A) where rn between #{start} and #{end} 
 	</select>
 	<select id="listRestByCS" parameterType="java.util.HashMap" resultType="RestaurantDTO" > 
-		select * from (select rownum rn, A.* from (select * from yeps_restaurant where category=#{category} and upper(rname) like '%'||upper(#{searchword})||'%' order by rnum desc)A) where rn between #{start} and #{end} 
+		select * from (select rownum rn, A.* from (select * from yeps_restaurant where category=#{category} and replace(upper(rname),' ','') like '%'||replace(upper(#{searchword}),' ','')||'%' order by rnum desc)A) where rn between #{start} and #{end} 
 	</select>
 	<select id="listRestByC" parameterType="java.util.HashMap" resultType="RestaurantDTO" > 
 		select * from (select rownum rn, A.* from (select * from yeps_restaurant where category=#{category} order by rnum desc)A) where rn between #{start} and #{end} 
 	</select>
 	<select id="listRestByLS" parameterType="java.util.HashMap" resultType="RestaurantDTO" > 
-		select * from (select rownum rn, A.* from (select * from yeps_restaurant where upper(roadAddrPart1) like '%'||upper(#{location})||'%' and upper(rname) like '%'||upper(#{searchword})||'%' order by rnum desc)A) where rn between #{start} and #{end} 
+		select * from (select rownum rn, A.* from (select * from yeps_restaurant where replace(upper(roadAddrPart1),' ','') like '%'||replace(upper(#{location}),' ','')||'%' and replace(upper(rname),' ','') like '%'||replace(upper(#{searchword}),' ','')||'%' order by rnum desc)A) where rn between #{start} and #{end} 
 	</select>
 	<select id="listRestByL" parameterType="java.util.HashMap" resultType="RestaurantDTO" > 
-		select * from (select rownum rn, A.* from (select * from yeps_restaurant where upper(roadAddrPart1) like '%'||upper(#{location})||'%' order by rnum desc)A) where rn between #{start} and #{end} 
+		select * from (select rownum rn, A.* from (select * from yeps_restaurant where replace(upper(roadAddrPart1),' ','') like '%'||replace(upper(#{location}),' ','')||'%' order by rnum desc)A) where rn between #{start} and #{end} 
 	</select>
 	<select id="listRestByS" parameterType="java.util.HashMap" resultType="RestaurantDTO" > 
-		select * from (select rownum rn, A.* from (select * from yeps_restaurant where upper(rname) like '%'||upper(#{searchword})||'%' order by rnum desc)A) where rn between #{start} and #{end} 
+		select * from (select rownum rn, A.* from (select * from yeps_restaurant where replace(upper(rname),' ','') like '%'||replace(upper(#{searchword}),' ','')||'%' order by rnum desc)A) where rn between #{start} and #{end} 
 	</select>
 </mapper>
 
