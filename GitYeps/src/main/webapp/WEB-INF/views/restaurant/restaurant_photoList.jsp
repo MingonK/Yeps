@@ -38,7 +38,7 @@
 										</div>
 										<div class="biz-passport_rating" style="margin-top: -3px; display:flex;">
 											<div class="biz-rating biz-rating-medium clearfix" style="margin-bottom: 0;margin: 3px 0;">
-												<div class="restList-star-rating-${starAvg}">
+												<div class="restPhoto-star-rating-${starAvg}">
 													<img class="offscreen" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png" width="84" height="303"style="clip: rect(0, 0, 0, 0); position: absolute; left: -9999px; top: auto; overflow: hidden; width: 1px; height: 1px; vertical-align: middle;">
 												</div>
 												<span class="review-count rating-qualifier" style="font-size: 12px;line-height: 1.5em;    display: block;float: left;color: #666;font-weight: normal;">

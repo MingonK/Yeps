@@ -23,9 +23,6 @@
 						<button type="button" value="large" class="large" style="padding: 5px 8px;font-size: 12px;line-height: 1.5em;border: 1px solid #ccc;" >
 							<span>Add</span>
 						</button>
-						<button type="button" value="check" class="check" style="padding: 5px 8px;font-size: 12px;line-height: 1.5em;border: 1px solid #ccc;">
-							<span>Check</span>
-						</button>
 						</div>
 					<form name="MenuForm" enctype="multipart/form-data" method="post" action="restaurant_insertMenu"  style="margin-bottom: 18px;display: block;width:100%;height:100%;">
 						<div class="menu-sections" style="margin-top:15px">
@@ -53,9 +50,6 @@ $(document).ready(function() {
 	var small_count=0;
 	
 	
-	$(".check").click(function(){
-		
-	});
 	
 	
 	$( ".large" ).click(function() {

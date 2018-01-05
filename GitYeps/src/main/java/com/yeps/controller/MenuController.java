@@ -27,11 +27,25 @@ public class MenuController {
 	private SmallMenuMapper smallMenuMapper;
 	@Autowired
 	private RestaurantMapper restaurantMapper;
-
+	
+	@RequestMapping(value="/restaurant_insertMenuForm")
+	public ModelAndView insertMenuForm(HttpServletRequest req) {
+		String rnum = req.getParameter("rnum");
+		if (rnum == null || rnum.trim().equals("")) {
+			return new ModelAndView("redirect:restaurant_list");
+		}
+		return new ModelAndView("restaurant_insertMenu","rnum",rnum);
+		
+	}
+	
 	@RequestMapping(value = "/restaurant_insertMenu")
 	public ModelAndView insertMenu(HttpServletRequest req, @ModelAttribute LargeMenuDTO large_dto,
 			@ModelAttribute SmallMenuDTO small_dto) {
 		String rnum = req.getParameter("rnum");
+		if(rnum==null||rnum.trim().equals("")) {
+			
+		}
+		
 		String[] small = req.getParameterValues("small_length");
 		int[] small_length = new int[small.length];
 		for (int i = 0; i < small.length; i++) {
@@ -64,36 +78,20 @@ public class MenuController {
 	public ModelAndView listMenu(HttpServletRequest req) {
 		int rnum = Integer.parseInt(req.getParameter("rnum"));
 		RestaurantDTO dto = restaurantMapper.getRest(rnum);
-
-		
-		
 		
 		List<LargeMenuDTO>largeList=largeMenuMapper.listLargeMenu(rnum);		
 		List<SmallMenuDTO>smallList=new ArrayList<SmallMenuDTO>();
+		List<Integer>smallSize=new ArrayList<Integer>();
 		for(int i=0;i<largeList.size();i++) {
-//			smallList=smallMenuMapper.listSmallMenu(largeList.get(i).getLarge_menunum())
-			
-			
-//			List<Integer>small_size=
-//			smallList.addAll();
+			smallList.addAll(smallMenuMapper.listSmallMenu(largeList.get(i).getLarge_menunum()));
+			smallSize.add(smallList.size());
 		}
-		
-		
-		
-//		List<SmallMenuDTO> smallList=largeMenuMapper.getLarge_SmallMenu(rnum);
-//		List<LargeMenuDTO> largeList = null;
-//		
-//		for(int i=0;i<smallList.size();i++) {
-//			smallList.get(i).getLargeMenuDTO().getLarge_name();
-//		
-//		}
-		
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("getRest", dto);
 		mav.addObject("largeList", largeList);
 		mav.addObject("smallList", smallList);
-//		mav.addObject("smallList_size",smallList_size);
+		mav.addObject("smallSize",smallSize);
 		mav.setViewName("restaurant/restaurant_listMenu");
 		return mav;
 	}
