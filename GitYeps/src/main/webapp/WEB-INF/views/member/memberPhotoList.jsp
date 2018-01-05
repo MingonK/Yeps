@@ -187,9 +187,7 @@
 						<div class="photo_popup_container">
 							<div class="photo_popup_grid">
 								<div class="photo_popup_grid_main">
-									<span class="ms-arrow msa-previous" id="prev"></span>
-    								<span class="ms-arrow msa-next" id="next"></span>
-									<div id="popup_slideshow_img" class="cycle-slideshow" data-cycle-fx="scrollHorz" data-cycle-prev="#prev" data-cycle-next="#next" data-cycle-timeout="0">
+									<div id="popup_slideshow_img">
 									</div>
 									
 									<div class="photo_popup_grid_main_photo_area_footer">
@@ -212,7 +210,9 @@
 														1
 													</span>
 													of
-													<span class="photo_popup_footer_total"></span>
+													<span class="photo_popup_footer_total">
+														1
+													</span>
 												</span>
 											</li>
 										</ul>
@@ -223,8 +223,6 @@
 					</div>
 				</div>
 			</div>
-    	    
-
     	</div>
 	</div>
 
@@ -274,27 +272,11 @@
 		$('[data-popup-open]').on('click', function(e)  {
         	var targeted_popup_class = jQuery(this).attr('data-popup-open');
         	$('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
-        	
-        	$('.photo_popup_footer_current').text('1');
-        	var count = 1;
-        	
-        	$('#prev').on('click', function() {
-        		count--;
-        		if(count <= 0) {
-        			count = list.length;
-        		}
-        		$('.photo_popup_footer_current').text(count);
-        	})
-        	
-        	$('#next').on('click', function() {
-        		count++;
-        		if(count > list.length) {
-        			count = 1;
-        		}
-        		$('.photo_popup_footer_current').text(count);
-        	})
-        	$('.photo_popup_footer_total').text(list.length);
-        	
+        	$('#popup_slideshow_img').empty();
+        	$('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+        	var src = jQuery(this).children().first().attr('src');
+        	var img = $("<img>").attr("src", src).css('position', 'static').css('vertical-align', 'middle');
+			$('#popup_slideshow_img').append(img);        	
         	
         	$('body').css('overflow','hidden');
  			e.stopPropagation();

@@ -34,6 +34,7 @@
   	<resultMap type="reviewDTO" id="getSelectedRestaurant_ReviewMap">
 		<id column="rvnum" property="rvnum"/>
 		<result column="rnum" property="rnum"></result>
+		<result column="mnum" property="mnum"></result>
 		<result column="content" property="content"></result>
 		<result column="reg_date" property="reg_date"></result>
 		<result column="gradepoint" property="gradepoint"></result>
@@ -54,6 +55,7 @@
   	<select id="getSelectedRestaurant_Rv" parameterType="java.util.HashMap" resultMap="getSelectedRestaurant_ReviewMap">
   		select * from (select rownum rn, A.* from (select
   		 		R.rvnum
+  		 		, R.mnum
         		, R.rnum
         		, R.content
         		, R.reg_date
@@ -75,6 +77,7 @@
 		
 		<association javaType="MemberDTO" property="memberDTO">
 			<id column="mnum" property="mnum"></id>
+			<result column="mnum" property="mnum"></result>
 			<association javaType="MemberPhotoDTO" property="memberPhotoDTO">
 				<result column="filename" property="filename"></result>
 				<result column="ismainphoto" property="ismainphoto"></result>
@@ -82,11 +85,12 @@
 		</association>
 		<association javaType="RestaurantDTO" property="restaurantDTO">
 			<id column="rnum" property="rnum"></id>
+			<result column="rnum" property="rnum"></result>
 			<result column="rname" property="rname"></result>
 		</association>
 	</resultMap>
   	<select id="getRandomRestaurant_Rv" parameterType="int" resultMap="HighlightReviewMap">
-  		select * from (select R.content, P.filename, RT.rname
+  		select * from (select R.content, P.filename, RT.rname, RT.rnum, M.mnum
 		from yeps_review R, yeps_member M, yeps_member_photos P, yeps_restaurant RT
 		where R.rnum = RT.rnum and R.mnum = M.mnum and M.mnum = P.mnum and P.ismainphoto = 'y' and R.rnum = #{rnum}
 		order by dbms_random.value) where 3 >= rownum

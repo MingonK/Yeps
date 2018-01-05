@@ -5,13 +5,17 @@
 <html>
 <head>
 	<title>${getRest.rname}</title>
-	<script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js" ></script>
-	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=jD9qGVpvZh7Zobclojwp&submodules=geocoder"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/restStyle.css?ver=1"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css?ver=1"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css?ver=2"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/message.css?ver=2"/>"/>
+	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=jD9qGVpvZh7Zobclojwp&submodules=geocoder"></script>
+	<script src="//code.jquery.com/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script src="http://malsup.github.com/jquery.cycle2.js"></script>
+	<script src="http://malsup.github.io/jquery.cycle2.carousel.js"></script>
+	
 </head>
 <%@include file="../top.jsp" %>
 	<div class="main" style="background: white;">
@@ -57,7 +61,7 @@
 							    		<path d="M12 1.5l2.61 6.727 6.89.53-5.278 4.688 1.65 7.055L12 16.67 6.13 20.5l1.648-7.055L2.5 8.757l6.89-.53L12 1.5z"></path>
 							   		</svg>
 								</span>
-								리뷰쓰기 
+								Write a Review 
 							</a>
 							</c:if>
 							<c:if test="${!empty myReview}">
@@ -178,35 +182,9 @@
 							</div>
 	
 							<div class="showcase-photos">
-								<div class="js-photo photo photo-1"
-									data-media-id="VXaXWJEy7XSoyh1ij9zojA" data-media-index="17" style="z-index: 1000;display:inline-block;width: 100%;height: 220px;    box-shadow: none;transition: all 0.2s ease-out;transition-property: transform, box-shadow;">
-									<div class="showcase-photo-box" style="height:100%;">
-									<c:forEach items="${uploadFileList}" var="upload" >
-										<a href="#" style="color: #0073bb;text-decoration: none;"> 
-											<img class="photo-box-img" style="display:inline-block;vertical-align: middle;" width="210" height="220" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${upload.filename}">
-										</a>
-									</c:forEach>
-									</div>
-								<div class="photo-box-overlay js-overlay"
-									style="opacity: 0; position: absolute; right: 0; bottom: 0; left: 0; padding: 3px 6px; border-radius: 0 0 4px 4px; background: #333; background: rgba(0, 0, 0, 0.5); color: white; font-size: 12px; line-height: 1.5em; font-weight: bold; overflow: hidden; -webkit-transition: all 0.3s ease-in-out; transition: all 0.3s ease-in-out;">
-									<div class="photo-box-overlay_caption" style="    padding: 3px 6px 3px 1px;    position: relative;    display: flex;transition: all 0.2s ease-out;">
-										<div class="media-avatar avatar" style="    position: relative;    border-right: 6px solid transparent; border-left: none;">
-											<div class="photo-box pb-30s">
-												<a href="#" class="js-analytics-click" data-analytics-label="user-photo" style="    color: white;    text-decoration: none;    cursor: pointer;">
-									                <img class="photo-box-img" height="30" src="https://s3-media2.fl.yelpcdn.com/photo/SDnJqhDE0GRwI8pu4Gus2g/30s.jpg" width="30"
-									                style="    outline: none;    display: block;    margin-top: 3px;    border-radius: 4px;    vertical-align: middle;">
-									        </a>
-											</div>
-										</div>
-										<div class="media-story"
-											style="overflow: hidden; height: 36px; -webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;">
-											<a class="photo-desc" href="#"
-												style="text-decoration: none; text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5); color: white; cursor: pointer;">
-												Photo of Yardbird Southern Table &amp; Bar - Las Vegas, NV,
-												United States </a>
-										</div>
-									</div>
-								</div>
+								<div class="cycle-slideshow responsive" id="showcase-photo-box" data-cycle-prev="#prev" data-cycle-next="#next" style="background: none; z-index: 1000; display:inline-block; width: 100%; height: 220px; box-shadow: none;" data-cycle-fx="carousel" data-cycle-timeout="2000" data-cycle-carousel-visible="3" data-cycle-carousel-fluid="true">
+									<span class="ms-arrow msa-previous" id="prev"></span>
+    								<span class="ms-arrow msa-next" id="next"></span>
 								</div>
 							</div>
 						</div>
@@ -214,10 +192,10 @@
 				  </div>
 		        </div>
 	        </div>
-        </div>
+        
 		<div class="restContent-super-container" style="width: 960px;height:100%; margin: 0 auto; padding: 0 15px; padding-top: 18px; padding-bottom: 36px;">
-				<div class="restContent-container" style="display:block;width:100%;overflow:hidden;height:auto;">
-					<div class="restContent-layout-block" style="margin-bottom: 0;position: relative;margin: 0 -15px;width:960px;overflow:hidden;height:auto;">
+			<div class="restContent-container" style="display:block;width:100%;overflow:hidden;height:auto;">
+				<div class="restContent-layout-block" style="margin-bottom: 0;position: relative;margin: 0 -15px;width:960px;overflow:hidden;height:auto;">
 					<div class="restContent-alpha" style="padding: 0 30px 0 0; margin-left: 15px; float: left; min-height: 1px; box-sizing: border-box;width: 66.66667%;height:100%;border-right: 1px solid #e6e6e6;display:inline-block;">
 						<div class="restContent-review-highlights" style="position: relative;">
 							<div class="restContent-review-hightlights-content">
@@ -232,18 +210,18 @@
 										<div class="restContent-review-highlights-media-avatar"
 											style="border-right: 12px solid transparent; border-left: none;">
 											<div class="restcontent-review-highlights-photo-box">
-												<a href="#" style="color: #0073bb; text-decoration: none; cursor: pointer;">
+												<a href="member_details?mnum=${reviewDTO.memberDTO.mnum}" style="color: #0073bb; text-decoration: none; cursor: pointer;">
 													<img width="60px" height="60px" style="outline: none; border-radius: 4px; vertical-align: middle;" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${reviewDTO.memberDTO.memberPhotoDTO.filename}">
 												</a>
 											</div>
 										</div>
 										<div class="restContent-review-highlights-media-story"
 											style="-webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;">
-											<p class="restContent-quote" style="    margin-bottom: 4px;">
+											<p class="restContent-quote" style="margin-bottom: 4px;">
            										${reviewDTO.content} 
 											</p>
 											<p class="restContent-highlight-sub-info" style="color: #666;margin-bottom: 4px;">
-												<a href="#" style="color: #0073bb;">${reviewDTO.restaurantDTO.rname}</a>
+												<a href="restaurant_content?rnum=${reviewDTO.restaurantDTO.rnum}" style="color: #0073bb;">${reviewDTO.restaurantDTO.rname}</a>
 											</p>
 										</div>
 									</li>
@@ -311,7 +289,6 @@
 									</div>
 									<div class="restContent-review-list" style="position: relative;">
 										<ul class="restContent-reviews">
-										
 										<c:if test="${empty myReview}">
 											<li>
 												<div class="restContent-review-widget" style="margin: 0 -15px;">
@@ -324,11 +301,7 @@
 													<div class="restContent-clearfix" style="text-align: center !important;padding: 11px; background: #f5f5f5;border: 1px solid #e6e6e6;border-radius: 4px;">
 														<div class="restcontent-star" style="margin-bottom: 12px !important;">
 															<div class="restContent-u-space" style="margin-bottom: 12px !important;border-bottom: 1px solid #ccc;">
-															<fieldset
-																data-war-url="/writeareview/biz/lJAGnYzku5zSaLnQ_T6_GQ?return_url=%2Fbiz%2FlJAGnYzku5zSaLnQ_T6_GQ"
-																class="star-selector js-star-selector"
-																data-original-rating="0" data-component-bound="true"
-																style="vertical-align: middle; display: inline-block; -webkit-margin-start: 2px; -webkit-margin-end: 2px; -webkit-padding-before: 0.35em; -webkit-padding-start: 0.75em; -webkit-padding-end: 0.75em; -webkit-padding-after: 0.625em; min-width: -webkit-min-content;">
+															<fieldset class="star-selector js-star-selector" style="border: 0; vertical-align: middle; display: inline-block;">
 													 			<form name="starpointF" method="post" action="review_write?mode=write&where=rest">
 																	<div>
 																		<ul id="star_rating" style="float: left; margin: 0px; padding: 0px; display: inline-block; width: 162px; height: 30px; overflow: hidden; vertical-align: middle;
@@ -468,7 +441,7 @@
 															<button class="myreview_button_1">
 																<span class="myreview_span_1">
 																	<svg class="myreview_svg_1">
-																		<path d="M3 5V3h4V2h4v1h4v2H3zm11 9c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V6h10v8zM8 8.5a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5zm3 0a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5z"></path>
+																		<path class="myreview_path_1" d="M3 5V3h4V2h4v1h4v2H3zm11 9c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V6h10v8zM8 8.5a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5zm3 0a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5z"></path>
 																	</svg>
 																</span>
 																<span class="myreview_span_2">
@@ -498,7 +471,7 @@
 													<div class="restContent-meida-block" style="font-size: 12px; line-height: 1.5em; position: relative; display: flex;">
 														<div class="restContent-media-avatar" style="border-right-width: 9px;border-right: 6px solid transparent;border-left: none;">
 															<div class="restContent-photo-box">
-																<a href="#" style="color: #0073bb;">
+																<a href="member_details?mnum=${getReview.memberDTO.mnum}" style="color: #0073bb;">
 																	<img class="restContent-photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${getReview.memberDTO.memberPhotoDTO.filename}" width="60">
 																</a>
 															</div>
@@ -506,7 +479,7 @@
 														<div class="restContent-media-story" style="-webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;">
 															<ul class="restContent-user-info">
 																<li class="restContent-user-name">
-																	<a href="#" class="restContent-user-display-name" style="font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; cursor: pointer;">
+																	<a href="member_details?mnum=${getReview.memberDTO.mnum}" class="restContent-user-display-name" style="font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; cursor: pointer;">
 																		<c:if test="${empty getReview.memberDTO.nickname}">
 																			${getReview.memberDTO.email}
 																		</c:if>
@@ -595,10 +568,10 @@
 													
 												<div class="review-footer clearfix">
 													<div class="review-footer-actions pull-right clearfix" style="margin-top: 23px; float: right;">
-														<a class="chiclet-link show-tooltip js-analytics-click chiclet-link--flag" data-popup-open="popup-2">
+														<a class="myreview_a_2" class="chiclet-link show-tooltip js-analytics-click chiclet-link--flag" data-popup-open="popup-2" style="position: relative;display: inline-block;padding: 5px;border: 1px solid #ccc;border-radius: 3px;font-size: 12px;line-height: 1.5em;color: #999;background: transparent;box-shadow: none;white-space: nowrap;transition: all 0.3s ease;text-decoration: none;cursor: pointer;">
 															<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-flag icon--size-18 icon--currentColor">
 															    <svg id="18x18_flag" height="100%" viewBox="0 0 18 18" width="100%">
-															    	<path d="M6 10V3c4.976 1.098 4.024-1 8 0v7c-4.024-.976-3.024 1.024-8 0zM4 2h1v14H4V2z"></path>
+															    	<path class="myreview_path_2" d="M6 10V3c4.976 1.098 4.024-1 8 0v7c-4.024-.976-3.024 1.024-8 0zM4 2h1v14H4V2z"></path>
 														    	</svg>
 															</span>
 															<span class="tooltip-wrapper">
@@ -834,7 +807,7 @@
 						</div>
 						<div class="restContent-menu-preview" style="margin-bottom: 24px;height:204px;">
 							<h3 class="restContent-menu-preview-heading" style="margin-bottom: 12px; font-weight: bold; font-size: 16px; line-height: 1.3125em; color: #d32323; margin: 0 0 6px;display: block;">
-								<a href="#" style="color: #d32323;text-decoration: none;cursor: pointer;">메뉴</a>
+								<a href="#" style="color: #d32323; cursor: pointer;">메뉴</a>
 							</h3>
 						</div>
 						<div class="restContent-business-info" style="height:1000px;margin-bottom: 24px;">
@@ -1167,6 +1140,21 @@
 //**원하는 페이지로 이동시 검색조건, 키워드 값을 유지하기 위해 
 var rnum = '${getRest.rnum}';
 
+var list = new Array();
+<c:forEach var="fileDTO" items="${uploadFileList}">
+	list.push("${fileDTO.filename}");
+</c:forEach>
+
+for(var i = 0; i < list.length; i++) {
+	var img = document.createElement('img');
+	img.src = 'https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/' + list[i];
+	img.style.cursor = 'pointer';
+	img.style.width = '100%';
+	img.style.height = '100%';
+	img.onclick = function() {location.href="#"};
+	document.getElementById('showcase-photo-box').appendChild(img);
+}
+
 function reply_report_check() {
 	var selected = document.getElementById('reason_field');
 	if(selected.options[selected.selectedIndex].value == "default") {
@@ -1237,7 +1225,7 @@ function list(page){
 											'<div class="restContent-media-story" style="-webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;">' +
 												'<ul class="restContent-user-info">' +
 													'<li class="restContent-user-name">' +
-														'<a href="#" class="restContent-user-display-name" style="font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; cursor: pointer;">' +
+														'<a href=member_details?mnum="'+ item.memberDTO.mnum +'" class="restContent-user-display-name" style="font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; cursor: pointer;">' +
 															userId +
 														'</a>' +
 													'</li>' +
@@ -1467,7 +1455,7 @@ function check() {
 										'<div class="restContent-meida-block" style="font-size: 12px; line-height: 1.5em; position: relative; display: flex;">' +
 											'<div class="restContent-media-avatar" style="border-right-width: 9px;border-right: 6px solid transparent;border-left: none;">' +
 												'<div class="restContent-photo-box">' +
-													'<a href="#" style="color: #0073bb;">' +
+													'<a href=member_details?mnum="' + item.memberDTO.mnum + '" style="color: #0073bb;">' +
 														'<img class="restContent-photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/' + item.memberDTO.memberPhotoDTO.filename + '" width="60">' +
 													'</a>' +
 												'</div>' +
@@ -1475,7 +1463,7 @@ function check() {
 											'<div class="restContent-media-story" style="-webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;">' +
 												'<ul class="restContent-user-info">' +
 													'<li class="restContent-user-name">' +
-														'<a href="#" class="restContent-user-display-name" style="font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; cursor: pointer;">' +
+														'<a href="member_details?mnum="' + item.memberDTO.mnum + 'class="restContent-user-display-name" style="font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; cursor: pointer;">' +
 															userId +
 														'</a>' +
 													'</li>' +

@@ -169,7 +169,7 @@ public class MemberMapper {
 	}
 
 	public MemberDTO getMemberForEmail(String email) {
-		return sqlSession.selectOne("getMemberForMemberEmail", email);
+		return sqlSession.selectOne("getMemberForEmail", email);
 	}
 
 	public List<MemberDTO> previous_M(int mnum) {

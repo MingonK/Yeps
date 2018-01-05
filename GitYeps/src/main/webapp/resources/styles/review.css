@@ -1,28 +1,27 @@
-.myreview_p_1{
+.myreview_p_1 {
 	margin-bottom: 12px;
-	    display: block;
-	        text-align: -webkit-match-parent;
-	        color: #333;
+	display: block;
+	text-align: -webkit-match-parent;
+	color: #333;
 }
 
-.myreview_strong_1{
+.myreview_strong_1 {
 	font-weight: bold;
 	text-align: -webkit-match-parent;
-	        color: #333;
+	color: #333;}
+
+.myreview_div_1 {
+	padding: 11px;
+	background: #f5f5f5;
+	border: 1px solid #e6e6e6;
+	border-radius: 4px;
+	display: block;
+	text-align: -webkit-match-parent;
 }
 
-.myreview_div_1{
-	    padding: 11px;
-    background: #f5f5f5;
-    border: 1px solid #e6e6e6;
-    border-radius: 4px;
-        display: block;
-            text-align: -webkit-match-parent;
-}
-
-.myreview_div_1:before{
-	    content: " ";
-    display: table;
+.myreview_div_1:before {
+	content: " ";
+	display: table;
 }
 
 .myreview_div_1:after{
@@ -137,7 +136,7 @@
 }
 
 .myreview_a_1:hover, .myreview_a_1:visited {
-	color: #666;
+	background: linear-gradient(#fff, #fff);
 }
 
 .myreview_formF{
@@ -169,6 +168,8 @@
 }
 
 .myreview_button_1{
+	background: #f5f5f5;
+    border: 1px solid #e6e6e6;
 	cursor: pointer !important;
 	position: relative;
 	display: inline-block;
@@ -196,6 +197,12 @@
     -webkit-appearance: button;
 }
 
+.myreview_button_1:hover .myreview_span_2 {
+    left: 16px;
+}
+
+
+
 .myreview_span_1{
 	width: 18px;
     height: 18px;
@@ -217,6 +224,11 @@
     text-shadow: none;
     -webkit-writing-mode: horizontal-tb;
 }
+
+.myreview_span_1:hover{
+	fill: currentColor;
+}
+
 
 .myreview_span_1:before{
 	background: none;
@@ -329,11 +341,11 @@
     right: auto;
     bottom: auto;
     margin-left: -8px;
-        border-top-color: rgba(255,255,255,0.1);
+    border-top-color: rgba(255,255,255,0.1);
 }
 
 .myreview_span_3:after{
-	    display: block;
+	display: block;
     position: absolute;
     content: " ";
     width: 0;
@@ -348,6 +360,16 @@
     margin-left: -7px;
     border-top-color: rgba(0,0,0,0.8);
 }
+
+.myreview_path_1{
+	
+}
+
+.myreview_button_1:hover .myreview_path_1 {
+    color: #333;
+    background: linear-gradient(#fff, #eee);
+}
+
 
 
 
@@ -773,7 +795,6 @@
 }
 
 .resFind_a_2 {
-	color: #666;
 	margin: 9px 0 0;
 	display: inline-block;
 	vertical-align: middle;
@@ -792,6 +813,19 @@
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 	padding: 8px 19px 9px;
 	border-radius: 3px;
+}
+
+.resFind_a_2:hover {
+	background: linear-gradient(#d90007, #c91400);
+	border-color: #8d0005;
+	color: white;
+	border: 1px solid;
+	border-color: #8d0005;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.resFind_a_2:hover .resFind_span_5{
+	fill: white;
 }
 
 .resFind_span_5 {
@@ -3324,7 +3358,6 @@
 	padding: 14px 8px;
 	font-size: 12px;
 	line-height: 1.5em;
-	color: #fff;
 	border-color: #8d0005;
 	box-shadow: 0 1px 1px rgba(0, 0, 0, .3);
 	background-color: #d90007;
