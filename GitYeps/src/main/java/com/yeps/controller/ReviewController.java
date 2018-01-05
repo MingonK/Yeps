@@ -205,7 +205,7 @@ public class ReviewController {
 			//업데이트 쿼리문 작성 해주면 됨.★★★
 			int res = reviewMapper.review_write_update(contentUpdate, gradepoint, rnum);
 			System.out.println("리뷰수정 결과값 출력:" + res);
-		}
+		} 
 
 		// ===============================
 		String mode = req.getParameter("mode");

@@ -496,6 +496,6 @@
    
   	<update id="review_write_update" parameterType="java.util.HashMap">
   		update yeps_review set content=#{contentUpdate}, gradepoint=#{gradepoint} where rnum=#{rnum}
-  	</update>  
+  	</update>   
   	
 </mapper>		

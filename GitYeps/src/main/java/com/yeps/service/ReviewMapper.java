@@ -164,7 +164,7 @@ public class ReviewMapper {
    // 2018. 1. 6일 새벽 상우 추가 
    public int review_write_update(String contentUpdate, int gradepoint, int rnum) {
 	   HashMap<String, Object> map = new HashMap<String, Object>();
-	   map.put("contentUpdate", contentUpdate);
+	   map.put("contentUpdate", contentUpdate); 
 	   map.put("gradepoint", gradepoint);
 	   map.put("rnum", rnum);
 	   return sqlSession.update("review_write_update", map);
