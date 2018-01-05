@@ -453,24 +453,7 @@
 										</div>
 									</li>
 								</c:if>	
-									
-									
-									
-							   
-							
-									
-									
-									
-									
-									
-									
-									
-										
-									<c:forEach var="getReview" items="${selectedDataRV}">	
-									
-									
-									<!-- 상우 작업부분 li -->
-									<c:if test="${!empty myReview}">
+								<c:if test="${!empty myReview}">
 									<li>
 										<div class="restContent-review-with" style="margin: 0 -15px; display: flex;">
 											<div class="restContent-user" style="float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 37.5%;">
@@ -736,18 +719,13 @@
 											</div>
 										</div>
 									</li><!-- 리뷰 -->
-								</c:if>	
+								</c:if>		
 									
 									
+										
+									<c:forEach var="getReview" items="${selectedDataRV}">	
 									
-									
-									
-									
-									
-									
-									
-									
-									
+									<!-- 상우 작업부분 li -->
 									
 									<li>
 										<div class="restContent-review-with" style="margin: 0 -15px; display: flex;">
