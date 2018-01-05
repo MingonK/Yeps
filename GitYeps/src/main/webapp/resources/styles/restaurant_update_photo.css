@@ -163,10 +163,6 @@
     text-align: left;
 }
 
-#restaurant_photo_upload_container {
-	display: none;
-}
-
 #photo_box_grid_wide > #uploaded_photo {
 	margin: 0 18px 18px 0;
     width: 226px;
