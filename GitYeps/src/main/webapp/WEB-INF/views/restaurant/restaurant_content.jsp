@@ -410,10 +410,18 @@
 														${myReview.content}
 													</p>
 													<div class="myreview_div_6">
+<<<<<<< HEAD
 														<a class="myreview_a_1" href="/writeareview/biz/V7lXZKBDzScDeGB8JmnzSA?return_url=%2Fbiz%2FV7lXZKBDzScDeGB8JmnzSA">Finish My Review</a>
 														<form class="myreview_formF" method="post">
 															<input class="myreview_input_1" type="hidden">
 															<input class="myreview_input_1" type="hidden">
+=======
+														<a class="myreview_a_1" href="#">리뷰수정</a>
+														<form class="myreview_formF" action="" method="post" name="">
+															<input class="myreview_input_1" type="hidden" name="" value="">
+															<input class="myreview_input_1" type="hidden" name="" value="">
+															<!-- myreview 휴지통 버튼 -->
+>>>>>>> branch 'master' of https://github.com/MingonK/Yeps.git
 															<button class="myreview_button_1">
 																<span class="myreview_span_1">
 																	<svg class="myreview_svg_1">

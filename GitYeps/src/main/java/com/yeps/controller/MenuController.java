@@ -69,15 +69,14 @@ public class MenuController {
 		
 		
 		List<LargeMenuDTO>largeList=largeMenuMapper.listLargeMenu(rnum);		
-		
+		List<SmallMenuDTO>smallList=new ArrayList<SmallMenuDTO>();
 		for(int i=0;i<largeList.size();i++) {
-			smallMenuMapper.listSmallMenu(largeList.get(i).getLarge_menunum());
+//			smallList=smallMenuMapper.listSmallMenu(largeList.get(i).getLarge_menunum())
+			
+			
+//			List<Integer>small_size=
+//			smallList.addAll();
 		}
-		
-		
-		
-		
-		
 		
 		
 		
@@ -92,8 +91,8 @@ public class MenuController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("getRest", dto);
-//		mav.addObject("largeList", largeList);
-//		mav.addObject("smallList", smallList);
+		mav.addObject("largeList", largeList);
+		mav.addObject("smallList", smallList);
 //		mav.addObject("smallList_size",smallList_size);
 		mav.setViewName("restaurant/restaurant_listMenu");
 		return mav;
