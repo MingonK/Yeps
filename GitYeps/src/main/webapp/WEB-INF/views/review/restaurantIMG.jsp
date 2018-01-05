@@ -115,7 +115,7 @@
                            <div class="resIMG_div_53">
                               <ul class="resIMG_ul_4">
                                  <li   class="resIMG_li_4">
-                                    <a class="resIMG_a_4" href="#">
+                                    <a class="resIMG_a_4" href="member_details?mnum=${sessionScope.memberinfo.mnum }">
                                        <c:if test="${empty nickname}">
 					   						${email}
 					   				   </c:if>

@@ -777,11 +777,12 @@ public class MemberController {
 			}
 			getPhotoList = memberPhotoMapper.getMemberPhotoList(Integer.parseInt(mnum));
 		}
-
+        int reviewcount = memberDTO.getReviewcount();
+      
 		String email = memberDTO.getEmail();
 		int noneCount = messageMapper.noneMessageCount(email);
 		mav.addObject("noneCount", noneCount);
-
+        mav.addObject("reviewcount", reviewcount);
 		mav.addObject("memberDTO", memberDTO);
 		mav.addObject("getPhotoList", getPhotoList);
 		mav.setViewName("member/memberDetails");

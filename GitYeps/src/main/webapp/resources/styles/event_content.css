@@ -902,7 +902,7 @@
 }
 
 .ms-arrow {
-    opacity: 0.2;
+    opacity: 0.7;
     position: absolute;
     z-index:999;
     top:50%;
@@ -922,15 +922,15 @@
     left:2.5%;
     -webkit-transform:rotate(-45deg);
     transform:rotate(-45deg);
-    border-top:2px solid white;
-    border-left:2px solid white;
+    border-top:5px solid white;
+    border-left:5px solid white;
 }
 .ms-arrow.msa-next {
     right:4.5%;
     -webkit-transform:rotate(-45deg);
     transform:rotate(-45deg);
-    border-bottom:2px solid white;
-    border-right:2px solid white;
+    border-bottom:5px solid white;
+    border-right:5px solid white;
 }
 .ms-arrow.msa-previous:hover, .ms-arrow.msa-next:hover {
     opacity: 1;

@@ -87,7 +87,7 @@
 	                		</div>
 					</div>
 					<div class="column column-beta popular-section" style="float: left;padding: 0 15px;min-height: 1px;    box-sizing: border-box;width: 33.33333%;">
-						<a href="restaurant_insertMenuForm?rnum=${getRest.rnum }">메뉴 등록</a>
+						<a href="restaurant_insertMenuForm?rnum=${getRest.rnum}">메뉴 등록</a>
 					</div>
 				</div>
 			</div>

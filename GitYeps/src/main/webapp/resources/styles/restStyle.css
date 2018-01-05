@@ -310,7 +310,6 @@ overflow: hidden; width: 132px; height: 24px; background-position: 0 0px;
  background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png)
 }
 
-
 .restContent-star-rating-1{
 margin-top: 0; float: left;margin-right:6px;  position: relative;
 overflow: hidden; width: 132px; height: 24px; background-position: 0 -24px;
@@ -364,6 +363,150 @@ margin-top: 0; float: left;  margin-right:6px; position: relative;
 overflow: hidden; width: 132px; height: 24px; background-position: 0 -216px;
  background-size: 132px 560px; display: inline-block; vertical-align: middle; 
  background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png)
+}
+
+.restPhoto-star-rating-0{
+	float: left;
+	margin: 1px 6px 0 0;
+	position: relative;
+	overflow: hidden;
+	width: 82px;
+	height: 14px;
+	background-position: 0 -420px;
+	background-size: 132px 560px;
+	display: inline-block;
+	vertical-align: middle;
+	background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+}
+.restPhoto-star-rating-0.5{
+	float: left;
+	margin: 1px 6px 0 0;
+	position: relative;
+	overflow: hidden;
+	width: 82px;
+	height: 14px;
+	background-position: 0 -420px;
+	background-size: 132px 560px;
+	display: inline-block;
+	vertical-align: middle;
+	background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+}
+.restPhoto-star-rating-1{
+	float: left;
+	margin: 1px 6px 0 0;
+	position: relative;
+	overflow: hidden;
+	width: 82px;
+	height: 14px;
+	background-position: 0 -434px;
+	background-size: 132px 560px;
+	display: inline-block;
+	vertical-align: middle;
+	background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+}
+.restPhoto-star-rating-1.5{
+	float: left;
+	margin: 1px 6px 0 0;
+	position: relative;
+	overflow: hidden;
+	width: 82px;
+	height: 14px;
+	background-position: 0 -448px;
+	background-size: 132px 560px;
+	display: inline-block;
+	vertical-align: middle;
+	background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+}
+.restPhoto-star-rating-2{
+	float: left;
+	margin: 1px 6px 0 0;
+	position: relative;
+	overflow: hidden;
+	width: 82px;
+	height: 14px;
+	background-position: 0 -462px;
+	background-size: 132px 560px;
+	display: inline-block;
+	vertical-align: middle;
+	background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+}
+.restPhoto-star-rating-2.5{
+	float: left;
+	margin: 1px 6px 0 0;
+	position: relative;
+	overflow: hidden;
+	width: 82px;
+	height: 14px;
+	background-position: 0 -476px;
+	background-size: 132px 560px;
+	display: inline-block;
+	vertical-align: middle;
+	background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+}
+.restPhoto-star-rating-3{
+	float: left;
+	margin: 1px 6px 0 0;
+	position: relative;
+	overflow: hidden;
+	width: 82px;
+	height: 14px;
+	background-position: 0 -490px;
+	background-size: 132px 560px;
+	display: inline-block;
+	vertical-align: middle;
+	background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+}
+.restPhoto-star-rating-3.5{
+	float: left;
+	margin: 1px 6px 0 0;
+	position: relative;
+	overflow: hidden;
+	width: 82px;
+	height: 14px;
+	background-position: 0 -504px;
+	background-size: 132px 560px;
+	display: inline-block;
+	vertical-align: middle;
+	background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+}
+.restPhoto-star-rating-4{
+	float: left;
+	margin: 1px 6px 0 0;
+	position: relative;
+	overflow: hidden;
+	width: 82px;
+	height: 14px;
+	background-position: 0 -518px;
+	background-size: 132px 560px;
+	display: inline-block;
+	vertical-align: middle;
+	background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+}
+.restPhoto-star-rating-4.5{
+	float: left;
+	margin: 1px 6px 0 0;
+	position: relative;
+	overflow: hidden;
+	width: 82px;
+	height: 14px;
+	background-position: 0 -532px;
+	background-size: 132px 560px;
+	display: inline-block;
+	vertical-align: middle;
+	background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
+}
+.restPhoto-star-rating-5{
+	float: left;
+	margin: 1px 6px 0 0;
+	position: relative;
+	overflow: hidden;
+	width: 82px;
+	height: 14px;
+	background-position: 0 -546px;
+	background-size: 132px 560px;
+	display: inline-block;
+	vertical-align: middle;
+	background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/de2252bea656/assets/img/stars/stars@2x.png);
 }
 
 <!--                    -->
@@ -1064,20 +1207,12 @@ overflow: hidden; width: 132px; height: 24px; background-position: 0 -216px;
 	-webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;
 }
 
-.restContent-user-display-name {
-	font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; cursor: pointer;
-}
-
 .restContent-review-count {
 	color: #666;display: list-item;text-align: -webkit-match-parent;
 }
 
 .restContent-photo-count {
 	color: #666;display: list-item;text-align: -webkit-match-parent;	
-}
-
-.restContent-review-wrapper {
-	float: left; padding: 0 15px; min-height: 1px; box-sizing: border-box; width: 62.5%;
 }
 
 .restContent-review-with {
@@ -1102,14 +1237,6 @@ overflow: hidden; width: 132px; height: 24px; background-position: 0 -216px;
 
 .restContent-user-display-name {
 	font-size: 14px; line-height: 1.28571em; font-weight: bold; color: #0073bb; cursor: pointer;
-}
-
-.restContent-review-count {
-	color: #666; display: list-item;text-align: -webkit-match-parent;
-}
-
-.restContent-photo-count {
-	color: #666;display: list-item;text-align: -webkit-match-parent;
 }
 
 .restContent-share-review {
