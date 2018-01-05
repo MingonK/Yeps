@@ -101,12 +101,13 @@ public class SearchController {
 		String searchword = req.getParameter("searchword");
 		String latitude = req.getParameter("latitude");
 		String longitude = req.getParameter("longitude");
-		if(latitude != null && longitude != null) {
-			if(location.equals("Current Location")) {
+
+		if(location.equals("Current Location")) {
+			if(latitude != null && longitude != null) {
 				try {
 					GpsToAddress gps = new GpsToAddress(Double.parseDouble(latitude), Double.parseDouble(longitude));
 					String[] addr = gps.getAddress().split(" ");
-					if(addr.length >=3) {
+					if(addr.length >=4) {
 						location = addr[1] + " " + addr[2] + " " + addr[3];
 					}else {
 						location = addr[1] + " " + addr[2];
@@ -114,10 +115,19 @@ public class SearchController {
 				}catch(Exception e) {
 					e.printStackTrace();
 				}
-
+			}else {
+				location = null;
 			}
 		}
-		if(location != null && !location.equals("Home")) {
+
+
+		MemberDTO memberDTO =  (MemberDTO) session.getAttribute("memberinfo");
+		if(memberDTO != null && location != null && location.equals("Home")) {
+			String[] addr = memberDTO.getAddress().split(" ");
+			location = addr[1] + " " + addr[2] + " " +addr[3];
+		}
+		
+		if(location != null && !location.trim().equals("") && !location.equals("Home")) {
 			Cookie[] cookies = req.getCookies();
 			boolean isExistLocation = false;
 			if(cookies!=null) {
@@ -148,15 +158,8 @@ public class SearchController {
 
 			}
 		}
-		MemberDTO memberDTO =  (MemberDTO) session.getAttribute("memberinfo");
-		if(memberDTO != null && location != null && location.equals("Home")) {
-			String[] addr = memberDTO.getAddress().split(" ");
-			location = addr[1] + " " + addr[2] + " " +addr[3];
-		}
 
-		if (searchword == null || searchword.trim().equals("")) {
-			// 검색어 없을 경우
-		} else {
+		if (searchword != null && !searchword.trim().equals("")) {
 			ContsSingleton conts = ContsSingleton.getContsSingletonObject();
 			ContsDTO contsDTO = new ContsDTO();
 			String initial = jaso.getInitial(searchword);
@@ -164,6 +167,27 @@ public class SearchController {
 			contsDTO.setConts_nm_div(initial);
 			conts.addContsUploadList(contsDTO);
 		}
+
+		//----------------------------여기부터 검색작업-------------------
+
+		if(category == null || category.trim().equals("")) {
+			category = "Restaurants";
+		}
+
+		if(category.equals("Restaurants")) {
+
+		}else if(category.equals("Bars")){
+			mav.setViewName("");
+		}else if(category.equals("Food")){
+			mav.setViewName("");
+		}else if(category.equals("Breakfast & Brunch")){
+			mav.setViewName("");
+		}else if(category.equals("Coffee & Tea")){
+			mav.setViewName("");
+		}
+
+
+
 		return mav;
 	}
 
