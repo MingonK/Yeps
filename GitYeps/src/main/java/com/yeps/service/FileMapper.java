@@ -147,7 +147,7 @@ public class FileMapper {
 		map.put("rnum", rnum);
 		map.put("start", start);
 		map.put("end", end);
-		return sqlSession.selectList("uploadFileList", rnum);
+		return sqlSession.selectList("getPagedFileList", map);
 	}
 	
 	public int getAllFileCount(int rnum) {

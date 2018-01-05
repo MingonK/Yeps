@@ -209,10 +209,8 @@ public class RestaurantController {
 		
 
 		ReviewDTO existMyReview = null;
-		System.out.println("existMyReview 출력 전:" + existMyReview);
 		if(loginMember != null) {
 			existMyReview = reviewMapper.findMyReview(Integer.parseInt(rnum), loginMember.getMnum());
-			System.out.println("existMyReview 출력 후:" + existMyReview);
 		}
 		
 		if(existMyReview != null) {
@@ -427,7 +425,7 @@ public class RestaurantController {
 
 		int count = fileMapper.getAllFileCount(rnum);
 		int pageScale = 10;
-		int blockScale = 10;
+		int blockScale = 30;
 		YepsPager YepsPager = new YepsPager(count, curPage, pageScale, blockScale);
 		int start = YepsPager.getPageBegin();
 		int end = YepsPager.getPageEnd();
@@ -440,6 +438,8 @@ public class RestaurantController {
 
 		mav.addObject("getRest", dto);
 		mav.addObject("starAvg", starAvg);
+		mav.addObject("curPage", curPage);
+		mav.addObject("yepsPager", YepsPager);
 		mav.addObject("uploadFileList", uploadFileList);
 		mav.addObject("reviewCount", reviewCount);
 		mav.addObject("photoCount", count);
