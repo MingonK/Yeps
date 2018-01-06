@@ -723,13 +723,13 @@
 						                    <dt class="restContent-attribute-key" style="margin-right: 0.25em;display: inline;">가격 범위</dt>
 						                    <dd class="restContent-nowrap price-description">
 						                        <c:choose>
-													<c:when test="${getRest.price.length()==1 }">
+													<c:when test="${getRest.price==1 }">
 														10,000원 이하
 													</c:when>
-													<c:when test="${getRest.price.length()==2 }">
+													<c:when test="${getRest.price==2 }">
 														10,000원~30,000원
 													</c:when>
-													<c:when test="${getRest.price.length()==3 }">
+													<c:when test="${getRest.price==3 }">
 														30,000원~50,000원
 													</c:when>
 													<c:otherwise>
