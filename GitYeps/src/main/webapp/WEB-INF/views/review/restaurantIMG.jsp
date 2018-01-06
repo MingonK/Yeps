@@ -222,7 +222,7 @@
                <div class="resIMG_div_29">
                   <div class="resIMG_div_30">
                      <div class="resIMG_div_31">
-                        <img class="resIMG_img_1" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${dto.rest_filename}">   
+                        <img class="resIMG_img_1" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${dto.fileDTO.filename}">   
                      </div>
                      <div class="resIMG_div_32">
                         <h3 class="resIMG_h3_1">
