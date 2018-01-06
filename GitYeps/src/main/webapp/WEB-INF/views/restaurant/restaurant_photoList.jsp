@@ -363,7 +363,7 @@
     	var targeted_popup_class = jQuery(this).attr('data-popup-open');
     	$('#popup_slideshow_img').empty();
     	$('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
-    	var src = jQuery(this).children().first().attr('src');
+    	var src = jQuery(this).children('img').attr('src');
     	var img = $("<img>").attr("src", src).css('position', 'static').css('vertical-align', 'middle');
 		$('#popup_slideshow_img').append(img);
   
