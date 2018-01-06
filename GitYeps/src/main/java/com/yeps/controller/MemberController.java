@@ -987,5 +987,10 @@ public class MemberController {
 		mav.setViewName("member/memberPhotoList");
 		return mav;
 	}
-
+	
+	@RequestMapping(value = "/page_404")
+	public ModelAndView page404(HttpServletRequest req, HttpSession session) {
+		return new ModelAndView("404Page");
+	}
+	
 }
