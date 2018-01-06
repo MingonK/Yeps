@@ -211,27 +211,35 @@
        <id column="rvnum" property="rvnum"/>
        <id column="rnum" property="rnum"/>
        <id column="mnum" property="mnum"/>
+       <result column="rnum" property="rnum"></result>
        <result column="content" property="content"></result>
+       <result column="gradepoint" property="gradepoint"></result>
        
        <association javaType="MemberDTO" property="memberDTO">
            <id column="mnum" property="mnum"></id>
            <result column="name" property="name"></result>
            <result column="reviewcount" property="reviewcount"></result>
-           <result column="imagecount" property="imagecount"></result>
-           <result column="address" property="address"></result>
-           <result column="joindate" property="joindate"></result>
+          
        </association>
        <association javaType="RestaurantDTO" property="restaurantDTO">
                <id column="rnum" property="rnum"></id>
                <result column="rname" property="rname"></result> 
                <result column="rest_regdate" property="rest_regdate"></result>
+               <result column="roadAddrPart1" property="roadAddrPart1"></result>
+               <result column="roadAddrPart2" property="roadAddrPart2"></result>
+               <result column="addrDetail" property="addrDetail"></result>
                <result column="raddress" property="raddress"></result>
+               <result column="foodstyle" property="foodstyle"></result>
+               <result column="hp2" property="hp2"></result>
+               <result column="hp3" property="hp3"></result>
+               
        </association>
    </resultMap>
    
    <select id="getMemberReview"  parameterType="java.util.HashMap" resultMap="MemberReviewMap">
       select * from (select rownum rn, A. * from(select
                R.content
+              ,R.gradepoint
               ,R.rvnum
               ,RT.rest_regdate
               ,RT.rname
@@ -245,9 +253,7 @@
               ,M.mnum
               ,M.name
               ,M.reviewcount
-              ,M.imagecount
-              ,M.address
-              ,M.joindate
+            
         from yeps_review R, yeps_member M, yeps_restaurant RT where R.mnum = M.mnum and R.rnum = RT.rnum and M.mnum = #{mnum} order by rvnum desc)A)
         where rn between #{start} and #{end}
     </select>
@@ -484,12 +490,12 @@
    				, R.reg_date
    				, R.gradepoint
    				, R.rvnum
-   				, M.email
+   				, M.email 
    				, M.address
    				, M.reviewcount
    				, M.imagecount
    				, M.nickname
-   				, M.mnum
+   				, M.mnum 
    				, P.filename
    		from yeps_review R, yeps_member M, yeps_member_photos P
    		where R.mnum = M.mnum and M.mnum = P.mnum and P.ismainphoto='y' and R.rnum = #{rnum} and R.mnum = #{mnum} 

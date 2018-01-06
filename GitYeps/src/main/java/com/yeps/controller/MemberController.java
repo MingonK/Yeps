@@ -778,7 +778,7 @@ public class MemberController {
 			getPhotoList = memberPhotoMapper.getMemberPhotoList(Integer.parseInt(mnum));
 		}
         int reviewcount = memberDTO.getReviewcount();
-      
+      System.out.println(mnum);
 		String email = memberDTO.getEmail();
 		int noneCount = messageMapper.noneMessageCount(email);
 		mav.addObject("noneCount", noneCount);
@@ -987,5 +987,10 @@ public class MemberController {
 		mav.setViewName("member/memberPhotoList");
 		return mav;
 	}
-
+	
+	@RequestMapping(value = "/page_404")
+	public ModelAndView page404(HttpServletRequest req, HttpSession session) {
+		return new ModelAndView("404Page");
+	}
+	
 }

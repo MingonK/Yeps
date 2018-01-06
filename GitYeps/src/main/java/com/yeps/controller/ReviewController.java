@@ -146,7 +146,7 @@ public class ReviewController {
 	@RequestMapping(value = "/review_write") 
 	public ModelAndView review_write(HttpServletRequest req) {
 
-		String rnum = req.getParameter("rnum");
+		String rnum = req.getParameter("rnum"); 
 		if(rnum == null || rnum.trim().equals("")) {
 			return new ModelAndView("redirect: restaurant_list");
         }
@@ -285,7 +285,7 @@ public class ReviewController {
 	public HashMap<String, Object> review_member(HttpServletRequest req, HttpSession session) {
         HashMap<String, Object> map = new HashMap<String, Object>();
 		String smnum = req.getParameter("mnum");
-
+System.out.println(smnum);
 		int mnum = 0;
 		if(smnum==null) {
 			MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo");

@@ -25,14 +25,14 @@
 								${rname}
 							</a>
 						</h2>
-					</div>
+					</div> 
 					 
 					
 					<div> 
-						<form name="review_writeF" action="review_insert?rname=${rname}&rnum=${rnum}&mode=${mode}&contentUpdate=${contentUpdate}&rvnum=${rvnum}" method="post"
+						<form name="review_writeF" action="review_insert?rname=${rname}&rnum=${rnum}&mode=${mode}&contentUpdate=${contentUpdate}" method="post"
            						onsubmit="return ContentAndGradepointCheck()">
            						<input type="hidden" name="gradepoint" id="gradepoint">
-							<div>
+							<div> 
 								<div class="review_input">
 									<div class="review_text_star_wrap">
 										<div class="review_text_star_container">

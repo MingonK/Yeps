@@ -443,7 +443,7 @@
 														</div>
 													</div>
 													<p class="myreview_p_3">
-														${myReview.content}
+														${myReview.content} 
 													</p>
 													<div class="myreview_div_6">
 
@@ -960,12 +960,12 @@
     	    <div id="flag_popup_description" style="padding: 0 12px;">
     	    	<div>
     	    		<p style="margin: 12px 0;">이 댓글을 신고하는 이유를 선택하고 상세하게 설명해주세요.</p>
-    	    		<form name="reply_flag_popup_form" id="reply_flag_popup_form" action="#" method="post" onsubmit="return reply_report_check()" style="margin-bottoom: 0;">
+    	    		<form name="reply_flag_popup_form" id="reply_flag_popup_form" action="message_send?report=reply&rnum=${getRest.rnum}&where=rest" method="post" onsubmit="return reply_report_check()" style="margin-bottoom: 0;">
     	    			<div>
     	    				<label id="reply_flag_popup_form_label" for="reason_field" style="display: inline-block; font-weight: bold; margin: 0 0 6px;">
     	    					이유
     	    				</label>
-    	    				<select id="reason_field">
+    	    				<select id="reason_field" name="reason_field">
     	    					<option value="default" selected>신고 사유를 선택하세요.</option>
     	    					<option value="inappropriate_post">부적절한 홍보 게시물</option>
     	    					<option value="Eroticism">음란성, 선정성 또는 부적합한 내용</option>
@@ -1012,7 +1012,7 @@
     	
     	<div id="flag_popup_description" style="padding: 12px 8px 0;">
     		<div>
-    			<form name="sendform" method="post">
+    			<form name="sendform"  action = "message_send" method="post">
     				<div>
 						<h4 align="left" style="color: #d32323;">Send Message To</h4>
     	    			<input type="text" id="sendformTo" name="receiver" style="width: 95%; height: 20px;">
@@ -1028,7 +1028,7 @@
     	   	
 		<div id="flag_popup_footer">
      		<div id="flag_popup_buttons">
-     			<button id="reply_flag_popup_submit_button" type="submit" value="submit" data-popup-send="SendMessage" onclick="sendMessage()">
+     			<button id="reply_message_popup_submit_button" type="submit" value="submit" data-popup-send="SendMessage" >
      				<span>메세지 보내기</span>
      			</button>
      			<a href="#" data-popup-close="writeMessage">
@@ -1045,6 +1045,7 @@
 		
 		
 <script>
+
 	 $(function() {
 		$(document).on('click', '[data-popup-open]', function(e)  {
 			var memberinfo ='${sessionScope.memberinfo}';
@@ -1079,26 +1080,6 @@
 			});
 		});   
 	 
-	 $('#sendMessage').click(function(){
-	    	if($('#sendformTo').val()==''){
-	    	alert("받는 사람을 입력해주세요");
-	    	$('#sendformTo').focus()
-	    	return false;
-	    	
-	    	}else if($('#sendformSubject').val()==''){
-	    	alert("제목를 입력해주세요");
-	    	$('#sendformSubject').focus()
-	    	return false;
-	    	
-	    	}else if($('#sendformMessage').val()==''){
-	    	alert("내용을 입력해주세요");
-	    	$('#sendformMessage').focus()
-	    	return false;
-	    	}
-	        document.sendform.action = "message_send";
-	        document.sendform.submit(); 
-
-	    });
    
    $(document).on('mouseenter', '.selector', function(e) {
 	   var star = $(e.target).val();
@@ -1193,6 +1174,27 @@ for(var i = 0; i < list.length; i++) {
 	img.onclick = function() {location.href="#"};
 	document.getElementById('showcase-photo-box').appendChild(img);
 }
+
+$('#reply_message_popup_submit_button').click(function(){
+	if($('#sendformTo').val()==''){
+	alert("받는 사람을 입력해주세요");
+	$('#sendformTo').focus()
+	return false;
+	
+	}else if($('#sendformSubject').val()==''){
+	alert("제목를 입력해주세요");
+	$('#sendformSubject').focus()
+	return false;
+	
+	}else if($('#sendformMessage').val()==''){
+	alert("내용을 입력해주세요");
+	$('#sendformMessage').focus()
+	return false;
+	}
+ 
+    document.sendform.submit(); 
+
+});
 
 function reply_report_check() {
 	var selected = document.getElementById('reason_field');
