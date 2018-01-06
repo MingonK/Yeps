@@ -52,7 +52,8 @@ public class ReviewController {
 	public ModelAndView review_delete(HttpServletRequest req, HttpSession session) {
 		String rvnum = req.getParameter("rvnum");
 		int mnum = Integer.parseInt(req.getParameter("mnum"));
-		System.out.println(rvnum);
+		System.out.println("review_delete부분에 mnum출력:" + mnum);
+		System.out.println("review_delete부분에 rvnum출력:" + rvnum);
 		int res = reviewMapper.deleteReview(Integer.parseInt(rvnum));
 		ModelAndView mav = new ModelAndView();
 		String msg;

@@ -448,9 +448,9 @@
 													<div class="myreview_div_6">
 
 														<a class="myreview_a_1" href="review_write?star=${myReview.gradepoint}&contentUpdate=${myReview.content}&rnum=${getRest.rnum}&mode=${updateReview}&rvnum=${myReview.rvnum}">리뷰수정</a>
-														<form class="myreview_formF" method="post">
-															<input class="myreview_input_1" type="hidden">
-															<input class="myreview_input_1" type="hidden">
+														<form class="myreview_formF" action="review_delete" method="post">
+															<input class="myreview_input_1" type="hidden" name="rvnum" value="${myReview.rvnum}">
+															<input class="myreview_input_1" type="hidden" name="mnum" value="${myReview.memberDTO.mnum}">
 															<button class="myreview_button_1"> 
 																<span class="myreview_span_1">
 																	<svg class="myreview_svg_1">
