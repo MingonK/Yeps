@@ -53,10 +53,12 @@
 	<div class="memberManager">
 		<div class="memberManagerContainer_wrap">
 			<div class="memberManagerContainer">
+			<button  style="line-height: 1.28571em; border-color: #000; border: 1px solid; border-radius: 3px; width:160px; height: 32px; cursor: pointer; float: right; background: #d32323; color:#fff; font-weight: bold; font-size: 15px;" type="button" name="management" id="management" value="managementPage" onclick="moveManagerPage();">managementPage</button>
 				<div class="memberManagerContainer_section_header">
 					<h2>
 						YEPS's Members
 					</h2>
+					
 				</div>
 				<div class="memberManagerContainer_section">
 					<c:choose>
@@ -303,6 +305,10 @@
 		}
 	});
 	
+	function moveManagerPage(){
+		var url = "member_managerPage";
+		window.location = url;
+	}	
 	function deleteMember(){
 		if(confirm("정말 탈퇴시키실건가요?")){
 			var mnum = '${memberProfile.mnum}'
