@@ -292,19 +292,7 @@ public class RestaurantController {
 		}
 
 		RestaurantDTO restaurantDTO = restaurantMapper.getRest(Integer.parseInt(rnum));
-		HttpSession session = req.getSession();
-		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
 		ModelAndView mav = new ModelAndView();
-
-		if (memberDTO.getIsmanager().equals("y") || memberDTO.getIsmaster().equals("y")
-				|| restaurantDTO.getMnum() == memberDTO.getMnum()) {
-			List<FileDTO> allUploadFileList = fileMapper.getAllRestaurantFiles(restaurantDTO.getRnum());
-			mav.addObject("uploadFileList", allUploadFileList);
-		} else {
-			List<FileDTO> myUploadFileList = fileMapper.getRest_fileListForMe(restaurantDTO.getRnum(),
-					memberDTO.getMnum());
-			mav.addObject("uploadFileList", myUploadFileList);
-		}
 
 		mav.addObject("filecount", filecount);
 		mav.addObject("mode", mode);
@@ -447,31 +435,56 @@ public class RestaurantController {
 	@RequestMapping(value = "/restaurant_photoList")
 	public ModelAndView photoListRest(HttpServletRequest req, @RequestParam(defaultValue = "1") int curPage) {
 		int rnum = Integer.parseInt(req.getParameter("rnum"));
-
+		String mode = req.getParameter("mode");
+		String view = req.getParameter("view");
 		if (rnum == 0) {  
 			return new ModelAndView("redirect: restaurant_list");
 		}
-
-		int count = fileMapper.getAllFileCount(rnum);
+		
+		RestaurantDTO restaurantDTO = restaurantMapper.getRest(rnum);
+		HttpSession session = req.getSession();
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
+		
+		
+		int allPhotoCount = fileMapper.getAllFileCount(rnum);
+		int myPhotoCount = 0;
+		
+		if(memberDTO != null) {
+			myPhotoCount = fileMapper.getRest_fileCountForMe(rnum, memberDTO.getMnum());
+		}
+		
 		int pageScale = 30;
 		int blockScale = 10;
-		YepsPager YepsPager = new YepsPager(count, curPage, pageScale, blockScale);
-		int start = YepsPager.getPageBegin();
-		int end = YepsPager.getPageEnd();
-		RestaurantDTO dto = restaurantMapper.getRest(rnum);
-		List<FileDTO> uploadFileList = fileMapper.getPagedFileList(rnum, start, end);
+		YepsPager YepsPager = null;
+		int start = 0;
+		int end = 0;
+		List<FileDTO> getFileList = null;
+		if(view.equals("all")) {
+			YepsPager = new YepsPager(allPhotoCount, curPage, pageScale, blockScale);
+			start = YepsPager.getPageBegin();
+			end = YepsPager.getPageEnd();
+			getFileList = fileMapper.getPagedFileList(rnum, start, end);
+		} else if(view.equals("mylist")) {
+			YepsPager = new YepsPager(myPhotoCount, curPage, pageScale, blockScale);
+			start = YepsPager.getPageBegin();
+			end = YepsPager.getPageEnd();
+			getFileList = fileMapper.getPagedFileListForMe(rnum, memberDTO.getMnum(), start, end);
+		}
+
 		int reviewCount = reviewMapper.getRestaurantReviewCount(rnum);
 		int starAvg = reviewMapper.getStarAvg(rnum);
-
+				
 		ModelAndView mav = new ModelAndView();
-
-		mav.addObject("getRest", dto);
+		mav.addObject("view", view);
+		mav.addObject("mode", mode);
+		mav.addObject("getRest", restaurantDTO);
 		mav.addObject("starAvg", starAvg);
 		mav.addObject("curPage", curPage);
 		mav.addObject("yepsPager", YepsPager);
-		mav.addObject("uploadFileList", uploadFileList);
+		mav.addObject("uploadFileList", getFileList);
 		mav.addObject("reviewCount", reviewCount);
-		mav.addObject("photoCount", count);
+		mav.addObject("allPhotoCount", allPhotoCount);
+		mav.addObject("myPhotoCount", myPhotoCount);
 		mav.setViewName("restaurant/restaurant_photoList");
 		return mav;
 

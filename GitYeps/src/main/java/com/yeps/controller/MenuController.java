@@ -34,7 +34,7 @@ public class MenuController {
 		if (rnum == null || rnum.trim().equals("")) {
 			return new ModelAndView("redirect:restaurant_list");
 		}
-		return new ModelAndView("restaurant_insertMenuForm");
+		return new ModelAndView("restaurant_insertMenu","rnum",rnum);
 		
 	}
 	
@@ -43,7 +43,7 @@ public class MenuController {
 			@ModelAttribute SmallMenuDTO small_dto) {
 		String rnum = req.getParameter("rnum");
 		if(rnum==null||rnum.trim().equals("")) {
-			return new ModelAndView("redirect:restaurant_list");
+			
 		}
 		
 		String[] small = req.getParameterValues("small_length");
