@@ -1357,15 +1357,27 @@ overflow: hidden; width: 132px; height: 24px; background-position: 0 -216px;
     cursor: pointer;
 }
 
+.tab-link {
+	padding: 0 12px; padding-top: 6px; padding-bottom: 6px; color: #333; text-decoration: none; 
+	display: block; vertical-align: bottom; line-height: 1; white-space: nowrap; outline: 0;
+}
 
+.tab-link:hover {
+	text-decoration: none !important;
+}
 
+.hovered {
+	border-bottom: 3px solid #d32323;
+	background: #f5f5f9;
+}
 
+.selected {
+	border-bottom: 3px solid #d32323;
+}
 
-
-
-
-
-
+.clear_bottom {
+	border-bottom: none !important;
+}
 
 
 

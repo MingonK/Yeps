@@ -153,4 +153,21 @@ public class FileMapper {
 	public int getAllFileCount(int rnum) {
 		return sqlSession.selectOne("getAllFileCount", rnum);
 	}
+	
+	// 1월 6일 민곤 추가
+	public int getRest_fileCountForMe(int rnum, int mnum) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("rnum", rnum);
+		map.put("mnum", mnum);
+		return sqlSession.selectOne("getRest_fileCountForMe", map);
+	}
+	
+	public List<FileDTO> getPagedFileListForMe(int rnum, int mnum, int start, int end) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("rnum", rnum);
+		map.put("mnum", mnum);
+		map.put("start", start);
+		map.put("end", end);
+		return sqlSession.selectList("getPagedFileListForMe", map);
+	}
 }
