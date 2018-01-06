@@ -13,6 +13,7 @@ public class FileDTO {
 	private String file_upload_date;
 	private String ismainphoto;
 	private MemberDTO memberDTO;
+	private RestaurantDTO restaurantDTO;
 	
 	public int getFilenum() {
 		return filenum;
@@ -85,6 +86,12 @@ public class FileDTO {
 	}
 	public void setMemberDTO(MemberDTO memberDTO) {
 		this.memberDTO = memberDTO;
+	}
+	public RestaurantDTO getRestaurantDTO() {
+		return restaurantDTO;
+	}
+	public void setRestaurantDTO(RestaurantDTO restaurantDTO) {
+		this.restaurantDTO = restaurantDTO;
 	}
 	
 }

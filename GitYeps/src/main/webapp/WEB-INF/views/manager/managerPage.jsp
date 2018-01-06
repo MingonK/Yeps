@@ -9,7 +9,7 @@
 <%@ include file="../top.jsp"%> 
 
 <div id="manager_container" style="height: 400px; margin: 50px; float: inherit;font-family: cambria;font-weight: bold;font-size: 18;
-    margin-left: 300; margin-top: 90;" >
+    margin-left: 300; margin-top: 40;" >
    <div id="manager_header" style="  width: 70%; height: 50px; margin-bottom: 20px;" >
 	  <h2>Management Page</h2>
    </div>

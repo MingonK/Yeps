@@ -160,7 +160,11 @@
 															<img class="photo-box-img" src="https://s3-media4.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/m.jpg">
 														</c:when>
 														<c:otherwise>
+<<<<<<< HEAD
 															<img class="photo-box-img" src="getImage/${memberMainPhoto.member_filename}" alt="member_main_photo" id="photo_box_img" width="100px" height="100px">
+=======
+															<img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${memberMainPhoto.member_filename}" alt="member_main_photo" id="photo_box_img" width="100px" height="100px">
+>>>>>>> branch 'master' of https://github.com/MingonK/Yeps.git
 														</c:otherwise>
 													</c:choose>	
 													

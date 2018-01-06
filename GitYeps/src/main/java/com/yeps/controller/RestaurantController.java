@@ -492,9 +492,6 @@ public class RestaurantController {
 		RestaurantDTO restaurantDTO = restaurantMapper.getRest(rnum);
 		HttpSession session = req.getSession();
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
-		if (memberDTO == null) {
-			return new ModelAndView("redirect: member_login");
-		}
 
 		int allPhotoCount = fileMapper.getAllFileCount(rnum);
 		int myPhotoCount = 0;

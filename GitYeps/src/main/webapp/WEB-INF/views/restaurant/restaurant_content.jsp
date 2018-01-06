@@ -329,23 +329,23 @@
 													 			<form name="starpointF" method="post" action="review_write?mode=write&where=rest">
 																	<div>
 																		<ul id="star_rating">
-																			<li class="selector star-selector-li-1_4" data-label="Eek! Methinks not.">
+																			<li class="selector star-selector-li-1_4 check_li_1" data-label="Eek! Methinks not.">
 							                            				     	<input id="rating-1" type="radio" value="1" name="rating" class="star-selector-input" style="cursor: pointer; border: none; margin: 0; padding: 0; width: 30px; height: 30px; opacity: 0;">
 							                                					 	<label class="star-selector_label" for="rating-1">1 (Eek! Methinks not.)</label>
 							                             					</li>
-							                              					<li class="selector star-selector-li-1_4" data-label="Meh. I've experienced better.">
+							                              					<li class="selector star-selector-li-1_4 check_li_2" data-label="Meh. I've experienced better.">
 							                                 					<input id="rating-2" type="radio" value="2" name="rating" class="star-selector-input">
 							                                 					<label class="star-selector_label" for="rating-2">2 (Meh. I've experienced better.)</label>
 							                              					</li>
-																			<li class="selector star-selector-li-1_4" data-label="3 (A-OK.)">
+																			<li class="selector star-selector-li-1_4 check_li_3" data-label="3 (A-OK.)">
 																				<input id="rating-3" type="radio" value="3" name="rating" class="star-selector-input">
 							                                 					<label class="star-selector_label" for="rating-3">3 (A-OK.)</label>
 							                              					</li>
-							                              					<li class="selector star-selector-li-1_4" data-label="4 (Yay! I'm a fan.)">
+							                              					<li class="selector star-selector-li-1_4 check_li_4" data-label="4 (Yay! I'm a fan.)">
 							                                 					<input id="rating-4" type="radio" value="4"  name="rating" class="star-selector-input">
 							                                 					<label class="star-selector_label" for="rating-4">4 (Yay! I'm a fan.)</label>
 							                              					</li>
-							                              					<li class="selector star-selector-li-5" data-label="5 (Woohoo! As good as it gets!)">
+							                              					<li class="selector star-selector-li-5 check_li_5" data-label="5 (Woohoo! As good as it gets!)">
 							                                 					<input id="rating-5" type="radio" value="5"  name="rating" class="star-selector-input">
 							                                 					<label class="star-selector_label" for="rating-5">5 (Woohoo! As good as it gets!)</label>
 							                              					</li>
@@ -447,11 +447,13 @@
 													</p>
 													<div class="myreview_div_6">
 
-														<a class="myreview_a_1" href="review_write?star=${myReview.gradepoint}&contentUpdate=${myReview.content}&rnum=${getRest.rnum}&updatemode=${updatemode}&rvnum=${myReview.rvnum}">리뷰수정</a>
-														<form class="myreview_formF" method="post">
-															<input class="myreview_input_1" type="hidden">
-															<input class="myreview_input_1" type="hidden">
-															<button class="myreview_button_1">
+														<a class="myreview_a_1" href="review_write?star=${myReview.gradepoint}&contentUpdate=${myReview.content}&rnum=${getRest.rnum}&mode=${updateReview}&rvnum=${myReview.rvnum}">리뷰수정</a>
+														<form class="myreview_formF" action="review_delete" method="post">
+															<input class="myreview_input_1" type="hidden" name="rvnum" value="${myReview.rvnum}">
+															<input class="myreview_input_1" type="hidden" name="mnum" value="${myReview.memberDTO.mnum}">
+															<input class="myreview_input_1" type="hidden" name="rnum" value="${getRest.rnum}">
+															<input class="myreview_input_1" type="hidden" name="mode" value="${restaurantReviewDelete}">		
+															<button class="myreview_button_1"> 
 																<span class="myreview_span_1">
 																	<svg class="myreview_svg_1">
 																		<path class="myreview_path_1" d="M3 5V3h4V2h4v1h4v2H3zm11 9c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V6h10v8zM8 8.5a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5zm3 0a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5z"></path>
@@ -875,7 +877,7 @@
 											<dd style="font-weight: bold;display: inline;">
 												${getRest.groupreserv}
 											</dd>
-										</dl>
+										</dl> 
 										
 										<dl style="padding-bottom: 6px;display: block;">
 											<dt class="restContent-attribute-key">소음</dt>

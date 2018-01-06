@@ -60,7 +60,11 @@
                                                 <img class="photo-box-img" height="90" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" width="90">
                                              </c:when>
                                              <c:otherwise>
-                                                <img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${mainPhoto.filename}" alt="member_main_photo" id="photo_box_img" width="90px" height="90px">
+<<<<<<< HEAD
+                                                <img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${member_filename}" alt="member_main_photo" id="photo_box_img" width="90px" height="90px">
+=======
+                                                <img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${mainPhoto.member_filename}" alt="member_main_photo" id="photo_box_img" width="90px" height="90px">
+>>>>>>> branch 'master' of https://github.com/MingonK/Yeps.git
                                              </c:otherwise>
                                           </c:choose>
                                        </span>
@@ -82,7 +86,11 @@
                                                                <img class="photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" width="60">
                                                             </c:when>
                                                             <c:otherwise>
-                                                               <img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${mainPhoto.filename}" alt="member_main_photo" id="photo_box_img" width="60px" height="60px">
+<<<<<<< HEAD
+                                                               <img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${member_filename}" alt="member_main_photo" id="photo_box_img" width="60px" height="60px">
+=======
+                                                               <img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${mainPhoto.member_filename}" alt="member_main_photo" id="photo_box_img" width="60px" height="60px">
+>>>>>>> branch 'master' of https://github.com/MingonK/Yeps.git
                                                             </c:otherwise>
                                                          </c:choose>
                                                       </a>
@@ -133,6 +141,15 @@
                                                             </svg>
                                                          </span>
                                                          <b>${sessionScope.memberinfo.reviewcount}</b> <!-- 리뷰 수 -->
+                                                      </li>
+                                                      
+                                                      <li class="photo-count">
+                                                         <span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-review icon--size-18">
+                                                            <svg class="icon_svg" id="18x18_camera" height="100%" viewBox="0 0 18 18" width="100%">
+																<path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 6.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path>
+															</svg>
+                                                         </span>
+                                                         <b>${sessionScope.memberinfo.imagecount}</b> <!-- 리뷰 수 -->
                                                       </li>
                                                    </ul>
                                                 </div>

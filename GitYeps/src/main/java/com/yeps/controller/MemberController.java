@@ -24,7 +24,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.yeps.model.FileDTO;
 import com.yeps.model.MemberDTO;
 import com.yeps.model.MemberPhotoDTO;
 import com.yeps.service.MemberMapper;
@@ -795,7 +794,6 @@ public class MemberController {
 			getPhotoList = memberPhotoMapper.getMemberPhotoList(Integer.parseInt(mnum));
 		}
         int reviewcount = memberDTO.getReviewcount();
-      System.out.println(mnum);
 		String email = memberDTO.getEmail();
 		int noneCount = messageMapper.noneMessageCount(email);
 		mav.addObject("noneCount", noneCount);

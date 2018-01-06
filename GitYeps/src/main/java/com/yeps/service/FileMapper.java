@@ -208,4 +208,8 @@ public class FileMapper {
 		map.put("end", end);
 		return sqlSession.selectList("getPagedFileListForMe", map);
 	}
+	
+	public FileDTO getRandomRestaurantPhoto() {
+		return sqlSession.selectOne("getRandomRestaurantPhoto");
+	}
 }
