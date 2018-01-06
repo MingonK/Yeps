@@ -76,7 +76,7 @@
 						   		    	<path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 4.75a4.25 4.25 0 1 0 0 8.5 4.25 4.25 0 0 0 0-8.5zM11 10h-1v1a1 1 0 0 1-2 0v-1H7a1 1 0 0 1 0-2h1V7a1 1 0 0 1 2 0v1h1a1 1 0 0 1 0 2z"></path>
 						         	</svg>
 							  	</span> 
-							  	사진추가
+							  	Add Photo
 							  	<a class="menu-explore js-menu-explore" href="restaurant_listMenu?rnum=${getRest.rnum}">모든 메뉴</a>
 						   	</a>
 							</span>
@@ -723,13 +723,13 @@
 						                    <dt class="restContent-attribute-key" style="margin-right: 0.25em;display: inline;">가격 범위</dt>
 						                    <dd class="restContent-nowrap price-description">
 						                        <c:choose>
-													<c:when test="${getRest.price==1 }">
+													<c:when test="${getRest.price==1}">
 														10,000원 이하
 													</c:when>
-													<c:when test="${getRest.price==2 }">
+													<c:when test="${getRest.price==2}">
 														10,000원~30,000원
 													</c:when>
-													<c:when test="${getRest.price==3 }">
+													<c:when test="${getRest.price==3}">
 														30,000원~50,000원
 													</c:when>
 													<c:otherwise>
