@@ -52,8 +52,8 @@ public class ReviewController {
 	public ModelAndView review_delete(HttpServletRequest req, HttpSession session) {
 		String rvnum = req.getParameter("rvnum");
 		int mnum = Integer.parseInt(req.getParameter("mnum"));
-		System.out.println("review_delete부분에 mnum출력:" + mnum);
-		System.out.println("review_delete부분에 rvnum출력:" + rvnum);
+		String mode = req.getParameter("mode");
+		int rnum = Integer.parseInt(req.getParameter("rnum"));
 		int res = reviewMapper.deleteReview(Integer.parseInt(rvnum));
 		ModelAndView mav = new ModelAndView();
 		String msg;
@@ -65,12 +65,17 @@ public class ReviewController {
 			memberMapper.updateReviewCount(mnum, nowReviewcount);
 			MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo");
 			mdto.setReviewcount(nowReviewcount);
-			System.out.println(nowReviewcount);
-			msg = "리뷰 삭제성공!!";
-			url = "member_details";
-			mav.addObject("msg", msg);
-			mav.addObject("url", url);
-			mav.setViewName("message");
+			//System.out.println(nowReviewcount);
+			if(mode.equals("restaurantReviewDelete")) {
+				mav.addObject("rnum", rnum);
+				mav.setViewName("restaurant_content");
+			}else {
+				msg = "리뷰 삭제성공!!";
+				url = "member_details";
+				mav.addObject("msg", msg);
+				mav.addObject("url", url);
+				mav.setViewName("message");
+			}
 		} else {
 			msg = "리뷰 삭제실패!!";
 			url = "member_detalis";

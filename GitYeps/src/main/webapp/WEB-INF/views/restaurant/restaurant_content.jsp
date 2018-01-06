@@ -451,6 +451,8 @@
 														<form class="myreview_formF" action="review_delete" method="post">
 															<input class="myreview_input_1" type="hidden" name="rvnum" value="${myReview.rvnum}">
 															<input class="myreview_input_1" type="hidden" name="mnum" value="${myReview.memberDTO.mnum}">
+															<input class="myreview_input_1" type="hidden" name="rnum" value="${getRest.rnum}">
+															<input class="myreview_input_1" type="hidden" name="mode" value="${restaurantReviewDelete}">		
 															<button class="myreview_button_1"> 
 																<span class="myreview_span_1">
 																	<svg class="myreview_svg_1">
