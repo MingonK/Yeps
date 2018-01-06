@@ -467,24 +467,23 @@
 													</p>
 													
 													<ul class="review_photo_box">
-													<c:forEach var="photos" items="${uploadFileList}" varStatus="status" begin="0" end="2">
+													<c:forEach var="photos" items="${uploadFileList}" varStatus="status">
 														<c:if test="${photos.mnum eq myReview.memberDTO.mnum}">
-															
-																<c:if test="${status.index == 0}">
-																	<li style="width: 348px; height: 348px;">
-																		<div class="review_photo_box_overlay">
-																			<img height="348" width="348" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photos.filename}">
-																		</div>
-																	</li>
-																</c:if>
-																<c:if test="${status.index > 0}">
-																	<li style="width: 168px; height: 168px;">
-																		<div class="review_photo_box_overlay">
-																			<img height="168" width="168" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photos.filename}">
-																		</div>
-																	</li>
-																</c:if>
-															
+														<c:set var="count" value="${count=count+1}"/>
+															<c:if test="${count == 1}">
+																<li style="width: 348px; height: 348px;">
+																	<div class="review_photo_box_overlay">
+																		<img height="348" width="348" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photos.filename}">
+																	</div>
+																</li>
+															</c:if>
+															<c:if test="${count > 1 && count < 4}">
+																<li style="width: 168px; height: 168px;">
+																	<div class="review_photo_box_overlay">
+																		<img height="168" width="168" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photos.filename}">
+																	</div>
+																</li>
+															</c:if>
 														</c:if>
 													</c:forEach>
 													</ul>
@@ -610,33 +609,28 @@
 														${getReview.content}
 													</p>
 													
+													
+												<ul class="review_photo_box">
 													<c:forEach var="photos" items="${uploadFileList}" varStatus="status">
 														<c:if test="${photos.mnum eq getReview.mnum}">
-															<c:set var="count" value="${status.count}"/>
+														<c:set var="count" value="${count=count+1}"/>
+															<c:if test="${count == 1}">
+																<li style="width: 348px; height: 348px;">
+																	<div class="review_photo_box_overlay">
+																		<img height="348" width="348" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photos.filename}">
+																	</div>
+																</li>
+															</c:if>
+															<c:if test="${count > 1 && count < 4}">
+																<li style="width: 168px; height: 168px;">
+																	<div class="review_photo_box_overlay">
+																		<img height="168" width="168" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photos.filename}">
+																	</div>
+																</li>
+															</c:if>
 														</c:if>
 													</c:forEach>
-													
-													<c:forEach var="photos" items="${uploadFileList}" varStatus="status" begin="0" end="2">
-														<c:if test="${photos.mnum eq getReview.mnum}">
-															<ul class="review_photo_box">
-																<c:if test="${status.index == 0}">
-																	<li style="width: 348px; height: 348px;">
-																		<div class="review_photo_box_overlay">
-																			<img height="348" width="348" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photos.filename}">
-																		</div>
-																	</li>
-																</c:if>
-																<c:if test="${status.index > 0}">
-																	<li style="width: 168px; height: 168px;">
-																		<div class="review_photo_box_overlay">
-																			<img height="168" width="168" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photos.filename}">
-																		</div>
-																	</li>
-																</c:if>
-															</ul>
-														</c:if>
-													</c:forEach>
-																										
+												</ul>										
 													
 													
 												</div><!--리뷰 내용 -->
