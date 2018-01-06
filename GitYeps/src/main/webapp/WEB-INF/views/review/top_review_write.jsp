@@ -60,11 +60,7 @@
                                                 <img class="photo-box-img" height="90" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" width="90">
                                              </c:when>
                                              <c:otherwise>
-<<<<<<< HEAD
-                                                <img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${member_filename}" alt="member_main_photo" id="photo_box_img" width="90px" height="90px">
-=======
                                                 <img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${mainPhoto.member_filename}" alt="member_main_photo" id="photo_box_img" width="90px" height="90px">
->>>>>>> branch 'master' of https://github.com/MingonK/Yeps.git
                                              </c:otherwise>
                                           </c:choose>
                                        </span>
@@ -86,11 +82,7 @@
                                                                <img class="photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" width="60">
                                                             </c:when>
                                                             <c:otherwise>
-<<<<<<< HEAD
-                                                               <img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${member_filename}" alt="member_main_photo" id="photo_box_img" width="60px" height="60px">
-=======
                                                                <img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${mainPhoto.member_filename}" alt="member_main_photo" id="photo_box_img" width="60px" height="60px">
->>>>>>> branch 'master' of https://github.com/MingonK/Yeps.git
                                                             </c:otherwise>
                                                          </c:choose>
                                                       </a>

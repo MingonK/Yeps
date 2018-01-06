@@ -50,7 +50,7 @@
 					<div class="biz-page-header-right u-relative">
 						<div class="biz-page-actions nowrap">
 							<c:if test="${empty myReview}">
-							<a href="review_write?rnum=${getRest.rnum}&mode=write$where=rest" style="text-decoration: none;" class="ybtn review_write">
+							<a href="review_write?rnum=${getRest.rnum}&mode=write&where=rest" style="text-decoration: none;" class="ybtn review_write">
 								<span aria-hidden="true" style="fill: white; width: 24px; height: 24px;" class="icon">
 							    	<svg id="24x24_star" height="100%" viewBox="0 0 24 24" width="100%">
 							    		<path d="M12 1.5l2.61 6.727 6.89.53-5.278 4.688 1.65 7.055L12 16.67 6.13 20.5l1.648-7.055L2.5 8.757l6.89-.53L12 1.5z"></path>
@@ -60,7 +60,7 @@
 							</a>
 							</c:if>
 							<c:if test="${!empty myReview}">
-							<a href="review_write?rnum=${getRest.rnum}&mode=write$where=rest" style="text-decoration: none;" class="ybtn review_write">
+							<a href="review_write?rnum=${getRest.rnum}&mode=update&where=rest&rvnum=${myReview.rvnum}&star=${myReview.gradepoint}" style="text-decoration: none;" class="ybtn review_write">
 								<span aria-hidden="true" style="fill: white; width: 24px; height: 24px;" class="icon">
 							    	<svg id="24x24_star" height="100%" viewBox="0 0 24 24" width="100%">
 							    		<path d="M12 1.5l2.61 6.727 6.89.53-5.278 4.688 1.65 7.055L12 16.67 6.13 20.5l1.648-7.055L2.5 8.757l6.89-.53L12 1.5z"></path>

@@ -29,9 +29,14 @@
 					 
 					 
 					<div> 
-						<form name="review_writeF" action="review_insert?rname=${rname}&rnum=${rnum}&mode=${mode}&contentUpdate=${contentUpdate}&rvnum=${rvnum}" method="post"
-           						onsubmit="return ContentAndGradepointCheck()">
+						<form name="review_writeF" id="review_writeF" action="review_insert" method="post" onsubmit="return ContentAndGradepointCheck()">
            						<input type="hidden" name="gradepoint" id="gradepoint">
+           						<input type="hidden" name="rname" id="rname" value="${rname}">
+           						<input type="hidden" name="rnum" id="rnum" value="${rnum}">
+           						<input type="hidden" name="mnum" id="mnum" value="${memberinfo.mnum}">
+           						<input type="hidden" name="mode" id="mode" value="${mode}">
+           						<input type="hidden" name="rvnum" id="rvnum" value="${rvnum}">
+           						<input type="hidden" name="where" id="where" value="${where}">
 							<div> 
 								<div class="review_input">
 									<div class="review_text_star_wrap">
@@ -61,12 +66,12 @@
 											</fieldset>
 										</div>
 									</div>
-									<c:if test="${empty contentUpdate}">
+									<c:if test="${empty reviewDTO}">
 										<textarea class="review_write_Textarea" name="content" maxlength="5000" style="font-size: 18px; height: 100px;"
 										placeholder="Your review helps others learn about great local businesses.&#13;&#10; &#13;&#10;Please don't review this business if you received a freebie for writing this review, or if you're connected in any way to the owner or employees."></textarea>
 									</c:if>
-									<c:if test="${!empty contentUpdate}">
-										<textarea class="review_write_Textarea" name="content" maxlength="5000" style="font-size: 18px; height: 100px;">${contentUpdate}</textarea>
+									<c:if test="${!empty reviewDTO}">
+										<textarea class="review_write_Textarea" name="content" maxlength="5000" style="font-size: 18px; height: 100px;">${reviewDTO.content}</textarea>
 									</c:if>
 									<div class="review_write_alert_wrap">
 										<span>
@@ -302,6 +307,10 @@
 		$('.review_write_Button').hover(function(e) {
 			$('.review_write_Button').css("background-color", "#ff0008");
 		})
+		
+		$('.review_write_Button').click(function() {
+			$('#review_writeF').submit();
+		})
       
 		$('.selector').hover(function(e) {
 			var star = $(e.target).val();
@@ -445,7 +454,6 @@ $(function() {
        alert("평점과 내용을 제대로 기입하세요!!")
        return false;
     }
-       document.review_writeF.submit();
        return true;
     }
 
