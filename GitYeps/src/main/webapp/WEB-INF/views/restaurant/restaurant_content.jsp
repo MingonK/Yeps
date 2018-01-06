@@ -332,22 +332,42 @@
 																			<li class="selector star-selector-li-1_4 check_li_1" data-label="Eek! Methinks not.">
 							                            				     	<input id="rating-1" type="radio" value="1" name="rating" class="star-selector-input" style="cursor: pointer; border: none; margin: 0; padding: 0; width: 30px; height: 30px; opacity: 0;">
 							                                					 	<label class="star-selector_label" for="rating-1">1 (Eek! Methinks not.)</label>
+							                                					 	<span class="tooltip-wrapper">
+							                                					 		<span class="tooltip">
+							                                					 		</span>
+							                                					 	</span>
 							                             					</li>
 							                              					<li class="selector star-selector-li-1_4 check_li_2" data-label="Meh. I've experienced better.">
 							                                 					<input id="rating-2" type="radio" value="2" name="rating" class="star-selector-input">
-							                                 					<label class="star-selector_label" for="rating-2">2 (Meh. I've experienced better.)</label>
+							                                 						<label class="star-selector_label" for="rating-2">2 (Meh. I've experienced better.)</label>
+							                              							<span class="tooltip-wrapper">
+							                                					 		<span class="tooltip">
+							                                					 		</span>
+							                                						</span>
 							                              					</li>
 																			<li class="selector star-selector-li-1_4 check_li_3" data-label="3 (A-OK.)">
 																				<input id="rating-3" type="radio" value="3" name="rating" class="star-selector-input">
-							                                 					<label class="star-selector_label" for="rating-3">3 (A-OK.)</label>
+							                                 						<label class="star-selector_label" for="rating-3">3 (A-OK.)</label>
+							                              							<span class="tooltip-wrapper">
+							                                					 		<span class="tooltip">
+							                                					 		</span>
+							                                					 	</span>
 							                              					</li>
 							                              					<li class="selector star-selector-li-1_4 check_li_4" data-label="4 (Yay! I'm a fan.)">
 							                                 					<input id="rating-4" type="radio" value="4"  name="rating" class="star-selector-input">
-							                                 					<label class="star-selector_label" for="rating-4">4 (Yay! I'm a fan.)</label>
+							                                 						<label class="star-selector_label" for="rating-4">4 (Yay! I'm a fan.)</label>
+							                              							<span class="tooltip-wrapper">
+							                                					 		<span class="tooltip">
+							                                					 		</span>
+							                                					 	</span>
 							                              					</li>
 							                              					<li class="selector star-selector-li-5 check_li_5" data-label="5 (Woohoo! As good as it gets!)">
 							                                 					<input id="rating-5" type="radio" value="5"  name="rating" class="star-selector-input">
-							                                 					<label class="star-selector_label" for="rating-5">5 (Woohoo! As good as it gets!)</label>
+							                                 						<label class="star-selector_label" for="rating-5">5 (Woohoo! As good as it gets!)</label>
+							                              							<span class="tooltip-wrapper">
+							                                					 		<span class="tooltip">
+							                                					 		</span>
+							                                					 	</span>
 							                              					</li>
 							                           					</ul>
 							                                 			<input type="hidden" name="rnum" value="${getRest.rnum}">   
