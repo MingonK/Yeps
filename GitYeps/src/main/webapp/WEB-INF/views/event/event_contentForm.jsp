@@ -1092,14 +1092,16 @@
 		}
     	$('[data-popup-open]').on('click', function(e)  {
         	var targeted_popup_class = jQuery(this).attr('data-popup-open');
-        	$('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
         	if(targeted_popup_class == 'popup-1' || targeted_popup_class == 'popup-2') {
         		var memberinfo ='${sessionScope.memberinfo}';
         		if(!memberinfo.length) {
          			$(location).attr("href", "event_report");
          			return;
         		}
-        	} else if(targeted_popup_class == 'photo_popup') {
+        	}
+        	
+        	$('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+        	if(targeted_popup_class == 'photo_popup') {
         		$('.photo_popup_footer_current').text('1');
         		var count = 1;
         		$('#prev').on('click', function() {

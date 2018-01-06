@@ -155,7 +155,7 @@
 						<div class="restContent-showcase-container-inner">
 							<div class="top-shelf-grey"></div>
 							<div class="showcase-footer-links">
-								<a class="see-more u-pull-right" href="restaurant_photoList?rnum=${getRest.rnum}" style="float: right !important; color: #0073bb; cursor: pointer;">
+								<a class="see-more u-pull-right" href="restaurant_photoList?rnum=${getRest.rnum}&view=all" style="float: right !important; color: #0073bb; cursor: pointer;">
 									<span aria-hidden="true" style="width: 18px; height: 18px;"class="icon">
 										<svg class="icon_svg">
 								        	<svg id="18x18_grid" height="100%" viewBox="0 0 18 18" width="100%">
