@@ -182,7 +182,6 @@ public class ReviewController {
 		// ★최근 식당목록으로 뽑아온것이 아니라, 일단은 식당등록이 먼저된것에서부터 19개의 식당목록을 가져왔음! ->20개로 바꿀예정임
 
 		List<RestaurantDTO> rlist = restaurantMapper.review_restaurantIMG();
-		System.out.println("rlist 출력1" + rlist);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("set", "review");
 		mav.addObject("rlist", rlist);
