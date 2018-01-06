@@ -195,7 +195,6 @@ public class ReviewController {
 		// ★ if (res > 0)일때 /식당명/이름/위치(Korea, Seoul)/friend/리뷰수/별점/작성일/내용 가지고 가기!
 		// 로그인했을때의 그 이름을 통해서 나머지 값들을 꺼내서 보여줘야함
 		ReviewDTO rvdto = new ReviewDTO();
-
 		MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo");	
 		MemberPhotoDTO mpdto = (MemberPhotoDTO) session.getAttribute("mainPhoto");
 		int mnum = mdto.getMnum(); 
