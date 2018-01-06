@@ -27,7 +27,7 @@
 						</h2>
 					</div> 
 					 
-					
+					 
 					<div> 
 						<form name="review_writeF" action="review_insert?rname=${rname}&rnum=${rnum}&mode=${mode}&contentUpdate=${contentUpdate}&rvnum=${rvnum}" method="post"
            						onsubmit="return ContentAndGradepointCheck()">

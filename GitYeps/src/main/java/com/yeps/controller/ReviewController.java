@@ -192,7 +192,7 @@ public class ReviewController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/review_insert")
+	@RequestMapping(value = "/review_insert") 
 	public ModelAndView review_insert(HttpServletRequest req, HttpSession session) {
 		// ★ if (res > 0)일때 /식당명/이름/위치(Korea, Seoul)/friend/리뷰수/별점/작성일/내용 가지고 가기!
 		// 로그인했을때의 그 이름을 통해서 나머지 값들을 꺼내서 보여줘야함
@@ -202,7 +202,7 @@ public class ReviewController {
 		ModelAndView mav = new ModelAndView();
 		int mnum = mdto.getMnum(); 
 
-
+ 
 		String mode = req.getParameter("mode");
 		String contentUpdate = req.getParameter("contentUpdate");
 		int gradepoint = Integer.parseInt(req.getParameter("gradepoint"));

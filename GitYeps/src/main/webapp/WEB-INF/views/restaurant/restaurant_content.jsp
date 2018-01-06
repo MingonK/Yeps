@@ -451,7 +451,7 @@
 														<form class="myreview_formF" method="post">
 															<input class="myreview_input_1" type="hidden">
 															<input class="myreview_input_1" type="hidden">
-															<button class="myreview_button_1">
+															<button class="myreview_button_1"> 
 																<span class="myreview_span_1">
 																	<svg class="myreview_svg_1">
 																		<path class="myreview_path_1" d="M3 5V3h4V2h4v1h4v2H3zm11 9c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V6h10v8zM8 8.5a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5zm3 0a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5z"></path>
@@ -875,7 +875,7 @@
 											<dd style="font-weight: bold;display: inline;">
 												${getRest.groupreserv}
 											</dd>
-										</dl>
+										</dl> 
 										
 										<dl style="padding-bottom: 6px;display: block;">
 											<dt class="restContent-attribute-key">소음</dt>
