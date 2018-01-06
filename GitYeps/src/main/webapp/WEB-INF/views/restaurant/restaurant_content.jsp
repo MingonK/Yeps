@@ -465,9 +465,34 @@
 													<p class="myreview_p_3">
 														${myReview.content} 
 													</p>
+													
+													<ul class="review_photo_box">
+													<c:forEach var="photos" items="${uploadFileList}" varStatus="status" begin="0" end="2">
+														<c:if test="${photos.mnum eq myReview.memberDTO.mnum}">
+															
+																<c:if test="${status.index == 0}">
+																	<li style="width: 348px; height: 348px;">
+																		<div class="review_photo_box_overlay">
+																			<img height="348" width="348" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photos.filename}">
+																		</div>
+																	</li>
+																</c:if>
+																<c:if test="${status.index > 0}">
+																	<li style="width: 168px; height: 168px;">
+																		<div class="review_photo_box_overlay">
+																			<img height="168" width="168" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photos.filename}">
+																		</div>
+																	</li>
+																</c:if>
+															
+														</c:if>
+													</c:forEach>
+													</ul>
 													<div class="myreview_div_6">
 
-														<a class="myreview_a_1" href="review_write?star=${myReview.gradepoint}&contentUpdate=${myReview.content}&rnum=${getRest.rnum}&mode=${updateReview}&rvnum=${myReview.rvnum}">리뷰수정</a>
+														<a class="myreview_a_1" href="review_write?star=${myReview.gradepoint}&contentUpdate=${myReview.content}&rnum=${getRest.rnum}&mode=${updateReview}&rvnum=${myReview.rvnum}">
+															리뷰수정
+														</a>
 														<form class="myreview_formF" action="review_delete" method="post">
 															<input class="myreview_input_1" type="hidden" name="rvnum" value="${myReview.rvnum}">
 															<input class="myreview_input_1" type="hidden" name="mnum" value="${myReview.memberDTO.mnum}">
@@ -584,6 +609,36 @@
 													<p lang="ko" style="margin-bottom: 12px;display:block;">
 														${getReview.content}
 													</p>
+													
+													<c:forEach var="photos" items="${uploadFileList}" varStatus="status">
+														<c:if test="${photos.mnum eq getReview.mnum}">
+															<c:set var="count" value="${status.count}"/>
+														</c:if>
+													</c:forEach>
+													
+													<c:forEach var="photos" items="${uploadFileList}" varStatus="status" begin="0" end="2">
+														<c:if test="${photos.mnum eq getReview.mnum}">
+															<ul class="review_photo_box">
+																<c:if test="${status.index == 0}">
+																	<li style="width: 348px; height: 348px;">
+																		<div class="review_photo_box_overlay">
+																			<img height="348" width="348" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photos.filename}">
+																		</div>
+																	</li>
+																</c:if>
+																<c:if test="${status.index > 0}">
+																	<li style="width: 168px; height: 168px;">
+																		<div class="review_photo_box_overlay">
+																			<img height="168" width="168" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photos.filename}">
+																		</div>
+																	</li>
+																</c:if>
+															</ul>
+														</c:if>
+													</c:forEach>
+																										
+													
+													
 												</div><!--리뷰 내용 -->
 													
 												<div class="review-footer clearfix">
