@@ -77,7 +77,6 @@
 						         	</svg>
 							  	</span> 
 							  	사진추가
-							  	<a class="menu-explore js-menu-explore" href="restaurant_listMenu?rnum=${getRest.rnum}">모든 메뉴</a>
 						   	</a>
 							</span>
 				     	</div>

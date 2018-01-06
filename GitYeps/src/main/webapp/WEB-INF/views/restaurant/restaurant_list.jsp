@@ -494,6 +494,11 @@
 
 <script>
 $(document).ready(function(){
+
+	if($("input:checkbox[name='price']").is(":checked")==true){
+		alert($(this).val());
+	}
+	
 	var mode;
 	$('.filters').on('change', function() {
 	    $('.filters').not(this).prop('checked', false);  
