@@ -1075,7 +1075,6 @@
 			$('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
 			$('body').css('overflow','auto');
 			e.stopPropagation();
-
         	e.preventDefault();
 			});
 		});   
@@ -1147,16 +1146,20 @@
    
    //리뷰 Sort
    $(document).on("click", ".dropdown_toggle-action", function (e) {
-       $(this).parent().addClass(' is-active')
-       $(this).parent().parent().addClass('is-active')
-       $('.js-dropdown-menu').addClass('is-visible')
-       e.stopPropagation();
-	   e.preventDefault();
+	   if($(this).parent().hasClass('is-active')) {
+		   $(this).parent().removeClass(' is-active')
+	       $(this).parent().parent().removeClass('is-active')
+	   } else {
+		   $(this).parent().addClass(' is-active')
+	       $(this).parent().parent().addClass('is-active')
+	       $('.js-dropdown-menu').addClass('is-visible')   
+	       e.stopPropagation();
+		   e.preventDefault();
+	   }
    });
    
    $(document).on("click", function (e) {
 	   if(!$(e.target).hasClass('dropdown') || !$(e.target).hasClass('dropdown_toggle-action')) {
-		   
 		   $('.dropdown').removeClass('is-active');
 		   $('.dropdown_toggle').removeClass('is-active');
 		   $('.js-dropdown-menu').removeClass('is-visible')
