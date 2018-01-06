@@ -648,13 +648,13 @@
 							<!-- 아마 최신 검색 리스트 가져와서 반복문으로 6개 돌린 듯 -->
 								<c:forEach var="location" items="${locationList}">
 									<li class="mainpage_location_bar_item">
-										<a href="#" class="mainpage_location_bar_item_link">
+										<a href="yeps_main_saerch?location=${location}" class="mainpage_location_bar_item_link">
 											<span class="mainpage_location_bar_item_label">${location}</span>
 										</a>
 									</li>
 								</c:forEach>
 								<!-- 아마 최신 검색 리스트 가져와서 반복문으로 6개 돌린 듯 -->
-								<li class="mainpage_location_bar_item">
+								<!-- <li class="mainpage_location_bar_item">
 									<a href="#" class="mainpage_location_bar_item_link">
 										<span style="width: 18px; height: 18px;" class="icon mainpage_18x18_search_small_icon">
 											<svg class="icon_svg" height="100%" viewBox="0 0 18 18" width="100%">
@@ -665,7 +665,7 @@
 											더 보기
 										</span>
 									</a>
-								</li>
+								</li> -->
 							</ul>
 						</div>
 					</div>
