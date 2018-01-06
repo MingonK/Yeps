@@ -19,6 +19,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete yeps_eventreview where evnum = #{evnum}
 	</delete>
 	
+	<delete id="deleteEventReview" parameterType="int">
+	    delete yeps_eventreview where  eventReview_num = #{eventReview_num}
+	    </delete>
+	
+	<select id="eventReviewList" resultType="EventReviewDTO">
+	     select * from yeps_eventreview
+	 </select>
+	 
+	 <select id="getEventReview" resultType="EventReviewDTO">
+	     select * from yeps_eventreview where eventReview_num = #{eventReview_num}
+	 </select>
+	 
+	 <select id="eventReviewCount" resultType="int">
+	     select count(*) from yeps_eventreview
+	 </select>
 	
 	
 	

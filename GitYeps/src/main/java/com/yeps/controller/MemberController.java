@@ -136,7 +136,7 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 		String msg = null, url = null;
 		MemberDTO dto = (MemberDTO) session.getAttribute("memberinfo");
-		if (!dto.getIsmaster().equals("y") && !dto.getIsmanager().equals("y")) {
+		if (!dto.getIsmaster().equals("y") && !dto.getIsmanager().equals("y") || dto == null){
 			msg = "회원관리권한이 없습니다.";
 			url = "main";
 			mav.setViewName("message");
@@ -144,7 +144,7 @@ public class MemberController {
 			mav.addObject("url", url);
 			return mav;
 		}
-		mav.setViewName("member/managerPage");
+		mav.setViewName("manager/managerPage");
 		return mav;
 	}
 
