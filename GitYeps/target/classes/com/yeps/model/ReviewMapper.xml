@@ -386,7 +386,11 @@
 		<association javaType="RestaurantDTO" property="restaurantDTO">
 			<id column="rnum" property="rnum"></id>
 			<result column="rname" property="rname"></result>
-			<result column="rest_filename" property="rest_filename"></result>
+			<association javaType="FileDTO" property="fileDTO">
+				<id column="filenum" property="filenum"></id>
+				<result column="filename" property="filename"></result>
+				<result column="mnum" property="mnum"></result>
+			</association>
 		</association>
   	</resultMap>
    
@@ -401,9 +405,10 @@
         		, M.nickname
         		, P.filename
         		, RT.rname
-        		, RT.rest_filename
-        from	yeps_review R, yeps_member M, yeps_member_photos P, yeps_restaurant RT
-        where	R.mnum = M.mnum and R.mnum = P.mnum and R.rnum = RT.rnum and P.ismainphoto = 'y'
+        		, F.filename
+        		, F.mnum
+        from	yeps_review R, yeps_member M, yeps_member_photos P, yeps_restaurant RT, yeps_files F
+        where	R.mnum = M.mnum and R.mnum = P.mnum and R.rnum = RT.rnum and RT.rnum = F.rnum and P.ismainphoto = 'y' and F.ismainphoto = 'y'
         order by R.rvnum desc
 	</select>
    
