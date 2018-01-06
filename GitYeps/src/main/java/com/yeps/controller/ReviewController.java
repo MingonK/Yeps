@@ -146,12 +146,13 @@ public class ReviewController {
 	@RequestMapping(value = "/review_write") 
 	public ModelAndView review_write(HttpServletRequest req) {
 
-		String rnum = req.getParameter("rnum");
+		String rnum = req.getParameter("rnum"); 
 		if(rnum == null || rnum.trim().equals("")) {
 			return new ModelAndView("redirect: restaurant_list");
         }
 		
 		String rname = restaurantMapper.review_write_getrname(Integer.parseInt(rnum));
+		//int rvnum = reviewMapper.get_rvnum(Integer.parseInt(rnum));
 		String star = req.getParameter("star");
 		String mode = req.getParameter("mode");
 		String where = req.getParameter("where");
@@ -164,7 +165,8 @@ public class ReviewController {
 		if(updatemode != null) {
 			mav.addObject("contentUpdate", contentUpdate);
 		}
-
+		
+		//mav.addObject("rvnum", rvnum);
 		mav.addObject("mode", mode);
 		mav.addObject("rnum", rnum);
 		mav.addObject("where", where);
@@ -198,12 +200,14 @@ public class ReviewController {
 		MemberPhotoDTO mpdto = (MemberPhotoDTO) session.getAttribute("mainPhoto");
 		int mnum = mdto.getMnum(); 
 		
+		
 		String contentUpdate = req.getParameter("content");
 		int gradepoint = Integer.parseInt(req.getParameter("gradepoint"));
+		int rvnum = Integer.parseInt(req.getParameter("rvnum"));
 		int rnum = Integer.parseInt(req.getParameter("rnum"));
 		if(contentUpdate != null) {
 			//업데이트 쿼리문 작성 해주면 됨.★★★
-			int res = reviewMapper.review_write_update(contentUpdate, gradepoint, rnum);
+			int res = reviewMapper.review_write_update(contentUpdate, gradepoint, rvnum);
 			System.out.println("리뷰수정 결과값 출력:" + res);
 		} 
 
