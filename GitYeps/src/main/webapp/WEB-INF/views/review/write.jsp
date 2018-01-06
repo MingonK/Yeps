@@ -29,7 +29,7 @@
 					 
 					
 					<div> 
-						<form name="review_writeF" action="review_insert?rname=${rname}&rnum=${rnum}&mode=${mode}&contentUpdate=${contentUpdate}" method="post"
+						<form name="review_writeF" action="review_insert?rname=${rname}&rnum=${rnum}&mode=${mode}&contentUpdate=${contentUpdate}&rvnum=${rvnum}" method="post"
            						onsubmit="return ContentAndGradepointCheck()">
            						<input type="hidden" name="gradepoint" id="gradepoint">
 							<div>

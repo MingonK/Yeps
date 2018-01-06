@@ -154,19 +154,24 @@ public class ReviewMapper {
 	}
    
    // 2018. 1. 5일 민곤 추가
-   public ReviewDTO findMyReview(int rnum, int mnum) {
-	   HashMap<String, Integer> map = new HashMap<String, Integer>();
+   public ReviewDTO findMyReview(int rnum, int mnum, String content) {
+	   HashMap<String, Object> map = new HashMap<String, Object>();
 	   map.put("rnum", rnum);
 	   map.put("mnum", mnum);
+	   map.put("content", content);
 	   return sqlSession.selectOne("findMyReview", map);
    }
    
    // 2018. 1. 6일 새벽 상우 추가 
-   public int review_write_update(String contentUpdate, int gradepoint, int rnum) {
+   public int review_write_update(String contentUpdate, int gradepoint, int rvnum) {
 	   HashMap<String, Object> map = new HashMap<String, Object>();
 	   map.put("contentUpdate", contentUpdate); 
 	   map.put("gradepoint", gradepoint);
-	   map.put("rnum", rnum);
+	   map.put("rvnum", rvnum);
 	   return sqlSession.update("review_write_update", map);
+   }
+   
+   public int get_rvnum(int rvnum) {
+	   return sqlSession.selectOne("get_rvnum", rvnum);
    }
 }

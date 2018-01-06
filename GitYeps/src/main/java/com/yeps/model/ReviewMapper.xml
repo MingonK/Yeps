@@ -42,9 +42,7 @@
 		<association javaType="MemberDTO" property="memberDTO">
 			<id column="mnum" property="mnum"></id>
 			<result column="email" property="email"></result>
-			<result column="address" property="address"></result>
 			<result column="reviewcount" property="reviewcount"></result>
-			<result column="imagecount" property="imagecount"></result>
 			<result column="nickname" property="nickname"></result>
 			<association javaType="MemberPhotoDTO" property="memberPhotoDTO">
 				<id column="filenum" property="filenum"></id>
@@ -64,14 +62,12 @@
         		, R.gradepoint
         		, M.email
         		, M.reviewcount
-        		, M.imagecount
-        		, M.address
         		, M.nickname
         		, P.filename
         		, P.ismainphoto
         from	yeps_review R, yeps_member M, yeps_member_photos P
-        where	R.mnum = M.mnum and R.mnum = P.mnum and P.ismainphoto = 'y' and R.rnum = #{rnum})A)
-        where 	rn between #{start} and #{end}
+        where	R.mnum = M.mnum and R.mnum = P.mnum
+        and		P.ismainphoto = 'y' and R.rnum = #{rnum})A) where rn between #{start} and #{end}
   	</select>
   	
   	
@@ -364,11 +360,14 @@
   		<id column="rvnum" property="rvnum"/>
 		<result column="rnum" property="rnum"></result>
 		<result column="content" property="content"></result>
+		<result column="reg_date" property="reg_date"></result>
 		<result column="gradepoint" property="gradepoint"></result>
 		
 		<association javaType="MemberDTO" property="memberDTO">
 			<id column="mnum" property="mnum"></id>
 			<result column="email" property="email"></result>
+			<result column="reviewcount" property="reviewcount"></result>
+			<result column="imagecount" property="imagecount"></result>
 			<result column="nickname" property="nickname"></result>
 			<association javaType="MemberPhotoDTO" property="memberPhotoDTO">
 				<id column="filenum" property="filenum"></id>
@@ -390,8 +389,11 @@
   		 		R.rvnum
         		, R.rnum
         		, R.content
+        		, R.reg_date
         		, R.gradepoint
         		, M.email
+        		, M.reviewcount
+        		, M.imagecount
         		, M.nickname
         		, P.filename
         		, RT.rname
@@ -481,6 +483,7 @@
    		select R.content
    				, R.reg_date
    				, R.gradepoint
+   				, R.rvnum
    				, M.email
    				, M.address
    				, M.reviewcount
@@ -489,11 +492,15 @@
    				, M.mnum
    				, P.filename
    		from yeps_review R, yeps_member M, yeps_member_photos P
-   		where R.mnum = M.mnum and M.mnum = P.mnum and P.ismainphoto='y' and R.rnum = #{rnum} and R.mnum = #{mnum}
+   		where R.mnum = M.mnum and M.mnum = P.mnum and P.ismainphoto='y' and R.rnum = #{rnum} and R.mnum = #{mnum} and R.content = #{content}
    </select>
    
+   	<select id="get_rvnum" parameterType="int" resultType="int">
+   		select rvnum from yeps_review where rnum = #{rnum} 
+   	</select>
+   
   	<update id="review_write_update" parameterType="java.util.HashMap">
-  		update yeps_review set content=#{contentUpdate}, gradepoint=#{gradepoint} where rnum=#{rnum}
+  		update yeps_review set content=#{contentUpdate}, gradepoint=#{gradepoint} where rvnum=#{rvnum}
   	</update>   
   	
 </mapper>		
