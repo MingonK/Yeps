@@ -8,7 +8,9 @@
 <title>Details</title>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/member.css?ver=2"/>"/>
-
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/message.css?ver=2"/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/restStyle.css?ver=2"/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css?ver=2"/>"/>
 <script src="//code.jquery.com/jquery.min.js?ver=1"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js?ver=2"></script>
 <script src="http://malsup.github.com/jquery.cycle2.js"></script>
@@ -125,7 +127,7 @@
 								</c:if>
 								<c:if test="${memberDTO.mnum != sessionScope.memberinfo.mnum}">
 									<li>
-										<a class="member_detail_arrange" href="#" rel="">
+										<a class="member_detail_arrange" href="#" rel="" data-popup-open="writeMessage" alt="${memberDTO.email}">
 											<div class="member_action-link_icon">
 												<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon member_icon--currentColor">
 													<svg class="icon_svg">
@@ -325,65 +327,11 @@
 				    
 					     </ul>
 					  </div>
-			       </div>
-			    
-			       
-				   <div class="member_reviews-hero">
-					   <div class="member_u-relative">
-						   <h2 class="section-header_title">Reviews</h2>
-					   <p>It’s your turn ? review everything from your favorite burger to your favorite root canal. Write reviews to contribute to the Yelp community and help your friends find all the local gems that you love.</p>
-						   <a href="review_restaurantIMG" class="ybtn ybtn-primary">Write a Review</a>
-									<img class="reviews-hero-img" src="https://s3-media3.fl.yelpcdn.com/assets/2/www/img/1f978654eb34/user_details/reviews-hero.png">
-									<div class="member_reviews-widget member_u-bg-color">
-										<div class="member_reviews-widget_action-bar">
-											<div class="member_reviews-widget_action-bar-buttons">
-												<a class="ybtn ybtn-primary war-button" href="javascript:;">
-													<span aria-hidden="true" style="width: 24px; height: 24px;" class="member_icon member_icon-currentColor">
-														<svg class="icon_svg">
-															<path d="M12 1.5l2.61 6.727 6.89.53-5.278 4.688 1.65 7.055L12 16.67 6.13 20.5l1.648-7.055L2.5 8.757l6.89-.53L12 1.5z"></path>
-														</svg>
-													</span>Write a Review
-												</a>
-												<span class="member_ybtn-group">
-													<a class="ybtn ybtn--small add-photo-button" href="javascript:;">
-														<span aria-hidden="true" style="width: 18px; height: 18px;" class="member_icon member_icon-currentColor">
-															<svg class="icon_svg">
-																<path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 4.75a4.25 4.25 0 1 0 0 8.5 4.25 4.25 0 0 0 0-8.5zM11 10h-1v1a1 1 0 0 1-2 0v-1H7a1 1 0 0 1 0-2h1V7a1 1 0 0 1 2 0v1h1a1 1 0 0 1 0 2z"></path>
-															</svg>
-														</span> Add Photo
-													</a>
-													<a class="ybtn ybtn--small share-icon" href="javascript:;">
-														<span aria-hidden="true" style="width: 18px; height: 18px;" class="member_icon member_icon-currentColor">
-															<svg class="icon_svg">
-																<path d="M17.714 6.43L13 10.356v-3.03c-1 0-5.097 1.47-6.286 3.62.274-3.08 4.286-5.5 6.286-5.5V2.5l4.714 3.93zM3 4v10h11v-2.5l1-1V15H2V3h8.5l-1 1H3z"></path>
-															</svg>
-														</span> Share
-													</a>
-													<a class="ybtn ybtn--small not-bookmarked" href="javascript:;">
-														<span aria-hidden="true" style="width: 18px; height: 18px;" class="member_icon member_icon-currentColor">
-															<svg class="icon_svg">
-																<path d="M14 2H4v14l5-4 5 4V2zm-3.13 7.957L8.978 8.794 7.148 10 7.5 7.926 6 6.458l2.074-.303L8.977 4l.948 2.155L12 6.458l-1.5 1.468.37 2.03z"></path>
-															</svg>
-														</span>
-														<span class="bookmark-icon_label">Bookmark</span>
-													</a>
-												</span>
-											</div>
-										</div>
-										<div class="reviews-widget--no-hover u-sticky u-absolute"></div>
-									</div>
-								</div>
-							</div>
-		                </div> 
-						  
-				
-				
-					      
-<!-- -----페이징 처리 시작 ------ -->					
-			   <div class="yeps_message_paging_section" style="font-size: 14px; ">
-	                       <div class="yeps_message_pagination_block">
-	                          <div class="yeps_message_pagination_wrap">
-	                              <div class="yeps_message_page_of_pages" >
+					  <!-- -----페이징 처리 시작 ------ -->					
+			   <div class="event_list_paging_section" style="font-size: 14px; width: 66.66667%">
+	                       <div class="event_list_pagination_block">
+	                          <div class="event_list_pagination_wrap"  >
+	                              <div class="event_list_page_of_pages" >
 	                                  <c:if test="${map.yepsPager.blockEnd == 0}">
 	                                      Page ${map.yepsPager.curPage} of 1
 	                                  </c:if>
@@ -393,8 +341,8 @@
 	                             </div>
 	              <!--         페이징 처리!! 현재페이지는 span이 되고 나머지는 a로   --> 
 	                         <c:if test="${map.yepsPager.blockEnd != 1}">
-	                             <div class="yeps_message_page_link_wrapper" style="text-align: right;">
-	                                 <div class="yeps_message_page_link_wrap">
+	                             <div class="yeps_message_page_link_wrapper" >
+	                                 <div class="yeps_message_page_link_wrap" >
 	                                     <c:if test="${map.yepsPager.curBlock > 1}">
 	                                         <div class="yeps_message_next_block">
 	                                             <a class="yeps_message_next_block_action" href="javascript:list('1')">
@@ -455,6 +403,61 @@
 	             </div>
 	         </div>
 	      </div>
+			       </div>
+			    
+			       
+				   <div class="member_reviews-hero">
+					   <div class="member_u-relative">
+						   <h2 style="margin: 0; padding: 0; color: #d32323;" class="section-header_title">Reviews</h2>
+					   <p>It’s your turn ? review everything from your favorite burger to your favorite root canal. Write reviews to contribute to the Yelp community and help your friends find all the local gems that you love.</p>
+						   <a href="review_restaurantIMG" class="ybtn ybtn-primary">Write a Review</a>
+									<img class="reviews-hero-img" src="https://s3-media3.fl.yelpcdn.com/assets/2/www/img/1f978654eb34/user_details/reviews-hero.png">
+									<div class="member_reviews-widget member_u-bg-color">
+										<div class="member_reviews-widget_action-bar">
+											<div class="member_reviews-widget_action-bar-buttons">
+												<a class="ybtn ybtn-primary war-button" href="javascript:;">
+													<span aria-hidden="true" style="width: 24px; height: 24px;" class="member_icon member_icon-currentColor">
+														<svg class="icon_svg">
+															<path d="M12 1.5l2.61 6.727 6.89.53-5.278 4.688 1.65 7.055L12 16.67 6.13 20.5l1.648-7.055L2.5 8.757l6.89-.53L12 1.5z"></path>
+														</svg>
+													</span>Write a Review
+												</a>
+												<span class="member_ybtn-group">
+													<a class="ybtn ybtn--small add-photo-button" href="javascript:;">
+														<span aria-hidden="true" style="width: 18px; height: 18px;" class="member_icon member_icon-currentColor">
+															<svg class="icon_svg">
+																<path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 4.75a4.25 4.25 0 1 0 0 8.5 4.25 4.25 0 0 0 0-8.5zM11 10h-1v1a1 1 0 0 1-2 0v-1H7a1 1 0 0 1 0-2h1V7a1 1 0 0 1 2 0v1h1a1 1 0 0 1 0 2z"></path>
+															</svg>
+														</span> Add Photo
+													</a>
+													<a class="ybtn ybtn--small share-icon" href="javascript:;">
+														<span aria-hidden="true" style="width: 18px; height: 18px;" class="member_icon member_icon-currentColor">
+															<svg class="icon_svg">
+																<path d="M17.714 6.43L13 10.356v-3.03c-1 0-5.097 1.47-6.286 3.62.274-3.08 4.286-5.5 6.286-5.5V2.5l4.714 3.93zM3 4v10h11v-2.5l1-1V15H2V3h8.5l-1 1H3z"></path>
+															</svg>
+														</span> Share
+													</a>
+													<a class="ybtn ybtn--small not-bookmarked" href="javascript:;">
+														<span aria-hidden="true" style="width: 18px; height: 18px;" class="member_icon member_icon-currentColor">
+															<svg class="icon_svg">
+																<path d="M14 2H4v14l5-4 5 4V2zm-3.13 7.957L8.978 8.794 7.148 10 7.5 7.926 6 6.458l2.074-.303L8.977 4l.948 2.155L12 6.458l-1.5 1.468.37 2.03z"></path>
+															</svg>
+														</span>
+														<span class="bookmark-icon_label">Bookmark</span>
+													</a>
+												</span>
+											</div>
+										</div>
+										<div class="reviews-widget--no-hover u-sticky u-absolute"></div>
+									</div>
+								</div>
+							</div>
+		                </div> 
+						  
+				
+				
+					      
+
 
              
 				<div class="details-column-beta_events">
@@ -496,11 +499,102 @@
 		</div>
 	</div>
 	
+	<div class="popup" align="left" id="writeMessage" data-popup="writeMessage"  style="z-index: 1;">
+	<div class="popup-inner" style="width: 465px; z-index: 1; height: auto !important; max-height: 400px;">
+    	<div id="flag_content_popup_title">
+    	    <div id="flag_content_popup_close" data-popup-close="writeMessage">
+    			<h4 style="display: table-cell; padding: 0px 7px; font-size: 100%; font: inherit;">×</h4>
+    		</div>
+    		<h2>
+    	    	메세지 보내기
+    	    </h2>
+    	</div>
+    	
+    	<div id="flag_popup_description" style="padding: 12px 8px 0;">
+    		<div>
+    			<form name="sendform" method="post">
+    				<div>
+						<h4 align="left" style="color: #d32323;">Send Message To</h4>
+    	    			<input type="text" id="sendformTo" name="receiver" style="width: 95%; height: 20px;">
+    	    			<h4 align="left" style="color: #d32323;">Subject is</h4>
+	            		<input type="text" name="title" id="sendformSubject" style="width: 95%; height: 20px;">
+	        			<h4 align="left" style="color: #d32323;">Content is</h4>
+	            		<textarea rows="4" name="content" id="sendformMessage"  style="width: 95%;" placeholder="여기에 메시지를 입력하세요."></textarea>
+    	    		</div>
+    			</form>
+    		</div>
+    	</div>
+    	
+    	   	
+		<div id="flag_popup_footer">
+     		<div id="flag_popup_buttons">
+     			<button id="reply_flag_popup_submit_button" type="submit" value="submit" data-popup-send="SendMessage" onclick="sendMessage()">
+     				<span>메세지 보내기</span>
+     			</button>
+     			<a href="#" data-popup-close="writeMessage">
+    				Close
+    			</a>
+     		</div>
+     	</div>
+	</div>		
+</div>
+	
 	<div class="loading_wapper" >
       	<div class="loading_img" style="left: 40%; top: 40%;"></div>
    	</div>
 	
 <script type="text/javascript">
+
+$(function() {
+	$(document).on('click', '[data-popup-open]', function(e)  {
+		var memberinfo ='${sessionScope.memberinfo}';
+    	if(!memberinfo.length) {
+     		$(location).attr("href", "event_report");
+     		return;
+    	}
+		var targeted_popup_class = jQuery(this).attr('data-popup-open');
+		$('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+    	
+    	if(targeted_popup_class == 'writeMessage') {
+    		var email = $(this).attr('alt');
+    		$('#sendformTo').val(email);
+    	}
+		e.stopPropagation();
+    	e.preventDefault();
+	});
+    
+	//----- CLOSE
+	$(document).on('click', '[data-popup-close]', function(e)  {
+		var targeted_popup_class = jQuery(this).attr('data-popup-close');
+		$('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+		$('body').css('overflow','auto');
+		e.stopPropagation();
+
+    	e.preventDefault();
+		});
+	});   
+
+		$('#sendMessage').click(function(){
+			if($('#sendformTo').val()==''){
+			alert("받는 사람을 입력해주세요");
+			$('#sendformTo').focus()
+			return false;
+			
+			}else if($('#sendformSubject').val()==''){
+			alert("제목를 입력해주세요");
+			$('#sendformSubject').focus()
+			return false;
+			
+			}else if($('#sendformMessage').val()==''){
+			alert("내용을 입력해주세요");
+			$('#sendformMessage').focus()
+			return false;
+			}
+		    document.sendform.action = "message_send";
+		    document.sendform.submit(); 
+		
+		});
+
 	var list = new Array();
 	<c:forEach var="memberPhotoDTO" items="${getPhotoList}">
 		list.push("${memberPhotoDTO.filename}");
@@ -522,6 +616,7 @@
 		$(".details-column-beta_reviews").hide();
 	   	$(".details-column-beta_events").hide();
 	    $(".details-column-beta_tips").hide();
+	    $('.event_list_paging_section').hide();
 		$('.profile-nav_items > li > a').removeClass('is-active');
 		$('#profile_overview').addClass('is-active');
 	    $('.profile-nav_items > li > a').click(function( e ){
@@ -534,6 +629,8 @@
  	    	$(".details-column-beta_reviews").hide();
  	    	$(".details-column-beta_events").hide();
  	    	$(".details-column-beta_tips").hide();
+ 	    	$('.event_list_paging_section').hide();
+ 	    	
 	    })
 	    
 	    $('#profile_reviews').click(function(e){
@@ -541,11 +638,12 @@
  	    	$(".details-column-beta_reviews").show();
  	    	$(".details-column-beta_events").hide();
  	    	$(".details-column-beta_tips").hide();
+ 	    	$('.event_list_paging_section').show();
  	    	
  	     	var mnum = '${memberDTO.mnum}';
 	        $.ajax({
              type : 'post',
-             url : 'review_member_ajax', 
+             url : 'review_member_ajax?mnum='+ mnum, 
              data : mnum,
              dataType : 'json',
              success : function(responseData){
@@ -558,7 +656,7 @@
 			
 				 '<li class="review-draft" style=" padding: 18px 0;  padding-bottom: 17px; display: list-item; text-align: -webkit-match-parent;">'+
  					'<div class="arrange" style="width: 100%; overflow: hidden; height: auto;">'+
- 						'<div class="restContent-user" style="float: left; padding: 0 15px; min-height: 1px;  ">'+
+ 						'<div class="restContent-user"  style="float: left; padding: 0 15px; min-height: 1px; width: 66.66667% ">'+
 						    '<div class="media-block media-block--12 biz-listing-medium">'+
 				                '<div class="media-avatar">'+
 				                    '<div class="photo-box pb-60s">'+
@@ -569,14 +667,14 @@
 				         	    '</div>'+
 				            '<div class="media-story">'+
 				                '<div class="media-title clearfix">'+
-				                    '<a class="biz-name js-analytics-click" data-analytics-label="biz-name" href="/biz/liholiho-yacht-club-san-francisco-2" data-hovercard-id="K8YqsGXicOLOUcQXTzRrnw"><span>'+ item.restaurantDTO.rname + '    Liholiho Yacht Club</span></a>'+
+				                    '<a class="biz-name js-analytics-click" data-analytics-label="biz-name" href="/biz/liholiho-yacht-club-san-francisco-2" data-hovercard-id="K8YqsGXicOLOUcQXTzRrnw"><span>'+ item.restaurantDTO.rname + '   </span></a>'+
 				                '</div>'+
 				                '<div class="price-category">'+
 				                    '<span class="category-str-list">'+
-				                        '<a href="/search?cflt=bars&amp;find_loc=San+Francisco%2C+CA">' + item.restaurantDTO.foodstyle + '  Bars</a>,'+
+				                        '<a href="/search?cflt=bars&amp;find_loc=San+Francisco%2C+CA">' + item.restaurantDTO.foodstyle + '  </a>,'+
 				                        '<a href="/search?cflt=newamerican&amp;find_loc=San+Francisco%2C+CA">' + 
-				                        item.restaurantDTO.roadAddrPart1 + item.restaurantDTO.roadAddrPart2 + item.restaurantDTO.addrDetail + '    American (New)</a>,'+
-				                        '<a href="/search?cflt=seafood&amp;find_loc=San+Francisco%2C+CA">Seafood</a>'+
+				                        item.restaurantDTO.roadAddrPart1 + item.restaurantDTO.roadAddrPart2 + item.restaurantDTO.addrDetail + '   </a>,'+
+				                        '<a href="/search?cflt=seafood&amp;find_loc=San+Francisco%2C+CA"></a>'+
 				    				'</span>'+
 				    			 '</div>'+
 				                 '<address>'+
@@ -627,11 +725,11 @@
 				      );
 	             });
 	 
-				 $('.yeps_message_paging_section').empty();
+				 $('.event_list_paging_section').empty();
 			     var pagingHtml = "";
-			     pagingHtml = '<div class="yeps_message_pagination_block">' + 
-			     			  '<div class="yeps_message_pagination_wrap">' + 
-			     			  '<div class="yeps_message_page_of_pages">';
+			     pagingHtml = '<div class="event_list_pagination_block">' + 
+			     			  '<div class="event_list_pagination_wrap" >' + 
+			     			  '<div class="event_list_page_of_pages">';
 			     if(responseData.YepsPager.blockEnd == 0) {
 			  	   pagingHtml += 'Page ' + responseData.YepsPager.curPage + ' of 1';
 			     } else {
@@ -639,11 +737,11 @@
 			     }
 			     pagingHtml += '</div>';
 			     if(responseData.YepsPager.blockEnd != 1) {
-			  	   pagingHtml += '<div class="yeps_message_page_link_wrapper">';
-			  	   pagingHtml += '<div class="yeps_message_page_link_wrap">';
+			  	   pagingHtml += '<div class="event_list_page_link_wrapper" style="text-align: right;">';
+			  	   pagingHtml += '<div class="event_list_page_link_wrap"  >';
 			  	   if(responseData.YepsPager.curBlock > 1) {
-			  		   pagingHtml += '<div class="yeps_message_next_block">';
-			  		   pagingHtml += '<a class="yeps_message_next_block_action" href="javascript:list('+ 1 +')">';
+			  		   pagingHtml += '<div class="event_list_next_block">';
+			  		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+ 1 +')">';
 			  		   pagingHtml += '<span>Start</span>';
 			  		   pagingHtml += '</a>';
 			  		   pagingHtml += '</div>';
@@ -663,13 +761,13 @@
 			  	   }
 			  	   
 			  	   for(var num = responseData.YepsPager.blockBegin; num <= responseData.YepsPager.blockEnd; num++) {
-			  		   pagingHtml += '<div class="yeps_message_page_link_option">';
+			  		   pagingHtml += '<div class="event_list_page_link_option">';
 			  		   if(num == responseData.YepsPager.curPage) {
-			  			   pagingHtml += '<span class="yeps_message_page_option_action">';
+			  			   pagingHtml += '<span class="event_list_page_option_action">';
 			  			   pagingHtml += num;
 			  			   pagingHtml += '</span>';
 			  		   } else {
-			  			   pagingHtml += '<a href="javascript:list('+ num +')" class="yeps_message_page_option_link_action">';
+			  			   pagingHtml += '<a href="javascript:list('+ num +')" class="event_list_page_option_link_action">';
 			  			   pagingHtml += num;
 			  			   pagingHtml += '</a>';
 			  		   }
@@ -677,8 +775,8 @@
 			  	   }
 			  	   
 			  	   if(responseData.YepsPager.curBlock <= responseData.YepsPager.totBlock) {
-			  		   pagingHtml += '<div class="yeps_message_next_block">';
-			  		   pagingHtml += '<a class="yeps_message_next_block_action" href="javascript:list('+responseData.YepsPager.nextPage+')">';
+			  		   pagingHtml += '<div class="event_list_next_block">';
+			  		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+responseData.YepsPager.nextPage+')">';
 			  		   pagingHtml += '<span>Next</span>';
 			  		   pagingHtml += '<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">';
 			  		   pagingHtml += '<svg class="icon_svg">';
@@ -689,8 +787,8 @@
 			  		   pagingHtml += '</div>';
 			  	   }
 			  	   if(responseData.YepsPager.curBlock <= responseData.YepsPager.totBlock) {
-			  		   pagingHtml += '<div class="yeps_message_next_block">';
-			  		   pagingHtml += '<a class="yeps_message_next_block_action" href="javascript:list('+responseData.YepsPager.totPage+')">';
+			  		   pagingHtml += '<div class="event_list_next_block">';
+			  		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+responseData.YepsPager.totPage+')">';
 			  		   pagingHtml += '<span>End</span>';
 			  		   pagingHtml += '</a>';
 			  		   pagingHtml += '</div>';
@@ -702,7 +800,7 @@
 			     pagingHtml += '</div>';
 			     pagingHtml += '</div>';
 			
-			     $('.yeps_message_paging_section').append(pagingHtml);      
+			     $('.event_list_paging_section').append(pagingHtml);      
 			   
 				 },
 	             error : function(request, status, error) {
@@ -741,7 +839,7 @@
 			
 				 '<li class="review-draft" style=" padding: 18px 0;  padding-bottom: 17px; display: list-item; text-align: -webkit-match-parent;">'+
  					'<div class="arrange" style="width: 100%; overflow: hidden; height: auto;">'+
- 						'<div class="restContent-user" style="float: left; padding: 0 15px; min-height: 1px;  ">'+
+ 						'<div class="restContent-user" style="float: left; padding: 0 15px; min-height: 1px; width: 66.66667% ">'+
 						    '<div class="media-block media-block--12 biz-listing-medium">'+
 				                '<div class="media-avatar">'+
 				                    '<div class="photo-box pb-60s">'+
@@ -810,11 +908,11 @@
 				      );
 				 });
 				 
-				 $('.yeps_message_paging_section').empty();
+				 $('.event_list_paging_section').empty();
 			     var pagingHtml = "";
-			     pagingHtml = '<div class="yeps_message_pagination_block">' + 
-			     			  '<div class="yeps_message_pagination_wrap">' + 
-			     			  '<div class="yeps_message_page_of_pages">';
+			     pagingHtml = '<div class="event_list_pagination_block">' + 
+			     			  '<div class="event_list_pagination_wrap" >' + 
+			     			  '<div class="event_list_page_of_pages">';
 			     if(responseData.YepsPager.blockEnd == 0) {
 			  	   pagingHtml += 'Page ' + responseData.YepsPager.curPage + ' of 1';
 			     } else {
@@ -822,11 +920,11 @@
 			     }
 			     pagingHtml += '</div>';
 			     if(responseData.YepsPager.blockEnd != 1) {
-			  	   pagingHtml += '<div class="yeps_message_page_link_wrapper">';
-			  	   pagingHtml += '<div class="yeps_message_page_link_wrap">';
+			  	   pagingHtml += '<div class="event_list_page_link_wrapper">';
+			  	   pagingHtml += '<div class="event_list_page_link_wrap" >';
 			  	   if(responseData.YepsPager.curBlock > 1) {
-			  		   pagingHtml += '<div class="yeps_message_next_block">';
-			  		   pagingHtml += '<a class="yeps_message_next_block_action" href="javascript:list('+ 1 +')">';
+			  		   pagingHtml += '<div class="event_list_next_block">';
+			  		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+ 1 +')">';
 			  		   pagingHtml += '<span>Start</span>';
 			  		   pagingHtml += '</a>';
 			  		   pagingHtml += '</div>';
@@ -846,13 +944,13 @@
 			  	   }
 			  	   
 			  	   for(var num = responseData.YepsPager.blockBegin; num <= responseData.YepsPager.blockEnd; num++) {
-			  		   pagingHtml += '<div class="yeps_message_page_link_option">';
+			  		   pagingHtml += '<div class="event_list_page_link_option">';
 			  		   if(num == responseData.YepsPager.curPage) {
-			  			   pagingHtml += '<span class="yeps_message_page_option_action">';
+			  			   pagingHtml += '<span class="event_list_page_option_action">';
 			  			   pagingHtml += num;
 			  			   pagingHtml += '</span>';
 			  		   } else {
-			  			   pagingHtml += '<a href="javascript:list('+ num +')" class="yeps_message_page_option_link_action">';
+			  			   pagingHtml += '<a href="javascript:list('+ num +')" class="event_list_page_option_link_action">';
 			  			   pagingHtml += num;
 			  			   pagingHtml += '</a>';
 			  		   }
@@ -860,8 +958,8 @@
 			  	   }
 			  	   
 			  	   if(responseData.YepsPager.curBlock <= responseData.YepsPager.totBlock) {
-			  		   pagingHtml += '<div class="yeps_message_next_block">';
-			  		   pagingHtml += '<a class="yeps_message_next_block_action" href="javascript:list('+responseData.YepsPager.nextPage+')">';
+			  		   pagingHtml += '<div class="event_list_next_block">';
+			  		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+responseData.YepsPager.nextPage+')">';
 			  		   pagingHtml += '<span>Next</span>';
 			  		   pagingHtml += '<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">';
 			  		   pagingHtml += '<svg class="icon_svg">';
@@ -872,8 +970,8 @@
 			  		   pagingHtml += '</div>';
 			  	   }
 			  	   if(responseData.YepsPager.curBlock <= responseData.YepsPager.totBlock) {
-			  		   pagingHtml += '<div class="yeps_message_next_block">';
-			  		   pagingHtml += '<a class="yeps_message_next_block_action" href="javascript:list('+responseData.YepsPager.totPage+')">';
+			  		   pagingHtml += '<div class="event_list_next_block">';
+			  		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+responseData.YepsPager.totPage+')">';
 			  		   pagingHtml += '<span>End</span>';
 			  		   pagingHtml += '</a>';
 			  		   pagingHtml += '</div>';
@@ -885,7 +983,7 @@
 			     pagingHtml += '</div>';
 			     pagingHtml += '</div>';
 			
-			     $('.yeps_message_paging_section').append(pagingHtml);      
+			     $('.event_list_paging_section').append(pagingHtml);      
 			   
 	           
 	         },
@@ -901,6 +999,7 @@
  	    	$(".details-column-beta_reviews").hide();
  	    	$(".details-column-beta_events").show();
  	    	$(".details-column-beta_tips").hide();
+ 	    	$(".event_list_paging_section").hide();
 	    })
 	    
 	    $('#profile_tips').click(function(e){
@@ -908,7 +1007,7 @@
  	    	$(".details-column-beta_reviews").hide();
  	    	$(".details-column-beta_events").hide();
  	    	$(".details-column-beta_tips").show();
- 	    	$(".yeps_message_section").hide();
+ 	    	$(".event_list_paging_section").hide();
 	    })
 	 });
 </script>

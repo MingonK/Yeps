@@ -15,18 +15,36 @@ public class RestaurantMapper {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public List<RestaurantDTO> listRest(int start, int end, String mode) {
+	public List<RestaurantDTO> listRest(int start, int end, String mode, List<Integer> prices) {
+		String sql=null;
+//		String pricesSql = null;
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
-		if (mode.equals("delivery")) {
-			return sqlSession.selectList("listRestaurant_delivery", map);
-		} else if (mode.equals("reserv")) {
-			return sqlSession.selectList("listRestaurant_reserv", map);
-		} else if (mode.equals("takeout")) {
-			return sqlSession.selectList("listRestaurant_takeout", map);
+
+		if(prices.get(0)!=0) {
+//			for(int i=0;i<prices.size();i++) {
+//				if(prices.size()==0) {
+					sql = "and price=";
+					sql+=String.valueOf(prices.get(0));
+//				}else {
+//					pricesSql = "or price = ";
+//					pricesSql+=String.valueOf(prices.get(i));
+//				}
+//			}
+			map.put("sql", sql);
+//			map.put("pricesSql", pricesSql);
+			return sqlSession.selectList("listRestaurant_"+mode+"",map);
+		}else {
+			if (mode.equals("delivery")) {
+				return sqlSession.selectList("listRestaurant_delivery", map);
+			} else if (mode.equals("reserv")) {
+				return sqlSession.selectList("listRestaurant_reserv", map);
+			} else if (mode.equals("takeout")) {
+				return sqlSession.selectList("listRestaurant_takeout", map);
+			}
+			return sqlSession.selectList("listRestaurant_mode", map);
 		}
-		return sqlSession.selectList("listRestaurant", map);
 	}
 
 	public int insertRest(RestaurantDTO dto) {

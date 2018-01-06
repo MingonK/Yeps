@@ -610,7 +610,7 @@ function test() {
 									</div>
 									</li>
 									<li class="restInsert-list">
-										<label for="roadAddrPart1" class="restInsert-label-bold">좌석</label><br>
+										<label for="reststyle" class="restInsert-label-bold">좌석</label><br>
 										<div class="checkbox" style="width:370px;height:auto;">
 											<input class="magic-checkbox" type="checkbox" id="reststyle" name="reststyle" value="좌식" >
 											<label for="reststyle" class="restInsert-label" style="width:60px">좌식</label>
@@ -624,7 +624,7 @@ function test() {
 									
 									</li>
 									<li class="restInsert-list">
-										<label for="roadAddrPart1" class="restInsert-label-bold">예약</label><br>
+										<label for="reserv" class="restInsert-label-bold">예약</label><br>
 										
 										<input class="magic-radio" type="radio" id="reserv" name="reserv" value="가능" >
 										<label for="reserv" class="restInsert-label" style="width:58px">가능</label>
@@ -633,7 +633,7 @@ function test() {
 									</li>
 									
 									<li class="restInsert-list">
-										<label for="roadAddrPart1" class="restInsert-label-bold">배달</label><br>
+										<label for="delivery" class="restInsert-label-bold">배달</label><br>
 										
 										<input class="magic-radio" type="radio" id="delivery1" name="delivery" value="가능" >
 										<label for="delivery1" class="restInsert-label" style="width:58px">가능</label>
@@ -642,7 +642,7 @@ function test() {
 									</li>
 									
 									<li class="restInsert-list">
-										<label class="restInsert-label-bold">포장</label><br>
+										<label for="takeout" class="restInsert-label-bold">포장</label><br>
 																				
 										<input class="magic-radio" type="radio" id="takeout1" name="takeout" value="가능" >
 										<label for="takeout1" class="restInsert-label" style="width:58px">가능</label>
@@ -650,7 +650,7 @@ function test() {
 										<label for="takeout2" class="restInsert-label">불가능</label>
 									</li>
 									<li class="restInsert-list">
-										<label for="roadAddrPart1" class="restInsert-label-bold">주차장</label><br>
+										<label for="parking" class="restInsert-label-bold">주차장</label><br>
 																														
 										<input class="magic-radio" type="radio" id="parking" name="parking" value="가능" >
 										<label for="parking" class="restInsert-label" style="width:58px">가능</label>
@@ -658,7 +658,7 @@ function test() {
 										<label for="parking2" class="restInsert-label">불가능</label>
 									</li>
 									<li class="restInsert-list">
-										<label for="roadAddrPart1" class="restInsert-label-bold">단체예약</label><br>
+										<label for="groupreserv" class="restInsert-label-bold">단체예약</label><br>
 																																								
 										<input class="magic-radio" type="radio" id="groupreserv" name="groupreserv" value="가능" >
 										<label for="groupreserv" class="restInsert-label" style="width:58px">가능</label>
@@ -666,7 +666,7 @@ function test() {
 										<label for="groupreserv2" class="restInsert-label">불가능</label>
 									</li>
 									<li class="restInsert-list">
-										<label for="roadAddrPart1" class="restInsert-label-bold">소음</label><br>
+										<label for="noise" class="restInsert-label-bold">소음</label><br>
 										
 										<input class="magic-radio" type="radio" id="noise" name="noise" value="조용함" >
 										<label for="noise" class="restInsert-label" style="width:58px">조용함</label>
@@ -678,7 +678,7 @@ function test() {
 										<label for="noise3" class="restInsert-label" style="width:58px">시끄러움</label>
 									</li>
 									<li class="restInsert-list">
-										<label for="roadAddrPart1" class="restInsert-label-bold">키드존</label><br>
+										<label for="kidszone" class="restInsert-label-bold">키드존</label><br>
 										
 										<input class="magic-radio" type="radio" id="kidszone" name="kidszone" value="키드존" >
 										<label for="kidszone" class="restInsert-label" style="width:58px">키드존</label>
@@ -686,7 +686,7 @@ function test() {
 										<label for="kidszone2" class="restInsert-label">노키드존</label>
 									</li>
 									<li class="restInsert-list">
-										<label for="roadAddrPart1" class="restInsert-label-bold">주류</label><br>
+										<label for="alcohol" class="restInsert-label-bold">주류</label><br>
 										
 										<div class="checkbox" style="width:390px;height:auto;">
 										
@@ -705,7 +705,7 @@ function test() {
 										</div>
 									</li>
 									<li class="restInsert-list">
-										<label class="restInsert-label-bold">대기실</label><br>
+										<label for="waiting" class="restInsert-label-bold">대기실</label><br>
 										
 										<input class="magic-radio" type="radio" id="waiting" name="waiting" value="있음" >
 										<label for="waiting" class="restInsert-label" style="width:58px">있음</label>
@@ -714,7 +714,7 @@ function test() {
 										<label for="waiting2" class="restInsert-label" >없음</label>
 									</li>
 									<li class="restInsert-list">
-										<label for="roadAddrPart1" class="restInsert-label-bold">WIFI</label><br>
+										<label for="wifi" class="restInsert-label-bold">WIFI</label><br>
 
 										 <input class="magic-radio" type="radio" id="wifi" name="wifi" value="있음" >
 										 <label for="wifi" class="restInsert-label" style="width:58px;">있음</label>
@@ -724,7 +724,7 @@ function test() {
 										
 									</li>
 									<li class="restInsert-list">
-										<label for="roadAddrPart1" class="restInsert-label-bold">화장실</label><br>
+										<label for="toilet" class="restInsert-label-bold">화장실</label><br>
 										
 										<input class="magic-radio" type="radio" id="toilet" name="toilet" value="있음" >
 										<label for="toilet" class="restInsert-label" style="width:58px;">있음</label>
@@ -733,7 +733,7 @@ function test() {
 										<label for="toilet2" class="restInsert-label">없음</label>
 									</li>
 									<li class="restInsert-list">
-										<label for="roadAddrPart1" class="restInsert-label-bold">테이블 수</label><br>
+										<label for="tablecount" class="restInsert-label-bold">테이블 수</label><br>
 										<input class="restInsert-input" id="tablecount" name="tablecount" type="text" value="12" style="width:237px;display:inline-block;"maxlength="3" >
 										<select class="restInsert-hp" name="standard"  style="width:147px;">
 											<option value="1">1</option>
@@ -748,7 +748,7 @@ function test() {
 										<span style="font-weight: bold;"> 인 기준</span>
 									</li>
 									<li class="restInsert-list">
-										<label for="roadAddrPart1" class="restInsert-label-bold">바쁜시간</label><br>
+									<label for="busytime" class="restInsert-label-bold">바쁜시간</label><br>
 									<div class="restInsert-busy-hours" id="restInsert-busy-hours" style="width:460px;height:auto;">
 										<input type="hidden" name="busytime" value="">
 										<div class="busy-hours" id="busy-display" style="width:460px;height:auto;margin-bottom: 6px;"></div>

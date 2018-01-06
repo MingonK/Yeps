@@ -198,7 +198,7 @@ public class ReviewController {
 		MemberPhotoDTO mpdto = (MemberPhotoDTO) session.getAttribute("mainPhoto");
 		int mnum = mdto.getMnum(); 
 		
-		String contentUpdate = req.getParameter("contentUpdate");
+		String contentUpdate = req.getParameter("content");
 		int gradepoint = Integer.parseInt(req.getParameter("gradepoint"));
 		int rnum = Integer.parseInt(req.getParameter("rnum"));
 		if(contentUpdate != null) {
@@ -281,7 +281,7 @@ public class ReviewController {
 	public HashMap<String, Object> review_member(HttpServletRequest req, HttpSession session) {
         HashMap<String, Object> map = new HashMap<String, Object>();
 		String smnum = req.getParameter("mnum");
-
+System.out.println(smnum);
 		int mnum = 0;
 		if(smnum==null) {
 			MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo");

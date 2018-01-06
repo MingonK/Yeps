@@ -236,7 +236,9 @@
 														</div>
 													<div class="price-category"style="clear: both;">
 														<span class="bullet-after">
-																<span class="business-attribute price-range" style="letter-spacing: 1px; white-space: nowrap;">${dto.price }</span>
+																<span class="business-attribute price-range" style="letter-spacing: 1px; white-space: nowrap;">
+																	<c:forEach begin="1" end="${dto.price}">￦</c:forEach>
+																</span>
 														</span>
 														<span class="category-str-list">
 															<a href="#" style="color: #0073bb; cursor: pointer;">${dto.foodstyle}</a>
@@ -496,29 +498,23 @@
 $(document).ready(function(){
 	var mode;
 	var price=[];
-// 	$('.filters-price').on('change', function() {
-// 		price=[];
-// 	$("input:checkbox[name='price']:checked").each(function() {
-// 			price.push($(this).val());
-// 		});
-// 	});
 	
 	$(document).on('change','.filters,.filters-price', function() {
-	    $('.filters').not(this).prop('checked', false);  
-		price=[];
-		$("input:checkbox[name='price']:checked").each(function() {
-				price.push($(this).val());
-			});
 		
-		if(price==null){
-			price.push("0");
-		}
+		$('.filters').not(this).prop('checked', false);  
 		
 	    if($("input:checkbox[name='feature']").is(":checked") == true){
             mode = $(this).val();
           }else{
              mode = "mode";
           }
+		price=[];
+		$("input:checkbox[name='price']:checked").each(function() {
+				price.push($(this).val());
+			});
+		if(price==null||price==""){
+			price.push("0");
+		}
 			var allData = { "mode": mode,"price":price};
 			$(document).ajaxStart(function() {
 				$('body').css('overflow', 'hidden');
@@ -567,7 +563,7 @@ $(document).ready(function(){
 																'</div>'+
 																'<div class="price-category"style="clear: both;">'+
 																	'<span class="bullet-after">'+
-																		'<span class="business-attribute price-range" style="letter-spacing: 1px; white-space: nowrap;">￦￦￦</span>'+
+																		'<span class="business-attribute price-range" style="letter-spacing: 1px; white-space: nowrap;">'+item.price+'</span>'+
 																	'</span>'+
 																	'<span class="category-str-list">'+
 																		'<a href="#" style="color: #0073bb;text-decoration: none;    cursor: pointer;">'+item.foodstyle+'</a>'+
