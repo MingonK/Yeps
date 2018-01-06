@@ -337,7 +337,7 @@ public class MessageController {
 			}
 
 		}
-		msg = "리포트를 작성하였습니다.. ";
+	
 		mav.setViewName("historyBack");// historyback.jsp를 이용하여 이전 페이지로 이동
 		mav.addObject("msg", msg);
 		return mav;

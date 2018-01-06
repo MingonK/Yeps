@@ -242,21 +242,21 @@
    
    <select id="getMemberReview"  parameterType="java.util.HashMap" resultMap="MemberReviewMap">
       select * from (select rownum rn, A. * from(select
-               R.content
-              ,R.gradepoint
-              ,R.rvnum
-              ,RT.rest_regdate
-              ,RT.rname
-              ,RT.roadAddrPart1
-              ,RT.roadAddrPart2
-              ,RT.addrDetail
-              ,RT.foodstyle
-              ,RT.hp2
-              ,RT.hp3
-              ,RT.raddress
-              ,M.mnum
-              ,M.name
-              ,M.reviewcount
+		               R.content
+		              ,R.gradepoint
+		              ,R.rvnum
+		              ,RT.rest_regdate
+		              ,RT.rname
+		              ,RT.roadAddrPart1
+		              ,RT.roadAddrPart2
+		              ,RT.addrDetail
+		              ,RT.foodstyle
+		              ,RT.hp2
+		              ,RT.hp3
+		              ,RT.raddress
+		              ,M.mnum
+		              ,M.name
+		              ,M.reviewcount
             
         from yeps_review R, yeps_member M, yeps_restaurant RT where R.mnum = M.mnum and R.rnum = RT.rnum and M.mnum = #{mnum} order by rvnum desc)A)
         where rn between #{start} and #{end}

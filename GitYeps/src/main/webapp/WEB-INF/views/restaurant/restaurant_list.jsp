@@ -595,9 +595,10 @@ $(document).ready(function(){
 															'<p style="margin-bottom: 0;display: block;">'+
 																''+data.LastReview[i].content+''+
 																'<c:if test="${LastReview.review.content.length()>60 }">' +
-																	'<a href="#" style="white-space: nowrap;color: #0073bb;text-decoration: none;cursor: pointer;">read more</a>'+
+																	'<a href="#" style="white-space: nowrap; color: #0073bb; text-decoration: none; cursor: pointer;">read more</a>'+
 																'</c:if>' +
 															'</p>'+
+															
 														'</div>'+
 													'</div>'+
 												

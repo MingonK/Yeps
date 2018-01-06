@@ -62,7 +62,7 @@ public class MemberController {
 		MemberDTO dto = (MemberDTO) session.getAttribute("memberinfo");
 		ModelAndView mav = new ModelAndView();
 		String msg = null, url = null;
-		if (!dto.getIsmaster().equals("y")) {
+		if (!dto.getIsmaster().equals("y") && !dto.getIsmanager().equals("y")) {
 			msg = "회원관리권한이 없습니다.";
 			url = "main";
 			mav.setViewName("message");
@@ -127,6 +127,23 @@ public class MemberController {
 			mav.setViewName("member/memberManager");
 		}
 
+		return mav;
+	}
+	
+	@RequestMapping(value = "/member_managerPage")
+	public ModelAndView managerPage(HttpServletRequest req, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		String msg = null, url = null;
+		MemberDTO dto = (MemberDTO) session.getAttribute("memberinfo");
+		if (!dto.getIsmaster().equals("y") && !dto.getIsmanager().equals("y") || dto == null){
+			msg = "회원관리권한이 없습니다.";
+			url = "main";
+			mav.setViewName("message");
+			mav.addObject("msg", msg);
+			mav.addObject("url", url);
+			return mav;
+		}
+		mav.setViewName("manager/managerPage");
 		return mav;
 	}
 

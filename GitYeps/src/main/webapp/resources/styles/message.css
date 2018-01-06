@@ -160,6 +160,15 @@ button #reply {
 	font-size: 16px;
 	cursor: pointer;
 }
+
+td, th {
+    display: table-cell;
+    vertical-align: inherit;
+    border-bottom: 1px solid #e6e6e6;
+    height: 40px;
+    padding: 10px;
+}
+}
 /* 팝업  */
 .popup {
 	width: 100%;
