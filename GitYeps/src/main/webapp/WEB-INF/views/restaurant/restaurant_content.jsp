@@ -36,7 +36,7 @@
 							</div>
 							<div class="price-category">
 								<span class="bullet-after">
-       								 <span class="business-attribute price-range">￦￦</span>
+       								 <span class="business-attribute price-range">${getRest.price}</span>
         						</span>
         						<span class="category-str-list" style="margin-right: 6px;">
 			                  	 	${getRest.foodstyle}
@@ -77,7 +77,7 @@
 						         	</svg>
 							  	</span> 
 							  	사진추가
-							  	<a class="menu-explore js-menu-explore" href="restaurant_listMenu?rnum=${getRest.rnum}">Full menu</a>
+							  	<a class="menu-explore js-menu-explore" href="restaurant_listMenu?rnum=${getRest.rnum}">모든 메뉴</a>
 						   	</a>
 							</span>
 				     	</div>
@@ -250,14 +250,14 @@
 															</div>
 														</div>
 													<div class="restContent-arrange-unit-nowrap">
-														<div class="restContent-review-sort" style=" margin-left: -12px;">
-															<div class="restContent-dropdown" style="position: relative;display: inline-block;">
-																<div class="restcontent-dropdown-toggle" style="position: relative;">
-																	<a href="#" class="restContent-dropdown-action">
-																		<span class="restContent-dropdown_prefix">
+														<div class="feed_sort js-review-feed-sort" style="margin-left: -12px;">
+															<div class="dropdown js-dropdown dropdown--tab dropdown--arrow dropdown--hover dropdown--restricted" >
+																<div class="dropdown_toggle js-dropdown-toggle">
+																	<a href="javascript:void(0);" class="dropdown_toggle-action" style="text-decoration:none;">
+																		<span class="dropdown_prefix">
 																			Sort by
 																		</span>
-																		<span class="restContent-dropdown-toggle-text" data-dropdown-initial-text="Yeps Sort" style="font-weight: bold;">
+																		<span class="dropdown_toggle-text js-dropdown-toggle-text" data-dropdown-initial-text="Yeps Sort" style="font-weight: bold;">
 																			Yeps Sort
 																		</span>
 																		<span aria-hidden="true" style="width: 14px; height: 14px;" class="icon icon--14-triangle-down icon--size-14 icon--currentColor u-triangle-direction-down dropdown_arrow">
@@ -268,6 +268,39 @@
                                                        						</svg>
                                                    						</span>
 																	</a>
+																</div>
+																<div class="dropdown_menu-container">
+																	<div class="dropdown_menu-inner">
+																		<div class="dropdown_menu js-dropdown-menu">
+																			<ul class="dropdown_menu-group" style="list-style: none;">
+																				<li class="dropdown_item">
+																					<a class="tab-link js-dropdown-link tab-link--dropdown js-tab-link--dropdown is-selected" href="javascript:;" style="text-decoration:none;">
+																						<span class="tab-link_label" title="Yelp Sort">Yelp Sort</span>
+																					</a>
+																				</li>
+																				<li class="dropdown_item">
+																					<a class="tab-link js-dropdown-link tab-link--dropdown js-tab-link--dropdown" href="javascript:;" style="text-decoration:none;">
+																						<span class="tab-link_label" title="Newest First">Newest First</span>
+																					</a>
+																				</li>
+																				<li class="dropdown_item">
+																					<a class="tab-link js-dropdown-link tab-link--dropdown js-tab-link--dropdown" href="javascript:;" style="text-decoration:none;">
+																						<span class="tab-link_label" title="Oldest First">Oldest First</span>
+																					</a>
+																				</li>
+																				<li class="dropdown_item">
+																					<a class="tab-link js-dropdown-link tab-link--dropdown js-tab-link--dropdown" href="javascript:;" style="text-decoration:none;">
+																						<span class="tab-link_label" title="Highest Rated">Highest Rated</span>
+																					</a>
+																				</li>
+																				<li class="dropdown_item">
+																					<a class="tab-link js-dropdown-link tab-link--dropdown js-tab-link--dropdown" href="javascript:;" style="text-decoration:none;">
+																						<span class="tab-link_label" title="Lowest Rated">Lowest Rated</span>
+																					</a>
+																				</li>
+																			</ul>
+																		</div>
+																	</div>
 																</div>
 															</div>
 														</div>
@@ -652,13 +685,13 @@
 									<div class="restContent-iconed-list-story">
 										<dl class="restContent-short-def-list" style="display: block;">
 											<dt class="restContent-attribute-key" style="margin-right: 0.25em;display: inline;">
-												Today
+												오늘
 											</dt>
 											<dd style="font-weight: bold;display: inline;"> 
 												<strong class="u-space-r-half" style="margin-right: 3px !important;font-weight: bold;">
-													<span class="nowrap">11:00 am</span> - <span class="nowrap">10:00 pm</span><br>
+													<span class="today"></span><br>
 												</strong>
-												<span class="restContent-nowrap extra closed">
+												<span class="nowrap extra closed">
 													Closed now
 												</span>
 											</dd>
@@ -676,20 +709,33 @@
 									<div class="restContent-iconed-list-story">
 							            <b style="font-weight: bold;">
 							            	<a class="menu-explore js-menu-explore" href="restaurant_listMenu?rnum=${getRest.rnum}">
-							            		Full menu
+							            		모든 메뉴
 							            	</a>
 							            </b>
 							        </div>
 							    </li>
 							    <li class="restContent-iconed-list-item" style="display: table;width: 100%;margin-bottom: 0;">
 						            <div class="restContent-iconed-list-avatar">
-						       		 	<span class="restContent-business-attribute price-range" data-remainder="￦￦">￦￦</span>
+						       		 	<span class="restContent-business-attribute price-range" data-remainder="">${getRest.price}</span>
 						            </div>
-						            <div class="restContent-iconed-list-story">
+						            <div class="restContent-iconed-list-story" style="    border-bottom: none;">
 						                <dl class="restContent-short-def-list" style="display: block;">
-						                    <dt class="restContent-attribute-key" style="margin-right: 0.25em;display: inline;">Price range</dt>
+						                    <dt class="restContent-attribute-key" style="margin-right: 0.25em;display: inline;">가격 범위</dt>
 						                    <dd class="restContent-nowrap price-description">
-						                        ￦11-30
+						                        <c:choose>
+													<c:when test="${getRest.price.length()==1 }">
+														10,000원 이하
+													</c:when>
+													<c:when test="${getRest.price.length()==2 }">
+														10,000원~30,000원
+													</c:when>
+													<c:when test="${getRest.price.length()==3 }">
+														30,000원~50,000원
+													</c:when>
+													<c:otherwise>
+														50,000원 이상
+													</c:otherwise>
+												</c:choose>
 						                    </dd>
 						                </dl>
 						            </div>
@@ -709,7 +755,7 @@
 											월요일
 										</th>
 										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
-											<span style="white-space: nowrap;">${getRest.mon}</span>
+											<span class="mon" style="white-space: nowrap;">${getRest.mon}</span>
 										</td>
 										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
@@ -718,7 +764,7 @@
 											화요일
 										</th>
 										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
-											<span style="white-space: nowrap;">${getRest.tue}</span>
+											<span class="tue" style="white-space: nowrap;">${getRest.tue}</span>
 										</td>
 										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
@@ -727,7 +773,7 @@
 											수요일
 										</th>
 										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
-											<span style="white-space: nowrap;">${getRest.wed}</span>
+											<span class="wed" style="white-space: nowrap;">${getRest.wed}</span>
 										</td>
 										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
@@ -736,7 +782,7 @@
 											목요일
 										</th>
 										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
-											<span style="white-space: nowrap;">${getRest.thu}</span>
+											<span class="thu" style="white-space: nowrap;">${getRest.thu}</span>
 										</td>
 										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
@@ -745,7 +791,7 @@
 											금요일
 										</th>
 										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
-											<span style="white-space: nowrap;">${getRest.fri}</span>
+											<span class="fri" style="white-space: nowrap;">${getRest.fri}</span>
 										</td>
 										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
@@ -754,7 +800,7 @@
 											토요일
 										</th>
 										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
-											<span style="white-space: nowrap;">${getRest.sat}</span>
+											<span class="sat" style="white-space: nowrap;">${getRest.sat}</span>
 										</td>
 										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
@@ -763,7 +809,7 @@
 											일요일
 										</th>
 										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
-											<span style="white-space: nowrap;">${getRest.sun}</span>
+											<span class="sun" style="white-space: nowrap;">${getRest.sun}</span>
 										</td>
 										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
@@ -1098,6 +1144,31 @@
 	   $("#reply_flag_popup_form").submit();
     });
 
+   
+   //리뷰 Sort
+   $(document).on("click", ".dropdown_toggle-action", function (e) {
+       $(this).parent().addClass(' is-active')
+       $(this).parent().parent().addClass('is-active')
+       $('.js-dropdown-menu').addClass('is-visible')
+       e.stopPropagation();
+	   e.preventDefault();
+   });
+   
+   $(document).on("click", function (e) {
+	   if(!$(e.target).hasClass('dropdown') || !$(e.target).hasClass('dropdown_toggle-action')) {
+		   
+		   $('.dropdown').removeClass('is-active');
+		   $('.dropdown_toggle').removeClass('is-active');
+		   $('.js-dropdown-menu').removeClass('is-visible')
+	   }
+   });
+   var week = new Array("sun","mon","tue","wed","thu","fri","sat")
+   var d = new Date();
+   var day = d.getDate();
+   
+
+   $(".today").text($('.'+week[day]+'').text());
+   
 </script>
 
 
