@@ -198,7 +198,7 @@ public class ReviewController {
 		MemberPhotoDTO mpdto = (MemberPhotoDTO) session.getAttribute("mainPhoto");
 		int mnum = mdto.getMnum(); 
 		
-		String contentUpdate = req.getParameter("contentUpdate");
+		String contentUpdate = req.getParameter("content");
 		int gradepoint = Integer.parseInt(req.getParameter("gradepoint"));
 		int rnum = Integer.parseInt(req.getParameter("rnum"));
 		if(contentUpdate != null) {
