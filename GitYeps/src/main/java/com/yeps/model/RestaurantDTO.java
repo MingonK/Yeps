@@ -39,6 +39,7 @@ public class RestaurantDTO {
 	private String rest_regdate;
 	private ReviewDTO reviewDTO;
 	private MemberDTO memberDTO;
+	private FileDTO fileDTO;
 	private int mnum;
 	private String category;
 	private int price;
@@ -283,5 +284,11 @@ public class RestaurantDTO {
 	}
 	public void setMnum(int mnum) {
 		this.mnum = mnum;
+	}
+	public FileDTO getFileDTO() {
+		return fileDTO;
+	}
+	public void setFileDTO(FileDTO fileDTO) {
+		this.fileDTO = fileDTO;
 	}
 }

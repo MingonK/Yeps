@@ -683,17 +683,17 @@
 						<div class="mainpage_new_businesses">
 							<div class="mainpage_new_businesses_card">
 								<div class="mainpage_new_businesses_card_photo">
-								<c:if test="${empty RestaurantDTO.rest_filename}">
+								<c:if test="${empty RestaurantDTO.fileDTO.filename}">
 									<div class="mainpage_new_businesses_photo_box" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png);">
 										<a href="restaurant_content?rnum=${RestaurantDTO.rnum}" style="display: block;" class="new_businesses_photo_box_link">
 											<img class="photo_box_img" height="400" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png" width="600">
 										</a>
 									</div>
 								</c:if>
-								<c:if test="${!empty RestaurantDTO.rest_filename}">
-									<div class="mainpage_new_businesses_photo_box" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${RestaurantDTO.rest_filename});">
+								<c:if test="${!empty RestaurantDTO.fileDTO.filename}">
+									<div class="mainpage_new_businesses_photo_box" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${RestaurantDTO.fileDTO.filename});">
 										<a href="restaurant_content?rnum=${RestaurantDTO.rnum}" style="display: block;" class="new_businesses_photo_box_link">
-											<img class="photo_box_img" height="400" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${RestaurantDTO.rest_filename}" width="600">
+											<img class="photo_box_img" height="400" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${RestaurantDTO.fileDTO.filename}" width="600">
 										</a>
 									</div>
 								</c:if>
@@ -721,13 +721,13 @@
 									
 									<div class="new_business_price_foodstyle">
 										<!-- 가격표시 없으면 표시 안함 -->
-										<span>
+										<span class="bullet-after">
 											<span style="letter-spacing: 1px; white-space: nowrap;">
-												가격범위 표시
+												${RestaurantDTO.price}
 											</span>
 										</span>
 										<span>
-											푸드스타일
+											${RestaurantDTO.foodstyle}
 										</span>
 									</div>
 									
@@ -1257,17 +1257,17 @@
 									<!-- 만약 사진이 있으면 보이고 없으면 안보이고 -->
 									<div class="recent_activity_unit_content">
 										<div class="recent_activity_unit_content_photo">
-											<c:if test="${empty reviewDTO.restaurantDTO.rest_filename}">
+											<c:if test="${empty reviewDTO.restaurantDTO.fileDTO.filename}">
 											<div class="photo_box_background" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png)">
 												<a href="restaurant_content?rnum=${reviewDTO.restaurantDTO.rnum}" style="display: block;">
 													<img class="recent_activity_photo_box" height="400" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png" width="600">
 												</a>
 											</div>
 											</c:if>
-											<c:if test="${!empty reviewDTO.restaurantDTO.rest_filename}">
-											<div class="photo_box_background" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${reviewDTO.restaurantDTO.rest_filename})">
+											<c:if test="${!empty reviewDTO.restaurantDTO.fileDTO.filename}">
+											<div class="photo_box_background" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${reviewDTO.restaurantDTO.fileDTO.filename})">
 												<a href="restaurant_content?rnum=${reviewDTO.restaurantDTO.rnum}" style="display: block;">
-													<img class="recent_activity_photo_box" height="400" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${reviewDTO.restaurantDTO.rest_filename}" width="600">
+													<img class="recent_activity_photo_box" height="400" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${reviewDTO.restaurantDTO.fileDTO.filename}" width="600">
 												</a>
 											</div>
 											</c:if>
