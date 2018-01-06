@@ -111,7 +111,7 @@
                                                 			<img class="photo-box-img" height="90" width="90" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png">
                                              			</c:when>
                                              			<c:otherwise>
-                                                			<img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${mainPhoto.filename}" alt="member_main_photo" id="photo_box_img" width="90px" height="90px">
+                                                			<img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${mainPhoto.member_filename}" alt="member_main_photo" id="photo_box_img" width="90px" height="90px">
                                              			</c:otherwise>
                                           			</c:choose>
                                        			</span>
@@ -133,7 +133,7 @@
                                                             		   <img class="photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" width="60">
                                                            			</c:when>
                                                             		<c:otherwise>
-                                                               			<img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${mainPhoto.filename}" alt="member_main_photo" id="photo_box_img" width="60px" height="60px">
+                                                               			<img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${mainPhoto.member_filename}" alt="member_main_photo" id="photo_box_img" width="60px" height="60px">
                                                             		</c:otherwise>
                                                          		</c:choose>
 		                                                      </a>
@@ -1047,11 +1047,11 @@
 											<div>
 												<a href="member_details?mnum=${review_of_the_day_reviewDTO.memberDTO.mnum}">
 												<!-- 만약 아이디에 사진 없다면 이거 띄우도록 이프 문! -->
-													<c:if test="${review_of_the_day_reviewDTO.memberDTO.memberPhotoDTO.filename == null}">
+													<c:if test="${review_of_the_day_reviewDTO.memberDTO.memberPhotoDTO.member_filename == null}">
 														<img class="review_of_the_day_writer_img" height="60" widgh="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" style="border-radius: 4px;">
 													</c:if>
-													<c:if test="${review_of_the_day_reviewDTO.memberDTO.memberPhotoDTO.filename != null}">
-														<img class="review_of_the_day_writer_img" height="60" widgh="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${review_of_the_day_reviewDTO.memberDTO.memberPhotoDTO.filename}" style="border-radius: 4px;">
+													<c:if test="${review_of_the_day_reviewDTO.memberDTO.memberPhotoDTO.member_filename != null}">
+														<img class="review_of_the_day_writer_img" height="60" widgh="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${review_of_the_day_reviewDTO.memberDTO.memberPhotoDTO.member_filename}" style="border-radius: 4px;">
 													</c:if>
 												</a>
 											</div>
@@ -1059,7 +1059,7 @@
 										
 										<div class="review_of_the_day_writer_info">
 											<strong style="font-weight: 700;">
-												<a href="member_details?mnum=${review_of_the_day_reviewDTO.memberDTO.mnum}" class="review_of_the_day_writer">
+												<a href="member_details?mnum=${review_of_the_day_reviewDTO.mnum}" class="review_of_the_day_writer">
 													${review_of_the_day_reviewDTO.memberDTO.email}
 												</a>
 											</strong>
@@ -1114,97 +1114,8 @@
 									</a>
 								</p>
 								
-								
 							</div>
 						</div>
-						
-<!-- 						<div class="mainpage_recent_list"> -->
-<!-- 							<div class="js-fresh-lists"> -->
-<!-- 								<h3 class="recent_list_title">Recent Lists</h3> -->
-<!-- 								<div class="recent_list_wrap_container"> -->
-<!-- 									<div class="recent_list_wrap"> -->
-<!-- 										<div class="recent_list_unit"> -->
-<!-- 											<ul class="recent_list_set"> -->
-<!-- 											3번 반복 !!!!!! -->
-<!-- 												<li class="recent_list_item"> -->
-<!-- 													<div class="recent_list_item_block"> -->
-<!-- 														<div class="recent_list_item_photo_area"> -->
-<!-- 															<div class="recent_list_item_photo_box"> -->
-<!-- 																등록된 사진이 없다면 !!!!!!!!!!!!! -->
-<!-- 																<div class="recent_list_item_photo" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png);"> -->
-<!-- 																	<a href="#" style="display: block;"> -->
-<!-- 																		<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png" class="recent_list_photo" width="90" height="90"> -->
-<!-- 																	</a> -->
-<!-- 																</div> -->
-<!-- 															</div> -->
-<!-- 														</div> -->
-														
-<!-- 														<div class="recent_list_item_info_area"> -->
-<!-- 															<p class="recent_list_item_title"> -->
-<!-- 																<a href="#" style="font-weight: 700;"> -->
-<!-- 																	제목 -->
-<!-- 																</a> -->
-<!-- 															</p> -->
-															
-<!-- 															<p class="recent_list_item_description"> -->
-<!-- 																내용 -->
-<!-- 															</p> -->
-															
-<!-- 															<div class="recent_list_item_owner"> -->
-<!-- 																By -->
-<!-- 																<a href="#"> -->
-<!-- 																	작성자 -->
-<!-- 																</a> -->
-<!-- 															</div> -->
-<!-- 														</div> -->
-<!-- 													</div> -->
-<!-- 												</li> -->
-												
-<!-- 												<li class="recent_list_item"> -->
-<!-- 													<div class="recent_list_item_block"> -->
-<!-- 														<div class="recent_list_item_photo_area"> -->
-<!-- 															<div class="recent_list_item_photo_box"> -->
-<!-- 																등록된 사진이 없다면 !!!!!!!!!!!!! -->
-<!-- 																<div class="recent_list_item_photo" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png);"> -->
-<!-- 																	<a href="#" style="display: block;"> -->
-<!-- 																		<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png" class="recent_list_photo" width="90" height="90"> -->
-<!-- 																	</a> -->
-<!-- 																</div> -->
-<!-- 															</div> -->
-<!-- 														</div> -->
-														
-<!-- 														<div class="recent_list_item_info_area"> -->
-<!-- 															<p class="recent_list_item_title"> -->
-<!-- 																<a href="#" style="font-weight: 700;"> -->
-<!-- 																	제목 -->
-<!-- 																</a> -->
-<!-- 															</p> -->
-															
-<!-- 															<p class="recent_list_item_description"> -->
-<!-- 																내용 -->
-<!-- 															</p> -->
-															
-<!-- 															<div class="recent_list_item_owner"> -->
-<!-- 																By -->
-<!-- 																<a href="#"> -->
-<!-- 																	작성자 -->
-<!-- 																</a> -->
-<!-- 															</div> -->
-<!-- 														</div> -->
-<!-- 													</div> -->
-<!-- 												</li> -->
-<!-- 											</ul> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
-								
-<!-- 								<p style="text-align: center!important; margin-bottom: 12px;"> -->
-<!-- 									<a href="#"> -->
-<!-- 										Browse more lists -->
-<!-- 									</a> -->
-<!-- 								</p> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
 					</div>
 				</div>
 				
@@ -1225,11 +1136,11 @@
 											<div class="recent_activity_unit_header_user_profile">
 												<div class="photo_box">
 													<a href="member_details?mnum=${reviewDTO.memberDTO.mnum}">
-														<c:if test="${empty reviewDTO.memberDTO.memberPhotoDTO.filename}">
+														<c:if test="${empty reviewDTO.memberDTO.memberPhotoDTO.member_filename}">
 															<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" height="30" width="30" style="border-radius: 4px;">
 														</c:if>
-														<c:if test="${!empty reviewDTO.memberDTO.memberPhotoDTO.filename}">
-															<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${reviewDTO.memberDTO.memberPhotoDTO.filename}" height="30" width="30" style="border-radius: 4px;">
+														<c:if test="${!empty reviewDTO.memberDTO.memberPhotoDTO.member_filename}">
+															<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${reviewDTO.memberDTO.memberPhotoDTO.member_filename}" height="30" width="30" style="border-radius: 4px;">
 														</c:if>
 														
 													</a>

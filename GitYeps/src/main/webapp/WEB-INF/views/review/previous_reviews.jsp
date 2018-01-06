@@ -74,7 +74,7 @@
 			   					    		<div class="pre_div9-1-1">
 			   					    			<div class="pre_div9-1-1-1">
 			   					    				<div class="pre_div9-1-1-1-1">
-			   					    					<a class="pre_a_1" href="#"><img class="pre_img_1" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${dto.memberDTO.memberPhotoDTO.filename}"></a>
+			   					    					<a class="pre_a_1" href="#"><img class="pre_img_1" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${dto.memberDTO.memberPhotoDTO.member_filename}"></a>
 			   					    				</div>
 					   					    	 </div>
 					   					    	 <div class="pre_div9-1-1-2">

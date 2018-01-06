@@ -216,7 +216,7 @@ public class ReviewController {
 		String where = req.getParameter("where");
 		String nickname = mdto.getNickname();
 		String email = mdto.getEmail();
-		String filename = mpdto.getFilename();
+		String filename = mpdto.getMember_filename();
 		String rname = req.getParameter("rname");
 		String content = req.getParameter("content");
 		String Get_InsertReviewDate = reviewMapper.Get_InsertReviewDate();

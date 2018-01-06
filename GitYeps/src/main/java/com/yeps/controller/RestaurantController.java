@@ -261,7 +261,6 @@ public class RestaurantController {
 		ReviewDTO existMyReview = null;
 		if (loginMember != null) {
 			existMyReview = reviewMapper.findMyReview(Integer.parseInt(rnum), loginMember.getMnum());
-			 System.out.println(existMyReview.getRvnum()); 
 		}
 
 		if (existMyReview != null) {
