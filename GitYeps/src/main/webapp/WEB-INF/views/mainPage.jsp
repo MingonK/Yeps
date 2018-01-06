@@ -19,7 +19,7 @@
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 </head>
 <body>
-	<div class="mainpage_header_container" style="background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_large_assets/8a6cc705477a/assets/img/home/hero_photos/uteUmycsbh0UibXk-At-3A.jpg);">
+	<div class="mainpage_header_container" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${randomPhoto.filename});">
 		<div class="mainpage_header_content_container">
 			<div class="mainpage_header_top" style="height: 40px;">
 				<div class="mainpage_header_top_wrap">
@@ -610,9 +610,9 @@
 				<div class="mainpage_header_inner_bottom" style="text-align: center;">
 					<div class="mainpage_header_bottom_text_name" style="display:inline-block;">
 						<span>
-							<a href="#" class="mainpage_header_recommend_name">
+							<a href="restaurant_content?rnum=${randomPhoto.rnum}" class="mainpage_header_recommend_name">
 								<span>
-									사진이 찍힌 레스토랑 명
+									${randomPhoto.restaurantDTO.rname}
 								</span>
 							</a>
 						</span>
@@ -623,8 +623,13 @@
 					<div>
 						<p style="margin-bottom: 12px;">
 							photo by
-							<a href="#" class="mainpage_header_bottom_photo_owner_link">
-								사진 찍은 사람
+							<a href="member_details?mnum=${randomPhoto.mnum}" class="mainpage_header_bottom_photo_owner_link">
+								<c:if test="${empty randomPhoto.memberDTO.nickname}">
+									${randomPhoto.memberDTO.email}
+								</c:if>
+								<c:if test="${!empty randomPhoto.memberDTO.nickname}">
+									${randomPhoto.memberDTO.nickname}
+								</c:if>
 							</a>
 						</p>
 					</div>
