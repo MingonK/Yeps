@@ -319,7 +319,7 @@
 				
 				<div class="details-column-beta_reviews">
 				   <div>
-					  <div class="restContent-review-list" style="position: relative;">
+					  <div class="memberDetails-review-list" style="position: relative;">
 					     <ul  class="review-drafts" style="list-style: none; display: block;">
 					    <!----------------------------------------------- 아작스 통해 붙여넣는 부분 -------------------------------------------------- -->
 				    
@@ -374,87 +374,87 @@
 									</div>
 								</div>
 							</div>
-		        </div> 
+		                </div> 
 						  
 				
 				
 					      
 <!-- -----페이징 처리 시작 ------ -->					
-			   <!-- <div class="yeps_message_section" style="font-size: 14px; "> -->
-<!-- 	                       <div class="yeps_message_pagination_block"> -->
-<!-- 	                          <div class="yeps_message_pagination_wrap"> -->
-<!-- 	                              <div class="yeps_message_page_of_pages" > -->
-<%-- 	                                  <c:if test="${map.yepsPager.blockEnd == 0}"> --%>
-<%-- 	                                      Page ${map.yepsPager.curPage} of 1 --%>
-<%-- 	                                  </c:if> --%>
-<%-- 	                                  <c:if test="${map.yepsPager.blockEnd != 0}"> --%>
-<%-- 	                                      Page ${map.yepsPager.curPage} of ${map.yepsPager.blockEnd} --%>
-<%-- 	                                  </c:if> --%>
-<!-- 	                             </div> -->
-<!-- 	                      페이징 처리!! 현재페이지는 span이 되고 나머지는 a로    -->
-<%-- 	                         <c:if test="${map.yepsPager.blockEnd != 1}"> --%>
-<!-- 	                             <div class="yeps_message_page_link_wrapper" style="text-align: right;"> -->
-<!-- 	                                 <div class="yeps_message_page_link_wrap"> -->
-<%-- 	                                     <c:if test="${map.yepsPager.curBlock > 1}"> --%>
-<!-- 	                                         <div class="yeps_message_next_block"> -->
-<!-- 	                                             <a class="yeps_message_next_block_action" href="javascript:list('1')"> -->
-<!-- 	                                                 <span>Start</span> -->
-<!-- 	                                             </a> -->
-<!-- 	                                         </div> -->
-<%-- 	                                     </c:if> --%>
-<%-- 	                                 <c:if test="${map.yepsPager.curBlock > 1}"> --%>
-<!-- 	                                     <div class="yeps_message_next_block"> -->
-<%-- 	                                         <a class="yeps_message_next_block_action" href="javascript:list('${map.yepsPager.prevPage}','${map.lMode}')"> --%>
-<!-- 	                                             <span style="width: 24px; height: 24px; fill: currentColor;" class="icon"> -->
-<!-- 	                                                  <svg class="icon_svg"> -->
-<!-- 	                                                      <path d="M14.475 18.364l1.414-1.414L10.94 12l4.95-4.95-1.415-1.414L8.11 12l6.365 6.364z"></path> -->
-<!-- 	                                                  </svg> -->
-<!-- 	                                            </span> -->
-<!-- 	                                            <span>Previous</span> -->
-<!-- 	                                         </a> -->
-<!-- 	                                    </div> -->
-<%-- 	                                </c:if> --%>
-<%-- 	                                    <c:forEach var="num" begin="${map.yepsPager.blockBegin}" end="${map.yepsPager.blockEnd}"> --%>
-<!-- 	                                        <div class="yeps_message_page_link_option"> -->
-<%-- 		                                        <c:choose> --%>
-<%-- 		                                            <c:when test="${num == map.yepsPager.curPage}"> --%>
-<!-- 		                                                <span class="yeps_message_page_option_action"> -->
-<%-- 		                                                    ${num} --%>
-<!-- 		                                                </span> -->
-<%-- 		                                            </c:when> --%>
-<%-- 		                                            <c:otherwise> --%>
-<%-- 		                                                <a href="javascript:list('${num}','${map.lMode}')" class="yeps_message_page_option_link_action"> --%>
-<%-- 		                                                    ${num} --%>
-<!-- 		                                                </a> -->
-<%-- 		                                            </c:otherwise> --%>
-<%-- 		                                        </c:choose> --%>
-<!-- 		                                    </div> -->
-<%-- 	                                    </c:forEach> --%>
-<%-- 	                                <c:if test="${map.yepsPager.curBlock <= map.yepsPager.totBlock}"> --%>
-<!-- 	                                    <div class="yeps_message_next_block"> -->
-<%-- 	                                        <a class="yeps_message_next_block_action" href="javascript:list('${map.yepsPager.nextPage}','${map.lMode}')"> --%>
-<!-- 	                                            <span>Next</span> -->
-<!-- 	                                            <span style="width: 24px; height: 24px; fill: currentColor;" class="icon"> -->
-<!-- 	                                                <svg class="icon_svg"> -->
-<!-- 	                                                    <path d="M9.525 5.636L8.11 7.05 13.06 12l-4.95 4.95 1.415 1.414L15.89 12 9.524 5.636z"></path> -->
-<!-- 	                                                </svg> -->
-<!-- 	                                            </span> -->
-<!-- 	                                        </a> -->
-<!-- 	                                    </div> -->
-<%-- 	                                </c:if> --%>
-<%-- 	                            <c:if test="${map.yepsPager.curPage <= map.yepsPager.totPage}"> --%>
-<!-- 	                                <div class="yeps_message_next_block" style="display: inline-block;"> -->
-<%-- 	                                    <a class="yeps_message_next_block_action" href="javascript:list('${map.yepsPager.totPage}','${map.lMode}')"> --%>
-<!-- 	                                        <span>End</span> -->
-<!-- 	                                    </a> -->
-<!-- 	                                </div> -->
-<%-- 	                            </c:if> --%>
-<!-- 	                         </div> -->
-<!-- 	                     </div> -->
-<%-- 	                 </c:if> --%>
-<!-- 	             </div> -->
-<!-- 	         </div> -->
-<!-- 	      </div> -->
+			   <div class="yeps_message_paging_section" style="font-size: 14px; ">
+	                       <div class="yeps_message_pagination_block">
+	                          <div class="yeps_message_pagination_wrap">
+	                              <div class="yeps_message_page_of_pages" >
+	                                  <c:if test="${map.yepsPager.blockEnd == 0}">
+	                                      Page ${map.yepsPager.curPage} of 1
+	                                  </c:if>
+	                                  <c:if test="${map.yepsPager.blockEnd != 0}">
+	                                      Page ${map.yepsPager.curPage} of ${map.yepsPager.blockEnd}
+	                                  </c:if>
+	                             </div>
+	              <!--         페이징 처리!! 현재페이지는 span이 되고 나머지는 a로   --> 
+	                         <c:if test="${map.yepsPager.blockEnd != 1}">
+	                             <div class="yeps_message_page_link_wrapper" style="text-align: right;">
+	                                 <div class="yeps_message_page_link_wrap">
+	                                     <c:if test="${map.yepsPager.curBlock > 1}">
+	                                         <div class="yeps_message_next_block">
+	                                             <a class="yeps_message_next_block_action" href="javascript:list('1')">
+	                                                 <span>Start</span>
+	                                             </a>
+	                                         </div>
+	                                     </c:if>
+	                                 <c:if test="${map.yepsPager.curBlock > 1}">
+	                                     <div class="yeps_message_next_block">
+	                                         <a class="yeps_message_next_block_action" href="javascript:list('${map.yepsPager.prevPage}')">
+	                                             <span style="width: 24px; height: 24px; fill: currentColor;" class="icon">
+	                                                  <svg class="icon_svg">
+	                                                      <path d="M14.475 18.364l1.414-1.414L10.94 12l4.95-4.95-1.415-1.414L8.11 12l6.365 6.364z"></path>
+	                                                  </svg>
+	                                            </span>
+	                                            <span>Previous</span>
+	                                         </a>
+	                                    </div>
+	                                </c:if>
+	                                    <c:forEach var="num" begin="${map.yepsPager.blockBegin}" end="${map.yepsPager.blockEnd}">
+	                                        <div class="yeps_message_page_link_option">
+		                                        <c:choose>
+		                                            <c:when test="${num == map.yepsPager.curPage}">
+		                                                <span class="yeps_message_page_option_action">
+		                                                    ${num}
+		                                                </span>
+		                                            </c:when>
+		                                            <c:otherwise>
+		                                                <a href="javascript:list('${num}')" class="yeps_message_page_option_link_action">
+		                                                    ${num}
+		                                                </a>
+		                                            </c:otherwise>
+		                                        </c:choose>
+		                                    </div>
+	                                    </c:forEach>
+	                                <c:if test="${map.yepsPager.curBlock <= map.yepsPager.totBlock}">
+	                                    <div class="yeps_message_next_block">
+	                                        <a class="yeps_message_next_block_action" href="javascript:list('${map.yepsPager.nextPage}')">
+	                                            <span>Next</span>
+	                                            <span style="width: 24px; height: 24px; fill: currentColor;" class="icon">
+	                                                <svg class="icon_svg">
+	                                                    <path d="M9.525 5.636L8.11 7.05 13.06 12l-4.95 4.95 1.415 1.414L15.89 12 9.524 5.636z"></path>
+	                                                </svg>
+	                                            </span>
+	                                        </a>
+	                                    </div>
+	                                </c:if>
+	                            <c:if test="${map.yepsPager.curPage <= map.yepsPager.totPage}">
+	                                <div class="yeps_message_next_block" style="display: inline-block;">
+	                                    <a class="yeps_message_next_block_action" href="javascript:list('${map.yepsPager.totPage})">
+	                                        <span>End</span>
+	                                    </a>
+	                                </div>
+	                            </c:if>
+	                         </div>
+	                     </div>
+	                 </c:if>
+	             </div>
+	         </div>
+	      </div>
 
              
 				<div class="details-column-beta_events">
@@ -495,6 +495,10 @@
 			</div>
 		</div>
 	</div>
+	
+	<div class="loading_wapper" >
+      	<div class="loading_img" style="left: 40%; top: 40%;"></div>
+   	</div>
 	
 <script type="text/javascript">
 	var list = new Array();
@@ -538,23 +542,23 @@
  	    	$(".details-column-beta_events").hide();
  	    	$(".details-column-beta_tips").hide();
  	    	
- 	   	var mnum = '${memberDTO.mnum}';
+ 	     	var mnum = '${memberDTO.mnum}';
 	        $.ajax({
              type : 'post',
-             url : 'review_member_ajax',
+             url : 'review_member_ajax', 
              data : mnum,
              dataType : 'json',
              success : function(responseData){
             	var num = responseData.num;
                 var mnum = responseData.mnum;
               
-       	 $('.restContent-review-list ul li').remove(); 
+       	 $('.memberDetails-review-list ul li').remove(); 
 	 $.each(responseData.memberReview,function(i,item){
-		 $(".restContent-review-list ul").append(
+		 $(".memberDetails-review-list ul").append(
 			
-				 '<li class="review-draft" style="margin: 20; padding: 18px 0;  padding-bottom: 17px; display: list-item; text-align: -webkit-match-parent;">'+
-// 					'<div class="arrange" style="width: 100%; overflow: hidden; height: auto;">'+
-//  						'<div class="restContent-user" style="float: left; padding: 0 15px; min-height: 1px;  ">'+
+				 '<li class="review-draft" style=" padding: 18px 0;  padding-bottom: 17px; display: list-item; text-align: -webkit-match-parent;">'+
+ 					'<div class="arrange" style="width: 100%; overflow: hidden; height: auto;">'+
+ 						'<div class="restContent-user" style="float: left; padding: 0 15px; min-height: 1px;  ">'+
 						    '<div class="media-block media-block--12 biz-listing-medium">'+
 				                '<div class="media-avatar">'+
 				                    '<div class="photo-box pb-60s">'+
@@ -589,13 +593,22 @@
 							 item.content +
 						    '</p><br><br>'+
 			             '</div>'+
+			             
+			             /* '<div>'+
+							'<div class="restList-star-rating-'+item.gradepoint+'" >'+
+								'<img class="offscreen" '+
+									'src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/stars.png" '+
+									'width="84" height="303" alt="4.0 star rating" '+
+									'style="clip: rect(0, 0, 0, 0); position: absolute; left: -9999px; top: auto; overflow: hidden; width: 1px; height: 1px; vertical-align: middle;">'+
+							'</div>'+
+						'</div>'+ */
 			       
-			             '<div class="clearfix"  style="margin-bottom: 50px;">'+
-			             '<a  style="float: left;" href="member_details?mnum=' + mnum + '" class="yepsbyn ybtn--small js-war-widget_finish-draft pull-left">Finish My Review</a>'+
-			                 '<form action="review_delete?rvnum='+ item.rvnum + '&mnum=' + mnum + '" class="pull-right js-delete-review-draft-form" method="post" name="delete_draft">'+
+			            '<div class="clearfix"  style="margin-bottom: 50px;">'+
+			               '<a  style="float: left;" href="member_details?mnum=' + mnum + '" class="yepsbyn ybtn--small js-war-widget_finish-draft pull-left">Finish My Review</a>'+
+			                  '<form action="review_delete?rvnum='+ item.rvnum + '&mnum=' + mnum + '" class="pull-right js-delete-review-draft-form" method="post" name="delete_draft">'+
 			               
-			                     '<input type="hidden" value="'+ item.rvnum + '" name="rvnum">'+
-			                     '<button type="submit" style="float: right;"class="chiclet-link u-cursor-pointer show-tooltip js-delete-review-draft">'+
+			                      '<input type="hidden" value="'+ item.rvnum + '" name="rvnum">'+
+			                      '<button type="submit" style="float: right;"class="chiclet-link u-cursor-pointer show-tooltip js-delete-review-draft">'+
 			                         '<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-trash icon--size-18 icon--currentColor">'+
 			                             '<svg class="icon_svg">'+
 									         '<path d="M3 5V3h4V2h4v1h4v2H3zm11 9c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V6h10v8zM8 8.5a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5zm3 0a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5z"></path>'+
@@ -609,56 +622,280 @@
 			                '</form>'+
 			             '</div>'+
 		              '</div>'+
-// 						'<div class="restContent-media-story" style="-webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;"></div>'+
-// 							
-// 									'<a class="restContent-share-review" href="#" style="display: table; min-width: 100%; table-layout: auto; color: #0073bb; text-decoration: none; cursor: pointer;">'+
-// 										'<div class="action-link_icon arrange_unit" style="padding-top: 3px; padding-bottom: 3px; vertical-align: middle; padding-right: 12px; box-sizing: border-box; display: table-cell;">'+
-// 											'<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-share icon--size-18 icon--currentColor">'+
-// 												 '<svg class="icon_svg">'+
-// 											         '<svg id="18x18_share" height="100%" viewBox="0 0 18 18" width="100%">'+
-// 											        	 '<path d="M17.714 6.43L13 10.356v-3.03c-1 0-5.097 1.47-6.286 3.62.274-3.08 4.286-5.5 6.286-5.5V2.5l4.714 3.93zM3 4v10h11v-2.5l1-1V15H2V3h8.5l-1 1H3z"></path>'+
-// 											         '</svg>'+
-// 												 '</svg>'+
-// 											 '</span>'+
-// 										 '</div>'+ 
-// 										 '<div class="action-link_label arrange_unit arrange_unit--fill" style="border-top: 1px solid #e6e6e6; padding-top: 3px; padding-bottom: 3px; vertical-align: middle; width: 100%;">'+
-// 											            'Share review'+
-// 								         '</div>'+
-// 									 '</a>'+
-// 							
-// 						 '</div>'+
-// 			         '</div>'+
-// 					 '<div class="restContent-review-wrapper" style="float: left; padding: 0 10px; min-height: 1px; box-sizing: border-box; ">'+
-// 						 '<div class="restContent-review-content" style="padding: 0 12px 6px 0; min-height: 120px; word-wrap: break-word !important; word-break: break-word !important; overflow-wrap: break-word !important;">'+
-// 							 '<div class="restContent-review-rating" style="margin: 6px 0;width:100%;overflow:hidden;height:auto;">'+
-// 								 '<div>'+
-// 									 '<div class="restList-star-rating-${getReview.gradepoint }" >'+
-// 										 '<img class="offscreen"'+ 
-// 											'src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png"'+
-// 											'width="84" height="303" alt="4.0 star rating"'+
-// 											'style="clip: rect(0, 0, 0, 0); position: absolute; left: -9999px; top: auto; overflow: hidden; width: 1px; height: 1px; vertical-align: middle;">'+
-// 									 '</div>'+
-// 									 '</div>'+
-									
-// 								 '</div>'+
-								
-// 								 '</div>'+
-								
-								
-// 						        '</div>'+
-					         '</div>'+
-				          '</li>'
+				   '</div>'+
+				'</li>'
 				      );
 	             });
-   
+	 
+				 $('.yeps_message_paging_section').empty();
+			     var pagingHtml = "";
+			     pagingHtml = '<div class="yeps_message_pagination_block">' + 
+			     			  '<div class="yeps_message_pagination_wrap">' + 
+			     			  '<div class="yeps_message_page_of_pages">';
+			     if(responseData.YepsPager.blockEnd == 0) {
+			  	   pagingHtml += 'Page ' + responseData.YepsPager.curPage + ' of 1';
+			     } else {
+			  	   pagingHtml += 'Page ' + responseData.YepsPager.curPage + ' of ' + responseData.YepsPager.blockEnd;
+			     }
+			     pagingHtml += '</div>';
+			     if(responseData.YepsPager.blockEnd != 1) {
+			  	   pagingHtml += '<div class="yeps_message_page_link_wrapper">';
+			  	   pagingHtml += '<div class="yeps_message_page_link_wrap">';
+			  	   if(responseData.YepsPager.curBlock > 1) {
+			  		   pagingHtml += '<div class="yeps_message_next_block">';
+			  		   pagingHtml += '<a class="yeps_message_next_block_action" href="javascript:list('+ 1 +')">';
+			  		   pagingHtml += '<span>Start</span>';
+			  		   pagingHtml += '</a>';
+			  		   pagingHtml += '</div>';
+			  	   }
+			  	   
+			  	   if(responseData.YepsPager.curBlock > 1) {
+			  		   pagingHtml += '<div class="event_list_next_block">';
+			  		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+responseData.YepsPager.prevPage+')">';
+			  		   pagingHtml += '<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">';
+			  		   pagingHtml += '<svg class="icon_svg">';
+			  		   pagingHtml += '<path d="M14.475 18.364l1.414-1.414L10.94 12l4.95-4.95-1.415-1.414L8.11 12l6.365 6.364z"></path>';
+			  		   pagingHtml += '</svg>';
+			  		   pagingHtml += '</span>';
+			  		   pagingHtml += '<span>Previous</span>';
+			  		   pagingHtml += '</a>';
+			  		   pagingHtml += '</div>';
+			  	   }
+			  	   
+			  	   for(var num = responseData.YepsPager.blockBegin; num <= responseData.YepsPager.blockEnd; num++) {
+			  		   pagingHtml += '<div class="yeps_message_page_link_option">';
+			  		   if(num == responseData.YepsPager.curPage) {
+			  			   pagingHtml += '<span class="yeps_message_page_option_action">';
+			  			   pagingHtml += num;
+			  			   pagingHtml += '</span>';
+			  		   } else {
+			  			   pagingHtml += '<a href="javascript:list('+ num +')" class="yeps_message_page_option_link_action">';
+			  			   pagingHtml += num;
+			  			   pagingHtml += '</a>';
+			  		   }
+			  		   pagingHtml += '</div>';
+			  	   }
+			  	   
+			  	   if(responseData.YepsPager.curBlock <= responseData.YepsPager.totBlock) {
+			  		   pagingHtml += '<div class="yeps_message_next_block">';
+			  		   pagingHtml += '<a class="yeps_message_next_block_action" href="javascript:list('+responseData.YepsPager.nextPage+')">';
+			  		   pagingHtml += '<span>Next</span>';
+			  		   pagingHtml += '<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">';
+			  		   pagingHtml += '<svg class="icon_svg">';
+			  		   pagingHtml += '<path d="M9.525 5.636L8.11 7.05 13.06 12l-4.95 4.95 1.415 1.414L15.89 12 9.524 5.636z"></path>';
+			  		   pagingHtml += '</svg>';
+			  		   pagingHtml += '</span>';
+			  		   pagingHtml += '</a>';
+			  		   pagingHtml += '</div>';
+			  	   }
+			  	   if(responseData.YepsPager.curBlock <= responseData.YepsPager.totBlock) {
+			  		   pagingHtml += '<div class="yeps_message_next_block">';
+			  		   pagingHtml += '<a class="yeps_message_next_block_action" href="javascript:list('+responseData.YepsPager.totPage+')">';
+			  		   pagingHtml += '<span>End</span>';
+			  		   pagingHtml += '</a>';
+			  		   pagingHtml += '</div>';
+			  	   }
+			  	   pagingHtml += '</div>';
+			  	   pagingHtml += '</div>';
+			     }
+			     pagingHtml += '</div>';
+			     pagingHtml += '</div>';
+			     pagingHtml += '</div>';
+			
+			     $('.yeps_message_paging_section').append(pagingHtml);      
+			   
 				 },
 	             error : function(request, status, error) {
 	             alert("실패 :" + "code:"+request.status+"\n\n"+"message:"+request.responseText+"\n\n"+"error:"+error); 
 	             },
 	         }); 
-	    })
-    
+	    });
 	    
+	function list(page){
+	
+		$(document).ajaxStart(function() {
+			$('body').css('overflow', 'hidden');
+			$('html').scrollTop(0);
+			$('.loading_wapper').fadeIn(500);
+		})
+						
+		$(document).ajaxStop(function() {
+			$('body').css('overflow', 'auto');
+			$('.loading_wapper').fadeOut(500);
+		})
+		
+		var mnum = '${memberDTO.mnum}';
+	    $.ajax({
+	        type : 'post',
+	        url : 'review_member_ajax?curPage=' + page + '&rnum=' + rnum,
+	        data : mnum,
+	        dataType : 'json',
+	        success : function(responseData){
+		       	 $('.memberDetails-review-list ul li').remove(); 
+				 $.each(responseData.memberReview,function(i,item){
+			    	var num = responseData.num;
+			        var mnum = responseData.mnum;
+				   
+	           
+		 $('.memberDetails-review-list ul').append(
+			
+				 '<li class="review-draft" style=" padding: 18px 0;  padding-bottom: 17px; display: list-item; text-align: -webkit-match-parent;">'+
+ 					'<div class="arrange" style="width: 100%; overflow: hidden; height: auto;">'+
+ 						'<div class="restContent-user" style="float: left; padding: 0 15px; min-height: 1px;  ">'+
+						    '<div class="media-block media-block--12 biz-listing-medium">'+
+				                '<div class="media-avatar">'+
+				                    '<div class="photo-box pb-60s">'+
+				                        '<a href="/biz/liholiho-yacht-club-san-francisco-2" class="js-analytics-click" data-analytics-label="biz-photo">'+
+				                            '<img alt="Liholiho Yacht Club" class="photo-box-img" height="60" src="https://s3-media1.fl.yelpcdn.com/bphoto/FK2X98w6z5naJyiQjsGTNA/60s.jpg" srcset="https://s3-media1.fl.yelpcdn.com/bphoto/FK2X98w6z5naJyiQjsGTNA/90s.jpg 1.50x,https://s3-media1.fl.yelpcdn.com/bphoto/FK2X98w6z5naJyiQjsGTNA/168s.jpg 2.80x,https://s3-media1.fl.yelpcdn.com/bphoto/FK2X98w6z5naJyiQjsGTNA/ms.jpg 1.67x,https://s3-media1.fl.yelpcdn.com/bphoto/FK2X98w6z5naJyiQjsGTNA/180s.jpg 3.00x,https://s3-media1.fl.yelpcdn.com/bphoto/FK2X98w6z5naJyiQjsGTNA/120s.jpg 2.00x" width="60">'+
+				          			    '</a>'+
+				    		        '</div>'+
+				         	    '</div>'+
+				            '<div class="media-story">'+
+				                '<div class="media-title clearfix">'+
+				                    '<a class="biz-name js-analytics-click" data-analytics-label="biz-name" href="/biz/liholiho-yacht-club-san-francisco-2" data-hovercard-id="K8YqsGXicOLOUcQXTzRrnw"><span>'+ item.restaurantDTO.rname + '    Liholiho Yacht Club</span></a>'+
+				                '</div>'+
+				                '<div class="price-category">'+
+				                    '<span class="category-str-list">'+
+				                        '<a href="/search?cflt=bars&amp;find_loc=San+Francisco%2C+CA">' + item.restaurantDTO.foodstyle + '  Bars</a>,'+
+				                        '<a href="/search?cflt=newamerican&amp;find_loc=San+Francisco%2C+CA">' + 
+				                        item.restaurantDTO.roadAddrPart1 + item.restaurantDTO.roadAddrPart2 + item.restaurantDTO.addrDetail + '    American (New)</a>,'+
+				                        '<a href="/search?cflt=seafood&amp;find_loc=San+Francisco%2C+CA">Seafood</a>'+
+				    				'</span>'+
+				    			 '</div>'+
+				                 '<address>'+
+				                      item.restaurantDTO.raddress + item.restaurantDTO.hp2 + item.restaurantDTO.hp3 +
+// 				                     '871 Sutter St<br>San Francisco, CA 94109'+
+				                 '</address>'+
+				             '</div>'+
+        		        '</div>'+
+				        '<div class="arrange_unit" align="right" style="margin-bottom: 10px;">'+
+			                '<p class="time-stamp nowrap review-draft_date-created text-right">'+
+			                    'Started on  '+  item.restaurantDTO.rest_regdate + 
+			                '</p>'+
+			                '<p lang="ko" style="margin-bottom: 12px; width: 100%; float: right; display: block;">'+
+							 item.content +
+						    '</p><br><br>'+
+			             '</div>'+
+			             
+			             /* '<div>'+
+							'<div class="restList-star-rating-'+item.gradepoint+'" >'+
+								'<img class="offscreen" '+
+									'src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/stars.png" '+
+									'width="84" height="303" alt="4.0 star rating" '+
+									'style="clip: rect(0, 0, 0, 0); position: absolute; left: -9999px; top: auto; overflow: hidden; width: 1px; height: 1px; vertical-align: middle;">'+
+							'</div>'+
+						'</div>'+ */
+			       
+			            '<div class="clearfix"  style="margin-bottom: 50px;">'+
+			               '<a  style="float: left;" href="member_details?mnum=' + mnum + '" class="yepsbyn ybtn--small js-war-widget_finish-draft pull-left">Finish My Review</a>'+
+			                  '<form action="review_delete?rvnum='+ item.rvnum + '&mnum=' + mnum + '" class="pull-right js-delete-review-draft-form" method="post" name="delete_draft">'+
+			               
+			                      '<input type="hidden" value="'+ item.rvnum + '" name="rvnum">'+
+			                      '<button type="submit" style="float: right;"class="chiclet-link u-cursor-pointer show-tooltip js-delete-review-draft">'+
+			                         '<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-trash icon--size-18 icon--currentColor">'+
+			                             '<svg class="icon_svg">'+
+									         '<path d="M3 5V3h4V2h4v1h4v2H3zm11 9c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V6h10v8zM8 8.5a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5zm3 0a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5z"></path>'+
+								
+			                             '</svg>'+
+			                         '</span>'+
+			                         '<span class="tooltip-wrapper">'+
+			                         '<span class="tooltip">Delete draft</span>'+
+			                      '</span>'+
+			                   '</button>'+
+			                '</form>'+
+			             '</div>'+
+		              '</div>'+
+				   '</div>'+
+				'</li>'
+				      );
+				 });
+				 
+				 $('.yeps_message_paging_section').empty();
+			     var pagingHtml = "";
+			     pagingHtml = '<div class="yeps_message_pagination_block">' + 
+			     			  '<div class="yeps_message_pagination_wrap">' + 
+			     			  '<div class="yeps_message_page_of_pages">';
+			     if(responseData.YepsPager.blockEnd == 0) {
+			  	   pagingHtml += 'Page ' + responseData.YepsPager.curPage + ' of 1';
+			     } else {
+			  	   pagingHtml += 'Page ' + responseData.YepsPager.curPage + ' of ' + responseData.YepsPager.blockEnd;
+			     }
+			     pagingHtml += '</div>';
+			     if(responseData.YepsPager.blockEnd != 1) {
+			  	   pagingHtml += '<div class="yeps_message_page_link_wrapper">';
+			  	   pagingHtml += '<div class="yeps_message_page_link_wrap">';
+			  	   if(responseData.YepsPager.curBlock > 1) {
+			  		   pagingHtml += '<div class="yeps_message_next_block">';
+			  		   pagingHtml += '<a class="yeps_message_next_block_action" href="javascript:list('+ 1 +')">';
+			  		   pagingHtml += '<span>Start</span>';
+			  		   pagingHtml += '</a>';
+			  		   pagingHtml += '</div>';
+			  	   }
+			  	   
+			  	   if(responseData.YepsPager.curBlock > 1) {
+			  		   pagingHtml += '<div class="event_list_next_block">';
+			  		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+responseData.YepsPager.prevPage+')">';
+			  		   pagingHtml += '<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">';
+			  		   pagingHtml += '<svg class="icon_svg">';
+			  		   pagingHtml += '<path d="M14.475 18.364l1.414-1.414L10.94 12l4.95-4.95-1.415-1.414L8.11 12l6.365 6.364z"></path>';
+			  		   pagingHtml += '</svg>';
+			  		   pagingHtml += '</span>';
+			  		   pagingHtml += '<span>Previous</span>';
+			  		   pagingHtml += '</a>';
+			  		   pagingHtml += '</div>';
+			  	   }
+			  	   
+			  	   for(var num = responseData.YepsPager.blockBegin; num <= responseData.YepsPager.blockEnd; num++) {
+			  		   pagingHtml += '<div class="yeps_message_page_link_option">';
+			  		   if(num == responseData.YepsPager.curPage) {
+			  			   pagingHtml += '<span class="yeps_message_page_option_action">';
+			  			   pagingHtml += num;
+			  			   pagingHtml += '</span>';
+			  		   } else {
+			  			   pagingHtml += '<a href="javascript:list('+ num +')" class="yeps_message_page_option_link_action">';
+			  			   pagingHtml += num;
+			  			   pagingHtml += '</a>';
+			  		   }
+			  		   pagingHtml += '</div>';
+			  	   }
+			  	   
+			  	   if(responseData.YepsPager.curBlock <= responseData.YepsPager.totBlock) {
+			  		   pagingHtml += '<div class="yeps_message_next_block">';
+			  		   pagingHtml += '<a class="yeps_message_next_block_action" href="javascript:list('+responseData.YepsPager.nextPage+')">';
+			  		   pagingHtml += '<span>Next</span>';
+			  		   pagingHtml += '<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">';
+			  		   pagingHtml += '<svg class="icon_svg">';
+			  		   pagingHtml += '<path d="M9.525 5.636L8.11 7.05 13.06 12l-4.95 4.95 1.415 1.414L15.89 12 9.524 5.636z"></path>';
+			  		   pagingHtml += '</svg>';
+			  		   pagingHtml += '</span>';
+			  		   pagingHtml += '</a>';
+			  		   pagingHtml += '</div>';
+			  	   }
+			  	   if(responseData.YepsPager.curBlock <= responseData.YepsPager.totBlock) {
+			  		   pagingHtml += '<div class="yeps_message_next_block">';
+			  		   pagingHtml += '<a class="yeps_message_next_block_action" href="javascript:list('+responseData.YepsPager.totPage+')">';
+			  		   pagingHtml += '<span>End</span>';
+			  		   pagingHtml += '</a>';
+			  		   pagingHtml += '</div>';
+			  	   }
+			  	   pagingHtml += '</div>';
+			  	   pagingHtml += '</div>';
+			     }
+			     pagingHtml += '</div>';
+			     pagingHtml += '</div>';
+			     pagingHtml += '</div>';
+			
+			     $('.yeps_message_paging_section').append(pagingHtml);      
+			   
+	           
+	         },
+	         error : function(request, status, error) {
+	             alert("실패 :" + "code:"+request.status+"\n\n"+"message:"+request.responseText+"\n\n"+"error:"+error); 
+	         },
+	     });
+	 } 
+	
+	
 	    $('#profile_events').click(function(e){
 	    	$(".details-column-beta_overview").hide();
  	    	$(".details-column-beta_reviews").hide();

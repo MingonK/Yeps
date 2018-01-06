@@ -245,9 +245,12 @@ public class EventController {
 		}
 		HttpSession session = req.getSession();
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
+		if (memberDTO == null) {			
+			return new ModelAndView("redirect: member_login");
+		}
 		memberDTO.setImagecount(memberDTO.getImagecount()-imageCount);
 		session.setAttribute("memberinfo", memberDTO);
-		
+		memberMapper.updateImageCount(memberDTO.getMnum(), memberDTO.getMnum());
 		int fileDelete_result = fileMapper.deleteAllFile(Integer.parseInt(evnum));
 		int eventReviewDelete_result = eventReviewMapper.deleteAllEventReivew(Integer.parseInt(evnum));
 		if (fileDelete_result >= 0 && eventReviewDelete_result >= 0) {
@@ -299,6 +302,9 @@ public class EventController {
 		
 		HttpSession session = req.getSession();
 		MemberDTO loginMember = (MemberDTO) session.getAttribute("memberinfo");
+		if (loginMember == null) {			
+			return new ModelAndView("redirect: member_login");
+		}
 		dto.setMnum(loginMember.getMnum());
 
 		if (dto.getEventname() == null || dto.getEventname().trim().equals("") || dto.getEvent_content() == null
@@ -334,6 +340,10 @@ public class EventController {
 
 		HttpSession session = req.getSession();
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
+		if (memberDTO == null) {			
+			return new ModelAndView("redirect: member_login");
+		}
+		
 		EventDTO eventDTO = eventMapper.getEventContent(Integer.parseInt(evnum));
 		ModelAndView mav = new ModelAndView();
 
@@ -384,6 +394,10 @@ public class EventController {
 		int fileSize = 0;
 		List<FileDTO> fileList = new ArrayList<FileDTO>();
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
+		if (memberDTO == null) {			
+			map.put("url", "member_login");
+			return map;
+		}
 		
 		int imageCount = 0;
 		while (it.hasNext()) {
@@ -437,8 +451,8 @@ public class EventController {
 				map.put("upload_failed", "업로드할 수 없는 파일이 존재합니다.");
 			}
 		}
-		memberMapper.updateImageCount(memberDTO.getMnum(), imageCount);
 		memberDTO.setImagecount(memberDTO.getImagecount()+imageCount);
+		memberMapper.updateImageCount(memberDTO.getMnum(), memberDTO.getMnum());
 		session.setAttribute("memberinfo", memberDTO);
 		
 		map.put("update", "사진을 등록하였습니다.");
@@ -464,7 +478,8 @@ public class EventController {
 		String isMainPhoto = req.getParameter("ismainphoto");
 
 		HttpSession session = req.getSession();
-		if (session == null) {
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
+		if (memberDTO == null) {
 			return new ModelAndView("redirect: member_login");
 		}
 		if (filename == null || filename.trim().equals("") || evnum == null || evnum.trim().equals("")
@@ -481,10 +496,9 @@ public class EventController {
 
 		S3Connection.getInstance().deleteObject("yepsbucket", "images/" + filename);
 		fileMapper.deleteFile(filename, Integer.parseInt(evnum), isMainPhoto);
-		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
 		memberDTO.setImagecount(memberDTO.getImagecount()-1);
 		session.setAttribute("memberinfo", memberDTO);
-		
+		memberMapper.updateImageCount(memberDTO.getMnum(), memberDTO.getMnum());
 		mav.setViewName("redirect: event_update_photo?evnum=" + Integer.parseInt(evnum) + "&mode=delete");
 		return mav;
 	}
@@ -553,6 +567,10 @@ public class EventController {
 
 		ModelAndView mav = new ModelAndView();
 		MemberDTO loginMember = (MemberDTO) session.getAttribute("memberinfo");
+		if (loginMember == null) {
+			return new ModelAndView("redirect: member_login");
+		}
+		
 		EventDTO eventDTO = eventMapper.getEventContent(Integer.parseInt(evnum));
 
 		if (loginMember.getMnum() == Integer.parseInt(mnum) || loginMember.getIsmanager().equals("y")

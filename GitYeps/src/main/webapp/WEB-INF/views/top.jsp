@@ -230,8 +230,7 @@
 							<div id="yeps_search_arrange" style="width: 32%; float: left;">
 								<label id="yeps_search_arrange_label">
 									<span id="search_input_span">
-										<input type="text" maxlength="80" id="page_header_searchDate_inputs" class="page_header_searchDate_inputs" name="searchword" autocomplete="off" placeholder="검색어를 입력하세요."">
-										<input type="hidden" maxlength="80" name="search_loc" value>
+										<input type="text" maxlength="80" id="page_header_searchDate_inputs" class="page_header_searchDate_inputs" name="searchword" autocomplete="off" placeholder="검색어를 입력하세요.">
 									</span>
 								</label>
 								
@@ -382,13 +381,22 @@
                                                          </span>
                                                          <b>${sessionScope.memberinfo.reviewcount}</b> <!-- 리뷰 수 -->
                                                       </li>
+                                                      
+                                                      <li class="photo-count">
+                                                         <span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-review icon--size-18">
+                                                            <svg class="icon_svg" id="18x18_camera" height="100%" viewBox="0 0 18 18" width="100%">
+																<path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 6.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path>
+															</svg>
+                                                         </span>
+                                                         <b>${sessionScope.memberinfo.imagecount}</b> <!-- 리뷰 수 -->
+                                                      </li>
                                                    </ul>
                                                 </div>
                                              </div>
                                            </div>
                                           <ul class="drop-menu-group--nav drop-menu-group">
                                              <li class="drop-down-menu-link">
-                                                <a class="js-analytics-click arrange arrange--middle arrange--6" href="member_details" style="display: block; word-wrap: break-word;">
+                                                <a class="js-analytics-click arrange arrange--middle arrange--6" href="member_details?mnum=${sessionScope.memberinfo.mnum}" style="display: block; word-wrap: break-word;">
                                                    <strong class="arrange_unit">
                                                       <span aria-hidden="true" style="width: 24px; height: 24px;" class="icon icon--24-profile icon--size-24 u-space-r1">
                                                          <svg class="icon_svg">
@@ -590,6 +598,14 @@
 		} else if(set.val() == 'message') {
 			$('#footer_list_li_message').css('background', '#9b1a1a');
 		}
+		
+		var category = '${map.category}';
+		var location = '${map.location}';
+		var searchword = '${map.searchword}';
+		$('#page_header_inputs').val(category);
+		$('#page_header_location_inputs').val(location);
+		$('#page_header_searchDate_inputs').val(searchword);
+		
 	});
 		$(document).on("mouseenter","#footer_list_block",function(){
         $('#header_page_footer_dropdown').attr('id', 'header_page_footer_dropdown_view');

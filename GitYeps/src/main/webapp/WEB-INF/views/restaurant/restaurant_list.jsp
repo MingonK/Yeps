@@ -236,7 +236,7 @@
 														</div>
 													<div class="price-category"style="clear: both;">
 														<span class="bullet-after">
-																<span class="business-attribute price-range" style="letter-spacing: 1px; white-space: nowrap;">￦￦￦</span>
+																<span class="business-attribute price-range" style="letter-spacing: 1px; white-space: nowrap;">${getRest.price }</span>
 														</span>
 														<span class="category-str-list">
 															<a href="#" style="color: #0073bb; cursor: pointer;">${dto.foodstyle}</a>
@@ -479,7 +479,7 @@
 <script>
     // **원하는 페이지로 이동시 검색조건, 키워드 값을 유지하기 위해 
     function list(page){
-        location.href="restaurant_list?curPage="+page;
+        location.href="restaurant_list?category="+category+"&location="+location+"&searchword="+searchword+"&curPage="+page;
     }
 </script>
 <script>
