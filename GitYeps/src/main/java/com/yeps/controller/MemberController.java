@@ -209,7 +209,7 @@ public class MemberController {
 				MemberPhotoDTO memberPhotoDTO = new MemberPhotoDTO();
 				memberPhotoDTO.setFilenum(0);
 				memberPhotoDTO.setMnum(newMemberDTO.getMnum());
-				memberPhotoDTO.setFilename("30s.jpg");
+				memberPhotoDTO.setMember_filename("30s.jpg");
 				memberPhotoDTO.setFilesize(707);
 				memberPhotoDTO.setOrigin_filename("30s.jpg");
 				memberPhotoMapper.insertMemberPhoto(memberPhotoDTO, "main");
@@ -750,7 +750,7 @@ public class MemberController {
 				MemberPhotoDTO memberPhotoDTO = new MemberPhotoDTO();
 				memberPhotoDTO.setFilenum(0);
 				memberPhotoDTO.setMnum(newMemberDTO.getMnum());
-				memberPhotoDTO.setFilename("30s.jpg");
+				memberPhotoDTO.setMember_filename("30s.jpg");
 				memberPhotoDTO.setFilesize(707);
 				memberPhotoDTO.setOrigin_filename("30s.jpg");
 				memberPhotoMapper.insertMemberPhoto(memberPhotoDTO, "main");
@@ -845,7 +845,7 @@ public class MemberController {
 
 					MemberPhotoDTO MemberPhotoDTO = new MemberPhotoDTO();
 					MemberPhotoDTO.setMnum(memberDTO.getMnum());
-					MemberPhotoDTO.setFilename(saveFileName);
+					MemberPhotoDTO.setMember_filename(saveFileName);
 					MemberPhotoDTO.setOrigin_filename(origin_fileName);
 					MemberPhotoDTO.setFilesize(fileSize);
 
@@ -1004,10 +1004,4 @@ public class MemberController {
 		mav.setViewName("member/memberPhotoList");
 		return mav;
 	}
-	
-	@RequestMapping(value = "/page_404")
-	public ModelAndView page404(HttpServletRequest req, HttpSession session) {
-		return new ModelAndView("404Page");
-	}
-	
 }

@@ -51,7 +51,12 @@ public class HomeController {
 		List<Integer> gethotAndNewReview = reviewMapper.gethotAndNewReview();
 		Set<RestaurantDTO> hotAndNewSet = new LinkedHashSet<RestaurantDTO>();
 		for (int i = 0; i < 3; i++) {
-			hotAndNewSet.add(restaurantMapper.getHotAndNewRestaurant(gethotAndNewReview.get(i)));
+				RestaurantDTO dto = restaurantMapper.getHotAndNewRestaurant(gethotAndNewReview.get(i));
+			if(dto != null) {
+				hotAndNewSet.add(dto);
+			} else {
+				hotAndNewSet.add(dto);
+			}
 		}
 
 		List<Integer> reviewCount = new ArrayList<Integer>();
@@ -127,7 +132,12 @@ public class HomeController {
 		List<Integer> gethotAndNewReview = reviewMapper.gethotAndNewReview();
 		Set<RestaurantDTO> hotAndNewSet = new LinkedHashSet<RestaurantDTO>();
 		for (int i = 0; i < 3; i++) {
-			hotAndNewSet.add(restaurantMapper.getHotAndNewRestaurant(gethotAndNewReview.get(i)));
+				RestaurantDTO dto = restaurantMapper.getHotAndNewRestaurant(gethotAndNewReview.get(i));
+			if(dto != null) {
+				hotAndNewSet.add(dto);
+			} else {
+				hotAndNewSet.add(dto);
+			}
 		}
 
 		List<Integer> reviewCount = new ArrayList<Integer>();

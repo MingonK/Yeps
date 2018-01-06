@@ -29,7 +29,7 @@
 								</a> 
 								Add Photos
 							</h2>
-							<a href="restaurant_photoList?rnum=${restaurantDTO.rnum}">View all photos</a>
+							<a href="restaurant_photoList?rnum=${restaurantDTO.rnum}&view=all">View all photos</a>
 							<br>
 							<br>
 						</div>

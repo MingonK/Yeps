@@ -64,7 +64,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      </select>
      
      <!-- 12월 31일 지원 추가 -->
-	<select id="getHotAndNewRestaurant" resultType="RestaurantDTO">
+     <resultMap type="restaurantDTO" id="HotAndNewRestaurantMap">
+     	<id column="rnum" property="rnum"/>
+     	<result column="rnum" property="rnum"></result>
+     	<result column="rname" property="rname"></result>
+     	<result column="price" property="price"></result>
+     	<result column="foodstyle" property="foodstyle"></result>
+     	<result column="roadAddrPart1" property="roadAddrPart1"></result>
+     	<result column="rest_regdate" property="rest_regdate"></result>
+     	
+     	<association javaType="FileDTO" property="fileDTO">
+     		<id column="filenum" property="filenum"></id>
+     		<result column="filename" property="filename"></result>
+     	</association>
+     </resultMap>     
+     
+	<select id="getHotAndNewRestaurant" parameterType="int" resultMap="HotAndNewRestaurantMap">
+		select		RT.rnum
+					, RT.rname
+					, RT.price
+					, RT.foodstyle
+					, RT.roadAddrPart1
+					, RT.rest_regdate
+					, F.filename
+		from yeps_restaurant RT, yeps_files F 
+		where RT.rnum = F.rnum and F.ismainphoto = 'y' and RT.rnum = #{rnum}
+	</select>
+	
+	<select id="getHotAndNewRestaurant_noPhoto" parameterType="int" resultType="RestaurantDTO">
 		select * from yeps_restaurant where rnum=#{rnum}
 	</select>
 	
