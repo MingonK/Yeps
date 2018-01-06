@@ -60,7 +60,7 @@
                                                 <img class="photo-box-img" height="90" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" width="90">
                                              </c:when>
                                              <c:otherwise>
-                                                <img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${mainPhoto.filename}" alt="member_main_photo" id="photo_box_img" width="90px" height="90px">
+                                                <img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${member_filename}" alt="member_main_photo" id="photo_box_img" width="90px" height="90px">
                                              </c:otherwise>
                                           </c:choose>
                                        </span>
@@ -82,7 +82,7 @@
                                                                <img class="photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" width="60">
                                                             </c:when>
                                                             <c:otherwise>
-                                                               <img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${mainPhoto.filename}" alt="member_main_photo" id="photo_box_img" width="60px" height="60px">
+                                                               <img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${member_filename}" alt="member_main_photo" id="photo_box_img" width="60px" height="60px">
                                                             </c:otherwise>
                                                          </c:choose>
                                                       </a>

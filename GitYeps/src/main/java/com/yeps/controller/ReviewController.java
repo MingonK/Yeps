@@ -152,7 +152,7 @@ public class ReviewController {
         }
 		
 		String rname = restaurantMapper.review_write_getrname(Integer.parseInt(rnum));
-		//int rvnum = reviewMapper.get_rvnum(Integer.parseInt(rnum));
+		String rvnum = req.getParameter("rvnum");
 		String star = req.getParameter("star");
 		String mode = req.getParameter("mode");
 		String where = req.getParameter("where");
@@ -166,7 +166,7 @@ public class ReviewController {
 			mav.addObject("contentUpdate", contentUpdate);
 		}
 		
-		//mav.addObject("rvnum", rvnum);
+		mav.addObject("rvnum", rvnum);
 		mav.addObject("mode", mode);
 		mav.addObject("rnum", rnum);
 		mav.addObject("where", where);
