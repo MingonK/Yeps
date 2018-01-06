@@ -778,7 +778,7 @@ public class MemberController {
 			getPhotoList = memberPhotoMapper.getMemberPhotoList(Integer.parseInt(mnum));
 		}
         int reviewcount = memberDTO.getReviewcount();
-      
+      System.out.println(mnum);
 		String email = memberDTO.getEmail();
 		int noneCount = messageMapper.noneMessageCount(email);
 		mav.addObject("noneCount", noneCount);

@@ -1496,7 +1496,7 @@ small {
 }
 
 .member_reviews-hero {
-	margin: 400px 0;
+	margin: 30px 0;
 }
 
 .member_u-relative {
@@ -1643,6 +1643,13 @@ small {
     float: left;
     padding: 0 15px;
     min-height: 1px;
+}
+
+.restContent-user {
+	float: left; 
+	padding: 0 15px; 
+	min-height: 1px;  
+	width: 66.66667%;
 }
 
 iv, span, li, ul, form, a, dl, dt, dd {

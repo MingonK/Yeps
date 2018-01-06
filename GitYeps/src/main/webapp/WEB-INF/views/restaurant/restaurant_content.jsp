@@ -914,7 +914,7 @@
     	    <div id="flag_popup_description" style="padding: 0 12px;">
     	    	<div>
     	    		<p style="margin: 12px 0;">이 댓글을 신고하는 이유를 선택하고 상세하게 설명해주세요.</p>
-    	    		<form name="reply_flag_popup_form" id="reply_flag_popup_form" action="#" method="post" onsubmit="return reply_report_check()" style="margin-bottoom: 0;">
+    	    		<form name="reply_flag_popup_form" id="reply_flag_popup_form" action="message_send?report=reply&rnum=${getRest.rnum}&where=rest" method="post" onsubmit="return reply_report_check()" style="margin-bottoom: 0;">
     	    			<div>
     	    				<label id="reply_flag_popup_form_label" for="reason_field" style="display: inline-block; font-weight: bold; margin: 0 0 6px;">
     	    					이유
@@ -982,7 +982,7 @@
     	   	
 		<div id="flag_popup_footer">
      		<div id="flag_popup_buttons">
-     			<button id="reply_flag_popup_submit_button" type="submit" value="submit" data-popup-send="SendMessage" onclick="sendMessage()">
+     			<button id="reply_flag_popup_submit_button" type="submit" value="submit" data-popup-send="SendMessage" id="sendMessage">
      				<span>메세지 보내기</span>
      			</button>
      			<a href="#" data-popup-close="writeMessage">

@@ -866,7 +866,7 @@
     	    <div id="flag_popup_description">
     	    	<div>
     	    		<p>지금 보고계신 콘텐츠의 수정이 필요한 부분과 실제 이벤트에서 어떠한 사항을 위반하고 있는지 알려 주시기 바랍니다.</p>
-    	    		<form name="flag_popup_form" id="flag_popup_form" action="message_send?issue=issue" method="post" onsubmit="return check()" style="margin-bottoom: 0;">
+    	    		<form name="flag_popup_form" id="flag_popup_form" action="message_send?report=event&where=event" method="post" onsubmit="return check()" style="margin-bottoom: 0;">
     	    			<input type="hidden" name="evnum" value="${eventDTO.evnum}">
     	    			<input type="hidden" name="email" value="${sessionScope.memberinfo.email}">
     	    			<div id="flag_popup_descripte_container">
@@ -920,7 +920,9 @@
     	    <div id="flag_popup_description" style="padding: 0 12px;">
     	    	<div>
     	    		<p style="margin: 12px 0;">이 댓글을 신고하는 이유를 선택하고 상세하게 설명해주세요.</p>
-    	    		<form name="reply_flag_popup_form" id="reply_flag_popup_form" action="#" method="post" onsubmit="return reply_report_check()" style="margin-bottoom: 0;">
+    	    		<form name="reply_flag_popup_form" id="reply_flag_popup_form" action="message_send?report=reply&mnum=${sessionScope.memberinfo.mnum }&where=event" method="post" onsubmit="return reply_report_check()" style="margin-bottoom: 0;">
+    	    			<input type="hidden" name="evnum" value="${eventDTO.evnum}">
+    	    			<input type="hidden" name="email" value="${sessionScope.memberinfo.email}">
     	    			<div>
     	    				<label id="reply_flag_popup_form_label" for="reason_field" style="display: inline-block; font-weight: bold; margin: 0 0 6px;">
     	    					이유

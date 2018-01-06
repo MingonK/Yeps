@@ -17,16 +17,21 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.yeps.model.MemberDTO;
 import com.yeps.model.MessageDTO;
+import com.yeps.model.RestaurantDTO;
 import com.yeps.service.EventMapper;
 import com.yeps.service.MemberMapper;
 import com.yeps.service.MessageMapper;
+import com.yeps.service.RestaurantMapper;
 import com.yeps.service.YepsPager;
 
 @Controller
 public class MessageController {
 
 	@Autowired
-	private MessageMapper yepsMessageMapper;
+	private MessageMapper messageMapper;
+
+	@Autowired
+	private RestaurantMapper restaurantMapper;
 
 	@Autowired
 	private MemberMapper memberMapper;
@@ -38,13 +43,13 @@ public class MessageController {
 		ModelAndView mav = new ModelAndView();
 		// 각각의 메시지 총 수를 구한다.
 		int cnt = 0;
-		int count = yepsMessageMapper.getMessageCount();// 총 메시지 카운트. 하지만 보여지는 페이지에선 나오지 않을듯
-		int lCount = yepsMessageMapper.getLockerCount(email);// 보관함 쪽지 개수
-		int sCount = yepsMessageMapper.getSendCount(email);// 보낸 쪽지 개수
-		int mCount = yepsMessageMapper.getReceiveCount(email);// 받은 쪽지 개수
-		int aCount = yepsMessageMapper.allAlertCount(email);
-		int rCount = yepsMessageMapper.readAlertCount(email);
-		int noneCount = yepsMessageMapper.noneMessageCount(email);
+		int count = messageMapper.getMessageCount();// 총 메시지 카운트. 하지만 보여지는 페이지에선 나오지 않을듯
+		int lCount = messageMapper.getLockerCount(email);// 보관함 쪽지 개수
+		int sCount = messageMapper.getSendCount(email);// 보낸 쪽지 개수
+		int mCount = messageMapper.getReceiveCount(email);// 받은 쪽지 개수
+		int aCount = messageMapper.allAlertCount(email);
+		int rCount = messageMapper.readAlertCount(email);
+		int noneCount = messageMapper.noneMessageCount(email);
 		int curPage = req.getParameter("curPage") != null ? Integer.parseInt(req.getParameter("curPage")) : 1;
 		// lMode로 여러 종류의 리스트를 구분하여 카운트를 설정한다.
 		if (lMode == null) {
@@ -62,13 +67,13 @@ public class MessageController {
 			cnt = noneCount;
 		} else if (lMode.equals("readMsg")) {
 
-			cnt = yepsMessageMapper.readMessageCount(email);
+			cnt = messageMapper.readMessageCount(email);
 		} else if (lMode.equals("noneLocker")) {
 
-			cnt = yepsMessageMapper.noneLockerCount(email);
+			cnt = messageMapper.noneLockerCount(email);
 		} else if (lMode.equals("readLocker")) {
 
-			cnt = yepsMessageMapper.readLockerCount(email);
+			cnt = messageMapper.readLockerCount(email);
 		} else if (lMode.equals("alertMsg")) {
 
 			cnt = aCount;
@@ -95,7 +100,7 @@ public class MessageController {
 		}
 
 		// 페이징처리된 리스트를 구한다.
-		List<MessageDTO> list = yepsMessageMapper.messageList(start, end, lMode, email);
+		List<MessageDTO> list = messageMapper.messageList(start, end, lMode, email);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("lMode", lMode);
 		map.put("list", list); // list
@@ -192,7 +197,7 @@ public class MessageController {
 			}
 			for (String num : check) {
 				int msgnum = Integer.parseInt(num);
-				res = yepsMessageMapper.deleteMessage(msgnum);
+				res = messageMapper.deleteMessage(msgnum);
 				if (res > 0) {
 					msg = "메시지가 삭제 되었습니다.";
 				} else {
@@ -201,7 +206,7 @@ public class MessageController {
 			}
 		} else {
 			int msgnum = Integer.parseInt(msgNum);
-			res = yepsMessageMapper.deleteMessage(msgnum);
+			res = messageMapper.deleteMessage(msgnum);
 			msg = "메시지가 삭제 되었습니다.";
 
 		}
@@ -221,7 +226,7 @@ public class MessageController {
 		ModelAndView mav = new ModelAndView();
 		String msg = null, lMode = null, receiver = null, email = null;
 		int res = 0;
-		String issue = req.getParameter("issue");
+		String report = req.getParameter("report");
 		MemberDTO member = (MemberDTO) req.getSession().getAttribute("memberinfo");
 
 		if (member == null) {
@@ -229,13 +234,14 @@ public class MessageController {
 			return mav;
 		}
 		int mnum = member.getMnum();
+
 		dto.setMnum(mnum);
 		email = member.getEmail();// 로그인시 로그인한 회원의 정보로 보내는 사람을 구한다.*/
 		dto.setSender(email);
 
 		List<MemberDTO> memberList = memberMapper.listMemberForMessage();
 
-		if (issue == null && dto.getReceiver() != null) {
+		if (report == null && dto.getReceiver() != null) {
 			receiver = dto.getReceiver().trim();
 			dto.setReceiver(receiver);
 			dto.setIsIssue(0);
@@ -245,7 +251,7 @@ public class MessageController {
 					dto.setReceiver(who);
 				}
 			}
-			res = yepsMessageMapper.writeMessage(dto);
+			res = messageMapper.writeMessage(dto);
 			if (res > 0) {
 				msg = "쪽지를 보냈습니다.쪽지함으로 이동합니다.";
 				lMode = "msgBoxList";
@@ -256,59 +262,73 @@ public class MessageController {
 				mav = pagingMessageList(req, lMode, email);
 			}
 			mav.addObject("msg", msg);
+			
+
 			// 쪽지함에서 신고쪽지 보낼때 받는 부분
-		} else if (issue.equals("issue") || issue.equals("eventissue")) {
+		} else if (report.equals("reply") || report.equals("event")) {
 			// 이벤트에서 신고보낼때 받는 부분(쪽지함 신고 부분에 포함)
 			String sEvnum = req.getParameter("evnum");
+			int evnum = Integer.parseInt(sEvnum);
+			String where = req.getParameter("where");
+			String rnum = req.getParameter("rnum");
+			String eventname = eventMapper.getEventContent(evnum).getEventname();
+			String reason = req.getParameter("reason_field");
 
-			if (sEvnum != null) {
-				int evnum = Integer.parseInt(sEvnum);
-				String eventname = eventMapper.getEventContent(evnum).getEventname();
+			if (reason.equals("inappropriate_post")) {
+				reason = "부적절한 홍보 게시물";
+			} else if (reason.equals("Eroticism")) {
+				reason = "음란성, 선정성 또는 부적합한 내용";
+			} else if (reason.equals("swear_word")) {
+				reason = "특정인 대상의 비방/욕설";
+			} else if (reason.equals("Privacy_infringement")) {
+				reason = "명예훼손/사생활 침해 및 저작권침해 등";
+			} else if (reason.equals("personal_information")) {
+				reason = "개인정보 공개";
+			} else if (reason.equals("plaster")) {
+				reason = "같은 내용의 반복 게시 (도배)";
+			}
 
-				String eventReason = req.getParameter("reason_field");
-				if (eventReason != null) {
-					if (eventReason.equals("inappropriate_post")) {
-						eventReason = "부적절한 홍보 게시물";
-					} else if (eventReason.equals("Eroticism")) {
-						eventReason = "음란성, 선정성 또는 부적합한 내용";
-					} else if (eventReason.equals("swear_word")) {
-						eventReason = "특정인 대상의 비방/욕설";
-					} else if (eventReason.equals("Privacy_infringement")) {
-						eventReason = "명예훼손/사생활 침해 및 저작권침해 등";
-					} else if (eventReason.equals("personal_information")) {
-						eventReason = "개인정보 공개";
-					} else if (eventReason.equals("plaster")) {
-						eventReason = "같은 내용의 반복 게시 (도배)";
-					}
-					dto.setTitle("reply report : " + eventname + ", (" + eventReason + ")");
-				} else {
-					dto.setTitle("event report : " + eventname);
-				}
-				String eventContent = req.getParameter("flag_popup_descripte_field");
+			if(where.equals("rest")) {
+				RestaurantDTO restaurant = restaurantMapper.getRest(Integer.parseInt(rnum));
+				dto.setTitle("restaurant report : " + restaurant.getRname() + ", (" + reason + ")");
 
-				dto.setContent(eventContent);
+			}else if(where.equals("event")) {
 				dto.setEvnum(evnum);
 				mav.addObject("evnum", evnum);
+				if(report.equals("reply")) {
+					dto.setTitle("reply report : " + eventname + ", (" + reason + ")");
 
-			} // 여기까지 이벤트 신고 부분. 아래부터는 쪽지함 신고와 동일
+				}else {
+					dto.setTitle("event report : " + eventname);
+				}
 
-			// 등록된 회원중 매니져를 찾아 매니져에게만 이슈가 되는 내용을 보낸다.
-			for (int i = 0; i < memberList.size(); i++) {
-				String isManager = memberList.get(i).getIsmanager();
-				email = memberList.get(i).getEmail();
-				if (isManager.equals("y")) {
-					receiver = memberList.get(i).getEmail();
-					dto.setReceiver(receiver);
-					dto.setIsIssue(1);
-					res = yepsMessageMapper.writeMessage(dto);
+				String reportContent = req.getParameter("flag_popup_descripte_field");
+				dto.setContent(reportContent);
+
+				// 여기까지 이벤트 신고 부분. 아래부터는 쪽지함 신고와 동일
+				// 등록된 회원중 매니져를 찾아 매니져에게만 이슈가 되는 내용을 보낸다.
+				for (int i = 0; i < memberList.size(); i++) {
+					String isManager = memberList.get(i).getIsmanager();
+					email = memberList.get(i).getEmail();
+					if (isManager.equals("y")) {
+						receiver = memberList.get(i).getEmail();
+						dto.setReceiver(receiver);
+						dto.setIsIssue(1);
+						System.out.println("@=" +dto.getMnum());
+						System.out.println("@@=" +dto.getTitle());
+						res = messageMapper.writeMessage(dto);
+					}
 				}
 			}
-			msg = "이슈를 보냈습니다. ";
-			mav.setViewName("historyBack");// historyback.jsp를 이용하여 이전 페이지로 이동
 		}
+		msg = "리포트를 작성하였습니다.. ";
+		mav.setViewName("historyBack");// historyback.jsp를 이용하여 이전 페이지로 이동
 		mav.addObject("msg", msg);
 		return mav;
 	}
+			
+
+		
 
 	@RequestMapping(value = "message_action")
 	public ModelAndView message_search(HttpServletRequest req) {
@@ -391,11 +411,11 @@ public class MessageController {
 			return mav;
 		}
 		msgNum = Integer.parseInt(sMsgnum);
-		readNum = yepsMessageMapper.getContent(msgNum).getReadNum();
+		readNum = messageMapper.getContent(msgNum).getReadNum();
 		if (readNum == 0) {
-			yepsMessageMapper.updateReadNum1(msgNum);
-			yepsMessageMapper.updateReadDate(msgNum);
-			readNum = yepsMessageMapper.getContent(msgNum).getReadNum();
+			messageMapper.updateReadNum1(msgNum);
+			messageMapper.updateReadDate(msgNum);
+			readNum = messageMapper.getContent(msgNum).getReadNum();
 			mav.addObject("readNum", readNum);
 			mav = pagingMessageList(req, lMode, email);
 		} else {
@@ -423,7 +443,7 @@ public class MessageController {
 		}
 		for (String num : check) {
 			int msgnum = Integer.parseInt(num);
-			int res = yepsMessageMapper.moveToLocker(msgnum);
+			int res = messageMapper.moveToLocker(msgnum);
 			if (res > 0) {
 
 				msg = "보관함으로 이동 되었습니다. ";
@@ -458,7 +478,7 @@ public class MessageController {
 
 		for (String num : check) {
 			int msgnum = Integer.parseInt(num);
-			int res = yepsMessageMapper.lockerToMsgBox(msgnum);
+			int res = messageMapper.lockerToMsgBox(msgnum);
 			if (res > 0) {
 				msg = "쪽지함으로 이동 되었습니다. ";
 				mav.addObject("msg", msg);
