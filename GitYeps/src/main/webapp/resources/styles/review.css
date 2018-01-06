@@ -1,3 +1,74 @@
+.tooltip-wrapper_1{
+	position: absolute;
+    left: -9999px;
+    bottom: 100%;
+    width: 250px;
+    margin-left: -125px;
+    margin-bottom: 5px;
+    text-align: center;
+    text-decoration: none;
+        color: #333;
+}
+
+.tooltip-wrapper_1:after{
+	z-index: 1013;
+}
+
+.tooltip_1{
+	z-index: 1012;
+	display: inline-block;
+    position: relative;
+    padding: 6px 9px;
+    vertical-align: middle;
+    white-space: normal;
+    font-size: 12px;
+    pointer-events: none;
+    font-weight: bold;
+    line-height: 18px;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    border-radius: 5px;
+    text-shadow: none;
+    text-align: left;
+    cursor: default;
+    box-shadow: 0 1px rgba(255,255,255,0.1);
+}
+
+.tooltip_1:before{
+	display: block;
+    position: absolute;
+    content: " ";
+    width: 0;
+    height: 0;
+    border: 8px solid transparent;
+    margin: auto;
+    z-index: 5;
+    left: 50%;
+    top: 100%;
+    right: auto;
+    bottom: auto;
+    margin-left: -8px;
+    border-top-color: rgba(255,255,255,0.1);
+}
+
+.tooltip_1:after{
+	display: block;
+    position: absolute;
+    content: " ";
+    width: 0;
+    height: 0;
+    border: 7px solid transparent;
+    margin: auto;
+    z-index: 5;
+    left: 50%;
+    top: 100%;
+    right: auto;
+    bottom: auto;
+    margin-left: -7px;
+    border-top-color: rgba(0,0,0,0.8);
+}
+
+
 .myreview_p_1 {
 	margin-bottom: 12px;
 	display: block;
