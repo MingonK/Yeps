@@ -47,16 +47,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete yeps_files where evnum = #{evnum}
 	</delete>
 	
-	<update id="changeEventMainPhoto" parameterType="java.util.HashMap">
-		update yeps_files set ismainphoto='n' where evnum = #{evnum}
+	<update id="changeMainPhoto" parameterType="java.util.HashMap">
+		${sql}
 	</update>
 	
-	<update id="setEventMainPhoto" parameterType="java.util.HashMap">
-      update yeps_files set ismainphoto='y' where evnum=#{evnum} and filenum=#{filenum}
+	<update id="setMainPhoto" parameterType="java.util.HashMap">
+      ${sql}
    </update>
    
-   <select id="isExistEventMainPhoto" parameterType="int" resultType="int">
-      select count(*) from yeps_files where evnum = #{evnum} and ismainphoto = 'y'
+   <select id="isExistMainPhoto" parameterType="int" resultType="int">
+      ${sql}
    </select>
    
 	<select id="getPagedEventFiles" parameterType="java.util.HashMap" resultType="FileDTO">

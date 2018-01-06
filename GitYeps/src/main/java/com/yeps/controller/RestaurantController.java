@@ -153,7 +153,7 @@ public class RestaurantController {
 
 	@RequestMapping(value = "/restaurant_ajax")
 	@ResponseBody
-	public HashMap<String, Object> listRestRefresh(@RequestParam(value = "mode") String mode,
+	public HashMap<String, Object> listRestRefresh(@RequestParam(value = "mode") String mode,@RequestParam(value="checkArray[]") List<Integer> arrayParams,
 			@RequestParam(defaultValue = "1") int curPage) {
 		int count = restaurantMapper.getCount();
 		int pageScale = 10;
@@ -346,7 +346,7 @@ public class RestaurantController {
 					fileDTO.setFilename(saveFileName);
 					fileDTO.setOrigin_filename(origin_fileName);
 					fileDTO.setFilesize(fileSize);
-					boolean isExistMainPhoto = fileMapper.isExistRestaurantMainPhoto(rnum);
+					boolean isExistMainPhoto = fileMapper.isExistMainPhoto(rnum, "restaurant");
 					int result = 0;
 					if (!isExistMainPhoto) {
 						result = fileMapper.insertFile(fileDTO, "main");
@@ -405,7 +405,7 @@ public class RestaurantController {
 	
 	@RequestMapping(value="/restaurant_delete_ajax")
 	@ResponseBody
-	public HashMap<String, Object> deleteRestaurantPhoto(HttpServletRequest req) {
+	public HashMap<String, Object> deleteRestaurantPhotoToAjax(HttpServletRequest req) {
 		String rnum = req.getParameter("rnum");
 		String filename = req.getParameter("filename");
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -421,8 +421,13 @@ public class RestaurantController {
 			return map;
 		}
 		
+		FileDTO fileDTO = fileMapper.getFile(filename, 0);
+		if(fileDTO == null) {
+			map.put("url", "restaurant_upload_check?rnum=" + Integer.parseInt(rnum));
+		}
+		
 		S3Connection.getInstance().deleteObject("yepsbucket", "images/" + filename);
-		fileMapper.deleteRestaurantFile(filename, Integer.parseInt(rnum));
+		fileMapper.deleteFile(filename, Integer.parseInt(rnum), fileDTO.getIsmainphoto(), "restaurant");
 		memberDTO.setImagecount(memberDTO.getImagecount()-1);
 		session.setAttribute("memberinfo", memberDTO);
 		memberMapper.updateImageCount(memberDTO.getMnum(), memberDTO.getMnum());
@@ -444,11 +449,12 @@ public class RestaurantController {
 		RestaurantDTO restaurantDTO = restaurantMapper.getRest(rnum);
 		HttpSession session = req.getSession();
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
-		
+		if (memberDTO == null) {
+			return new ModelAndView("redirect: member_login");
+		}
 		
 		int allPhotoCount = fileMapper.getAllFileCount(rnum);
 		int myPhotoCount = 0;
-		
 		if(memberDTO != null) {
 			myPhotoCount = fileMapper.getRest_fileCountForMe(rnum, memberDTO.getMnum());
 		}
@@ -489,6 +495,77 @@ public class RestaurantController {
 		return mav;
 
 	}
-
+	
+	@RequestMapping(value = "/restaurant_photo_update")
+	public ModelAndView updateRestaurantMainPhoto(HttpServletRequest req) {
+		String filenum = req.getParameter("filenum");
+		String rnum = req.getParameter("rnum");
+		String mnum = req.getParameter("mnum");
+		String view = req.getParameter("view");
+		
+		if(filenum == null || filenum.trim().equals("") || rnum == null || rnum.trim().equals("")) {
+			return new ModelAndView("redirect: restaurant_list");
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = req.getSession();
+		MemberDTO loginMember = (MemberDTO) session.getAttribute("memberinfo");
+		if (loginMember == null) {
+			return new ModelAndView("redirect: member_login");
+		}
+		
+		if (loginMember.getMnum() == Integer.parseInt(mnum) || loginMember.getIsmanager().equals("y")
+				|| loginMember.getIsmaster().equals("y")) {
+			fileMapper.changeMainPhoto(Integer.parseInt(rnum), Integer.parseInt(filenum), "restaurant");
+		}
+		
+		mav.setViewName("redirect: restaurant_photoList?rnum=" + rnum + "&view=" + view + "&mode=update");
+		return mav;
+	}
+	
+	
+	@RequestMapping(value="/restaurant_photo_delete")
+	public ModelAndView deleteRestaurantPhoto(HttpServletRequest req) {
+		String filenum = req.getParameter("filenum");
+		String rnum = req.getParameter("rnum");
+		String filename = req.getParameter("filename");
+		String ismainphoto = req.getParameter("ismainphoto"); 
+		String view = req.getParameter("view");
+		
+		if(filenum == null || filenum.trim().equals("") || rnum == null || rnum.trim().equals("")) {
+			return new ModelAndView("redirect: restaurant_list");
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = req.getSession();
+		MemberDTO loginMember = (MemberDTO) session.getAttribute("memberinfo");
+		if (loginMember == null) {
+			return new ModelAndView("redirect: member_login");
+		}
+		
+		System.out.println(ismainphoto);
+		S3Connection.getInstance().deleteObject("yepsbucket", "images/" + filename);
+		fileMapper.deleteFile(filename, Integer.parseInt(rnum), ismainphoto, "restaurant");
+		loginMember.setImagecount(loginMember.getImagecount()-1);
+		session.setAttribute("memberinfo", loginMember);
+		memberMapper.updateImageCount(loginMember.getMnum(), loginMember.getMnum());
+		mav.setViewName("redirect: restaurant_photoList?rnum=" + rnum + "&view=" + view + "&mode=delete");
+		return mav;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

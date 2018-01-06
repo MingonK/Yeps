@@ -121,11 +121,13 @@
 									</c:if>									
 									<img class="photo-box-img" height="226" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${upload.filename}"  width="226" style="max-width: 100%; max-height: 100%; border-radius: 4px; vertical-align: middle;">
 									
-									<c:if test="${getRest.mnum eq memberinfo.mnum || memberinfo.ismaster eq 'y' || memberinfo.ismanager eq 'y' || view eq 'mylist'}">							
-									<div id="photo_box_delete" style="top: unset; bottom: 6px; right: 42px;">
+									<c:if test="${(getRest.mnum eq memberinfo.mnum || memberinfo.ismaster eq 'y' || memberinfo.ismanager eq 'y') && upload.ismainphoto == 'n'}">							
+									<div id="photo_box_delete" style="top: unset; bottom: 6px; left: 6px;">
 										<form name="photoupdate" class="photo_update" action="restaurant_photo_update" method="POST">
 											<input type="hidden" name="filenum" value="${upload.filenum}">
+											<input type="hidden" name="mnum" value="${getRest.mnum}">
 											<input type="hidden" name="rnum" value="${getRest.rnum}">
+											<input type="hidden" name="view" value="${view}">
   	 										<a id="photo_box_action_link" style="background: rgba(0,0,0,0.8);">
   	 											<span style="width: 24px; height: 24px; fill: #fff;" class="icon">
   	 												<svg class="icon_svg" height="100%" viewBox="0 0 18 18" width="100%"> 
@@ -141,14 +143,15 @@
   	 										</a>
   	 									</form>
   	 								</div>
-									
-									
+									</c:if>
+									<c:if test="${view == 'mylist' || getRest.mnum eq memberinfo.mnum || memberinfo.ismaster eq 'y' || memberinfo.ismanager eq 'y'}">
 									<div id="photo_box_delete" style="top: unset; bottom: 6px;">
 										<form name="photoupdate" class="photo_update" action="restaurant_photo_delete" method="POST">
 											<input type="hidden" name="filenum" value="${upload.filenum}">
 											<input type="hidden" name="rnum" value="${getRest.rnum}">
 											<input type="hidden" name="filename" value="${upload.filename}">
 											<input type="hidden" name="ismainphoto" value="${upload.ismainphoto}">
+											<input type="hidden" name="view" value="${view}">
   	 										<a id="photo_box_action_link" style="background: rgba(0,0,0,0.8);">
   	 											<span style="width: 24px; height: 24px; fill: #fff;" class="icon">
   	 												<svg class="icon_svg" height="100%" viewBox="0 0 24 24" width="100%"> 
@@ -165,7 +168,7 @@
   	 									</form>
   	 								</div>
   	 								</c:if>
-									<a class="biz-shim js-lightbox-media-link js-analytics-click" data-analytics-label="biz-photo" href="#" style="display: block; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: white; opacity: 0; color: #0073bb; text-decoration: none; cursor: pointer;"></a>
+									<a class="biz-shim js-lightbox-media-link js-analytics-click" id="dd" data-analytics-label="biz-photo" href="#" style="display: block; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: white; opacity: 0; color: #0073bb; text-decoration: none; cursor: pointer;"></a>
 								</div>
 							</li>
 							</c:forEach>
@@ -350,6 +353,13 @@
     
   //----- OPEN   		
 	$('[data-popup-open]').on('click', function(e)  {
+		if($(e.target).prop('className') == 'icon') {
+			$(e.target).parent().parent().submit();
+			e.stopPropagation();
+	    	e.preventDefault();
+			return;
+		}
+		
     	var targeted_popup_class = jQuery(this).attr('data-popup-open');
     	$('#popup_slideshow_img').empty();
     	$('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
@@ -375,10 +385,5 @@
     	e.preventDefault();
 	});
 	
-	$(document).on('click', '#photo_box_action_link', function() {
-		$(this).parent().submit();
-	})
 </script>
-</body>
-</html>
 <%@include file="../bottom.jsp" %>

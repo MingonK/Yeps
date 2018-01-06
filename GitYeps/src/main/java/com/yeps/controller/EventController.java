@@ -422,7 +422,7 @@ public class EventController {
 					fileDTO.setFilename(saveFileName);
 					fileDTO.setOrigin_filename(origin_fileName);
 					fileDTO.setFilesize(fileSize);
-					boolean isExistMainPhoto = fileMapper.isExistEventMainPhoto(evnum);
+					boolean isExistMainPhoto = fileMapper.isExistMainPhoto(evnum, "event");
 					int result = 0;
 					if (!isExistMainPhoto) {
 						result = fileMapper.insertFile(fileDTO, "main");
@@ -495,7 +495,7 @@ public class EventController {
 		}
 
 		S3Connection.getInstance().deleteObject("yepsbucket", "images/" + filename);
-		fileMapper.deleteFile(filename, Integer.parseInt(evnum), isMainPhoto);
+		fileMapper.deleteFile(filename, Integer.parseInt(evnum), isMainPhoto, "event");
 		memberDTO.setImagecount(memberDTO.getImagecount()-1);
 		session.setAttribute("memberinfo", memberDTO);
 		memberMapper.updateImageCount(memberDTO.getMnum(), memberDTO.getMnum());
@@ -572,10 +572,9 @@ public class EventController {
 		}
 		
 		EventDTO eventDTO = eventMapper.getEventContent(Integer.parseInt(evnum));
-
 		if (loginMember.getMnum() == Integer.parseInt(mnum) || loginMember.getIsmanager().equals("y")
 				|| loginMember.getIsmaster().equals("y")) {
-			fileMapper.changeEventMainPhoto(Integer.parseInt(evnum), Integer.parseInt(filenum));
+			fileMapper.changeMainPhoto(Integer.parseInt(evnum), Integer.parseInt(filenum), "event");
 			mav.addObject("mode", "update");
 		}
 
