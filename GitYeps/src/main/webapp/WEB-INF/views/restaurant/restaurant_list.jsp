@@ -496,16 +496,24 @@
 $(document).ready(function(){
 	var mode;
 	var price=[];
-	$('.filters-price').on('change', function() {
-		price=[];
-	$("input:checkbox[name='price']:checked").each(function() {
-			price.push($(this).val());
-		});
-	});
+// 	$('.filters-price').on('change', function() {
+// 		price=[];
+// 	$("input:checkbox[name='price']:checked").each(function() {
+// 			price.push($(this).val());
+// 		});
+// 	});
 	
 	$(document).on('change','.filters,.filters-price', function() {
 	    $('.filters').not(this).prop('checked', false);  
-	    
+		price=[];
+		$("input:checkbox[name='price']:checked").each(function() {
+				price.push($(this).val());
+			});
+		
+		if(price==null){
+			price.push("0");
+		}
+		
 	    if($("input:checkbox[name='feature']").is(":checked") == true){
             mode = $(this).val();
           }else{
