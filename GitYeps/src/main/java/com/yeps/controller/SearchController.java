@@ -103,8 +103,8 @@ public class SearchController {
 		}
 	}
 
-	@RequestMapping(value = "/yeps_main_saerch", method = RequestMethod.POST)
-	public ModelAndView MainSearchPro(HttpServletRequest req, HttpServletResponse resp, HttpSession session) {
+	@RequestMapping(value = "/yeps_main_saerch")
+	public ModelAndView MainSearchPro(HttpServletRequest req, HttpServletResponse resp, HttpSession session, @RequestParam(defaultValue = "1") int curPage) {
 
 		ModelAndView mav = new ModelAndView();
 
@@ -202,7 +202,6 @@ public class SearchController {
 		searchMap.put("location", location);
 		searchMap.put("searchword", searchword);
 		
-		int curPage = 1;
 		int count = restaurantMapper.getCountBySearchMap(searchMap);
 		int pageScale = 10;
 		int blockScale = 10;

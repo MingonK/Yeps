@@ -20,7 +20,7 @@
    </select>
 
    <select id="findQnA" parameterType="java.util.HashMap" resultType="QnADTO">
-      select * from (select rownum rn, A.* from(select * from yeps_qna where title like '%'||#{searchString}||'%' order by qnum desc)A) 
+      select * from (select rownum rn, A.* from(select * from yeps_qna where replace(upper(title),' ','') like '%'||replace(upper(#{searchString}),' ','')||'%' order by qnum desc)A) 
        where rn between #{startRow} and #{endRow}
    </select>
    

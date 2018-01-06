@@ -39,15 +39,16 @@ public class RestaurantDTO {
 	private String rest_regdate;
 	private ReviewDTO reviewDTO;
 	private MemberDTO memberDTO;
+	private FileDTO fileDTO;
 	private int mnum;
 	private String category;
-	private String price;
+	private int price;
 	
 	
-	public String getPrice() {
+	public int getPrice() {
 		return price;
 	}
-	public void setPrice(String price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 	public String getCategory() {
@@ -283,5 +284,11 @@ public class RestaurantDTO {
 	}
 	public void setMnum(int mnum) {
 		this.mnum = mnum;
+	}
+	public FileDTO getFileDTO() {
+		return fileDTO;
+	}
+	public void setFileDTO(FileDTO fileDTO) {
+		this.fileDTO = fileDTO;
 	}
 }

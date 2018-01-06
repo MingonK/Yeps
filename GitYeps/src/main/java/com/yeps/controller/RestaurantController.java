@@ -64,29 +64,74 @@ public class RestaurantController {
 			throws Exception {
 		String msg = null, url = null;
 
-		// Map<String, MultipartFile> fileMap = mhsq.getFileMap();
-		// for (MultipartFile multipartFile : fileMap.values()) {
-		// String genId = UUID.randomUUID().toString();
-		// String originalfileName=multipartFile.getOriginalFilename();
-		// String saveFileName = genId + "." + getExtension(originalfileName);
-		// String savePath = uploadPath + saveFileName; // 저장 될 파일 경로
-		// multipartFile.transferTo(new File(savePath));
-		// dto.setFilename(saveFileName);
-		// }
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest) req;
 		MultipartFile mf = mr.getFile("filename");
 		String origin_fileName = mf.getOriginalFilename();
 		String genId = UUID.randomUUID().toString();
-		String saveFileName = genId + "." + getExtension(origin_fileName);
+		String contentType = getExtension(origin_fileName);
+		String saveFileName = genId + "." + contentType;
 		int fileSize = (int) mf.getSize();
-		File file = new File(uploadPath, saveFileName);
-		try {
-			mf.transferTo(file);
-			dto.setRest_filename(saveFileName);
-		} catch (Exception e) {
-			e.printStackTrace();
-			dto.setRest_filename("");
+		File file = new File(saveFileName);
+		HttpSession session = req.getSession();
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
+		if (memberDTO == null) {
+			return new ModelAndView("redirect: member_login");
 		}
+
+		ModelAndView mav = new ModelAndView();
+		int imageCount = 0;
+		if (mf.getSize() != 0) {
+			try {
+				mf.transferTo(file);
+				S3Connection.getInstance().putObjectAsync("yepsbucket", "images/" + saveFileName, file,
+						"image/" + contentType);
+				imageCount++;
+				FileDTO fileDTO = new FileDTO();
+				fileDTO.setRnum(dto.getRnum());
+				fileDTO.setMnum(memberDTO.getMnum());
+				fileDTO.setFilename(saveFileName);
+				fileDTO.setOrigin_filename(origin_fileName);
+				fileDTO.setFilesize(fileSize);
+				boolean isExistMainPhoto = fileMapper.isExistMainPhoto(dto.getRnum(), "restaurant");
+				int res = 0;
+				if (!isExistMainPhoto) {
+					res = fileMapper.insertFile(fileDTO, "main");
+				} else {
+					res = fileMapper.insertFile(fileDTO, "not");
+				}
+
+				if (res < 0) {
+					fileMapper.deleteFileToFilename(saveFileName);
+					S3Connection.getInstance().deleteObject("yepsbucket", "images/" + saveFileName);
+					mav.addObject("msg", "파일 등록에 실패했습니다. 잠시후 다시 시도해주세요.");
+					mav.addObject("url", "restaurant_list");
+					imageCount--;
+					file.delete();
+					mav.setViewName("message");
+					return mav;
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				origin_fileName = null;
+				fileSize = 0;
+				file = null;
+				mav.addObject("msg", "파일 생성 실패, 잠시 후 다시 시도하세요.");
+				mav.addObject("url", "restaurant_list");
+				mav.setViewName("message");
+				return mav;
+			}
+			
+		} else {
+			mav.addObject("msg", "업로드할 수 없는 파일이 존재합니다.");
+			mav.addObject("url", "restaurant_list");
+			mav.setViewName("message");
+			return mav;
+		}
+
+		memberDTO.setImagecount(memberDTO.getImagecount() + imageCount);
+		memberMapper.updateImageCount(memberDTO.getMnum(), memberDTO.getMnum());
+		session.setAttribute("memberinfo", memberDTO);
 
 		int res = restaurantMapper.insertRest(dto);
 		if (res > 0) {
@@ -95,6 +140,7 @@ public class RestaurantController {
 		} else {
 			msg = "레스토랑 등록 실패";
 			url = "restaurant_insert";
+			S3Connection.getInstance().deleteObject("yepsbucket", "images/" + saveFileName);
 			file.delete();
 		}
 		req.setAttribute("msg", msg);
@@ -154,6 +200,7 @@ public class RestaurantController {
 	@RequestMapping(value = "/restaurant_ajax")
 	@ResponseBody
 	public HashMap<String, Object> listRestRefresh(@RequestParam(value = "mode") String mode,
+			@RequestParam(value = "checkArray[]") List<Integer> arrayParams,
 			@RequestParam(defaultValue = "1") int curPage) {
 		int count = restaurantMapper.getCount();
 		int pageScale = 10;
@@ -189,7 +236,7 @@ public class RestaurantController {
 	public ModelAndView contentRest(HttpServletRequest req, @RequestParam(defaultValue = "1") int curPage) {
 		String rnum = req.getParameter("rnum");
 
-		if(rnum == null || rnum.trim().equals("")) {
+		if (rnum == null || rnum.trim().equals("")) {
 			return new ModelAndView("redirect: restaurant_list");
 		}
 
@@ -203,29 +250,27 @@ public class RestaurantController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("count", count); // 레코드의 갯수
 		map.put("YepsPager", YepsPager);
-		
+
 		HttpSession session = req.getSession();
 		MemberDTO loginMember = (MemberDTO) session.getAttribute("memberinfo");
 		ModelAndView mav = new ModelAndView();
-		
+
 		RestaurantDTO getRest = restaurantMapper.getRest(Integer.parseInt(rnum));// 가게 1개 정보
 		List<FileDTO> uploadFileList = fileMapper.getAllRestaurantFiles(Integer.parseInt(rnum));// 가게 업로드 파일
-		
 
 		ReviewDTO existMyReview = null;
-		if(loginMember != null) {
+		if (loginMember != null) {
 			existMyReview = reviewMapper.findMyReview(Integer.parseInt(rnum), loginMember.getMnum());
 		}
-		
-		if(existMyReview != null) {
+
+		if (existMyReview != null) {
 			mav.addObject("myReview", existMyReview);
 		}
 		
 		List<ReviewDTO> reviewList = reviewMapper.getSelectedRestaurant_Rv(Integer.parseInt(rnum), start, end);// 가게 리뷰
 		List<ReviewDTO> highlightReview = reviewMapper.getRandomRestaurant_Rv(Integer.parseInt(rnum));
 		int starAvg = reviewMapper.getStarAvg(Integer.parseInt(rnum));
-
-		
+       
 		mav.addObject("map", map);
 		mav.addObject("getRest", getRest);
 		mav.addObject("uploadFileList", uploadFileList);
@@ -245,19 +290,19 @@ public class RestaurantController {
 		String SearchKeyword = req.getParameter("SearchKeyword");
 		int curPage = req.getParameter("curPage") != null ? Integer.parseInt(req.getParameter("curPage")) : 1;
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		
-		if(rnum == null || rnum.trim().equals("")) {
+
+		if (rnum == null || rnum.trim().equals("")) {
 			map.put("error", "다시 시도해주세요.");
 			return map;
 		}
-		
+
 		int pageScale = 10;
 		int blockScale = 10;
 		int count = 0;
 		int start = 0;
 		int end = 0;
 		List<ReviewDTO> targetRestaurant_reviews = null;
-		
+
 		YepsPager YepsPager = null;
 		if (SearchKeyword == null || SearchKeyword.trim().equals("")) {
 			count = reviewMapper.getRestaurantReviewCount(Integer.parseInt(rnum));
@@ -292,19 +337,7 @@ public class RestaurantController {
 		}
 
 		RestaurantDTO restaurantDTO = restaurantMapper.getRest(Integer.parseInt(rnum));
-		HttpSession session = req.getSession();
-		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
 		ModelAndView mav = new ModelAndView();
-
-		if (memberDTO.getIsmanager().equals("y") || memberDTO.getIsmaster().equals("y")
-				|| restaurantDTO.getMnum() == memberDTO.getMnum()) {
-			List<FileDTO> allUploadFileList = fileMapper.getAllRestaurantFiles(restaurantDTO.getRnum());
-			mav.addObject("uploadFileList", allUploadFileList);
-		} else {
-			List<FileDTO> myUploadFileList = fileMapper.getRest_fileListForMe(restaurantDTO.getRnum(),
-					memberDTO.getMnum());
-			mav.addObject("uploadFileList", myUploadFileList);
-		}
 
 		mav.addObject("filecount", filecount);
 		mav.addObject("mode", mode);
@@ -334,7 +367,7 @@ public class RestaurantController {
 		int fileSize = 0;
 		List<FileDTO> fileList = new ArrayList<FileDTO>();
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
-		
+
 		int imageCount = 0;
 		while (it.hasNext()) {
 			imageCount++;
@@ -358,7 +391,7 @@ public class RestaurantController {
 					fileDTO.setFilename(saveFileName);
 					fileDTO.setOrigin_filename(origin_fileName);
 					fileDTO.setFilesize(fileSize);
-					boolean isExistMainPhoto = fileMapper.isExistRestaurantMainPhoto(rnum);
+					boolean isExistMainPhoto = fileMapper.isExistMainPhoto(rnum, "restaurant");
 					int result = 0;
 					if (!isExistMainPhoto) {
 						result = fileMapper.insertFile(fileDTO, "main");
@@ -387,23 +420,23 @@ public class RestaurantController {
 				map.put("upload_failed", "업로드할 수 없는 파일이 존재합니다.");
 			}
 		}
-		memberDTO.setImagecount(memberDTO.getImagecount()+imageCount);
+		memberDTO.setImagecount(memberDTO.getImagecount() + imageCount);
 		memberMapper.updateImageCount(memberDTO.getMnum(), memberDTO.getMnum());
 		session.setAttribute("memberinfo", memberDTO);
 		map.put("fileList", fileList);
-		String url = "restaurant_upload_check?rnum="+rnum;
-		for(int i = 0; i < fileList.size(); i++) {
+		String url = "restaurant_upload_check?rnum=" + rnum;
+		for (int i = 0; i < fileList.size(); i++) {
 			url += "&filename=" + fileList.get(i).getFilename();
 		}
 		map.put("url", url);
 		return map;
 	}
-	
-	@RequestMapping(value="/restaurant_upload_check")
+
+	@RequestMapping(value = "/restaurant_upload_check")
 	public ModelAndView uploadCheckRestaurant(HttpServletRequest req) {
 		String filename[] = req.getParameterValues("filename");
 		String rnum = req.getParameter("rnum");
-		if(rnum == null || rnum.trim().equals("")) {
+		if (rnum == null || rnum.trim().equals("")) {
 			return new ModelAndView("redirect: restaurant_list");
 		}
 		RestaurantDTO dto = restaurantMapper.getRest(Integer.parseInt(rnum));
@@ -414,68 +447,152 @@ public class RestaurantController {
 		mav.setViewName("restaurant/restaurant_upload_check");
 		return mav;
 	}
-	
-	@RequestMapping(value="/restaurant_delete_ajax")
+
+	@RequestMapping(value = "/restaurant_delete_ajax")
 	@ResponseBody
-	public HashMap<String, Object> deleteRestaurantPhoto(HttpServletRequest req) {
+	public HashMap<String, Object> deleteRestaurantPhotoToAjax(HttpServletRequest req) {
 		String rnum = req.getParameter("rnum");
 		String filename = req.getParameter("filename");
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		HttpSession session = req.getSession();
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
-		if(rnum == null || rnum.trim().equals("") || filename == null || filename.trim().equals("")) {
+		if (rnum == null || rnum.trim().equals("") || filename == null || filename.trim().equals("")) {
 			map.put("url", "restaurant_list");
 			return map;
 		}
-		
+
 		if (memberDTO == null) {
 			map.put("url", "member_login");
 			return map;
 		}
-		
+
+		FileDTO fileDTO = fileMapper.getFile(filename, 0);
+		if (fileDTO == null) {
+			map.put("url", "restaurant_upload_check?rnum=" + Integer.parseInt(rnum));
+		}
+
 		S3Connection.getInstance().deleteObject("yepsbucket", "images/" + filename);
-		fileMapper.deleteRestaurantFile(filename, Integer.parseInt(rnum));
-		memberDTO.setImagecount(memberDTO.getImagecount()-1);
+		fileMapper.deleteFile(filename, Integer.parseInt(rnum), fileDTO.getIsmainphoto(), "restaurant");
+		memberDTO.setImagecount(memberDTO.getImagecount() - 1);
 		session.setAttribute("memberinfo", memberDTO);
 		memberMapper.updateImageCount(memberDTO.getMnum(), memberDTO.getMnum());
 		map.put("success", "success");
 		return map;
 	}
-	
-
 
 	@RequestMapping(value = "/restaurant_photoList")
 	public ModelAndView photoListRest(HttpServletRequest req, @RequestParam(defaultValue = "1") int curPage) {
 		int rnum = Integer.parseInt(req.getParameter("rnum"));
-
-		if (rnum == 0) {  
+		String mode = req.getParameter("mode");
+		String view = req.getParameter("view");
+		if (rnum == 0) {
 			return new ModelAndView("redirect: restaurant_list");
 		}
 
-		int count = fileMapper.getAllFileCount(rnum);
+		RestaurantDTO restaurantDTO = restaurantMapper.getRest(rnum);
+		HttpSession session = req.getSession();
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
+		if (memberDTO == null) {
+			return new ModelAndView("redirect: member_login");
+		}
+
+		int allPhotoCount = fileMapper.getAllFileCount(rnum);
+		int myPhotoCount = 0;
+		if (memberDTO != null) {
+			myPhotoCount = fileMapper.getRest_fileCountForMe(rnum, memberDTO.getMnum());
+		}
+
 		int pageScale = 30;
 		int blockScale = 10;
-		YepsPager YepsPager = new YepsPager(count, curPage, pageScale, blockScale);
-		int start = YepsPager.getPageBegin();
-		int end = YepsPager.getPageEnd();
-		RestaurantDTO dto = restaurantMapper.getRest(rnum);
-		List<FileDTO> uploadFileList = fileMapper.getPagedFileList(rnum, start, end);
+		YepsPager YepsPager = null;
+		int start = 0;
+		int end = 0;
+		List<FileDTO> getFileList = null;
+		if (view.equals("all")) {
+			YepsPager = new YepsPager(allPhotoCount, curPage, pageScale, blockScale);
+			start = YepsPager.getPageBegin();
+			end = YepsPager.getPageEnd();
+			getFileList = fileMapper.getPagedFileList(rnum, start, end);
+		} else if (view.equals("mylist")) {
+			YepsPager = new YepsPager(myPhotoCount, curPage, pageScale, blockScale);
+			start = YepsPager.getPageBegin();
+			end = YepsPager.getPageEnd();
+			getFileList = fileMapper.getPagedFileListForMe(rnum, memberDTO.getMnum(), start, end);
+		}
+
 		int reviewCount = reviewMapper.getRestaurantReviewCount(rnum);
 		int starAvg = reviewMapper.getStarAvg(rnum);
 
 		ModelAndView mav = new ModelAndView();
-
-		mav.addObject("getRest", dto);
+		mav.addObject("view", view);
+		mav.addObject("mode", mode);
+		mav.addObject("getRest", restaurantDTO);
 		mav.addObject("starAvg", starAvg);
 		mav.addObject("curPage", curPage);
 		mav.addObject("yepsPager", YepsPager);
-		mav.addObject("uploadFileList", uploadFileList);
+		mav.addObject("uploadFileList", getFileList);
 		mav.addObject("reviewCount", reviewCount);
-		mav.addObject("photoCount", count);
+		mav.addObject("allPhotoCount", allPhotoCount);
+		mav.addObject("myPhotoCount", myPhotoCount);
 		mav.setViewName("restaurant/restaurant_photoList");
 		return mav;
 
 	}
 
+	@RequestMapping(value = "/restaurant_photo_update")
+	public ModelAndView updateRestaurantMainPhoto(HttpServletRequest req) {
+		String filenum = req.getParameter("filenum");
+		String rnum = req.getParameter("rnum");
+		String mnum = req.getParameter("mnum");
+		String view = req.getParameter("view");
+
+		if (filenum == null || filenum.trim().equals("") || rnum == null || rnum.trim().equals("")) {
+			return new ModelAndView("redirect: restaurant_list");
+		}
+
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = req.getSession();
+		MemberDTO loginMember = (MemberDTO) session.getAttribute("memberinfo");
+		if (loginMember == null) {
+			return new ModelAndView("redirect: member_login");
+		}
+
+		if (loginMember.getMnum() == Integer.parseInt(mnum) || loginMember.getIsmanager().equals("y")
+				|| loginMember.getIsmaster().equals("y")) {
+			fileMapper.changeMainPhoto(Integer.parseInt(rnum), Integer.parseInt(filenum), "restaurant");
+		}
+
+		mav.setViewName("redirect: restaurant_photoList?rnum=" + rnum + "&view=" + view + "&mode=update");
+		return mav;
+	}
+
+	@RequestMapping(value = "/restaurant_photo_delete")
+	public ModelAndView deleteRestaurantPhoto(HttpServletRequest req) {
+		String filenum = req.getParameter("filenum");
+		String rnum = req.getParameter("rnum");
+		String filename = req.getParameter("filename");
+		String ismainphoto = req.getParameter("ismainphoto");
+		String view = req.getParameter("view");
+
+		if (filenum == null || filenum.trim().equals("") || rnum == null || rnum.trim().equals("")) {
+			return new ModelAndView("redirect: restaurant_list");
+		}
+
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = req.getSession();
+		MemberDTO loginMember = (MemberDTO) session.getAttribute("memberinfo");
+		if (loginMember == null) {
+			return new ModelAndView("redirect: member_login");
+		}
+
+		System.out.println(ismainphoto);
+		S3Connection.getInstance().deleteObject("yepsbucket", "images/" + filename);
+		fileMapper.deleteFile(filename, Integer.parseInt(rnum), ismainphoto, "restaurant");
+		loginMember.setImagecount(loginMember.getImagecount() - 1);
+		session.setAttribute("memberinfo", loginMember);
+		memberMapper.updateImageCount(loginMember.getMnum(), loginMember.getMnum());
+		mav.setViewName("redirect: restaurant_photoList?rnum=" + rnum + "&view=" + view + "&mode=delete");
+		return mav;
+	}
 
 }

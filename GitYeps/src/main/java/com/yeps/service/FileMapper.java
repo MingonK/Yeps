@@ -60,29 +60,63 @@ public class FileMapper {
 		return sqlSession.delete("deleteAllFile", evnum);
 	}
 
-	public boolean isExistEventMainPhoto(int evnum) {
-		try {
-			int num = sqlSession.selectOne("isExistEventMainPhoto", evnum);
-			if (num > 0) {
-				return true;
-			} else {
+	public boolean isExistMainPhoto(int num, String mode) {
+		if (mode.equals("event")) {
+			try {
+				String sql = "select count(*) from yeps_files where evnum = " + num + " and ismainphoto = 'y'";
+				HashMap<String, String> map = new HashMap<String, String>();
+				map.put("sql", sql);
+				int result_num = sqlSession.selectOne("isExistMainPhoto", map);
+				if (result_num > 0) {
+					return true;
+				} else {
+					return false;
+				}
+			} catch (Exception e) {
 				return false;
 			}
-		} catch (Exception e) {
-			return false;
+		} else if (mode.equals("restaurant")) {
+			try {
+				String sql = "select count(*) from yeps_files where rnum = " + num + " and ismainphoto = 'y'";
+				HashMap<String, String> map = new HashMap<String, String>();
+				map.put("sql", sql);
+				int result_num = sqlSession.selectOne("isExistMainPhoto", map);
+				if (result_num > 0) {
+					return true;
+				} else {
+					return false;
+				}
+			} catch (Exception e) {
+				return false;
+			}
 		}
+		return false;
 	}
 
-	public int deleteFile(String filename, int evnum, String ismainphoto) {
+	public int deleteFile(String filename, int num, String ismainphoto, String mode) {
 		if (ismainphoto.equals("y")) {
 			int res = sqlSession.delete("deleteFileToFilename", filename);
-			List<FileDTO> list = sqlSession.selectList("getTargetEventFiles", evnum);
-			if (list.size() > 0) {
-				FileDTO dto = list.get(0);
-				HashMap<String, Object> map = new HashMap<String, Object>();
-				map.put("filenum", dto.getFilenum());
-				map.put("evnum", dto.getEvnum());
-				sqlSession.update("setEventMainPhoto", map);
+			if(mode.equals("event")) {
+				System.out.println("!");
+				List<FileDTO> list = sqlSession.selectList("getTargetEventFiles", num);
+				if (list.size() > 0) {
+					FileDTO dto = list.get(0);
+					HashMap<String, Object> map = new HashMap<String, Object>();
+					String sql = "update yeps_files set ismainphoto='y' where evnum=" + dto.getEvnum() + " and filenum=" + dto.getFilenum();
+					map.put("sql", sql);
+					sqlSession.update("setMainPhoto", map);
+				}
+				return res;
+			} else {
+				System.out.println("?");
+				List<FileDTO> list = sqlSession.selectList("getAllRestaurantFiles", num);
+				if(list.size() > 0) {
+					FileDTO dto = list.get(0);
+					HashMap<String, Object> map = new HashMap<String, Object>();
+					String sql = "update yeps_files set ismainphoto='y' where rnum=" + dto.getRnum() + " and filenum=" + dto.getFilenum();
+					map.put("sql", sql);
+					sqlSession.update("setMainPhoto", map);
+				}
 			}
 			return res;
 		} else {
@@ -90,16 +124,33 @@ public class FileMapper {
 		}
 	}
 
-	public int changeEventMainPhoto(int evnum, int filenum) {
-		int res = sqlSession.update("changeEventMainPhoto", evnum);
-		if (res > 0) {
-			HashMap<String, Integer> map = new HashMap<String, Integer>();
-			map.put("evnum", evnum);
-			map.put("filenum", filenum);
-			return sqlSession.update("setEventMainPhoto", map);
-		} else {
-			return 0;
+	public int changeMainPhoto(int num, int filenum, String mode) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		String sql = null;
+		if (mode.equals("event")) {
+			sql = "update yeps_files set ismainphoto='n' where evnum = " + num;
+			map.put("sql", sql);
+			int res = sqlSession.update("changeMainPhoto", map);
+			if (res > 0) {
+				sql = "update yeps_files set ismainphoto='y' where evnum=" + num + " and filenum=" + filenum;
+				map.put("sql", sql);
+				return sqlSession.update("setMainPhoto", map);
+			} else {
+				return 0;
+			}
+		} else if(mode.equals("restaurant")){
+			sql = "update yeps_files set ismainphoto='n' where rnum = " + num;
+			map.put("sql", sql);
+			int res = sqlSession.update("changeMainPhoto", map);
+			if (res > 0) {
+				sql = "update yeps_files set ismainphoto='y' where rnum=" + num + " and filenum=" + filenum;
+				map.put("sql", sql);
+				return sqlSession.update("setMainPhoto", map);
+			} else {
+				return 0;
+			}
 		}
+		return 0;
 	}
 
 	public List<FileDTO> getPagedEventFiles(int evnum, int start, int end) {
@@ -122,26 +173,13 @@ public class FileMapper {
 		return sqlSession.selectList("getRest_fileListForMe", map);
 	}
 
-	public boolean isExistRestaurantMainPhoto(int rnum) {
-		try {
-			int num = sqlSession.selectOne("isExistRestaurantMainPhoto", rnum);
-			if (num > 0) {
-				return true;
-			} else {
-				return false;
-			}
-		} catch (Exception e) {
-			return false;
-		}
-	}
-	
 	public int deleteRestaurantFile(String filename, int rnum) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("filename", filename);
 		map.put("rnum", rnum);
 		return sqlSession.delete("deleteRestaurantFile", map);
 	}
-	
+
 	public List<FileDTO> getPagedFileList(int rnum, int start, int end) {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("rnum", rnum);
@@ -149,8 +187,25 @@ public class FileMapper {
 		map.put("end", end);
 		return sqlSession.selectList("getPagedFileList", map);
 	}
-	
+
 	public int getAllFileCount(int rnum) {
 		return sqlSession.selectOne("getAllFileCount", rnum);
+	}
+
+	// 1월 6일 민곤 추가
+	public int getRest_fileCountForMe(int rnum, int mnum) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("rnum", rnum);
+		map.put("mnum", mnum);
+		return sqlSession.selectOne("getRest_fileCountForMe", map);
+	}
+
+	public List<FileDTO> getPagedFileListForMe(int rnum, int mnum, int start, int end) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("rnum", rnum);
+		map.put("mnum", mnum);
+		map.put("start", start);
+		map.put("end", end);
+		return sqlSession.selectList("getPagedFileListForMe", map);
 	}
 }

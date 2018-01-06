@@ -81,6 +81,7 @@
 						<form id="finishForm" action="restaurant_update_photo" method="post">
 							<input type="hidden" name="rnum" value="${restaurantDTO.rnum}">
 							<input type="hidden" name="mode" value="update">
+							<input type="hidden" name="view" value="all">
 							<input type="hidden" name="filecount" value="${filesize}">
 						</form>
 					</div>
@@ -113,7 +114,14 @@
 	});
 	
 	$(document).on('click', '#finish_button', function() {
-		$('#finishForm').submit();
+		var existFile = $('#photo_box_grid_wide').children();
+		if(existFile) {
+			$('#finishForm').attr('action', 'restaurant_photoList');
+			$('#finishForm').submit();
+		} else {
+			$('#finishForm').submit();
+		}
+		
 	})
 	</script>
 	

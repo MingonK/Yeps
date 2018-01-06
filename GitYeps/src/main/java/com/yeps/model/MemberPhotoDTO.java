@@ -3,7 +3,7 @@ package com.yeps.model;
 public class MemberPhotoDTO {
 	private int filenum;
 	private int mnum;
-	private String filename;
+	private String member_filename;
 	private String origin_filename;
 	private int filesize;
 	private String file_caption;
@@ -26,12 +26,12 @@ public class MemberPhotoDTO {
 		this.mnum = mnum;
 	}
 
-	public String getFilename() {
-		return filename;
+	public String getMember_filename() {
+		return member_filename;
 	}
 
-	public void setFilename(String filename) {
-		this.filename = filename;
+	public void setMember_filename(String member_filename) {
+		this.member_filename = member_filename;
 	}
 
 	public String getOrigin_filename() {

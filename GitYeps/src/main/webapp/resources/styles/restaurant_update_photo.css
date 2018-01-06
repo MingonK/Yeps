@@ -210,7 +210,7 @@
 }
 
 #photo_box_action_link:hover {
-	background: rgba(0,0,0,0.6);
+	background: rgba(0,0,0,0.8);
     text-decoration: none;
     color: #fff;
 }
@@ -228,10 +228,12 @@
     margin-bottom: 5px;
     text-align: center;
     text-decoration: none;
+    overflow: visible !important;
 }
 
 #tooltip {
-	z-index: 1012;
+	overflow: visible !important;
+	z-index: 9000;
 	display: inline-block;
     position: relative;
     padding: 6px 9px;
@@ -284,7 +286,22 @@
     border-top-color: rgba(0,0,0,0.8);
 }
 
-
+.photo-box-overlay {
+    position: absolute;
+    right: 0;
+    left: 0;
+    padding: 3px 6px;
+    border-radius: 4px 4px 0 0;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    font-size: 12px;
+    line-height: 1.5em;
+    font-weight: bold;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    font: inherit;
+    vertical-align: baseline;
+}
 
 
 

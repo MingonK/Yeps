@@ -40,7 +40,7 @@
 										<ul class="suggested-filters_price-filters" style="height:38px;font-size: 0;list-style: none;display: block;-webkit-margin-start: 0px;-webkit-margin-end: 0px;">
 										<li style="display: inline-block; text-align: -webkit-match-parent;">
 											<label class="radio-check" style="display: inline; float: none; padding: 0; cursor: default;">
-												<input name="price" type="checkbox" value="RestaurantsPriceRange2.1" style="display: none; color: inherit; font: inherit; margin: 0; font-weight: normal; -webkit-appearance: checkbox; box-sizing: border-box; background-color: initial; cursor: default; padding: initial; border: initial; -webkit-rtl-ordering: logical; text-rendering: auto; letter-spacing: normal; word-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none; text-align:start ; -webkit-writing-mode: horizontal-tb;">
+												<input class="filters-price" name="price" type="checkbox" value="1" style="display: none; color: inherit; font: inherit; margin: 0; font-weight: normal; -webkit-appearance: checkbox; box-sizing: border-box; background-color: initial; cursor: default; padding: initial; border: initial; -webkit-rtl-ordering: logical; text-rendering: auto; letter-spacing: normal; word-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none; text-align:start ; -webkit-writing-mode: horizontal-tb;">
 												<span class="filter-label show-tooltip" >
 													￦
 													<span class="tooltip-wrapper">
@@ -54,8 +54,8 @@
 										
 										<li style="display: inline-block; text-align: -webkit-match-parent;">
 											<label class="radio-check" style="display: inline; float: none; padding: 0; cursor: default;">
-												<input name="price" type="checkbox"
-												value="RestaurantsPriceRange2.1"
+												<input class="filters-price" name="price" type="checkbox"
+												value="2"
 												style="display: none; color: inherit; font: inherit; margin: 0; font-weight: normal; -webkit-appearance: checkbox; box-sizing: border-box; background-color: initial; cursor: default; padding: initial; border: initial; -webkit-rtl-ordering: logical; text-rendering: auto; letter-spacing: normal; word-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none; text-align: start; -webkit-writing-mode: horizontal-tb;">
 												<span class="filter-label show-tooltip">
 													￦￦
@@ -70,8 +70,8 @@
 										<li style="display: inline-block; text-align: -webkit-match-parent;">
 											<label class="radio-check"
 											style="display: inline; float: none; padding: 0; cursor: default;">
-												<input name="price" type="checkbox"
-												value="RestaurantsPriceRange2.1"
+												<input class="filters-price" name="price" type="checkbox"
+												value="3"
 												style="display: none; color: inherit; font: inherit; margin: 0; font-weight: normal; -webkit-appearance: checkbox; box-sizing: border-box; background-color: initial; cursor: default; padding: initial; border: initial; -webkit-rtl-ordering: logical; text-rendering: auto; letter-spacing: normal; word-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none; text-align: start; -webkit-writing-mode: horizontal-tb;">
 												<span class="filter-label show-tooltip">
 													￦￦￦
@@ -86,8 +86,8 @@
 										<li style="display: inline-block; text-align: -webkit-match-parent;">
 											<label class="radio-check"
 											style="display: inline; float: none; padding: 0; cursor: default;">
-												<input name="price" type="checkbox"
-												value="RestaurantsPriceRange2.1"
+												<input class="filters-price" name="price" type="checkbox"
+												value="4"
 												style="display: none; color: inherit; font: inherit; margin: 0; font-weight: normal; -webkit-appearance: checkbox; box-sizing: border-box; background-color: initial; cursor: default; padding: initial; border: initial; -webkit-rtl-ordering: logical; text-rendering: auto; letter-spacing: normal; word-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none; text-align: start; -webkit-writing-mode: horizontal-tb;">
 												<span class="filter-label show-tooltip">
 													￦￦￦￦ 
@@ -236,7 +236,7 @@
 														</div>
 													<div class="price-category"style="clear: both;">
 														<span class="bullet-after">
-																<span class="business-attribute price-range" style="letter-spacing: 1px; white-space: nowrap;">￦￦￦</span>
+																<span class="business-attribute price-range" style="letter-spacing: 1px; white-space: nowrap;">${dto.price }</span>
 														</span>
 														<span class="category-str-list">
 															<a href="#" style="color: #0073bb; cursor: pointer;">${dto.foodstyle}</a>
@@ -261,7 +261,7 @@
 										<div class="media-avatar" style="border-right: 6px solid transparent; border-left: none;">
 											<div class="photo-box pb-30s">
 												<a href="restaurant_content?rnum=${dto.rnum}" style="color: #0073bb; cursor: pointer;">
-													<img width="30px" height="30px" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${map.LastReview.get(status.index).memberDTO.memberPhotoDTO.filename}" style="outline: none; margin-top: 3px; border-radius: 4px; vertical-align: middle;">
+													<img width="30px" height="30px" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${map.LastReview.get(status.index).memberDTO.memberPhotoDTO.member_filename}" style="outline: none; margin-top: 3px; border-radius: 4px; vertical-align: middle;">
 												</a>
 											</div>
 										</div>
@@ -479,7 +479,7 @@
 <script>
     // **원하는 페이지로 이동시 검색조건, 키워드 값을 유지하기 위해 
     function list(page){
-        location.href="restaurant_list?curPage="+page;
+        location.href="yeps_main_saerch?category="+category+"&location="+location+"&searchword="+searchword+"&curPage="+page;
     }
 </script>
 <script>
@@ -495,6 +495,17 @@
 <script>
 $(document).ready(function(){
 	var mode;
+	var price=[];
+	$('.filters-price').on('change', function() {
+		price=[];
+	$("input:checkbox[name='price']:checked").each(function(index) {
+			price.push($(this).val());
+		});
+	});
+
+	
+	
+	
 	$('.filters').on('change', function() {
 	    $('.filters').not(this).prop('checked', false);  
 	    if($("input:checkbox[name='feature']").is(":checked") == true){
@@ -502,7 +513,7 @@ $(document).ready(function(){
           }else{
              mode = "mode";
           }
-			var allData = { "mode": mode};
+			var allData = { "mode": mode,"price":price};
 			$(document).ajaxStart(function() {
 				$('body').css('overflow', 'hidden');
 	            $('.loading_wapper').fadeIn(500);
@@ -512,11 +523,11 @@ $(document).ready(function(){
 	        	 $('body').css('overflow', 'auto');
 	            $('.loading_wapper').fadeOut(500);
 	         })
+	         
 				 $.ajax({
 					 url : "restaurant_ajax",
 					 type : "post",
 					 dataType : "json",
-// 					 contentType: false,
 					 data : allData,
 					 success : function(data){
 						 $('.column-alpha2 ul li').remove();
@@ -575,7 +586,7 @@ $(document).ready(function(){
 														'<div class="media-avatar" style="border-right: 6px solid transparent;border-left: none;">'+
 															'<div class="photo-box pb-30s">'+
 																'<a href="restaurant_content?rnum='+item.rnum+'" style="color: #0073bb;text-decoration: none;    cursor: pointer;">'+
-																	'<img width="30px" height="30px" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/'+data.LastReview[i].memberDTO.memberPhotoDTO.filename+'" style="outline: none;margin-top: 3px;border-radius: 4px;    vertical-align: middle;">'+
+																	'<img width="30px" height="30px" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/'+data.LastReview[i].memberDTO.memberPhotoDTO.member_filename+'" style="outline: none;margin-top: 3px;border-radius: 4px;    vertical-align: middle;">'+
 																'</a>'+
 															'</div>'+
 														'</div>'+

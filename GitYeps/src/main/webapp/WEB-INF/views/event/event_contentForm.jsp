@@ -293,11 +293,11 @@
 												<div id="event_reply_user_info_photo_wrapper">
 													<div id="event_reply_user_photo">
 														<a href="member_details?mnum=${event_reviewDTO.memberDTO.mnum}">
-															<c:if test="${empty event_reviewDTO.memberDTO.memberPhotoDTO.filename}">
+															<c:if test="${empty event_reviewDTO.memberDTO.memberPhotoDTO.member_filename}">
 																<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" width="60" height="60" id="event_reply_user_img">
 															</c:if>
-															<c:if test="${!empty event_reviewDTO.memberDTO.memberPhotoDTO.filename}">
-																<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${event_reviewDTO.memberDTO.memberPhotoDTO.filename}" width="60" height="60" id="event_reply_user_img">
+															<c:if test="${!empty event_reviewDTO.memberDTO.memberPhotoDTO.member_filename}">
+																<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${event_reviewDTO.memberDTO.memberPhotoDTO.member_filename}" width="60" height="60" id="event_reply_user_img">
 															</c:if>
 														</a>
 													</div>
@@ -866,7 +866,7 @@
     	    <div id="flag_popup_description">
     	    	<div>
     	    		<p>지금 보고계신 콘텐츠의 수정이 필요한 부분과 실제 이벤트에서 어떠한 사항을 위반하고 있는지 알려 주시기 바랍니다.</p>
-    	    		<form name="flag_popup_form" id="flag_popup_form" action="message_send?issue=issue" method="post" onsubmit="return check()" style="margin-bottoom: 0;">
+    	    		<form name="flag_popup_form" id="flag_popup_form" action="message_send?report=event&where=event" method="post" onsubmit="return check()" style="margin-bottoom: 0;">
     	    			<input type="hidden" name="evnum" value="${eventDTO.evnum}">
     	    			<input type="hidden" name="email" value="${sessionScope.memberinfo.email}">
     	    			<div id="flag_popup_descripte_container">
@@ -920,12 +920,14 @@
     	    <div id="flag_popup_description" style="padding: 0 12px;">
     	    	<div>
     	    		<p style="margin: 12px 0;">이 댓글을 신고하는 이유를 선택하고 상세하게 설명해주세요.</p>
-    	    		<form name="reply_flag_popup_form" id="reply_flag_popup_form" action="#" method="post" onsubmit="return reply_report_check()" style="margin-bottoom: 0;">
+    	    		<form name="reply_flag_popup_form" id="reply_flag_popup_form" action="message_send?report=reply&mnum=${sessionScope.memberinfo.mnum }&where=event" method="post" onsubmit="return reply_report_check()" style="margin-bottoom: 0;">
+    	    			<input type="hidden" name="evnum" value="${eventDTO.evnum}">
+    	    			<input type="hidden" name="email" value="${sessionScope.memberinfo.email}">
     	    			<div>
     	    				<label id="reply_flag_popup_form_label" for="reason_field" style="display: inline-block; font-weight: bold; margin: 0 0 6px;">
     	    					이유
     	    				</label>
-    	    				<select id="reason_field">
+    	    				<select id="reason_field" name="reason_field">
     	    					<option value="default" selected>신고 사유를 선택하세요.</option>
     	    					<option value="inappropriate_post">부적절한 홍보 게시물</option>
     	    					<option value="Eroticism">음란성, 선정성 또는 부적합한 내용</option>
@@ -1092,14 +1094,16 @@
 		}
     	$('[data-popup-open]').on('click', function(e)  {
         	var targeted_popup_class = jQuery(this).attr('data-popup-open');
-        	$('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
         	if(targeted_popup_class == 'popup-1' || targeted_popup_class == 'popup-2') {
         		var memberinfo ='${sessionScope.memberinfo}';
         		if(!memberinfo.length) {
          			$(location).attr("href", "event_report");
          			return;
         		}
-        	} else if(targeted_popup_class == 'photo_popup') {
+        	}
+        	
+        	$('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+        	if(targeted_popup_class == 'photo_popup') {
         		$('.photo_popup_footer_current').text('1');
         		var count = 1;
         		$('#prev').on('click', function() {

@@ -457,10 +457,10 @@ function test() {
 									<li class="restInsert-list">
 										<label for="foodstyle" class="restInsert-label-bold">가격 범위</label>
 										<select class="restInsert-day" id="price" name="price" style="width:390px">
-											<option value="￦">￦(10,000원 이하)</option>
-											<option value="￦￦">￦￦(10,000원~30,000원)</option>
-											<option value="￦￦￦">￦￦￦(30,000원~50,000원)</option>
-											<option value="￦￦￦￦">￦￦￦￦(50,000원 이상)</option>
+											<option value="1">￦(10,000원 이하)</option>
+											<option value="2">￦￦(10,000원~30,000원)</option>
+											<option value="3">￦￦￦(30,000원~50,000원)</option>
+											<option value="4">￦￦￦￦(50,000원 이상)</option>
 										</select>
 									</li>
 									
