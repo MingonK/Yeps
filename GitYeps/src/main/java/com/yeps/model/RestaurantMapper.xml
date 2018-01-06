@@ -5,8 +5,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.web.model">
-	<select id="listRestaurant" parameterType="java.util.HashMap" resultType="RestaurantDTO" >
-		select * from (select rownum rn, A.* from (select * from yeps_restaurant order by rnum desc)A) where rn between #{start} and #{end}
+
+	<resultMap type="restaurantDTO" id="listRestaurantMap">
+     	<id column="rnum" property="rnum"/>
+     	<result column="rnum" property="rnum"></result>
+     	<result column="rname" property="rname"></result>
+     	<result column="price" property="price"></result>
+     	<result column="foodstyle" property="foodstyle"></result>
+     	<result column="roadAddrPart1" property="roadAddrPart1"></result>
+     	<result column="addrDetail" property="addrDetail"></result>
+     	<result column="roadAddrPart2" property="roadAddrPart2"></result>
+     	<result column="raddress" property="raddress"></result>
+     	<result column="hp2" property="hp2"></result>
+     	<result column="hp3" property="hp3"></result>
+     	<result column="reststyle" property="reststyle"></result>
+     	<result column="category" property="category"></result>
+     	<result column="price" property="price"></result>
+     	<association javaType="FileDTO" property="fileDTO">
+     		<id column="filenum" property="filenum"></id>
+     		<result column="filename" property="filename"></result>
+     	</association>
+     </resultMap> 
+	<select id="listRestaurant" parameterType="java.util.HashMap" resultMap="listRestaurantMap" >
+		select * from (select rownum rn, A.* from (select 
+													RT.rnum, RT.rname, RT.price, RT.foodstyle, RT.roadAddrPart1, RT.addrDetail, RT.roadAddrPart2,
+													RT.raddress, RT.hp2, RT.hp3, RT.reststyle, RT.category, F.filename
+		from yeps_restaurant RT, yeps_files F where RT.rnum = F.rnum and F.ismainphoto = 'y' order by RT.rnum desc)A) where rn between #{start} and #{end}
 	</select>
 
 	<insert id="insertRestaurant" parameterType="RestaurantDTO">
@@ -63,7 +87,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      	</association>
      </resultMap> 
 	
-	
 	<select id="getRest" parameterType="int" resultMap="getRestMap">
 		select * from yeps_restaurant RT, yeps_files F where RT.rnum = F.rnum and F.ismainphoto = 'y' and RT.rnum = #{rnum}
 	</select>
@@ -80,16 +103,78 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select rname from yeps_restaurant where rnum= #{rnum} 
 	</select>
 	
-	<select id="listRestaurant_delivery" parameterType="java.util.HashMap" resultType="RestaurantDTO" > 
-		select * from (select rownum rn, A.* from (select * from yeps_restaurant where delivery='가능' order by rnum desc)A) where rn between #{start} and #{end} 
+	
+	
+	
+	<resultMap type="restaurantDTO" id="listRestaurant_deliveryMap">
+     	<id column="rnum" property="rnum"/>
+     	<result column="rnum" property="rnum"></result>
+     	<result column="rname" property="rname"></result>
+     	<result column="price" property="price"></result>
+     	<result column="roadAddrPart1" property="roadAddrPart1"></result>
+     	<result column="addrDetail" property="addrDetail"></result>
+     	<result column="roadAddrPart2" property="roadAddrPart2"></result>
+     	<result column="raddress" property="raddress"></result>
+     	<result column="hp2" property="hp2"></result>
+     	<result column="hp3" property="hp3"></result>
+     	<result column="foodstyle" property="foodstyle"></result>
+     	<result column="reststyle" property="reststyle"></result>
+     	<result column="category" property="category"></result>
+     	<association javaType="FileDTO" property="fileDTO">
+     		<id column="filenum" property="filenum"></id>
+     		<result column="filename" property="filename"></result>
+     	</association>
+     </resultMap> 
+	<select id="listRestaurant_delivery" parameterType="java.util.HashMap" resultMap="listRestaurant_deliveryMap" > 
+		select * from (select rownum rn, A.* from (select * from yeps_restaurant RT, yeps_files F where RT.rnum = F.rnum and F.ismainphoto = 'y' and delivery='가능' order by RT.rnum desc)A) where rn between #{start} and #{end} 
+	</select>
+	
+	
+	
+	<resultMap type="restaurantDTO" id="listRestaurant_reservMap">
+     	<id column="rnum" property="rnum"/>
+     	<result column="rnum" property="rnum"></result>
+     	<result column="rname" property="rname"></result>
+     	<result column="price" property="price"></result>
+     	<result column="roadAddrPart1" property="roadAddrPart1"></result>
+     	<result column="addrDetail" property="addrDetail"></result>
+     	<result column="roadAddrPart2" property="roadAddrPart2"></result>
+     	<result column="raddress" property="raddress"></result>
+     	<result column="hp2" property="hp2"></result>
+     	<result column="hp3" property="hp3"></result>
+     	<result column="foodstyle" property="foodstyle"></result>
+     	<result column="reststyle" property="reststyle"></result>
+     	<result column="category" property="category"></result>
+     	<association javaType="FileDTO" property="fileDTO">
+     		<id column="filenum" property="filenum"></id>
+     		<result column="filename" property="filename"></result>
+     	</association>
+     </resultMap> 
+	<select id="listRestaurant_reserv" parameterType="java.util.HashMap" resultMap="listRestaurant_reservMap" > 
+		select * from (select rownum rn, A.* from (select * from yeps_restaurant RT, yeps_files F where RT.rnum = F.rnum and F.ismainphoto = 'y' and reserv='가능' order by RT.rnum desc)A) where rn between #{start} and #{end} 
 	</select>
 
-	<select id="listRestaurant_reserv" parameterType="java.util.HashMap" resultType="RestaurantDTO" > 
-		select * from (select rownum rn, A.* from (select * from yeps_restaurant where reserv='가능' order by rnum desc)A) where rn between #{start} and #{end} 
-	</select>
 
-	<select id="listRestaurant_takeout" parameterType="java.util.HashMap" resultType="RestaurantDTO" > 
-		select * from (select rownum rn, A.* from (select * from yeps_restaurant where takeout='가능' order by rnum desc)A) where rn between #{start} and #{end} 
+	<resultMap type="restaurantDTO" id="listRestaurant_takeoutMap">
+     	<id column="rnum" property="rnum"/>
+     	<result column="rnum" property="rnum"></result>
+     	<result column="rname" property="rname"></result>
+     	<result column="price" property="price"></result>
+     	<result column="foodstyle" property="foodstyle"></result>
+     	<result column="roadAddrPart1" property="roadAddrPart1"></result>
+     	<result column="addrDetail" property="addrDetail"></result>
+     	<result column="roadAddrPart2" property="roadAddrPart2"></result>
+     	<result column="raddress" property="raddress"></result>
+     	<result column="hp2" property="hp2"></result>
+     	<result column="hp3" property="hp3"></result>
+     	<result column="category" property="category"></result>
+     	<association javaType="FileDTO" property="fileDTO">
+     		<id column="filenum" property="filenum"></id>
+     		<result column="filename" property="filename"></result>
+     	</association>
+     </resultMap> 
+	<select id="listRestaurant_takeout" parameterType="java.util.HashMap" resultMap="listRestaurant_takeoutMap" > 
+		select * from (select rownum rn, A.* from (select * from yeps_restaurant RT, yeps_files F where RT.rnum = F.rnum and F.ismainphoto = 'y' and takeout='가능' order by RT.rnum desc)A) where rn between #{start} and #{end} 
 	</select>
 	
 	

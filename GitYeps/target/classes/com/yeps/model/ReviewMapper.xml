@@ -43,6 +43,7 @@
 			<id column="mnum" property="mnum"></id>
 			<result column="email" property="email"></result>
 			<result column="reviewcount" property="reviewcount"></result>
+			<result column="imagecount" property="imagecount"></result>
 			<result column="nickname" property="nickname"></result>
 			<association javaType="MemberPhotoDTO" property="memberPhotoDTO">
 				<id column="filenum" property="filenum"></id>
@@ -62,6 +63,7 @@
         		, R.gradepoint
         		, M.email
         		, M.reviewcount
+        		, M.imagecount
         		, M.nickname
         		, P.member_filename
         		, P.ismainphoto

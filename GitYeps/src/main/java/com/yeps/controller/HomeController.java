@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yeps.model.FileDTO;
 import com.yeps.model.RestaurantDTO;
 import com.yeps.model.ReviewDTO;
+import com.yeps.service.FileMapper;
 import com.yeps.service.RestaurantMapper;
 import com.yeps.service.ReviewMapper;
 
@@ -30,6 +32,8 @@ public class HomeController {
 	private ReviewMapper reviewMapper;
 	@Autowired
 	private RestaurantMapper restaurantMapper;
+	@Autowired
+	private FileMapper fileMapper;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(Locale locale, Model model, HttpServletRequest req) {
@@ -94,6 +98,11 @@ public class HomeController {
 				}
 			}
 		}
+		
+		FileDTO randomPhoto = fileMapper.getRandomRestaurantPhoto();
+		
+		//랜덤 사진
+		mav.addObject("randomPhoto", randomPhoto);
 		
 		//최근 검색 리스트
 		mav.addObject("locationList", locationList);
@@ -175,7 +184,10 @@ public class HomeController {
 				}
 			}
 		}
+		FileDTO randomPhoto = fileMapper.getRandomRestaurantPhoto();
 		
+		//랜덤 사진
+		mav.addObject("randomPhoto", randomPhoto);
 		//최근 검색 리스트
 		mav.addObject("locationList", locationList);
 

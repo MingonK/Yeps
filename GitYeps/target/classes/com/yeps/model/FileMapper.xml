@@ -133,5 +133,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getPagedFileListForMe" parameterType="java.util.HashMap" resultType="FileDTO">
 		select * from (select rownum rn, A.* from (select * from yeps_files where rnum=#{rnum} and mnum = #{mnum} order by filenum desc)A) where rn between #{start} and #{end}
 	</select>
+	
+	
+	<resultMap type="FileDTO" id="getRandomPhoto">
+		<id column="filenum" property="filenum"/>
+		<result column="filename" property="filename"></result>
+		<result column="mnum" property="mnum"></result>
+		<result column="rnum" property="rnum"></result>
+		
+		<association javaType="MemberDTO" property="memberDTO">
+			<id column="mnum" property="mnum"></id>
+			<result column="email" property="email"></result>
+			<result column="nickname" property="nickname"></result>
+		</association>
+		
+		<association javaType="RestaurantDTO" property="restaurantDTO">
+			<id column="rnum" property="rnum"></id>
+			<result column="rname" property="rname"></result>
+		</association>
+	</resultMap>
+	<select id="getRandomRestaurantPhoto" resultMap="getRandomPhoto">
+		select * from (select RT.rname, F.filename, F.mnum, F.rnum, M.email, M.nickname from yeps_restaurant RT, yeps_files F, yeps_member M where RT.rnum = F.rnum and F.mnum = M.mnum order by dbms_random.value) where rownum=1
+	</select>
 
 </mapper>
