@@ -36,7 +36,7 @@
 							</div>
 							<div class="price-category">
 								<span class="bullet-after">
-       								 <span class="business-attribute price-range">￦￦</span>
+       								 <span class="business-attribute price-range">${getRest.price}</span>
         						</span>
         						<span class="category-str-list" style="margin-right: 6px;">
 			                  	 	${getRest.foodstyle}
@@ -76,8 +76,8 @@
 						   		    	<path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 4.75a4.25 4.25 0 1 0 0 8.5 4.25 4.25 0 0 0 0-8.5zM11 10h-1v1a1 1 0 0 1-2 0v-1H7a1 1 0 0 1 0-2h1V7a1 1 0 0 1 2 0v1h1a1 1 0 0 1 0 2z"></path>
 						         	</svg>
 							  	</span> 
-							  	사진추가
-							  	<a class="menu-explore js-menu-explore" href="restaurant_listMenu?rnum=${getRest.rnum}">Full menu</a>
+							  	Add Photo
+							  	<a class="menu-explore js-menu-explore" href="restaurant_listMenu?rnum=${getRest.rnum}">모든 메뉴</a>
 						   	</a>
 							</span>
 				     	</div>
@@ -155,7 +155,7 @@
 						<div class="restContent-showcase-container-inner">
 							<div class="top-shelf-grey"></div>
 							<div class="showcase-footer-links">
-								<a class="see-more u-pull-right" href="restaurant_photoList?rnum=${getRest.rnum}" style="float: right !important; color: #0073bb; cursor: pointer;">
+								<a class="see-more u-pull-right" href="restaurant_photoList?rnum=${getRest.rnum}&view=all" style="float: right !important; color: #0073bb; cursor: pointer;">
 									<span aria-hidden="true" style="width: 18px; height: 18px;"class="icon">
 										<svg class="icon_svg">
 								        	<svg id="18x18_grid" height="100%" viewBox="0 0 18 18" width="100%">
@@ -250,14 +250,14 @@
 															</div>
 														</div>
 													<div class="restContent-arrange-unit-nowrap">
-														<div class="restContent-review-sort" style=" margin-left: -12px;">
-															<div class="restContent-dropdown" style="position: relative;display: inline-block;">
-																<div class="restcontent-dropdown-toggle" style="position: relative;">
-																	<a href="#" class="restContent-dropdown-action">
-																		<span class="restContent-dropdown_prefix">
+														<div class="feed_sort js-review-feed-sort" style="margin-left: -12px;">
+															<div class="dropdown js-dropdown dropdown--tab dropdown--arrow dropdown--hover dropdown--restricted" >
+																<div class="dropdown_toggle js-dropdown-toggle">
+																	<a href="javascript:void(0);" class="dropdown_toggle-action" style="text-decoration:none;">
+																		<span class="dropdown_prefix">
 																			Sort by
 																		</span>
-																		<span class="restContent-dropdown-toggle-text" data-dropdown-initial-text="Yeps Sort" style="font-weight: bold;">
+																		<span class="dropdown_toggle-text js-dropdown-toggle-text" data-dropdown-initial-text="Yeps Sort" style="font-weight: bold;">
 																			Yeps Sort
 																		</span>
 																		<span aria-hidden="true" style="width: 14px; height: 14px;" class="icon icon--14-triangle-down icon--size-14 icon--currentColor u-triangle-direction-down dropdown_arrow">
@@ -268,6 +268,39 @@
                                                        						</svg>
                                                    						</span>
 																	</a>
+																</div>
+																<div class="dropdown_menu-container">
+																	<div class="dropdown_menu-inner">
+																		<div class="dropdown_menu js-dropdown-menu">
+																			<ul class="dropdown_menu-group" style="list-style: none;">
+																				<li class="dropdown_item">
+																					<a class="tab-link js-dropdown-link tab-link--dropdown js-tab-link--dropdown is-selected" href="javascript:;" style="text-decoration:none;">
+																						<span class="tab-link_label" title="Yelp Sort">Yelp Sort</span>
+																					</a>
+																				</li>
+																				<li class="dropdown_item">
+																					<a class="tab-link js-dropdown-link tab-link--dropdown js-tab-link--dropdown" href="javascript:;" style="text-decoration:none;">
+																						<span class="tab-link_label" title="Newest First">Newest First</span>
+																					</a>
+																				</li>
+																				<li class="dropdown_item">
+																					<a class="tab-link js-dropdown-link tab-link--dropdown js-tab-link--dropdown" href="javascript:;" style="text-decoration:none;">
+																						<span class="tab-link_label" title="Oldest First">Oldest First</span>
+																					</a>
+																				</li>
+																				<li class="dropdown_item">
+																					<a class="tab-link js-dropdown-link tab-link--dropdown js-tab-link--dropdown" href="javascript:;" style="text-decoration:none;">
+																						<span class="tab-link_label" title="Highest Rated">Highest Rated</span>
+																					</a>
+																				</li>
+																				<li class="dropdown_item">
+																					<a class="tab-link js-dropdown-link tab-link--dropdown js-tab-link--dropdown" href="javascript:;" style="text-decoration:none;">
+																						<span class="tab-link_label" title="Lowest Rated">Lowest Rated</span>
+																					</a>
+																				</li>
+																			</ul>
+																		</div>
+																	</div>
 																</div>
 															</div>
 														</div>
@@ -652,13 +685,13 @@
 									<div class="restContent-iconed-list-story">
 										<dl class="restContent-short-def-list" style="display: block;">
 											<dt class="restContent-attribute-key" style="margin-right: 0.25em;display: inline;">
-												Today
+												오늘
 											</dt>
 											<dd style="font-weight: bold;display: inline;"> 
 												<strong class="u-space-r-half" style="margin-right: 3px !important;font-weight: bold;">
-													<span class="nowrap">11:00 am</span> - <span class="nowrap">10:00 pm</span><br>
+													<span class="today"></span><br>
 												</strong>
-												<span class="restContent-nowrap extra closed">
+												<span class="nowrap extra closed">
 													Closed now
 												</span>
 											</dd>
@@ -676,20 +709,33 @@
 									<div class="restContent-iconed-list-story">
 							            <b style="font-weight: bold;">
 							            	<a class="menu-explore js-menu-explore" href="restaurant_listMenu?rnum=${getRest.rnum}">
-							            		Full menu
+							            		모든 메뉴
 							            	</a>
 							            </b>
 							        </div>
 							    </li>
 							    <li class="restContent-iconed-list-item" style="display: table;width: 100%;margin-bottom: 0;">
 						            <div class="restContent-iconed-list-avatar">
-						       		 	<span class="restContent-business-attribute price-range" data-remainder="￦￦">￦￦</span>
+						       		 	<span class="restContent-business-attribute price-range" data-remainder="">${getRest.price}</span>
 						            </div>
-						            <div class="restContent-iconed-list-story">
+						            <div class="restContent-iconed-list-story" style="    border-bottom: none;">
 						                <dl class="restContent-short-def-list" style="display: block;">
-						                    <dt class="restContent-attribute-key" style="margin-right: 0.25em;display: inline;">Price range</dt>
+						                    <dt class="restContent-attribute-key" style="margin-right: 0.25em;display: inline;">가격 범위</dt>
 						                    <dd class="restContent-nowrap price-description">
-						                        ￦11-30
+						                        <c:choose>
+													<c:when test="${getRest.price==1}">
+														10,000원 이하
+													</c:when>
+													<c:when test="${getRest.price==2}">
+														10,000원~30,000원
+													</c:when>
+													<c:when test="${getRest.price==3}">
+														30,000원~50,000원
+													</c:when>
+													<c:otherwise>
+														50,000원 이상
+													</c:otherwise>
+												</c:choose>
 						                    </dd>
 						                </dl>
 						            </div>
@@ -709,7 +755,7 @@
 											월요일
 										</th>
 										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
-											<span style="white-space: nowrap;">${getRest.mon}</span>
+											<span class="mon" style="white-space: nowrap;">${getRest.mon}</span>
 										</td>
 										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
@@ -718,7 +764,7 @@
 											화요일
 										</th>
 										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
-											<span style="white-space: nowrap;">${getRest.tue}</span>
+											<span class="tue" style="white-space: nowrap;">${getRest.tue}</span>
 										</td>
 										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
@@ -727,7 +773,7 @@
 											수요일
 										</th>
 										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
-											<span style="white-space: nowrap;">${getRest.wed}</span>
+											<span class="wed" style="white-space: nowrap;">${getRest.wed}</span>
 										</td>
 										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
@@ -736,7 +782,7 @@
 											목요일
 										</th>
 										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
-											<span style="white-space: nowrap;">${getRest.thu}</span>
+											<span class="thu" style="white-space: nowrap;">${getRest.thu}</span>
 										</td>
 										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
@@ -745,7 +791,7 @@
 											금요일
 										</th>
 										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
-											<span style="white-space: nowrap;">${getRest.fri}</span>
+											<span class="fri" style="white-space: nowrap;">${getRest.fri}</span>
 										</td>
 										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
@@ -754,7 +800,7 @@
 											토요일
 										</th>
 										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
-											<span style="white-space: nowrap;">${getRest.sat}</span>
+											<span class="sat" style="white-space: nowrap;">${getRest.sat}</span>
 										</td>
 										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
@@ -763,7 +809,7 @@
 											일요일
 										</th>
 										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
-											<span style="white-space: nowrap;">${getRest.sun}</span>
+											<span class="sun" style="white-space: nowrap;">${getRest.sun}</span>
 										</td>
 										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
@@ -919,7 +965,7 @@
     	    				<label id="reply_flag_popup_form_label" for="reason_field" style="display: inline-block; font-weight: bold; margin: 0 0 6px;">
     	    					이유
     	    				</label>
-    	    				<select id="reason_field">
+    	    				<select id="reason_field" name="reason_field">
     	    					<option value="default" selected>신고 사유를 선택하세요.</option>
     	    					<option value="inappropriate_post">부적절한 홍보 게시물</option>
     	    					<option value="Eroticism">음란성, 선정성 또는 부적합한 내용</option>
@@ -966,7 +1012,7 @@
     	
     	<div id="flag_popup_description" style="padding: 12px 8px 0;">
     		<div>
-    			<form name="sendform" method="post">
+    			<form name="sendform"  action = "message_send" method="post">
     				<div>
 						<h4 align="left" style="color: #d32323;">Send Message To</h4>
     	    			<input type="text" id="sendformTo" name="receiver" style="width: 95%; height: 20px;">
@@ -982,7 +1028,7 @@
     	   	
 		<div id="flag_popup_footer">
      		<div id="flag_popup_buttons">
-     			<button id="reply_flag_popup_submit_button" type="submit" value="submit" data-popup-send="SendMessage" id="sendMessage">
+     			<button id="reply_message_popup_submit_button" type="submit" value="submit" data-popup-send="SendMessage" >
      				<span>메세지 보내기</span>
      			</button>
      			<a href="#" data-popup-close="writeMessage">
@@ -1030,31 +1076,10 @@
 			$('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
 			$('body').css('overflow','auto');
 			e.stopPropagation();
-
         	e.preventDefault();
 			});
 		});   
 	 
-	 $('#sendMessage').click(function(){
-	    	if($('#sendformTo').val()==''){
-	    	alert("받는 사람을 입력해주세요");
-	    	$('#sendformTo').focus()
-	    	return false;
-	    	
-	    	}else if($('#sendformSubject').val()==''){
-	    	alert("제목를 입력해주세요");
-	    	$('#sendformSubject').focus()
-	    	return false;
-	    	
-	    	}else if($('#sendformMessage').val()==''){
-	    	alert("내용을 입력해주세요");
-	    	$('#sendformMessage').focus()
-	    	return false;
-	    	}
-	        document.sendform.action = "message_send";
-	        document.sendform.submit(); 
-
-	    });
    
    $(document).on('mouseenter', '.selector', function(e) {
 	   var star = $(e.target).val();
@@ -1099,6 +1124,35 @@
 	   $("#reply_flag_popup_form").submit();
     });
 
+   
+   //리뷰 Sort
+   $(document).on("click", ".dropdown_toggle-action", function (e) {
+	   if($(this).parent().hasClass('is-active')) {
+		   $(this).parent().removeClass(' is-active')
+	       $(this).parent().parent().removeClass('is-active')
+	   } else {
+		   $(this).parent().addClass(' is-active')
+	       $(this).parent().parent().addClass('is-active')
+	       $('.js-dropdown-menu').addClass('is-visible')   
+	       e.stopPropagation();
+		   e.preventDefault();
+	   }
+   });
+   
+   $(document).on("click", function (e) {
+	   if(!$(e.target).hasClass('dropdown') || !$(e.target).hasClass('dropdown_toggle-action')) {
+		   $('.dropdown').removeClass('is-active');
+		   $('.dropdown_toggle').removeClass('is-active');
+		   $('.js-dropdown-menu').removeClass('is-visible')
+	   }
+   });
+   var week = new Array("sun","mon","tue","wed","thu","fri","sat")
+   var d = new Date();
+   var day = d.getDate();
+   
+
+   $(".today").text($('.'+week[day]+'').text());
+   
 </script>
 
 
@@ -1120,6 +1174,27 @@ for(var i = 0; i < list.length; i++) {
 	img.onclick = function() {location.href="#"};
 	document.getElementById('showcase-photo-box').appendChild(img);
 }
+
+$('#reply_message_popup_submit_button').click(function(){
+	if($('#sendformTo').val()==''){
+	alert("받는 사람을 입력해주세요");
+	$('#sendformTo').focus()
+	return false;
+	
+	}else if($('#sendformSubject').val()==''){
+	alert("제목를 입력해주세요");
+	$('#sendformSubject').focus()
+	return false;
+	
+	}else if($('#sendformMessage').val()==''){
+	alert("내용을 입력해주세요");
+	$('#sendformMessage').focus()
+	return false;
+	}
+ 
+    document.sendform.submit(); 
+
+});
 
 function reply_report_check() {
 	var selected = document.getElementById('reason_field');

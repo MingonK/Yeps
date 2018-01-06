@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <html>
 <head>
 	<title>Photos for ${getRest.rname}</title>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/restStyle.css?ver=1"/>"/>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/restaurant_update_photo.css?ver=1"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_list.css?ver=1"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css"/>"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -64,20 +66,38 @@
 							<div class="tab-navbars js-tab-navbars" style="display: inline-block; width: 75%;">
 								<div class="media-header_root-navbar media-header_root-navbar--paged">
 									<div class="tab-nav-container">
-										<ul class="tab-nav js-tab-nav tab-nav--paged js-tab-nav--paged tab-nav--large js-tab-nav--large tab-nav--no-icon js-tab-nav--no-icon" style="display: inline; margin: 0 0 -1px; padding: 0; white-space: nowrap;">
+										<ul class="js-tab-nav--paged" style="display: inline; margin: 0 0 -1px; padding: 0; white-space: nowrap;">
 											<div class="paged-scroll-container js-paged-scroll-container inactive-left-arrow inactive-right-arrow has-single-page" style="    overflow: hidden;margin: 0 -15px;    user-select: none;position: relative;    display: flex;-webkit-box-direction: normal; -webkit-box-orient: horizontal; flex-direction: row;padding: 0px 18px; z-index: 2;">
 												<div class="paged-scroll-container_container" style="-webkit-box-flex: 1;flex-grow: 1;align-self: center;overflow: hidden;position: relative;white-space: nowrap;">
 													<div class="js-scroll-container scroll-container" style="transform: translateX(0px);    display: flex;-webkit-box-direction: normal;-webkit-box-orient: horizontal;    flex-direction: row;    transition: transform 400ms;width: 100%;">
 														<li class="tab-nav_item" style="display: table-cell; vertical-align: middle;">
-															<a href="#" class="tab-link" style="padding: 0 12px; padding-top: 6px; padding-bottom: 6px; color: #333; text-decoration: none; border-bottom: 3px solid #d32323; display: block; vertical-align: bottom; line-height: 1; white-space: nowrap; outline: 0;">
+															<a href="restaurant_photoList?rnum=${getRest.rnum}&view=all" class="tab-link">
 																<span style="font-weight: bold; vertical-align: middle; line-height: 30px; display: inline-block;">
 																	All Photos
 																</span>
 																<span style="font-weight: bold; vertical-align: middle; line-height: 30px; display: inline-block;">
-																	(${photoCount})
+																	(${allPhotoCount})
 																</span>
 															</a>
 														</li>
+														<c:if test="${!empty memberinfo}">
+														<li class="tab-nav_item" style="display: table-cell; vertical-align: middle;">
+															<a href="restaurant_photoList?rnum=${getRest.rnum}&view=mylist" class="tab-link">
+																<span style="font-weight: bold; vertical-align: middle; line-height: 30px; display: inline-block;">
+																	<c:if test="${empty memberinfo.nickname}">
+																		<c:set var="email" value="${fn:split(memberinfo.email, '@')}" />
+																		${email[0]}'s Photos
+																	</c:if>
+																	<c:if test="${!empty memberinfo.nickname}">
+																		${memberinfo.nickname}'s Photos
+																	</c:if>
+																</span>
+																<span style="font-weight: bold; vertical-align: middle; line-height: 30px; display: inline-block;">
+																	(${myPhotoCount})
+																</span>
+															</a>
+														</li>
+														</c:if>
 													</div>
 												</div>
 											</div>
@@ -91,11 +111,64 @@
 				<div class="media-landing js-media-landing" style="position: relative;">
 					<div class="media-landing_gallery photos" style="height:auto;overflow:hidden;">
 						<ul class="photo-box-grid photo-box-grid--highlight photo-box-grid--small clearfix lightbox-media-parent" style="margin-right: -12px; margin-top: 18px; transform-style: preserve-3d;">
-							<c:forEach items="${uploadFileList}" var="upload">
+							<c:forEach var="upload" items="${uploadFileList}">
 							<li style="transition: opacity 0.1s ease-out; width: 150px; float: left; margin: 0 12px 12px 0; display: list-item;">
 								<div class="photo-box photo-box--interactive" data-popup-open="photo_popup" style="height: 150px; position: relative;">
+									<c:if test="${upload.ismainphoto == 'y'}">
+										<div class="photo-box-overlay">
+											<div class="photo-box-overlay_caption">메인사진</div>
+										</div>
+									</c:if>									
 									<img class="photo-box-img" height="226" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${upload.filename}"  width="226" style="max-width: 100%; max-height: 100%; border-radius: 4px; vertical-align: middle;">
-									<a class="biz-shim js-lightbox-media-link js-analytics-click" data-analytics-label="biz-photo" href="#" style="display: block; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: white; opacity: 0;    color: #0073bb;text-decoration: none;    cursor: pointer;"></a>
+									
+									<c:if test="${(getRest.mnum eq memberinfo.mnum || memberinfo.ismaster eq 'y' || memberinfo.ismanager eq 'y') && upload.ismainphoto == 'n'}">							
+									<div id="photo_box_delete" style="top: unset; bottom: 6px; left: 6px;">
+										<form name="photoupdate" class="photo_update" action="restaurant_photo_update" method="POST">
+											<input type="hidden" name="filenum" value="${upload.filenum}">
+											<input type="hidden" name="mnum" value="${getRest.mnum}">
+											<input type="hidden" name="rnum" value="${getRest.rnum}">
+											<input type="hidden" name="view" value="${view}">
+  	 										<a id="photo_box_action_link" style="background: rgba(0,0,0,0.8);">
+  	 											<span style="width: 24px; height: 24px; fill: #fff;" class="icon">
+  	 												<svg class="icon_svg" height="100%" viewBox="0 0 18 18" width="100%"> 
+  	 													<path d="M13 6c0-.55-.45-1-1-1s-1 .45-1 1 .45 1 1 1 1-.45 1-1zm-4.71 6.93L6.5 10.79 4 14h10l-3.21-4.29-2.5 3.22zM3 3h5V1H3c-1.1 0-2 .9-2 2v5h2V3zm12 12h-5v2h5c1.1 0 2-.9 2-2v-5h-2v5zM3 10H1v5c0 1.1.9 2 2 2h5v-2H3v-5zm12-9h-5v2h5v5h2V3c0-1.1-.9-2-2-2z"/>
+  	 												</svg>
+  	 											</span>
+ 	 											
+  	 											<span id="tooltip_wrapper">
+  													<span id="tooltip">
+  														MainPhoto
+  													</span>
+  	 											</span>
+  	 										</a>
+  	 									</form>
+  	 								</div>
+									</c:if>
+									<c:if test="${view == 'mylist' || getRest.mnum eq memberinfo.mnum || memberinfo.ismaster eq 'y' || memberinfo.ismanager eq 'y'}">
+									<div id="photo_box_delete" style="top: unset; bottom: 6px;">
+										<form name="photoupdate" class="photo_update" action="restaurant_photo_delete" method="POST">
+											<input type="hidden" name="filenum" value="${upload.filenum}">
+											<input type="hidden" name="rnum" value="${getRest.rnum}">
+											<input type="hidden" name="filename" value="${upload.filename}">
+											<input type="hidden" name="ismainphoto" value="${upload.ismainphoto}">
+											<input type="hidden" name="view" value="${view}">
+  	 										<a id="photo_box_action_link" style="background: rgba(0,0,0,0.8);">
+  	 											<span style="width: 24px; height: 24px; fill: #fff;" class="icon">
+  	 												<svg class="icon_svg" height="100%" viewBox="0 0 24 24" width="100%"> 
+  	 													<path d="M5 7V5a1 1 0 0 1 1-1h4V3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v1h4a1 1 0 0 1 1 1v2H5zm13 12a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3V8h12v11zm-8-8H9v8h1v-8zm5 0h-1v8h1v-8z"></path>
+  	 												</svg>
+  	 											</span>
+ 	 										
+  	 											<span id="tooltip_wrapper">
+  													<span id="tooltip">
+  														Delete
+  													</span>
+  	 											</span>
+  	 										</a>
+  	 									</form>
+  	 								</div>
+  	 								</c:if>
+									<a class="biz-shim js-lightbox-media-link js-analytics-click" id="dd" data-analytics-label="biz-photo" href="#" style="display: block; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: white; opacity: 0; color: #0073bb; text-decoration: none; cursor: pointer;"></a>
 								</div>
 							</li>
 							</c:forEach>
@@ -121,7 +194,7 @@
 						
 									<c:if test="${yepsPager.curBlock > 1}">
 										<div class="event_list_next_block">
-											<a class="event_list_next_block_action" href="javascript:list('1')">
+											<a class="event_list_next_block_action" href="javascript:list('1', '${view}')">
 												<span>Start</span>
 											</a>
 										</div>
@@ -129,7 +202,7 @@
 
 									<c:if test="${yepsPager.curBlock > 1}">
 										<div class="event_list_next_block">
-											<a class="event_list_next_block_action" href="javascript:list('${yepsPager.prevPage}')">
+											<a class="event_list_next_block_action" href="javascript:list('${yepsPager.prevPage}', '${view}')">
 												<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">
 													<svg class="icon_svg">
 														<path d="M14.475 18.364l1.414-1.414L10.94 12l4.95-4.95-1.415-1.414L8.11 12l6.365 6.364z"></path>
@@ -150,7 +223,7 @@
 												</span>
 											</c:when>
 											<c:otherwise>
-												<a href="javascript:list('${num}')" class="event_list_page_option_link_action">
+												<a href="javascript:list('${num}', '${view}')" class="event_list_page_option_link_action">
 												${num}
 												</a>
 											</c:otherwise>
@@ -160,7 +233,7 @@
 						
 									<c:if test="${yepsPager.curBlock <= yepsPager.totBlock}">
 										<div class="event_list_next_block">
-											<a class="event_list_next_block_action" href="javascript:list('${yepsPager.nextPage}')">
+											<a class="event_list_next_block_action" href="javascript:list('${yepsPager.nextPage}', '${view}')">
 												<span>Next</span>
 												<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">
 													<svg class="icon_svg">
@@ -173,7 +246,7 @@
 							
 									<c:if test="${yepsPager.curPage <= yepsPager.totPage}">
 										<div class="event_list_next_block">
-											<a class="event_list_next_block_action" href="javascript:list('${yepsPager.totPage}')">
+											<a class="event_list_next_block_action" href="javascript:list('${yepsPager.totPage}', '${view}')">
 												<span>End</span>
 											</a>
 										</div>
@@ -249,13 +322,44 @@
 	</div>
 
 <script>
+	var view = '${view}';
+	if(view == 'all') {
+		$('.js-tab-nav--paged li').first().children('.tab-link').addClass('selected');
+	} else if(view == 'mylist') {
+		$('.js-tab-nav--paged li:not(:first) > a').addClass('selected');
+	}
+	
+	$(document).on('mouseenter', '.tab-link', function() {
+		if(!$(this).hasClass('selected')) {
+			$(this).addClass('hovered');
+			$('.tab-link').not(this).addClass('clear_bottom');
+		}
+	})
+	$(document).on('click', '.tab-link', function() {
+		not($(this)).removeClass('hovered');
+		not($(this)).removeClass('selected');
+		$(this).addClass('selected');
+	})
+	$(document).on('mouseleave', '.tab-link', function() {
+		$('.tab-link').removeClass('clear_bottom');	
+		$(this).removeClass('hovered');
+	})
+	
+	
     // **원하는 페이지로 이동시 검색조건, 키워드 값을 유지하기 위해 
     function list(page){
-        location.href="restaurant_photoList?curPage="+page;
+        location.href="restaurant_photoList?curPage="+page+"&rnum=${getRest.rnum}&view=${view}";
     }
     
   //----- OPEN   		
 	$('[data-popup-open]').on('click', function(e)  {
+		if($(e.target).prop('className') == 'icon') {
+			$(e.target).parent().parent().submit();
+			e.stopPropagation();
+	    	e.preventDefault();
+			return;
+		}
+		
     	var targeted_popup_class = jQuery(this).attr('data-popup-open');
     	$('#popup_slideshow_img').empty();
     	$('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
@@ -264,7 +368,7 @@
 		$('#popup_slideshow_img').append(img);
   
     	$('body').css('overflow','hidden');
-			e.stopPropagation();
+		e.stopPropagation();
     	e.preventDefault();
 	});
 
@@ -280,7 +384,6 @@
     	e.stopPropagation();
     	e.preventDefault();
 	});
+	
 </script>
-</body>
-</html>
 <%@include file="../bottom.jsp" %>

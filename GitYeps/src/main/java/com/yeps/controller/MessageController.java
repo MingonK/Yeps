@@ -262,73 +262,86 @@ public class MessageController {
 				mav = pagingMessageList(req, lMode, email);
 			}
 			mav.addObject("msg", msg);
-			
 
 			// 쪽지함에서 신고쪽지 보낼때 받는 부분
 		} else if (report.equals("reply") || report.equals("event")) {
+			
 			// 이벤트에서 신고보낼때 받는 부분(쪽지함 신고 부분에 포함)
-			String sEvnum = req.getParameter("evnum");
-			int evnum = Integer.parseInt(sEvnum);
 			String where = req.getParameter("where");
 			String rnum = req.getParameter("rnum");
-			String eventname = eventMapper.getEventContent(evnum).getEventname();
-			String reason = req.getParameter("reason_field");
+			
+			if (where.equals("rest")) {
+				String reason = req.getParameter("reason_field");
 
-			if (reason.equals("inappropriate_post")) {
-				reason = "부적절한 홍보 게시물";
-			} else if (reason.equals("Eroticism")) {
-				reason = "음란성, 선정성 또는 부적합한 내용";
-			} else if (reason.equals("swear_word")) {
-				reason = "특정인 대상의 비방/욕설";
-			} else if (reason.equals("Privacy_infringement")) {
-				reason = "명예훼손/사생활 침해 및 저작권침해 등";
-			} else if (reason.equals("personal_information")) {
-				reason = "개인정보 공개";
-			} else if (reason.equals("plaster")) {
-				reason = "같은 내용의 반복 게시 (도배)";
-			}
-
-			if(where.equals("rest")) {
+				if (reason.equals("inappropriate_post")) {
+					reason = "부적절한 홍보 게시물";
+				} else if (reason.equals("Eroticism")) {
+					reason = "음란성, 선정성 또는 부적합한 내용";
+				} else if (reason.equals("swear_word")) {
+					reason = "특정인 대상의 비방/욕설";
+				} else if (reason.equals("Privacy_infringement")) {
+					reason = "명예훼손/사생활 침해 및 저작권침해 등";
+				} else if (reason.equals("personal_information")) {
+					reason = "개인정보 공개";
+				} else if (reason.equals("plaster")) {
+					reason = "같은 내용의 반복 게시 (도배)";
+				}
 				RestaurantDTO restaurant = restaurantMapper.getRest(Integer.parseInt(rnum));
 				dto.setTitle("restaurant report : " + restaurant.getRname() + ", (" + reason + ")");
 
-			}else if(where.equals("event")) {
-				dto.setEvnum(evnum);
-				mav.addObject("evnum", evnum);
-				if(report.equals("reply")) {
-					dto.setTitle("reply report : " + eventname + ", (" + reason + ")");
+			} else if (where.equals("event")) {
 
-				}else {
+				String sEvnum = req.getParameter("evnum");
+				int evnum = Integer.parseInt(sEvnum);
+				String eventname = eventMapper.getEventContent(evnum).getEventname();
+				String reason = req.getParameter("reason_field");
+
+				if (reason != null) {
+					if (reason.equals("inappropriate_post")) {
+						reason = "부적절한 홍보 게시물";
+					} else if (reason.equals("Eroticism")) {
+						reason = "음란성, 선정성 또는 부적합한 내용";
+					} else if (reason.equals("swear_word")) {
+						reason = "특정인 대상의 비방/욕설";
+					} else if (reason.equals("Privacy_infringement")) {
+						reason = "명예훼손/사생활 침해 및 저작권침해 등";
+					} else if (reason.equals("personal_information")) {
+						reason = "개인정보 공개";
+					} else if (reason.equals("plaster")) {
+						reason = "같은 내용의 반복 게시 (도배)";
+					}
+					dto.setTitle("reply report : " + eventname + ", (" + reason + ")");
+				} else {
 					dto.setTitle("event report : " + eventname);
 				}
+				dto.setEvnum(evnum);
+				mav.addObject("evnum", evnum);
+			}
 
-				String reportContent = req.getParameter("flag_popup_descripte_field");
-				dto.setContent(reportContent);
+			String reportContent = req.getParameter("flag_popup_descripte_field");
+			dto.setContent(reportContent);
 
-				// 여기까지 이벤트 신고 부분. 아래부터는 쪽지함 신고와 동일
-				// 등록된 회원중 매니져를 찾아 매니져에게만 이슈가 되는 내용을 보낸다.
-				for (int i = 0; i < memberList.size(); i++) {
-					String isManager = memberList.get(i).getIsmanager();
-					email = memberList.get(i).getEmail();
-					if (isManager.equals("y")) {
-						receiver = memberList.get(i).getEmail();
-						dto.setReceiver(receiver);
-						dto.setIsIssue(1);
-						System.out.println("@=" +dto.getMnum());
-						System.out.println("@@=" +dto.getTitle());
-						res = messageMapper.writeMessage(dto);
-					}
+			// 여기까지 이벤트 신고 부분. 아래부터는 쪽지함 신고와 동일
+			// 등록된 회원중 매니져를 찾아 매니져에게만 이슈가 되는 내용을 보낸다.
+			for (int i = 0; i < memberList.size(); i++) {
+				String isManager = memberList.get(i).getIsmanager();
+				email = memberList.get(i).getEmail();
+				if (isManager.equals("y")) {
+					receiver = memberList.get(i).getEmail();
+					dto.setReceiver(receiver);
+					dto.setIsIssue(1);
+					System.out.println("@=" + dto.getMnum());
+					System.out.println("@@=" + dto.getTitle());
+					res = messageMapper.writeMessage(dto);
 				}
 			}
+
 		}
 		msg = "리포트를 작성하였습니다.. ";
 		mav.setViewName("historyBack");// historyback.jsp를 이용하여 이전 페이지로 이동
 		mav.addObject("msg", msg);
 		return mav;
 	}
-			
-
-		
 
 	@RequestMapping(value = "message_action")
 	public ModelAndView message_search(HttpServletRequest req) {

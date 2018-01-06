@@ -81,6 +81,7 @@
 						<form id="finishForm" action="restaurant_update_photo" method="post">
 							<input type="hidden" name="rnum" value="${restaurantDTO.rnum}">
 							<input type="hidden" name="mode" value="update">
+							<input type="hidden" name="view" value="all">
 							<input type="hidden" name="filecount" value="${filesize}">
 						</form>
 					</div>
@@ -96,13 +97,8 @@
 		var src = $(this).parent().parent().children('#photo_box_img').attr('src');
 		var pathpoint = src.lastIndexOf('/');
 		var filename = src.substring(pathpoint+1, src.length);
-		$(document).ajaxStart(function() {
-			$(this).parent().parent().parent().css('opacity', '1');
-		})
-		
-		$(document).ajaxStop(function() {
-			$(this).parent().parent().parent().css('opacity', '0.3');
-		})
+		$(this).parent().parent().parent().fadeOut(500);
+
 		$.ajax({
 			url : 'restaurant_delete_ajax?rnum=' + rnum + '&filename=' + filename,
 			dataType : 'json',
@@ -111,15 +107,21 @@
 					window.location = responseData.url; 
 				}
 				if(responseData.success) {
-		        	$(this).parent().parent().parent().css('opacity', '0');
-		        	$(this).parent().parent().parent().remove();
+		        	
 		        }
 			}
 		});
 	});
 	
 	$(document).on('click', '#finish_button', function() {
-		$('#finishForm').submit();
+		var existFile = $('#photo_box_grid_wide').children();
+		if(existFile) {
+			$('#finishForm').attr('action', 'restaurant_photoList');
+			$('#finishForm').submit();
+		} else {
+			$('#finishForm').submit();
+		}
+		
 	})
 	</script>
 	

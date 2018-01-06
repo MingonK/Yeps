@@ -558,6 +558,7 @@ small {
 }
 
 .profile-content-wrap{
+	display: inline;
 	background: white;
 	height: 80%;
 	min-width: 1020px;

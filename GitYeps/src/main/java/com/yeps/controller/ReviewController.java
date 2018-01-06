@@ -199,9 +199,13 @@ public class ReviewController {
 		int mnum = mdto.getMnum(); 
 		
 		String contentUpdate = req.getParameter("contentUpdate");
+		int gradepoint = Integer.parseInt(req.getParameter("gradepoint"));
+		int rnum = Integer.parseInt(req.getParameter("rnum"));
 		if(contentUpdate != null) {
 			//업데이트 쿼리문 작성 해주면 됨.★★★
-		}
+			int res = reviewMapper.review_write_update(contentUpdate, gradepoint, rnum);
+			System.out.println("리뷰수정 결과값 출력:" + res);
+		} 
 
 		// ===============================
 		String mode = req.getParameter("mode");
@@ -209,9 +213,7 @@ public class ReviewController {
 		String nickname = mdto.getNickname();
 		String email = mdto.getEmail();
 		String filename = mpdto.getFilename();
-		String rnum = req.getParameter("rnum");
 		String rname = req.getParameter("rname");
-		String gradepoint = req.getParameter("gradepoint");
 		String content = req.getParameter("content");
 		String Get_InsertReviewDate = reviewMapper.Get_InsertReviewDate();
 
@@ -222,10 +224,10 @@ public class ReviewController {
 			memberMapper.updateReviewCount(mnum, nowReviewcount);
 		}
 
-		rvdto.setRnum(Integer.parseInt(rnum));
+		rvdto.setRnum(rnum);
 		rvdto.setMnum(mnum);
 		rvdto.setContent(content);
-		rvdto.setGradepoint(Integer.parseInt(gradepoint));
+		rvdto.setGradepoint(gradepoint);
 		rvdto.setFilenum(3);
 		rvdto.setIp(req.getRemoteAddr());
 		rvdto.setRecentreview("n");

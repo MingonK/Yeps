@@ -218,8 +218,6 @@
        <association javaType="MemberDTO" property="memberDTO">
            <id column="mnum" property="mnum"></id>
            <result column="name" property="name"></result>
-           <result column="nickname" property="nickname"></result>
-           <result column="email" property="email"></result>
            <result column="reviewcount" property="reviewcount"></result>
           
        </association>
@@ -242,8 +240,8 @@
       select * from (select rownum rn, A. * from(select
                R.content
               ,R.gradepoint
+              ,R.rvnum
               ,RT.rest_regdate
-              ,RT.rnum
               ,RT.rname
               ,RT.roadAddrPart1
               ,RT.roadAddrPart2
@@ -254,8 +252,6 @@
               ,RT.raddress
               ,M.mnum
               ,M.name
-              ,M.nickname
-              ,M.email
               ,M.reviewcount
             
         from yeps_review R, yeps_member M, yeps_restaurant RT where R.mnum = M.mnum and R.rnum = RT.rnum and M.mnum = #{mnum} order by rvnum desc)A)
@@ -504,5 +500,8 @@
    		where R.mnum = M.mnum and M.mnum = P.mnum and P.ismainphoto='y' and R.rnum = #{rnum} and R.mnum = #{mnum}
    </select>
    
+  	<update id="review_write_update" parameterType="java.util.HashMap">
+  		update yeps_review set content=#{contentUpdate}, gradepoint=#{gradepoint} where rnum=#{rnum}
+  	</update>   
   	
 </mapper>		
