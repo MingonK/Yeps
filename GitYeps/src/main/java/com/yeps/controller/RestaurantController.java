@@ -153,7 +153,7 @@ public class RestaurantController {
 
 	@RequestMapping(value = "/restaurant_ajax")
 	@ResponseBody
-	public HashMap<String, Object> listRestRefresh(@RequestParam(value = "mode") String mode,@RequestParam(value="checkArray[]") List<Integer> arrayParams,
+	public HashMap<String, Object> listRestRefresh(@RequestParam(value = "mode") String mode,@RequestParam(value="price[]") List<Integer> price,
 			@RequestParam(defaultValue = "1") int curPage) {
 		int count = restaurantMapper.getCount();
 		int pageScale = 10;

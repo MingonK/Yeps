@@ -498,16 +498,14 @@ $(document).ready(function(){
 	var price=[];
 	$('.filters-price').on('change', function() {
 		price=[];
-	$("input:checkbox[name='price']:checked").each(function(index) {
+	$("input:checkbox[name='price']:checked").each(function() {
 			price.push($(this).val());
 		});
 	});
-
 	
-	
-	
-	$('.filters').on('change', function() {
+	$(document).on('change','.filters,.filters-price', function() {
 	    $('.filters').not(this).prop('checked', false);  
+	    
 	    if($("input:checkbox[name='feature']").is(":checked") == true){
             mode = $(this).val();
           }else{
