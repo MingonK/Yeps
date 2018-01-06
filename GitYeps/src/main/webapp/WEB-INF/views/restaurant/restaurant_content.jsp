@@ -443,11 +443,11 @@
 														</div>
 													</div>
 													<p class="myreview_p_3">
-														${myReview.content}
+														${myReview.content} 
 													</p>
 													<div class="myreview_div_6">
 
-														<a class="myreview_a_1" href="review_write?star=${myReview.gradepoint}&contentUpdate=${myReview.content}&rnum=${getRest.rnum}&updatemode=${updatemode}">리뷰수정</a>
+														<a class="myreview_a_1" href="review_write?star=${myReview.gradepoint}&contentUpdate=${myReview.content}&rnum=${getRest.rnum}&updatemode=${updatemode}&rvnum=${myReview.rvnum}">리뷰수정</a>
 														<form class="myreview_formF" method="post">
 															<input class="myreview_input_1" type="hidden">
 															<input class="myreview_input_1" type="hidden">

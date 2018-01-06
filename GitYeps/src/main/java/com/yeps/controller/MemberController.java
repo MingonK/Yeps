@@ -987,5 +987,4 @@ public class MemberController {
 		mav.setViewName("member/memberPhotoList");
 		return mav;
 	}
-
 }
