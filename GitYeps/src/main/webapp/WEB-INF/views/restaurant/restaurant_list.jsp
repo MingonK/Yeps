@@ -236,7 +236,7 @@
 														</div>
 													<div class="price-category"style="clear: both;">
 														<span class="bullet-after">
-																<span class="business-attribute price-range" style="letter-spacing: 1px; white-space: nowrap;">${getRest.price }</span>
+																<span class="business-attribute price-range" style="letter-spacing: 1px; white-space: nowrap;">${dto.price }</span>
 														</span>
 														<span class="category-str-list">
 															<a href="#" style="color: #0073bb; cursor: pointer;">${dto.foodstyle}</a>
