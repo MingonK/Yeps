@@ -170,7 +170,7 @@ public class MemberController {
 				url = old_url;
 			}else {
 				url = "main";
-			}
+			} 
 			
 			mav.setViewName("message");
 			mav.addObject("msg", msg);
