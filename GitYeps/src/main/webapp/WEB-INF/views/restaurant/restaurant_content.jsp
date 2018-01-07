@@ -36,7 +36,9 @@
 							</div>
 							<div class="price-category">
 								<span class="bullet-after">
-       								 <span class="business-attribute price-range">${getRest.price}</span>
+       								 <span class="business-attribute price-range">
+       								 	<c:forEach begin="1" end="${getRest.price}">￦</c:forEach>
+       								 </span>
         						</span>
         						<span class="category-str-list" style="margin-right: 6px;">
 			                  	 	${getRest.foodstyle}
@@ -77,7 +79,6 @@
 						         	</svg>
 							  	</span> 
 							  	Add Photo
-							  	<a class="menu-explore js-menu-explore" href="restaurant_listMenu?rnum=${getRest.rnum}">모든 메뉴</a>
 						   	</a>
 							</span>
 				     	</div>
@@ -785,7 +786,9 @@
 							    </li>
 							    <li class="restContent-iconed-list-item" style="display: table;width: 100%;margin-bottom: 0;">
 						            <div class="restContent-iconed-list-avatar">
-						       		 	<span class="restContent-business-attribute price-range" data-remainder="">${getRest.price}</span>
+						       		 	<span class="restContent-business-attribute price-range" data-remainder="">
+						       		 		<c:forEach begin="1" end="${getRest.price}">￦</c:forEach>
+						       		 	</span>
 						            </div>
 						            <div class="restContent-iconed-list-story" style="    border-bottom: none;">
 						                <dl class="restContent-short-def-list" style="display: block;">
@@ -985,13 +988,6 @@
 											<dt class="restContent-attribute-key">테이블 수</dt>
 											<dd style="font-weight: bold;display: inline;">
 												${getRest.tablecount} (${getRest.standard}인 기준)
-											</dd>
-										</dl>
-										
-										<dl style="padding-bottom: 6px;display: block;">
-											<dt class="restContent-attribute-key">바쁜 시간</dt>
-											<dd style="font-weight: bold;display: inline;">
-												${getRest.busytime}
 											</dd>
 										</dl>
 									</div>
@@ -1217,7 +1213,7 @@
    });
    var week = new Array("sun","mon","tue","wed","thu","fri","sat")
    var d = new Date();
-   var day = d.getDate();
+   var day = d.getDate()-1;
    
 
    $(".today").text($('.'+week[day]+'').text());
