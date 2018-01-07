@@ -43,7 +43,6 @@ public class MemberController {
 	private MemberMapper memberMapper;
 	@Autowired
 	private RandomNum randomNum;
-
 	@Autowired
 	private MemberPhotoMapper memberPhotoMapper;
 	@Autowired
@@ -54,6 +53,32 @@ public class MemberController {
 	@RequestMapping(value = "/member_index")
 	public ModelAndView indexMember() {
 		return new ModelAndView("member/index");
+	}
+	
+	@RequestMapping(value = "/manager_managerPage")
+	public ModelAndView managerPage(HttpServletRequest req, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		String msg = null, url = null;
+		MemberDTO dto = (MemberDTO) session.getAttribute("memberinfo");
+		if(dto == null) {
+			msg = "회원관리권한이 없습니다.";
+			url = "main";
+			mav.setViewName("message");
+			mav.addObject("msg", msg);
+			mav.addObject("url", url);
+			return mav;
+		}
+		
+		if (!dto.getIsmaster().equals("y") && !dto.getIsmanager().equals("y")){
+			msg = "회원관리권한이 없습니다.";
+			url = "main";
+			mav.setViewName("message");
+			mav.addObject("msg", msg);
+			mav.addObject("url", url);
+			return mav;
+		}
+		mav.setViewName("manager/managerPage");
+		return mav;
 	}
 
 	@RequestMapping(value = "/member_manager")
@@ -120,6 +145,8 @@ public class MemberController {
 			map.put("yepsPager", yepsPager);
 			map.put("search", search);
 			map.put("searchString", searchString);
+			mav.addObject("count", count); // 레코드의 갯수
+			mav.addObject("yepsPager", yepsPager);
 			mav.addObject("map", map);
 			mav.setViewName("member/memberManager");
 		} else {
@@ -131,22 +158,6 @@ public class MemberController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/member_managerPage")
-	public ModelAndView managerPage(HttpServletRequest req, HttpSession session) {
-		ModelAndView mav = new ModelAndView();
-		String msg = null, url = null;
-		MemberDTO dto = (MemberDTO) session.getAttribute("memberinfo");
-		if (!dto.getIsmaster().equals("y") && !dto.getIsmanager().equals("y") || dto == null){
-			msg = "회원관리권한이 없습니다.";
-			url = "main";
-			mav.setViewName("message");
-			mav.addObject("msg", msg);
-			mav.addObject("url", url);
-			return mav;
-		}
-		mav.setViewName("manager/managerPage");
-		return mav;
-	}
 
 	@RequestMapping(value = "/member_join", method = RequestMethod.GET)
 	public ModelAndView joinMemberForm(HttpSession session, HttpServletRequest req) {

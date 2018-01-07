@@ -793,7 +793,7 @@
 	margin: 3px 0;
 }
 
-.review_of_the_day_writer_friend_count, .review_of_the_day_writer_review_count, .review_of_the_day_writer_is_elite {
+.review_of_the_day_writer_friend_count, .review_of_the_day_writer_review_count, .review_of_the_day_writer_is_elite, .review_of_the_day_writer_image_count {
 	color: #666;
 	display: inline;
     margin-right: 6px;

@@ -72,7 +72,7 @@ public class ReviewController {
 				mav.setViewName("restaurant_content");
 			}else {
 				msg = "리뷰 삭제성공!!";
-				url = "member_details";
+				url = "restaurant_content?rnum="+rnum;
 				mav.addObject("msg", msg);
 				mav.addObject("url", url);
 				mav.setViewName("message");
@@ -226,7 +226,34 @@ public class ReviewController {
 		MemberDTO loginMember = (MemberDTO) session.getAttribute("memberinfo");
 		ModelAndView mav = new ModelAndView();
 
-		if(mode.equals("write")) {
+		if(mode.equals("update")) {
+			int res = reviewMapper.updateReview(dto);
+			if(res > 0) {
+				mav.setViewName("redirect: restaurant_content?rnum=" + dto.getRnum());
+			} else {
+				mav.addObject("msg", "리뷰 등록에 실패했습니다. 잠시 후 다시 시도해주세요.");
+				mav.addObject("url", "restaurant_list");
+				mav.setViewName("message");
+			}
+
+			return mav;
+		} else {
+			if(loginMember == null) {
+				return new ModelAndView("redirect: main");
+			}
+			
+			ReviewDTO existMyReview = reviewMapper.findMyReview(dto.getRnum(), loginMember.getMnum());
+			
+			if(existMyReview != null) {
+				String url = null, msg = null;
+				url = "restaurant_list";
+				msg = "레스토랑당 리뷰는 한 개 씩만 작성 하실 수 있습니다.";
+				mav.addObject("url", url);
+				mav.addObject("msg", msg);
+				mav.setViewName("message");
+				return mav;
+			}
+			
 			int res = reviewMapper.insertReview(dto);
 			if(res > 0) {
 				loginMember.setReviewcount(loginMember.getReviewcount() + 1);
@@ -240,7 +267,7 @@ public class ReviewController {
 
 			List<RestaurantDTO> restaurantList = restaurantMapper.review_restaurantIMG();
 			if(loginMember != null) {
-				ReviewDTO existMyReview = null;
+				existMyReview = null;
 				for(Iterator<RestaurantDTO> it = restaurantList.iterator() ; it.hasNext() ; ){
 					RestaurantDTO rdto = it.next();
 					int rnum = rdto.getRnum();
@@ -260,17 +287,6 @@ public class ReviewController {
 			mav.addObject("rname", rname);
 			mav.addObject("mode", "write");
 			mav.setViewName("review/restaurantIMG");
-			return mav;
-		} else {
-			int res = reviewMapper.updateReview(dto);
-			if(res > 0) {
-				mav.setViewName("redirect: restaurant_content?rnum=" + dto.getRnum());
-			} else {
-				mav.addObject("msg", "리뷰 등록에 실패했습니다. 잠시 후 다시 시도해주세요.");
-				mav.addObject("url", "restaurant_list");
-				mav.setViewName("message");
-			}
-
 			return mav;
 		}
 	}
@@ -350,30 +366,46 @@ public class ReviewController {
 	///////////////////1월 4일 상우 
 	@RequestMapping(value="/review_restaurantFind")
 	public ModelAndView review_restaurantFind(HttpServletRequest req, 
-			@RequestParam(defaultValue = "1") int curPage) {
+			@RequestParam(defaultValue = "1") int curPage, HttpSession session) {
 
 		//★일단 Find값으로만 검색했을때의 값을 불러오게 만들어놨음 
 		//Near도 같이 검색되게끔해야하는데 디폴트값을 Korea, Seoul로 해놨기때문에 굳이 near은 검색안해될것같긴함.
 		String SearchFind = req.getParameter("SearchFind");
-		//String SearchNear = req.getParameter("SearchNear");
-
-		int count = 0;
+		String SearchNear = req.getParameter("SearchNear");
 		if(SearchFind == null || SearchFind.trim().equals("")) {
-			count = 0;
-		}else {
-			count = restaurantMapper.get_review_restaurantFind_Count(SearchFind);
-			System.out.println("count 출력후 :" + count);
+			SearchFind = null;
 		}
+		if(SearchNear == null || SearchNear.trim().equals("")) {
+			SearchNear = null;
+		}
+
+		HashMap<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("SearchFind", SearchFind);
+		searchMap.put("SearchNear", SearchNear);
+
+		int count = restaurantMapper.get_review_restaurantFind_Count(searchMap);
 
 		int pageScale = 10;
 		int blockScale = 10;
 		YepsPager yepsPager = new YepsPager(count, curPage, pageScale, blockScale);
 		int start = yepsPager.getPageBegin();
 		int end = yepsPager.getPageEnd();
-
 		int num = count - pageScale * (curPage - 1) + 1;
-		List<RestaurantDTO> Find_Restaurant_Review_Get_rdto = restaurantMapper.review_restaurantFind(start, end, SearchFind);
-
+		List<RestaurantDTO> Find_Restaurant_Review_Get_rdto = restaurantMapper.review_restaurantFind(start, end, searchMap);
+		List<String> isExistReviewList = new ArrayList<String>(); 
+		MemberDTO loginDTO = (MemberDTO)session.getAttribute("memberinfo");
+		if(loginDTO != null) {
+			for(RestaurantDTO rDTO: Find_Restaurant_Review_Get_rdto) {
+				int rnum = rDTO.getRnum();
+				int mnum = loginDTO.getMnum();
+				ReviewDTO myReview = reviewMapper.findMyReview(rnum, mnum);
+				if(myReview != null) {
+					isExistReviewList.add("y");
+				}else {
+					isExistReviewList.add("n");
+				}
+			}
+		}
 		//System.out.println("rest_filename출력:" +Find_Restaurant_Review_Get_rdto.get(0).getRest_filename());
 
 		//getRnumList reviewCount StarAvg 
@@ -394,12 +426,15 @@ public class ReviewController {
 		map.put("yepsPager", yepsPager);
 
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("SearchFind", SearchFind);
+		mav.addObject("SearchNear", SearchNear);
+		mav.addObject("isExistReviewList",isExistReviewList);
 		mav.addObject("num", num);			
 		mav.addObject("map", map);			
 		mav.addObject("reviewCount", reviewCount);
 		mav.addObject("StarAvg", StarAvg);
 		mav.addObject("SearchFind", SearchFind);
-		mav.setViewName("/review/restaurantFind");
+		mav.setViewName("review/restaurantFind");
 		return mav;
 	}
 

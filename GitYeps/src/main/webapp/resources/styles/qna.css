@@ -22,6 +22,10 @@ a {
    color: #0073bb; font: inherit; text-decoration: none;
 }
 
+#eventReview{
+	font-family: cambria; color: #0073bb; font: inherit; text-decoration: none;
+}
+
 li {
    padding: 0; margin: 0; list-style: none; padding-left: 0px;
 }

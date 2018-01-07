@@ -37,9 +37,6 @@ import com.yeps.service.YepsPager;
 
 @Controller
 public class RestaurantController {
-	@Resource(name = "uploadPath")
-	private String uploadPath;
-
 	@Autowired
 	private RestaurantMapper restaurantMapper;
 	@Autowired

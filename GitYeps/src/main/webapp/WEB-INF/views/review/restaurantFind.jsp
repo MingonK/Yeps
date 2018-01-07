@@ -59,7 +59,7 @@
 															Find
 														</div>
 														<div class="resIMG_div_13">
-															<input class="resIMG_input_1" type="text" id="" name="SearchFind" value="${SearchFind}" autocomplete="off">
+															<input class="resIMG_input_1" type="text" name="SearchFind" value="${SearchFind}" autocomplete="off">
 														</div>
 													</div>	
 												</div>
@@ -75,7 +75,7 @@
 													<div class="resIMG_div_18">
 														<div class="resIMG_div_20">Near</div>
 														<div class="resIMG_div_21">
-															<input class="resIMG_input_2" type="text" id="" name="" value="Korea, Seoul" autocomplete="off" >
+															<input class="resIMG_input_2" type="text" name="SearchNear" value="${SearchNear}" autocomplete="off" >
 														</div>
 													</div>
 												</div>
@@ -135,7 +135,7 @@
    												<div class="resFind_div8">
    													<div class="resFind_div9">
    														<div class="resFind_div10">
-   															<img class="resFind_img_1" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${rdto.rest_filename}">
+   															<img class="resFind_img_1" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${rdto.fileDTO.filename}">
    														</div>
    													</div>
    													<div class="resFind_div11">
@@ -161,22 +161,46 @@
    																$$ － ${rdto.foodstyle}
    															</span>
    														</div>
-   														<a class="resFind_a_1" href="/writeareview/biz/okfeUjIixTLjwZ-LnDv1dA?return_url=%2Fwriteareview%2Fsearch%3Fwar_desc%3Dwow%26war_loc%3DClifton">
-   															<span class="resFind_span_4" aria-hidden="true">
-   																<svg class="resFind_svg_1">
-   																	<path d="M8.94 1l2.373 5.387 5.187.758-3.75 3.67.928 5.077-4.737-2.907L4.367 16l.885-5.186-3.75-3.67 5.187-.757L8.94 1z"></path>
-   																</svg>
-   															</span>
-   															Write a Review
-   														</a>
-   														<a class="resFind_a_2" href="review_write?rnum=${rdto.rnum}">
-   															<span class="resFind_span_5">
-   																<svg class="resFind_svg_2">
-   																	<path d="M8.94 1l2.373 5.387 5.187.758-3.75 3.67.928 5.077-4.737-2.907L4.367 16l.885-5.186-3.75-3.67 5.187-.757L8.94 1z"></path>
-   																</svg>
-   															</span>
-   															Write a Review
-   														</a>													
+   															<c:choose>
+	   															<c:when test="${!empty sessionScope.memberinfo}">
+				   													<c:if test="${isExistReviewList.get(status.index) == 'n'}">
+				   														<a class="resFind_a_1" href="/writeareview/biz/okfeUjIixTLjwZ-LnDv1dA?return_url=%2Fwriteareview%2Fsearch%3Fwar_desc%3Dwow%26war_loc%3DClifton">
+				   															<span class="resFind_span_4" aria-hidden="true">
+				   																<svg class="resFind_svg_1">
+				   																	<path d="M8.94 1l2.373 5.387 5.187.758-3.75 3.67.928 5.077-4.737-2.907L4.367 16l.885-5.186-3.75-3.67 5.187-.757L8.94 1z"></path>
+				   																</svg>
+				   															</span>
+				   															Write a Review
+				   														</a>
+				   														<a class="resFind_a_2" href="review_write?rnum=${rdto.rnum}">
+				   															<span class="resFind_span_5">
+				   																<svg class="resFind_svg_2">
+				   																	<path d="M8.94 1l2.373 5.387 5.187.758-3.75 3.67.928 5.077-4.737-2.907L4.367 16l.885-5.186-3.75-3.67 5.187-.757L8.94 1z"></path>
+				   																</svg>
+				   															</span>
+				   															Write a Review
+				   														</a>
+				   													</c:if>
+	   															</c:when>
+	   															<c:otherwise>
+	   																<a class="resFind_a_1" href="/writeareview/biz/okfeUjIixTLjwZ-LnDv1dA?return_url=%2Fwriteareview%2Fsearch%3Fwar_desc%3Dwow%26war_loc%3DClifton">
+			   															<span class="resFind_span_4" aria-hidden="true">
+			   																<svg class="resFind_svg_1">
+			   																	<path d="M8.94 1l2.373 5.387 5.187.758-3.75 3.67.928 5.077-4.737-2.907L4.367 16l.885-5.186-3.75-3.67 5.187-.757L8.94 1z"></path>
+			   																</svg>
+			   															</span>
+			   															Write a Review
+			   														</a>
+			   														<a class="resFind_a_2" href="review_write?rnum=${rdto.rnum}">
+			   															<span class="resFind_span_5">
+			   																<svg class="resFind_svg_2">
+			   																	<path d="M8.94 1l2.373 5.387 5.187.758-3.75 3.67.928 5.077-4.737-2.907L4.367 16l.885-5.186-3.75-3.67 5.187-.757L8.94 1z"></path>
+			   																</svg>
+			   															</span>
+			   															Write a Review
+			   														</a>
+	   															</c:otherwise>
+   															</c:choose>									
    													</div>
    												</div>
    											</div>

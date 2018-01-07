@@ -1055,6 +1055,15 @@
 													</span>
 													<b>${review_of_the_day_reviewDTO.memberDTO.reviewcount}</b>
 												</li>
+												
+												<li class="review_of_the_day_writer_image_count">
+													<span class="icon 18x18_review_icon">
+														<svg style="fill: #f15c00; width: 18px; height: 18px;">
+															<path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 6.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path>
+														</svg>
+													</span>
+													<b>${review_of_the_day_reviewDTO.memberDTO.imagecount}</b>
+												</li>
 											</ul>
 											<div class="where_write_review">
 												Wrote a review for

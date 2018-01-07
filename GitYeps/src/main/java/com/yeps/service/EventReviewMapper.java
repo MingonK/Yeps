@@ -32,8 +32,11 @@ public class EventReviewMapper {
 		return sqlSession.delete("deleteAllEventReivew", evnum);
 	}
 	
-	public List<EventReviewDTO> eventReviewList(){
-		return sqlSession.selectList("eventReviewList");
+	public List<EventReviewDTO> eventReviewList(int start, int end){
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		return sqlSession.selectList("eventReviewList", map);
 	}
 	
     public int deleteEventReview(int evrvnum) {
