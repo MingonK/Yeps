@@ -18,7 +18,7 @@
 				<div class="event_list_section_header_location_bar_inner">
 					<div class="event_list_section_header_location_left">
 						<c:if test="${empty sessionScope.memberinfo}">
-							<h1>서울특별시</h1>
+							<h1>${search}</h1>
 						</c:if>
 						<c:if test="${!empty sessionScope.memberinfo}">
 							<h1>
@@ -86,15 +86,35 @@
 							<div class="popular_cities">
 								<div class="popular_cities_left" style="vertical-align: top;">
 									<!-- 반복문으로 16개 도시 출력 -->
-									<a href="#" style="margin-bottom: 6px !important; display: block !important;">도시이름</a>
+									<a href="event_list?mode=${mode}&search=종로" style="margin-bottom: 6px !important; display: block !important;">종로</a>
+								</div>
+								<div class="popular_cities_left" style="vertical-align: top;">
+									<a href="event_list?mode=${mode}&search=양화로" style="margin-bottom: 6px !important; display: block !important;">홍대</a>
+								</div>
+								<div class="popular_cities_left" style="vertical-align: top;">
+									<a href="event_list?mode=${mode}&search=서초" style="margin-bottom: 6px !important; display: block !important;">강남</a>
+								</div>
+								<div class="popular_cities_left" style="vertical-align: top;">
+									<a href="event_list?mode=${mode}&search=이태원" style="margin-bottom: 6px !important; display: block !important;">이태원</a>
+								</div>
+								<div class="popular_cities_left" style="vertical-align: top;">
+									<a href="event_list?mode=${mode}&search=충무로" style="margin-bottom: 6px !important; display: block !important;">명동</a>
+								</div>
+								<div class="popular_cities_left" style="vertical-align: top;">
+									<a href="event_list?mode=${mode}&search=부산진구" style="margin-bottom: 6px !important; display: block !important;">서면</a>
+								</div>
+								<div class="popular_cities_left" style="vertical-align: top;">
+									<a href="event_list?mode=${mode}&search=속초" style="margin-bottom: 6px !important; display: block !important;">속초</a>
+								</div>
+								<div class="popular_cities_left" style="vertical-align: top;">
+									<a href="event_list?mode=${mode}&search=동구" style="margin-bottom: 6px !important; display: block !important;">동대구</a>
 								</div>
 								
 								<div class="popular_cities_right" style="vertical-align: top;">
-									<!-- 반복문으로 16개 도시 출력 -->
-									<a href="#" style="margin-bottom: 6px !important; display: block !important;">도시이름</a>
-									<strong style="font-weight: bold;">
+									<a href="event_list?mode=${mode}&search=광진구" style="margin-bottom: 6px !important; display: block !important;">건대</a>
+									<!-- <strong style="font-weight: bold;">
 										<a href="#">더 많은 도시보기 »</a>
-									</strong>
+									</strong> -->
 								</div>
 							</div>
 						</div>
@@ -109,7 +129,8 @@
 							<div class="search_different_city">
 								<form name="search_different_city" action="#" method="post" id="search_different_location" style="margin-bottom: 18px;">
 									<div class="search_different_city_input_wrap" style="width: 100%;">
-										<input type="text" placeholder name="search_location" value>
+										<input type="text" placeholder name="search" value="${search}">
+										<input type="hidden" placeholder name="mode" value="${mode}">
 									</div>
 									
 									<div class="search_different_city_input_wrap">
@@ -215,91 +236,91 @@
 										<div class="event_browse_dropdown_menu_inner">
 											<ul class="event_browse_dropdown_menu_group">
 												<li class="event_browse_dropdown_menu_item">
-													<a href="event_list" class="dropdown_menu_item_link">
+													<a href="event_list?search=${search}" class="dropdown_menu_item_link">
 														<span style="display: inline-block;">
 															전체 목록
 														</span>
 													</a>
 												</li>
 												<li class="event_browse_dropdown_menu_item">
-													<a href="event_list?mode=music_concert" class="dropdown_menu_item_link">
+													<a href="event_list?mode=music_concert&search=${search}" class="dropdown_menu_item_link">
 														<span style="display: inline-block;">
 															음악 & 콘서트
 														</span>
 													</a>
 												</li>
 												<li class="event_browse_dropdown_menu_item">
-													<a href="event_list?mode=visualart" class="dropdown_menu_item_link">
+													<a href="event_list?mode=visualart&search=${search}" class="dropdown_menu_item_link">
 														<span style="display: inline-block;">
 															전시회
 														</span>
 													</a>
 												</li>
 												<li class="event_browse_dropdown_menu_item">
-													<a href="event_list?mode=film" class="dropdown_menu_item_link">
+													<a href="event_list?mode=film&search=${search}" class="dropdown_menu_item_link">
 														<span style="display: inline-block;">
 															영화 & 시사회
 														</span>
 													</a>
 												</li>
 												<li class="event_browse_dropdown_menu_item">
-													<a href="event_list?mode=book" class="dropdown_menu_item_link">
+													<a href="event_list?mode=book&search=${search}" class="dropdown_menu_item_link">
 														<span style="display: inline-block;">
 															도서 & 출판
 														</span>
 													</a>
 												</li>
 												<li class="event_browse_dropdown_menu_item">
-													<a href="event_list?mode=fashion" class="dropdown_menu_item_link">
+													<a href="event_list?mode=fashion&search=${search}" class="dropdown_menu_item_link">
 														<span style="display: inline-block;">
 															패션
 														</span>
 													</a>
 												</li>
 												<li class="event_browse_dropdown_menu_item">
-													<a href="event_list?mode=food" class="dropdown_menu_item_link">
+													<a href="event_list?mode=food&search=${search}" class="dropdown_menu_item_link">
 														<span style="display: inline-block;">
 															음식
 														</span>
 													</a>
 												</li>
 												<li class="event_browse_dropdown_menu_item">
-													<a href="event_list?mode=festival" class="dropdown_menu_item_link">
+													<a href="event_list?mode=festival&search=${search}" class="dropdown_menu_item_link">
 														<span style="display: inline-block;">
 															축제 & 행사
 														</span>
 													</a>
 												</li>
 												<li class="event_browse_dropdown_menu_item">
-													<a href="event_list?mode=sports_activity" class="dropdown_menu_item_link">
+													<a href="event_list?mode=sports_activity&search=${search}" class="dropdown_menu_item_link">
 														<span style="display: inline-block;">
 															스포츠 & 야외활동
 														</span>
 													</a>
 												</li>
 												<li class="event_browse_dropdown_menu_item">
-													<a href="event_list?mode=nightlife" class="dropdown_menu_item_link">
+													<a href="event_list?mode=nightlife&search=${search}" class="dropdown_menu_item_link">
 														<span style="display: inline-block;">
 															야간 문화활동
 														</span>
 													</a>
 												</li>
 												<li class="event_browse_dropdown_menu_item">
-													<a href="event_list?mode=family_kids" class="dropdown_menu_item_link">
+													<a href="event_list?mode=family_kids&search=${search}" class="dropdown_menu_item_link">
 														<span style="display: inline-block;">
 															가족 & 어린이
 														</span>
 													</a>
 												</li>
 												<li class="event_browse_dropdown_menu_item">
-													<a href="event_list?mode=other" class="dropdown_menu_item_link">
+													<a href="event_list?mode=other&search=${search}" class="dropdown_menu_item_link">
 														<span style="display: inline-block;">
 															기타
 														</span>
 													</a>
 												</li>
 												<li class="event_browse_dropdown_menu_item">
-													<a href="event_list?mode=free" class="dropdown_menu_item_link">
+													<a href="event_list?mode=free&search=${search}" class="dropdown_menu_item_link">
 														<span style="display: inline-block;">
 															무료 이벤트
 														</span>

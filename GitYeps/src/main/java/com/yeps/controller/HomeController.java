@@ -87,7 +87,17 @@ public class HomeController {
 						if(addr.length >=3) {
 							value= addr[1] + " " + addr[2];
 						}
+						
+						boolean isExistlocation = false;
+						for( String location : locationList) {
+							if(location.equals(value)) {
+								isExistlocation = true;
+							}
+						}
+						if(isExistlocation == false) {
 						locationList.add(value);
+						}
+						
 						j+=1;
 						if(j == 6) {
 							break;
@@ -176,7 +186,16 @@ public class HomeController {
 						if(addr.length >=3) {
 							value= addr[1] + " " +addr[2];
 						}
+						boolean isExistlocation = false;
+						for( String location : locationList) {
+							if(location.equals(value)) {
+								isExistlocation = true;
+							}
+						}
+						if(isExistlocation == false) {
 						locationList.add(value);
+						}
+						
 						j+=1;
 						if(j == 6) {
 							break;
