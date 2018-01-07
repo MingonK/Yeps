@@ -418,7 +418,7 @@ function test() {
 									 <label for="attr_BusinessName" class="restInsert-label-bold">사진 선택</label>
 						               <div class="filebox bs3-primary preview-image" style="margin: 6px 0 18px; width: 100%; height: 30px; display: block; text-align:left;">
 						                  <label for="input_file" id="input_file_label"style="width: 80px; color: black; display: inline-block; padding: .5em .75em; font-size: 14px; vertical-align: middle; text-align: center; cursor: pointer; border: 1px solid #999; border-radius: 3px;">사진 올리기</label>
-						                  <input type="file" id="input_file" class="upload-hidden" name="filename" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0;" >
+						                  <input type="file" id="input_file" class="upload-hidden" name="rest_filename" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0;" >
 						               </div> 
 									</li>
 									<li class="restInsert-list">
@@ -487,7 +487,7 @@ function test() {
 													</select>
 												</li>
 												<li class="restInsert-li">
-													<button type="button" value="submit" class="restInsert-button " style="padding: 5px 8px;font-size: 12px;line-height: 1.5em;border:1px solid #ccc;display:absolute;" onclick="food_add()">
+													<button type="button" value="submit" class="restInsert-button " style="padding: 5px 8px;font-size: 12px;line-height: 1.5em;border:1px solid #ccc;" onclick="food_add()">
 														<span>Add</span>
 													</button>
 												</li>
