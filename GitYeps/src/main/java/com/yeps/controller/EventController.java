@@ -632,4 +632,12 @@ public class EventController {
 		mav.setViewName("historyBack");
 		return mav;
 	}
+	
+
+	@RequestMapping(value = "/event_photo_manage")
+	public ModelAndView event_photo_manage() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("manager/event_photoManager");
+		return mav;
+	}
 }

@@ -5,6 +5,7 @@
 <link rel="shortcut icon" type="image⁄x-icon" href="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/favicon.ico">
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css?ver=1"/>"/>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/mainPage.css?ver=1"/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css?ver=1"/>"/>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/message.css?ver=2"/>"/>  
 <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 <script src="//code.jquery.com/jquery.min.js"></script>
@@ -420,7 +421,7 @@
                                              </li>
                                              <c:if test="${memberinfo.ismaster eq 'y' || memberinfo.ismanager eq 'y'}">
                                              <li class="drop-down-menu-link">
-                                                <a class="js-analytics-click arrange arrange--middle arrange--6" href="member_manager">
+                                                <a class="js-analytics-click arrange arrange--middle arrange--6" href="manager_managerPage">
                                                    <strong class="arrange_unit">
                                                       <span aria-hidden="true" style="width: 24px; height: 24px;" class="icon icon--24-cash-back icon--size-24 u-space-r1">
                                                          <svg class="icon_svg">
