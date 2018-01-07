@@ -1476,6 +1476,10 @@
 	color: #333;
 }
 
+.pre_div1 a:hover {
+	text-decoration: underline;
+}
+
 .pre_div2 {
 	padding-top: 15px;
 	padding-bottom: 36px;

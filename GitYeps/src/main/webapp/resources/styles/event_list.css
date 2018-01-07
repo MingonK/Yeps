@@ -115,6 +115,9 @@
 	margin-bottom: 12px;
 	margin-top: 12px;
 	font-size: 13px;
+	
+	transition: padding-top 0.2s ease-in-out, max-height 0.2s ease-in-out, opacity 0.2s ease-in-out;
+    animation-delay: 0.1s;
 }
 		
 .more_cities_island_wrap {
