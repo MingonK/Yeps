@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yeps.model.FileDTO;
 import com.yeps.model.RestaurantDTO;
 import com.yeps.model.ReviewDTO;
+import com.yeps.service.FileMapper;
 import com.yeps.service.RestaurantMapper;
 import com.yeps.service.ReviewMapper;
 
@@ -30,6 +32,8 @@ public class HomeController {
 	private ReviewMapper reviewMapper;
 	@Autowired
 	private RestaurantMapper restaurantMapper;
+	@Autowired
+	private FileMapper fileMapper;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(Locale locale, Model model, HttpServletRequest req) {
@@ -51,7 +55,12 @@ public class HomeController {
 		List<Integer> gethotAndNewReview = reviewMapper.gethotAndNewReview();
 		Set<RestaurantDTO> hotAndNewSet = new LinkedHashSet<RestaurantDTO>();
 		for (int i = 0; i < 3; i++) {
-			hotAndNewSet.add(restaurantMapper.getHotAndNewRestaurant(gethotAndNewReview.get(i)));
+				RestaurantDTO dto = restaurantMapper.getHotAndNewRestaurant(gethotAndNewReview.get(i));
+			if(dto != null) {
+				hotAndNewSet.add(dto);
+			} else {
+				hotAndNewSet.add(dto);
+			}
 		}
 
 		List<Integer> reviewCount = new ArrayList<Integer>();
@@ -90,6 +99,11 @@ public class HomeController {
 			}
 		}
 		
+		FileDTO randomPhoto = fileMapper.getRandomRestaurantPhoto();
+		
+		//랜덤 사진
+		mav.addObject("randomPhoto", randomPhoto);
+		
 		//최근 검색 리스트
 		mav.addObject("locationList", locationList);
 
@@ -127,7 +141,12 @@ public class HomeController {
 		List<Integer> gethotAndNewReview = reviewMapper.gethotAndNewReview();
 		Set<RestaurantDTO> hotAndNewSet = new LinkedHashSet<RestaurantDTO>();
 		for (int i = 0; i < 3; i++) {
-			hotAndNewSet.add(restaurantMapper.getHotAndNewRestaurant(gethotAndNewReview.get(i)));
+				RestaurantDTO dto = restaurantMapper.getHotAndNewRestaurant(gethotAndNewReview.get(i));
+			if(dto != null) {
+				hotAndNewSet.add(dto);
+			} else {
+				hotAndNewSet.add(dto);
+			}
 		}
 
 		List<Integer> reviewCount = new ArrayList<Integer>();
@@ -165,7 +184,14 @@ public class HomeController {
 				}
 			}
 		}
+		FileDTO randomPhoto = fileMapper.getRandomRestaurantPhoto();
+		int randomPhoto_reivewCount = reviewMapper.getRestaurantReviewCount(randomPhoto.getRnum());
+		int randomPhoto_starAvg = reviewMapper.getStarAvg(randomPhoto.getRnum());
 		
+		//랜덤 사진
+		mav.addObject("randomPhoto", randomPhoto);
+		mav.addObject("randomPhoto_reivewCount", randomPhoto_reivewCount);
+		mav.addObject("randomPhoto_starAvg", randomPhoto_starAvg);
 		//최근 검색 리스트
 		mav.addObject("locationList", locationList);
 

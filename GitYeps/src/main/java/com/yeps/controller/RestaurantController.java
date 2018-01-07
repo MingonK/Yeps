@@ -261,7 +261,6 @@ public class RestaurantController {
 		ReviewDTO existMyReview = null;
 		if (loginMember != null) {
 			existMyReview = reviewMapper.findMyReview(Integer.parseInt(rnum), loginMember.getMnum());
-			 System.out.println(existMyReview.getRvnum()); 
 		}
 
 		if (existMyReview != null) {
@@ -493,9 +492,6 @@ public class RestaurantController {
 		RestaurantDTO restaurantDTO = restaurantMapper.getRest(rnum);
 		HttpSession session = req.getSession();
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
-		if (memberDTO == null) {
-			return new ModelAndView("redirect: member_login");
-		}
 
 		int allPhotoCount = fileMapper.getAllFileCount(rnum);
 		int myPhotoCount = 0;

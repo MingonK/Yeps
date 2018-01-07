@@ -4,7 +4,9 @@
 <html>
 <head>
 <title>findPw</title>
+<link rel="shortcut icon" type="image⁄x-icon" href="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/favicon.ico">
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/member.css"/>"/>
 </head>
 <body>
 	<c:choose>

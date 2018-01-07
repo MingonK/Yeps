@@ -19,7 +19,7 @@
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 </head>
 <body>
-	<div class="mainpage_header_container" style="background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_large_assets/8a6cc705477a/assets/img/home/hero_photos/uteUmycsbh0UibXk-At-3A.jpg);">
+	<div class="mainpage_header_container" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${randomPhoto.filename});">
 		<div class="mainpage_header_content_container">
 			<div class="mainpage_header_top" style="height: 40px;">
 				<div class="mainpage_header_top_wrap">
@@ -111,7 +111,7 @@
                                                 			<img class="photo-box-img" height="90" width="90" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png">
                                              			</c:when>
                                              			<c:otherwise>
-                                                			<img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${mainPhoto.filename}" alt="member_main_photo" id="photo_box_img" width="90px" height="90px">
+                                                			<img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${mainPhoto.member_filename}" alt="member_main_photo" id="photo_box_img" width="90px" height="90px">
                                              			</c:otherwise>
                                           			</c:choose>
                                        			</span>
@@ -133,7 +133,7 @@
                                                             		   <img class="photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" width="60">
                                                            			</c:when>
                                                             		<c:otherwise>
-                                                               			<img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${mainPhoto.filename}" alt="member_main_photo" id="photo_box_img" width="60px" height="60px">
+                                                               			<img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${mainPhoto.member_filename}" alt="member_main_photo" id="photo_box_img" width="60px" height="60px">
                                                             		</c:otherwise>
                                                          		</c:choose>
 		                                                      </a>
@@ -610,9 +610,9 @@
 				<div class="mainpage_header_inner_bottom" style="text-align: center;">
 					<div class="mainpage_header_bottom_text_name" style="display:inline-block;">
 						<span>
-							<a href="#" class="mainpage_header_recommend_name">
+							<a href="restaurant_content?rnum=${randomPhoto.rnum}" class="mainpage_header_recommend_name">
 								<span>
-									사진이 찍힌 레스토랑 명
+									${randomPhoto.restaurantDTO.rname}
 								</span>
 							</a>
 						</span>
@@ -623,18 +623,20 @@
 					<div>
 						<p style="margin-bottom: 12px;">
 							photo by
-							<a href="#" class="mainpage_header_bottom_photo_owner_link">
-								사진 찍은 사람
+							<a href="member_details?mnum=${randomPhoto.mnum}" class="mainpage_header_bottom_photo_owner_link">
+								<c:if test="${empty randomPhoto.memberDTO.nickname}">
+									${randomPhoto.memberDTO.email}
+								</c:if>
+								<c:if test="${!empty randomPhoto.memberDTO.nickname}">
+									${randomPhoto.memberDTO.nickname}
+								</c:if>
 							</a>
 						</p>
 					</div>
-					 
 				</div>
 			</div>
 		</div>
 	</div>
-
-
 
 
 	<div class="mainpage_container">
@@ -648,24 +650,11 @@
 							<!-- 아마 최신 검색 리스트 가져와서 반복문으로 6개 돌린 듯 -->
 								<c:forEach var="location" items="${locationList}">
 									<li class="mainpage_location_bar_item">
-										<a href="#" class="mainpage_location_bar_item_link">
+										<a href="yeps_main_saerch?location=${location}" class="mainpage_location_bar_item_link">
 											<span class="mainpage_location_bar_item_label">${location}</span>
 										</a>
 									</li>
 								</c:forEach>
-								<!-- 아마 최신 검색 리스트 가져와서 반복문으로 6개 돌린 듯 -->
-								<li class="mainpage_location_bar_item">
-									<a href="#" class="mainpage_location_bar_item_link">
-										<span style="width: 18px; height: 18px;" class="icon mainpage_18x18_search_small_icon">
-											<svg class="icon_svg" height="100%" viewBox="0 0 18 18" width="100%">
-												<path d="M15.913 14.224a1.324 1.324 0 0 0-.3-.466h.01l-3.378-3.376a5.49 5.49 0 0 0 .802-2.857 5.523 5.523 0 1 0-5.522 5.52 5.49 5.49 0 0 0 2.856-.8l3.37 3.368.006.003a1.364 1.364 0 0 0 .93.384C15.41 16 16 15.41 16 14.684c0-.163-.032-.317-.086-.46zM7.525 10.94a3.422 3.422 0 0 1-3.418-3.416 3.422 3.422 0 0 1 3.418-3.417 3.422 3.422 0 0 1 3.416 3.417 3.42 3.42 0 0 1-3.413 3.416z"></path>
-											</svg>
-										</span>
-										<span class="mainpage_more_city">
-											더 보기
-										</span>
-									</a>
-								</li>
 							</ul>
 						</div>
 					</div>
@@ -683,17 +672,17 @@
 						<div class="mainpage_new_businesses">
 							<div class="mainpage_new_businesses_card">
 								<div class="mainpage_new_businesses_card_photo">
-								<c:if test="${empty RestaurantDTO.rest_filename}">
+								<c:if test="${empty RestaurantDTO.fileDTO.filename}">
 									<div class="mainpage_new_businesses_photo_box" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png);">
 										<a href="restaurant_content?rnum=${RestaurantDTO.rnum}" style="display: block;" class="new_businesses_photo_box_link">
 											<img class="photo_box_img" height="400" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png" width="600">
 										</a>
 									</div>
 								</c:if>
-								<c:if test="${!empty RestaurantDTO.rest_filename}">
-									<div class="mainpage_new_businesses_photo_box" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${RestaurantDTO.rest_filename});">
+								<c:if test="${!empty RestaurantDTO.fileDTO.filename}">
+									<div class="mainpage_new_businesses_photo_box" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${RestaurantDTO.fileDTO.filename});">
 										<a href="restaurant_content?rnum=${RestaurantDTO.rnum}" style="display: block;" class="new_businesses_photo_box_link">
-											<img class="photo_box_img" height="400" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${RestaurantDTO.rest_filename}" width="600">
+											<img class="photo_box_img" height="400" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${RestaurantDTO.fileDTO.filename}" width="600">
 										</a>
 									</div>
 								</c:if>
@@ -721,13 +710,13 @@
 									
 									<div class="new_business_price_foodstyle">
 										<!-- 가격표시 없으면 표시 안함 -->
-										<span>
+										<span class="bullet-after">
 											<span style="letter-spacing: 1px; white-space: nowrap;">
-												가격범위 표시
+												${RestaurantDTO.price}
 											</span>
 										</span>
 										<span>
-											푸드스타일
+											${RestaurantDTO.foodstyle}
 										</span>
 									</div>
 									
@@ -747,284 +736,279 @@
 							</div>
 						</div>
 						</c:forEach>					
-				</div>
+					</div>
 				
-				<div style="margin-top: 12px!important; text-align: center!important;">
-					<a href="#">더 많은 최신 식당 보기</a>
+					<div style="margin-top: 12px!important; text-align: center!important;">
+						<a href="#">더 많은 최신 식당 보기</a>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 	
-	<div class="mainpage_browse_categories">
-		<div class="mainpage_browse_categories_content_container">
-			<div class="browse_categories_inner_container">
-				<div class="browse_categories_section">
-					<h2 class="browes_categories_section_header">Browse Businesses by Category</h2>
-					
-					<div class="mainpage_browes_categories_content">
-						<div class="mainpage_browes_categories_content_partial_wrap">
-							<div class="mainpage_browes_categories_content_unit">
-								<a href="restaurant_list" class="mainpage_browes_categories_content_link">
-									<img class="mainpage_browes_categories_content_img"  width="72" src="https://s3-media1.fl.yelpcdn.com/assets/srv0/homepage/80b92cd513f0/assets/img/categories/72x72_restaurants.png">
-									<h3 class="mainpage_browes_categories_content_title">Restaurants</h3>
-								</a>
-							</div>
+		<div class="mainpage_browse_categories">
+			<div class="mainpage_browse_categories_content_container">
+				<div class="browse_categories_inner_container">
+					<div class="browse_categories_section">
+						<h2 class="browes_categories_section_header">Browse Businesses by Category</h2>
+			
+						<div class="mainpage_browes_categories_content">
+							<div class="mainpage_browes_categories_content_partial_wrap">
+								<div class="mainpage_browes_categories_content_unit">
+									<a href="restaurant_list" class="mainpage_browes_categories_content_link">
+										<img class="mainpage_browes_categories_content_img"  width="72" src="https://s3-media1.fl.yelpcdn.com/assets/srv0/homepage/80b92cd513f0/assets/img/categories/72x72_restaurants.png">
+										<h3 class="mainpage_browes_categories_content_title">Restaurants</h3>
+									</a>
+								</div>
 							
-							<div class="mainpage_browes_categories_content_unit">
-								<a href="#" class="mainpage_browes_categories_content_link">
-									<img class="mainpage_browes_categories_content_img"  width="72" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/homepage/ad1f85392c04/assets/img/categories/72x72_shopping.png">
-									<h3 class="mainpage_browes_categories_content_title">Shopping</h3>
-								</a>
-							</div>
+								<div class="mainpage_browes_categories_content_unit">
+									<a href="#" class="mainpage_browes_categories_content_link">
+										<img class="mainpage_browes_categories_content_img"  width="72" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/homepage/ad1f85392c04/assets/img/categories/72x72_shopping.png">
+										<h3 class="mainpage_browes_categories_content_title">Shopping</h3>
+									</a>
+								</div>
 							
-							<div class="mainpage_browes_categories_content_unit">
-								<a href="#" class="mainpage_browes_categories_content_link">
-									<img class="mainpage_browes_categories_content_img"  width="72" src="https://s3-media1.fl.yelpcdn.com/assets/srv0/homepage/4ee31d03d5b2/assets/img/categories/72x72_nightlife.png">
-									<h3 class="mainpage_browes_categories_content_title">Nightlife</h3>
-								</a>
-							</div>
+								<div class="mainpage_browes_categories_content_unit">
+									<a href="#" class="mainpage_browes_categories_content_link">
+										<img class="mainpage_browes_categories_content_img"  width="72" src="https://s3-media1.fl.yelpcdn.com/assets/srv0/homepage/4ee31d03d5b2/assets/img/categories/72x72_nightlife.png">
+										<h3 class="mainpage_browes_categories_content_title">Nightlife</h3>
+									</a>
+								</div>
 							
-							<div class="mainpage_browes_categories_content_unit">
-								<a href="#" class="mainpage_browes_categories_content_link">
-									<img class="mainpage_browes_categories_content_img"  width="72" src="https://s3-media4.fl.yelpcdn.com/assets/srv0/homepage/7b915f332ffe/assets/img/categories/72x72_active_life.png">
-									<h3 class="mainpage_browes_categories_content_title">Active Life</h3>
-								</a>
+								<div class="mainpage_browes_categories_content_unit">
+									<a href="#" class="mainpage_browes_categories_content_link">
+										<img class="mainpage_browes_categories_content_img"  width="72" src="https://s3-media4.fl.yelpcdn.com/assets/srv0/homepage/7b915f332ffe/assets/img/categories/72x72_active_life.png">
+										<h3 class="mainpage_browes_categories_content_title">Active Life</h3>
+									</a>
+								</div>
 							</div>
-						</div>
 						
-						<div class="mainpage_browes_categories_content_partial_wrap">
-							<div class="mainpage_browes_categories_content_unit">
-								<a href="#" class="mainpage_browes_categories_content_link">
-									<img class="mainpage_browes_categories_content_img"  width="72" src="https://s3-media1.fl.yelpcdn.com/assets/srv0/homepage/dda5bcbe7e6c/assets/img/categories/72x72_beauty.png">
-									<h3 class="mainpage_browes_categories_content_title">Beauty & Spas</h3>
-								</a>
-							</div>
-							<div class="mainpage_browes_categories_content_unit">
-								<a href="#" class="mainpage_browes_categories_content_link">
-									<img class="mainpage_browes_categories_content_img"  width="72" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/homepage/59b42d70fa94/assets/img/categories/72x72_automotive.png">
-									<h3 class="mainpage_browes_categories_content_title">Automotive</h3>
-								</a>
-							</div>
-							<div class="mainpage_browes_categories_content_unit">
-								<a href="#" class="mainpage_browes_categories_content_link">
-									<img class="mainpage_browes_categories_content_img"  width="72" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/homepage/52d0e24aea08/assets/img/categories/72x72_home_services.png">
-									<h3 class="mainpage_browes_categories_content_title">Home Services</h3>
-								</a>
-							</div>
-							<div class="mainpage_browes_categories_content_unit">
-								<a href="javascript:;" class="mainpage_browes_categories_content_link">
-									<img class="mainpage_browes_categories_content_img"  width="72" src="https://s3-media4.fl.yelpcdn.com/assets/srv0/homepage/3110ec19fa2b/assets/img/categories/72x72_more_categories.png">
-									<h3 class="mainpage_browes_categories_content_title change_title">More Categories</h3>
-								</a>
-							</div>
-						</div>
-						
-					</div>
-					
-					
-					
-					<div class="mainpage_browes_more_categories is_disabled" id="mainpage_more_categories" style="max-height: 0px; position: static; visibility: visible;">
-						<div class="more_categories_divider hr_line"></div>
-						
-						<div class="mainpage_browes_more_categories_lines">
-							<div class="mainpage_browes_more_categories_units">
-								<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_coffee">
-									<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
-										<path d="M19 13h-1a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V5h15a3 3 0 0 1 3 3v2a3 3 0 0 1-3 3zm1-5c0-.55-.45-1-1-1h-1v4h1c.55 0 1-.45 1-1V8zm2 10a1 1 0 0 1-1 1H3a1 1 0 0 1 0-2h18a1 1 0 0 1 1 1z"></path>
-									</svg>
-								</span>
-								<a href="#">
-									<strong style="font-weight: 700;">Coffee & Tea</strong>
-								</a>
-							</div>
-							
-							<div class="mainpage_browes_more_categories_units">
-								<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Food">
-									<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
-										<path d="M17.22 22a1.78 1.78 0 0 1-1.74-2.167l1.298-4.98L14 13l1.756-9.657A1.635 1.635 0 0 1 19 3.635V20.22A1.78 1.78 0 0 1 17.22 22zm-7.138-9.156l.697 7.168a1.79 1.79 0 1 1-3.56 0l.7-7.178A3.985 3.985 0 0 1 5 9V3a1 1 0 0 1 2 0v5.5c0 .28.22.5.5.5s.5-.22.5-.5V3a1 1 0 0 1 2 0v5.5c0 .28.22.5.5.5s.5-.22.5-.5V3a1 1 0 0 1 2 0v5.83c0 1.85-1.2 3.518-2.918 4.014z"></path>
-									</svg>
-								</span>
-								<a href="#">
-									<strong style="font-weight: 700;">Food</strong>
-								</a>
-							</div>
-							
-							
-							<div class="mainpage_browes_more_categories_units">
-								<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Arts_Entertainment">
-									<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
-										<path d="M11.85 3c-4.73.08-8.7 3.99-8.85 8.72-.02.62.03 1.23.13 1.82A3.003 3.003 0 0 0 6.09 16H11c.55 0 1 .45 1 1v.19c0 2.3 2.49 3.76 4.49 2.61A9.002 9.002 0 0 0 11.85 3zM8 11.5c-.83 0-1.5-.67-1.5-1.5S7.17 8.5 8 8.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3 8c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm1-5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"></path>
-									</svg>
-								</span>
-								<a href="#">
-									<strong style="font-weight: 700;">Arts & Entertainment</strong>
-								</a>
-							</div>
-							
-							<div class="mainpage_browes_more_categories_units">
-								<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Health_Medical">
-									<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
-										<path d="M15 9V4H9v5H4v6h5v5h6v-5h5V9h-5z"></path>
-									</svg>
-								</span>
-								<a href="#">
-									<strong style="font-weight: 700;">Health & Medical</strong>
-								</a>
+							<div class="mainpage_browes_categories_content_partial_wrap">
+								<div class="mainpage_browes_categories_content_unit">
+									<a href="#" class="mainpage_browes_categories_content_link">
+										<img class="mainpage_browes_categories_content_img"  width="72" src="https://s3-media1.fl.yelpcdn.com/assets/srv0/homepage/dda5bcbe7e6c/assets/img/categories/72x72_beauty.png">
+										<h3 class="mainpage_browes_categories_content_title">Beauty & Spas</h3>
+									</a>
+								</div>
+								<div class="mainpage_browes_categories_content_unit">
+									<a href="#" class="mainpage_browes_categories_content_link">
+										<img class="mainpage_browes_categories_content_img"  width="72" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/homepage/59b42d70fa94/assets/img/categories/72x72_automotive.png">
+										<h3 class="mainpage_browes_categories_content_title">Automotive</h3>
+									</a>
+								</div>
+								<div class="mainpage_browes_categories_content_unit">
+									<a href="#" class="mainpage_browes_categories_content_link">
+										<img class="mainpage_browes_categories_content_img"  width="72" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/homepage/52d0e24aea08/assets/img/categories/72x72_home_services.png">
+										<h3 class="mainpage_browes_categories_content_title">Home Services</h3>
+									</a>
+								</div>
+								<div class="mainpage_browes_categories_content_unit">
+									<a href="javascript:;" class="mainpage_browes_categories_content_link">
+										<img class="mainpage_browes_categories_content_img"  width="72" src="https://s3-media4.fl.yelpcdn.com/assets/srv0/homepage/3110ec19fa2b/assets/img/categories/72x72_more_categories.png">
+										<h3 class="mainpage_browes_categories_content_title change_title">More Categories</h3>
+									</a>
+								</div>
 							</div>
 						</div>
 						
 						
 						
-						<div class="mainpage_browes_more_categories_lines">
-							<div class="mainpage_browes_more_categories_units">
-								<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Professional_Service">
+						<div class="mainpage_browes_more_categories is_disabled" id="mainpage_more_categories" style="max-height: 0px; position: static; visibility: visible;">
+							<div class="more_categories_divider hr_line"></div>
+						
+							<div class="mainpage_browes_more_categories_lines">
+								<div class="mainpage_browes_more_categories_units">
+									<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_coffee">
+										<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
+											<path d="M19 13h-1a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V5h15a3 3 0 0 1 3 3v2a3 3 0 0 1-3 3zm1-5c0-.55-.45-1-1-1h-1v4h1c.55 0 1-.45 1-1V8zm2 10a1 1 0 0 1-1 1H3a1 1 0 0 1 0-2h18a1 1 0 0 1 1 1z"></path>
+										</svg>
+									</span>
+									<a href="#">
+										<strong style="font-weight: 700;">Coffee & Tea</strong>
+									</a>
+								</div>
+								
+								<div class="mainpage_browes_more_categories_units">
+									<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Food">
+										<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
+											<path d="M17.22 22a1.78 1.78 0 0 1-1.74-2.167l1.298-4.98L14 13l1.756-9.657A1.635 1.635 0 0 1 19 3.635V20.22A1.78 1.78 0 0 1 17.22 22zm-7.138-9.156l.697 7.168a1.79 1.79 0 1 1-3.56 0l.7-7.178A3.985 3.985 0 0 1 5 9V3a1 1 0 0 1 2 0v5.5c0 .28.22.5.5.5s.5-.22.5-.5V3a1 1 0 0 1 2 0v5.5c0 .28.22.5.5.5s.5-.22.5-.5V3a1 1 0 0 1 2 0v5.83c0 1.85-1.2 3.518-2.918 4.014z"></path>
+										</svg>
+									</span>
+									<a href="#">
+										<strong style="font-weight: 700;">Food</strong>
+									</a>
+								</div>
+								
+								
+								<div class="mainpage_browes_more_categories_units">
+									<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Arts_Entertainment">
+										<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
+											<path d="M11.85 3c-4.73.08-8.7 3.99-8.85 8.72-.02.62.03 1.23.13 1.82A3.003 3.003 0 0 0 6.09 16H11c.55 0 1 .45 1 1v.19c0 2.3 2.49 3.76 4.49 2.61A9.002 9.002 0 0 0 11.85 3zM8 11.5c-.83 0-1.5-.67-1.5-1.5S7.17 8.5 8 8.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3 8c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm1-5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"></path>
+										</svg>
+									</span>
+									<a href="#">
+										<strong style="font-weight: 700;">Arts & Entertainment</strong>
+									</a>
+								</div>
+								
+								<div class="mainpage_browes_more_categories_units">
+									<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Health_Medical">
+										<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
+											<path d="M15 9V4H9v5H4v6h5v5h6v-5h5V9h-5z"></path>
+										</svg>
+									</span>
+									<a href="#">
+										<strong style="font-weight: 700;">Health & Medical</strong>
+									</a>
+								</div>
+							</div>
+							<div class="mainpage_browes_more_categories_lines">
+								<div class="mainpage_browes_more_categories_units">
+									<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Professional_Service">
+										<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
+											<path d="M19 20H5a3 3 0 0 1-3-3v-4h8v3h4v-3h8v4a3 3 0 0 1-3 3zM2 7h6V4h8v3h6v5H2V7zm8 0h4V6h-4v1z"></path>
+										</svg>
+									</span>
+									<a href="#">
+										<strong style="font-weight: 700;">Professional Services</strong>
+									</a>
+								</div>
+							
+								<div class="mainpage_browes_more_categories_units">
+									<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Pets">
+										<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
+											<path d="M16.956 14.106l-7.07-7.07A2.5 2.5 0 0 0 6.35 3.498a2.49 2.49 0 0 0-.698 2.13 2.493 2.493 0 0 0-2.13.697A2.5 2.5 0 0 0 7.057 9.86l7.07 7.07a2.5 2.5 0 0 0 3.536 3.538 2.49 2.49 0 0 0 .698-2.13 2.49 2.49 0 0 0 2.134-.7 2.5 2.5 0 1 0-3.536-3.534z"></path>
+										</svg>
+									</span>
+									<a href="#">
+										<strong style="font-weight: 700;">Pets</strong>
+									</a>
+								</div>
+							
+							
+								<div class="mainpage_browes_more_categories_units">
+									<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_RealEstate">
+										<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
+											<path d="M12 3l-8.48 9.327C2.938 12.97 3.393 14 4.26 14H5v7h5v-5h4v5h5v-7h.74c.868 0 1.323-1.03.74-1.673L12 3z"></path>
+										</svg>
+									</span>
+									<a href="#">
+										<strong style="font-weight: 700;">Real Estate</strong>
+									</a>
+								</div>
+								
+								<div class="mainpage_browes_more_categories_units">
+									<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Hotels_Travel">
+										<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
+											<path d="M20.4 13.61a1.924 1.924 0 0 0-1.825-.505l-2.203.55-3.228-3.227 5.973-4.887-.438-.436a1.92 1.92 0 0 0-2.117-.407L10.157 7.44 6.732 4.018c-.75-.75-2.644-1.43-3.394-.68-.75.75-.07 2.646.68 3.395l3.423 3.425-2.743 6.408a1.92 1.92 0 0 0 .407 2.114l.44.437 4.886-5.973 3.227 3.228-.55 2.203a1.92 1.92 0 0 0 .504 1.824l.59.586 2.717-4.073 4.073-2.716-.59-.59z"></path>
+										</svg>
+									</span>
+									<a href="#">
+										<strong style="font-weight: 700;">Hotels & Travel</strong>
+									</a>
+								</div>
+							</div>
+						
+						
+							<div class="mainpage_browes_more_categories_lines">
+								<div class="mainpage_browes_more_categories_units">
+									<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Local_Service">
+										<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
+											<path d="M21 10h-8.35A5.996 5.996 0 0 0 1 12a5.996 5.996 0 0 0 11.65 2H14v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1a2 2 0 0 0 0-4zM7 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path>
+										</svg>
+									</span>
+									<a href="#">
+										<strong style="font-weight: 700;">Local Services</strong>
+									</a>
+								</div>
+								
+								<div class="mainpage_browes_more_categories_units">
+									<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_EventPlanning_Services">
 									<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
-										<path d="M19 20H5a3 3 0 0 1-3-3v-4h8v3h4v-3h8v4a3 3 0 0 1-3 3zM2 7h6V4h8v3h6v5H2V7zm8 0h4V6h-4v1z"></path>
-									</svg>
-								</span>
-								<a href="#">
-									<strong style="font-weight: 700;">Professional Services</strong>
-								</a>
+											<path d="M15.14 14.96L17 18h-2v5h-1v-5h-2l1.86-3.04C10.85 14.586 8.5 11.616 8.5 8c0-3.87 2.69-7 6-7s6 3.13 6 7c0 3.617-2.35 6.587-5.36 6.96zM12.39 3.55c-.54-.14-1.14.39-1.36 1.19-.21.8.05 1.57.58 1.71.54.14 1.14-.39 1.36-1.19.21-.8-.05-1.57-.58-1.71zm-.45 11.89a4.737 4.737 0 0 1-2.82 1.49L10.5 19H9v4H8v-4H6.5l1.367-2.05c-2.53-.365-4.487-2.88-4.487-5.93 0-3.1 2.02-5.66 4.61-5.95-.32.91-.49 1.9-.49 2.93 0 3.38 1.84 6.27 4.44 7.44z"></path>
+										</svg>
+									</span>
+									<a href="#">
+										<strong style="font-weight: 700;">Event Planning & Services</strong>
+									</a>
+								</div>
+								
+								
+								<div class="mainpage_browes_more_categories_units">
+									<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_PublicServices_Government">
+										<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
+											<path d="M21 11V9h-1l-8-6-8 6H3v2h2v7H4v1H3v2h18v-2h-1v-1h-1v-7h2zm-8 7h-2v-7h2v7zm-6-7h2v7H7v-7zm10 7h-2v-7h2v7z"></path>
+										</svg>
+									</span>
+									<a href="#">
+										<strong style="font-weight: 700;">Public Services & Government</strong>
+									</a>
+								</div>
+								
+								<div class="mainpage_browes_more_categories_units">
+									<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Financial_Services">
+										<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
+											<path d="M6 19v-2h14V9h2v10H6zM2 5h16v10H2V5zm8 7.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"></path>
+										</svg>
+									</span>
+									<a href="#">
+										<strong style="font-weight: 700;">Financial Services</strong>
+									</a>
+								</div>
 							</div>
 							
-							<div class="mainpage_browes_more_categories_units">
-								<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Pets">
-									<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
-										<path d="M16.956 14.106l-7.07-7.07A2.5 2.5 0 0 0 6.35 3.498a2.49 2.49 0 0 0-.698 2.13 2.493 2.493 0 0 0-2.13.697A2.5 2.5 0 0 0 7.057 9.86l7.07 7.07a2.5 2.5 0 0 0 3.536 3.538 2.49 2.49 0 0 0 .698-2.13 2.49 2.49 0 0 0 2.134-.7 2.5 2.5 0 1 0-3.536-3.534z"></path>
-									</svg>
-								</span>
-								<a href="#">
-									<strong style="font-weight: 700;">Pets</strong>
-								</a>
-							</div>
 							
-							
-							<div class="mainpage_browes_more_categories_units">
-								<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_RealEstate">
-									<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
-										<path d="M12 3l-8.48 9.327C2.938 12.97 3.393 14 4.26 14H5v7h5v-5h4v5h5v-7h.74c.868 0 1.323-1.03.74-1.673L12 3z"></path>
-									</svg>
-								</span>
-								<a href="#">
-									<strong style="font-weight: 700;">Real Estate</strong>
-								</a>
-							</div>
-							
-							<div class="mainpage_browes_more_categories_units">
-								<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Hotels_Travel">
-									<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
-										<path d="M20.4 13.61a1.924 1.924 0 0 0-1.825-.505l-2.203.55-3.228-3.227 5.973-4.887-.438-.436a1.92 1.92 0 0 0-2.117-.407L10.157 7.44 6.732 4.018c-.75-.75-2.644-1.43-3.394-.68-.75.75-.07 2.646.68 3.395l3.423 3.425-2.743 6.408a1.92 1.92 0 0 0 .407 2.114l.44.437 4.886-5.973 3.227 3.228-.55 2.203a1.92 1.92 0 0 0 .504 1.824l.59.586 2.717-4.073 4.073-2.716-.59-.59z"></path>
-									</svg>
-								</span>
-								<a href="#">
-									<strong style="font-weight: 700;">Hotels & Travel</strong>
-								</a>
+							<div class="mainpage_browes_more_categories_lines">
+								<div class="mainpage_browes_more_categories_units">
+									<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Education">
+										<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
+											<path d="M9.994 18H19v1H9.993v-1zm7.004-1H8.493c-.827 0-1.5.673-1.5 1.5s.673 1.5 1.5 1.5h9.505a1 1 0 0 1 0 2h-9.28c-1.812 0-3.467-1.277-3.7-3.075-.09-.7-.027-1.925-.027-1.925V4a2 2 0 0 1 2.004-2H17a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2z"></path>
+										</svg>
+									</span>
+									<a href="#">
+										<strong style="font-weight: 700;">Education</strong>
+									</a>
+								</div>
+								
+								<div class="mainpage_browes_more_categories_units">
+									<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Religious_Organizations">
+										<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
+											<path d="M18.5 11L16 14.5v-6L12 3 8 8.5v6L5.5 11 3 14.5V21h7v-4h4v4h7v-6.5L18.5 11z"></path>
+										</svg>
+									</span>
+									<a href="#">
+										<strong style="font-weight: 700;">Religious Organizations</strong>
+									</a>
+								</div>
+								
+								
+								<div class="mainpage_browes_more_categories_units">
+									<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Local_Flavor">
+										<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
+											<path d="M12 1.5l2.61 6.727 6.89.53-5.278 4.688 1.65 7.055L12 16.67 6.13 20.5l1.648-7.055L2.5 8.757l6.89-.53L12 1.5z"></path>
+										</svg>
+									</span>
+									<a href="#">
+										<strong style="font-weight: 700;"> Local Flavor</strong>
+									</a>
+								</div>
+								
+								<div class="mainpage_browes_more_categories_units">
+									<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Mass_Media">
+										<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
+											<path d="M19 6h-6.586l2.293-2.293a1 1 0 1 0-1.414-1.414L10 5.586 6.707 2.293a1 1 0 1 0-1.414 1.414L7.586 6H5a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V9a3 3 0 0 0-3-3zm-3 11c0 .55-.45 1-1 1H5c-.55 0-1-.45-1-1V9c0-.55.45-1 1-1h10c.55 0 1 .45 1 1v8zm3-4c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm0-3c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"></path>
+										</svg>
+									</span>
+									<a href="#">
+										<strong style="font-weight: 700;">Mass Media</strong>
+									</a>
+								</div>
 							</div>
 						</div>
-						
-						
-						<div class="mainpage_browes_more_categories_lines">
-							<div class="mainpage_browes_more_categories_units">
-								<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Local_Service">
-									<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
-										<path d="M21 10h-8.35A5.996 5.996 0 0 0 1 12a5.996 5.996 0 0 0 11.65 2H14v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1a2 2 0 0 0 0-4zM7 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path>
-									</svg>
-								</span>
-								<a href="#">
-									<strong style="font-weight: 700;">Local Services</strong>
-								</a>
-							</div>
-							
-							<div class="mainpage_browes_more_categories_units">
-								<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_EventPlanning_Services">
-									<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
-										<path d="M15.14 14.96L17 18h-2v5h-1v-5h-2l1.86-3.04C10.85 14.586 8.5 11.616 8.5 8c0-3.87 2.69-7 6-7s6 3.13 6 7c0 3.617-2.35 6.587-5.36 6.96zM12.39 3.55c-.54-.14-1.14.39-1.36 1.19-.21.8.05 1.57.58 1.71.54.14 1.14-.39 1.36-1.19.21-.8-.05-1.57-.58-1.71zm-.45 11.89a4.737 4.737 0 0 1-2.82 1.49L10.5 19H9v4H8v-4H6.5l1.367-2.05c-2.53-.365-4.487-2.88-4.487-5.93 0-3.1 2.02-5.66 4.61-5.95-.32.91-.49 1.9-.49 2.93 0 3.38 1.84 6.27 4.44 7.44z"></path>
-									</svg>
-								</span>
-								<a href="#">
-									<strong style="font-weight: 700;">Event Planning & Services</strong>
-								</a>
-							</div>
-							
-							
-							<div class="mainpage_browes_more_categories_units">
-								<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_PublicServices_Government">
-									<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
-										<path d="M21 11V9h-1l-8-6-8 6H3v2h2v7H4v1H3v2h18v-2h-1v-1h-1v-7h2zm-8 7h-2v-7h2v7zm-6-7h2v7H7v-7zm10 7h-2v-7h2v7z"></path>
-									</svg>
-								</span>
-								<a href="#">
-									<strong style="font-weight: 700;">Public Services & Government</strong>
-								</a>
-							</div>
-							
-							<div class="mainpage_browes_more_categories_units">
-								<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Financial_Services">
-									<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
-										<path d="M6 19v-2h14V9h2v10H6zM2 5h16v10H2V5zm8 7.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"></path>
-									</svg>
-								</span>
-								<a href="#">
-									<strong style="font-weight: 700;">Financial Services</strong>
-								</a>
-							</div>
-						</div>
-						
-						
-						<div class="mainpage_browes_more_categories_lines">
-							<div class="mainpage_browes_more_categories_units">
-								<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Education">
-									<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
-										<path d="M9.994 18H19v1H9.993v-1zm7.004-1H8.493c-.827 0-1.5.673-1.5 1.5s.673 1.5 1.5 1.5h9.505a1 1 0 0 1 0 2h-9.28c-1.812 0-3.467-1.277-3.7-3.075-.09-.7-.027-1.925-.027-1.925V4a2 2 0 0 1 2.004-2H17a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2z"></path>
-									</svg>
-								</span>
-								<a href="#">
-									<strong style="font-weight: 700;">Education</strong>
-								</a>
-							</div>
-							
-							<div class="mainpage_browes_more_categories_units">
-								<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Religious_Organizations">
-									<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
-										<path d="M18.5 11L16 14.5v-6L12 3 8 8.5v6L5.5 11 3 14.5V21h7v-4h4v4h7v-6.5L18.5 11z"></path>
-									</svg>
-								</span>
-								<a href="#">
-									<strong style="font-weight: 700;">Religious Organizations</strong>
-								</a>
-							</div>
-							
-							
-							<div class="mainpage_browes_more_categories_units">
-								<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Local_Flavor">
-									<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
-										<path d="M12 1.5l2.61 6.727 6.89.53-5.278 4.688 1.65 7.055L12 16.67 6.13 20.5l1.648-7.055L2.5 8.757l6.89-.53L12 1.5z"></path>
-									</svg>
-								</span>
-								<a href="#">
-									<strong style="font-weight: 700;"> Local Flavor</strong>
-								</a>
-							</div>
-							
-							<div class="mainpage_browes_more_categories_units">
-								<span style="width: 24px; height: 24px;" class="icon mainpage_24x24_Mass_Media">
-									<svg class="icon_svg" viewBox="0 0 24 24" height="100%" width="100%">
-										<path d="M19 6h-6.586l2.293-2.293a1 1 0 1 0-1.414-1.414L10 5.586 6.707 2.293a1 1 0 1 0-1.414 1.414L7.586 6H5a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V9a3 3 0 0 0-3-3zm-3 11c0 .55-.45 1-1 1H5c-.55 0-1-.45-1-1V9c0-.55.45-1 1-1h10c.55 0 1 .45 1 1v8zm3-4c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm0-3c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"></path>
-									</svg>
-								</span>
-								<a href="#">
-									<strong style="font-weight: 700;">Mass Media</strong>
-								</a>
-							</div>
-						</div>
-					
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
 	
 	
 	
@@ -1047,11 +1031,11 @@
 											<div>
 												<a href="member_details?mnum=${review_of_the_day_reviewDTO.memberDTO.mnum}">
 												<!-- 만약 아이디에 사진 없다면 이거 띄우도록 이프 문! -->
-													<c:if test="${review_of_the_day_reviewDTO.memberDTO.memberPhotoDTO.filename == null}">
+													<c:if test="${review_of_the_day_reviewDTO.memberDTO.memberPhotoDTO.member_filename == null}">
 														<img class="review_of_the_day_writer_img" height="60" widgh="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" style="border-radius: 4px;">
 													</c:if>
-													<c:if test="${review_of_the_day_reviewDTO.memberDTO.memberPhotoDTO.filename != null}">
-														<img class="review_of_the_day_writer_img" height="60" widgh="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${review_of_the_day_reviewDTO.memberDTO.memberPhotoDTO.filename}" style="border-radius: 4px;">
+													<c:if test="${review_of_the_day_reviewDTO.memberDTO.memberPhotoDTO.member_filename != null}">
+														<img class="review_of_the_day_writer_img" height="60" widgh="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${review_of_the_day_reviewDTO.memberDTO.memberPhotoDTO.member_filename}" style="border-radius: 4px;">
 													</c:if>
 												</a>
 											</div>
@@ -1059,7 +1043,7 @@
 										
 										<div class="review_of_the_day_writer_info">
 											<strong style="font-weight: 700;">
-												<a href="member_details?mnum=${review_of_the_day_reviewDTO.memberDTO.mnum}" class="review_of_the_day_writer">
+												<a href="member_details?mnum=${review_of_the_day_reviewDTO.mnum}" class="review_of_the_day_writer">
 													${review_of_the_day_reviewDTO.memberDTO.email}
 												</a>
 											</strong>
@@ -1114,97 +1098,8 @@
 									</a>
 								</p>
 								
-								
 							</div>
 						</div>
-						
-<!-- 						<div class="mainpage_recent_list"> -->
-<!-- 							<div class="js-fresh-lists"> -->
-<!-- 								<h3 class="recent_list_title">Recent Lists</h3> -->
-<!-- 								<div class="recent_list_wrap_container"> -->
-<!-- 									<div class="recent_list_wrap"> -->
-<!-- 										<div class="recent_list_unit"> -->
-<!-- 											<ul class="recent_list_set"> -->
-<!-- 											3번 반복 !!!!!! -->
-<!-- 												<li class="recent_list_item"> -->
-<!-- 													<div class="recent_list_item_block"> -->
-<!-- 														<div class="recent_list_item_photo_area"> -->
-<!-- 															<div class="recent_list_item_photo_box"> -->
-<!-- 																등록된 사진이 없다면 !!!!!!!!!!!!! -->
-<!-- 																<div class="recent_list_item_photo" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png);"> -->
-<!-- 																	<a href="#" style="display: block;"> -->
-<!-- 																		<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png" class="recent_list_photo" width="90" height="90"> -->
-<!-- 																	</a> -->
-<!-- 																</div> -->
-<!-- 															</div> -->
-<!-- 														</div> -->
-														
-<!-- 														<div class="recent_list_item_info_area"> -->
-<!-- 															<p class="recent_list_item_title"> -->
-<!-- 																<a href="#" style="font-weight: 700;"> -->
-<!-- 																	제목 -->
-<!-- 																</a> -->
-<!-- 															</p> -->
-															
-<!-- 															<p class="recent_list_item_description"> -->
-<!-- 																내용 -->
-<!-- 															</p> -->
-															
-<!-- 															<div class="recent_list_item_owner"> -->
-<!-- 																By -->
-<!-- 																<a href="#"> -->
-<!-- 																	작성자 -->
-<!-- 																</a> -->
-<!-- 															</div> -->
-<!-- 														</div> -->
-<!-- 													</div> -->
-<!-- 												</li> -->
-												
-<!-- 												<li class="recent_list_item"> -->
-<!-- 													<div class="recent_list_item_block"> -->
-<!-- 														<div class="recent_list_item_photo_area"> -->
-<!-- 															<div class="recent_list_item_photo_box"> -->
-<!-- 																등록된 사진이 없다면 !!!!!!!!!!!!! -->
-<!-- 																<div class="recent_list_item_photo" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png);"> -->
-<!-- 																	<a href="#" style="display: block;"> -->
-<!-- 																		<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png" class="recent_list_photo" width="90" height="90"> -->
-<!-- 																	</a> -->
-<!-- 																</div> -->
-<!-- 															</div> -->
-<!-- 														</div> -->
-														
-<!-- 														<div class="recent_list_item_info_area"> -->
-<!-- 															<p class="recent_list_item_title"> -->
-<!-- 																<a href="#" style="font-weight: 700;"> -->
-<!-- 																	제목 -->
-<!-- 																</a> -->
-<!-- 															</p> -->
-															
-<!-- 															<p class="recent_list_item_description"> -->
-<!-- 																내용 -->
-<!-- 															</p> -->
-															
-<!-- 															<div class="recent_list_item_owner"> -->
-<!-- 																By -->
-<!-- 																<a href="#"> -->
-<!-- 																	작성자 -->
-<!-- 																</a> -->
-<!-- 															</div> -->
-<!-- 														</div> -->
-<!-- 													</div> -->
-<!-- 												</li> -->
-<!-- 											</ul> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
-								
-<!-- 								<p style="text-align: center!important; margin-bottom: 12px;"> -->
-<!-- 									<a href="#"> -->
-<!-- 										Browse more lists -->
-<!-- 									</a> -->
-<!-- 								</p> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
 					</div>
 				</div>
 				
@@ -1225,11 +1120,11 @@
 											<div class="recent_activity_unit_header_user_profile">
 												<div class="photo_box">
 													<a href="member_details?mnum=${reviewDTO.memberDTO.mnum}">
-														<c:if test="${empty reviewDTO.memberDTO.memberPhotoDTO.filename}">
+														<c:if test="${empty reviewDTO.memberDTO.memberPhotoDTO.member_filename}">
 															<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" height="30" width="30" style="border-radius: 4px;">
 														</c:if>
-														<c:if test="${!empty reviewDTO.memberDTO.memberPhotoDTO.filename}">
-															<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${reviewDTO.memberDTO.memberPhotoDTO.filename}" height="30" width="30" style="border-radius: 4px;">
+														<c:if test="${!empty reviewDTO.memberDTO.memberPhotoDTO.member_filename}">
+															<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${reviewDTO.memberDTO.memberPhotoDTO.member_filename}" height="30" width="30" style="border-radius: 4px;">
 														</c:if>
 														
 													</a>
@@ -1257,17 +1152,17 @@
 									<!-- 만약 사진이 있으면 보이고 없으면 안보이고 -->
 									<div class="recent_activity_unit_content">
 										<div class="recent_activity_unit_content_photo">
-											<c:if test="${empty reviewDTO.restaurantDTO.rest_filename}">
+											<c:if test="${empty reviewDTO.restaurantDTO.fileDTO.filename}">
 											<div class="photo_box_background" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png)">
 												<a href="restaurant_content?rnum=${reviewDTO.restaurantDTO.rnum}" style="display: block;">
 													<img class="recent_activity_photo_box" height="400" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png" width="600">
 												</a>
 											</div>
 											</c:if>
-											<c:if test="${!empty reviewDTO.restaurantDTO.rest_filename}">
-											<div class="photo_box_background" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${reviewDTO.restaurantDTO.rest_filename})">
+											<c:if test="${!empty reviewDTO.restaurantDTO.fileDTO.filename}">
+											<div class="photo_box_background" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${reviewDTO.restaurantDTO.fileDTO.filename})">
 												<a href="restaurant_content?rnum=${reviewDTO.restaurantDTO.rnum}" style="display: block;">
-													<img class="recent_activity_photo_box" height="400" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${reviewDTO.restaurantDTO.rest_filename}" width="600">
+													<img class="recent_activity_photo_box" height="400" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${reviewDTO.restaurantDTO.fileDTO.filename}" width="600">
 												</a>
 											</div>
 											</c:if>
@@ -1325,8 +1220,6 @@
 								</span>
 							</a>
 						</p>
-						
-						<div></div>
 					</div>
 				</div>				
 			</div>
@@ -1334,7 +1227,43 @@
 	</div>
 </div>
 	
-	
+<div class="hover_card" style="top: 383px; left: 433.047px; display: none;">
+	<div class="hovercard-inner">
+		<div class="business-hovercard">
+			<div class="media-block">
+				<div class="media-avatar">
+					<div>
+						<a href="restaurant_content?rnum=${randomPhoto.rnum}">
+							<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${randomPhoto.filename}" height="90" width="90">
+						</a>
+					</div>
+				</div>
+				
+				<div class="media-story">
+					<div class="media-title">
+						<a href="restaurant_content?rnum=${randomPhoto.rnum}">
+							${randomPhoto.restaurantDTO.rname}
+						</a>
+					</div>
+					<div class="biz-rating-large">
+						<div class="mainpage_review_rating pre_div_star${randomPhoto_starAvg}" title="4.0 star rating">
+							<img class="pre_starimg1" height="303" width="84" alt="4.0 star rating" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/stars.png" >
+						</div>
+						<span class="mainpage_new_business_review_count">
+							${randomPhoto_reivewCount} reviews
+						</span>
+					</div>
+					<div class="price-category">
+						<span>
+							${randomPhoto.restaurantDTO.category}
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<span class="arrow-icon"></span>
+</div>
 	
 	
 	
@@ -1363,6 +1292,14 @@
 	             	},
 	        });
 			$('#main_location_suggestion_container').show();
+		})
+		
+		$(document).on('mouseenter', '.mainpage_header_recommend_name', function() {
+			$('.hover_card').css('display', 'block');
+		})
+	
+		$(document).on('mouseleave', '.hover_card', function(e) {
+			$('.hover_card').css('display', 'none');			
 		})
 		
 		$(document).on('mouseover', '.suggestions-location-list-item', function() {
@@ -1463,6 +1400,7 @@
 		var height = parseInt($('.recent_activity_line').css('max-height'));
  		$('.recent_activity_line').css("max-height", height+700);
 	})
+	
 	
 	</script>
 	

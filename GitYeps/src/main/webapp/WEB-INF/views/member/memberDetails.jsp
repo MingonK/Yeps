@@ -597,7 +597,7 @@ $(function() {
 
 	var list = new Array();
 	<c:forEach var="memberPhotoDTO" items="${getPhotoList}">
-		list.push("${memberPhotoDTO.filename}");
+		list.push("${memberPhotoDTO.member_filename}");
 	</c:forEach>
 	
 	for(var i = 0; i < list.length; i++) {

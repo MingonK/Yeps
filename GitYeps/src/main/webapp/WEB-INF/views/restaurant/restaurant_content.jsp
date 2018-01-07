@@ -50,7 +50,7 @@
 					<div class="biz-page-header-right u-relative">
 						<div class="biz-page-actions nowrap">
 							<c:if test="${empty myReview}">
-							<a href="review_write?rnum=${getRest.rnum}&mode=write$where=rest" style="text-decoration: none;" class="ybtn review_write">
+							<a href="review_write?rnum=${getRest.rnum}&mode=write&where=rest" style="text-decoration: none;" class="ybtn review_write">
 								<span aria-hidden="true" style="fill: white; width: 24px; height: 24px;" class="icon">
 							    	<svg id="24x24_star" height="100%" viewBox="0 0 24 24" width="100%">
 							    		<path d="M12 1.5l2.61 6.727 6.89.53-5.278 4.688 1.65 7.055L12 16.67 6.13 20.5l1.648-7.055L2.5 8.757l6.89-.53L12 1.5z"></path>
@@ -60,7 +60,7 @@
 							</a>
 							</c:if>
 							<c:if test="${!empty myReview}">
-							<a href="review_write?rnum=${getRest.rnum}&mode=write$where=rest" style="text-decoration: none;" class="ybtn review_write">
+							<a href="review_write?rnum=${getRest.rnum}&mode=update&where=rest&rvnum=${myReview.rvnum}&star=${myReview.gradepoint}" style="text-decoration: none;" class="ybtn review_write">
 								<span aria-hidden="true" style="fill: white; width: 24px; height: 24px;" class="icon">
 							    	<svg id="24x24_star" height="100%" viewBox="0 0 24 24" width="100%">
 							    		<path d="M12 1.5l2.61 6.727 6.89.53-5.278 4.688 1.65 7.055L12 16.67 6.13 20.5l1.648-7.055L2.5 8.757l6.89-.53L12 1.5z"></path>
@@ -198,7 +198,7 @@
 										<div class="restContent-review-highlights-media-avatar" style="border-right: 12px solid transparent; border-left: none;">
 											<div class="restcontent-review-highlights-photo-box">
 												<a href="member_details?mnum=${reviewDTO.memberDTO.mnum}" style="color: #0073bb; text-decoration: none; cursor: pointer;">
-													<img width="60px" height="60px" style="outline: none; border-radius: 4px; vertical-align: middle;" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${reviewDTO.memberDTO.memberPhotoDTO.filename}">
+													<img width="60px" height="60px" style="outline: none; border-radius: 4px; vertical-align: middle;" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${reviewDTO.memberDTO.memberPhotoDTO.member_filename}">
 												</a>
 											</div>
 										</div>
@@ -329,25 +329,45 @@
 													 			<form name="starpointF" method="post" action="review_write?mode=write&where=rest">
 																	<div>
 																		<ul id="star_rating">
-																			<li class="selector star-selector-li-1_4" data-label="Eek! Methinks not.">
+																			<li class="selector star-selector-li-1_4 check_li_1" data-label="Eek! Methinks not.">
 							                            				     	<input id="rating-1" type="radio" value="1" name="rating" class="star-selector-input" style="cursor: pointer; border: none; margin: 0; padding: 0; width: 30px; height: 30px; opacity: 0;">
 							                                					 	<label class="star-selector_label" for="rating-1">1 (Eek! Methinks not.)</label>
+							                                					 	<span class="tooltip-wrapper">
+							                                					 		<span class="tooltip">
+							                                					 		</span>
+							                                					 	</span>
 							                             					</li>
-							                              					<li class="selector star-selector-li-1_4" data-label="Meh. I've experienced better.">
+							                              					<li class="selector star-selector-li-1_4 check_li_2" data-label="Meh. I've experienced better.">
 							                                 					<input id="rating-2" type="radio" value="2" name="rating" class="star-selector-input">
-							                                 					<label class="star-selector_label" for="rating-2">2 (Meh. I've experienced better.)</label>
+							                                 						<label class="star-selector_label" for="rating-2">2 (Meh. I've experienced better.)</label>
+							                              							<span class="tooltip-wrapper">
+							                                					 		<span class="tooltip">
+							                                					 		</span>
+							                                						</span>
 							                              					</li>
-																			<li class="selector star-selector-li-1_4" data-label="3 (A-OK.)">
+																			<li class="selector star-selector-li-1_4 check_li_3" data-label="3 (A-OK.)">
 																				<input id="rating-3" type="radio" value="3" name="rating" class="star-selector-input">
-							                                 					<label class="star-selector_label" for="rating-3">3 (A-OK.)</label>
+							                                 						<label class="star-selector_label" for="rating-3">3 (A-OK.)</label>
+							                              							<span class="tooltip-wrapper">
+							                                					 		<span class="tooltip">
+							                                					 		</span>
+							                                					 	</span>
 							                              					</li>
-							                              					<li class="selector star-selector-li-1_4" data-label="4 (Yay! I'm a fan.)">
+							                              					<li class="selector star-selector-li-1_4 check_li_4" data-label="4 (Yay! I'm a fan.)">
 							                                 					<input id="rating-4" type="radio" value="4"  name="rating" class="star-selector-input">
-							                                 					<label class="star-selector_label" for="rating-4">4 (Yay! I'm a fan.)</label>
+							                                 						<label class="star-selector_label" for="rating-4">4 (Yay! I'm a fan.)</label>
+							                              							<span class="tooltip-wrapper">
+							                                					 		<span class="tooltip">
+							                                					 		</span>
+							                                					 	</span>
 							                              					</li>
-							                              					<li class="selector star-selector-li-5" data-label="5 (Woohoo! As good as it gets!)">
+							                              					<li class="selector star-selector-li-5 check_li_5" data-label="5 (Woohoo! As good as it gets!)">
 							                                 					<input id="rating-5" type="radio" value="5"  name="rating" class="star-selector-input">
-							                                 					<label class="star-selector_label" for="rating-5">5 (Woohoo! As good as it gets!)</label>
+							                                 						<label class="star-selector_label" for="rating-5">5 (Woohoo! As good as it gets!)</label>
+							                              							<span class="tooltip-wrapper">
+							                                					 		<span class="tooltip">
+							                                					 		</span>
+							                                					 	</span>
 							                              					</li>
 							                           					</ul>
 							                                 			<input type="hidden" name="rnum" value="${getRest.rnum}">   
@@ -376,7 +396,7 @@
 														<div class="restContent-media-avatar">
 															<div class="restContent-photo-box">
 																<a href="member_details?mnum=${myReview.memberDTO.mnum}" style="color: #0073bb;">
-																	<img class="restContent-photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${myReview.memberDTO.memberPhotoDTO.filename}" width="60">
+																	<img class="restContent-photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${myReview.memberDTO.memberPhotoDTO.member_filename}" width="60">
 																</a>
 															</div>
 														</div>
@@ -445,13 +465,39 @@
 													<p class="myreview_p_3">
 														${myReview.content} 
 													</p>
+													
+													<ul class="review_photo_box">
+													<c:forEach var="photos" items="${uploadFileList}" varStatus="status">
+														<c:if test="${photos.mnum eq myReview.memberDTO.mnum}">
+														<c:set var="count" value="${count=count+1}"/>
+															<c:if test="${count == 1}">
+																<li style="width: 348px; height: 348px;">
+																	<div class="review_photo_box_overlay">
+																		<img height="348" width="348" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photos.filename}">
+																	</div>
+																</li>
+															</c:if>
+															<c:if test="${count > 1 && count < 4}">
+																<li style="width: 168px; height: 168px;">
+																	<div class="review_photo_box_overlay">
+																		<img height="168" width="168" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photos.filename}">
+																	</div>
+																</li>
+															</c:if>
+														</c:if>
+													</c:forEach>
+													</ul>
 													<div class="myreview_div_6">
 
-														<a class="myreview_a_1" href="review_write?star=${myReview.gradepoint}&contentUpdate=${myReview.content}&rnum=${getRest.rnum}&updatemode=${updatemode}&rvnum=${myReview.rvnum}">리뷰수정</a>
-														<form class="myreview_formF" method="post">
-															<input class="myreview_input_1" type="hidden">
-															<input class="myreview_input_1" type="hidden">
-															<button class="myreview_button_1">
+														<a class="myreview_a_1" href="review_write?star=${myReview.gradepoint}&contentUpdate=${myReview.content}&rnum=${getRest.rnum}&mode=update&rvnum=${myReview.rvnum}">
+															리뷰수정
+														</a>
+														<form class="myreview_formF" action="review_delete" method="post">
+															<input class="myreview_input_1" type="hidden" name="rvnum" value="${myReview.rvnum}">
+															<input class="myreview_input_1" type="hidden" name="mnum" value="${myReview.memberDTO.mnum}">
+															<input class="myreview_input_1" type="hidden" name="rnum" value="${getRest.rnum}">
+															<input class="myreview_input_1" type="hidden" name="mode" value="${restaurantReviewDelete}">		
+															<button class="myreview_button_1"> 
 																<span class="myreview_span_1">
 																	<svg class="myreview_svg_1">
 																		<path class="myreview_path_1" d="M3 5V3h4V2h4v1h4v2H3zm11 9c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V6h10v8zM8 8.5a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5zm3 0a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5z"></path>
@@ -485,7 +531,7 @@
 														<div class="restContent-media-avatar">
 															<div class="restContent-photo-box">
 																<a href="member_details?mnum=${getReview.memberDTO.mnum}" style="color: #0073bb;">
-																	<img class="restContent-photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${getReview.memberDTO.memberPhotoDTO.filename}" width="60">
+																	<img class="restContent-photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${getReview.memberDTO.memberPhotoDTO.member_filename}" width="60">
 																</a>
 															</div>
 														</div>
@@ -562,6 +608,31 @@
 													<p lang="ko" style="margin-bottom: 12px;display:block;">
 														${getReview.content}
 													</p>
+													
+													
+												<ul class="review_photo_box">
+													<c:forEach var="photos" items="${uploadFileList}" varStatus="status">
+														<c:if test="${photos.mnum eq getReview.mnum}">
+														<c:set var="count" value="${count=count+1}"/>
+															<c:if test="${count == 1}">
+																<li style="width: 348px; height: 348px;">
+																	<div class="review_photo_box_overlay">
+																		<img height="348" width="348" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photos.filename}">
+																	</div>
+																</li>
+															</c:if>
+															<c:if test="${count > 1 && count < 4}">
+																<li style="width: 168px; height: 168px;">
+																	<div class="review_photo_box_overlay">
+																		<img height="168" width="168" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photos.filename}">
+																	</div>
+																</li>
+															</c:if>
+														</c:if>
+													</c:forEach>
+												</ul>										
+													
+													
 												</div><!--리뷰 내용 -->
 													
 												<div class="review-footer clearfix">
@@ -875,7 +946,7 @@
 											<dd style="font-weight: bold;display: inline;">
 												${getRest.groupreserv}
 											</dd>
-										</dl>
+										</dl> 
 										
 										<dl style="padding-bottom: 6px;display: block;">
 											<dt class="restContent-attribute-key">소음</dt>
@@ -1259,7 +1330,7 @@ function list(page){
 											'<div class="restContent-media-avatar">' +
 												'<div class="restContent-photo-box">' +
 													'<a href="member_details?mnum='+ item.memberDTO.mnum +'" style="color: #0073bb;">' +
-														'<img class="restContent-photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/' + item.memberDTO.memberPhotoDTO.filename + '" width="60">' +
+														'<img class="restContent-photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/' + item.memberDTO.memberPhotoDTO.member_filename + '" width="60">' +
 													'</a>' +
 												'</div>' +
 											'</div>' +
@@ -1493,7 +1564,7 @@ function check() {
 											'<div class="restContent-media-avatar">' +
 												'<div class="restContent-photo-box">' +
 													'<a href="member_details?mnum='+ item.memberDTO.mnum +'" style="color: #0073bb;">' +
-														'<img class="restContent-photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/' + item.memberDTO.memberPhotoDTO.filename + '" width="60">' +
+														'<img class="restContent-photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/' + item.memberDTO.memberPhotoDTO.member_filename + '" width="60">' +
 													'</a>' +
 												'</div>' +
 											'</div>' +
