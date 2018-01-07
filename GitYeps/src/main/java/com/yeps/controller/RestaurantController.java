@@ -206,8 +206,8 @@ public class RestaurantController {
 			@RequestParam(defaultValue = "1") int curPage) {
 		
 		
-		System.out.println(mode);
-		System.out.println(price.size());
+		System.out.println("필터="+mode);
+		System.out.println("가격 갯수="+price.size());
 		int count = restaurantMapper.getCount();
 		int pageScale = 10;
 		int blockScale = 10;
@@ -498,9 +498,6 @@ public class RestaurantController {
 		RestaurantDTO restaurantDTO = restaurantMapper.getRest(rnum);
 		HttpSession session = req.getSession();
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
-		if (memberDTO == null) {
-			return new ModelAndView("redirect: member_login");
-		}
 
 		int allPhotoCount = fileMapper.getAllFileCount(rnum);
 		int myPhotoCount = 0;

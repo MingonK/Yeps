@@ -15,7 +15,7 @@
   	</select>
  	
 	<insert id="insertReview" parameterType="ReviewDTO">
-  		insert into yeps_review values (yeps_review_seq.nextval, #{rnum}, #{mnum}, #{content}, sysdate, #{gradepoint}, #{filenum}, #{ip}, #{recentreview})
+  		insert into yeps_review values (yeps_review_seq.nextval, #{rnum}, #{mnum}, #{content}, sysdate, #{gradepoint}, #{filenum, jdbcType=INTEGER}, #{ip}, #{recentreview})
   	</insert>
   	
   	<delete id="deleteReview" parameterType="int">
@@ -242,21 +242,21 @@
    
    <select id="getMemberReview"  parameterType="java.util.HashMap" resultMap="MemberReviewMap">
       select * from (select rownum rn, A. * from(select
-               R.content
-              ,R.gradepoint
-              ,R.rvnum
-              ,RT.rest_regdate
-              ,RT.rname
-              ,RT.roadAddrPart1
-              ,RT.roadAddrPart2
-              ,RT.addrDetail
-              ,RT.foodstyle
-              ,RT.hp2
-              ,RT.hp3
-              ,RT.raddress
-              ,M.mnum
-              ,M.name
-              ,M.reviewcount
+		               R.content
+		              ,R.gradepoint
+		              ,R.rvnum
+		              ,RT.rest_regdate
+		              ,RT.rname
+		              ,RT.roadAddrPart1
+		              ,RT.roadAddrPart2
+		              ,RT.addrDetail
+		              ,RT.foodstyle
+		              ,RT.hp2
+		              ,RT.hp3
+		              ,RT.raddress
+		              ,M.mnum
+		              ,M.name
+		              ,M.reviewcount
             
         from yeps_review R, yeps_member M, yeps_restaurant RT where R.mnum = M.mnum and R.rnum = RT.rnum and M.mnum = #{mnum} order by rvnum desc)A)
         where rn between #{start} and #{end}
@@ -480,6 +480,7 @@
   	<resultMap type="ReviewDTO" id="myReviewMap">
   		<id column="rvnum" property="rvnum"/>
       	<result column="rvnum" property="rvnum"></result>
+      	<result column="rnum" property="rnum"></result>
       	<result column="content" property="content"></result>
       	<result column="reg_date" property="reg_date"></result>
       	<result column="gradepoint" property="gradepoint"></result>
@@ -504,6 +505,7 @@
    		select R.content
    				, R.reg_date
    				, R.gradepoint
+   				, R.rnum
    				, R.rvnum
    				, M.email 
    				, M.address

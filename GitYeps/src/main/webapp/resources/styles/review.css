@@ -1,3 +1,74 @@
+.tooltip-wrapper_1{
+	position: absolute;
+    left: -9999px;
+    bottom: 100%;
+    width: 250px;
+    margin-left: -125px;
+    margin-bottom: 5px;
+    text-align: center;
+    text-decoration: none;
+        color: #333;
+}
+
+.tooltip-wrapper_1:after{
+	z-index: 1013;
+}
+
+.tooltip_1{
+	z-index: 1012;
+	display: inline-block;
+    position: relative;
+    padding: 6px 9px;
+    vertical-align: middle;
+    white-space: normal;
+    font-size: 12px;
+    pointer-events: none;
+    font-weight: bold;
+    line-height: 18px;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    border-radius: 5px;
+    text-shadow: none;
+    text-align: left;
+    cursor: default;
+    box-shadow: 0 1px rgba(255,255,255,0.1);
+}
+
+.tooltip_1:before{
+	display: block;
+    position: absolute;
+    content: " ";
+    width: 0;
+    height: 0;
+    border: 8px solid transparent;
+    margin: auto;
+    z-index: 5;
+    left: 50%;
+    top: 100%;
+    right: auto;
+    bottom: auto;
+    margin-left: -8px;
+    border-top-color: rgba(255,255,255,0.1);
+}
+
+.tooltip_1:after{
+	display: block;
+    position: absolute;
+    content: " ";
+    width: 0;
+    height: 0;
+    border: 7px solid transparent;
+    margin: auto;
+    z-index: 5;
+    left: 50%;
+    top: 100%;
+    right: auto;
+    bottom: auto;
+    margin-left: -7px;
+    border-top-color: rgba(0,0,0,0.8);
+}
+
+
 .myreview_p_1 {
 	margin-bottom: 12px;
 	display: block;
@@ -11,7 +82,7 @@
 	color: #333;}
 
 .myreview_div_1 {
-	padding: 11px;
+	padding: 11px 0 11px 11px;
 	background: #f5f5f5;
 	border: 1px solid #e6e6e6;
 	border-radius: 4px;
@@ -146,6 +217,7 @@
 }
 
 .myreview_formF{
+	margin-right: 10px;
 	float: right;
 	display: block;
 	text-align: -webkit-match-parent;
@@ -4006,7 +4078,7 @@
 .resIMG_div_42 {
 	margin: auto;
 	background: #daecd2;
-	width: 80%;
+	width: 83%;
 	box-sizing: border-box;
 	position: relative;
 	margin-bottom: 12px;
@@ -4023,6 +4095,7 @@
 	padding-right: 30px;
 	display: block;
 	color: #333;
+	text-align: left;
 }
 
 .resIMG_div_43 {
@@ -4083,14 +4156,10 @@
 
 .resIMG_div_48 {
 	padding-top: 8px;
-	width: 50%;
-	border-collapse: collapse;
-	border-spacing: 0 0;
-	margin-left: 6px;
-	margin-right: 6px;
+	width: 66.66667%;
+	float: left;
+	padding: 0 15px;
 	box-sizing: border-box;
-	display: table-cell;
-	vertical-align: top;
 	color: #333;
 }
 
@@ -4102,18 +4171,20 @@
 }
 
 .resIMG_div_50 {
-	position: relative;
-	display: flex;
-	font-size: 12px;
-	line-height: 1.5em;
 	border-collapse: collapse;
-	color: #333;
+	border-spacing: 0 0;
+	margin-left: 6px;
+    margin-right: 6px;
+	box-sizing: border-box;
+    display: table-cell;
+    vertical-align: top;
 }
 
 .resIMG_div_51 {
 	border-right: 6px solid transparent;
 	border-left: none;
 	color: #333;
+	display: table-cell;
 }
 
 .resIMG_div_52 {
@@ -4139,19 +4210,17 @@
 }
 
 .resIMG_div_53 {
-	-webkit-box-flex: 1;
-	flex: 1;
 	min-width: 0;
 	min-height: 0;
-	display: block;
 	border-collapse: collapse;
-	color: #333;
+	display: table-cell;
+	vertical-align: top;
 }
 
 .resIMG_ul_4 {
-	list-style: none;
 	display: block;
 	color: #333;
+	float: left;
 }
 
 .resIMG_li_4 {
@@ -4183,6 +4252,8 @@
 	display: list-item;
 	text-align: -webkit-match-parent;
 	border-collapse: collapse;
+	font: -webkit-mini-control;
+	font-size: 12px;
 }
 
 .resIMG_span_10 {

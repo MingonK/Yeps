@@ -1554,6 +1554,44 @@ overflow: hidden; width: 132px; height: 24px; background-position: 0 -216px;
     outline: 0;
 }
 
+.review_photo_box {
+	margin-top: 18px;
+	transform-style: preserve-3d;
+	margin-right: -12px;
+}
+
+.review_photo_box:before, .review_photo_box:after {
+	content: " ";
+    display: table;
+}
+
+.review_photo_box > li {
+	float: left;
+	margin: 0 12px 12px 0;
+}
+
+.review_photo_box_overlay {
+	position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.review_photo_box > li img {
+	max-width: 100%;
+    max-height: 100%;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

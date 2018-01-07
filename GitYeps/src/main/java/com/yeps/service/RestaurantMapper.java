@@ -21,29 +21,42 @@ public class RestaurantMapper {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
-
-		if(prices.get(0)!=0) {
-//			for(int i=0;i<prices.size();i++) {
-//				if(prices.size()==0) {
-					sql = "and price=";
-					sql+=String.valueOf(prices.get(0));
-//				}else {
-//					pricesSql = "or price = ";
-//					pricesSql+=String.valueOf(prices.get(i));
-//				}
-//			}
+//		map.put("sql", sql);
+//		map.put("pricesSql", pricesSql);
+		if(prices.get(0)==0 && mode.equals("mode")) {// 가격 선택 X ,필터 선택 X
+			System.out.println("가격 선택 X ,필터 선택 X");
+			return sqlSession.selectList("listRestaurant", map);
+		}else if(prices.get(0)!=0 && mode.equals("mode")){ //가격 선택 O,필터 선택 X
+			for(int i=0;i<prices.size();i++) {
+				if(i==0) {
+					sql=String.valueOf(prices.get(i));
+				}
+			}
 			map.put("sql", sql);
-//			map.put("pricesSql", pricesSql);
-			return sqlSession.selectList("listRestaurant_"+mode+"",map);
-		}else {
+			map.put("pricesSql", prices);
+			System.out.println("가격 선택 O,필터 선택 X");
+			return sqlSession.selectList("listRestaurant", map);
+		}else if(prices.get(0)==0 && !mode.equals("mode")) {//가격 선택 X,필터 선택 O
+			System.out.println("가격 선택 X,필터 선택 O");
 			if (mode.equals("delivery")) {
 				return sqlSession.selectList("listRestaurant_delivery", map);
 			} else if (mode.equals("reserv")) {
 				return sqlSession.selectList("listRestaurant_reserv", map);
-			} else if (mode.equals("takeout")) {
+			} else {
 				return sqlSession.selectList("listRestaurant_takeout", map);
+			}	
+			
+		}else { //가격 선택 O,필터 선택 O
+			for(int i=0;i<prices.size();i++) {
+				if(i==0) {
+					sql=String.valueOf(prices.get(i));
+				}
 			}
-			return sqlSession.selectList("listRestaurant_mode", map);
+			map.put("sql", sql);
+			map.put("pricesSql", prices);
+			map.put("mode", mode);
+			System.out.println("가격 선택 O,필터 선택 O");
+			return sqlSession.selectList("listRestaurant", map);
 		}
 	}
 
