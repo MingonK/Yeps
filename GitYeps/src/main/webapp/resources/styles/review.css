@@ -4214,11 +4214,12 @@
 }
 
 .resIMG_div_53 {
-	min-width: 0;
+	min-width: 170px;
 	min-height: 0;
 	border-collapse: collapse;
 	display: table-cell;
 	vertical-align: top;
+	text-align: left;
 }
 
 .resIMG_ul_4 {
@@ -4232,6 +4233,10 @@
 	text-align: -webkit-match-parent;
 	border-collapse: collapse;
 	color: #333;
+}
+
+.resIMG_ul_4-1 {
+	margin-top : 7px;
 }
 
 .resIMG_a_4 {
@@ -4529,15 +4534,15 @@
 	border-collapse: collapse;
 	color: #333;
 }
-
+ 
 .resIMG_div_60 {
+	text-align: left;
 	display: block;
 	border-collapse: collapse;
 	color: #333;
 }
 
 .resIMG_a_5 {
-	margin-left: -140;
 	display: inline-block;
 	padding: 5px;
 	border: 1px solid #ccc;

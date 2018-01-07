@@ -355,7 +355,7 @@
 							                                					 		</span>
 							                                					 	</span>
 							                              					</li>
-							                           					</ul>
+							                           					</ul> 
 							                                 			<input type="hidden" name="rnum" value="${getRest.rnum}">   
 							                                 			<input type="hidden" name="star" id="star">
 							                                 			<input type="hidden" name="mode" value="write">

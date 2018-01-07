@@ -281,7 +281,10 @@ public class ReviewController {
 			}
 
 			ReviewDTO myReview = reviewMapper.findMyReview(dto.getRnum(), dto.getMnum());
-
+			String[] addrSplit = myReview.getMemberDTO().getAddress().split(" ");
+			String addr = addrSplit[1] + " " + addrSplit[2] + "," + addrSplit[3] + " " + addrSplit[4] + "," + addrSplit[6] + "," + addrSplit[5];  
+			myReview.getMemberDTO().setAddress(addr);
+			
 			mav.addObject("rlist", restaurantList);
 			mav.addObject("myReview", myReview);
 			mav.addObject("rname", rname);
