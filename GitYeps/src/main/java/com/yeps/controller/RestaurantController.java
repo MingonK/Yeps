@@ -168,7 +168,6 @@ public class RestaurantController {
 		int end = YepsPager.getPageEnd();
 
 		List<RestaurantDTO> list = restaurantMapper.listRest(start, end, "mode",price);
-
 		List<Integer> reviewCount = new ArrayList<Integer>();
 		List<Integer> StarAvg = new ArrayList<Integer>();
 
