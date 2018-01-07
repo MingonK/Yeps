@@ -7,15 +7,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.yeps.model">
 
    <insert id="insertMemberMainPhoto" parameterType="MemberPhotoDTO">
-      insert into yeps_member_photos(filenum, mnum, filename, origin_filename, filesize, file_upload_date, ismainphoto) values (yeps_member_photos_seq.nextval, #{mnum, jdbcType=INTEGER}, #{filename}, #{origin_filename}, #{filesize}, sysdate, 'y')
+      insert into yeps_member_photos(filenum, mnum, member_filename, origin_filename, filesize, file_upload_date, ismainphoto) values (yeps_member_photos_seq.nextval, #{mnum, jdbcType=INTEGER}, #{member_filename}, #{origin_filename}, #{filesize}, sysdate, 'y')
    </insert>
    
    <insert id="insertMemberPhoto" parameterType="MemberPhotoDTO">
-      insert into yeps_member_photos(filenum, mnum, filename, origin_filename, filesize, file_upload_date, ismainphoto) values (yeps_member_photos_seq.nextval, #{mnum, jdbcType=INTEGER}, #{filename}, #{origin_filename}, #{filesize}, sysdate, 'n')
+      insert into yeps_member_photos(filenum, mnum, member_filename, origin_filename, filesize, file_upload_date, ismainphoto) values (yeps_member_photos_seq.nextval, #{mnum, jdbcType=INTEGER}, #{member_filename}, #{origin_filename}, #{filesize}, sysdate, 'n')
    </insert>
    
    <delete id="deleteMemberPhotoToFilename" parameterType="String">
-      delete yeps_member_photos where filename = #{filename}
+      delete yeps_member_photos where member_filename = #{member_filename}
    </delete>
    
    <select id="getMemberPhotoList" parameterType="int" resultType="MemberPhotoDTO">
