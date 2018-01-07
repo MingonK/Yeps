@@ -343,12 +343,30 @@ FROM
 	</select>
 	
 	<!-- 1월 4일 상우 추가 -->
-	<select id="get_review_restaurantFind_Count" parameterType="String" resultType="int">
- 		select count(*) from yeps_restaurant where rname like '%'||#{SearchFind}||'%'
+	<select id="get_review_restaurantFind_Count" parameterType="java.util.HashMap" resultType="int">
+ 		select count(*) from yeps_restaurant
+ 	</select>
+ 	<select id="get_review_restaurantFind_CountByNear" parameterType="java.util.HashMap" resultType="int">
+ 		select count(*) from yeps_restaurant where replace(upper(roadAddrPart1),' ','') like '%'||replace(upper(#{SearchNear}),' ','')||'%'
+ 	</select>
+ 	<select id="get_review_restaurantFind_CountByFind" parameterType="java.util.HashMap" resultType="int">
+ 		select count(*) from yeps_restaurant where replace(upper(rname),' ','') like '%'||replace(upper(#{SearchFind}),' ','')||'%'
+ 	</select>
+ 	<select id="get_review_restaurantFind_CountByAll" parameterType="java.util.HashMap" resultType="int">
+ 		select count(*) from yeps_restaurant where replace(upper(roadAddrPart1),' ','') like '%'||replace(upper(#{SearchNear}),' ','')||'%' and replace(upper(rname),' ','') like '%'||replace(upper(#{SearchFind}),' ','')||'%'
  	</select>
 
  	<select id="review_restaurantFind" parameterType="java.util.HashMap" resultType="RestaurantDTO">
- 		select *from (select rownum rn,A.* from(select * from yeps_restaurant where rname like '%'||#{SearchFind}||'%' order by rnum desc)A) where rn between #{start} and #{end} 
+ 		select *from (select rownum rn,A.* from(select * from yeps_restaurant order by rnum desc)A) where rn between #{start} and #{end} 
+ 	</select>
+ 	<select id="review_restaurantFindByNear" parameterType="java.util.HashMap" resultType="RestaurantDTO">
+ 		select *from (select rownum rn,A.* from(select * from yeps_restaurant where replace(upper(roadAddrPart1),' ','') like '%'||replace(upper(#{SearchNear}),' ','')||'%' order by rnum desc)A) where rn between #{start} and #{end} 
+ 	</select>
+ 	<select id="review_restaurantFindByFind" parameterType="java.util.HashMap" resultType="RestaurantDTO">
+ 		select *from (select rownum rn,A.* from(select * from yeps_restaurant where replace(upper(rname),' ','') like '%'||replace(upper(#{SearchFind}),' ','')||'%' order by rnum desc)A) where rn between #{start} and #{end} 
+ 	</select>
+ 	<select id="review_restaurantFindByAll" parameterType="java.util.HashMap" resultType="RestaurantDTO">
+ 		select *from (select rownum rn,A.* from(select * from yeps_restaurant where replace(upper(roadAddrPart1),' ','') like '%'||replace(upper(#{SearchNear}),' ','')||'%' and replace(upper(rname),' ','') like '%'||replace(upper(#{SearchFind}),' ','')||'%' order by rnum desc)A) where rn between #{start} and #{end} 
  	</select>
 	
 	
