@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yeps.model.EventDTO;
 import com.yeps.model.EventReviewDTO;
 import com.yeps.model.RestaurantDTO;
 import com.yeps.model.ReviewDTO;
+import com.yeps.service.EventMapper;
 import com.yeps.service.EventReviewMapper;
 import com.yeps.service.YepsPager;
 
@@ -24,6 +26,9 @@ public class EventReviewController {
 
 	@Autowired
 	private EventReviewMapper eventReviewMapper;
+	
+	@Autowired
+	private EventMapper eventMapper;
 
 	@RequestMapping(value = "/eventReview_insert")
 	public ModelAndView insertEventReviewForm(HttpServletRequest req) {
@@ -61,11 +66,12 @@ public class EventReviewController {
 		int end = YepsPager.getPageEnd();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<EventReviewDTO> list = eventReviewMapper.eventReviewList();
-		mav.addObject("eventReviewList", list);
-		map.put("count", count); 
-		map.put("YepsPager", YepsPager);
+		List<EventReviewDTO> list = eventReviewMapper.eventReviewList(start,end);
+		
+		mav.addObject("count", count); 
+		mav.addObject("yepsPager", YepsPager);
 		mav.addObject("map", map);
+		mav.addObject("eventReviewList", list);
 		mav.setViewName("manager/eventReview");
 		return mav;
 	}
@@ -76,12 +82,14 @@ public class EventReviewController {
 		int eventReview_num = Integer.parseInt(req.getParameter("eventReview_num"));
 		int res = eventReviewMapper.deleteEventReview(eventReview_num);
 		String msg = null, url = null;
+		
 		if(res > 0) {
 			msg = "이벤트 리뷰를 삭제하였습니다.";
 			url = "manager/eventReview";
 			mav.addObject("msg", msg);
 			mav.addObject("url", url);
 			mav.setViewName("message");
+			
 		}else {
 			msg = "이벤트 리뷰 삭제에 실패하엿습니다.";
 			url = "manager/eventReview";

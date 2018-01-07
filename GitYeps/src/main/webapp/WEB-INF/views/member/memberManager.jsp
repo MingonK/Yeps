@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/member.css?ver=7"/>"/>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/qna.css"/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_list.css?ver=1"/>"/>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/magic-check.css"/>"/>
 
 </head>
@@ -25,11 +26,12 @@
 						<div class="column column-beta column--responsive">
 							<div class="sc-top-shelf-search-block">
 								<div class="sc-search-form-container">
-									<form name="member_manger_f" action="member_manager" class="member_manager_form arrange arrange--6 arrange--stack-small sc-search-form" method="post">
+									<form name="member_manger_f" action="manager_managerPage" class="member_manager_form arrange arrange--6 arrange--stack-small sc-search-form" method="post">
 										<div class="arrange_unit arrange_unit--fill sc-search-field">
 											<select name="search" class="search">
 												<option value="email">이메일</option>
 												<option value="name">이름</option>
+												
 											</select>
 											<input name="searchString" class="searchString" placeholder="What can we help you with?" type="text" value="" autocomplete=off>
 											<button class="member_managerbtn member_managerbtn-primary" type="submit" value="submit">
@@ -53,12 +55,10 @@
 	<div class="memberManager">
 		<div class="memberManagerContainer_wrap">
 			<div class="memberManagerContainer">
-			<button  style="line-height: 1.28571em; border-color: #000; border: 1px solid; border-radius: 3px; width:160px; height: 32px; cursor: pointer; float: right; background: #d32323; color:#fff; font-weight: bold; font-size: 15px;" type="button" name="management" id="management"  >managementPage</button>
 				<div class="memberManagerContainer_section_header">
 					<h2>
 						YEPS's Members
 					</h2>
-					
 				</div>
 				<div class="memberManagerContainer_section">
 					<c:choose>
@@ -160,11 +160,11 @@
 															<img class="photo-box-img" src="https://s3-media4.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/m.jpg">
 														</c:when>
 														<c:otherwise>
-<<<<<<< HEAD
+
 															<img class="photo-box-img" src="getImage/${memberMainPhoto.member_filename}" alt="member_main_photo" id="photo_box_img" width="100px" height="100px">
-=======
+
 															<img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${memberMainPhoto.member_filename}" alt="member_main_photo" id="photo_box_img" width="100px" height="100px">
->>>>>>> branch 'master' of https://github.com/MingonK/Yeps.git
+
 														</c:otherwise>
 													</c:choose>	
 													
@@ -232,47 +232,92 @@
 					</c:choose>
 				</div>
 			</div>	
+		</div>			
+		<div class="event_list_paging_section" style="font-size: 14px;">
+			<div class="event_list_pagination_block">
+				<div class="event_list_pagination_wrap">
+					<div class="event_list_page_of_pages">
+						<c:if test="${yepsPager.blockEnd == 0}">
+							Page ${curPage} of 1
+						</c:if>
+						<c:if test="${yepsPager.blockEnd != 0}">
+							Page ${curPage} of ${yepsPager.blockEnd}
+						</c:if>
+					</div>
+<!-- 					페이징 처리!! 현재페이지는 span이 되고 나머지는 a로 -->
+					<c:if test="${yepsPager.blockEnd != 1}">
+					<div class="event_list_page_link_wrapper">
+						<div class="event_list_page_link_wrap">
+						
+						<c:if test="${yepsPager.curBlock > 1}">
+							<div class="event_list_next_block">
+								<a class="event_list_next_block_action" href="javascript:list('1')">
+									<span>Start</span>
+								</a>
+							</div>
+						</c:if>
+
+						<c:if test="${yepsPager.curBlock > 1}">
+							<div class="event_list_next_block">
+								<a class="event_list_next_block_action" href="javascript:list('${yepsPager.prevPage}')">
+									<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">
+										<svg class="icon_svg">
+											<path d="M14.475 18.364l1.414-1.414L10.94 12l4.95-4.95-1.415-1.414L8.11 12l6.365 6.364z"></path>
+										</svg>
+									</span>
+									<span>Previous</span>
+								</a>
+							</div>
+						</c:if>
+						
+						
+						<c:forEach var="num" begin="${yepsPager.blockBegin}" end="${yepsPager.blockEnd}">
+							<div class="event_list_page_link_option">
+							<c:choose>
+								<c:when test="${num == yepsPager.curPage}">
+									<span class="event_list_page_option_action">
+										${num}
+									</span>
+								</c:when>
+								<c:otherwise>
+									<a href="javascript:list('${num}')" class="event_list_page_option_link_action">
+										${num}
+									</a>
+								</c:otherwise>
+							</c:choose>
+							</div>
+						</c:forEach>
+						
+						<c:if test="${yepsPager.curBlock <= yepsPager.totBlock}">
+							<div class="event_list_next_block">
+								<a class="event_list_next_block_action" href="javascript:list('${yepsPager.nextPage}')">
+									<span>Next</span>
+									<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">
+										<svg class="icon_svg">
+											<path d="M9.525 5.636L8.11 7.05 13.06 12l-4.95 4.95 1.415 1.414L15.89 12 9.524 5.636z"></path>
+										</svg>
+									</span>
+								</a>
+							</div>
+						</c:if>
+						
+						<c:if test="${yepsPager.curPage <= yepsPager.totPage}">
+							<div class="event_list_next_block">
+								<a class="event_list_next_block_action" href="javascript:list('${yepsPager.totPage}')">
+									<span>End</span>
+								</a>
+							</div>
+						</c:if>
+						</div>
+					</div>
+					</c:if>
+				</div>
+			</div>
 		</div>
+		
 	</div>
 	
-	<c:if test="${empty memberProfile}">
-		<div class="boardPager">
-			<c:if test="${map.memberPager.curBlock > 1}">
-				<a class="number" href="javascript:list('1')">[처음]</a>
-					</c:if>
-					<!-- **이전페이지 블록으로 이동 : 현재 페이지 블럭이 1보다 크면 [이전]하이퍼링크를 화면에 출력 -->
-					<c:if test="${map.memberPager.curBlock > 1}">
-						<a class="number"
-							href="javascript:list('${map.memberPager.prevPage}')">[이전]</a>
-					</c:if>
-						<!-- **하나의 블럭에서 반복문 수행 시작페이지부터 끝페이지까지 -->
-					<c:forEach var="num" begin="${map.memberPager.blockBegin}"
-						end="${map.memberPager.blockEnd}">
-						<!-- **현재페이지이면 하이퍼링크 제거 -->
-						<c:choose>
-							<c:when test="${num == map.memberPager.curPage}">
-								<span class="number" style="color: red">${num}</span>&nbsp;
-							</c:when>
-						<c:otherwise>
-								<a class="number" href="javascript:list('${num}')">${num}</a>&nbsp;
-						</c:otherwise>
-						</c:choose>
-					</c:forEach>
-			
-					<!-- **다음이지 블록으로 이동 : 현재 페이지 블럭이 전체 페이지 블럭보다 작거나 같으면 [다음]하이퍼링크를 화면에 출력 -->
-					<c:if
-						test="${map.memberPager.curBlock <= map.memberPager.totBlock}">
-						<a class="number"
-							href="javascript:list('${map.memberPager.nextPage}')">[다음]</a>
-					</c:if>
-					
-					<!-- **끝페이지로 이동 : 현재 페이지가 전체 페이지보다 작거나 같으면 [끝]하이퍼링크를 화면에 출력 -->
-					<c:if test="${map.memberPager.curPage <= map.memberPager.totPage}">
-						<a class="number"
-							href="javascript:list('${map.memberPager.totPage}')">[끝]</a>
-					</c:if>
-			</div>
-		</c:if>
+	
 		
 <script type="text/javascript">
 	var search = '${map.search}'

@@ -638,4 +638,27 @@ public class EventController {
 		mav.setViewName("historyBack");
 		return mav;
 	}
+	
+
+	@RequestMapping(value = "/event_photo_manage")
+	public ModelAndView event_photo_manage(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();
+		int curPage = req.getParameter("curPage") != null ? Integer.parseInt(req.getParameter("curPage")) : 1;
+		int count = eventMapper.eventCount();
+		YepsPager yepsPager = null;
+		int start = 0;
+		int end = 0;
+
+		yepsPager = new YepsPager(count, curPage, 5, 5);
+		start = yepsPager.getPageBegin();
+		end = yepsPager.getPageEnd();
+		List<EventDTO> event = eventMapper.manage_eventList(start, end);
+		mav.addObject("eventList", event);
+		mav.addObject("set", "events");
+		mav.addObject("curPage", curPage);
+		mav.addObject("count", count);
+		mav.addObject("yepsPager", yepsPager);
+		mav.setViewName("manager/event_photoManage");
+		return mav;
+	}
 }

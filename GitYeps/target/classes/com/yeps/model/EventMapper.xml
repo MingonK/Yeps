@@ -18,9 +18,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from yeps_event where event_category = #{event_category} and replace(upper(store_address),' ','') like '%'||replace(upper(#{search}),' ','')||'%'
 	</select>
 	
+	<select id="eventCount" resultType="int">
+	    select count(*) from yeps_event 
+	    </select>
+	
 	<select id="listEvent" parameterType="java.util.HashMap" resultType="EventDTO">
 		${sql}
 	</select>
+	
+	<select id="manage_eventList" parameterType="java.util.HashMap" resultType="eventDTO">
+	     select * from (select rownum rn, A.* from (select * from yeps_event order by evnum desc)A) where rn between #{start} and #{end}
+		</select>
 	
 	<insert id="insertEvent" parameterType="EventDTO">
 		insert into yeps_event values (yeps_event_seq.nextval, #{eventname}, #{start_date},
