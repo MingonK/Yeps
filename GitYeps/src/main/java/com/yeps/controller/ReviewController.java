@@ -434,7 +434,7 @@ public class ReviewController {
 		mav.addObject("reviewCount", reviewCount);
 		mav.addObject("StarAvg", StarAvg);
 		mav.addObject("SearchFind", SearchFind);
-		mav.setViewName("/review/restaurantFind");
+		mav.setViewName("review/restaurantFind");
 		return mav;
 	}
 

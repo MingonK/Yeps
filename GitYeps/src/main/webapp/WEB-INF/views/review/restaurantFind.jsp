@@ -135,7 +135,7 @@
    												<div class="resFind_div8">
    													<div class="resFind_div9">
    														<div class="resFind_div10">
-   															<img class="resFind_img_1" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${rdto.rest_filename}">
+   															<img class="resFind_img_1" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${rdto.fileDTO.filename}">
    														</div>
    													</div>
    													<div class="resFind_div11">
