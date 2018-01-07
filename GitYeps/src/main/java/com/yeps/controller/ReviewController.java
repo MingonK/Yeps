@@ -179,11 +179,26 @@ public class ReviewController {
 	}
 
 	@RequestMapping(value = "/review_restaurantIMG")
-	public ModelAndView review_restaurantIMG() {
+	public ModelAndView review_restaurantIMG(HttpServletRequest req) {
 		// rnum을 가지고 가서 식당 목록을 뿌려주기 //최근 식당으로 등록된것 가져오기 쿼리문 작성해서 갖고오기
 		// ★최근 식당목록으로 뽑아온것이 아니라, 일단은 식당등록이 먼저된것에서부터 19개의 식당목록을 가져왔음! ->20개로 바꿀예정임
 
 		List<RestaurantDTO> rlist = restaurantMapper.review_restaurantIMG();
+		HttpSession session = req.getSession();
+		MemberDTO loginMember = (MemberDTO) session.getAttribute("memberinfo");
+
+		if(loginMember != null) {
+			ReviewDTO existMyReview = null;
+			for(int i=0; i< rlist.size() ; i++) {
+				int rnum = rlist.get(i).getRnum();
+				int mnum = loginMember.getMnum(); 
+				existMyReview = reviewMapper.findMyReview(rnum, mnum);
+				if(existMyReview != null) {
+					rlist.remove(i);
+				}
+			}
+		}
+
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("set", "review");
 		mav.addObject("rlist", rlist);
@@ -199,19 +214,19 @@ public class ReviewController {
 		String rname = req.getParameter("rname");
 		dto.setIp(req.getRemoteAddr());
 		dto.setRecentreview("n");
-		
+
 		if(dto.getRnum() == 0) {
 			return new ModelAndView("redirect: main");
 		}
-		
+
 		HttpSession session = req.getSession();
 		MemberDTO loginMember = (MemberDTO) session.getAttribute("memberinfo");
 		ModelAndView mav = new ModelAndView();
-		
+
 		if(loginMember == null) {
 			return new ModelAndView("redirect: member_login");
 		}
-		
+
 		if(mode.equals("write")) {
 			int res = reviewMapper.insertReview(dto);
 			if(res > 0) {
@@ -223,15 +238,33 @@ public class ReviewController {
 				mav.setViewName("message");
 				return mav;
 			}
+
+			List<RestaurantDTO> restaurantList = restaurantMapper.review_restaurantIMG();
+			if(loginMember != null) {
+				ReviewDTO existMyReview = null;
+				for(int i=0; i< restaurantList.size() ; i++) {
+					int rnum = restaurantList.get(i).getRnum();
+					System.out.println("rnum:"+ rnum);
+					int mnum = loginMember.getMnum();
+					System.out.println("mnum" + mnum);
+					existMyReview = reviewMapper.findMyReview(rnum, mnum);
+					System.out.println("existMyReview" +existMyReview);
+					if(existMyReview != null) {
+						restaurantList.remove(restaurantList.get(i));
+					}
+				}
+			} 
 			
-			 List<RestaurantDTO> restaurantList = restaurantMapper.review_restaurantIMG();
-			 ReviewDTO myReview = reviewMapper.findMyReview(dto.getRnum(), dto.getMnum());
-			 mav.addObject("rlist", restaurantList);
-			 mav.addObject("myReview", myReview);
-			 mav.addObject("rname", rname);
-			 mav.addObject("mode", "write");
-			 mav.setViewName("review/restaurantIMG");
-			 return mav;
+			ReviewDTO myReview = reviewMapper.findMyReview(dto.getRnum(), dto.getMnum());
+			
+			System.out.println("리스트 사이즈:" + restaurantList.size());
+			
+			mav.addObject("rlist", restaurantList);
+			mav.addObject("myReview", myReview);
+			mav.addObject("rname", rname);
+			mav.addObject("mode", "write");
+			mav.setViewName("review/restaurantIMG");
+			return mav;
 		} else {
 			int res = reviewMapper.updateReview(dto);
 			if(res > 0) {
@@ -241,7 +274,7 @@ public class ReviewController {
 				mav.addObject("url", "restaurant_list");
 				mav.setViewName("message");
 			}
-			
+
 			return mav;
 		}
 	}

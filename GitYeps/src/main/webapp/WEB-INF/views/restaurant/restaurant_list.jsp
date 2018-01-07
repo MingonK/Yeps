@@ -187,9 +187,6 @@
 										</div>
 									</div>
 								</li>
-								<li>
-									 <a href="restaurant_insert" >가게 등록</a>
-								</li>
 							</ul>
 							</div>
 						</div>
@@ -462,7 +459,18 @@
 		};
 			</script>
 					<div class="column column-beta js-search-feedback-container">
-					
+						<div class="search-feedback-box island island--light">
+							<div class="feedback-biz-suggest">
+								<div class="text-container">
+									<h3 style="display: block;word-wrap: break-word !important;word-break: break-word !important;overflow-wrap: break-word !important;font-weight: bold;margin-bottom: 6px;font-size: 16px;line-height: 1.3125em;color: #d32323;margin: 0 0 6px;">Not here? Tell us what we're missing.</h3>
+									<p style="margin-bottom: 12px; display: block;">If the business you're looking for isn't here, add it!</p>
+								</div>
+								<a href="restaurant_insert" class="ybtn ybtn--primary ybtn--small js-show-add-biz-modal">레스토랑 등록</a>
+							</div>
+							<div class="feedback-contact">
+            					Got search feedback? <a href="#" class="search-feedback" data-component-bound="true" style="">Help us improve.</a>
+							</div>
+						</div>
 					</div>
 				</div>
 				

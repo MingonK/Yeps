@@ -178,6 +178,11 @@
 	width: 100%!important;
 	box-sizing: border-box!important;
 	text-align: center!important;
+	
+}
+
+.mainpage_header_inner_bottom {
+	position:relative;
 }
 
 .mainpage_header_bottom_text_name {
