@@ -335,6 +335,7 @@
 							                                					 	<label class="star-selector_label" for="rating-1">1 (Eek! Methinks not.)</label>
 							                                					 	<span class="tooltip-wrapper">
 							                                					 		<span class="tooltip">
+							                                					 			Eek! Methinks not.
 							                                					 		</span>
 							                                					 	</span>
 							                             					</li>
@@ -1157,6 +1158,7 @@
        
        if(star == 0){
           $(this).parent().addClass('i-selector-stars--extra-large-0');
+          $('#check_li_1').dis
        }else if(star == 1){
           $(this).parent().addClass('i-selector-stars--extra-large-1');
        }else if(star == 2){
