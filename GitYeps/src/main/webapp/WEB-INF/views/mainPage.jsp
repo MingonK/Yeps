@@ -711,7 +711,7 @@
 										<!-- 가격표시 없으면 표시 안함 -->
 										<span class="bullet-after">
 											<span style="letter-spacing: 1px; white-space: nowrap;">
-												${RestaurantDTO.price}
+												<c:forEach begin="1" end="${RestaurantDTO.price}">￦</c:forEach>
 											</span>
 										</span>
 										<span>

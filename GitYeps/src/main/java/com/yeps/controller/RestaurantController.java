@@ -160,6 +160,8 @@ public class RestaurantController {
 
 	@RequestMapping(value = "/restaurant_list")
 	public ModelAndView listRest(@RequestParam(defaultValue = "1") int curPage) {
+		List<Integer>price=new ArrayList<Integer>();
+		price.add(0);
 		int count = restaurantMapper.getCount();
 		int pageScale = 10;
 		int blockScale = 10;
@@ -168,7 +170,7 @@ public class RestaurantController {
 		int start = YepsPager.getPageBegin();
 		int end = YepsPager.getPageEnd();
 
-		List<RestaurantDTO> list = restaurantMapper.listRest(start, end, "mode");
+		List<RestaurantDTO> list = restaurantMapper.listRest(start, end, "mode",price);
 
 		List<Integer> reviewCount = new ArrayList<Integer>();
 		List<Integer> StarAvg = new ArrayList<Integer>();
@@ -200,8 +202,12 @@ public class RestaurantController {
 	@RequestMapping(value = "/restaurant_ajax")
 	@ResponseBody
 	public HashMap<String, Object> listRestRefresh(@RequestParam(value = "mode") String mode,
-			@RequestParam(value = "checkArray[]") List<Integer> arrayParams,
+			@RequestParam(value = "price[]") List<Integer> price,
 			@RequestParam(defaultValue = "1") int curPage) {
+		
+		
+		System.out.println("필터="+mode);
+		System.out.println("가격 갯수="+price.size());
 		int count = restaurantMapper.getCount();
 		int pageScale = 10;
 		int blockScale = 10;
@@ -210,7 +216,7 @@ public class RestaurantController {
 		int start = YepsPager.getPageBegin();
 		int end = YepsPager.getPageEnd();
 
-		List<RestaurantDTO> list = restaurantMapper.listRest(start, end, mode);
+		List<RestaurantDTO> list = restaurantMapper.listRest(start, end, mode,price);
 
 		List<Integer> reviewCount = new ArrayList<Integer>();
 		List<Integer> StarAvg = new ArrayList<Integer>();

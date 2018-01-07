@@ -122,13 +122,6 @@
   		select rnum, mnum from yeps_review where recentreview='y'
   	</select>
   	
-<!--   	<select id="previous_Rv" resultType="ReviewDTO"> -->
-<!--   		select *from yeps_review where recentreview= 'y' -->
-<!--   	</select> -->
-  	
-  	
-  	
-  	
   	<resultMap type="reviewDTO" id="FindReviewMap">
 		<id column="rvnum" property="rvnum"/>
 		<result column="rnum" property="rnum"></result>

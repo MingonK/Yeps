@@ -226,10 +226,6 @@ public class ReviewController {
 		MemberDTO loginMember = (MemberDTO) session.getAttribute("memberinfo");
 		ModelAndView mav = new ModelAndView();
 
-		if(loginMember == null) {
-			return new ModelAndView("redirect: member_login");
-		}
-
 		if(mode.equals("write")) {
 			int res = reviewMapper.insertReview(dto);
 			if(res > 0) {
@@ -333,7 +329,7 @@ public class ReviewController {
 
 		int num = count - pageScale * (curPage - 1) + 1;
 		//recentreview가 y인 reviewDTO를 꺼내왔음 
-		List<ReviewDTO> rvdto_y = reviewMapper.previous_Rv(start, end);
+		List<ReviewDTO> rvdto_ylist = reviewMapper.previous_Rv(start, end);
 
 
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -345,7 +341,7 @@ public class ReviewController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("num", num);
 		mav.addObject("map", map);
-		mav.addObject("rvdto_y", rvdto_y);
+		mav.addObject("rvdto_ylist", rvdto_ylist);
 		mav.setViewName("review/previous_reviews");
 		return mav;
 	}

@@ -6,16 +6,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.yeps.model">
 
-	<select id="getEventCount" resultType="int">
-		select count(*) from yeps_event
+	<select id="getEventCount" parameterType="String" resultType="int">
+		select count(*) from yeps_event where replace(upper(store_address),' ','') like '%'||replace(upper(#{search}),' ','')||'%'
 	</select>
 	
-	<select id="getEventCountForFree" resultType="int">
-		select count(*) from yeps_event where discount like '%무료%'
+	<select id="getEventCountForFree" parameterType="String" resultType="int">
+		select count(*) from yeps_event where discount like '%무료%' and replace(upper(store_address),' ','') like '%'||replace(upper(#{search}),' ','')||'%'
 	</select>
 	
 	<select id="getEventCountForCategory" parameterType="java.util.HashMap" resultType="int">
-		select count(*) from yeps_event where event_category = #{event_category}
+		select count(*) from yeps_event where event_category = #{event_category} and replace(upper(store_address),' ','') like '%'||replace(upper(#{search}),' ','')||'%'
 	</select>
 	
 	<select id="listEvent" parameterType="java.util.HashMap" resultType="EventDTO">

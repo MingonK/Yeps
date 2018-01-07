@@ -187,9 +187,6 @@
 										</div>
 									</div>
 								</li>
-								<li>
-									 <a href="restaurant_insert" >가게 등록</a>
-								</li>
 							</ul>
 							</div>
 						</div>
@@ -236,7 +233,9 @@
 														</div>
 													<div class="price-category"style="clear: both;">
 														<span class="bullet-after">
-																<span class="business-attribute price-range" style="letter-spacing: 1px; white-space: nowrap;">${dto.price }</span>
+																<span class="business-attribute price-range" style="letter-spacing: 1px; white-space: nowrap;">
+																	<c:forEach begin="1" end="${dto.price}">￦</c:forEach>
+																</span>
 														</span>
 														<span class="category-str-list">
 															<a href="#" style="color: #0073bb; cursor: pointer;">${dto.foodstyle}</a>
@@ -459,6 +458,20 @@
 			});
 		};
 			</script>
+					<div class="column column-beta js-search-feedback-container">
+						<div class="search-feedback-box island island--light">
+							<div class="feedback-biz-suggest">
+								<div class="text-container">
+									<h3 style="display: block;word-wrap: break-word !important;word-break: break-word !important;overflow-wrap: break-word !important;font-weight: bold;margin-bottom: 6px;font-size: 16px;line-height: 1.3125em;color: #d32323;margin: 0 0 6px;">Not here? Tell us what we're missing.</h3>
+									<p style="margin-bottom: 12px; display: block;">If the business you're looking for isn't here, add it!</p>
+								</div>
+								<a href="restaurant_insert" class="ybtn ybtn--primary ybtn--small js-show-add-biz-modal">레스토랑 등록</a>
+							</div>
+							<div class="feedback-contact">
+            					Got search feedback? <a href="#" class="search-feedback" data-component-bound="true" style="">Help us improve.</a>
+							</div>
+						</div>
+					</div>
 				</div>
 				
 			</div>
@@ -496,23 +509,23 @@
 $(document).ready(function(){
 	var mode;
 	var price=[];
-	$('.filters-price').on('change', function() {
-		price=[];
-	$("input:checkbox[name='price']:checked").each(function(index) {
-			price.push($(this).val());
-		});
-	});
-
 	
-	
-	
-	$('.filters').on('change', function() {
-	    $('.filters').not(this).prop('checked', false);  
+	$(document).on('change','.filters,.filters-price', function() {
+		
+		$('.filters').not(this).prop('checked', false);  
+		
 	    if($("input:checkbox[name='feature']").is(":checked") == true){
             mode = $(this).val();
           }else{
              mode = "mode";
           }
+		price=[];
+		$("input:checkbox[name='price']:checked").each(function() {
+				price.push($(this).val());
+			});
+		if(price==null||price==""){
+			price.push("0");
+		}
 			var allData = { "mode": mode,"price":price};
 			$(document).ajaxStart(function() {
 				$('body').css('overflow', 'hidden');
@@ -561,7 +574,7 @@ $(document).ready(function(){
 																'</div>'+
 																'<div class="price-category"style="clear: both;">'+
 																	'<span class="bullet-after">'+
-																		'<span class="business-attribute price-range" style="letter-spacing: 1px; white-space: nowrap;">￦￦￦</span>'+
+																		'<span class="business-attribute price-range" style="letter-spacing: 1px; white-space: nowrap;">'+item.price+'</span>'+
 																	'</span>'+
 																	'<span class="category-str-list">'+
 																		'<a href="#" style="color: #0073bb;text-decoration: none;    cursor: pointer;">'+item.foodstyle+'</a>'+
@@ -608,9 +621,10 @@ $(document).ready(function(){
 						 });
 							
 				        },
-				        error:function(jqXHR, textStatus, errorThrown){
-				            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
-				        }
+				        error:function(request,status,error){
+				        	alert("code:"+request.status+"\n"+"error:"+error);
+				        	}
+
 				 });
 	});
 });
