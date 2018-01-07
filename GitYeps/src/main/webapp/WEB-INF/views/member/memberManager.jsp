@@ -11,7 +11,6 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/member.css?ver=7"/>"/>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/qna.css"/>"/>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_list.css?ver=1"/>"/>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css?ver=1"/>"/>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/magic-check.css"/>"/>
 
 </head>
@@ -56,12 +55,10 @@
 	<div class="memberManager">
 		<div class="memberManagerContainer_wrap">
 			<div class="memberManagerContainer">
-		
 				<div class="memberManagerContainer_section_header">
 					<h2>
 						YEPS's Members
 					</h2>
-					
 				</div>
 				<div class="memberManagerContainer_section">
 					<c:choose>

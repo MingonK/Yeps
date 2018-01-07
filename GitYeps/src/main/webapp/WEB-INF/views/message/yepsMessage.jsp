@@ -7,58 +7,183 @@
 <head>
 <title>Yeps Message</title>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/message.css?ver=1"/>"/>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/restStyle.css?ver=1"/>"/>
  	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css"/>"/>
+ 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css?ver=1"/>"/>
 	<script src="//code.jquery.com/jquery.min.js"></script>
 </head>
 <%@ include file="../top.jsp"%>
 <div style="background: white;">
+
 <div class="popup" align="left" id="writeIssue" data-popup="writeIssue"  style="z-index: 1;">
-    <form name="sendIssueform" method="post">
-	     <div class="popup-inner">
-	         <h4 align="left"  style="color: #d32323; margin-bottom: 20px;">Send Report To Manager</h4>
-	             <input type="hidden" id="issueValue" value="issue">
-	         <h4 align="left" style="color: #d32323;">Subject is</h4>
-	             <input type="text" name="title" id="sendIssueSubject">
-	         <h4 align="left" style="color: #d32323;">Content is</h4>
-	             <textarea rows="4" name="content" id="sendIssueContent"  placeholder="여기에 메시지를 입력하세요."></textarea>
-	                 <button class="popup-send" id="sendIssue" type="button" data-popup-send="SendIssue" >Send Report</button>&nbsp;&nbsp;
-			         <a data-popup-close="writeIssue" style="cursor:pointer;" href="#">  Close</a>
-					 <a class="popup-close" data-popup-close="writeIssue" href="#" >x</a>
-		  </div>
-	 </form>
-</div> 
+	<div class="popup-inner" style="width: 465px; z-index: 1; height: auto !important; max-height: 400px;">
+    	<div id="flag_content_popup_title">
+    	    <div id="flag_content_popup_close" data-popup-close="writeIssue">
+    			<h4 style="display: table-cell; padding: 0px 7px; font-size: 100%; font: inherit;">×</h4>
+    		</div>
+    		<h2>
+    	    	메세지 보내기
+    	    </h2>
+    	</div>
+    	
+    	<div id="flag_popup_description" style="padding: 12px 8px 0;">
+    		<div>
+    			<form name="sendIssueform" method="post">
+    				<div>
+						<h4 align="left" style="color: #d32323;">Send Report To Manager</h4>
+    	    			<input type="hidden" id="issueValue" value="issue" style="width: 95%; height: 20px;">
+    	    			<h4 align="left" style="color: #d32323;">Subject is</h4>
+	            		<input type="text" name="title" id="sendIssueSubject" style="width: 95%; height: 20px;">
+	        			<h4 align="left" style="color: #d32323;">Content is</h4>
+	            		<textarea rows="4" name="content" id="sendIssueContent"  style="width: 95%;" placeholder="여기에 메시지를 입력하세요."></textarea>
+    	    		</div>
+    			</form>
+    		</div>
+    	</div>
+    	
+		<div id="flag_popup_footer">
+     		<div id="flag_popup_buttons">
+     			<button id="reply_message_popup_submit_button" type="submit" value="submit" data-popup-send="SendMessage" >
+     				<span>메세지 보내기</span>
+     			</button>
+     			<a href="#" data-popup-close="writeIssue">
+    				Close
+    			</a>
+     		</div>
+     	</div>
+	</div>		
+</div>
+
+
 <!-- Message sendform -->
-<div class="popup" align="left" id="writeMessage" data-popup="writeMessage"  style="z-index: 1;">
-    <form name="sendform" method="post">
-	    <div class="popup-inner">
-	        <h4 align="left"  style="color: #d32323;">Send Message To</h4>
-	            <input type="text" id="sendformTo" name="receiver">
-	        <h4 align="left" style="color: #d32323;">Subject is</h4>
-	            <input type="text" name="title" id="sendformSubject" >
-	        <h4 align="left" style="color: #d32323;">Content is</h4>
-	            <textarea rows="4" name="content" id="sendformMessage"  placeholder="여기에 메시지를 입력하세요."></textarea>
-	                <button class="popup-send" id="sendMessage" type="button" data-popup-send="SendMessage" onclick="sendMessage()">SendMessage </button>
-			        <a data-popup-close="writeMessage" style="cursor:pointer;" href="#">  Close</a>
-					<a class="popup-close" data-popup-close="writeMessage" href="#" >X</a>
-	    </div>
-	</form>
-</div> 
+<div class="popup" align="left" id="writeMessage" data-popup="writeMessage"  style="z-index: 9000;">
+	<div class="popup-inner" style="width: 465px; z-index: 1; height: auto !important; max-height: 400px;">
+    	<div id="flag_content_popup_title">
+    	    <div id="flag_content_popup_close" data-popup-close="writeMessage">
+    			<h4 style="display: table-cell; padding: 0px 7px; font-size: 100%; font: inherit;">×</h4>
+    		</div>
+    		<h2>
+    	    	메세지 보내기
+    	    </h2>
+    	</div>
+    	
+    	<div id="flag_popup_description" style="padding: 12px 8px 0;">
+    		<div>
+    			<form name="sendIssueform" method="post">
+    				<div>
+						<h4 align="left" style="color: #d32323;">Send Message To</h4>
+    	    			<input type="text" id="sendformTo" name="receiver" style="width: 95%; height: 20px;">
+    	    			<h4 align="left" style="color: #d32323;">Subject is</h4>
+	            		<input type="text" name="title" id="sendformSubject" style="width: 95%; height: 20px;">
+	        			<h4 align="left" style="color: #d32323;">Content is</h4>
+	            		<textarea rows="4" name="content" id="sendformMessage"  style="width: 95%;" placeholder="여기에 메시지를 입력하세요."></textarea>
+    	    		</div>
+    			</form>
+    		</div>
+    	</div>
+    	
+		<div id="flag_popup_footer">
+     		<div id="flag_popup_buttons">
+     			<button id="reply_message_popup_submit_button" type="submit" value="submit" data-popup-send="SendMessage" >
+     				<span>메세지 보내기</span>
+     			</button>
+     			<a href="#" data-popup-close="writeMessage">
+    				Close
+    			</a>
+     		</div>
+     	</div>
+	</div>		
+</div>
+
+
+
+<!-- Message View -->
+<div class="popup" align="left" id="popup" data-popup="popup-1"  style="z-index: 9000;">
+	<div class="popup-inner" style="width: 465px; z-index: 1; height: auto !important; max-height: 400px;">
+    	<div id="flag_content_popup_title">
+    	    <div id="flag_content_popup_close" data-popup-close="popup-1">
+    			<h4 style="display: table-cell; padding: 0px 7px; font-size: 100%; font: inherit;" onclick="readCheck('${map.lMode}');">×</h4>
+    		</div>
+    		<h2>
+    	    	메세지 보내기
+    	    </h2>
+    	</div>
+    	
+    	<div id="flag_popup_description" style="padding: 12px 8px 0;">
+    		<div>
+    			<form name="sendIssueform" method="post">
+    				<div>
+						<h4 align="left" style="color: #d32323;">Message From</h4>
+    	    			<input type="text" id="from" readOnly style="width: 95%; height: 20px;">
+    	    			<h4 align="left" style="color: #d32323;">Subject is</h4>
+	            		<input type="text" id="subject" readOnly style="width: 95%; height: 20px;">
+	        			<h4 align="left" style="color: #d32323;">Content is</h4>
+	            		<textarea rows="4" id="message" readOnly style="width: 95%;"></textarea>
+    	    		</div>
+    			</form>
+    		</div>
+    	</div>
+    	
+		<div id="flag_popup_footer">
+     		<div id="flag_popup_buttons">
+     			<button id="replyMessage" class="popup-reply" type="button" data-popup-close="popup-1" data-popup-open="writeMessage">
+     				<span>답장 보내기</span>
+     			</button>
+			    <button class="popup-delete" id="deleteMessage" type="button" data-popup-close="popup-1" style="cursor:pointer;" onclick="deleteMsg('${map.lMode}');">
+			    	<span>삭제</span>
+			    </button>&nbsp;
+    			<input type="hidden" id="readCheck"> 
+    			<input type="hidden" id="pageMode">
+     			<a href="#" data-popup-close="popup-1" onclick="readCheck('${map.lMode}');">
+    				Close
+    			</a>
+     		</div>
+     	</div>
+	</div>		
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Message sendform -->
+<!-- <div class="popup" align="left" id="writeMessage" data-popup="writeMessage"  style="z-index: 9000;"> -->
+<!--     <form name="sendform" method="post"> -->
+<!-- 	    <div class="popup-inner"> -->
+<!-- 	        <h4 align="left"  style="color: #d32323;">Send Message To</h4> -->
+<!-- 	            <input type="text" id="sendformTo" name="receiver"> -->
+<!-- 	        <h4 align="left" style="color: #d32323;">Subject is</h4> -->
+<!-- 	            <input type="text" name="title" id="sendformSubject" > -->
+<!-- 	        <h4 align="left" style="color: #d32323;">Content is</h4> -->
+<!-- 	            <textarea rows="4" name="content" id="sendformMessage"  placeholder="여기에 메시지를 입력하세요."></textarea> -->
+<!-- 	                <button class="popup-send" id="sendMessage" type="button" data-popup-send="SendMessage" onclick="sendMessage()">SendMessage </button> -->
+<!-- 			        <a data-popup-close="writeMessage" style="cursor:pointer;" href="#">  Close</a> -->
+<!-- 					<a class="popup-close" data-popup-close="writeMessage" href="#" >X</a> -->
+<!-- 	    </div> -->
+<!-- 	</form> -->
+<!-- </div>  -->
 	<!-- Message View  -->
-        <div class="popup" align="left" id="popup" data-popup="popup-1" style="z-index: 1;">
-		    <div class="popup-inner">
-			  <h4 align="left"  style="color: #d32323;">Message From</h4>
-			     <input type="text" id="from" readOnly>
-			  <h4 align="left"  style="color: #d32323;">Subject is</h4>
-			     <input type="text" id="subject" readOnly>
-			  <h4 align="left"  style="color: #d32323;">Content is</h4>
-			     <textarea id="message" rows="4" readOnly></textarea>
-			        <button class="popup-reply" id="replyMessage" type="button" data-popup-close="popup-1" data-popup-open="writeMessage" style="cursor:pointer;">reply </button>
-			         <button class="popup-delete" id="deleteMessage" type="button" data-popup-close="popup-1" style="cursor:pointer;" onclick="deleteMsg('${map.lMode}');">delete </button>&nbsp;
-			           <a data-popup-close="popup-1" href="#" style="cursor:pointer;" onclick="readCheck('${map.lMode}');">Close</a>
-				           <input type="hidden" id="readCheck" > <input type="hidden" id="pageMode">
-				       <a class="popup-close" style="cursor:pointer;" data-popup-close="popup-1" href="#" onclick="readCheck('${map.lMode}');">x</a>
-		       </div>
-	      </div> 
+<!--         <div class="popup" align="left" id="popup" data-popup="popup-1" style="z-index: 9000;"> -->
+<!-- 		    <div class="popup-inner"> -->
+<!-- 			  <h4 align="left"  style="color: #d32323;">Message From</h4> -->
+<!-- 			     <input type="text" id="from" readOnly> -->
+<!-- 			  <h4 align="left"  style="color: #d32323;">Subject is</h4> -->
+<!-- 			     <input type="text" id="subject" readOnly> -->
+<!-- 			  <h4 align="left"  style="color: #d32323;">Content is</h4> -->
+<!-- 			     <textarea id="message" rows="4" readOnly></textarea> -->
+<!-- 			        <button class="popup-reply" id="replyMessage" type="button" data-popup-close="popup-1" data-popup-open="writeMessage" style="cursor:pointer;">reply </button> -->
+<%-- 			         <button class="popup-delete" id="deleteMessage" type="button" data-popup-close="popup-1" style="cursor:pointer;" onclick="deleteMsg('${map.lMode}');">delete </button>&nbsp; --%>
+<%-- 			           <a data-popup-close="popup-1" href="#" style="cursor:pointer;" onclick="readCheck('${map.lMode}');">Close</a> --%>
+<!-- 				           <input type="hidden" id="readCheck" > <input type="hidden" id="pageMode"> -->
+<%-- 				       <a class="popup-close" style="cursor:pointer;" data-popup-close="popup-1" href="#" onclick="readCheck('${map.lMode}');">x</a> --%>
+<!-- 		       </div> -->
+<!-- 	      </div>  -->
 	          <div id="messageContainer">
 	              <div id="messageHeader">
 		            <c:choose>

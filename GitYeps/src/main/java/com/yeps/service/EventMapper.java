@@ -49,8 +49,11 @@ public class EventMapper {
 		return sqlSession.selectList("listEvent", map);
 	}
 	
-	public List<EventDTO> manage_eventList() {
-		return sqlSession.selectList("manage_eventList");
+	public List<EventDTO> manage_eventList(int start, int end) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		return sqlSession.selectList("manage_eventList", map);
 	}
 
 	public int insertEvent(EventDTO dto) {
@@ -106,5 +109,9 @@ public class EventMapper {
 
 	public int updateEvent(EventDTO dto) {
 		return sqlSession.update("updateEvent", dto);
+	}
+	
+	public int eventCount() {
+		return sqlSession.selectOne("eventCount");
 	}
 }

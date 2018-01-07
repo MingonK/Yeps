@@ -68,8 +68,8 @@ public class EventReviewController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<EventReviewDTO> list = eventReviewMapper.eventReviewList(start,end);
 		
-		map.put("count", count); 
-		map.put("YepsPager", YepsPager);
+		mav.addObject("count", count); 
+		mav.addObject("yepsPager", YepsPager);
 		mav.addObject("map", map);
 		mav.addObject("eventReviewList", list);
 		mav.setViewName("manager/eventReview");
@@ -82,12 +82,14 @@ public class EventReviewController {
 		int eventReview_num = Integer.parseInt(req.getParameter("eventReview_num"));
 		int res = eventReviewMapper.deleteEventReview(eventReview_num);
 		String msg = null, url = null;
+		
 		if(res > 0) {
 			msg = "이벤트 리뷰를 삭제하였습니다.";
 			url = "manager/eventReview";
 			mav.addObject("msg", msg);
 			mav.addObject("url", url);
 			mav.setViewName("message");
+			
 		}else {
 			msg = "이벤트 리뷰 삭제에 실패하엿습니다.";
 			url = "manager/eventReview";

@@ -50,6 +50,115 @@
 		</div>
    </div>
    
+   <div id="event_manager_list_header" style="margin:0 100px;">
+	<h2 style="height: 40px; margin-top: 20px;">Event List</h2>
+	    <table style="width:90%;">
+			<tr>
+				<th align="center" width="15%">번호</th>
+				<th align="center" style=" width: 50%;">이벤트 이름</th>
+				<th align="center" width="21%">작성일자</th>
+				<th align="center" width="7%">삭제</th>
+				<th align="center" width="7%">수정</th>
+			</tr>
+		<c:if test="${empty eventList}">
+			<tr>
+				<td colspan="6" align="center">등록된 이벤트가 없습니다.</td>
+			</tr>
+		</c:if>
+		<c:forEach var="dto" items="${eventList}">
+			<tr>
+				<td id="event" align="center">${dto.evnum}</td>
+				<td id="event" style="color: navy;" align="center"><a href="#">${dto.eventname}</a> </td>
+				<td id="event" align="center">${dto.event_register_date}</td>
+				<td id="event" align="center"><a style="color: red; " href="event_delete?evnum=${dto.evnum}">삭제</a></td>
+				<td id="event" align="center"><a style="color: red; " href="event_edit?evnum=${dto.evnum}">수정</a></td>
+			</tr>
+		</c:forEach>
+	</table>
+	
+		<div class="event_list_paging_section" style="font-size: 14px;">
+			<div class="event_list_pagination_block">
+				<div class="event_list_pagination_wrap">
+					<div class="event_list_page_of_pages">
+						<c:if test="${yepsPager.blockEnd == 0}">
+							Page ${curPage} of 1
+						</c:if>
+						<c:if test="${yepsPager.blockEnd != 0}">
+							Page ${curPage} of ${yepsPager.blockEnd}
+						</c:if>
+					</div>
+<!-- 					페이징 처리!! 현재페이지는 span이 되고 나머지는 a로 -->
+					<c:if test="${yepsPager.blockEnd != 1}">
+					<div class="event_list_page_link_wrapper">
+						<div class="event_list_page_link_wrap">
+						
+						<c:if test="${yepsPager.curBlock > 1}">
+							<div class="event_list_next_block">
+								<a class="event_list_next_block_action" href="javascript:list('1')">
+									<span>Start</span>
+								</a>
+							</div>
+						</c:if>
+
+						<c:if test="${yepsPager.curBlock > 1}">
+							<div class="event_list_next_block">
+								<a class="event_list_next_block_action" href="javascript:list('${yepsPager.prevPage}')">
+									<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">
+										<svg class="icon_svg">
+											<path d="M14.475 18.364l1.414-1.414L10.94 12l4.95-4.95-1.415-1.414L8.11 12l6.365 6.364z"></path>
+										</svg>
+									</span>
+									<span>Previous</span>
+								</a>
+							</div>
+						</c:if>
+						
+						
+						<c:forEach var="num" begin="${yepsPager.blockBegin}" end="${yepsPager.blockEnd}">
+							<div class="event_list_page_link_option">
+							<c:choose>
+								<c:when test="${num == yepsPager.curPage}">
+									<span class="event_list_page_option_action">
+										${num}
+									</span>
+								</c:when>
+								<c:otherwise>
+									<a href="javascript:list('${num}')" class="event_list_page_option_link_action">
+										${num}
+									</a>
+								</c:otherwise>
+							</c:choose>
+							</div>
+						</c:forEach>
+						
+						<c:if test="${yepsPager.curBlock <= yepsPager.totBlock}">
+							<div class="event_list_next_block">
+								<a class="event_list_next_block_action" href="javascript:list('${yepsPager.nextPage}')">
+									<span>Next</span>
+									<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">
+										<svg class="icon_svg">
+											<path d="M9.525 5.636L8.11 7.05 13.06 12l-4.95 4.95 1.415 1.414L15.89 12 9.524 5.636z"></path>
+										</svg>
+									</span>
+								</a>
+							</div>
+						</c:if>
+						
+						<c:if test="${yepsPager.curPage <= yepsPager.totPage}">
+							<div class="event_list_next_block">
+								<a class="event_list_next_block_action" href="javascript:list('${yepsPager.totPage}')">
+									<span>End</span>
+								</a>
+							</div>
+						</c:if>
+						</div>
+					</div>
+					</c:if>
+				</div>
+			</div>
+		</div>
+	</div>
+   
 			<div id="photo_drop_super_container" style="margin: 0 15px;">
 				<div id="photo_drop_container">
 					<div id="sucess_file_upload_header">
