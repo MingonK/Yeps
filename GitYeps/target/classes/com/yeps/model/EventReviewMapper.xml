@@ -52,7 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<result column="nickname" property="nickname"></result>
 			<association javaType="MemberPhotoDTO" property="memberPhotoDTO">
 				<id column="filenum" property="filenum"></id>
-				<result column="filename" property="filename"></result>
+				<result column="member_filename" property="member_filename"></result>
 				<result column="ismainphoto" property="ismainphoto"></result>
 			</association>
 		</association>
@@ -74,7 +74,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         		, M.email
         		, M.reviewcount
         		, M.nickname
-        		, P.filename
+        		, P.member_filename
         from	yeps_eventreview ER, yeps_member M, yeps_member_photos P, yeps_event E
         where	ER.mnum = M.mnum and ER.mnum = P.mnum and ER.evnum = E.evnum and P.ismainphoto = 'y' and ER.evnum = #{evnum}
         order by ER.eventReview_num asc

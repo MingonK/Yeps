@@ -469,15 +469,14 @@
 													<ul class="review_photo_box">
 													<c:forEach var="photos" items="${uploadFileList}" varStatus="status">
 														<c:if test="${photos.mnum eq myReview.memberDTO.mnum}">
-														<c:set var="count" value="${count=count+1}"/>
-															<c:if test="${count == 1}">
+															<c:if test="${status.index % 3 == 0}">
 																<li style="width: 348px; height: 348px;">
 																	<div class="review_photo_box_overlay">
 																		<img height="348" width="348" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photos.filename}">
 																	</div>
 																</li>
 															</c:if>
-															<c:if test="${count > 1 && count < 4}">
+															<c:if test="${status.index % 3 != 0}">
 																<li style="width: 168px; height: 168px;">
 																	<div class="review_photo_box_overlay">
 																		<img height="168" width="168" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photos.filename}">
@@ -613,15 +612,14 @@
 												<ul class="review_photo_box">
 													<c:forEach var="photos" items="${uploadFileList}" varStatus="status">
 														<c:if test="${photos.mnum eq getReview.mnum}">
-														<c:set var="count" value="${count=count+1}"/>
-															<c:if test="${count == 1}">
+															<c:if test="${status.index % 3 == 0}">
 																<li style="width: 348px; height: 348px;">
 																	<div class="review_photo_box_overlay">
 																		<img height="348" width="348" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photos.filename}">
 																	</div>
 																</li>
 															</c:if>
-															<c:if test="${count > 1 && count < 4}">
+															<c:if test="${status.index % 3 != 0}">
 																<li style="width: 168px; height: 168px;">
 																	<div class="review_photo_box_overlay">
 																		<img height="168" width="168" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photos.filename}">
@@ -822,67 +820,67 @@
 							<table class="restContent-table-hours">
 								<tbody style="display: table-row-group;">
 									<tr style="display: table-row;">
-										<th scope="row" style="border-top: 0; min-width: 36px; padding-right: 18px; padding: 0 1em 0 0; border: none; vertical-align: baseline; font-weight: bold; text-align: left; display: table-cell;">
+										<th scope="row" style="border-top: 0; min-width: 36px; padding-right: 18px; border: none; vertical-align: baseline; font-weight: bold; text-align: left; display: table-cell;">
 											월요일
 										</th>
-										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
+										<td style="border-top: 0; padding-right: 6px;  border: none; vertical-align: baseline; display: table-cell;">
 											<span class="mon" style="white-space: nowrap;">${getRest.mon}</span>
 										</td>
-										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
+										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
 									<tr style="display: table-row;">
-										<th scope="row" style="border-top: 0; min-width: 36px; padding-right: 18px; padding: 0 1em 0 0; border: none; vertical-align: baseline; font-weight: bold; text-align: left; display: table-cell;">
+										<th scope="row" style="border-top: 0; min-width: 36px; padding-right: 18px; border: none; vertical-align: baseline; font-weight: bold; text-align: left; display: table-cell;">
 											화요일
 										</th>
-										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
+										<td style="border-top: 0; padding-right: 6px; border: none; vertical-align: baseline; display: table-cell;">
 											<span class="tue" style="white-space: nowrap;">${getRest.tue}</span>
 										</td>
-										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
+										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
 									<tr style="display: table-row;">
-										<th scope="row" style="border-top: 0; min-width: 36px; padding-right: 18px; padding: 0 1em 0 0; border: none; vertical-align: baseline; font-weight: bold; text-align: left; display: table-cell;">
+										<th scope="row" style="border-top: 0; min-width: 36px; padding-right: 18px; border: none; vertical-align: baseline; font-weight: bold; text-align: left; display: table-cell;">
 											수요일
 										</th>
-										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
+										<td style="border-top: 0; padding-right: 6px; border: none; vertical-align: baseline; display: table-cell;">
 											<span class="wed" style="white-space: nowrap;">${getRest.wed}</span>
 										</td>
-										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
+										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
 									<tr style="display: table-row;">
-										<th scope="row" style="border-top: 0; min-width: 36px; padding-right: 18px; padding: 0 1em 0 0; border: none; vertical-align: baseline; font-weight: bold; text-align: left; display: table-cell;">
+										<th scope="row" style="border-top: 0; min-width: 36px; padding-right: 18px; border: none; vertical-align: baseline; font-weight: bold; text-align: left; display: table-cell;">
 											목요일
 										</th>
-										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
+										<td style="border-top: 0; padding-right: 6px; border: none; vertical-align: baseline; display: table-cell;">
 											<span class="thu" style="white-space: nowrap;">${getRest.thu}</span>
 										</td>
-										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
+										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
 									<tr style="display: table-row;">
-										<th scope="row" style="border-top: 0; min-width: 36px; padding-right: 18px; padding: 0 1em 0 0; border: none; vertical-align: baseline; font-weight: bold; text-align: left; display: table-cell;">
+										<th scope="row" style="border-top: 0; min-width: 36px; padding-right: 18px; border: none; vertical-align: baseline; font-weight: bold; text-align: left; display: table-cell;">
 											금요일
 										</th>
-										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
+										<td style="border-top: 0; padding-right: 6px; border: none; vertical-align: baseline; display: table-cell;">
 											<span class="fri" style="white-space: nowrap;">${getRest.fri}</span>
 										</td>
-										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
+										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
 									<tr style="display: table-row;">
-										<th scope="row" style="border-top: 0; min-width: 36px; padding-right: 18px; padding: 0 1em 0 0; border: none; vertical-align: baseline; font-weight: bold; text-align: left; display: table-cell;">
+										<th scope="row" style="border-top: 0; min-width: 36px; padding-right: 18px; border: none; vertical-align: baseline; font-weight: bold; text-align: left; display: table-cell;">
 											토요일
 										</th>
-										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
+										<td style="border-top: 0; padding-right: 6px; border: none; vertical-align: baseline; display: table-cell;">
 											<span class="sat" style="white-space: nowrap;">${getRest.sat}</span>
 										</td>
-										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
+										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
 									<tr style="display: table-row;">
-										<th scope="row" style="border-top: 0; min-width: 36px; padding-right: 18px; padding: 0 1em 0 0; border: none; vertical-align: baseline; font-weight: bold; text-align: left; display: table-cell;">
+										<th scope="row" style="border-top: 0; min-width: 36px; padding-right: 18px; border: none; vertical-align: baseline; font-weight: bold; text-align: left; display: table-cell;">
 											일요일
 										</th>
-										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
+										<td style="border-top: 0; padding-right: 6px;  border: none; vertical-align: baseline; display: table-cell;">
 											<span class="sun" style="white-space: nowrap;">${getRest.sun}</span>
 										</td>
-										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
+										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
 								</tbody>
 							</table>
