@@ -45,7 +45,7 @@
 						</div>
 					</div>
 					
-					
+					 
 				
 					<div class="biz-page-header-right u-relative">
 						<div class="biz-page-actions nowrap">
@@ -494,7 +494,7 @@
 													</ul>
 													<div class="myreview_div_6">
 
-														<a class="myreview_a_1" href="review_write?star=${myReview.gradepoint}&contentUpdate=${myReview.content}&rnum=${getRest.rnum}&mode=${updateReview}&rvnum=${myReview.rvnum}">
+														<a class="myreview_a_1" href="review_write?star=${myReview.gradepoint}&contentUpdate=${myReview.content}&rnum=${getRest.rnum}&mode=update&rvnum=${myReview.rvnum}">
 															리뷰수정
 														</a>
 														<form class="myreview_formF" action="review_delete" method="post">

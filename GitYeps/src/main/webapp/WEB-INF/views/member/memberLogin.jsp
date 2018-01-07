@@ -300,6 +300,7 @@
 
 						<div id="member_body">
 							<form name="loginf" class="memberf" action="member_login" method="POST" onsubmit="return loginCheck()">
+								<input type="hidden" id="old_url" name="old_url" value="${old_url}">
 								<input id="email" name="email" placeholder="Email" required="required" type="email" autocomplete=off value=""> 
 								<input id="passwd" name="passwd" placeholder="Password" required="required" type="password" autocomplete=off value="">
 								<div id="forgot-email">
