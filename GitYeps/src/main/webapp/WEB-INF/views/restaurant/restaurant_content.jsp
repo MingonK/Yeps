@@ -89,22 +89,6 @@
 					<div class="mapbox-container">
 						<div class="mapbox" style="padding: 5px; background: #fff; border: 1px solid #ccc;">
 							<div class="mapbox-map" id="map2" style="height: 180px; border: 1px solid #ccc;">
-<!-- 								<script> -->
-// 								  var map = new naver.maps.Map('map2',{
-// 								  	  zoom:12
-// 								    });
-								      
-// 								      var myaddress = '${getRest.roadAddrPart1}';
-// 								      	naver.maps.Service.geocode({address: myaddress}, function(status, response) {
-// 								          var result = response.result;
-// 								          var myaddr = new naver.maps.Point(result.items[0].point.x, result.items[0].point.y);
-// 								          map.setCenter(myaddr);
-// 								          var marker = new naver.maps.Marker({
-// 								            position: myaddr,
-// 								            map: map
-// 								          });
-// 								      });
-<!-- 								 </script> -->
 							</div>
 							<div class="mapbox-text" style="min-height: 105px;">
 								<ul style="margin: 5px; display: block;">

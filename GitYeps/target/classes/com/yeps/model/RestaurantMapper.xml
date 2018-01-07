@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             OR RT.price=#{item.value}
         </foreach>
 		</if>)</if>
-		order by RT.rnum desc)A) where rn between #{start} and #{end}
+		order by RT.price desc)A) where rn between #{start} and #{end}
 	</select>
 
 	<insert id="insertRestaurant" parameterType="RestaurantDTO">

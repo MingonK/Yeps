@@ -543,6 +543,17 @@ $(document).ready(function(){
 					 success : function(data){
 						 $('.column-alpha2 ul li').remove();
 						 $.each(data.list,function(i,item){
+							 var price;
+							 if(item.price == 1) {
+								 price = '￦';
+							 } else if (item.price == 2) {
+								 price = '￦￦';
+							 } else if (item.price == 3) {
+								 price = '￦￦￦';
+							 } else if (item.price == 4) {
+								 price = '￦￦￦￦';
+							 }
+							 
 							 $(".column-alpha2 ul").append(
 										'<li style="margin: 0;padding: 18px 0;border-top: 1px solid #e6e6e6;padding-top: 17px;display: list-item;text-align: -webkit-match-parent;">'+
 											'<div class="search-result natural-search-result">'+
@@ -575,6 +586,7 @@ $(document).ready(function(){
 																		'<span class="business-attribute price-range" style="letter-spacing: 1px; white-space: nowrap;">'+
 																		''+item.price+''+
 																		'</span>'+
+																		'<span class="business-attribute price-range" style="letter-spacing: 1px; white-space: nowrap;">'+price+'</span>'+
 																	'</span>'+
 																	'<span class="category-str-list">'+
 																		'<a href="#" style="color: #0073bb;text-decoration: none;    cursor: pointer;">'+item.foodstyle+'</a>'+
