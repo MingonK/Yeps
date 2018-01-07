@@ -265,7 +265,7 @@
 											</div>
 										</div>
 										<div class="media-story" style="-webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;">
-											<p style="margin-bottom: 0;display: block;">
+											<p style="margin-bottom: 0;display: -webkit-box; overflow: hidden; text-overflow: ellipsis; -webkit-line-clamp: 2; -webkit-box-orient: vertical; word-wrap: break-word; margin: 0;">
 													${map.LastReview.get(status.index).content}	
 												<c:if test="${LastReview.review.content.length()>60 }">
 													<a href="#" style="white-space: nowrap;color: #0073bb; cursor: pointer;">read more</a>
