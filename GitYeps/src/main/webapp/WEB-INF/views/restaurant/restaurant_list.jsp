@@ -411,31 +411,29 @@
 					}
 				});        
 				iwContent = [
-					'<div class="scrollFix" style="width:300px;height:140px;padding:12px;">',
-						'<div class="left" style="width:200px;height:140px;display:inline-block;float:left">',
-							'<div class="rname" style="width:210px;height:20px">',
-								'<span><a href="restaurant_content?rnum='+rnum[j]+'">'+rname[j]+'</a></span>',
-							'</div>',
-							'<div class="rating" style="width:">',
-								'<span class="fa fa-star checked"></span>',
-								'<span class="fa fa-star checked"></span>',
-								'<span class="fa fa-star"></span>',
-								'<span class="fa fa-star"></span>',
-								'<span class="fa fa-star"></span>',
-								'<span class="review">리뷰</span>',
-							'</div>',
-							'<div class="price-range">',
-								'<span>￦￦￦</span><span>●</span><span class="foodstyle">'+foodstyle[j]+'</span>',
-							'</div>',
-							'<div class="address">',
-							'<span>'+roadAddrPart1[j]+'</span><br>',
-							'<span>'+addrDetail[j]+'</span><br>',
-							'<span>'+roadAddrPart2[j]+'</span>',
-							'</div>',
-					'</div>',
-					'<div class="right"style="width:100px;height:140px;float:left">',
-						'<img width="90px" height="90px"src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/'+rest_filename[j]+'">',
-					'</div>'
+// 					<div class="hovercard biz-hovercard biz top-aligned right-aligned" style="display: none;">
+						
+// 					</div>
+// 					'<div class="scrollFix" style="width:300px;height:140px;padding:12px;">',
+// 						'<div class="left" style="width:200px;height:140px;display:inline-block;float:left">',
+// 							'<div class="rname" style="width:210px;height:20px">',
+// 								'<span><a href="restaurant_content?rnum='+rnum[j]+'">'+rname[j]+'</a></span>',
+// 							'</div>',
+// 							'<div class="rating" style="width:">',
+// 								'<span class="review">리뷰</span>',
+// 							'</div>',
+// 							'<div class="price-range">',
+// 								'<span>￦￦￦</span><span>●</span><span class="foodstyle">'+foodstyle[j]+'</span>',
+// 							'</div>',
+// 							'<div class="address">',
+// 							'<span>'+roadAddrPart1[j]+'</span><br>',
+// 							'<span>'+addrDetail[j]+'</span><br>',
+// 							'<span>'+roadAddrPart2[j]+'</span>',
+// 							'</div>',
+// 					'</div>',
+// 					'<div class="right"style="width:100px;height:140px;float:left">',
+// 						'<img width="90px" height="90px"src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/'+rest_filename[j]+'">',
+// 					'</div>'
 					].join('')
 				var infowindow = new naver.maps.InfoWindow({
 					content : iwContent,
@@ -574,7 +572,9 @@ $(document).ready(function(){
 																'</div>'+
 																'<div class="price-category"style="clear: both;">'+
 																	'<span class="bullet-after">'+
-																		'<span class="business-attribute price-range" style="letter-spacing: 1px; white-space: nowrap;">'+item.price+'</span>'+
+																		'<span class="business-attribute price-range" style="letter-spacing: 1px; white-space: nowrap;">'+
+																		''+item.price+''+
+																		'</span>'+
 																	'</span>'+
 																	'<span class="category-str-list">'+
 																		'<a href="#" style="color: #0073bb;text-decoration: none;    cursor: pointer;">'+item.foodstyle+'</a>'+
