@@ -6,6 +6,7 @@
 <title>yeps EventReview-List</title>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/member.css?ver=7"/>"/>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/qna.css?ver=1"/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_list.css?ver=1"/>"/>
 </head>
 <%@ include file="../top.jsp"%>
 <div class="event_review_container">

@@ -15,7 +15,7 @@
   	</select>
  	
 	<insert id="insertReview" parameterType="ReviewDTO">
-  		insert into yeps_review values (yeps_review_seq.nextval, #{rnum}, #{mnum}, #{content}, sysdate, #{gradepoint}, #{filenum}, #{ip}, #{recentreview})
+  		insert into yeps_review values (yeps_review_seq.nextval, #{rnum}, #{mnum}, #{content}, sysdate, #{gradepoint}, #{filenum, jdbcType=INTEGER}, #{ip}, #{recentreview})
   	</insert>
   	
   	<delete id="deleteReview" parameterType="int">
@@ -121,13 +121,6 @@
   	<select id="previous_reviews_Num" resultType="ReviewDTO">
   		select rnum, mnum from yeps_review where recentreview='y'
   	</select>
-  	
-<!--   	<select id="previous_Rv" resultType="ReviewDTO"> -->
-<!--   		select *from yeps_review where recentreview= 'y' -->
-<!--   	</select> -->
-  	
-  	
-  	
   	
   	<resultMap type="reviewDTO" id="FindReviewMap">
 		<id column="rvnum" property="rvnum"/>
@@ -480,6 +473,7 @@
   	<resultMap type="ReviewDTO" id="myReviewMap">
   		<id column="rvnum" property="rvnum"/>
       	<result column="rvnum" property="rvnum"></result>
+      	<result column="rnum" property="rnum"></result>
       	<result column="content" property="content"></result>
       	<result column="reg_date" property="reg_date"></result>
       	<result column="gradepoint" property="gradepoint"></result>
@@ -504,6 +498,7 @@
    		select R.content
    				, R.reg_date
    				, R.gradepoint
+   				, R.rnum
    				, R.rvnum
    				, M.email 
    				, M.address

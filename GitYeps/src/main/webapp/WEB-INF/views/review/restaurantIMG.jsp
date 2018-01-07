@@ -5,7 +5,7 @@
 <html>
 <head>
    <title>Write a Review</title>
-   <title>레스토랑 리스트 사진목록 + 리뷰 + 평점 달 수 있도록 구현해둔 곳</title>
+   <link rel="shortcut icon" type="image⁄x-icon" href="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/favicon.ico">
    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css?ver=4"/>"/>
    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css?ver=6"/>"/>
    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/member.css?ver=6"/>"/>
@@ -53,7 +53,7 @@
                                        <div class="resIMG_div_18">
                                           <div class="resIMG_div_20">Near</div>
                                           <div class="resIMG_div_21">
-                                             <input class="resIMG_input_2" type="text" id="" name="SearchNear" value="Korea, Seoul" autocomplete="off" >
+                                             <input class="resIMG_input_2" type="text" id="" name="SearchNear" value="${review_search_location}" autocomplete="off" >
                                           </div>
                                        </div>
                                     </div>
@@ -91,7 +91,7 @@
    <div class="resIMG_div_42" align="center">
       <p class="resIMG_p_2">
          Your review for
-         <a class="bbb" href="restaurant_content?rnum=${rnum}">${rname}</a>
+         <a class="bbb" href="restaurant_content?rnum=${myReview.rnum}">${rname}</a>
          is now live!
       </p>
    </div>
@@ -103,96 +103,80 @@
                            <div class="resIMG_div_51">
                               <div class="resIMG_div_52">
                                  <a class="resIMG_a_3" href="#">
-                                 	<c:if test="${empty filename}">
+                                 	<c:if test="${empty myReview.memberDTO.memberPhotoDTO.member_filename}">
                                  		<img class="resIMG_img_3" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png">
                                  	</c:if>
-                                 	<c:if test="${!empty filename}">
-                                   		<img class="resIMG_img_3" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${filename}">
+                                 	<c:if test="${!empty myReview.memberDTO.memberPhotoDTO.member_filename}">
+                                   		<img class="resIMG_img_3" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${myReview.memberDTO.memberPhotoDTO.member_filename}">
                                    	</c:if>	    
                                  </a>
                               </div>
                            </div>
                            <div class="resIMG_div_53">
                               <ul class="resIMG_ul_4">
-                                 <li   class="resIMG_li_4">
-                                    <a class="resIMG_a_4" href="member_details?mnum=${sessionScope.memberinfo.mnum }">
-                                       <c:if test="${empty nickname}">
-					   						${email}
+                                 <li class="resIMG_li_4">
+                                    <a class="resIMG_a_4" href="member_details?mnum=${myReview.memberDTO.mnum}">
+                                       <c:if test="${empty myReview.memberDTO.nickname}">
+					   						${myReview.memberDTO.email}
 					   				   </c:if>
-					   				   <c:if test="${!empty nickname}">
-					   					  	${nickname}
+					   				   <c:if test="${!empty myReview.memberDTO.nickname}">
+					   					  	${myReview.memberDTO.nickname}
 					   				   </c:if>
                                     </a>
                                  </li>
                                  <li class="resIMG_li_4">
                                     <b class="resIMG_b_2">
-                                       Korea, Seoul
+                                       ${myReview.memberDTO.address}
                                     </b>
                                  </li>
                               </ul>
                               <ul class="resIMG_ul_4">
-                              
-                              <!--  
-                                 <li class="resIMG_li_5">
-                                    <span class="resIMG_span_10">
-                                       <svg class="resIMG_svg_4">
-                                          <g>
-                                             <path d="M7.904 9.43l-2.098 4.697a.9.9 0 0 1-1.612 0L2.096 9.43a.902.902 0 0 1 .806-1.305h4.196c.67 0 1.105.705.806 1.305zM5 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path>
-                                             <path d="M15.904 9.43l-2.098 4.697a.89.89 0 0 1-.806.498.89.89 0 0 1-.806-.498L10.096 9.43a.902.902 0 0 1 .806-1.305h4.195c.67 0 1.106.705.807 1.305zM13 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" opacity=".502"></path>   
-                                          </g>
-                                       </svg>
-                                    </span>
-                                    <b class="resIMG_b_3">1</b>
-                                    friend
-                                 </li>
-                             --> 
-                                 
                                  <li class="resIMG_li_5">
                                     <span class="resIMG_span_11">
                                        <svg class="resIMG_svg_5">
                                           <path d="M13 3H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1.505 9.643l-2.526-1.55L6.526 12.7 7 9.934 5 7.977l2.766-.404L8.97 4.7l1.264 2.873L13 7.977l-2 1.957.495 2.71z"></path>
                                        </svg>
                                     </span>
-                                    <b class="resIMG_b_4">${sessionScope.memberinfo.reviewcount}</b>
+                                    <b class="resIMG_b_4">${myReview.memberDTO.reviewcount}</b>
                                      reviews
+                                 </li>
+                                 
+                                 <li class="resIMG_li_5">
+                                    <span class="resIMG_span_11">
+                                       <svg class="resIMG_svg_5">
+                                          <path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 6.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path>
+                                       </svg>
+                                    </span>
+                                    <b class="resIMG_b_4">${myReview.memberDTO.imagecount}</b>
+                                     photos
                                  </li>
                               </ul>
                            </div>
                         </div>
-                     </div>
-                  </div>
-                  <div class="resIMG_div_54">
+                        
+                        
+                        
+                        
+                    <div class="resIMG_div_54">
                      <div class="resIMG_div_55">
                         <div class="resIMG_div_56">
                            <div class="resIMG_div_57">
-                              <div class="resIMG_div_star${gradepoint}">
+                              <div class="resIMG_div_star${myReview.gradepoint}">
                                  <img class="resIMG_img_4" height="303" width="84" alt="3.0 star rating" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/stars.png">
                               </div>
                               <span class="resIMG_span_12">
-                                 ${reg_date}
+                                 ${myReview.reg_date}
                               </span>
                            </div>
                         </div>
                      </div>
                      <div class="resIMG_div_59">
                         <p class="resIMG_p_3">
-                           ${content}
+                           ${myReview.content}
                         </p>
                      </div>
                      <div class="resIMG_div_60">
-                     
-                     	<!--  
-                        <a class="resIMG_a_5" href="#">
-                           <span class="resIMG_span_13">
-                              <svg class="resIMG_svg_6">
-                                 <path d="M6 14v-2h10v2H6zM6 4h10v2H6V4zm-4 8h2v2H2v-2zm0-4h2v2H2V8zm0-4h2v2H2V4zm12 6H6V8h8v2z"></path>
-                              </svg>
-                           </span>
-                           Add to list
-                        </a>
-                        -->
-                        
-                        <a class="resIMG_a_5" href="review_write?rnum=${rnum}&mode=update">
+                        <a class="resIMG_a_5" href="review_write?rnum=${myReview.rnum}&mode=update&rvnum=${myReview.rvnum}">
                            <span class="resIMG_span_14">
                               <svg class="resIMG_svg_7">
                                  <path d="M15.96 4.505a2.094 2.094 0 0 0-.577-1.89 2.103 2.103 0 0 0-2.973.002l-1.487 1.487-7.436 7.436L2 16l4.46-1.487 7.437-7.436 1.487-1.487c.308-.308.5-.688.577-1.085zm-10.067 9.09l-2.23.742.743-2.23 7.26-7.26 1.487 1.487-7.26 7.26z"></path>
@@ -202,8 +186,16 @@
                         </a>
                      </div>
                   </div>
-      </div>
-   </div>
+                     </div>
+                     
+                     
+                     
+                  
+                  
+                  </div>
+                  
+      			</div>
+   			</div>
    
    
    

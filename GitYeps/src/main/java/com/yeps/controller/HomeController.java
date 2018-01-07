@@ -87,7 +87,17 @@ public class HomeController {
 						if(addr.length >=3) {
 							value= addr[1] + " " + addr[2];
 						}
+						
+						boolean isExistlocation = false;
+						for( String location : locationList) {
+							if(location.equals(value)) {
+								isExistlocation = true;
+							}
+						}
+						if(isExistlocation == false) {
 						locationList.add(value);
+						}
+						
 						j+=1;
 						if(j == 6) {
 							break;
@@ -100,10 +110,13 @@ public class HomeController {
 		}
 		
 		FileDTO randomPhoto = fileMapper.getRandomRestaurantPhoto();
+		int randomPhoto_reivewCount = reviewMapper.getRestaurantReviewCount(randomPhoto.getRnum());
+		int randomPhoto_starAvg = reviewMapper.getStarAvg(randomPhoto.getRnum());
 		
 		//랜덤 사진
 		mav.addObject("randomPhoto", randomPhoto);
-		
+		mav.addObject("randomPhoto_reivewCount", randomPhoto_reivewCount);
+		mav.addObject("randomPhoto_starAvg", randomPhoto_starAvg);
 		//최근 검색 리스트
 		mav.addObject("locationList", locationList);
 
@@ -173,7 +186,16 @@ public class HomeController {
 						if(addr.length >=3) {
 							value= addr[1] + " " +addr[2];
 						}
+						boolean isExistlocation = false;
+						for( String location : locationList) {
+							if(location.equals(value)) {
+								isExistlocation = true;
+							}
+						}
+						if(isExistlocation == false) {
 						locationList.add(value);
+						}
+						
 						j+=1;
 						if(j == 6) {
 							break;

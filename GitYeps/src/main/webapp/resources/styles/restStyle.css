@@ -1348,6 +1348,11 @@ overflow: hidden; width: 132px; height: 24px; background-position: 0 -216px;
 	margin-bottom: 6px;width: auto; border-collapse: collapse;border-spacing: 0; display: table;
 }
 
+.restContent-table-hours th, .restContent-table-hours td {
+	height: 0;
+	padding: 0 18px 6px 0 !important;
+}
+
 .restContent-menu-preview-heading {
 	margin-bottom: 12px; font-weight: bold; 
 	font-size: 16px; line-height: 1.3125em; color: #d32323; margin: 0 0 6px;display: block;
@@ -1553,6 +1558,94 @@ overflow: hidden; width: 132px; height: 24px; background-position: 0 -216px;
     white-space: nowrap;
     outline: 0;
 }
+
+.review_photo_box {
+	margin-top: 18px;
+	transform-style: preserve-3d;
+	margin-right: -12px;
+}
+
+.review_photo_box:before, .review_photo_box:after {
+	content: " ";
+    display: table;
+}
+
+.review_photo_box > li {
+	float: left;
+	margin: 0 12px 12px 0;
+}
+
+.review_photo_box_overlay {
+	position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.review_photo_box > li img {
+	max-width: 100%;
+    max-height: 100%;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+
+/* 레스토랑 리스트 등록*/
+.layout-a .column-beta {
+    float: left;
+    padding: 0 15px;
+    min-height: 1px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 33.33333%;
+}
+.search-feedback-box {
+    margin-top: 24px;
+}
+.island-light, .island--light {
+    background: white;
+}
+.island {
+    padding: 11px;
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+}
+.search-feedback-box .feedback-biz-suggest {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 11px;
+    margin-bottom: 12px;
+}
+a.ybtn--twitter:hover, a.ybtn--twitter:visited, a.ybtn--facebook:hover, a.ybtn--facebook:visited, a.ybtn--google-plus:hover, a.ybtn--google-plus:visited, a.ybtn--line:hover, a.ybtn--line:visited, a.ybtn--github:hover, a.ybtn--github:visited, a.ybtn--rss:hover, a.ybtn--rss:visited, a.ybtn-primary:hover, a.ybtn-primary:visited, a.ybtn--primary:hover, a.ybtn--primary:visited, a.ybtn-deal:hover, a.ybtn-deal:visited, a.ybtn-platform:hover, a.ybtn-platform:visited, a.ybtn-cta:hover, a.ybtn-cta:visited, a.ybtn--cta:hover, a.ybtn--cta:visited, a.ybtn--green:hover, a.ybtn--green:visited {
+    color: white;
+}
+.ybtn-small:not(.ybtn--social), .ybtn--small:not(.ybtn--social) {
+    padding: 5px 8px;
+    font-size: 12px;
+    line-height: 1.5em;
+}
+a.ybtn {
+    text-decoration: none !important;
+}
+.ybtn-primary, .ybtn--primary {
+    color: white;
+    border-color: #8d0005;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+    background-color: #ff0000;
+    background: linear-gradient(#d90007, #c91400);
+}
+.ybtn {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+    user-select: none;
+    border-radius: 3px;
+}
+
+
+
+
 
 
 

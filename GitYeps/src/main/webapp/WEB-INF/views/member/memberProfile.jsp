@@ -91,7 +91,7 @@
 									</h4>
 									<div class="photo-box pb-m">
 										<a class="js-analytics-click" data-analytics-label="user-photo" href="member_photolist?mnum=${sessionScope.memberinfo.mnum}">
-											<img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${mainPhoto.filename}" alt="member_main_photo" id="photo_box_img" width="100px" height="100px">
+											<img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${mainPhoto.member_filename}" alt="member_main_photo" id="photo_box_img" width="100px" height="100px">
 										</a>
 									</div>
 								</c:otherwise>

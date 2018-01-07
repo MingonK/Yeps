@@ -36,7 +36,9 @@
 							</div>
 							<div class="price-category">
 								<span class="bullet-after">
-       								 <span class="business-attribute price-range">${getRest.price}</span>
+       								 <span class="business-attribute price-range">
+       								 	<c:forEach begin="1" end="${getRest.price}">￦</c:forEach>
+       								 </span>
         						</span>
         						<span class="category-str-list" style="margin-right: 6px;">
 			                  	 	${getRest.foodstyle}
@@ -45,12 +47,12 @@
 						</div>
 					</div>
 					
-					
+					 
 				
 					<div class="biz-page-header-right u-relative">
 						<div class="biz-page-actions nowrap">
 							<c:if test="${empty myReview}">
-							<a href="review_write?rnum=${getRest.rnum}&mode=write$where=rest" style="text-decoration: none;" class="ybtn review_write">
+							<a href="review_write?rnum=${getRest.rnum}&mode=write&where=rest" style="text-decoration: none;" class="ybtn review_write">
 								<span aria-hidden="true" style="fill: white; width: 24px; height: 24px;" class="icon">
 							    	<svg id="24x24_star" height="100%" viewBox="0 0 24 24" width="100%">
 							    		<path d="M12 1.5l2.61 6.727 6.89.53-5.278 4.688 1.65 7.055L12 16.67 6.13 20.5l1.648-7.055L2.5 8.757l6.89-.53L12 1.5z"></path>
@@ -60,7 +62,7 @@
 							</a>
 							</c:if>
 							<c:if test="${!empty myReview}">
-							<a href="review_write?rnum=${getRest.rnum}&mode=write$where=rest" style="text-decoration: none;" class="ybtn review_write">
+							<a href="review_write?rnum=${getRest.rnum}&mode=update&where=rest&rvnum=${myReview.rvnum}&star=${myReview.gradepoint}" style="text-decoration: none;" class="ybtn review_write">
 								<span aria-hidden="true" style="fill: white; width: 24px; height: 24px;" class="icon">
 							    	<svg id="24x24_star" height="100%" viewBox="0 0 24 24" width="100%">
 							    		<path d="M12 1.5l2.61 6.727 6.89.53-5.278 4.688 1.65 7.055L12 16.67 6.13 20.5l1.648-7.055L2.5 8.757l6.89-.53L12 1.5z"></path>
@@ -77,7 +79,6 @@
 						         	</svg>
 							  	</span> 
 							  	Add Photo
-							  	<a class="menu-explore js-menu-explore" href="restaurant_listMenu?rnum=${getRest.rnum}">모든 메뉴</a>
 						   	</a>
 							</span>
 				     	</div>
@@ -465,9 +466,32 @@
 													<p class="myreview_p_3">
 														${myReview.content} 
 													</p>
+													
+													<ul class="review_photo_box">
+													<c:forEach var="photos" items="${uploadFileList}" varStatus="status">
+														<c:if test="${photos.mnum eq myReview.memberDTO.mnum}">
+															<c:if test="${status.index % 3 == 0}">
+																<li style="width: 348px; height: 348px;">
+																	<div class="review_photo_box_overlay">
+																		<img height="348" width="348" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photos.filename}">
+																	</div>
+																</li>
+															</c:if>
+															<c:if test="${status.index % 3 != 0}">
+																<li style="width: 168px; height: 168px;">
+																	<div class="review_photo_box_overlay">
+																		<img height="168" width="168" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photos.filename}">
+																	</div>
+																</li>
+															</c:if>
+														</c:if>
+													</c:forEach>
+													</ul>
 													<div class="myreview_div_6">
 
-														<a class="myreview_a_1" href="review_write?star=${myReview.gradepoint}&contentUpdate=${myReview.content}&rnum=${getRest.rnum}&mode=${updateReview}&rvnum=${myReview.rvnum}">리뷰수정</a>
+														<a class="myreview_a_1" href="review_write?star=${myReview.gradepoint}&contentUpdate=${myReview.content}&rnum=${getRest.rnum}&mode=update&rvnum=${myReview.rvnum}">
+															리뷰수정
+														</a>
 														<form class="myreview_formF" action="review_delete" method="post">
 															<input class="myreview_input_1" type="hidden" name="rvnum" value="${myReview.rvnum}">
 															<input class="myreview_input_1" type="hidden" name="mnum" value="${myReview.memberDTO.mnum}">
@@ -584,6 +608,30 @@
 													<p lang="ko" style="margin-bottom: 12px;display:block;">
 														${getReview.content}
 													</p>
+													
+													
+												<ul class="review_photo_box">
+													<c:forEach var="photos" items="${uploadFileList}" varStatus="status">
+														<c:if test="${photos.mnum eq getReview.mnum}">
+															<c:if test="${status.index % 3 == 0}">
+																<li style="width: 348px; height: 348px;">
+																	<div class="review_photo_box_overlay">
+																		<img height="348" width="348" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photos.filename}">
+																	</div>
+																</li>
+															</c:if>
+															<c:if test="${status.index % 3 != 0}">
+																<li style="width: 168px; height: 168px;">
+																	<div class="review_photo_box_overlay">
+																		<img height="168" width="168" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photos.filename}">
+																	</div>
+																</li>
+															</c:if>
+														</c:if>
+													</c:forEach>
+												</ul>										
+													
+													
 												</div><!--리뷰 내용 -->
 													
 												<div class="review-footer clearfix">
@@ -738,7 +786,9 @@
 							    </li>
 							    <li class="restContent-iconed-list-item" style="display: table;width: 100%;margin-bottom: 0;">
 						            <div class="restContent-iconed-list-avatar">
-						       		 	<span class="restContent-business-attribute price-range" data-remainder="">${getRest.price}</span>
+						       		 	<span class="restContent-business-attribute price-range" data-remainder="">
+						       		 		<c:forEach begin="1" end="${getRest.price}">￦</c:forEach>
+						       		 	</span>
 						            </div>
 						            <div class="restContent-iconed-list-story" style="    border-bottom: none;">
 						                <dl class="restContent-short-def-list" style="display: block;">
@@ -773,67 +823,67 @@
 							<table class="restContent-table-hours">
 								<tbody style="display: table-row-group;">
 									<tr style="display: table-row;">
-										<th scope="row" style="border-top: 0; min-width: 36px; padding-right: 18px; padding: 0 1em 0 0; border: none; vertical-align: baseline; font-weight: bold; text-align: left; display: table-cell;">
+										<th scope="row" style="border-top: 0; min-width: 36px; padding-right: 18px; border: none; vertical-align: baseline; font-weight: bold; text-align: left; display: table-cell;">
 											월요일
 										</th>
-										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
+										<td style="border-top: 0; padding-right: 6px;  border: none; vertical-align: baseline; display: table-cell;">
 											<span class="mon" style="white-space: nowrap;">${getRest.mon}</span>
 										</td>
-										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
+										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
 									<tr style="display: table-row;">
-										<th scope="row" style="border-top: 0; min-width: 36px; padding-right: 18px; padding: 0 1em 0 0; border: none; vertical-align: baseline; font-weight: bold; text-align: left; display: table-cell;">
+										<th scope="row" style="border-top: 0; min-width: 36px; padding-right: 18px; border: none; vertical-align: baseline; font-weight: bold; text-align: left; display: table-cell;">
 											화요일
 										</th>
-										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
+										<td style="border-top: 0; padding-right: 6px; border: none; vertical-align: baseline; display: table-cell;">
 											<span class="tue" style="white-space: nowrap;">${getRest.tue}</span>
 										</td>
-										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
+										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
 									<tr style="display: table-row;">
-										<th scope="row" style="border-top: 0; min-width: 36px; padding-right: 18px; padding: 0 1em 0 0; border: none; vertical-align: baseline; font-weight: bold; text-align: left; display: table-cell;">
+										<th scope="row" style="border-top: 0; min-width: 36px; padding-right: 18px; border: none; vertical-align: baseline; font-weight: bold; text-align: left; display: table-cell;">
 											수요일
 										</th>
-										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
+										<td style="border-top: 0; padding-right: 6px; border: none; vertical-align: baseline; display: table-cell;">
 											<span class="wed" style="white-space: nowrap;">${getRest.wed}</span>
 										</td>
-										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
+										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
 									<tr style="display: table-row;">
-										<th scope="row" style="border-top: 0; min-width: 36px; padding-right: 18px; padding: 0 1em 0 0; border: none; vertical-align: baseline; font-weight: bold; text-align: left; display: table-cell;">
+										<th scope="row" style="border-top: 0; min-width: 36px; padding-right: 18px; border: none; vertical-align: baseline; font-weight: bold; text-align: left; display: table-cell;">
 											목요일
 										</th>
-										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
+										<td style="border-top: 0; padding-right: 6px; border: none; vertical-align: baseline; display: table-cell;">
 											<span class="thu" style="white-space: nowrap;">${getRest.thu}</span>
 										</td>
-										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
+										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
 									<tr style="display: table-row;">
-										<th scope="row" style="border-top: 0; min-width: 36px; padding-right: 18px; padding: 0 1em 0 0; border: none; vertical-align: baseline; font-weight: bold; text-align: left; display: table-cell;">
+										<th scope="row" style="border-top: 0; min-width: 36px; padding-right: 18px; border: none; vertical-align: baseline; font-weight: bold; text-align: left; display: table-cell;">
 											금요일
 										</th>
-										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
+										<td style="border-top: 0; padding-right: 6px; border: none; vertical-align: baseline; display: table-cell;">
 											<span class="fri" style="white-space: nowrap;">${getRest.fri}</span>
 										</td>
-										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
+										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
 									<tr style="display: table-row;">
-										<th scope="row" style="border-top: 0; min-width: 36px; padding-right: 18px; padding: 0 1em 0 0; border: none; vertical-align: baseline; font-weight: bold; text-align: left; display: table-cell;">
+										<th scope="row" style="border-top: 0; min-width: 36px; padding-right: 18px; border: none; vertical-align: baseline; font-weight: bold; text-align: left; display: table-cell;">
 											토요일
 										</th>
-										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
+										<td style="border-top: 0; padding-right: 6px; border: none; vertical-align: baseline; display: table-cell;">
 											<span class="sat" style="white-space: nowrap;">${getRest.sat}</span>
 										</td>
-										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
+										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
 									<tr style="display: table-row;">
-										<th scope="row" style="border-top: 0; min-width: 36px; padding-right: 18px; padding: 0 1em 0 0; border: none; vertical-align: baseline; font-weight: bold; text-align: left; display: table-cell;">
+										<th scope="row" style="border-top: 0; min-width: 36px; padding-right: 18px; border: none; vertical-align: baseline; font-weight: bold; text-align: left; display: table-cell;">
 											일요일
 										</th>
-										<td style="border-top: 0; padding-right: 6px; padding: 0 1em 0 0; border: none; vertical-align: baseline; display: table-cell;">
+										<td style="border-top: 0; padding-right: 6px;  border: none; vertical-align: baseline; display: table-cell;">
 											<span class="sun" style="white-space: nowrap;">${getRest.sun}</span>
 										</td>
-										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; padding: 0 1em 0 0; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
+										<td class="extra" style="border-top: 0; max-width: 70px; padding-right: 6px; font-size: 12px; font-weight: bold; color: #41a700; border: none; vertical-align: baseline; text-align: left; display: table-cell;"></td>
 									</tr>
 								</tbody>
 							</table>
@@ -938,13 +988,6 @@
 											<dt class="restContent-attribute-key">테이블 수</dt>
 											<dd style="font-weight: bold;display: inline;">
 												${getRest.tablecount} (${getRest.standard}인 기준)
-											</dd>
-										</dl>
-										
-										<dl style="padding-bottom: 6px;display: block;">
-											<dt class="restContent-attribute-key">바쁜 시간</dt>
-											<dd style="font-weight: bold;display: inline;">
-												${getRest.busytime}
 											</dd>
 										</dl>
 									</div>
@@ -1170,7 +1213,7 @@
    });
    var week = new Array("sun","mon","tue","wed","thu","fri","sat")
    var d = new Date();
-   var day = d.getDate();
+   var day = d.getDate()-1;
    
 
    $(".today").text($('.'+week[day]+'').text());

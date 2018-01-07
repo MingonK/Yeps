@@ -15,37 +15,42 @@ public class EventMapper {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public int getEventCount(String mode) {
+	public int getEventCount(String mode, String search) {
 		if (mode.equals("normal")) {
-			return sqlSession.selectOne("getEventCount");
+			return sqlSession.selectOne("getEventCount", search);
 		} else if (mode.equals("free")) {
-			return sqlSession.selectOne("getEventCountForFree");
+			return sqlSession.selectOne("getEventCountForFree", search);
 		} else {
 			HashMap<String, String> map = new HashMap<String, String>();
 			map.put("event_category", mode);
+			map.put("search", search);
 			return sqlSession.selectOne("getEventCountForCategory", map);
 		}
 	}
 
-	public List<EventDTO> listEvent(String mode, int start, int end) {
+	public List<EventDTO> listEvent(String mode, int start, int end, String search) {
 		String sql = null;
 		if (mode == null || mode.trim().equals("") || mode.trim().equals("recently")) {
-			sql = "select * from (select rownum rn, A.* from (select * from yeps_event order by evnum desc)A) where rn between '"
+			sql = "select * from (select rownum rn, A.* from (select * from yeps_event where replace(upper(store_address),' ','') like '%'||replace(upper('"+ search +"'),' ','')||'%' order by evnum desc)A) where rn between '"
 					+ start + "' and '" + end + "'";
 		} else if (mode.equals("free")) {
-			sql = "select * from (select rownum rn, A.* from (select * from yeps_event where discount like '%무료%' order by evnum desc)A) where rn between '"
+			sql = "select * from (select rownum rn, A.* from (select * from yeps_event where discount like '%무료%' and replace(upper(store_address),' ','') like '%'||replace(upper('"+ search +"'),' ','')||'%' order by evnum desc)A) where rn between '"
 					+ start + "' and '" + end + "'";
 		} else if (mode.equals("date")) {
-			sql = "select * from (select rownum rn, A.* from (select * from yeps_event order by evnum asc)A) where rn between '"
+			sql = "select * from (select rownum rn, A.* from (select * from yeps_event where replace(upper(store_address),' ','') like '%'||replace(upper('"+ search +"'),' ','')||'%' order by evnum asc)A) where rn between '"
 					+ start + "' and '" + end + "'";
 		} else {
 			sql = "select * from (select rownum rn, A.* from (select * from yeps_event where event_category = '" + mode
-					+ "' order by evnum desc)A) where rn between '" + start + "' and '" + end + "'";
+					+ "' and replace(upper(store_address),' ','') like '%'||replace(upper('"+ search +"'),' ','')||'%' order by evnum desc)A) where rn between '" + start + "' and '" + end + "'";
 		}
 
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("sql", sql);
 		return sqlSession.selectList("listEvent", map);
+	}
+	
+	public List<EventDTO> manage_eventList() {
+		return sqlSession.selectList("manage_eventList");
 	}
 
 	public int insertEvent(EventDTO dto) {

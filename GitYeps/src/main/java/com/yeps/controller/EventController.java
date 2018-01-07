@@ -66,30 +66,35 @@ public class EventController {
 		int end = 0;
 		int pageScale = 15;
 		int blockScale = 10;
+		
+		String search = req.getParameter("search");
+		if(search == null || search.trim().equals("")) {
+			search = "서울특별시";
+		}
 
-		if (mode == null || mode.trim().equals("") || mode.trim().equals("recently")) {
-			count = eventMapper.getEventCount("normal");
+		if (mode == null || mode.trim().equals("") || mode.trim().equals("recently")) { 
+			count = eventMapper.getEventCount("normal", search);
 			yepsPager = new YepsPager(count, curPage, pageScale, blockScale);
 			start = yepsPager.getPageBegin();
 			end = yepsPager.getPageEnd();
 		} else if (mode.equals("free")) {
-			count = eventMapper.getEventCount("free");
+			count = eventMapper.getEventCount("free", search);
 			yepsPager = new YepsPager(count, curPage, pageScale, blockScale);
 			start = yepsPager.getPageBegin();
 			end = yepsPager.getPageEnd();
 		} else if (mode.equals("date")) {
-			count = eventMapper.getEventCount("normal");
+			count = eventMapper.getEventCount("normal", search);
 			yepsPager = new YepsPager(count, curPage, pageScale, blockScale);
 			start = yepsPager.getPageBegin();
 			end = yepsPager.getPageEnd();
 		} else {
-			count = eventMapper.getEventCount(mode);
+			count = eventMapper.getEventCount(mode, search);
 			yepsPager = new YepsPager(count, curPage, pageScale, blockScale);
 			start = yepsPager.getPageBegin();
 			end = yepsPager.getPageEnd();
 		}
 
-		List<EventDTO> eventList = eventMapper.listEvent(mode, start, end);
+		List<EventDTO> eventList = eventMapper.listEvent(mode, start, end, search);
 		List<FileDTO> fileList = new ArrayList<FileDTO>();
 		for (int i = 0; i < eventList.size(); i++) {
 			FileDTO dto = fileMapper.getFYIEventFile(eventList.get(i).getEvnum());
@@ -118,6 +123,7 @@ public class EventController {
 		}
 
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("search", search);
 		mav.addObject("mode", mode);
 		mav.addObject("set", "events");
 		mav.addObject("fileList", fileList);
@@ -635,9 +641,20 @@ public class EventController {
 	
 
 	@RequestMapping(value = "/event_photo_manage")
-	public ModelAndView event_photo_manage() {
+	public ModelAndView event_photo_manage(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("manager/event_photoManager");
+		int curPage = req.getParameter("curPage") != null ? Integer.parseInt(req.getParameter("curPage")) : 1;
+		int count = 0;
+		YepsPager yepsPager = null;
+		int start = 0;
+		int end = 0;
+
+		yepsPager = new YepsPager(count, curPage, , 5);
+		start = yepsPager.getPageBegin();
+		end = yepsPager.getPageEnd();
+		List<EventDTO> event = eventMapper.manage_eventList();
+		mav.addObject("eventList", event);
+		mav.setViewName("manager/event_photoManage");
 		return mav;
 	}
 }

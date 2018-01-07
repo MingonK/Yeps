@@ -65,7 +65,7 @@
 			   	  	<div class="pre_div6">
 			   			<div class="pre_div7">
 			   			   <ul class="pre_ul_super">   
-			   			   	 <c:forEach var="dto" items="${rvdto_y}" varStatus="status">
+			   			   	 <c:forEach var="dto" items="${rvdto_ylist}" varStatus="status">
 			   			   	  <li class="pre_li">
 			   					<div class="pre_div8"> 			 
 			   					 	<!--프로필뭉텅이 / 내용뭉텅이  -->
@@ -87,7 +87,7 @@
 					   					    	 				<a class="pre_a_2" href="member_details?mnum=${dto.memberDTO.mnum}">${dto.memberDTO.nickname}</a>
 					   					    	 			</c:if>
 					   					    	 		</li>			
-					   					    	 		<li class="pre_li_small-1"><b>Korea, Seoul</b></li>
+					   					    	 		<li class="pre_li_small-1"><b>서울특별시</b></li>
 					   					    	 	</ul>	
 					   					    		<ul class="pre_ul_small_1">
 					   					    			<li class="pre_li_small-2">

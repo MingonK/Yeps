@@ -15,18 +15,49 @@ public class RestaurantMapper {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public List<RestaurantDTO> listRest(int start, int end, String mode) {
+	public List<RestaurantDTO> listRest(int start, int end, String mode, List<Integer> prices) {
+		String sql=null;
+//		String pricesSql = null;
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
-		if (mode.equals("delivery")) {
-			return sqlSession.selectList("listRestaurant_delivery", map);
-		} else if (mode.equals("reserv")) {
-			return sqlSession.selectList("listRestaurant_reserv", map);
-		} else if (mode.equals("takeout")) {
-			return sqlSession.selectList("listRestaurant_takeout", map);
+//		map.put("sql", sql);
+//		map.put("pricesSql", pricesSql);
+		if(prices.get(0)==0 && mode.equals("mode")) {// 가격 선택 X ,필터 선택 X
+			System.out.println("가격 선택 X ,필터 선택 X");
+			return sqlSession.selectList("listRestaurant", map);
+		}else if(prices.get(0)!=0 && mode.equals("mode")){ //가격 선택 O,필터 선택 X
+			for(int i=0;i<prices.size();i++) {
+				if(i==0) {
+					sql=String.valueOf(prices.get(i));
+				}
+			}
+			map.put("sql", sql);
+			map.put("pricesSql", prices);
+			System.out.println("가격 선택 O,필터 선택 X");
+			return sqlSession.selectList("listRestaurant", map);
+		}else if(prices.get(0)==0 && !mode.equals("mode")) {//가격 선택 X,필터 선택 O
+			System.out.println("가격 선택 X,필터 선택 O");
+			if (mode.equals("delivery")) {
+				return sqlSession.selectList("listRestaurant_delivery", map);
+			} else if (mode.equals("reserv")) {
+				return sqlSession.selectList("listRestaurant_reserv", map);
+			} else {
+				return sqlSession.selectList("listRestaurant_takeout", map);
+			}	
+			
+		}else { //가격 선택 O,필터 선택 O
+			for(int i=0;i<prices.size();i++) {
+				if(i==0) {
+					sql=String.valueOf(prices.get(i));
+				}
+			}
+			map.put("sql", sql);
+			map.put("pricesSql", prices);
+			map.put("mode", mode);
+			System.out.println("가격 선택 O,필터 선택 O");
+			return sqlSession.selectList("listRestaurant", map);
 		}
-		return sqlSession.selectList("listRestaurant", map);
 	}
 
 	public int insertRest(RestaurantDTO dto) {
