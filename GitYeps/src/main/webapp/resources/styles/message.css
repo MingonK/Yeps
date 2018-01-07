@@ -216,8 +216,6 @@ td, th {
 
 .popup #replyMessage, #deleteMessage, #alert_replyMessage, #alert_deleteMassage, #sendMessage, #alert_sendMessage, #sendIssue {
 	cursor: pointer;
-	width: 57;
-	height: 27;
 	color: #ffffff;
 	background: #d32323;
 	border-radius: 5px;

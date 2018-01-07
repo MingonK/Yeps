@@ -164,7 +164,7 @@ public class ReviewController {
 		String where = req.getParameter("where");
 
 		ModelAndView mav = new ModelAndView();
-		if(mode.equals("update")) {
+		if(mode != null && !mode.trim().equals("") && mode.equals("update")) {
 			ReviewDTO reviewDTO = reviewMapper.getReview(Integer.parseInt(rvnum));
 			mav.addObject("reviewDTO", reviewDTO);
 		}
