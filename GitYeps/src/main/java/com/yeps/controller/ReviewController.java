@@ -2,6 +2,7 @@ package com.yeps.controller;
 import java.util.ArrayList;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -189,12 +190,14 @@ public class ReviewController {
 
 		if(loginMember != null) {
 			ReviewDTO existMyReview = null;
-			for(int i=0; i< rlist.size() ; i++) {
-				int rnum = rlist.get(i).getRnum();
-				int mnum = loginMember.getMnum(); 
+			for(Iterator<RestaurantDTO> it = rlist.iterator() ; it.hasNext() ; ){
+				RestaurantDTO rdto = it.next();
+				int rnum = rdto.getRnum();
+				int mnum = loginMember.getMnum();
 				existMyReview = reviewMapper.findMyReview(rnum, mnum);
+
 				if(existMyReview != null) {
-					rlist.remove(i);
+					it.remove();
 				}
 			}
 		}
@@ -242,23 +245,20 @@ public class ReviewController {
 			List<RestaurantDTO> restaurantList = restaurantMapper.review_restaurantIMG();
 			if(loginMember != null) {
 				ReviewDTO existMyReview = null;
-				for(int i=0; i< restaurantList.size() ; i++) {
-					int rnum = restaurantList.get(i).getRnum();
-					System.out.println("rnum:"+ rnum);
+				for(Iterator<RestaurantDTO> it = restaurantList.iterator() ; it.hasNext() ; ){
+					RestaurantDTO rdto = it.next();
+					int rnum = rdto.getRnum();
 					int mnum = loginMember.getMnum();
-					System.out.println("mnum" + mnum);
 					existMyReview = reviewMapper.findMyReview(rnum, mnum);
-					System.out.println("existMyReview" +existMyReview);
+
 					if(existMyReview != null) {
-						restaurantList.remove(restaurantList.get(i));
+						it.remove();
 					}
 				}
-			} 
-			
+			}
+
 			ReviewDTO myReview = reviewMapper.findMyReview(dto.getRnum(), dto.getMnum());
-			
-			System.out.println("리스트 사이즈:" + restaurantList.size());
-			
+
 			mav.addObject("rlist", restaurantList);
 			mav.addObject("myReview", myReview);
 			mav.addObject("rname", rname);
