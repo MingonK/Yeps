@@ -1641,6 +1641,8 @@ a.ybtn {
     text-align: center;
     user-select: none;
     border-radius: 3px;
+    padding-left: 12px;
+    margin: 0 12px 0 0;
 }
 
 
