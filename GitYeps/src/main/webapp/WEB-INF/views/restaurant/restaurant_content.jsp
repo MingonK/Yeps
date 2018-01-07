@@ -466,18 +466,23 @@
 														${myReview.content} 
 													</p>
 													
+													<c:forEach var="photos" items="${uploadFileList}">
+														<c:if test="${photos.mnum eq myReview.memberDTO.mnum}">
+															<c:set var="count" value="${count = count + 1}"/>
+														</c:if>
+													</c:forEach>
+													
 													<ul class="review_photo_box">
 													<c:forEach var="photos" items="${uploadFileList}" varStatus="status">
 														<c:if test="${photos.mnum eq myReview.memberDTO.mnum}">
-														<c:set var="count" value="${count=count+1}"/>
-															<c:if test="${count == 1}">
+															<c:if test="${status.index == 0 && count < 4}">
 																<li style="width: 348px; height: 348px;">
 																	<div class="review_photo_box_overlay">
 																		<img height="348" width="348" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photos.filename}">
 																	</div>
 																</li>
 															</c:if>
-															<c:if test="${count > 1 && count < 4}">
+															<c:if test="${status.index > 0}">
 																<li style="width: 168px; height: 168px;">
 																	<div class="review_photo_box_overlay">
 																		<img height="168" width="168" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photos.filename}">
@@ -613,15 +618,14 @@
 												<ul class="review_photo_box">
 													<c:forEach var="photos" items="${uploadFileList}" varStatus="status">
 														<c:if test="${photos.mnum eq getReview.mnum}">
-														<c:set var="count" value="${count=count+1}"/>
-															<c:if test="${count == 1}">
+															<c:if test="${status.index == 0}">
 																<li style="width: 348px; height: 348px;">
 																	<div class="review_photo_box_overlay">
 																		<img height="348" width="348" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photos.filename}">
 																	</div>
 																</li>
 															</c:if>
-															<c:if test="${count > 1 && count < 4}">
+															<c:if test="${status.index > 0}">
 																<li style="width: 168px; height: 168px;">
 																	<div class="review_photo_box_overlay">
 																		<img height="168" width="168" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photos.filename}">

@@ -47,7 +47,6 @@
 					
 					
 					
-					
 					<c:choose>
 							<c:when test="${empty sessionScope.memberinfo}">
 								<div class="mainpage_header_top_right_wrap">
@@ -1227,7 +1226,7 @@
 	</div>
 </div>
 	
-<div class="hover_card" style="top: 383px; left: 433.047px; display: none;">
+<div class="hover_card" style="top: 383px; display: none;">
 	<div class="hovercard-inner">
 		<div class="business-hovercard">
 			<div class="media-block">
@@ -1294,12 +1293,17 @@
 			$('#main_location_suggestion_container').show();
 		})
 		
-		$(document).on('mouseenter', '.mainpage_header_recommend_name', function() {
+		$(document).on('mouseenter', '.mainpage_header_recommend_name', function(e) {
+			$('.hover_card').css('left', Math.max(0, (($(window).width() - $(this).outerWidth()) / 2 - 125)) + "px");
 			$('.hover_card').css('display', 'block');
+			e.stopPropagation();
+		    e.preventDefault();
 		})
 	
-		$(document).on('mouseleave', '.hover_card', function(e) {
-			$('.hover_card').css('display', 'none');			
+		$(document).on('mouseleave', function(e) {
+			if($(e.target).hasClass('.hover_card') || $(e.target).hasClass('.mainpage_header_recommend_name')) {
+				$('.hover_card').css('display', 'none');
+			}
 		})
 		
 		$(document).on('mouseover', '.suggestions-location-list-item', function() {
