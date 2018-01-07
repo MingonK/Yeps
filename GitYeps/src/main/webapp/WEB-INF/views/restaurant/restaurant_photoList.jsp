@@ -21,14 +21,14 @@
 					<h1 class="js-media-landing_header_title" style="word-wrap: break-word !important; word-break: break-word !important; overflow-wrap: break-word !important; font-weight: bold; margin-bottom: 6px; font-size: 30px; line-height: 1.2em; color: #333; padding-top: 6px; margin: 0 0 6px; display: block;">
 						Photos for ${getRest.rname}
 					</h1>
-					<div class="section-header media-header--tabbed" style="    margin-bottom: 11px;border-bottom: 1px solid #e6e6e6;">
+					<div class="section-header media-header--tabbed" style="margin-bottom: 11px;border-bottom: 1px solid #e6e6e6;">
 						<div class="arrange arrange--12 arrange--bottom" style="margin-left: -12px;margin-right: -12px;border-collapse: separate;border-spacing: 12px 0;    display: table;min-width: 100%;table-layout: auto;">
 							<div class="arrange_unit arrange_unit--fill media-header_biz-listing" style=" margin-left: 6px;margin-right: 6px;border-collapse: collapse;border-spacing: 0 0;    vertical-align: bottom;    width: 100%;    box-sizing: border-box;display: table-cell;">
 								<div class="media-block media-block biz-passport--slim" style="    position: relative;    display: flex;">
 									<div class="media-avatar">
 										<div class="photo-box pb-30s">
 											<a href="restaurant_content?rnum=${getRest.rnum}" class="js-analytics-click" style="color: #0073bb;text-decoration: none;cursor: pointer;">
-												<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${getRest.rest_filename}" class="photo-box-img" width="30" height="30" style="outline: none;margin-top: 3px;border-radius: 4px;vertical-align: middle;">
+												<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${getRest.fileDTO.filename}" class="photo-box-img" width="30" height="30" style="outline: none;margin-top: 3px;border-radius: 4px;vertical-align: middle;">
 											</a>
 										</div>
 									</div>
@@ -363,7 +363,7 @@
     	var targeted_popup_class = jQuery(this).attr('data-popup-open');
     	$('#popup_slideshow_img').empty();
     	$('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
-    	var src = jQuery(this).children().first().attr('src');
+    	var src = jQuery(this).children('img').attr('src');
     	var img = $("<img>").attr("src", src).css('position', 'static').css('vertical-align', 'middle');
 		$('#popup_slideshow_img').append(img);
   

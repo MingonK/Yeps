@@ -216,7 +216,7 @@
 											<div class="midea-avata"style="border-right: 12px solid transparent; border-left: none;">
 												<div class="photo-box" >
 													<a href="restaurant_content?rnum=${dto.rnum}" class="js-analytics-click" style="color: #0073bb; cursor: pointer;">
-														<img width="90px" height="90px" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${dto.rest_filename}" style="outline: none;border-radius: 4px;vertical-align: middle;">	
+														<img width="90px" height="90px" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${dto.fileDTO.filename}" style="outline: none;border-radius: 4px;vertical-align: middle;">	
         											</a>
 												</div>
 											</div>
@@ -392,7 +392,7 @@
 			addrDetail.push("${item.addrDetail}");
 			roadAddrPart2.push("${item.roadAddrPart2}");
 			hp.push("${item.raddress}" + "-" + "${item.hp2}" + "-" + "${item.hp3}");
-			rest_filename.push("${item.rest_filename}");
+			rest_filename.push("${item.fileDTO.filename}");
 		</c:forEach>
 		
 
@@ -541,7 +541,7 @@ $(document).ready(function(){
 															'<div class="midea-avata" style="border-right: 12px solid transparent; border-left: none;">'+
 																'<div class="photo-box">'+
 																	'<a href="restaurant_content?rnum='+item.rnum+'" class="js-analytics-click" style="color: #0073bb;text-decoration: none;    cursor: pointer;">'+
-																		'<img width="90px" height="90px" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/'+item.rest_filename+'" style="outline: none;border-radius: 4px;vertical-align: middle;">'+
+																		'<img width="90px" height="90px" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/'+item.fileDTO.filename+'" style="outline: none;border-radius: 4px;vertical-align: middle;">'+
 																	'</a>'+
 																'</div>'+
 															'</div>'+
@@ -595,9 +595,10 @@ $(document).ready(function(){
 															'<p style="margin-bottom: 0;display: block;">'+
 																''+data.LastReview[i].content+''+
 																'<c:if test="${LastReview.review.content.length()>60 }">' +
-																	'<a href="#" style="white-space: nowrap;color: #0073bb;text-decoration: none;cursor: pointer;">read more</a>'+
+																	'<a href="#" style="white-space: nowrap; color: #0073bb; text-decoration: none; cursor: pointer;">read more</a>'+
 																'</c:if>' +
 															'</p>'+
+															
 														'</div>'+
 													'</div>'+
 												

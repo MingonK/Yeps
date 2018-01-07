@@ -53,10 +53,12 @@
 	<div class="memberManager">
 		<div class="memberManagerContainer_wrap">
 			<div class="memberManagerContainer">
+			<button  style="line-height: 1.28571em; border-color: #000; border: 1px solid; border-radius: 3px; width:160px; height: 32px; cursor: pointer; float: right; background: #d32323; color:#fff; font-weight: bold; font-size: 15px;" type="button" name="management" id="management"  >managementPage</button>
 				<div class="memberManagerContainer_section_header">
 					<h2>
 						YEPS's Members
 					</h2>
+					
 				</div>
 				<div class="memberManagerContainer_section">
 					<c:choose>
@@ -77,11 +79,11 @@
 														<div class="member_photo_box">
 															<a href="member_manager?mnum=${dto.mnum}" class="js-analytics-click" data-analytics-label="user-photo">
 																<c:choose>
-																	<c:when test="${empty map.listMemberPhoto[status.index].filename}">
+																	<c:when test="${empty map.listMemberPhoto[status.index].member_filename}">
 																		<img class="photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" width="60" style="border-radius: 4px;">
 																	</c:when>
 																	<c:otherwise>
-																		<img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${map.listMemberPhoto[status.index].filename}" style="border-radius: 4px;" alt="member_main_photo" id="photo_box_img" width="60px" height="60px">
+																		<img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${map.listMemberPhoto[status.index].member_filename}" style="border-radius: 4px;" alt="member_main_photo" id="photo_box_img" width="60px" height="60px">
 																	</c:otherwise>
 																</c:choose>
 															
@@ -158,7 +160,11 @@
 															<img class="photo-box-img" src="https://s3-media4.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/m.jpg">
 														</c:when>
 														<c:otherwise>
-															<img class="photo-box-img" src="getImage/${memberMainPhoto.filename}" alt="member_main_photo" id="photo_box_img" width="100px" height="100px">
+<<<<<<< HEAD
+															<img class="photo-box-img" src="getImage/${memberMainPhoto.member_filename}" alt="member_main_photo" id="photo_box_img" width="100px" height="100px">
+=======
+															<img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${memberMainPhoto.member_filename}" alt="member_main_photo" id="photo_box_img" width="100px" height="100px">
+>>>>>>> branch 'master' of https://github.com/MingonK/Yeps.git
 														</c:otherwise>
 													</c:choose>	
 													
@@ -301,6 +307,11 @@
 				$("input:checkbox[id='controlreview']").prop("checked", true);
 			}
 		}
+	});
+	
+	$('#management').click(function(){
+		var url = "member_managerPage";
+		window.location = url;
 	});
 	
 	function deleteMember(){
