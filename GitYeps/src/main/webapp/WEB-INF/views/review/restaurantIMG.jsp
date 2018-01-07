@@ -53,7 +53,7 @@
                                        <div class="resIMG_div_18">
                                           <div class="resIMG_div_20">Near</div>
                                           <div class="resIMG_div_21">
-                                             <input class="resIMG_input_2" type="text" id="" name="SearchNear" value="Korea, Seoul" autocomplete="off" >
+                                             <input class="resIMG_input_2" type="text" id="" name="SearchNear" value="${review_search_location}" autocomplete="off" >
                                           </div>
                                        </div>
                                     </div>
