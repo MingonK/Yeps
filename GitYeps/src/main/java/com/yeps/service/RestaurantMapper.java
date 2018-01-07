@@ -117,18 +117,42 @@ public class RestaurantMapper {
 
 
 	//////////////1월 4일 상우추가 
-	public int get_review_restaurantFind_Count(String SearchFind){
-		return sqlSession.selectOne("get_review_restaurantFind_Count", SearchFind);
+	public int get_review_restaurantFind_Count(HashMap<String, Object> searchMap){
+		if(searchMap.get("SearchFind") == null ) {
+			if(searchMap.get("SearchNear") == null) {
+				return sqlSession.selectOne("get_review_restaurantFind_Count");
+			}else {
+				return sqlSession.selectOne("get_review_restaurantFind_CountByNear", searchMap);
+			}
+		}else {
+			if(searchMap.get("SearchNear") == null) {
+				return sqlSession.selectOne("get_review_restaurantFind_CountByFind", searchMap);
+			}else {
+				return sqlSession.selectOne("get_review_restaurantFind_CountByAll", searchMap);
+			}
+		}
+		
 	}
 
 
 
-	public List<RestaurantDTO> review_restaurantFind(int start, int end, String SearchFind) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("start", start);
-		map.put("end", end);
-		map.put("SearchFind", SearchFind);
-		return sqlSession.selectList("review_restaurantFind", map);
+	public List<RestaurantDTO> review_restaurantFind(int start, int end, HashMap<String, Object> searchMap) {
+		searchMap.put("start", start);
+		searchMap.put("end", end);
+		if(searchMap.get("SearchFind") == null ) {
+			if(searchMap.get("SearchNear") == null) {
+				return sqlSession.selectList("review_restaurantFind", searchMap);
+			}else {
+				return sqlSession.selectList("review_restaurantFindByNear", searchMap);
+			}
+		}else {
+			if(searchMap.get("SearchNear") == null) {
+				return sqlSession.selectList("review_restaurantFindByFind", searchMap);
+			}else {
+				return sqlSession.selectList("review_restaurantFindByAll", searchMap);
+			}
+		}
+		
 	}
 	
 	//---------------1월 5일 민우 추가
