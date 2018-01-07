@@ -216,7 +216,7 @@
 											<div class="midea-avata"style="border-right: 12px solid transparent; border-left: none;">
 												<div class="photo-box" >
 													<a href="restaurant_content?rnum=${dto.rnum}" class="js-analytics-click" style="color: #0073bb; cursor: pointer;">
-														<img width="90px" height="90px" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${dto.rest_filename}" style="outline: none;border-radius: 4px;vertical-align: middle;">	
+														<img width="90px" height="90px" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${dto.fileDTO.filename}" style="outline: none;border-radius: 4px;vertical-align: middle;">	
         											</a>
 												</div>
 											</div>
@@ -263,7 +263,7 @@
 										<div class="media-avatar" style="border-right: 6px solid transparent; border-left: none;">
 											<div class="photo-box pb-30s">
 												<a href="restaurant_content?rnum=${dto.rnum}" style="color: #0073bb; cursor: pointer;">
-													<img width="30px" height="30px" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${map.LastReview.get(status.index).memberDTO.memberPhotoDTO.filename}" style="outline: none; margin-top: 3px; border-radius: 4px; vertical-align: middle;">
+													<img width="30px" height="30px" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${map.LastReview.get(status.index).memberDTO.memberPhotoDTO.member_filename}" style="outline: none; margin-top: 3px; border-radius: 4px; vertical-align: middle;">
 												</a>
 											</div>
 										</div>
@@ -394,7 +394,7 @@
 			addrDetail.push("${item.addrDetail}");
 			roadAddrPart2.push("${item.roadAddrPart2}");
 			hp.push("${item.raddress}" + "-" + "${item.hp2}" + "-" + "${item.hp3}");
-			rest_filename.push("${item.rest_filename}");
+			rest_filename.push("${item.fileDTO.filename}");
 		</c:forEach>
 		
 
@@ -543,7 +543,7 @@ $(document).ready(function(){
 															'<div class="midea-avata" style="border-right: 12px solid transparent; border-left: none;">'+
 																'<div class="photo-box">'+
 																	'<a href="restaurant_content?rnum='+item.rnum+'" class="js-analytics-click" style="color: #0073bb;text-decoration: none;    cursor: pointer;">'+
-																		'<img width="90px" height="90px" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/'+item.rest_filename+'" style="outline: none;border-radius: 4px;vertical-align: middle;">'+
+																		'<img width="90px" height="90px" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/'+item.fileDTO.filename+'" style="outline: none;border-radius: 4px;vertical-align: middle;">'+
 																	'</a>'+
 																'</div>'+
 															'</div>'+
@@ -588,7 +588,7 @@ $(document).ready(function(){
 														'<div class="media-avatar" style="border-right: 6px solid transparent;border-left: none;">'+
 															'<div class="photo-box pb-30s">'+
 																'<a href="restaurant_content?rnum='+item.rnum+'" style="color: #0073bb;text-decoration: none;    cursor: pointer;">'+
-																	'<img width="30px" height="30px" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/'+data.LastReview[i].memberDTO.memberPhotoDTO.filename+'" style="outline: none;margin-top: 3px;border-radius: 4px;    vertical-align: middle;">'+
+																	'<img width="30px" height="30px" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/'+data.LastReview[i].memberDTO.memberPhotoDTO.member_filename+'" style="outline: none;margin-top: 3px;border-radius: 4px;    vertical-align: middle;">'+
 																'</a>'+
 															'</div>'+
 														'</div>'+

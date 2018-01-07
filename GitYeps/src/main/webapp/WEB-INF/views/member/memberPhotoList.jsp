@@ -94,7 +94,7 @@
 						<c:forEach var="memberPhotoDTO" items="${memberPhotoList}">
 							<li>
 								<div class="photo-box" data-popup-open="photo_popup">
-									<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${memberPhotoDTO.filename}" alt="member_photo" id="photo_box_img" width="150px" height="150px">
+									<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${memberPhotoDTO.member_filename}" alt="member_photo" id="photo_box_img" width="150px" height="150px">
 									<c:if test="${memberPhotoDTO.ismainphoto =='y'}">
 										<div class="photo-box-overlay">
 											<div class="photo-box-overlay_caption">메인사진</div>
@@ -128,7 +128,7 @@
 											<form name="photoupdate" class="photo_delete" action="member_photo_delete" method="POST">
 												<input type="hidden" name="filenum" value="${memberPhotoDTO.filenum}">
 												<input type="hidden" name="mnum" value="${memberPhotoDTO.mnum}">
-												<input type="hidden" name="filename" value="${memberPhotoDTO.filename}">
+												<input type="hidden" name="filename" value="${memberPhotoDTO.member_filename}">
 												<input type="hidden" name="ismainphoto" value="${memberPhotoDTO.ismainphoto}">
 												<a class="photo-arrange_delete">
 													<div class="photo-action-link_icon">
@@ -229,7 +229,7 @@
 <script type="text/javascript">
 	var list = new Array();
 	<c:forEach var="memberPhotoDTO" items="${memberPhotoList}">
-		list.push("${memberPhotoDTO.filename}");
+		list.push("${memberPhotoDTO.member_filename}");
 	</c:forEach>
 	for(var i = 0; i < list.length; i++) {
 		var img = $("<img>").attr("src", "https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/" + list[i]).css('vertical-align', 'middle').css('display', 'inline-block').css('max-width', '100%').css('max-height', '100%');

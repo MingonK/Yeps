@@ -159,16 +159,36 @@ function busy_add() {
 	
 	if(s.options[s.selectedIndex].value=='없음'){
 		document.getElementById("busy-display").appendChild(div).innerHTML = "<span>"+day[day2]+"    "+"</span>"+"없음"+
-		"<a style='margin-left: 6px;' href='javascript:void(0);' onclick='remove2("+day2+")'>삭제</a>" 
+		"<a style='margin-left: 6px;' href='javascript:void(0);' onclick='busy_remove("+day2+")'>삭제</a>" 
 		document.getElementsByName("busytime").value="없음";
 	}else{
 		document.getElementById("busy-display").appendChild(div).innerHTML = "<span>"+day[day2]+"    "+"</span>"+
 		"<span>"+start+"</span>"+"<span>"+"&nbsp-&nbsp"+"</span>"+"<span>"+end+"&nbsp"+"</span>"+
-		"<a href='javascript:void(0);' onclick='remove2("+day2+")'>삭제</a>"
+		"<a href='javascript:void(0);' onclick='busy_remove("+day2+")'>삭제</a>"
 		document.getElementsByName("busytime").value=start +"&nbsp"+end;
 	}
 }
 function food_add(){
+	var div = document.createElement("DIV");
+	var span = document.createElement("SPAN");
+	var parent = document.getElementById("food-display");
+	var foodstyle = document.getElementById("foodstyle");
+	var food_value = foodstyle.options[foodstyle.selectedIndex].value;
+	if(parent.childNodes.length>3){
+		return false;
+	}
+	for(var i=0;i<parent.childNodes.length;i++){
+		if(parent.childNodes[i].id==food_value){
+			return false;
+		}
+	}
+	
+	div.setAttribute("id", food_value);
+	div.setAttribute("class","restInsert-hours");
+	
+	parent.appendChild(div).innerHTML = "<span>"+food_value+"</span>"+
+	"<a href='javascript:void(0);' onclick='food_remove("+food_value+")'>&nbsp삭제</a>"+
+	"<input type='hidden' name='foodstyle' value='"+food_value+"'/>";;
 	
 }
 function hour_add() {
@@ -217,9 +237,14 @@ function remove(obj) {
 	var child = document.getElementById(week[obj]);
 	parent.removeChild(child);
 }
-function remove2(obj) {
+function busy_remove(obj) {
 	var parent = document.getElementById("busy-display");
 	var child = document.getElementById("busy"+week[obj]);
+	parent.removeChild(child);
+}
+function food_remove(obj){
+	var parent = document.getElementById("food-display");
+	var child = document.getElementById(obj);
 	parent.removeChild(child);
 }
 
@@ -335,7 +360,14 @@ function test() {
 	
 
 	
-	
+	var foodstyle=new Array();
+	var foodstyle_name = document.getElementsByName("foodstyle");
+	for (var i=0;i<foodstyle_name.length;i++){
+		if (foodstyle_name[i].checked) {
+			foodstyle.push(foodstyle_name[i].value)
+		}
+	}
+	document.getElementById("foodstyle").value = foodstyle.join(',')
 	
 	var reststyle=new Array();
 	for (var i = 0; i < reststyle_name.length; i++) {
@@ -432,30 +464,41 @@ function test() {
 									
 									
 									<li class="restInsert-list">
-										<label for="foodstyle" class="restInsert-label-bold">카테고리 등록</label>
-										<select class="restInsert-day" id="category" name="category" style="width:390px">
-											<option value="Restaurants">레스토랑</option>
-											<option value="Bars">바</option>
-											<option value="Food">음식점</option>
-											<option value="Breakfast & Brunch">아침식사 & 브런치</option>
-											<option value="Coffee & Tea">카페</option>
-										</select>	
+										<label for="category" class="restInsert-label-bold">카테고리 등록</label>
+											
+											
+											<select class="restInsert-day" id="category" name="category" style="width:390px">
+												<option value="Restaurants">레스토랑</option>
+												<option value="Bars">바</option>
+												<option value="Food">음식점</option>
+												<option value="Breakfast & Brunch">아침식사 & 브런치</option>
+												<option value="Coffee & Tea">카페</option>
+											</select>
 									</li>
 									
 									<li class="restInsert-list">
 										<label for="foodstyle" class="restInsert-label-bold">음식 종류</label>
-										<select class="restInsert-day" id="foodstyle" name="foodstyle" style="width:390px;">
-											<option value="한식">한식</option>
-											<option value="일식">일식</option>
-											<option value="중식">중식</option>
-										</select>
+										<ul style="width:460px;heigth:55px; margin: -3px;display: block;font-size: 0;line-height: 1;text-align: left;    list-style: none;">
+												<li class="restInsert-li">
+													<select class="restInsert-day" id="foodstyle" name="foodstyle" style="width:390px;">
+														<option value="한식">한식</option>
+														<option value="일식">일식</option>
+														<option value="중식">중식</option>
+													</select>
+												</li>
+												<li class="restInsert-li">
+													<button type="button" value="submit" class="restInsert-button " style="padding: 5px 8px;font-size: 12px;line-height: 1.5em;border:1px solid #ccc;display:absolute;" onclick="food_add()">
+														<span>Add</span>
+													</button>
+												</li>
+											</ul>
 										<div class="day-hours" id="food-display" style="width:460px;height:auto;margin-bottom: 6px;">
 												
 										</div>
 									</li>
 									
 									<li class="restInsert-list">
-										<label for="foodstyle" class="restInsert-label-bold">가격 범위</label>
+										<label for="price" class="restInsert-label-bold">가격 범위</label>
 										<select class="restInsert-day" id="price" name="price" style="width:390px">
 											<option value="1">￦(10,000원 이하)</option>
 											<option value="2">￦￦(10,000원~30,000원)</option>
@@ -747,7 +790,7 @@ function test() {
 										</select>
 										<span style="font-weight: bold;"> 인 기준</span>
 									</li>
-									<li class="restInsert-list">
+									<!--< li class="restInsert-list">
 									<label for="busytime" class="restInsert-label-bold">바쁜시간</label><br>
 									<div class="restInsert-busy-hours" id="restInsert-busy-hours" style="width:460px;height:auto;">
 										<input type="hidden" name="busytime" value="">
@@ -890,7 +933,7 @@ function test() {
 												</li>
 											</ul>
 									</div>	
-									</li>
+									</li> -->
 								</ul>
 								<div class="restInsert-footer">
 									<button id="restInsert-submit" name="action_submit" type="submit" value="등록" class="restInsert-submit">

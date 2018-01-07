@@ -36,7 +36,9 @@
 							</div>
 							<div class="price-category">
 								<span class="bullet-after">
-       								 <span class="business-attribute price-range">${getRest.price}</span>
+       								 <span class="business-attribute price-range">
+       								 	<c:forEach begin="1" end="${getRest.price}">￦</c:forEach>
+       								 </span>
         						</span>
         						<span class="category-str-list" style="margin-right: 6px;">
 			                  	 	${getRest.foodstyle}
@@ -77,7 +79,6 @@
 						         	</svg>
 							  	</span> 
 							  	Add Photo
-							  	<a class="menu-explore js-menu-explore" href="restaurant_listMenu?rnum=${getRest.rnum}">모든 메뉴</a>
 						   	</a>
 							</span>
 				     	</div>
@@ -198,7 +199,7 @@
 										<div class="restContent-review-highlights-media-avatar" style="border-right: 12px solid transparent; border-left: none;">
 											<div class="restcontent-review-highlights-photo-box">
 												<a href="member_details?mnum=${reviewDTO.memberDTO.mnum}" style="color: #0073bb; text-decoration: none; cursor: pointer;">
-													<img width="60px" height="60px" style="outline: none; border-radius: 4px; vertical-align: middle;" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${reviewDTO.memberDTO.memberPhotoDTO.filename}">
+													<img width="60px" height="60px" style="outline: none; border-radius: 4px; vertical-align: middle;" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${reviewDTO.memberDTO.memberPhotoDTO.member_filename}">
 												</a>
 											</div>
 										</div>
@@ -376,7 +377,7 @@
 														<div class="restContent-media-avatar">
 															<div class="restContent-photo-box">
 																<a href="member_details?mnum=${myReview.memberDTO.mnum}" style="color: #0073bb;">
-																	<img class="restContent-photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${myReview.memberDTO.memberPhotoDTO.filename}" width="60">
+																	<img class="restContent-photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${myReview.memberDTO.memberPhotoDTO.member_filename}" width="60">
 																</a>
 															</div>
 														</div>
@@ -443,11 +444,11 @@
 														</div>
 													</div>
 													<p class="myreview_p_3">
-														${myReview.content}
+														${myReview.content} 
 													</p>
 													<div class="myreview_div_6">
 
-														<a class="myreview_a_1" href="review_write?star=${myReview.gradepoint}&contentUpdate=${myReview.content}&rnum=${getRest.rnum}&updatemode=${updatemode}">리뷰수정</a>
+														<a class="myreview_a_1" href="review_write?star=${myReview.gradepoint}&contentUpdate=${myReview.content}&rnum=${getRest.rnum}&updatemode=${updatemode}&rvnum=${myReview.rvnum}">리뷰수정</a>
 														<form class="myreview_formF" method="post">
 															<input class="myreview_input_1" type="hidden">
 															<input class="myreview_input_1" type="hidden">
@@ -485,7 +486,7 @@
 														<div class="restContent-media-avatar">
 															<div class="restContent-photo-box">
 																<a href="member_details?mnum=${getReview.memberDTO.mnum}" style="color: #0073bb;">
-																	<img class="restContent-photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${getReview.memberDTO.memberPhotoDTO.filename}" width="60">
+																	<img class="restContent-photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${getReview.memberDTO.memberPhotoDTO.member_filename}" width="60">
 																</a>
 															</div>
 														</div>
@@ -920,13 +921,6 @@
 												${getRest.tablecount} (${getRest.standard}인 기준)
 											</dd>
 										</dl>
-										
-										<dl style="padding-bottom: 6px;display: block;">
-											<dt class="restContent-attribute-key">바쁜 시간</dt>
-											<dd style="font-weight: bold;display: inline;">
-												${getRest.busytime}
-											</dd>
-										</dl>
 									</div>
 								</li>
 							</ul>
@@ -1150,7 +1144,7 @@
    });
    var week = new Array("sun","mon","tue","wed","thu","fri","sat")
    var d = new Date();
-   var day = d.getDate();
+   var day = d.getDate()-1;
    
 
    $(".today").text($('.'+week[day]+'').text());
@@ -1261,7 +1255,7 @@ function list(page){
 											'<div class="restContent-media-avatar">' +
 												'<div class="restContent-photo-box">' +
 													'<a href="member_details?mnum='+ item.memberDTO.mnum +'" style="color: #0073bb;">' +
-														'<img class="restContent-photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/' + item.memberDTO.memberPhotoDTO.filename + '" width="60">' +
+														'<img class="restContent-photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/' + item.memberDTO.memberPhotoDTO.member_filename + '" width="60">' +
 													'</a>' +
 												'</div>' +
 											'</div>' +
@@ -1495,7 +1489,7 @@ function check() {
 											'<div class="restContent-media-avatar">' +
 												'<div class="restContent-photo-box">' +
 													'<a href="member_details?mnum='+ item.memberDTO.mnum +'" style="color: #0073bb;">' +
-														'<img class="restContent-photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/' + item.memberDTO.memberPhotoDTO.filename + '" width="60">' +
+														'<img class="restContent-photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/' + item.memberDTO.memberPhotoDTO.member_filename + '" width="60">' +
 													'</a>' +
 												'</div>' +
 											'</div>' +

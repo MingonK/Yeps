@@ -293,11 +293,11 @@
 												<div id="event_reply_user_info_photo_wrapper">
 													<div id="event_reply_user_photo">
 														<a href="member_details?mnum=${event_reviewDTO.memberDTO.mnum}">
-															<c:if test="${empty event_reviewDTO.memberDTO.memberPhotoDTO.filename}">
+															<c:if test="${empty event_reviewDTO.memberDTO.memberPhotoDTO.member_filename}">
 																<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png" width="60" height="60" id="event_reply_user_img">
 															</c:if>
-															<c:if test="${!empty event_reviewDTO.memberDTO.memberPhotoDTO.filename}">
-																<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${event_reviewDTO.memberDTO.memberPhotoDTO.filename}" width="60" height="60" id="event_reply_user_img">
+															<c:if test="${!empty event_reviewDTO.memberDTO.memberPhotoDTO.member_filename}">
+																<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${event_reviewDTO.memberDTO.memberPhotoDTO.member_filename}" width="60" height="60" id="event_reply_user_img">
 															</c:if>
 														</a>
 													</div>

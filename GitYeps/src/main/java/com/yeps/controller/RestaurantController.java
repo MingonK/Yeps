@@ -272,11 +272,11 @@ public class RestaurantController {
 		if (existMyReview != null) {
 			mav.addObject("myReview", existMyReview);
 		}
-
+		
 		List<ReviewDTO> reviewList = reviewMapper.getSelectedRestaurant_Rv(Integer.parseInt(rnum), start, end);// 가게 리뷰
 		List<ReviewDTO> highlightReview = reviewMapper.getRandomRestaurant_Rv(Integer.parseInt(rnum));
 		int starAvg = reviewMapper.getStarAvg(Integer.parseInt(rnum));
-
+       
 		mav.addObject("map", map);
 		mav.addObject("getRest", getRest);
 		mav.addObject("uploadFileList", uploadFileList);

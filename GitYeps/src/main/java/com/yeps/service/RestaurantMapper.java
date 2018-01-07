@@ -82,7 +82,11 @@ public class RestaurantMapper {
 	}
 
 	public RestaurantDTO getHotAndNewRestaurant(int rnum) {
-		return sqlSession.selectOne("getHotAndNewRestaurant", rnum);
+		RestaurantDTO dto =  sqlSession.selectOne("getHotAndNewRestaurant", rnum);
+		if(dto == null) {
+			dto =  sqlSession.selectOne("getHotAndNewRestaurant_noPhoto", rnum);
+		}
+		return dto;
 	}
 
 	// -------------- 이벤트랑 레스토랑 연결 ---------------------------

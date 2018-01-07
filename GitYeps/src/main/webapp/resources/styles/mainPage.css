@@ -1222,3 +1222,13 @@
 	background: #0073bb;
 	color: white;
 }
+
+.bullet-after:after {
+	content: "•";
+    position: relative;
+    top: -1px;
+    margin: 0 3px;
+    color: #999;
+    font-size: 10px;
+    line-height: 18px;
+}
