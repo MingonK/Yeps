@@ -224,6 +224,7 @@
        </association>
        <association javaType="RestaurantDTO" property="restaurantDTO">
                <id column="rnum" property="rnum"></id>
+               <result column="rnum" property="rnum"></result>
                <result column="rname" property="rname"></result> 
                <result column="rest_regdate" property="rest_regdate"></result>
                <result column="roadAddrPart1" property="roadAddrPart1"></result>
@@ -233,7 +234,10 @@
                <result column="foodstyle" property="foodstyle"></result>
                <result column="hp2" property="hp2"></result>
                <result column="hp3" property="hp3"></result>
-               
+               <association javaType="FileDTO" property="fileDTO">
+               		<id column="filenum" property="filenum"></id>
+               		<result column="filename" property="filename"></result>
+               </association>
        </association>
    </resultMap>
    
@@ -241,6 +245,7 @@
       select * from (select rownum rn, A. * from(select
 		               R.content
 		              ,R.gradepoint
+		              ,R.rnum
 		              ,R.rvnum
 		              ,RT.rest_regdate
 		              ,RT.rname
@@ -254,8 +259,8 @@
 		              ,M.mnum
 		              ,M.name
 		              ,M.reviewcount
-            
-        from yeps_review R, yeps_member M, yeps_restaurant RT where R.mnum = M.mnum and R.rnum = RT.rnum and M.mnum = #{mnum} order by rvnum desc)A)
+            		  ,F.filename
+        from yeps_review R, yeps_member M, yeps_restaurant RT, yeps_files F where R.mnum = M.mnum and R.rnum = RT.rnum and RT.rnum = F.rnum and M.mnum = #{mnum} order by rvnum desc)A)
         where rn between #{start} and #{end}
     </select>
     
@@ -520,4 +525,7 @@
   		update yeps_review set content=#{contentUpdate}, gradepoint=#{gradepoint} where rvnum=#{rvnum}
   	</update>   
   	
+  	<delete id="deleteReviewByMemberNumber" parameterType="int">
+  		delete yeps_review where mnum = #{mnum}
+  	</delete>
 </mapper>		

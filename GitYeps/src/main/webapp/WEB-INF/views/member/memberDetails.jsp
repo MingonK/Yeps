@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/message.css?ver=2"/>"/>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/restStyle.css?ver=2"/>"/>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css?ver=2"/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_list.css?ver=2"/>"/>
 <script src="//code.jquery.com/jquery.min.js?ver=1"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js?ver=2"></script>
 <script src="http://malsup.github.com/jquery.cycle2.js"></script>
@@ -328,7 +329,7 @@
 					     </ul>
 					  </div>
 					  <!-- -----페이징 처리 시작 ------ -->					
-			   <div class="event_list_paging_section" style="font-size: 14px; width: 66.66667%">
+			   <div class="event_list_paging_section" style="font-size: 14px;">
 	                       <div class="event_list_pagination_block">
 	                          <div class="event_list_pagination_wrap"  >
 	                              <div class="event_list_page_of_pages" >
@@ -660,19 +661,19 @@ $(function() {
 						    '<div class="media-block media-block--12 biz-listing-medium">'+
 				                '<div class="media-avatar">'+
 				                    '<div class="photo-box pb-60s">'+
-				                        '<a href="restaurant_content?rnum='+ item.restaurantDTO.rnum +'" class="js-analytics-click" data-analytics-label="biz-photo">'+
-				                            '<img alt="Liholiho Yacht Club" class="photo-box-img" height="60" src="https://s3-media1.fl.yelpcdn.com/bphoto/FK2X98w6z5naJyiQjsGTNA/60s.jpg" srcset="https://s3-media1.fl.yelpcdn.com/bphoto/FK2X98w6z5naJyiQjsGTNA/90s.jpg 1.50x,https://s3-media1.fl.yelpcdn.com/bphoto/FK2X98w6z5naJyiQjsGTNA/168s.jpg 2.80x,https://s3-media1.fl.yelpcdn.com/bphoto/FK2X98w6z5naJyiQjsGTNA/ms.jpg 1.67x,https://s3-media1.fl.yelpcdn.com/bphoto/FK2X98w6z5naJyiQjsGTNA/180s.jpg 3.00x,https://s3-media1.fl.yelpcdn.com/bphoto/FK2X98w6z5naJyiQjsGTNA/120s.jpg 2.00x" width="60">'+
+				                        '<a href="restaurant_content?rnum='+ item.rnum +'" class="js-analytics-click" data-analytics-label="biz-photo">'+
+				                            '<img alt="Liholiho Yacht Club" class="photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/'+item.restaurantDTO.fileDTO.filename+'" width="60">'+
 				          			    '</a>'+
 				    		        '</div>'+
 				         	    '</div>'+
 				            '<div class="media-story">'+
 				                '<div class="media-title clearfix">'+
-				                    '<a class="biz-name js-analytics-click" data-analytics-label="biz-name" href="restaurant_content?rnum='+ item.restaurantDTO.rnum +'" data-hovercard-id="K8YqsGXicOLOUcQXTzRrnw"><span>'+ item.restaurantDTO.rname + '   </span></a>'+
+				                    '<a class="biz-name js-analytics-click" data-analytics-label="biz-name" href="restaurant_content?rnum='+ item.rnum +'" data-hovercard-id="K8YqsGXicOLOUcQXTzRrnw"><span>'+ item.restaurantDTO.rname + '   </span></a>'+
 				                '</div>'+
 				                '<div class="price-category">'+
 				                    '<span class="category-str-list">'+
 				                        '<a href="#">' + item.restaurantDTO.foodstyle + '  </a>,'+
-				                        '<a href="yeps_main_saerch?location='+ item.restaurantDTO.rnum +'">' + 
+				                        '<a href="yeps_main_saerch?location='+ item.rnum +'">' + 
 				                        item.restaurantDTO.roadAddrPart1 + item.restaurantDTO.roadAddrPart2 + item.restaurantDTO.addrDetail + '   </a>'+
 				    				'</span>'+
 				    			 '</div>'+
@@ -703,8 +704,8 @@ $(function() {
 						'</div>'+ */
 			       
 			            '<div class="clearfix"  style="margin-bottom: 50px;">'+
-			               '<a  style="float: left;" href="member_details?mnum=' + mnum + '" class="yepsbyn ybtn--small js-war-widget_finish-draft pull-left">리뷰수정</a>'+
-			                  '<form action="review_delete?rvnum='+ item.rvnum + '&mnum=' + mnum + '" class="pull-right js-delete-review-draft-form" method="post" name="delete_draft">'+
+			               '<a  style="float: left;" href="review_write?rvnum=' + item.rvnum + '&mode=update&star='+item.gradepoint+'&rnum='+item.rnum+'" class="yepsbyn ybtn--small js-war-widget_finish-draft pull-left">리뷰수정</a>'+
+			                  '<form action="review_delete?rvnum='+ item.rvnum + '&mnum=' + mnum + '&mode=restaurantReviewDelete&rnum='+item.rnum+'" class="pull-right js-delete-review-draft-form" method="post" name="delete_draft">'+
 			               
 			                      '<input type="hidden" value="'+ item.rvnum + '" name="rvnum">'+
 			                      '<button type="submit" style="float: right;"class="chiclet-link u-cursor-pointer show-tooltip js-delete-review-draft">'+
@@ -826,8 +827,7 @@ $(function() {
 		var mnum = '${memberDTO.mnum}';
 	    $.ajax({
 	        type : 'post',
-	        url : 'review_member_ajax?curPage=' + page + '&rnum=' + rnum,
-	        data : mnum,
+	        url : 'review_member_ajax?curPage=' + page + '&mnum=' + mnum,
 	        dataType : 'json',
 	        success : function(responseData){
 		       	 $('.memberDetails-review-list ul li').remove(); 
@@ -845,7 +845,7 @@ $(function() {
 				                '<div class="media-avatar">'+
 				                    '<div class="photo-box pb-60s">'+
 				                        '<a href="/biz/liholiho-yacht-club-san-francisco-2" class="js-analytics-click" data-analytics-label="biz-photo">'+
-				                            '<img alt="Liholiho Yacht Club" class="photo-box-img" height="60" src="https://s3-media1.fl.yelpcdn.com/bphoto/FK2X98w6z5naJyiQjsGTNA/60s.jpg" srcset="https://s3-media1.fl.yelpcdn.com/bphoto/FK2X98w6z5naJyiQjsGTNA/90s.jpg 1.50x,https://s3-media1.fl.yelpcdn.com/bphoto/FK2X98w6z5naJyiQjsGTNA/168s.jpg 2.80x,https://s3-media1.fl.yelpcdn.com/bphoto/FK2X98w6z5naJyiQjsGTNA/ms.jpg 1.67x,https://s3-media1.fl.yelpcdn.com/bphoto/FK2X98w6z5naJyiQjsGTNA/180s.jpg 3.00x,https://s3-media1.fl.yelpcdn.com/bphoto/FK2X98w6z5naJyiQjsGTNA/120s.jpg 2.00x" width="60">'+
+				                            '<img class="photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/' + item.restaurantDTO.fileDTO.filename + '"  width="60">'+
 				          			    '</a>'+
 				    		        '</div>'+
 				         	    '</div>'+

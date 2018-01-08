@@ -39,7 +39,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    </update>
    
    <delete id="deleteMemberPhoto" parameterType="java.util.HashMap">
-        delete from yeps_member_photos where mnum = #{mnum} and filenum=#{filenum}
+        delete yeps_member_photos where mnum = #{mnum} and filenum=#{filenum}
+   </delete>
+   
+   <delete id="deleteMemberPhotosByMemberNumber" parameterType="int">
+   		delete yeps_member_photos where mnum = #{mnum}
    </delete>
    <!--
    

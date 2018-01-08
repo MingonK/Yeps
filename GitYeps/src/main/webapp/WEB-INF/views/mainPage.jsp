@@ -424,7 +424,7 @@
 							<label id="near_label" class="mainpage_search">
 								<span id="label_span">Near</span>
 								<span id="label_input_span">
-									<input type="text" maxlength="80" name="location" id="page_header_location_inputs" class="page_header_location_inputs" autocomplete="off" placeholder="지역별 검색">
+									<input type="text" maxlength="80" name="location" id="page_header_location_inputs" class="page_header_location_inputs" autocomplete="off" placeholder="지역별 검색" value="서울특별시">
 									<input type="hidden" name="latitude" id="latitude" />
 									<input type="hidden" name="longitude" id="longitude" />
 								</span>

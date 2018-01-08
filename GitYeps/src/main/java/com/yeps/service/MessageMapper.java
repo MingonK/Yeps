@@ -218,5 +218,9 @@ public class MessageMapper {
 	public int lockerToMsgBox(int msgnum) {
 		return sqlSession.update("lockerToMsgBox", msgnum);
 	}
+	
+	public int deleteMessageByMemberNumber(int mnum) {
+		return sqlSession.delete("deleteMessageByMemberNumber", mnum);
+	}
 
 }

@@ -50,4 +50,8 @@ public class EventReviewMapper {
     public List<EventReviewDTO> getEventReview(int evrvnum){
     	return sqlSession.selectList("getEventReview",evrvnum);
     }
+    
+    public int deleteEventReviewByMemberNumber(int mnum) {
+    	return sqlSession.delete("deleteEventReviewByMemberNumber", mnum);
+    }
 }

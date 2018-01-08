@@ -97,7 +97,6 @@ public class FileMapper {
 		if (ismainphoto.equals("y")) {
 			int res = sqlSession.delete("deleteFileToFilename", filename);
 			if(mode.equals("event")) {
-				System.out.println("!");
 				List<FileDTO> list = sqlSession.selectList("getTargetEventFiles", num);
 				if (list.size() > 0) {
 					FileDTO dto = list.get(0);
@@ -108,7 +107,6 @@ public class FileMapper {
 				}
 				return res;
 			} else {
-				System.out.println("?");
 				List<FileDTO> list = sqlSession.selectList("getAllRestaurantFiles", num);
 				if(list.size() > 0) {
 					FileDTO dto = list.get(0);
@@ -212,4 +210,5 @@ public class FileMapper {
 	public FileDTO getRandomRestaurantPhoto() {
 		return sqlSession.selectOne("getRandomRestaurantPhoto");
 	}
+
 }

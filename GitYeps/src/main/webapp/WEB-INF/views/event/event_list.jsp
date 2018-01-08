@@ -17,7 +17,7 @@
 			<div class="event_list_main_section_location_bar">
 				<div class="event_list_section_header_location_bar_inner">
 					<div class="event_list_section_header_location_left">
-						<c:if test="${empty sessionScope.memberinfo}">
+						<c:if test="${empty sessionScope.memberinfo || empty sessionScope.memberinfo.address}">
 							<h1>${search}</h1>
 						</c:if>
 						<c:if test="${!empty sessionScope.memberinfo}">
@@ -30,7 +30,7 @@
 					</div>
 					<!-- 반복문 돌면서 최대 5개 까지 출력 -->
 					<div class="event_list_section_header_location_nowrap">
-						<a href="#">인근 추천 지역</a>
+<!-- 						<a href="#">인근 추천 지역</a> -->
 					</div>
 					<div class="event_list_section_header_location_nowrap">
 						<a href="javascript:;" class="location_city_list_toggle">

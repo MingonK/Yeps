@@ -22,4 +22,8 @@ public class SmallMenuMapper {
 		return sqlSession.selectList("listSmallMenu", large_menunum);
 	}
 	
+	public int deleteSmallMenuByMemberNumber(int mnum) {
+		return sqlSession.delete("deleteSmallMenuByMemberNumber", mnum);
+	}
+	
 }
