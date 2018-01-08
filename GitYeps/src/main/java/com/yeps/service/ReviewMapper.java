@@ -171,4 +171,8 @@ public class ReviewMapper {
 	   return sqlSession.update("review_write_update", map);
    }
    
+   public int deleteReviewByMemberNumber(int mnum) {
+	   return sqlSession.delete("deleteReviewByMemberNumber", mnum);
+   }
+   
 }

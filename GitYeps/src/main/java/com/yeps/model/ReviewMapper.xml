@@ -520,4 +520,7 @@
   		update yeps_review set content=#{contentUpdate}, gradepoint=#{gradepoint} where rvnum=#{rvnum}
   	</update>   
   	
+  	<delete id="deleteReviewByMemberNumber" parameterType="int">
+  		delete yeps_review where mnum = #{mnum}
+  	</delete>
 </mapper>		

@@ -114,4 +114,8 @@ public class EventMapper {
 	public int eventCount() {
 		return sqlSession.selectOne("eventCount");
 	}
+	
+	public int deleteEventByMemberNumber(int mnum) {
+		return sqlSession.delete("deleteEventByMemberNumber", mnum);
+	}
 }

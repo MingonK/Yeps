@@ -494,6 +494,10 @@ FROM
 	<select id="listRestByS" parameterType="java.util.HashMap" resultType="RestaurantDTO" > 
 		select * from (select rownum rn, A.* from (select * from yeps_restaurant where replace(upper(rname),' ','') like '%'||replace(upper(#{searchword}),' ','')||'%' order by rnum desc)A) where rn between #{start} and #{end} 
 	</select>
+	
+	<delete id="deleteRestaurantByMemberNumber" parameterType="int">
+		delete yeps_restaurant where mnum = #{mnum}
+	</delete>
 </mapper>
 
 

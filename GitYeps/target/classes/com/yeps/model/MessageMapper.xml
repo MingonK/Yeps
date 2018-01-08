@@ -81,6 +81,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      <update id="lockerToMsgBox" parameterType="int">
         update yeps_message set islocker=0 where msgnum=#{msgnum}
     </update>
+    
+    <delete id="deleteMessageByMemberNumber" parameterType="int">
+    	delete yeps_message where mnum = #{mnum}
+    </delete>
 </mapper>
 
 

@@ -51,5 +51,9 @@
     <update id="replyQnA" parameterType="QnADTO">
        update yeps_qna set reply=#{reply} where qnum = #{qnum}
     </update>
+    
+    <delete id="deleteQnAByMemberNumber" parameterType="int">
+    	delete yeps_qna where mnum = #{mnum}
+    </delete>
    
 </mapper>
