@@ -1,6 +1,7 @@
 package com.yeps.controller;
 
 import java.io.File;
+import java.net.URLDecoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -121,8 +123,30 @@ public class EventController {
 				thisWeek_random_fileList.add(dto);
 			}
 		}
+		
+		Cookie[] cookies = req.getCookies();
+		List<String> locationList = new ArrayList<String>();
+		if(cookies!=null) {
+			int j = 0;
+			for (int i = cookies.length-1 ; i>=0; i--) {
+				String name = cookies[i].getName(); 
+				try {
+					String value = URLDecoder.decode(cookies[i].getValue(),"utf-8");
+					if(name.contains("location")) {
+						locationList.add(value);
+						j+=1;
+						if(j == 10) {
+							break;
+						}
+					}
+				}catch(Exception e) {
+					System.out.println("불러오기 실패");
+				}
+			}
+		}
 
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("locationList", locationList);
 		mav.addObject("search", search);
 		mav.addObject("mode", mode);
 		mav.addObject("set", "events");

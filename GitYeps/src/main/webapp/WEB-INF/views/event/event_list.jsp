@@ -71,12 +71,20 @@
 							<h4>최근 검색한 위치</h4>
 							<ul>
 								<!-- 반복문으로 최대 10개까지 -->
-								<li style="margin-bottom: 12px;">
-									<a href="#">최근 검색한 기록이 없습니다.</a>
-								</li>
-								<li style="margin-bottom: 12px;">
-									<a href="#">최근 검색한 기록1~10</a>
-								</li>
+								<c:choose>
+									<c:when test="${empty locationList}">
+										<li style="margin-bottom: 12px;">
+											<a href="#">최근 검색한 기록이 없습니다.</a>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<c:forEach var="recentLocation" items="${locationList}">
+											<li style="margin-bottom: 12px;">
+												<a href="#">${recentLocation}</a>
+											</li>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
 							</ul>
 							<a href="#" class="clear-location-toggle">최근 검색위치 초기화 »</a>
 						</div>
