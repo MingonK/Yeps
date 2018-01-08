@@ -42,15 +42,9 @@
 
 <script>
 
-
-
-
 $(document).ready(function() {
 	var large_count=0;
 	var small_count=0;
-	
-	
-	
 	
 	$( ".large" ).click(function() {
 		var largeMenu=$("#restMenu-input").val();
@@ -66,13 +60,16 @@ $(document).ready(function() {
 
 		
 		$( ".menu-sections" ).append(
-    			'<div class="'+largeMenu+'-header" style="margin-bottom: 0;border-bottom: 1px solid #e6e6e6;">'+
+    		'<div class="'+largeMenu+'-header" style="margin-bottom: 0;border-bottom: 1px solid #e6e6e6;">'+
 				'<h2 class="'+largeMenu+'" style="color: #333;word-wrap: break-word !important;word-break: break-word !important;overflow-wrap: break-word !important;font-weight: bold;margin-bottom: 6px;font-size: 21px;line-height: 1.28571em;    margin: 0 0 6px; display:inline-block;padding-right:6px;">'+
                     ''+largeMenu+''+
                 '</h2>'+
                 '<input type="hidden" name="largeMenuList['+large_count+'].large_name" value="'+largeMenu+'">'+
-                '<button type="button" class="'+largeMenu+'_add" value="'+largeMenu+'" style="padding: 5px 8px;font-size: 12px;line-height: 1.5em;border: 1px solid #ccc;">'+
+                '<button type="button" class="small_add" value="'+largeMenu+'" style="padding: 5px 8px;font-size: 12px;line-height: 1.5em;border: 1px solid #ccc;">'+
 					'<span>추가</span>'+
+				'</button>'+
+				'<button type="button" class="small_removeAll" value="'+largeMenu+'" style="padding: 5px 8px;font-size: 12px;line-height: 1.5em;border: 1px solid #ccc;">'+
+					'<span>삭제</span>'+
 				'</button>'+
 			'</div>'+
 			'<div class="'+largeMenu+'-list" style="margin-bottom: 18px !important;">'+
@@ -84,14 +81,11 @@ $(document).ready(function() {
 		large_count++;
 	});
 	
-		$('.menu-sections').on('click','button',function(e){
-			
+		$('.menu-sections').on('click','.small_add',function(e){
 			var name=$(this).val();
 			var small_length=$('.'+name+'-list').children().length;	
 			
-			
 			$('input[id='+name+']').val(small_length);
-			
 			
 			$('.'+name+'-list ').append(
 				'<div class="menu-item" style="border-top: 0;padding: 10px 0;">'+
@@ -99,7 +93,7 @@ $(document).ready(function() {
 					'<div class="arrange_unit" style="margin-left: 3px;margin-right: 3px;border-collapse: collapse;border-spacing: 0 0;box-sizing: border-box;display: table-cell;vertical-align: top;">'+
 						'<div class="photo-box biz-photo-box pb-60s">'+
 							'<a class="js-lightbox-media-link js-analytics-click" href="#" data-analytics-label="biz-photo" style="color: #0073bb;text-decoration: none;    cursor: pointer;">'+
-				                '<img alt="" class="photo-box-img" height="60" src=no.png" width="60" style="outline: none; border-radius: 4px;vertical-align: middle; ">'+
+				                '<img alt="" class="photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/no-image.jpg" width="60" style="outline: none; border-radius: 4px;vertical-align: middle; ">'+
 				            '</a>'+
 						'</div>'+
 					'</div>'+
@@ -107,6 +101,9 @@ $(document).ready(function() {
 						'<div class="arrange" style="display: table;min-width: 100%;table-layout: auto;">'+
 							'<div class="arrange_unit arrange_unit--fill menu-item-details" style="width: 100%;box-sizing: border-box;display: table-cell;vertical-align: top;">'+
 			                    '<input type="text" class="restMenu-input" style="width:200px;margin-bottom: 5px;" name="smallMenuList['+small_count+'].small_name">'+
+			                    '<button type="button" class="small_remove" value="small_remove" style="padding: 5px 8px;font-size: 12px;line-height: 1.5em;border: 1px solid #ccc;">'+
+								'<span>삭제</span>'+
+							'</button>'+
 			                    '<textarea style="margin-bottom: 5px;display: block;overflow:auto;" rows="2" cols="50" name="smallMenuList['+small_count+'].small_content"></textarea>'+
 							'</div>'+
 							'<div class="menu-item-prices arrange_unit" style="text-align:right;padding-left: 90px;box-sizing: border-box;display: table-cell;vertical-align: top;">'+
@@ -122,13 +119,22 @@ $(document).ready(function() {
 				'</div>'
 			);																			   
 			small_count++;
-			
 			$(".restInsert-footer").css('display','inline');
 		});
-// 		$('.menu-sections').on('click','.small_remove',function(){
-// 			$('.section-header--no-spacing').remove();
-// 			$('.menu-list').remove();
-// 		});
+		
+		
+		$('.menu-sections').on('click','.small_remove',function(e){
+			$(this).parent().parent().parent().parent().parent().remove();
+		});
+		
+		$('.menu-sections').on('click','.small_removeAll',function(e){
+			var name=$(this).val();
+			var small_length=$('.'+name+'-list').children().length;	
+			$('.'+name+'-header').remove();
+			$('.'+name+'-list').remove();
+			large_count--;
+			small_count-=small_length;
+		});
 	
 	
 

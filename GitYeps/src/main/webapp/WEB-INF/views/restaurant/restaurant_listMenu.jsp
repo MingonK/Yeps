@@ -50,15 +50,15 @@
 					                    ${large.large_name}
 					                </h2>
 	                			</div>
-			                			<div class="u-space-b3" style="margin-bottom: 18px !important;">
-			                			<c:forEach var="small" items="${smallList}" varStatus="status2" begin="${count}" end="${smallSize.get(status1.index)-1 }">
+			                		<div class="u-space-b3" style="margin-bottom: 18px !important;">
+			                			<c:forEach var="small" items="${smallList}" varStatus="status2" begin="${count}" end="${smallSize.get(status1.index)-1}">
 			                			<c:set var="count" value="${count+1}"/>
 			                				<div class="menu-item" style="border-top: 0;padding: 10px 0;">
 			                					<div class="arrange arrange--6" style="margin-left: -6px;margin-right: -6px;border-collapse: separate;border-spacing: 6px 0;    display: table;min-width: 100%;table-layout: auto;">
 			                						<div class="arrange_unit" style="margin-left: 3px;margin-right: 3px;border-collapse: collapse;border-spacing: 0 0;    box-sizing: border-box;display: table-cell;vertical-align: top;">
 			                							<div class="photo-box biz-photo-box pb-60s">
 			                								<a class="js-lightbox-media-link js-analytics-click" href="#" data-analytics-label="biz-photo" style="color: #0073bb;text-decoration: none;    cursor: pointer;">
-												                <img alt="" class="photo-box-img" height="60" src="https://s3-media3.fl.yelpcdn.com/bphoto/WbWYI1l--9F0c_xRIDLb7g/60s.jpg" width="60" style="outline: none; border-radius: 4px;vertical-align: middle; ">
+												                <img alt="" class="photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/no-image.jpg" width="60" style="outline: none; border-radius: 4px;vertical-align: middle; ">
 												            </a>
 			                							</div>
 			                						</div>
@@ -87,7 +87,12 @@
 	                		</div>
 					</div>
 					<div class="column column-beta popular-section" style="float: left;padding: 0 15px;min-height: 1px;    box-sizing: border-box;width: 33.33333%;">
+					<c:if test="${empty largeList }">
 						<a href="restaurant_insertMenuForm?rnum=${getRest.rnum}">메뉴 등록</a>
+					</c:if>
+					<c:if test="${!empty largeList }">
+						<a href="restaurant_updateMenuForm?rnum=${getRest.rnum}">메뉴 수정</a>	
+					</c:if>
 					</div>
 				</div>
 			</div>

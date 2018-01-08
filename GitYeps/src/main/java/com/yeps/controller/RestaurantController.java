@@ -169,6 +169,8 @@ public class RestaurantController {
 		YepsPager YepsPager = new YepsPager(count, curPage, pageScale, blockScale);
 		int start = YepsPager.getPageBegin();
 		int end = YepsPager.getPageEnd();
+
+//		List<RestaurantDTO> list = restaurantMapper.listRest(start, end, "mode",price);
 		
 		
 		List<RestaurantDTO> list = restaurantMapper.listRest(start, end, "mode",price, location);
@@ -203,9 +205,7 @@ public class RestaurantController {
 
 	@RequestMapping(value = "/restaurant_ajax")
 	@ResponseBody
-	public HashMap<String, Object> listRestRefresh(@RequestParam(value = "mode") String mode,
-			@RequestParam(value = "price[]") List<Integer> price,
-			@RequestParam(defaultValue = "1") int curPage) {
+	public HashMap<String, Object> listRestRefresh(@RequestParam(value = "mode") String mode,@RequestParam(value = "price[]") List<Integer> price,@RequestParam(defaultValue = "1") int curPage) {
 		
 		
 		System.out.println("필터="+mode);
@@ -328,6 +328,40 @@ public class RestaurantController {
 			targetRestaurant_reviews = reviewMapper.review_keyword(SearchKeyword, Integer.parseInt(rnum), start, end);
 			map.put("SearchKeyword", SearchKeyword);
 		}
+
+		map.put("count", count); // 레코드의 갯수
+		map.put("YepsPager", YepsPager);
+		map.put("rnum", rnum);
+		map.put("selectedDataRV", targetRestaurant_reviews); // 한 페이지에서 변수명에 따라 다른값보여주기위해서
+		return map;
+	}
+	
+	@RequestMapping(value = "/restaurant_content_sort_ajax")
+	@ResponseBody
+	public HashMap<String, Object> listContentSortRefresh(HttpServletRequest req) {
+		String rnum = req.getParameter("rnum");
+		int curPage = req.getParameter("curPage") != null ? Integer.parseInt(req.getParameter("curPage")) : 1;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		if (rnum == null || rnum.trim().equals("")) {
+			map.put("error", "다시 시도해주세요.");
+			return map;
+		}
+
+		int pageScale = 10;
+		int blockScale = 10;
+		int count = 0;
+		int start = 0;
+		int end = 0;
+		List<ReviewDTO> targetRestaurant_reviews = null;
+
+		YepsPager YepsPager = null;
+//			count = reviewMapper.review_keywordCount(SearchKeyword);
+			YepsPager = new YepsPager(count, curPage, pageScale, blockScale);
+			start = YepsPager.getPageBegin();
+			end = YepsPager.getPageEnd();
+//			targetRestaurant_reviews = reviewMapper.review_keyword(SearchKeyword, Integer.parseInt(rnum), start, end);
+//			map.put("SearchKeyword", SearchKeyword);
 
 		map.put("count", count); // 레코드의 갯수
 		map.put("YepsPager", YepsPager);
@@ -458,6 +492,28 @@ public class RestaurantController {
 		return mav;
 	}
 
+	@RequestMapping(value = "/restaurant_delete")
+	public ModelAndView delete_restaurant(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();
+		int rnum = Integer.parseInt(req.getParameter("rnum"));
+		int res = restaurantMapper.deleteRestaurant(rnum);
+		String msg = null, url = null;
+		if(res>0) {
+			msg = "삭제되었습니다.";
+			url = "redirect: restReview_list";
+			mav.addObject("msg", msg);
+			mav.addObject("url", url); 
+			mav.setViewName("message");
+		}else {
+			msg = "삭제에 실패하였습니다.";
+			url = "redirect: restReview_list";
+			mav.addObject("msg", msg);
+			mav.addObject("url", url); 
+			mav.setViewName("message");
+		}
+		return mav;
+	}
+	
 	@RequestMapping(value = "/restaurant_delete_ajax")
 	@ResponseBody
 	public HashMap<String, Object> deleteRestaurantPhotoToAjax(HttpServletRequest req) {

@@ -5,9 +5,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.web.model">
+
+    <select id="restaurantList" parameterType="java.util.HashMap" resultType="restaurantDTO">
+       select * from (select rownum rn, A.* from (select * from yeps_restaurant order by rnum desc)A) where rn between #{start} and #{end}
+        </select> 
+        
+    <delete id="deleteRestaurant" parameterType="int">
+         delete from yeps_restaurant where rnum=#{rnum}
+     </delete>
+        
 	<select id="listRestaurant_mode" parameterType="java.util.HashMap" resultType="RestaurantDTO" >
 		select * from (select rownum rn, A.* from (select * from yeps_restaurant order by rnum desc)A) where rn between #{start} and #{end}
 	</select>
+	
+	 <select id="getSearchRestaurantCount" parameterType="java.util.HashMap" resultType="int">
+      select count(*) from yeps_restaurant where ${search} like '%'||#{searchString}||'%'
+   </select>
+   
+    <resultMap type="RestaurantDTO" id="findRestaurant_Manage_Map">
+			<id column="rnum" property="rnum"/>
+			<result column="mnum" property="mnum"></result>
+			<result column="rname" property="rname"></result>
+			<result column="foodstyle" property="foodstyle"></result>
+			<result column="rest_regdate" property="rest_regdate"></result>
+	
+	        <association javaType="MemberDTO" property="memberDTO">
+				<id column="mnum" property="mnum"></id>
+				<result column="name" property="name"></result>
+			</association>
+		</resultMap>
+   
+   <select id="findRestaurant_Manage" parameterType="java.util.HashMap" resultMap="findRestaurant_Manage_Map">
+      select * from (select rownum rn, A.* from(select 
+                     RT.mnum
+        		, RT.rname
+        		, RT.foodstyle
+        		, RT.rest_regdate
+        		, M.name
+       from yeps_restaurant RT, yeps_member M where RT.mnum = M.mnum and RT.rname= rname and M.name=name and replace(upper(#{search}),' ','') like '%'||replace(upper(#{searchString}),' ','')||'%' order by rnum desc)A) 
+       where rn between #{startRow} and #{endRow}
+   </select>
+   
 	<resultMap type="restaurantDTO" id="listRestaurantMap">
      	<id column="rnum" property="rnum"/>
      	<result column="rnum" property="rnum"></result>
@@ -38,7 +76,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             OR RT.price=#{item.value}
         </foreach>
 		</if>)</if>
-		order by RT.rnum desc)A) where rn between #{start} and #{end}
+		order by RT.price desc)A) where rn between #{start} and #{end}
 	</select>
 
 	<insert id="insertRestaurant" parameterType="RestaurantDTO">

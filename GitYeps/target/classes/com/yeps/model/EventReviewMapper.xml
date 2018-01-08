@@ -57,6 +57,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 <select id="eventReviewCount" resultType="int">
 	     select count(*) from yeps_eventreview
 	 </select>
+	 
+	  <select id="getSearchEventReviewCount" parameterType="java.util.HashMap" resultType="int">
+      select count(*) from yeps_eventreview where ${search} like '%'||#{searchString}||'%'
+   </select>
+   
+   <resultMap type="eventReviewDTO" id="findEventReview_Map">
+			<id column="eventReview_num" property="eventReview_num"/>
+			<result column="evnum" property="evnum"></result>
+			<result column="mnum" property="mnum"></result>
+			<result column="eventReview_writer" property="eventReview_writer"></result>
+			<result column="eventReview_content" property="eventReview_content"></result>
+			<result column="eventReview_writedate" property="eventReview_writedate"></result>
+		
+	        <association javaType="EventDTO" property="eventDTO">
+				<id column="evnum" property="evnum"></id>
+				<result column="eventname" property="eventname"></result>
+			</association>
+		</resultMap>
+   
+   <select id="findEventReview" parameterType="java.util.HashMap" resultMap="findEventReview_Map">
+      select * from (select rownum rn, A.* from(select 
+                     ER.evnum
+        		, ER.mnum
+        		, ER.eventReview_num
+        		, ER.eventReview_writer
+        		, ER.eventReview_content
+        		, ER.eventReview_writedate
+        		, EV.eventname
+       from yeps_eventreview ER, yeps_event EV where ER.evnum = EV.evnum and EV.evnum = ER.evnum  and  EV.eventname = eventname and  ${search} like '%'||#{searchString}||'%' order by evnum desc)A) 
+       where rn between #{startRow} and #{endRow}
+   </select>
 	
 	<delete id="deleteEventReviewByMemberNumber" parameterType="int">
 		delete yeps_eventreview where mnum = #{mnum}
