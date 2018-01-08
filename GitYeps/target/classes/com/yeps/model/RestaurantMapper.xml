@@ -33,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 													RT.rnum, RT.rname, RT.price, RT.foodstyle, RT.roadAddrPart1, RT.addrDetail, RT.roadAddrPart2,
 													RT.raddress, RT.hp2, RT.hp3, RT.reststyle, RT.category, F.filename
 		from yeps_restaurant RT, yeps_files F where 
-		RT.rnum = F.rnum and F.ismainphoto = 'y' <if test="mode!=null">AND #{mode}='가능'</if><if test="sql != null">AND (RT.price=#{sql} <if test="pricesSql != null">
+		RT.rnum = F.rnum and F.ismainphoto = 'y' and replace(upper(RT.roadAddrPart1),' ','') like '%'||replace(upper(#{location}),' ','')||'%' <if test="mode!=null">AND #{mode}='가능'</if><if test="sql != null">AND (RT.price=#{sql} <if test="pricesSql != null">
 		<foreach collection="pricesSql" item="item" index="index">
             OR RT.price=#{item.value}
         </foreach>
@@ -161,6 +161,7 @@ FROM
             RT.rnum = RT.rnum
             AND   F.ismainphoto = 'y'
             AND   RT.delivery = '가능'
+            and replace(upper(RT.roadAddrPart1),' ','') like '%'||replace(upper(#{location}),' ','')||'%'
         ORDER BY
             rt.rnum DESC
     ) a) where rn between #{start} and #{end} 
@@ -215,6 +216,7 @@ FROM
             RT.rnum = RT.rnum
             AND   F.ismainphoto = 'y'
             AND   RT.reserv = '가능'
+            and replace(upper(RT.roadAddrPart1),' ','') like '%'||replace(upper(#{location}),' ','')||'%'
         ORDER BY
             rt.rnum DESC
     ) a) where rn between #{start} and #{end}  
@@ -267,6 +269,7 @@ FROM
             RT.rnum = RT.rnum
             AND   F.ismainphoto = 'y'
             AND   RT.takeout = '가능'
+            and replace(upper(RT.roadAddrPart1),' ','') like '%'||replace(upper(#{location}),' ','')||'%'
         ORDER BY
             rt.rnum DESC
     ) a) where rn between #{start} and #{end}   
