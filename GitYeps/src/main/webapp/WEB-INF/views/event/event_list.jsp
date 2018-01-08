@@ -85,36 +85,26 @@
 							<h4>인기 지역</h4>
 							<div class="popular_cities">
 								<div class="popular_cities_left" style="vertical-align: top;">
-									<!-- 반복문으로 16개 도시 출력 -->
-									<a href="event_list?mode=${mode}&search=종로" style="margin-bottom: 6px !important; display: block !important;">종로</a>
-								</div>
-								<div class="popular_cities_left" style="vertical-align: top;">
-									<a href="event_list?mode=${mode}&search=양화로" style="margin-bottom: 6px !important; display: block !important;">홍대</a>
-								</div>
-								<div class="popular_cities_left" style="vertical-align: top;">
-									<a href="event_list?mode=${mode}&search=서초" style="margin-bottom: 6px !important; display: block !important;">강남</a>
-								</div>
-								<div class="popular_cities_left" style="vertical-align: top;">
-									<a href="event_list?mode=${mode}&search=이태원" style="margin-bottom: 6px !important; display: block !important;">이태원</a>
-								</div>
-								<div class="popular_cities_left" style="vertical-align: top;">
-									<a href="event_list?mode=${mode}&search=충무로" style="margin-bottom: 6px !important; display: block !important;">명동</a>
-								</div>
-								<div class="popular_cities_left" style="vertical-align: top;">
-									<a href="event_list?mode=${mode}&search=부산진구" style="margin-bottom: 6px !important; display: block !important;">서면</a>
-								</div>
-								<div class="popular_cities_left" style="vertical-align: top;">
-									<a href="event_list?mode=${mode}&search=속초" style="margin-bottom: 6px !important; display: block !important;">속초</a>
-								</div>
-								<div class="popular_cities_left" style="vertical-align: top;">
-									<a href="event_list?mode=${mode}&search=동구" style="margin-bottom: 6px !important; display: block !important;">동대구</a>
-								</div>
-								
+									<a href="event_list?mode=${mode}&search=종로" style="margin-bottom: 10px !important; display: block !important;">종로</a>
+									<a href="event_list?mode=${mode}&search=양화로" style="margin-bottom: 10px !important; display: block !important;">홍대</a>
+									<a href="event_list?mode=${mode}&search=서초" style="margin-bottom: 10px !important; display: block !important;">강남</a>
+									<a href="event_list?mode=${mode}&search=이태원" style="margin-bottom: 10px !important; display: block !important;">이태원</a>
+									<a href="event_list?mode=${mode}&search=충무로" style="margin-bottom: 10px !important; display: block !important;">명동</a>
+									<a href="event_list?mode=${mode}&search=신촌" style="margin-bottom: 10px !important; display: block !important;">신촌</a>
+									<a href="event_list?mode=${mode}&search=혜화" style="margin-bottom: 10px !important; display: block !important;">혜화</a>
+									<a href="event_list?mode=${mode}&search=압구정" style="margin-bottom: 10px !important; display: block !important;">압구정</a>
+									<a href="event_list?mode=${mode}&search=광진구" style="margin-bottom: 10px !important; display: block !important;">건대</a>
+								</div>								
 								<div class="popular_cities_right" style="vertical-align: top;">
-									<a href="event_list?mode=${mode}&search=광진구" style="margin-bottom: 6px !important; display: block !important;">건대</a>
-									<!-- <strong style="font-weight: bold;">
-										<a href="#">더 많은 도시보기 »</a>
-									</strong> -->
+									<a href="event_list?mode=${mode}&search=부산" style="margin-bottom: 10px !important; display: block !important;">부산시</a>
+									<a href="event_list?mode=${mode}&search=대구" style="margin-bottom: 10px !important; display: block !important;">대구시</a>
+									<a href="event_list?mode=${mode}&search=울산" style="margin-bottom: 10px !important; display: block !important;">울산시</a>
+									<a href="event_list?mode=${mode}&search=포항" style="margin-bottom: 10px !important; display: block !important;">포항시</a>
+									<a href="event_list?mode=${mode}&search=대전" style="margin-bottom: 10px !important; display: block !important;">대전시</a>
+									<a href="event_list?mode=${mode}&search=광주" style="margin-bottom: 10px !important; display: block !important;">광주시</a>
+									<a href="event_list?mode=${mode}&search=전주" style="margin-bottom: 10px !important; display: block !important;">전주시</a>
+									<a href="event_list?mode=${mode}&search=강릉" style="margin-bottom: 10px !important; display: block !important;">강릉시</a>
+									<a href="event_list?mode=${mode}&search=천안" style="margin-bottom: 10px !important; display: block !important;">천안시</a>
 								</div>
 							</div>
 						</div>
