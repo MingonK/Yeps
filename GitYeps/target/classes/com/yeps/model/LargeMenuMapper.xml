@@ -39,4 +39,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   	<select id="getLarge_SmallMenu" parameterType="java.util.HashMap" resultMap="getLarge_SmallMenuMap">
   		select * from yeps_largeMenu L, yeps_smallMenu S where L.large_menunum = S.large_menunum and L.rnum=#{rnum} order by S.small_menunum asc
   	</select>
+  	
+  	<delete id="deleteLargeMenuByMemberNumber" parameterType="int">
+  		delete yeps_largeMenu where mnum = #{mnum}
+  	</delete>
 </mapper>
