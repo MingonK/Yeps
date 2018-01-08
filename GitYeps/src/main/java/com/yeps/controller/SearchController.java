@@ -207,6 +207,7 @@ public class SearchController {
 		searchMap.put("searchword", searchword);
 		
 		int count = restaurantMapper.getCountBySearchMap(searchMap);
+		System.out.println(count);
 		int pageScale = 10;
 		int blockScale = 10;
 		// 페이지 나누기 관련 처리
@@ -215,7 +216,7 @@ public class SearchController {
 		int end = YepsPager.getPageEnd();
 		
 		List<RestaurantDTO> list = restaurantMapper.listRestBySearchMap(start, end, searchMap);
-
+		System.out.println(list.size());
 		List<Integer> reviewCount = new ArrayList<Integer>();
 		List<Integer> StarAvg = new ArrayList<Integer>();
 

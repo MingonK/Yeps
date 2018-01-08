@@ -68,7 +68,7 @@ public class EventController {
 		int end = 0;
 		int pageScale = 15;
 		int blockScale = 10;
-		
+
 		String search = req.getParameter("search");
 		if(search == null || search.trim().equals("")) {
 			search = "서울특별시";
@@ -308,7 +308,7 @@ public class EventController {
 		ModelAndView mav = new ModelAndView();
 		EventDTO getEventDTO = eventMapper.getEventContent(Integer.parseInt(evnum));
 		String[] start_date = getEventDTO.getStart_date().split(",");
-		
+
 		getEventDTO.setStart_date(start_date[0]);
 		if (getEventDTO.getEnd_date() != null) {
 			String[] end_date = getEventDTO.getEnd_date().split(",");
@@ -323,13 +323,13 @@ public class EventController {
 	@RequestMapping(value = "/event_edit", method = RequestMethod.POST)
 	public ModelAndView EditProEvent(HttpServletRequest req, @ModelAttribute EventDTO dto, BindingResult result) {
 		dto.setStart_date(dto.getStart_date() + ", " + getDateDay(dto.getStart_date()));
-		
+
 		if(dto.getEnd_date() == null || dto.getEnd_date().trim().equals("")) {
 			dto.setEnd_date(null);
 		} else {
 			dto.setEnd_date(dto.getEnd_date() + ", " + getDateDay(dto.getEnd_date()));
 		}
-		
+
 		HttpSession session = req.getSession();
 		MemberDTO loginMember = (MemberDTO) session.getAttribute("memberinfo");
 		if (loginMember == null) {			
@@ -364,6 +364,7 @@ public class EventController {
 	public ModelAndView insertPhoto_Event(HttpServletRequest req) {
 		String evnum = req.getParameter("evnum");
 		String mode = req.getParameter("mode");
+
 		if (evnum == null || evnum.trim().equals("")) {
 			return new ModelAndView("redirect: event_list");
 		}
@@ -373,7 +374,7 @@ public class EventController {
 		if (memberDTO == null) {			
 			return new ModelAndView("redirect: member_login");
 		}
-		
+
 		EventDTO eventDTO = eventMapper.getEventContent(Integer.parseInt(evnum));
 		ModelAndView mav = new ModelAndView();
 
@@ -428,7 +429,7 @@ public class EventController {
 			map.put("url", "member_login");
 			return map;
 		}
-		
+
 		int imageCount = 0;
 		while (it.hasNext()) {
 			imageCount++;
@@ -445,7 +446,7 @@ public class EventController {
 					mf.transferTo(file);
 					S3Connection.getInstance().putObjectAsync("yepsbucket", "images/" + saveFileName, file,
 							"image/" + contentType);
-										
+
 					FileDTO fileDTO = new FileDTO();
 					fileDTO.setEvnum(evnum);
 					fileDTO.setMnum(memberDTO.getMnum());
@@ -484,7 +485,7 @@ public class EventController {
 		memberDTO.setImagecount(memberDTO.getImagecount()+imageCount);
 		memberMapper.updateImageCount(memberDTO.getMnum(), memberDTO.getMnum());
 		session.setAttribute("memberinfo", memberDTO);
-		
+
 		map.put("update", "사진을 등록하였습니다.");
 		map.put("evnum", evnum);
 		map.put("fileList", fileList);
@@ -546,14 +547,14 @@ public class EventController {
 		FileDTO photoInMap = fileMapper.getFYIEventFile(Integer.parseInt(evnum));
 		RestaurantDTO restaurantDTO = restaurantMapper.findRestaurant(eventDTO.getZipNo(), eventDTO.getRoadAddrPart1(),
 				eventDTO.getRoadAddrPart2(), eventDTO.getAddrDetail());
-		
+
 		if (restaurantDTO != null) {
 			int reviewCount = reviewMapper.getRestaurantReviewCount(restaurantDTO.getRnum());
 			int starAVG = reviewMapper.getStarAvg(restaurantDTO.getRnum());
 			mav.addObject("starAVG", starAVG);
 			mav.addObject("reviewCount", reviewCount);
 		}
-		
+
 		List<EventDTO> thisWeek_EventList = eventMapper.getThisWeek_EventList();
 		List<FileDTO> thisWeek_EventFileList = new ArrayList<FileDTO>();
 		if (thisWeek_EventList != null) {
@@ -600,7 +601,7 @@ public class EventController {
 		if (loginMember == null) {
 			return new ModelAndView("redirect: member_login");
 		}
-		
+
 		EventDTO eventDTO = eventMapper.getEventContent(Integer.parseInt(evnum));
 		if (loginMember.getMnum() == Integer.parseInt(mnum) || loginMember.getIsmanager().equals("y")
 				|| loginMember.getIsmaster().equals("y")) {
@@ -662,7 +663,7 @@ public class EventController {
 		mav.setViewName("historyBack");
 		return mav;
 	}
-	
+
 
 	@RequestMapping(value = "/event_photo_manage")
 	public ModelAndView event_photo_manage(HttpServletRequest req) {
@@ -685,4 +686,65 @@ public class EventController {
 		mav.setViewName("manager/event_photoManage");
 		return mav;
 	}
+	
+//	@RequestMapping(value = "/event_photo_manage_ajax")
+//	@ResponseBody
+//	public HashMap<String, Object> managePhoto_Event(HttpServletRequest req) {
+//		HashMap<String, Object> map = new HashMap<String, Object>();
+//		String evnum = req.getParameter("evnum");
+//		String mode = req.getParameter("mode");
+//        String url = null;
+//		if (evnum == null || evnum.trim().equals("")) {
+//			url = "redirect: manager_managerPage";
+//			map.put("url", url);
+//		}
+//
+//		HttpSession session = req.getSession();
+//		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberinfo");
+//		if (memberDTO == null) {			
+//			url = "redirect: member_login";
+//			map.put("url",url);
+//		}
+//
+//		EventDTO eventDTO = eventMapper.getEventContent(Integer.parseInt(evnum));
+//		ModelAndView mav = new ModelAndView();
+//
+//		if (eventDTO == null) {
+//	         url = "redirect: event_photo_manage";
+//			 map.put("url",url);
+//		}
+//
+//		if (memberDTO.getIsmanager().equals("y") || memberDTO.getIsmaster().equals("y")
+//				|| eventDTO.getMnum() == memberDTO.getMnum()) {
+//			List<FileDTO> allUploadFileList = fileMapper.getAllEventFiles(eventDTO.getEvnum());
+//			List<MemberDTO> registMemberList = new ArrayList<MemberDTO>();
+//			for (int i = 0; i < allUploadFileList.size(); i++) {
+//				registMemberList.add(memberMapper.getMemberProfile(allUploadFileList.get(i).getMnum()));
+//			}
+//			map.put("registMemberList", registMemberList);
+//			map.put("uploadFileList", allUploadFileList);
+//		} else {
+//			List<FileDTO> myUploadFileList = fileMapper.getfileListForMe(eventDTO.getEvnum(), memberDTO.getMnum());
+//			map.put("uploadFileList", myUploadFileList);
+//		}
+//		
+//		int curPage = req.getParameter("curPage") != null ? Integer.parseInt(req.getParameter("curPage")) : 1;
+//		int count =  0;//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//		YepsPager yepsPager = null;
+//		int start = 0;
+//		int end = 0;
+//
+//		yepsPager = new YepsPager(count, curPage, 5, 5);
+//		start = yepsPager.getPageBegin();
+//		end = yepsPager.getPageEnd();
+//
+//		map.put("mode", mode);
+//		map.put("eventDTO", eventDTO);
+//		map.put("curPage", curPage);
+//		map.put("count", count);
+//		map.put("photoPager", yepsPager);
+//		map.put("set", "events");
+//		return map;
+//	}
+	
 }

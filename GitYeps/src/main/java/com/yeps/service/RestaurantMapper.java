@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yeps.model.EventReviewDTO;
 import com.yeps.model.RestaurantDTO;
 
 @Service
@@ -66,6 +67,26 @@ public class RestaurantMapper {
 	public int insertRest(RestaurantDTO dto) {
 		return sqlSession.update("insertRestaurant", dto);
 	}
+	
+	public List<RestaurantDTO> restaurantList(int start, int end) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		return sqlSession.selectList("restaurantList", map);
+	}
+	
+	 public List<RestaurantDTO> findRestaurant_Manage(int startRow, int endRow, String search, String searchString) {
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("startRow", startRow);
+			map.put("endRow", endRow);
+			map.put("search", search);
+			map.put("searchString", searchString);
+			return sqlSession.selectList("findRestaurant_Manage", map);
+		}
+	
+	public int deleteRestaurant(int rnum) {
+		return sqlSession.delete("deleteRestaurant",rnum);
+	}
 
 	public RestaurantDTO getRest(int rnum) {
 		return sqlSession.selectOne("getRest", rnum);
@@ -76,7 +97,11 @@ public class RestaurantMapper {
 	}
 
 	public int getCount() {
-		return sqlSession.selectOne("getCount");
+		return sqlSession.selectOne("getCountBySeoul");
+	}
+	
+	public int getCountBySeoul(String location) {
+		return sqlSession.selectOne("getCountBySeoul", location);
 	}
 
 	public int getImageCount(int rnum) {
@@ -242,8 +267,21 @@ public class RestaurantMapper {
 		}
 	}
 	
+
+	  public int getSearchRestaurantCount(String search, String searchString) {
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("search", search);
+			map.put("searchString", searchString);
+			try {
+				return sqlSession.selectOne("getSearchRestaurantCount", map);
+			} catch (Exception e) {
+				return 0;
+			}
+		}
+
 	public int deleteRestaurantByMemberNumber(int mnum) {
 		return sqlSession.delete("deleteRestaurantByMemberNumber", mnum);
 	}
+
 
 }

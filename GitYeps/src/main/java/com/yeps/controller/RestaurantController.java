@@ -161,7 +161,8 @@ public class RestaurantController {
 	public ModelAndView listRest(@RequestParam(defaultValue = "1") int curPage) {
 		List<Integer>price=new ArrayList<Integer>();
 		price.add(0);
-		int count = restaurantMapper.getCount();
+		String location = "서울특별시";
+		int count = restaurantMapper.getCountBySeoul(location);
 		int pageScale = 10;
 		int blockScale = 10;
 		// 페이지 나누기 관련 처리
@@ -171,7 +172,7 @@ public class RestaurantController {
 
 //		List<RestaurantDTO> list = restaurantMapper.listRest(start, end, "mode",price);
 		
-		String location = "서울특별시";
+		
 		List<RestaurantDTO> list = restaurantMapper.listRest(start, end, "mode",price, location);
 		
 		List<Integer> reviewCount = new ArrayList<Integer>();
@@ -491,6 +492,28 @@ public class RestaurantController {
 		return mav;
 	}
 
+	@RequestMapping(value = "/restaurant_delete")
+	public ModelAndView delete_restaurant(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();
+		int rnum = Integer.parseInt(req.getParameter("rnum"));
+		int res = restaurantMapper.deleteRestaurant(rnum);
+		String msg = null, url = null;
+		if(res>0) {
+			msg = "삭제되었습니다.";
+			url = "redirect: restReview_list";
+			mav.addObject("msg", msg);
+			mav.addObject("url", url); 
+			mav.setViewName("message");
+		}else {
+			msg = "삭제에 실패하였습니다.";
+			url = "redirect: restReview_list";
+			mav.addObject("msg", msg);
+			mav.addObject("url", url); 
+			mav.setViewName("message");
+		}
+		return mav;
+	}
+	
 	@RequestMapping(value = "/restaurant_delete_ajax")
 	@ResponseBody
 	public HashMap<String, Object> deleteRestaurantPhotoToAjax(HttpServletRequest req) {

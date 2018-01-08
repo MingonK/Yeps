@@ -38,14 +38,49 @@ public class ReviewController {
 	@Autowired
 	private RestaurantMapper restaurantMapper;
 
-	@RequestMapping(value = "/review_list")
-	public ModelAndView review_list() {
-		List<ReviewDTO> list = reviewMapper.listReview();
+	@RequestMapping(value = "/restReview_list")
+	public ModelAndView review_list(HttpServletRequest req) {
+
 
 		ModelAndView mav = new ModelAndView();
+		String search = req.getParameter("search");
+		String searchString = req.getParameter("searchString");
+		int count = 0;
+		if (searchString == null || searchString.trim().equals("") || search == null || search.trim().equals("")) {
+			count = restaurantMapper.getCount();
+		} else {
+			count = restaurantMapper.getSearchRestaurantCount(search, searchString);
+		}
+		System.out.println(search);
+		System.out.println(searchString);
+		int curPage = req.getParameter("curPage") != null ? Integer.parseInt(req.getParameter("curPage")) : 1;
+
+		System.out.println(count);
+		int pageScale = 10;
+		int blockScale = 5;
+		
+		YepsPager YepsPager = new YepsPager(count, curPage, pageScale, blockScale);
+		int start = YepsPager.getPageBegin();
+		int end = YepsPager.getPageEnd();
+		List<RestaurantDTO> restaurant = null;
+
+		if (searchString == null || searchString.trim().equals("") || search == null || search.trim().equals("")) {
+			restaurant = restaurantMapper.restaurantList(start,end);
+		} else {
+			restaurant = restaurantMapper.findRestaurant_Manage(start, end, search, searchString);
+		}
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("search", search);
+		map.put("searchString", searchString);
+        mav.addObject("map", map);
 		mav.addObject("set", "review");
-		mav.addObject("list", list);
-		mav.setViewName("review/list");
+		mav.addObject("count", count); 
+		mav.addObject("curPage", curPage); 
+		mav.addObject("yepsPager", YepsPager);
+		mav.addObject("restaurant", restaurant);
+		mav.setViewName("review/restaurant_review");
 		return mav;
 	}
 
@@ -224,9 +259,9 @@ public class ReviewController {
 			if(loginMember == null) {
 				return new ModelAndView("redirect: main");
 			}
-			
+
 			ReviewDTO existMyReview = reviewMapper.findMyReview(dto.getRnum(), loginMember.getMnum());
-			
+
 			if(existMyReview != null) {
 				String url = null, msg = null;
 				url = "restaurant_list";
@@ -236,7 +271,7 @@ public class ReviewController {
 				mav.setViewName("message");
 				return mav;
 			}
-			
+
 			int res = reviewMapper.insertReview(dto);
 			if(res > 0) {
 				loginMember.setReviewcount(loginMember.getReviewcount() + 1);
@@ -267,7 +302,7 @@ public class ReviewController {
 			String[] addrSplit = myReview.getMemberDTO().getAddress().split(" ");
 			String addr = addrSplit[1] + " " + addrSplit[2];  
 			myReview.getMemberDTO().setAddress(addr);
-			
+
 			mav.addObject("rlist", restaurantList);
 			mav.addObject("myReview", myReview);
 			mav.addObject("rname", rname);
