@@ -85,6 +85,10 @@ public class MemberPhotoMapper {
 			return sqlSession.delete("deleteMemberPhoto", map);
 		}
 	}
+	
+	public int deleteMemberPhotosByMemberNumber(int mnum) {
+		return sqlSession.delete("deleteMemberPhotosByMemberNumber", mnum);
+	}
 
 	/*
 	 * 

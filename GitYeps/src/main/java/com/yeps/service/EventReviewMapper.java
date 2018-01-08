@@ -52,6 +52,7 @@ public class EventReviewMapper {
     	return sqlSession.selectList("getEventReview",evrvnum);
     }
     
+
     public int getSearchEventReviewCount(String search, String searchString) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("search", search);
@@ -71,4 +72,9 @@ public class EventReviewMapper {
 		map.put("searchString", searchString);
 		return sqlSession.selectList("findEventReview", map);
 	}
+
+    public int deleteEventReviewByMemberNumber(int mnum) {
+    	return sqlSession.delete("deleteEventReviewByMemberNumber", mnum);
+    }
+
 }

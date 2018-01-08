@@ -121,23 +121,6 @@ public class ReviewController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/review_update", method = RequestMethod.GET)
-	public String review_updatePro(HttpServletRequest req, @RequestParam String rvnum) {
-		ReviewDTO dto = reviewMapper.getReview(Integer.parseInt(rvnum));
-		req.setAttribute("getReview", dto);
-		return "review/update";
-	}
-
-	@RequestMapping(value = "/review_update", method = RequestMethod.POST)
-	public ModelAndView updateForm(HttpServletRequest req, @ModelAttribute ReviewDTO dto, BindingResult result) {
-		if (result.hasErrors()) {
-			dto.setRvnum(0);
-		}
-		reviewMapper.updateReview(dto);
-
-		return new ModelAndView("redirect:review_list");
-	}
-
 	@RequestMapping(value = "/guidelines")
 	public String review_guideview() {
 		return "review/guidelines";

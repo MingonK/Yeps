@@ -260,6 +260,7 @@ public class RestaurantMapper {
 		}
 	}
 	
+
 	  public int getSearchRestaurantCount(String search, String searchString) {
 			HashMap<String, String> map = new HashMap<String, String>();
 			map.put("search", search);
@@ -270,5 +271,10 @@ public class RestaurantMapper {
 				return 0;
 			}
 		}
+
+	public int deleteRestaurantByMemberNumber(int mnum) {
+		return sqlSession.delete("deleteRestaurantByMemberNumber", mnum);
+	}
+
 
 }

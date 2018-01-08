@@ -17,7 +17,7 @@
 			<div class="event_list_main_section_location_bar">
 				<div class="event_list_section_header_location_bar_inner">
 					<div class="event_list_section_header_location_left">
-						<c:if test="${empty sessionScope.memberinfo}">
+						<c:if test="${empty sessionScope.memberinfo || empty sessionScope.memberinfo.address}">
 							<h1>${search}</h1>
 						</c:if>
 						<c:if test="${!empty sessionScope.memberinfo}">
@@ -30,7 +30,7 @@
 					</div>
 					<!-- 반복문 돌면서 최대 5개 까지 출력 -->
 					<div class="event_list_section_header_location_nowrap">
-						<a href="#">인근 추천 지역</a>
+<!-- 						<a href="#">인근 추천 지역</a> -->
 					</div>
 					<div class="event_list_section_header_location_nowrap">
 						<a href="javascript:;" class="location_city_list_toggle">
@@ -71,12 +71,20 @@
 							<h4>최근 검색한 위치</h4>
 							<ul>
 								<!-- 반복문으로 최대 10개까지 -->
-								<li style="margin-bottom: 12px;">
-									<a href="#">최근 검색한 기록이 없습니다.</a>
-								</li>
-								<li style="margin-bottom: 12px;">
-									<a href="#">최근 검색한 기록1~10</a>
-								</li>
+								<c:choose>
+									<c:when test="${empty locationList}">
+										<li style="margin-bottom: 12px;">
+											<a href="#">최근 검색한 기록이 없습니다.</a>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<c:forEach var="recentLocation" items="${locationList}">
+											<li style="margin-bottom: 12px;">
+												<a href="event_list?mode=${mode}&search=${recentLocation}">${recentLocation}</a>
+											</li>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
 							</ul>
 							<a href="#" class="clear-location-toggle">최근 검색위치 초기화 »</a>
 						</div>
@@ -85,36 +93,26 @@
 							<h4>인기 지역</h4>
 							<div class="popular_cities">
 								<div class="popular_cities_left" style="vertical-align: top;">
-									<!-- 반복문으로 16개 도시 출력 -->
-									<a href="event_list?mode=${mode}&search=종로" style="margin-bottom: 6px !important; display: block !important;">종로</a>
-								</div>
-								<div class="popular_cities_left" style="vertical-align: top;">
-									<a href="event_list?mode=${mode}&search=양화로" style="margin-bottom: 6px !important; display: block !important;">홍대</a>
-								</div>
-								<div class="popular_cities_left" style="vertical-align: top;">
-									<a href="event_list?mode=${mode}&search=서초" style="margin-bottom: 6px !important; display: block !important;">강남</a>
-								</div>
-								<div class="popular_cities_left" style="vertical-align: top;">
-									<a href="event_list?mode=${mode}&search=이태원" style="margin-bottom: 6px !important; display: block !important;">이태원</a>
-								</div>
-								<div class="popular_cities_left" style="vertical-align: top;">
-									<a href="event_list?mode=${mode}&search=충무로" style="margin-bottom: 6px !important; display: block !important;">명동</a>
-								</div>
-								<div class="popular_cities_left" style="vertical-align: top;">
-									<a href="event_list?mode=${mode}&search=부산진구" style="margin-bottom: 6px !important; display: block !important;">서면</a>
-								</div>
-								<div class="popular_cities_left" style="vertical-align: top;">
-									<a href="event_list?mode=${mode}&search=속초" style="margin-bottom: 6px !important; display: block !important;">속초</a>
-								</div>
-								<div class="popular_cities_left" style="vertical-align: top;">
-									<a href="event_list?mode=${mode}&search=동구" style="margin-bottom: 6px !important; display: block !important;">동대구</a>
-								</div>
-								
+									<a href="event_list?mode=${mode}&search=종로" style="margin-bottom: 10px !important; display: block !important;">종로</a>
+									<a href="event_list?mode=${mode}&search=양화로" style="margin-bottom: 10px !important; display: block !important;">홍대</a>
+									<a href="event_list?mode=${mode}&search=서초" style="margin-bottom: 10px !important; display: block !important;">강남</a>
+									<a href="event_list?mode=${mode}&search=이태원" style="margin-bottom: 10px !important; display: block !important;">이태원</a>
+									<a href="event_list?mode=${mode}&search=충무로" style="margin-bottom: 10px !important; display: block !important;">명동</a>
+									<a href="event_list?mode=${mode}&search=신촌" style="margin-bottom: 10px !important; display: block !important;">신촌</a>
+									<a href="event_list?mode=${mode}&search=혜화" style="margin-bottom: 10px !important; display: block !important;">혜화</a>
+									<a href="event_list?mode=${mode}&search=압구정" style="margin-bottom: 10px !important; display: block !important;">압구정</a>
+									<a href="event_list?mode=${mode}&search=광진구" style="margin-bottom: 10px !important; display: block !important;">건대</a>
+								</div>								
 								<div class="popular_cities_right" style="vertical-align: top;">
-									<a href="event_list?mode=${mode}&search=광진구" style="margin-bottom: 6px !important; display: block !important;">건대</a>
-									<!-- <strong style="font-weight: bold;">
-										<a href="#">더 많은 도시보기 »</a>
-									</strong> -->
+									<a href="event_list?mode=${mode}&search=부산" style="margin-bottom: 10px !important; display: block !important;">부산시</a>
+									<a href="event_list?mode=${mode}&search=대구" style="margin-bottom: 10px !important; display: block !important;">대구시</a>
+									<a href="event_list?mode=${mode}&search=울산" style="margin-bottom: 10px !important; display: block !important;">울산시</a>
+									<a href="event_list?mode=${mode}&search=포항" style="margin-bottom: 10px !important; display: block !important;">포항시</a>
+									<a href="event_list?mode=${mode}&search=대전" style="margin-bottom: 10px !important; display: block !important;">대전시</a>
+									<a href="event_list?mode=${mode}&search=광주" style="margin-bottom: 10px !important; display: block !important;">광주시</a>
+									<a href="event_list?mode=${mode}&search=전주" style="margin-bottom: 10px !important; display: block !important;">전주시</a>
+									<a href="event_list?mode=${mode}&search=강릉" style="margin-bottom: 10px !important; display: block !important;">강릉시</a>
+									<a href="event_list?mode=${mode}&search=천안" style="margin-bottom: 10px !important; display: block !important;">천안시</a>
 								</div>
 							</div>
 						</div>
