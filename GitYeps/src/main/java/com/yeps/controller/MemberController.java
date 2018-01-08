@@ -66,19 +66,18 @@ public class MemberController {
 	private ReviewMapper reviewMapper;
 	@Autowired
 	private RestaurantMapper restaurantMapper;
-	
 
 	@RequestMapping(value = "/member_index")
 	public ModelAndView indexMember() {
 		return new ModelAndView("member/index");
 	}
-	
+
 	@RequestMapping(value = "/manager_managerPage")
 	public ModelAndView managerPage(HttpServletRequest req, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		String msg = null, url = null;
 		MemberDTO dto = (MemberDTO) session.getAttribute("memberinfo");
-		if(dto == null) {
+		if (dto == null) {
 			msg = "회원관리권한이 없습니다.";
 			url = "main";
 			mav.setViewName("message");
@@ -86,8 +85,8 @@ public class MemberController {
 			mav.addObject("url", url);
 			return mav;
 		}
-		
-		if (!dto.getIsmaster().equals("y") && !dto.getIsmanager().equals("y")){
+
+		if (!dto.getIsmaster().equals("y") && !dto.getIsmanager().equals("y")) {
 			msg = "회원관리권한이 없습니다.";
 			url = "main";
 			mav.setViewName("message");
@@ -175,7 +174,6 @@ public class MemberController {
 
 		return mav;
 	}
-	
 
 	@RequestMapping(value = "/member_join", method = RequestMethod.GET)
 	public ModelAndView joinMemberForm(HttpSession session, HttpServletRequest req) {
@@ -184,23 +182,23 @@ public class MemberController {
 		if (session.getAttribute("memberinfo") != null) {
 			String old_url = req.getHeader("referer");
 			String[] urls = old_url.split("/");
-			if(old_url != null && !old_url.trim().equals("")) {
+			if (old_url != null && !old_url.trim().equals("")) {
 				old_url = null;
-				for(int i=4; i < urls.length ; i++) {
-					if(i==4) {
+				for (int i = 4; i < urls.length; i++) {
+					if (i == 4) {
 						old_url = urls[i];
-					}else {
+					} else {
 						old_url = "/" + urls[i];
 					}
 				}
 			}
 			msg = "로그아웃을 먼저 해주세요.";
-			if(old_url != null && !old_url.trim().equals("")) {
+			if (old_url != null && !old_url.trim().equals("")) {
 				url = old_url;
-			}else {
+			} else {
 				url = "main";
-			} 
-			
+			}
+
 			mav.setViewName("message");
 			mav.addObject("msg", msg);
 			mav.addObject("url", url);
@@ -252,7 +250,7 @@ public class MemberController {
 				MemberPhotoDTO memberPhotoDTO = new MemberPhotoDTO();
 				memberPhotoDTO.setFilenum(0);
 				memberPhotoDTO.setMnum(newMemberDTO.getMnum());
-				memberPhotoDTO.setMember_filename("30s.jpg"); 
+				memberPhotoDTO.setMember_filename("30s.jpg");
 				memberPhotoDTO.setFilesize(707);
 				memberPhotoDTO.setOrigin_filename("30s.jpg");
 				memberPhotoMapper.insertMemberPhoto(memberPhotoDTO, "main");
@@ -270,19 +268,19 @@ public class MemberController {
 					session.setAttribute("memberinfo", getLoginMemberDTO);
 				}
 				String[] urls = old_url.split("/");
-				if(old_url != null && !old_url.trim().equals("")) {
+				if (old_url != null && !old_url.trim().equals("")) {
 					old_url = null;
-					for(int i=4; i < urls.length ; i++) {
-						if(i==4) {
+					for (int i = 4; i < urls.length; i++) {
+						if (i == 4) {
 							old_url = urls[i];
-						}else {
+						} else {
 							old_url = "/" + urls[i];
 						}
 					}
-					if(old_url.contains("member_login")) {
+					if (old_url.contains("member_login")) {
 						return new ModelAndView("redirect:/main");
-					}else {
-						mav.setViewName("redirect:"+old_url);
+					} else {
+						mav.setViewName("redirect:" + old_url);
 						return mav;
 					}
 				}
@@ -355,7 +353,7 @@ public class MemberController {
 			qnaMapper.deleteQnAByMemberNumber(mnum);
 			reviewMapper.deleteReviewByMemberNumber(mnum);
 			restaurantMapper.deleteRestaurantByMemberNumber(mnum);
-			
+
 			msg = "회원삭제성공!! 회원목록보기페이지로 이동합니다.";
 			url = "member_manager";
 		} else {
@@ -387,7 +385,8 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/member_login", method = RequestMethod.POST)
-	public ModelAndView loginMemberPro(@ModelAttribute MemberDTO dto, HttpSession session, HttpServletRequest req, HttpServletResponse resp) {
+	public ModelAndView loginMemberPro(@ModelAttribute MemberDTO dto, HttpSession session, HttpServletRequest req,
+			HttpServletResponse resp) {
 		ModelAndView mav = new ModelAndView();
 		String msg = null, url = null;
 		if (dto.getEmail().trim().equals("") || dto.getPasswd().trim().equals("")) {
@@ -429,23 +428,28 @@ public class MemberController {
 				session.setAttribute("memberinfo", getLoginMemberDTO);
 			}
 			String[] urls = old_url.split("/");
-			if(old_url != null && !old_url.trim().equals("")) {
-				old_url = null;
-				for(int i=4; i < urls.length ; i++) {
-					if(i==4) {
-						old_url = urls[i];
-					}else {
-						old_url = "/" + urls[i];
+			try {
+				if (old_url != null && !old_url.trim().equals("")) {
+					old_url = null;
+					for (int i = 4; i < urls.length; i++) {
+						if (i == 4) {
+							old_url = urls[i];
+						} else {
+							old_url = "/" + urls[i];
+						}
 					}
-				}
-				if(old_url.contains("member_login")) {
+					if (old_url.contains("member_login")) {
+						return new ModelAndView("redirect:/main");
+					} else {
+						mav.setViewName("redirect:" + old_url);
+						return mav;
+					}
+				} else {
 					return new ModelAndView("redirect:/main");
-				}else {
-					mav.setViewName("redirect:"+old_url);
-					return mav;
 				}
+			} catch (Exception e) {
+				return new ModelAndView("redirect:/main");
 			}
-			return new ModelAndView("redirect:/main");
 		} else {
 			msg = "비밀번호를 확인해주세요.";
 			url = "member_login";
@@ -565,19 +569,19 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 		String old_url = req.getHeader("referer");
 		String[] urls = old_url.split("/");
-		if(old_url != null && !old_url.trim().equals("")) {
+		if (old_url != null && !old_url.trim().equals("")) {
 			old_url = null;
-			for(int i=4; i < urls.length ; i++) {
-				if(i==4) {
+			for (int i = 4; i < urls.length; i++) {
+				if (i == 4) {
 					old_url = urls[i];
-				}else {
+				} else {
 					old_url = "/" + urls[i];
 				}
 			}
-			if(old_url.contains("member_login")) {
+			if (old_url.contains("member_login")) {
 				return new ModelAndView("redirect:/main");
-			}else {
-				mav.setViewName("redirect:"+old_url);
+			} else {
+				mav.setViewName("redirect:" + old_url);
 				return mav;
 			}
 		}
@@ -817,8 +821,8 @@ public class MemberController {
 
 	@RequestMapping(value = "/member_join_ajax", method = RequestMethod.POST)
 	@ResponseBody
-	public HashMap<String, String> joinMemberAjaxPro(HttpServletRequest req, @ModelAttribute MemberDTO dto, HttpSession session,
-			BindingResult result) {
+	public HashMap<String, String> joinMemberAjaxPro(HttpServletRequest req, @ModelAttribute MemberDTO dto,
+			HttpSession session, BindingResult result) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		if (result.hasErrors()) { // 에러가 날 경우를 대비해 BindingResult result를 만들어주고 여기에서 초기값을 잡아주면 된다.
 			dto.setMnum(0);
@@ -899,7 +903,7 @@ public class MemberController {
 			}
 			getPhotoList = memberPhotoMapper.getMemberPhotoList(Integer.parseInt(mnum));
 		}
-        int reviewcount = memberDTO.getReviewcount();
+		int reviewcount = memberDTO.getReviewcount();
 		String email = memberDTO.getEmail();
 		int noneCount = messageMapper.noneMessageCount(email);
 		mav.addObject("noneCount", noneCount);
@@ -982,7 +986,7 @@ public class MemberController {
 			}
 		}
 		memberMapper.updateImageCount(memberDTO.getMnum(), imageCount);
-		memberDTO.setImagecount(memberDTO.getImagecount()+imageCount);
+		memberDTO.setImagecount(memberDTO.getImagecount() + imageCount);
 		session.setAttribute("memberinfo", memberDTO);
 
 		MemberPhotoDTO mainPhoto = memberPhotoMapper.getMemberMainPhoto(memberDTO.getMnum());
@@ -1091,7 +1095,7 @@ public class MemberController {
 					ismainphoto);
 			if (res > 0) {
 				S3Connection.getInstance().deleteObject("yepsbucket", "images/" + filename);
-				memberDTO.setImagecount(memberDTO.getImagecount()-1);
+				memberDTO.setImagecount(memberDTO.getImagecount() - 1);
 				session.setAttribute("memberinfo", memberDTO);
 				if (memberDTO.getMnum() == userDTO.getMnum()) { // 내 사진을 변경했는지(내 사진을 변경했다면 현재 나의 메인 사진을 바꿔줘야함)
 					MemberPhotoDTO mainPhoto = memberPhotoMapper.getMemberMainPhoto(memberDTO.getMnum());
