@@ -70,11 +70,6 @@ public class MemberController {
 	@Autowired
 	private RestaurantMapper restaurantMapper;
 
-	@RequestMapping(value = "/member_index")
-	public ModelAndView indexMember() {
-		return new ModelAndView("member/index");
-	}
-
 	@RequestMapping(value = "/manager_managerPage")
 	public ModelAndView managerPage(HttpServletRequest req, HttpSession session) {
 		ModelAndView mav = new ModelAndView();

@@ -29,11 +29,6 @@ public class QnAController {
 	@Autowired
 	private QnAMapper qnaMapper;
 
-	@RequestMapping(value = "/qna_index")
-	public ModelAndView indexQnA() {
-		return new ModelAndView("qna/index");
-	}
-
 	@RequestMapping(value = "/qna_list")
 	public ModelAndView listQnA(HttpServletRequest req, @RequestParam(defaultValue = "1") int curPage) {
 		List<QnADTO> list = null;
