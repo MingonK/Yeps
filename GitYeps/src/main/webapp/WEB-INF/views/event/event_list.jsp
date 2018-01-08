@@ -22,7 +22,7 @@
 						</c:if>
 						<c:if test="${!empty sessionScope.memberinfo}">
 							<h1>
-								<c:forTokens items="${sessionScope.memberinfo.address}" delims=" " begin="1" end="2" var="addr">
+								<c:forTokens items="${sessionScope.memberinfo.address}" delims=" " begin="1" end="1" var="addr">
 									${addr}
 								</c:forTokens>
                             </h1>
@@ -411,7 +411,7 @@
 											<path d="M12 2C8.13 2 5 5.13 5 9c0 2.61 1.43 4.88 3.54 6.08L12 22l3.46-6.92A6.987 6.987 0 0 0 19 9c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"></path>
 										</svg>
 									</span>
-									<a href="#">${eventDTO.roadAddrPart1}</a> — ${eventDTO.roadAddrPart2}
+									${eventDTO.roadAddrPart1} — ${eventDTO.roadAddrPart2}
 								</div>
 								
 								<p class="event_list_card_content_text">
