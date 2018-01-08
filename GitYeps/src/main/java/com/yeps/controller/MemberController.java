@@ -351,8 +351,6 @@ public class MemberController {
 			eventMapper.deleteEventByMemberNumber(mnum);
 			eventReviewMapper.deleteEventReviewByMemberNumber(mnum);
 			memberPhotoMapper.deleteMemberPhotosByMemberNumber(mnum);
-			largeMenuMapper.deleteLargeMenuByMemberNumber(mnum);
-			smallMenuMapper.deleteSmallMenuByMemberNumber(mnum);
 			messageMapper.deleteMessageByMemberNumber(mnum);
 			qnaMapper.deleteQnAByMemberNumber(mnum);
 			reviewMapper.deleteReviewByMemberNumber(mnum);
@@ -758,8 +756,6 @@ public class MemberController {
 		eventMapper.deleteEventByMemberNumber(dto.getMnum());
 		eventReviewMapper.deleteEventReviewByMemberNumber(dto.getMnum());
 		memberPhotoMapper.deleteMemberPhotosByMemberNumber(dto.getMnum());
-		largeMenuMapper.deleteLargeMenuByMemberNumber(dto.getMnum());
-		smallMenuMapper.deleteSmallMenuByMemberNumber(dto.getMnum());
 		messageMapper.deleteMessageByMemberNumber(dto.getMnum());
 		qnaMapper.deleteQnAByMemberNumber(dto.getMnum());
 		reviewMapper.deleteReviewByMemberNumber(dto.getMnum());

@@ -22,7 +22,7 @@
 						</c:if>
 						<c:if test="${!empty sessionScope.memberinfo}">
 							<h1>
-								<c:forTokens items="${sessionScope.memberinfo.address}" delims=" " begin="1" end="2" var="addr">
+								<c:forTokens items="${sessionScope.memberinfo.address}" delims=" " begin="1" end="1" var="addr">
 									${addr}
 								</c:forTokens>
                             </h1>
@@ -71,12 +71,20 @@
 							<h4>최근 검색한 위치</h4>
 							<ul>
 								<!-- 반복문으로 최대 10개까지 -->
-								<li style="margin-bottom: 12px;">
-									<a href="#">최근 검색한 기록이 없습니다.</a>
-								</li>
-								<li style="margin-bottom: 12px;">
-									<a href="#">최근 검색한 기록1~10</a>
-								</li>
+								<c:choose>
+									<c:when test="${empty locationList}">
+										<li style="margin-bottom: 12px;">
+											<a href="#">최근 검색한 기록이 없습니다.</a>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<c:forEach var="recentLocation" items="${locationList}">
+											<li style="margin-bottom: 12px;">
+												<a href="event_list?mode=${mode}&search=${recentLocation}">${recentLocation}</a>
+											</li>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
 							</ul>
 							<a href="#" class="clear-location-toggle">최근 검색위치 초기화 »</a>
 						</div>
@@ -85,36 +93,26 @@
 							<h4>인기 지역</h4>
 							<div class="popular_cities">
 								<div class="popular_cities_left" style="vertical-align: top;">
-									<!-- 반복문으로 16개 도시 출력 -->
-									<a href="event_list?mode=${mode}&search=종로" style="margin-bottom: 6px !important; display: block !important;">종로</a>
-								</div>
-								<div class="popular_cities_left" style="vertical-align: top;">
-									<a href="event_list?mode=${mode}&search=양화로" style="margin-bottom: 6px !important; display: block !important;">홍대</a>
-								</div>
-								<div class="popular_cities_left" style="vertical-align: top;">
-									<a href="event_list?mode=${mode}&search=서초" style="margin-bottom: 6px !important; display: block !important;">강남</a>
-								</div>
-								<div class="popular_cities_left" style="vertical-align: top;">
-									<a href="event_list?mode=${mode}&search=이태원" style="margin-bottom: 6px !important; display: block !important;">이태원</a>
-								</div>
-								<div class="popular_cities_left" style="vertical-align: top;">
-									<a href="event_list?mode=${mode}&search=충무로" style="margin-bottom: 6px !important; display: block !important;">명동</a>
-								</div>
-								<div class="popular_cities_left" style="vertical-align: top;">
-									<a href="event_list?mode=${mode}&search=부산진구" style="margin-bottom: 6px !important; display: block !important;">서면</a>
-								</div>
-								<div class="popular_cities_left" style="vertical-align: top;">
-									<a href="event_list?mode=${mode}&search=속초" style="margin-bottom: 6px !important; display: block !important;">속초</a>
-								</div>
-								<div class="popular_cities_left" style="vertical-align: top;">
-									<a href="event_list?mode=${mode}&search=동구" style="margin-bottom: 6px !important; display: block !important;">동대구</a>
-								</div>
-								
+									<a href="event_list?mode=${mode}&search=종로" style="margin-bottom: 10px !important; display: block !important;">종로</a>
+									<a href="event_list?mode=${mode}&search=양화로" style="margin-bottom: 10px !important; display: block !important;">홍대</a>
+									<a href="event_list?mode=${mode}&search=서초" style="margin-bottom: 10px !important; display: block !important;">강남</a>
+									<a href="event_list?mode=${mode}&search=이태원" style="margin-bottom: 10px !important; display: block !important;">이태원</a>
+									<a href="event_list?mode=${mode}&search=충무로" style="margin-bottom: 10px !important; display: block !important;">명동</a>
+									<a href="event_list?mode=${mode}&search=신촌" style="margin-bottom: 10px !important; display: block !important;">신촌</a>
+									<a href="event_list?mode=${mode}&search=혜화" style="margin-bottom: 10px !important; display: block !important;">혜화</a>
+									<a href="event_list?mode=${mode}&search=압구정" style="margin-bottom: 10px !important; display: block !important;">압구정</a>
+									<a href="event_list?mode=${mode}&search=광진구" style="margin-bottom: 10px !important; display: block !important;">건대</a>
+								</div>								
 								<div class="popular_cities_right" style="vertical-align: top;">
-									<a href="event_list?mode=${mode}&search=광진구" style="margin-bottom: 6px !important; display: block !important;">건대</a>
-									<!-- <strong style="font-weight: bold;">
-										<a href="#">더 많은 도시보기 »</a>
-									</strong> -->
+									<a href="event_list?mode=${mode}&search=부산" style="margin-bottom: 10px !important; display: block !important;">부산시</a>
+									<a href="event_list?mode=${mode}&search=대구" style="margin-bottom: 10px !important; display: block !important;">대구시</a>
+									<a href="event_list?mode=${mode}&search=울산" style="margin-bottom: 10px !important; display: block !important;">울산시</a>
+									<a href="event_list?mode=${mode}&search=포항" style="margin-bottom: 10px !important; display: block !important;">포항시</a>
+									<a href="event_list?mode=${mode}&search=대전" style="margin-bottom: 10px !important; display: block !important;">대전시</a>
+									<a href="event_list?mode=${mode}&search=광주" style="margin-bottom: 10px !important; display: block !important;">광주시</a>
+									<a href="event_list?mode=${mode}&search=전주" style="margin-bottom: 10px !important; display: block !important;">전주시</a>
+									<a href="event_list?mode=${mode}&search=강릉" style="margin-bottom: 10px !important; display: block !important;">강릉시</a>
+									<a href="event_list?mode=${mode}&search=천안" style="margin-bottom: 10px !important; display: block !important;">천안시</a>
 								</div>
 							</div>
 						</div>
@@ -413,7 +411,7 @@
 											<path d="M12 2C8.13 2 5 5.13 5 9c0 2.61 1.43 4.88 3.54 6.08L12 22l3.46-6.92A6.987 6.987 0 0 0 19 9c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"></path>
 										</svg>
 									</span>
-									<a href="#">${eventDTO.roadAddrPart1}</a> — ${eventDTO.roadAddrPart2}
+									${eventDTO.roadAddrPart1} — ${eventDTO.roadAddrPart2}
 								</div>
 								
 								<p class="event_list_card_content_text">

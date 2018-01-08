@@ -169,7 +169,11 @@ public class RestaurantController {
 		int start = YepsPager.getPageBegin();
 		int end = YepsPager.getPageEnd();
 
-		List<RestaurantDTO> list = restaurantMapper.listRest(start, end, "mode",price);
+//		List<RestaurantDTO> list = restaurantMapper.listRest(start, end, "mode",price);
+		
+		String location = "서울특별시";
+		List<RestaurantDTO> list = restaurantMapper.listRest(start, end, "mode",price, location);
+		
 		List<Integer> reviewCount = new ArrayList<Integer>();
 		List<Integer> StarAvg = new ArrayList<Integer>();
 
@@ -184,6 +188,7 @@ public class RestaurantController {
 		// System.out.println(test.getRnum());
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("location", "서울특별시");
 		map.put("list", list); // list
 		map.put("count", count); // 레코드의 갯수
 		map.put("YepsPager", YepsPager);
@@ -199,9 +204,7 @@ public class RestaurantController {
 
 	@RequestMapping(value = "/restaurant_ajax")
 	@ResponseBody
-	public HashMap<String, Object> listRestRefresh(@RequestParam(value = "mode") String mode,
-			@RequestParam(value = "price[]") List<Integer> price,
-			@RequestParam(defaultValue = "1") int curPage) {
+	public HashMap<String, Object> listRestRefresh(@RequestParam(value = "mode") String mode,@RequestParam(value = "price[]") List<Integer> price,@RequestParam(defaultValue = "1") int curPage) {
 		
 		
 		System.out.println("필터="+mode);
@@ -214,7 +217,8 @@ public class RestaurantController {
 		int start = YepsPager.getPageBegin();
 		int end = YepsPager.getPageEnd();
 
-		List<RestaurantDTO> list = restaurantMapper.listRest(start, end, mode,price);
+		String location = "서울특별시";
+		List<RestaurantDTO> list = restaurantMapper.listRest(start, end, mode,price, location);
 
 		List<Integer> reviewCount = new ArrayList<Integer>();
 		List<Integer> StarAvg = new ArrayList<Integer>();

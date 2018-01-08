@@ -589,7 +589,7 @@
 	padding: 0 12px 12px;
 }
 
-#flag_popup_submit_button, #reply_flag_popup_submit_button, #reply_message_popup_submit_button, #replyMessage, #deleteMessage {
+#flag_popup_submit_button, #reply_flag_popup_submit_button, #reply_message_popup_submit_button, #replyMessage, #deleteMessage, #message_popup_submit_button {
 	padding: 5px 8px; font-size: 12px; line-height: 1.5em; color: white; box-shadow: 0 1px 1px rgba(0,0,0,0.3); 
 	background-color: #d90007; display: inline-block; vertical-align: middle; overflow: visible; 
 	border-radius: 3px; margin: 0; cursor: pointer; border: 1px solid #8d0005; font-weight: bold; 

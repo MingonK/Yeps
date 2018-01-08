@@ -53,8 +53,7 @@ public class MenuController {
 	}
 	
 	@RequestMapping(value = "/restaurant_insertMenu")
-	public ModelAndView insertMenu(HttpServletRequest req, @ModelAttribute LargeMenuDTO large_dto,
-			@ModelAttribute SmallMenuDTO small_dto) {
+	public ModelAndView insertMenu(HttpServletRequest req, @ModelAttribute LargeMenuDTO large_dto,@ModelAttribute SmallMenuDTO small_dto) {
 		String rnum = req.getParameter("rnum");
 		if(rnum==null||rnum.trim().equals("")) {
 			return new ModelAndView("redirect:restaurant_list");
