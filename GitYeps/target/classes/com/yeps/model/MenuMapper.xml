@@ -8,4 +8,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="listMenu" resultType="MenuDTO">
 		select * from yeps_menu
 	</select>
+	
+	<delete id="deleteMenuByMemberNumber" parameterType="int">
+		delete yeps_menu where mnum = #{mnum}
+	</delete>
 </mapper>

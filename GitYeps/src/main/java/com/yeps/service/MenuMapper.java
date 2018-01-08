@@ -17,4 +17,8 @@ public class MenuMapper {
 	public List<MenuDTO> listMenu() {
 		return sqlSession.selectList("menuList");
 	}
+	
+	public int deleteMenuByMemberNumber(int mnum) {
+		return sqlSession.delete("deleteMenuByMemberNumber", mnum);
+	}
 }

@@ -1,7 +1,6 @@
 package com.yeps.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -27,10 +26,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.yeps.model.MemberDTO;
 import com.yeps.model.MemberPhotoDTO;
+import com.yeps.service.EventMapper;
+import com.yeps.service.EventReviewMapper;
 import com.yeps.service.MemberMapper;
 import com.yeps.service.MemberPhotoMapper;
+import com.yeps.service.MenuMapper;
 import com.yeps.service.MessageMapper;
+import com.yeps.service.QnAMapper;
 import com.yeps.service.RandomNum;
+import com.yeps.service.RestaurantMapper;
+import com.yeps.service.ReviewMapper;
 import com.yeps.service.S3Connection;
 import com.yeps.service.SHA256Util;
 import com.yeps.service.SendEmail;
@@ -49,6 +54,19 @@ public class MemberController {
 	private SendEmail sendEmail;
 	@Autowired
 	private MessageMapper messageMapper;
+	@Autowired
+	private EventMapper eventMapper;
+	@Autowired
+	private EventReviewMapper eventReviewMapper;
+	@Autowired
+	private MenuMapper menuMapper;
+	@Autowired
+	private QnAMapper qnaMapper;
+	@Autowired
+	private ReviewMapper reviewMapper;
+	@Autowired
+	private RestaurantMapper restaurantMapper;
+	
 
 	@RequestMapping(value = "/member_index")
 	public ModelAndView indexMember() {
@@ -329,6 +347,15 @@ public class MemberController {
 		}
 		int res = memberMapper.deleteMember(mnum);
 		if (res > 0) {
+			eventMapper.deleteEventByMemberNumber(mnum);
+			eventReviewMapper.deleteEventReviewByMemberNumber(mnum);
+			memberPhotoMapper.deleteMemberPhotosByMemberNumber(mnum);
+			menuMapper.deleteMenuByMemberNumber(mnum);
+			messageMapper.deleteMessageByMemberNumber(mnum);
+			qnaMapper.deleteQnAByMemberNumber(mnum);
+			reviewMapper.deleteReviewByMemberNumber(mnum);
+			restaurantMapper.deleteRestaurantByMemberNumber(mnum);
+			
 			msg = "회원삭제성공!! 회원목록보기페이지로 이동합니다.";
 			url = "member_manager";
 		} else {
@@ -720,6 +747,14 @@ public class MemberController {
 		passwd = SHA256Util.getEncrypt(passwd, salt);
 		dto.setPasswd(passwd);
 		int res = memberMapper.leaveMember(dto);
+		eventMapper.deleteEventByMemberNumber(dto.getMnum());
+		eventReviewMapper.deleteEventReviewByMemberNumber(dto.getMnum());
+		memberPhotoMapper.deleteMemberPhotosByMemberNumber(dto.getMnum());
+		menuMapper.deleteMenuByMemberNumber(dto.getMnum());
+		messageMapper.deleteMessageByMemberNumber(dto.getMnum());
+		qnaMapper.deleteQnAByMemberNumber(dto.getMnum());
+		reviewMapper.deleteReviewByMemberNumber(dto.getMnum());
+		restaurantMapper.deleteRestaurantByMemberNumber(dto.getMnum());
 
 		if (res > 0) {
 			msg = "회원 탈퇴 성공!";

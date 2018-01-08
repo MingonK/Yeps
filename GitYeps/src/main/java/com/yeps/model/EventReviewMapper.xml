@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	
 	<delete id="deleteEventReview" parameterType="int">
-	    delete yeps_eventreview where  eventReview_num = #{eventReview_num}
+	    delete yeps_eventreview where eventReview_num = #{eventReview_num}
 	    </delete>
 	
 		<resultMap type="eventReviewDTO" id="EventReview_Map">
@@ -58,7 +58,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     select count(*) from yeps_eventreview
 	 </select>
 	
-	
+	<delete id="deleteEventReviewByMemberNumber" parameterType="int">
+		delete yeps_eventreview where mnum = #{mnum}
+	</delete>
 	
 	<resultMap type="EventReviewDTO" id="EventReviewMap">
   		<id column="eventReview_num" property="eventReview_num"/>

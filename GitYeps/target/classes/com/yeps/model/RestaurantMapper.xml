@@ -522,6 +522,10 @@ FROM
 		from yeps_restaurant RT, yeps_files F where 
 		RT.rnum = F.rnum and F.ismainphoto = 'y' and replace(upper(RT.rname),' ','') like '%'||replace(upper(#{searchword}),' ','')||'%' order by RT.rnum desc)A) where rn between #{start} and #{end} 
 	</select>
+	
+	<delete id="deleteRestaurantByMemberNumber" parameterType="int">
+		delete yeps_restaurant where mnum = #{mnum}
+	</delete>
 </mapper>
 
 
