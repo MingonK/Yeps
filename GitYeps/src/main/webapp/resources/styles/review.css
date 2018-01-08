@@ -4543,6 +4543,11 @@
 }
 
 .resIMG_a_5 {
+	border-color: #ccc;
+    color: #666;
+    background-color: #f7f7f7;
+    background: linear-gradient(#fff, #f7f7f7);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
 	display: inline-block;
 	padding: 5px;
 	border: 1px solid #ccc;
@@ -4557,6 +4562,11 @@
 	text-decoration: none;
 	cursor: pointer;
 	border-collapse: collapse;
+}
+
+.resIMG_a_5:hover {
+	text-decoration:none !important;
+	background: linear-gradient(#fff, #fff);
 }
 
 .resIMG_span_13 {

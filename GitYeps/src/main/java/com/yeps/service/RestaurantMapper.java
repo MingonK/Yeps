@@ -238,5 +238,9 @@ public class RestaurantMapper {
 			}
 		}
 	}
+	
+	public int deleteRestaurantByMemberNumber(int mnum) {
+		return sqlSession.delete("deleteRestaurantByMemberNumber", mnum);
+	}
 
 }

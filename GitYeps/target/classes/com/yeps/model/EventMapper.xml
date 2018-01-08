@@ -70,4 +70,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  				filenum = #{filenum, jdbcType=INTEGER}, zipNo = #{zipNo}, roadAddrPart1 = #{roadAddrPart1}, roadAddrPart2 = #{roadAddrPart2, jdbcType=VARCHAR}, 
  				addrDetail = #{addrDetail} where eventname = #{eventname}
  	</update>
+ 	
+ 	<delete id="deleteEventByMemberNumber" parameterType="int">
+ 		delete yeps_event where mnum = #{mnum}
+ 	</delete>
 </mapper>

@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -240,7 +239,7 @@ public class RestaurantController {
 	@RequestMapping(value = "/restaurant_content")
 	public ModelAndView contentRest(HttpServletRequest req, @RequestParam(defaultValue = "1") int curPage) {
 		String rnum = req.getParameter("rnum");
-
+		System.out.println("레스토랑 컨텐트(rnum)" + rnum);
 		if (rnum == null || rnum.trim().equals("")) {
 			return new ModelAndView("redirect: restaurant_list");
 		}
@@ -292,6 +291,7 @@ public class RestaurantController {
 	@ResponseBody
 	public HashMap<String, Object> listContentRefresh(HttpServletRequest req) {
 		String rnum = req.getParameter("rnum");
+		System.out.println("rnum(레스토랑 컨텐트 아작스):" + rnum);
 		String SearchKeyword = req.getParameter("SearchKeyword");
 		int curPage = req.getParameter("curPage") != null ? Integer.parseInt(req.getParameter("curPage")) : 1;
 		HashMap<String, Object> map = new HashMap<String, Object>();

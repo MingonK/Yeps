@@ -18,11 +18,11 @@
 					<div class="column column-alpha" style="float: left;padding: 0 15px;min-height: 1px;box-sizing: border-box;width: 100%; height: 60%;">
 						<div class="search-header clearfix" style="width:1100px;height:80px;padding-top: 12px;padding-bottom: 7px;">
 							<div class="search-header-title-container" style="width:100%;height:40px;">
-								<h1 style="font-size:21px;padding-top: 6px;">베스트 10 레스토랑<span>   인천</span></h1>
+								<h1 style="font-size:21px;padding-top: 6px;">베스트 10 레스토랑 <span class="location">서울</span></h1>
 							</div>
 						<div class="breadcrumbs-hierarchy" style="width:100%;height:18px;margin-bottom:6px;">
 							<span style="width:100px;height:30px">
-								<a href="#">인천</a>
+								<a href="#" class="location">서울</a>
 									<span aria-hidden="true" style="width: 14px; height: 14px;" class="icon icon--14-chevron-right icon--size-14 u-space-r-half">
 									        	<svg id="14x14_chevron_right" height="100%" viewBox="0 0 14 14" width="100%">
 									        		<path d="M4.793 12a1 1 0 0 1-.707-1.707L7.38 7 4.085 3.707A1 1 0 1 1 5.5 2.293L10.207 7 5.5 11.707a.997.997 0 0 1-.707.293z"></path>

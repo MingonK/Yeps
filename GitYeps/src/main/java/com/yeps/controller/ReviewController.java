@@ -87,23 +87,6 @@ public class ReviewController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/review_update", method = RequestMethod.GET)
-	public String review_updatePro(HttpServletRequest req, @RequestParam String rvnum) {
-		ReviewDTO dto = reviewMapper.getReview(Integer.parseInt(rvnum));
-		req.setAttribute("getReview", dto);
-		return "review/update";
-	}
-
-	@RequestMapping(value = "/review_update", method = RequestMethod.POST)
-	public ModelAndView updateForm(HttpServletRequest req, @ModelAttribute ReviewDTO dto, BindingResult result) {
-		if (result.hasErrors()) {
-			dto.setRvnum(0);
-		}
-		reviewMapper.updateReview(dto);
-
-		return new ModelAndView("redirect:review_list");
-	}
-
 	@RequestMapping(value = "/guidelines")
 	public String review_guideview() {
 		return "review/guidelines";
@@ -282,7 +265,7 @@ public class ReviewController {
 
 			ReviewDTO myReview = reviewMapper.findMyReview(dto.getRnum(), dto.getMnum());
 			String[] addrSplit = myReview.getMemberDTO().getAddress().split(" ");
-			String addr = addrSplit[1] + " " + addrSplit[2] + "," + addrSplit[3] + " " + addrSplit[4] + "," + addrSplit[6] + "," + addrSplit[5];  
+			String addr = addrSplit[1] + " " + addrSplit[2];  
 			myReview.getMemberDTO().setAddress(addr);
 			
 			mav.addObject("rlist", restaurantList);

@@ -6,7 +6,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.yeps.model.MenuDTO;
 
 @Service
 public class MenuMapper {
@@ -14,7 +13,7 @@ public class MenuMapper {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public List<MenuDTO> listMenu() {
-		return sqlSession.selectList("menuList");
+	public int deleteMenuByMemberNumber(int mnum) {
+		return sqlSession.delete("deleteMenuByMemberNumber", mnum);
 	}
 }

@@ -81,4 +81,8 @@ public class QnAMapper {
 	public int replyQnA(QnADTO dto) {
 		return sqlSession.update("replyQnA", dto);
 	}
+	
+	public int deleteQnAByMemberNumber(int mnum) {
+		return sqlSession.delete("deleteQnAByMemberNumber", mnum);
+	}
 }

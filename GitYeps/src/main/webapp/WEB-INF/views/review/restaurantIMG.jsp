@@ -126,9 +126,7 @@
                                  </li>
                                  <li class="resIMG_li_4">
                                     <b class="resIMG_b_2">
-										<c:forTokens items="${myReview.memberDTO.address}" delims="," var="sel">
-											${sel}<br>
-										</c:forTokens>
+										${myReview.memberDTO.address}
                                     </b>
                                  </li>
                               </ul>

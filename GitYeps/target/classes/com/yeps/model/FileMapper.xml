@@ -157,5 +157,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getRandomRestaurantPhoto" resultMap="getRandomPhoto">
 		select * from (select RT.rname, RT.category, RT.price, F.filename, F.mnum, F.rnum, M.email, M.nickname from yeps_restaurant RT, yeps_files F, yeps_member M where RT.rnum = F.rnum and F.mnum = M.mnum order by dbms_random.value) where rownum=1
 	</select>
+	
+	<delete id="deleteFilesByMemberNumber" parameterType="int">
+		delete yeps_files where mnum = #{mnum}
+	</delete>
 
 </mapper>
