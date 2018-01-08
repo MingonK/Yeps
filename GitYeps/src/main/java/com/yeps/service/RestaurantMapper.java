@@ -16,12 +16,13 @@ public class RestaurantMapper {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public List<RestaurantDTO> listRest(int start, int end, String mode, List<Integer> prices) {
+	public List<RestaurantDTO> listRest(int start, int end, String mode, List<Integer> prices, String location) {
 		String sql=null;
 //		String pricesSql = null;
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
+		map.put("location", location);
 //		map.put("sql", sql);
 //		map.put("pricesSql", pricesSql);
 		if(prices.get(0)==0 && mode.equals("mode")) {// 가격 선택 X ,필터 선택 X

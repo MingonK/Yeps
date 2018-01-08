@@ -40,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getAllEventFiles" parameterType="int" resultType="FileDTO">
-		select * from yeps_files where evnum = #{evnum} order by filenum desc
+		select * from yeps_files where evnum = #{num} order by filenum desc
 	</select>
 	
 	<delete id="deleteAllFile" parameterType="int">
@@ -99,7 +99,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				, M.imagecount
 				, M.address
 		from yeps_files F, yeps_member M
-		where F.mnum = M.mnum and F.rnum = #{rnum}
+		where F.mnum = M.mnum and F.rnum = #{num}
 		order by filenum desc
 	</select>
 	

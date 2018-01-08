@@ -185,7 +185,7 @@
 					
 					<label>이벤트 내용</label>
 					<div style="margin-top: 6px;">
-						<textarea name="event_content" rows="7" cols="89" maxlength="1200" placeholder="이벤트의 내용을 상세하게 설명해주세요." style="border-radius: 3px; font-size: 14px; padding: 5px 10px 0 10px; border: 1px solid #999; resize: vertical;"></textarea>
+						<textarea name="event_content" rows="7" cols="89" maxlength="1200" placeholder="이벤트의 내용을 상세하게 설명해주세요." style="overflow-y: hidden; border-radius: 3px; font-size: 14px; padding: 5px 10px 0 10px; border: 1px solid #999; resize: vertical;"></textarea>
 					</div>
 					
 					<div style="margin-top: 20px; margin-bottom: 20px">
