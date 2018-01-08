@@ -20,8 +20,8 @@ function busy_changeTime(){
 	var s = document.getElementById("busy-hour-start")
 	var start = s.selectedIndex;
 	var e = document.getElementById("busy-hour-end")
-	var j = 1
-	var i = 0
+	var j = 1;
+	var i = 0;
 	var a=parseInt(s.options[s.selectedIndex].value);
 	var b=parseInt(e.options[e.selectedIndex].value);
 	var c=e.options[e.selectedIndex].value

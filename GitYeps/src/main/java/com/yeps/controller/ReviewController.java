@@ -161,7 +161,7 @@ public class ReviewController {
 		mav.setViewName("review/write");
 		return mav;
 	}
-
+	
 	@RequestMapping(value = "/review_restaurantIMG")
 	public ModelAndView review_restaurantIMG(HttpServletRequest req) {
 		// rnum을 가지고 가서 식당 목록을 뿌려주기 //최근 식당으로 등록된것 가져오기 쿼리문 작성해서 갖고오기

@@ -330,6 +330,40 @@ public class RestaurantController {
 		map.put("selectedDataRV", targetRestaurant_reviews); // 한 페이지에서 변수명에 따라 다른값보여주기위해서
 		return map;
 	}
+	
+	@RequestMapping(value = "/restaurant_content_sort_ajax")
+	@ResponseBody
+	public HashMap<String, Object> listContentSortRefresh(HttpServletRequest req) {
+		String rnum = req.getParameter("rnum");
+		int curPage = req.getParameter("curPage") != null ? Integer.parseInt(req.getParameter("curPage")) : 1;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		if (rnum == null || rnum.trim().equals("")) {
+			map.put("error", "다시 시도해주세요.");
+			return map;
+		}
+
+		int pageScale = 10;
+		int blockScale = 10;
+		int count = 0;
+		int start = 0;
+		int end = 0;
+		List<ReviewDTO> targetRestaurant_reviews = null;
+
+		YepsPager YepsPager = null;
+//			count = reviewMapper.review_keywordCount(SearchKeyword);
+			YepsPager = new YepsPager(count, curPage, pageScale, blockScale);
+			start = YepsPager.getPageBegin();
+			end = YepsPager.getPageEnd();
+//			targetRestaurant_reviews = reviewMapper.review_keyword(SearchKeyword, Integer.parseInt(rnum), start, end);
+//			map.put("SearchKeyword", SearchKeyword);
+
+		map.put("count", count); // 레코드의 갯수
+		map.put("YepsPager", YepsPager);
+		map.put("rnum", rnum);
+		map.put("selectedDataRV", targetRestaurant_reviews); // 한 페이지에서 변수명에 따라 다른값보여주기위해서
+		return map;
+	}
 
 	@RequestMapping(value = "/restaurant_update_photo")
 	public ModelAndView updateRestaurantPhoto(HttpServletRequest req) {

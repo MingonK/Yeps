@@ -260,27 +260,27 @@
 																			<ul class="dropdown_menu-group" style="list-style: none;">
 																				<li class="dropdown_item">
 																					<a class="tab-link js-dropdown-link tab-link--dropdown js-tab-link--dropdown is-selected" href="javascript:;" style="text-decoration:none;">
-																						<span class="tab-link_label" title="Yelp Sort">Yelp Sort</span>
+																						<span class="tab-link_label" title="Yeps Sort">Yeps Sort</span>
+																					</a>
+																				</li>
+																				<li class="dropdown_item">
+																					<a class="tab-link js-dropdown-link tab-link--dropdown js-tab-link--dropdown" href="#" onclick="sort_check()" style="text-decoration:none;">
+																						<span class="tab-link_label" title="최근">최근</span>
 																					</a>
 																				</li>
 																				<li class="dropdown_item">
 																					<a class="tab-link js-dropdown-link tab-link--dropdown js-tab-link--dropdown" href="javascript:;" style="text-decoration:none;">
-																						<span class="tab-link_label" title="Newest First">Newest First</span>
+																						<span class="tab-link_label" title="오래된">오래된</span>
 																					</a>
 																				</li>
 																				<li class="dropdown_item">
 																					<a class="tab-link js-dropdown-link tab-link--dropdown js-tab-link--dropdown" href="javascript:;" style="text-decoration:none;">
-																						<span class="tab-link_label" title="Oldest First">Oldest First</span>
+																						<span class="tab-link_label" title="높은 평점">높은 평점</span>
 																					</a>
 																				</li>
 																				<li class="dropdown_item">
 																					<a class="tab-link js-dropdown-link tab-link--dropdown js-tab-link--dropdown" href="javascript:;" style="text-decoration:none;">
-																						<span class="tab-link_label" title="Highest Rated">Highest Rated</span>
-																					</a>
-																				</li>
-																				<li class="dropdown_item">
-																					<a class="tab-link js-dropdown-link tab-link--dropdown js-tab-link--dropdown" href="javascript:;" style="text-decoration:none;">
-																						<span class="tab-link_label" title="Lowest Rated">Lowest Rated</span>
+																						<span class="tab-link_label" title="낮은 평점">낮은 평점</span>
 																					</a>
 																				</li>
 																			</ul>
@@ -1545,6 +1545,29 @@ function list(page){
            alert("불러오기 실패");
         },
    });
+}
+
+function sort_check(){
+	$(document).ajaxStart(function() {
+		$('body').css('overflow', 'hidden');
+		$('html').scrollTop(0);
+		$('.loading_wapper').fadeIn(500);
+	})
+					
+	$(document).ajaxStop(function() {
+		$('body').css('overflow', 'auto');
+		$('.loading_wapper').fadeOut(500);
+	})
+	
+	    $.ajax({
+	         type : 'post',
+	         url : 'restaurant_content_sort_ajax',
+	         data : queryString,
+	         dataType : 'json',
+         	success : function(responseData){
+         	
+         	}
+         });
 }
 
 function check() {	
