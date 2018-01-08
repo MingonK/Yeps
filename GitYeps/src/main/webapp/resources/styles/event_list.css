@@ -59,7 +59,7 @@
 }
 		
 .event_list_section_header_location_bar_inner .event_list_section_header_location_nowrap,
-.popular_citie .popular_cities_left, .popular_citie .popular_cities_right {
+.popular_cities .popular_cities_left, .popular_cities .popular_cities_right {
 	margin-left: 6px;
 	margin-right: 6px;
 	border-collapse: collapse;
