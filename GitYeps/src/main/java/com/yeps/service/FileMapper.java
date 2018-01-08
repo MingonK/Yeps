@@ -97,7 +97,7 @@ public class FileMapper {
 		if (ismainphoto.equals("y")) {
 			int res = sqlSession.delete("deleteFileToFilename", filename);
 			if(mode.equals("event")) {
-				List<FileDTO> list = sqlSession.selectList("getTargetEventFiles", num);
+				List<FileDTO> list = sqlSession.selectList("getAllEventFiles", num);
 				if (list.size() > 0) {
 					FileDTO dto = list.get(0);
 					HashMap<String, Object> map = new HashMap<String, Object>();

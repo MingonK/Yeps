@@ -43,7 +43,7 @@
     	
 		<div id="flag_popup_footer">
      		<div id="flag_popup_buttons">
-     			<button id="reply_message_popup_submit_button" type="submit" value="submit" data-popup-send="SendMessage" >
+     			<button id="message_popup_Issue_submit_button" type="submit" value="submit" data-popup-send="SendMessage" >
      				<span>메세지 보내기</span>
      			</button>
      			<a href="#" data-popup-close="writeIssue">
@@ -69,7 +69,7 @@
     	
     	<div id="flag_popup_description" style="padding: 12px 8px 0;">
     		<div>
-    			<form name="sendIssueform" method="post">
+    			<form name="sendform" method="post">
     				<div>
 						<h4 align="left" style="color: #d32323;">Send Message To</h4>
     	    			<input type="text" id="sendformTo" name="receiver" style="width: 95%; height: 20px;">
@@ -84,7 +84,7 @@
     	
 		<div id="flag_popup_footer">
      		<div id="flag_popup_buttons">
-     			<button id="reply_message_popup_submit_button" type="submit" value="submit" data-popup-send="SendMessage" >
+     			<button id="message_popup_submit_button" type="submit" value="submit" data-popup-send="SendMessage" >
      				<span>메세지 보내기</span>
      			</button>
      			<a href="#" data-popup-close="writeMessage">
@@ -358,7 +358,7 @@
   </div>
 </div>
 	<script>
- 	$('#sendIssue').click(function(){
+ 	$('#message_popup_Issue_submit_button').click(function(){
  	    var issue = $('#issueValue').val();
  	    document.sendIssueform.action = "message_send?issue=" + issue;
  	    document.sendIssueform.submit();
@@ -387,7 +387,7 @@
          $('#message').val(message);
     }   
 
-   $('#sendMessage').click(function(){
+   $('#message_popup_submit_button').click(function(){
     	
     	if($('#sendformTo').val()==''){
     	alert("받는 사람을 입력해주세요");

@@ -1044,3 +1044,7 @@ element.style {
 .icon--currentColor {
 	fill: currentColor;
 }
+
+.ui-datepicker td {
+	height: 0;
+}

@@ -155,10 +155,13 @@ public class HomeController {
 		Set<RestaurantDTO> hotAndNewSet = new LinkedHashSet<RestaurantDTO>();
 		for (int i = 0; i < 3; i++) {
 				RestaurantDTO dto = restaurantMapper.getHotAndNewRestaurant(gethotAndNewReview.get(i));
+				System.out.println("dto(핫앤유레스토랑):" + dto);
 			if(dto != null) {
 				hotAndNewSet.add(dto);
+				System.out.println("핫앤유1:" + hotAndNewSet.size());
 			} else {
 				hotAndNewSet.add(dto);
+				System.out.println("핫앤유2:" + hotAndNewSet.size());
 			}
 		}
 

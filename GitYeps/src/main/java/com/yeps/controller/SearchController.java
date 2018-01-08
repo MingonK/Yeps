@@ -198,7 +198,7 @@ public class SearchController {
 		//----------------------------여기부터 검색작업-------------------
 		
 		if(location == null) {
-			location = "서울";
+			location = "서울특별시";
 		}
 
 		HashMap<String, Object> searchMap = new HashMap<String, Object>();
