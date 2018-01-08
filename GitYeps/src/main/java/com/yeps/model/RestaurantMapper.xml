@@ -141,6 +141,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from yeps_restaurant
 	</select>
 	
+	<select id="getCountBySeoul" resultType="int">
+		select count(*) from yeps_restaurant where replace(upper(roadAddrPart1),' ','') like '%'||replace(upper(#{location}),' ','')||'%'
+	</select>
+	
 	<select id="getImageCount" resultType="int">
 		select count(*) from yeps_files where rnum=#{rnum}
 	</select>
