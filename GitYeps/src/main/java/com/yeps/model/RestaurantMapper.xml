@@ -473,26 +473,54 @@ FROM
 		select count(*) from yeps_restaurant where replace(upper(rname),' ','') like '%'||replace(upper(#{searchword}),' ','')||'%'
 	</select>
 	
-	<select id="listRestByCLS" parameterType="java.util.HashMap" resultType="RestaurantDTO" > 
-		select * from (select rownum rn, A.* from (select * from yeps_restaurant where category=#{category} and replace(upper(roadAddrPart1),' ','') like '%'||replace(upper(#{location}),' ','')||'%' and replace(upper(rname),' ','') like '%'||replace(upper(#{searchword}),' ','')||'%' order by rnum desc)A) where rn between #{start} and #{end} 
+	<select id="listRestByCLS" parameterType="java.util.HashMap" resultMap="listRestaurantMap" > 
+		select * from (select rownum rn, A.* from (select 
+													RT.rnum, RT.rname, RT.price, RT.foodstyle, RT.roadAddrPart1, RT.addrDetail, RT.roadAddrPart2,
+													RT.raddress, RT.hp2, RT.hp3, RT.reststyle, RT.category, F.filename
+		from yeps_restaurant RT, yeps_files F where 
+		RT.rnum = F.rnum and F.ismainphoto = 'y' and RT.category=#{category} and replace(upper(RT.roadAddrPart1),' ','') like '%'||replace(upper(#{location}),' ','')||'%' and replace(upper(RT.rname),' ','') like '%'||replace(upper(#{searchword}),' ','')||'%' order by RT.rnum desc)A) where rn between #{start} and #{end} 
 	</select>
-	<select id="listRestByCL" parameterType="java.util.HashMap" resultType="RestaurantDTO" > 
-		select * from (select rownum rn, A.* from (select * from yeps_restaurant where category=#{category} and replace(upper(roadAddrPart1),' ','') like '%'||replace(upper(#{location}),' ','')||'%' order by rnum desc)A) where rn between #{start} and #{end} 
+	<select id="listRestByCL" parameterType="java.util.HashMap" resultMap="listRestaurantMap" > 
+		select * from (select rownum rn, A.* from (select 
+													RT.rnum, RT.rname, RT.price, RT.foodstyle, RT.roadAddrPart1, RT.addrDetail, RT.roadAddrPart2,
+													RT.raddress, RT.hp2, RT.hp3, RT.reststyle, RT.category, F.filename
+		from yeps_restaurant RT, yeps_files F where 
+		RT.rnum = F.rnum and F.ismainphoto = 'y' and RT.category=#{category} and replace(upper(RT.roadAddrPart1),' ','') like '%'||replace(upper(#{location}),' ','')||'%' order by RT.rnum desc)A) where rn between #{start} and #{end} 
 	</select>
-	<select id="listRestByCS" parameterType="java.util.HashMap" resultType="RestaurantDTO" > 
-		select * from (select rownum rn, A.* from (select * from yeps_restaurant where category=#{category} and replace(upper(rname),' ','') like '%'||replace(upper(#{searchword}),' ','')||'%' order by rnum desc)A) where rn between #{start} and #{end} 
+	<select id="listRestByCS" parameterType="java.util.HashMap" resultMap="listRestaurantMap" > 
+		select * from (select rownum rn, A.* from (select 
+													RT.rnum, RT.rname, RT.price, RT.foodstyle, RT.roadAddrPart1, RT.addrDetail, RT.roadAddrPart2,
+													RT.raddress, RT.hp2, RT.hp3, RT.reststyle, RT.category, F.filename
+		from yeps_restaurant RT, yeps_files F where 
+		RT.rnum = F.rnum and F.ismainphoto = 'y' and RT.category=#{category} and replace(upper(RT.rname),' ','') like '%'||replace(upper(#{searchword}),' ','')||'%' order by RT.rnum desc)A) where rn between #{start} and #{end} 
 	</select>
-	<select id="listRestByC" parameterType="java.util.HashMap" resultType="RestaurantDTO" > 
-		select * from (select rownum rn, A.* from (select * from yeps_restaurant where category=#{category} order by rnum desc)A) where rn between #{start} and #{end} 
+	<select id="listRestByC" parameterType="java.util.HashMap" resultMap="listRestaurantMap" > 
+		select * from (select rownum rn, A.* from (select 
+													RT.rnum, RT.rname, RT.price, RT.foodstyle, RT.roadAddrPart1, RT.addrDetail, RT.roadAddrPart2,
+													RT.raddress, RT.hp2, RT.hp3, RT.reststyle, RT.category, F.filename
+		from yeps_restaurant RT, yeps_files F where 
+		RT.rnum = F.rnum and F.ismainphoto = 'y' and RT.category=#{category} order by RT.rnum desc)A) where rn between #{start} and #{end} 
 	</select>
-	<select id="listRestByLS" parameterType="java.util.HashMap" resultType="RestaurantDTO" > 
-		select * from (select rownum rn, A.* from (select * from yeps_restaurant where replace(upper(roadAddrPart1),' ','') like '%'||replace(upper(#{location}),' ','')||'%' and replace(upper(rname),' ','') like '%'||replace(upper(#{searchword}),' ','')||'%' order by rnum desc)A) where rn between #{start} and #{end} 
+	<select id="listRestByLS" parameterType="java.util.HashMap" resultMap="listRestaurantMap" > 
+		select * from (select rownum rn, A.* from (select 
+													RT.rnum, RT.rname, RT.price, RT.foodstyle, RT.roadAddrPart1, RT.addrDetail, RT.roadAddrPart2,
+													RT.raddress, RT.hp2, RT.hp3, RT.reststyle, RT.category, F.filename
+		from yeps_restaurant RT, yeps_files F where 
+		RT.rnum = F.rnum and F.ismainphoto = 'y' and replace(upper(RT.roadAddrPart1),' ','') like '%'||replace(upper(#{location}),' ','')||'%' and replace(upper(RT.rname),' ','') like '%'||replace(upper(#{searchword}),' ','')||'%' order by RT.rnum desc)A) where rn between #{start} and #{end} 
 	</select>
-	<select id="listRestByL" parameterType="java.util.HashMap" resultType="RestaurantDTO" > 
-		select * from (select rownum rn, A.* from (select * from yeps_restaurant where replace(upper(roadAddrPart1),' ','') like '%'||replace(upper(#{location}),' ','')||'%' order by rnum desc)A) where rn between #{start} and #{end} 
+	<select id="listRestByL" parameterType="java.util.HashMap" resultMap="listRestaurantMap" > 
+		select * from (select rownum rn, A.* from (select 
+													RT.rnum, RT.rname, RT.price, RT.foodstyle, RT.roadAddrPart1, RT.addrDetail, RT.roadAddrPart2,
+													RT.raddress, RT.hp2, RT.hp3, RT.reststyle, RT.category, F.filename
+		from yeps_restaurant RT, yeps_files F where 
+		RT.rnum = F.rnum and F.ismainphoto = 'y' and replace(upper(RT.roadAddrPart1),' ','') like '%'||replace(upper(#{location}),' ','')||'%' order by RT.rnum desc)A) where rn between #{start} and #{end} 
 	</select>
-	<select id="listRestByS" parameterType="java.util.HashMap" resultType="RestaurantDTO" > 
-		select * from (select rownum rn, A.* from (select * from yeps_restaurant where replace(upper(rname),' ','') like '%'||replace(upper(#{searchword}),' ','')||'%' order by rnum desc)A) where rn between #{start} and #{end} 
+	<select id="listRestByS" parameterType="java.util.HashMap" resultMap="listRestaurantMap" > 
+		select * from (select rownum rn, A.* from (select 
+													RT.rnum, RT.rname, RT.price, RT.foodstyle, RT.roadAddrPart1, RT.addrDetail, RT.roadAddrPart2,
+													RT.raddress, RT.hp2, RT.hp3, RT.reststyle, RT.category, F.filename
+		from yeps_restaurant RT, yeps_files F where 
+		RT.rnum = F.rnum and F.ismainphoto = 'y' and replace(upper(RT.rname),' ','') like '%'||replace(upper(#{searchword}),' ','')||'%' order by RT.rnum desc)A) where rn between #{start} and #{end} 
 	</select>
 </mapper>
 
