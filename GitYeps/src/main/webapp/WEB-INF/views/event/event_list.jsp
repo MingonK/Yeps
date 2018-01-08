@@ -80,7 +80,7 @@
 									<c:otherwise>
 										<c:forEach var="recentLocation" items="${locationList}">
 											<li style="margin-bottom: 12px;">
-												<a href="#">${recentLocation}</a>
+												<a href="event_list?mode=${mode}&search=${recentLocation}">${recentLocation}</a>
 											</li>
 										</c:forEach>
 									</c:otherwise>
