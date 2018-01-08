@@ -245,7 +245,7 @@
 								   </c:when>
 								</c:choose>
 							</tr>
-							<tr><td colspan="7" style=" border-bottom: 1px solid #e6e6e6;"> </td></tr> 
+<!-- 							<tr><td colspan="7" style=" border-bottom: 1px solid #e6e6e6;"> </td></tr>  -->
 						        <c:if test="${empty map.list}">
 					        <tr >
 								<c:choose>
