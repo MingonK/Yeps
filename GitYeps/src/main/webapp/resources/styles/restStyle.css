@@ -1087,7 +1087,7 @@ overflow: hidden; width: 132px; height: 24px; background-position: 0 -216px;
 }
 
 .mapbox-container {
-	width: 33.33333%;display: table-cell; vertical-align: middle;height:auto;overflow:hidden;
+	width: 33.33333%;display: table-cell; vertical-align: middle;
 }
 
 .u-relative {
@@ -1658,6 +1658,20 @@ a.ybtn {
     margin: 0 12px 0 0;
 }
 
+/*레스토랑 정보창*/
+.hovercard {
+    z-index: 1054;
+}
+.biz-hovercard {
+    font-size: 14px;
+    line-height: 1.28571em;
+}
+.hovercard {
+    z-index: 8;
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
 
 
 

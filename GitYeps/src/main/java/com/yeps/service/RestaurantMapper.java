@@ -44,7 +44,9 @@ public class RestaurantMapper {
 				return sqlSession.selectList("listRestaurant_delivery", map);
 			} else if (mode.equals("reserv")) {
 				return sqlSession.selectList("listRestaurant_reserv", map);
-			} else {
+			} else if(mode.equals("open")){
+				return sqlSession.selectList("listRestaurant_open_now", map);
+			}	else {
 				return sqlSession.selectList("listRestaurant_takeout", map);
 			}	
 			

@@ -260,27 +260,27 @@
 																			<ul class="dropdown_menu-group" style="list-style: none;">
 																				<li class="dropdown_item">
 																					<a class="tab-link js-dropdown-link tab-link--dropdown js-tab-link--dropdown is-selected" href="javascript:;" style="text-decoration:none;">
-																						<span class="tab-link_label" title="Yelp Sort">Yelp Sort</span>
+																						<span class="tab-link_label" title="Yeps Sort">Yeps Sort</span>
+																					</a>
+																				</li>
+																				<li class="dropdown_item">
+																					<a class="tab-link js-dropdown-link tab-link--dropdown js-tab-link--dropdown" href="#" onclick="sort_check()" style="text-decoration:none;">
+																						<span class="tab-link_label" title="최근">최근</span>
 																					</a>
 																				</li>
 																				<li class="dropdown_item">
 																					<a class="tab-link js-dropdown-link tab-link--dropdown js-tab-link--dropdown" href="javascript:;" style="text-decoration:none;">
-																						<span class="tab-link_label" title="Newest First">Newest First</span>
+																						<span class="tab-link_label" title="오래된">오래된</span>
 																					</a>
 																				</li>
 																				<li class="dropdown_item">
 																					<a class="tab-link js-dropdown-link tab-link--dropdown js-tab-link--dropdown" href="javascript:;" style="text-decoration:none;">
-																						<span class="tab-link_label" title="Oldest First">Oldest First</span>
+																						<span class="tab-link_label" title="높은 평점">높은 평점</span>
 																					</a>
 																				</li>
 																				<li class="dropdown_item">
 																					<a class="tab-link js-dropdown-link tab-link--dropdown js-tab-link--dropdown" href="javascript:;" style="text-decoration:none;">
-																						<span class="tab-link_label" title="Highest Rated">Highest Rated</span>
-																					</a>
-																				</li>
-																				<li class="dropdown_item">
-																					<a class="tab-link js-dropdown-link tab-link--dropdown js-tab-link--dropdown" href="javascript:;" style="text-decoration:none;">
-																						<span class="tab-link_label" title="Lowest Rated">Lowest Rated</span>
+																						<span class="tab-link_label" title="낮은 평점">낮은 평점</span>
 																					</a>
 																				</li>
 																			</ul>
@@ -746,8 +746,8 @@
 												<strong class="u-space-r-half" style="margin-right: 3px !important;font-weight: bold;">
 													<span class="today"></span><br>
 												</strong>
-												<span class="nowrap extra closed">
-													Closed now
+												<span class="closed">
+													영업 마감
 												</span>
 											</dd>
 										</dl>
@@ -873,11 +873,11 @@
 								</tbody>
 							</table>
 						</div>
-						<div class="restContent-menu-preview" style="margin-bottom: 24px;height:204px;">
-							<h3 class="restContent-menu-preview-heading">
-								<a href="#" style="color: #d32323; cursor: pointer;">메뉴</a>
-							</h3>
-						</div>
+<!-- 						<div class="restContent-menu-preview" style="margin-bottom: 24px;height:204px;"> -->
+<!-- 							<h3 class="restContent-menu-preview-heading"> -->
+<!-- 								<a href="#" style="color: #d32323; cursor: pointer;">메뉴</a> -->
+<!-- 							</h3> -->
+<!-- 						</div> -->
 						<div class="restContent-business-info" style="height:1000px;margin-bottom: 24px;">
 							<h3>
 								가게 정보
@@ -1199,11 +1199,34 @@
    });
    var week = new Array("sun","mon","tue","wed","thu","fri","sat")
    var d = new Date();
-   var day = d.getDate()-1;
+   var day = d.getDay();
    
-
+   
    $(".today").text($('.'+week[day]+'').text());
    
+   var today=$('.today').text()
+   var today_res = today.split("-");
+   var hours =  d.getHours(), minutes = d.getMinutes();
+   var current_time = (hours > 12) ? ("오후 "+hours-12 + ':' + minutes) : ("오전 "+hours + ':' + minutes);
+   var current=current_time.substring(3,current_time.length);
+   var current_split=current.split(":");
+  
+   var start=today_res[0].substring(3,today_res[0].length);//hh:dd 시작
+   var start_split=start.split(":");
+   
+   var end=today_res[1].substring(3,today_res[1].length);//hh:dd 끝
+   var end_split=end.split(":");
+   
+   
+   if(parseInt(current_split[0])>parseInt(start_split[0]) && parseInt(current_split[0])<parseInt(end_split[0])){
+	   $('.closed').removeClass('closed').addClass('open')
+	   $('#24x24_clock').parent().css("fill","#41a700")
+	   $('.open').text("영업중")
+	   
+   }else{
+	   
+   }
+	   
 </script>
 
 
@@ -1522,6 +1545,29 @@ function list(page){
            alert("불러오기 실패");
         },
    });
+}
+
+function sort_check(){
+	$(document).ajaxStart(function() {
+		$('body').css('overflow', 'hidden');
+		$('html').scrollTop(0);
+		$('.loading_wapper').fadeIn(500);
+	})
+					
+	$(document).ajaxStop(function() {
+		$('body').css('overflow', 'auto');
+		$('.loading_wapper').fadeOut(500);
+	})
+	
+	    $.ajax({
+	         type : 'post',
+	         url : 'restaurant_content_sort_ajax',
+	         data : queryString,
+	         dataType : 'json',
+         	success : function(responseData){
+         	
+         	}
+         });
 }
 
 function check() {	
