@@ -38,14 +38,27 @@ public class ReviewController {
 	@Autowired
 	private RestaurantMapper restaurantMapper;
 
-	@RequestMapping(value = "/review_list")
-	public ModelAndView review_list() {
-		List<ReviewDTO> list = reviewMapper.listReview();
+	@RequestMapping(value = "/restReview_list")
+	public ModelAndView review_list(HttpServletRequest req) {
+		List<RestaurantDTO> list = restaurantMapper.restaurantList();
 
 		ModelAndView mav = new ModelAndView();
+		
+		int curPage = req.getParameter("curPage") != null ? Integer.parseInt(req.getParameter("curPage")) : 1;
+		int count = restaurantMapper.getCount();
+		System.out.println(count);
+		int pageScale = 10;
+		int blockScale = 5;
+		YepsPager YepsPager = new YepsPager(count, curPage, pageScale, blockScale);
+		int start = YepsPager.getPageBegin();
+		int end = YepsPager.getPageEnd();
+		
 		mav.addObject("set", "review");
-		mav.addObject("list", list);
-		mav.setViewName("review/list");
+		mav.addObject("count", count); 
+		mav.addObject("curPage", curPage); 
+		mav.addObject("yepsPager", YepsPager);
+		mav.addObject("restaurant", list);
+		mav.setViewName("review/restaurant_review");
 		return mav;
 	}
 

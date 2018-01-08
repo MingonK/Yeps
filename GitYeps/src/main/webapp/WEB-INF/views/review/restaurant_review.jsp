@@ -3,13 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-<title>yeps EventReview-List</title>
+<title>yeps restReview-List</title>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/member.css?ver=7"/>"/>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/qna.css?ver=1"/>"/>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_list.css?ver=1"/>"/>
 </head>
 <%@ include file="../top.jsp"%>
-<div class="event_review_container">
+<div class="event_review_container" style="margin: 0 70px;">
  <div class="main-content-wrap--full">
     	<div class="top-shelf top-shelf-grey sat-top-shelf">
 			<div class="content-container">
@@ -24,9 +24,9 @@
 									<form name="member_manger_f" action="member_manager" class="member_manager_form arrange arrange--6 arrange--stack-small sc-search-form" method="post">
 										<div class="arrange_unit arrange_unit--fill sc-search-field">
 											<select name="search" class="search" style="width:100px; align:center;" >
-												<option value="eventname">이벤트이름</option>
+												<option value="rname">레스토랑이름</option>
 												<option value="name">작성자</option>
-												<option value="rname">이벤트장소</option>
+												
 											</select>
 											<input name="searchString" class="searchString" placeholder="What can we help you with?" type="text" value="" autocomplete=off style="width: 60%;">
 											<button class="member_managerbtn member_managerbtn-primary" type="submit" value="submit">
@@ -50,33 +50,32 @@
 	<h2 style="height: 40px; margin-top: 20px;">Event Review List</h2>
 	    <table style="width:100%;">
 			<tr>
-				<th align="center" width="6%">번호</th>
-				<th align="center"  width: 14%;">이벤트 이름</th>
-				<th align="center" width="17%">작성자</th>
-				<th align="center" width="37%">내용</th>
-				<th align="center" width="14%">작성일자</th>
-				<th align="center" width="6%">삭제</th>
-				<th align="center" width="6%">수정</th>
+				<th align="center" width="10%">번호</th>
+				<th align="center" width= "30%">레스토랑 이름</th>
+				<th align="center" width="20%">푸드스타일</th>
+				<th align="center" width="22%">작성일자</th>
+				<th align="center" width="9%">삭제</th>
+				<th align="center" width="9%">수정</th>
 			</tr>
-		<c:if test="${empty eventReviewList}">
+		<c:if test="${empty restaurant}">
 			<tr>
 				<td colspan="6" align="center">등록된 카테고리가 없습니다.</td>
 			</tr>
 		</c:if>
-		<c:forEach var="dto" items="${eventReviewList}">
+		<c:forEach var="dto" items="${restaurant}">
 			<tr>
-				<td id="eventReview" align="center">${dto.eventReview_num}</td>
-				<td id="eventReview" align="center"> 이벤트이름<%-- ${dto.eventname} --%></td>
-				<td id="eventReview" align="center">${dto.eventReview_writer}</td>
-				<td id="eventReview" align="center">${dto.eventReview_content}</td>
-				<td id="eventReview" align="center">${dto.eventReview_writedate}</td>
-				<td id="eventReview" align="center"><a style="color: red; " href="eventReview_delete?eventReview_num=${dto.eventReview_num}">삭제</a></td>
-				<td id="eventReview" align="center"><a style="color: red; " href="eventReview_edit?eventReview_num=${dto.eventReview_num}">수정</a></td>
+				<td id="restReview" align="center">${dto.rnum}</td>
+				
+				<td id="restReview" align="center">${dto.rname}</td>
+				<td id="restReview" align="center">${dto.foodstyle}</td>
+				<td id="restReview" align="center">${dto.rest_regdate}</td>
+				<td id="restReview" align="center"><a style="color: red; " href="restReview_delete?restReview_num=${dto.rnum}">삭제</a></td>
+				<td id="restReview" align="center"><a style="color: red; " href="restReview_edit?restReview_num=${dto.rnum}">수정</a></td>
 			</tr>
 		</c:forEach>
 	</table>
 	</div>
-		<div class="event_list_paging_section" style="font-size: 14px;">
+		<div class="event_list_paging_section" style="font-size: 14px; ">
 			<div class="event_list_pagination_block">
 				<div class="event_list_pagination_wrap">
 					<div class="event_list_page_of_pages">
@@ -162,7 +161,7 @@
 <script type="text/javascript">	
 
 	function list(page){
-		location.href="eventReview_list?curPage=" + page;
+		location.href="restReview_list?curPage=" + page;
 		
 	}</script>
 

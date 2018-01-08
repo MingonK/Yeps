@@ -64,7 +64,7 @@
 		 <tr><td>
 		 <a class="btn" href="restaurant_list">레스토랑 목록</a></td></tr>
 		 <tr><td>
-		 <a class="btn" href="review_list">레스토랑 리뷰 목록</a></td></tr>
+		 <a class="btn" href="restReview_list">레스토랑 리뷰 목록</a></td></tr>
 		
 		 <tr><td>
 		 <a class="btn" href="main">메인 페이지</a>&emsp;&emsp;&emsp;</td></tr>

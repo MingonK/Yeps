@@ -69,6 +69,7 @@ public class EventReviewController {
 		List<EventReviewDTO> list = eventReviewMapper.eventReviewList(start,end);
 		
 		mav.addObject("count", count); 
+		mav.addObject("curPage", curPage); 
 		mav.addObject("yepsPager", YepsPager);
 		mav.addObject("map", map);
 		mav.addObject("eventReviewList", list);

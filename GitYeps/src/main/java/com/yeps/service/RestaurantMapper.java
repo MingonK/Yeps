@@ -63,6 +63,14 @@ public class RestaurantMapper {
 	public int insertRest(RestaurantDTO dto) {
 		return sqlSession.update("insertRestaurant", dto);
 	}
+	
+	public List<RestaurantDTO> restaurantList() {
+		return sqlSession.selectList("restaurantList");
+	}
+	
+	public int deleteRestaurant(int rnum) {
+		return sqlSession.delete("deleteRestaurant",rnum);
+	}
 
 	public RestaurantDTO getRest(int rnum) {
 		return sqlSession.selectOne("getRest", rnum);

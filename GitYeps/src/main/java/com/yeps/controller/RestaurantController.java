@@ -454,6 +454,28 @@ public class RestaurantController {
 		return mav;
 	}
 
+	@RequestMapping(value = "/restaurant_delete")
+	public ModelAndView delete_restaurant(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();
+		int rnum = Integer.parseInt(req.getParameter("rnum"));
+		int res = restaurantMapper.deleteRestaurant(rnum);
+		String msg = null, url = null;
+		if(res>0) {
+			msg = "삭제되었습니다.";
+			url = "redirect: restReview_list";
+			mav.addObject("msg", msg);
+			mav.addObject("url", url); 
+			mav.setViewName("message");
+		}else {
+			msg = "삭제에 실패하였습니다.";
+			url = "redirect: restReview_list";
+			mav.addObject("msg", msg);
+			mav.addObject("url", url); 
+			mav.setViewName("message");
+		}
+		return mav;
+	}
+	
 	@RequestMapping(value = "/restaurant_delete_ajax")
 	@ResponseBody
 	public HashMap<String, Object> deleteRestaurantPhotoToAjax(HttpServletRequest req) {
