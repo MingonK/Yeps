@@ -4214,11 +4214,12 @@
 }
 
 .resIMG_div_53 {
-	min-width: 0;
+	min-width: 170px;
 	min-height: 0;
 	border-collapse: collapse;
 	display: table-cell;
 	vertical-align: top;
+	text-align: left;
 }
 
 .resIMG_ul_4 {
@@ -4232,6 +4233,10 @@
 	text-align: -webkit-match-parent;
 	border-collapse: collapse;
 	color: #333;
+}
+
+.resIMG_ul_4-1 {
+	margin-top : 7px;
 }
 
 .resIMG_a_4 {
@@ -4529,15 +4534,20 @@
 	border-collapse: collapse;
 	color: #333;
 }
-
+ 
 .resIMG_div_60 {
+	text-align: left;
 	display: block;
 	border-collapse: collapse;
 	color: #333;
 }
 
 .resIMG_a_5 {
-	margin-left: -140;
+	border-color: #ccc;
+    color: #666;
+    background-color: #f7f7f7;
+    background: linear-gradient(#fff, #f7f7f7);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
 	display: inline-block;
 	padding: 5px;
 	border: 1px solid #ccc;
@@ -4552,6 +4562,11 @@
 	text-decoration: none;
 	cursor: pointer;
 	border-collapse: collapse;
+}
+
+.resIMG_a_5:hover {
+	text-decoration:none !important;
+	background: linear-gradient(#fff, #fff);
 }
 
 .resIMG_span_13 {

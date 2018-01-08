@@ -1308,6 +1308,24 @@ small {
     display: flex;
 }
 
+.member_ptag1{
+	word-break: break-all;
+}
+
+.star_member_img{
+	    clip: rect(0, 0, 0, 0);
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    vertical-align: middle;
+    width: 84;
+    height: 303;
+}
+
+
 .member_details_content_layout_block {
 	    margin: 20px -15px;
 }
@@ -1883,6 +1901,104 @@ li {
 
 div {
     display: block;
+}
+
+
+.review-drafts>.review-draft {
+    margin-bottom: 12px;
+    border-bottom: 1px solid #e6e6e6;
+    padding-bottom: 11px;
+}
+
+.arrange {
+    display: table;
+    min-width: 100%;
+    table-layout: auto;
+}
+
+.arrange_unit--fill {
+    width: 100%;
+}
+
+.arrange_unit {
+    box-sizing: border-box;
+    display: table-cell;
+    vertical-align: top;
+}
+
+.review-drafts .biz-listing-medium {
+    margin-bottom: 12px;
+    display: table-cell;
+    float: left;
+}
+
+.biz-listing-medium .media-avatar {
+    border-right: 12px solid transparent;
+    border-left: none;
+    float: left;
+}
+
+.biz-listing-medium .media-block {
+    position: relative;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.biz-listing-medium .media-story {
+    -webkit-box-flex: 1;
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+    float: left;
+}
+
+.media-title a {
+    font-weight: bold;
+}
+
+.biz-listing-medium .price-category, .biz-listing-medium address {
+    font-size: 12px;
+    line-height: 1.5em;
+}
+
+.price-category {
+    clear: both;
+}
+
+.biz-listing-medium .price-category, .biz-listing-medium address {
+    font-size: 12px;
+    line-height: 1.5em;
+}
+
+address {
+    display: block;
+    font-style: normal;
+}
+
+.review_arrange_unit {
+    box-sizing: border-box;
+    display: table-cell;
+    vertical-align: top;
+    float: right;
+}
+
+.time-stamp {
+    font-size: 12px;
+    line-height: 1.5em;
+    color: #999;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.arrange_unit p {
+    margin-bottom: 12px;
 }
 
 /* .member_lightbox {

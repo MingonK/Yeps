@@ -40,7 +40,6 @@
         <interceptor>
             <!-- 회원관련 -->
             <mapping path="/member_manager" />
-            <mapping path="/member_delete" />
             <mapping path="/member_profile" />
             <mapping path="/member_details" />
             <mapping path="/member_photos" />

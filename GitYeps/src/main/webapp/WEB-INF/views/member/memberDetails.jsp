@@ -322,7 +322,7 @@
 				<div class="details-column-beta_reviews">
 				   <div>
 					  <div class="memberDetails-review-list" style="position: relative;">
-					     <ul  class="review-drafts" style="list-style: none; display: block;">
+					     <ul class="review-drafts"">
 					    <!----------------------------------------------- 아작스 통해 붙여넣는 부분 -------------------------------------------------- -->
 				    
 					     </ul>
@@ -654,44 +654,45 @@ $(function() {
 	 $.each(responseData.memberReview,function(i,item){
 		 $(".memberDetails-review-list ul").append(
 			
-				 '<li class="review-draft" style=" padding: 18px 0;  padding-bottom: 17px; display: list-item; text-align: -webkit-match-parent;">'+
- 					'<div class="arrange" style="width: 100%; overflow: hidden; height: auto;">'+
- 						'<div class="restContent-user"  style="float: left; padding: 0 15px; min-height: 1px; width: 66.66667% ">'+
+				 '<li class="review-draft">'+
+ 					'<div class="arrange">'+
+ 						'<div class="arrange_unit arrange_unit--fill">'+
 						    '<div class="media-block media-block--12 biz-listing-medium">'+
 				                '<div class="media-avatar">'+
 				                    '<div class="photo-box pb-60s">'+
-				                        '<a href="/biz/liholiho-yacht-club-san-francisco-2" class="js-analytics-click" data-analytics-label="biz-photo">'+
+				                        '<a href="restaurant_content?rnum='+ item.restaurantDTO.rnum +'" class="js-analytics-click" data-analytics-label="biz-photo">'+
 				                            '<img alt="Liholiho Yacht Club" class="photo-box-img" height="60" src="https://s3-media1.fl.yelpcdn.com/bphoto/FK2X98w6z5naJyiQjsGTNA/60s.jpg" srcset="https://s3-media1.fl.yelpcdn.com/bphoto/FK2X98w6z5naJyiQjsGTNA/90s.jpg 1.50x,https://s3-media1.fl.yelpcdn.com/bphoto/FK2X98w6z5naJyiQjsGTNA/168s.jpg 2.80x,https://s3-media1.fl.yelpcdn.com/bphoto/FK2X98w6z5naJyiQjsGTNA/ms.jpg 1.67x,https://s3-media1.fl.yelpcdn.com/bphoto/FK2X98w6z5naJyiQjsGTNA/180s.jpg 3.00x,https://s3-media1.fl.yelpcdn.com/bphoto/FK2X98w6z5naJyiQjsGTNA/120s.jpg 2.00x" width="60">'+
 				          			    '</a>'+
 				    		        '</div>'+
 				         	    '</div>'+
 				            '<div class="media-story">'+
 				                '<div class="media-title clearfix">'+
-				                    '<a class="biz-name js-analytics-click" data-analytics-label="biz-name" href="/biz/liholiho-yacht-club-san-francisco-2" data-hovercard-id="K8YqsGXicOLOUcQXTzRrnw"><span>'+ item.restaurantDTO.rname + '   </span></a>'+
+				                    '<a class="biz-name js-analytics-click" data-analytics-label="biz-name" href="restaurant_content?rnum='+ item.restaurantDTO.rnum +'" data-hovercard-id="K8YqsGXicOLOUcQXTzRrnw"><span>'+ item.restaurantDTO.rname + '   </span></a>'+
 				                '</div>'+
 				                '<div class="price-category">'+
 				                    '<span class="category-str-list">'+
-				                        '<a href="/search?cflt=bars&amp;find_loc=San+Francisco%2C+CA">' + item.restaurantDTO.foodstyle + '  </a>,'+
-				                        '<a href="/search?cflt=newamerican&amp;find_loc=San+Francisco%2C+CA">' + 
-				                        item.restaurantDTO.roadAddrPart1 + item.restaurantDTO.roadAddrPart2 + item.restaurantDTO.addrDetail + '   </a>,'+
-				                        '<a href="/search?cflt=seafood&amp;find_loc=San+Francisco%2C+CA"></a>'+
+				                        '<a href="#">' + item.restaurantDTO.foodstyle + '  </a>,'+
+				                        '<a href="yeps_main_saerch?location='+ item.restaurantDTO.rnum +'">' + 
+				                        item.restaurantDTO.roadAddrPart1 + item.restaurantDTO.roadAddrPart2 + item.restaurantDTO.addrDetail + '   </a>'+
 				    				'</span>'+
 				    			 '</div>'+
-				                 '<address>'+
+				                 '<address> <br>'+
 				                      item.restaurantDTO.raddress + item.restaurantDTO.hp2 + item.restaurantDTO.hp3 +
 // 				                     '871 Sutter St<br>San Francisco, CA 94109'+
 				                 '</address>'+
 				             '</div>'+
         		        '</div>'+
-				        '<div class="arrange_unit" align="right" style="margin-bottom: 10px;">'+
+				        '<div class="review_arrange_unit">'+
 			                '<p class="time-stamp nowrap review-draft_date-created text-right">'+
 			                    'Started on  '+  item.restaurantDTO.rest_regdate + 
 			                '</p>'+
-			                '<p lang="ko" style="margin-bottom: 12px; width: 100%; float: right; display: block;">'+
-							 item.content +
-						    '</p><br><br>'+
+			                '<div class="restList-star-rating-'+ item.gradepoint +'">'+
+		             		'<img class="star_member_img" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png">'+
+		            	'</div>'+
 			             '</div>'+
-			             
+			             '<p class="member_ptag1" lang="ko" style="margin-bottom: 12px; width: 100%; float: right; display: block;">'+
+						 item.content +
+					    '</p><br><br>'+
 			             /* '<div>'+
 							'<div class="restList-star-rating-'+item.gradepoint+'" >'+
 								'<img class="offscreen" '+
@@ -702,7 +703,7 @@ $(function() {
 						'</div>'+ */
 			       
 			            '<div class="clearfix"  style="margin-bottom: 50px;">'+
-			               '<a  style="float: left;" href="member_details?mnum=' + mnum + '" class="yepsbyn ybtn--small js-war-widget_finish-draft pull-left">Finish My Review</a>'+
+			               '<a  style="float: left;" href="member_details?mnum=' + mnum + '" class="yepsbyn ybtn--small js-war-widget_finish-draft pull-left">리뷰수정</a>'+
 			                  '<form action="review_delete?rvnum='+ item.rvnum + '&mnum=' + mnum + '" class="pull-right js-delete-review-draft-form" method="post" name="delete_draft">'+
 			               
 			                      '<input type="hidden" value="'+ item.rvnum + '" name="rvnum">'+
@@ -885,7 +886,7 @@ $(function() {
 						'</div>'+ */
 			       
 			            '<div class="clearfix"  style="margin-bottom: 50px;">'+
-			               '<a  style="float: left;" href="member_details?mnum=' + mnum + '" class="yepsbyn ybtn--small js-war-widget_finish-draft pull-left">Finish My Review</a>'+
+			               '<a  style="float: left;" href="member_details?mnum=' + mnum + '" class="yepsbyn ybtn--small js-war-widget_finish-draft pull-left">리뷰수정</a>'+
 			                  '<form action="review_delete?rvnum='+ item.rvnum + '&mnum=' + mnum + '" class="pull-right js-delete-review-draft-form" method="post" name="delete_draft">'+
 			               
 			                      '<input type="hidden" value="'+ item.rvnum + '" name="rvnum">'+

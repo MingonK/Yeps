@@ -89,22 +89,6 @@
 					<div class="mapbox-container">
 						<div class="mapbox" style="padding: 5px; background: #fff; border: 1px solid #ccc;">
 							<div class="mapbox-map" id="map2" style="height: 180px; border: 1px solid #ccc;">
-								<script>
-								  var map = new naver.maps.Map('map2',{
-								  	  zoom:12
-								    });
-								      
-								      var myaddress = '${getRest.roadAddrPart1}';
-								      	naver.maps.Service.geocode({address: myaddress}, function(status, response) {
-								          var result = response.result;
-								          var myaddr = new naver.maps.Point(result.items[0].point.x, result.items[0].point.y);
-								          map.setCenter(myaddr);
-								          var marker = new naver.maps.Marker({
-								            position: myaddr,
-								            map: map
-								          });
-								      });
-								 </script>
 							</div>
 							<div class="mapbox-text" style="min-height: 105px;">
 								<ul style="margin: 5px; display: block;">
@@ -335,6 +319,7 @@
 							                                					 	<label class="star-selector_label" for="rating-1">1 (Eek! Methinks not.)</label>
 							                                					 	<span class="tooltip-wrapper">
 							                                					 		<span class="tooltip">
+							                                					 			Eek! Methinks not.
 							                                					 		</span>
 							                                					 	</span>
 							                             					</li>
@@ -370,7 +355,7 @@
 							                                					 		</span>
 							                                					 	</span>
 							                              					</li>
-							                           					</ul>
+							                           					</ul> 
 							                                 			<input type="hidden" name="rnum" value="${getRest.rnum}">   
 							                                 			<input type="hidden" name="star" id="star">
 							                                 			<input type="hidden" name="mode" value="write">
@@ -1157,6 +1142,7 @@
        
        if(star == 0){
           $(this).parent().addClass('i-selector-stars--extra-large-0');
+          $('#check_li_1').dis
        }else if(star == 1){
           $(this).parent().addClass('i-selector-stars--extra-large-1');
        }else if(star == 2){
@@ -1229,6 +1215,32 @@ var list = new Array();
 <c:forEach var="fileDTO" items="${uploadFileList}">
 	list.push("${fileDTO.filename}");
 </c:forEach>
+
+    var myaddress = '${getRest.roadAddrPart1}';
+    naver.maps.Service.geocode({address : myaddress}, function(status, response) {
+		var result = response.result;
+		var myaddr = new naver.maps.Point(result.items[0].point.x, result.items[0].point.y);
+		map.setCenter(myaddr);
+			
+		var marker = new naver.maps.Marker({
+			position: myaddr,
+			map: map
+		});
+	});
+	var map = new naver.maps.Map('map2', {
+		zoom: 12, //지도의 초기 줌 레벨
+	    minZoom: 10, //지도의 최소 줌 레벨
+	    disableKineticPan: true,
+	    tileTransition: true,
+	    draggable: true,
+        pinchZoom: true,
+        scrollWheel: true,
+        keyboardShortcuts: true,
+        disableDoubleTapZoom: false,
+        disableDoubleClickZoom: true,
+        disableTwoFingerTapZoom: true
+	});
+
 
 for(var i = 0; i < list.length; i++) {
 	var img = document.createElement('img');
