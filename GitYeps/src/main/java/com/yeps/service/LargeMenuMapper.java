@@ -33,4 +33,8 @@ public class LargeMenuMapper {
 		map.put("rnum", rnum);
 		return sqlSession.selectList("getLarge_SmallMenu", map);
 	}
+	
+	public int deleteLargeMenuByMemberNumber(int mnum) {
+		return sqlSession.delete("deleteLargeMenuByMemberNumber", mnum);
+	}
 }

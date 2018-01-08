@@ -28,9 +28,9 @@ import com.yeps.model.MemberDTO;
 import com.yeps.model.MemberPhotoDTO;
 import com.yeps.service.EventMapper;
 import com.yeps.service.EventReviewMapper;
+import com.yeps.service.LargeMenuMapper;
 import com.yeps.service.MemberMapper;
 import com.yeps.service.MemberPhotoMapper;
-import com.yeps.service.MenuMapper;
 import com.yeps.service.MessageMapper;
 import com.yeps.service.QnAMapper;
 import com.yeps.service.RandomNum;
@@ -39,6 +39,7 @@ import com.yeps.service.ReviewMapper;
 import com.yeps.service.S3Connection;
 import com.yeps.service.SHA256Util;
 import com.yeps.service.SendEmail;
+import com.yeps.service.SmallMenuMapper;
 import com.yeps.service.YepsPager;
 
 @Controller
@@ -59,7 +60,9 @@ public class MemberController {
 	@Autowired
 	private EventReviewMapper eventReviewMapper;
 	@Autowired
-	private MenuMapper menuMapper;
+	private LargeMenuMapper largeMenuMapper;
+	@Autowired
+	private SmallMenuMapper smallMenuMapper;
 	@Autowired
 	private QnAMapper qnaMapper;
 	@Autowired
@@ -348,7 +351,8 @@ public class MemberController {
 			eventMapper.deleteEventByMemberNumber(mnum);
 			eventReviewMapper.deleteEventReviewByMemberNumber(mnum);
 			memberPhotoMapper.deleteMemberPhotosByMemberNumber(mnum);
-			menuMapper.deleteMenuByMemberNumber(mnum);
+			largeMenuMapper.deleteLargeMenuByMemberNumber(mnum);
+			smallMenuMapper.deleteSmallMenuByMemberNumber(mnum);
 			messageMapper.deleteMessageByMemberNumber(mnum);
 			qnaMapper.deleteQnAByMemberNumber(mnum);
 			reviewMapper.deleteReviewByMemberNumber(mnum);
@@ -754,7 +758,8 @@ public class MemberController {
 		eventMapper.deleteEventByMemberNumber(dto.getMnum());
 		eventReviewMapper.deleteEventReviewByMemberNumber(dto.getMnum());
 		memberPhotoMapper.deleteMemberPhotosByMemberNumber(dto.getMnum());
-		menuMapper.deleteMenuByMemberNumber(dto.getMnum());
+		largeMenuMapper.deleteLargeMenuByMemberNumber(dto.getMnum());
+		smallMenuMapper.deleteSmallMenuByMemberNumber(dto.getMnum());
 		messageMapper.deleteMessageByMemberNumber(dto.getMnum());
 		qnaMapper.deleteQnAByMemberNumber(dto.getMnum());
 		reviewMapper.deleteReviewByMemberNumber(dto.getMnum());
