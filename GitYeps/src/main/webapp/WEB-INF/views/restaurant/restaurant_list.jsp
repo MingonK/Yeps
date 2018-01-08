@@ -265,7 +265,7 @@
 											</div>
 										</div>
 										<div class="media-story" style="-webkit-box-flex: 1; flex: 1; min-width: 0; min-height: 0;">
-											<p style="margin-bottom: 0;display: block;">
+											<p style="margin-bottom: 0;display: -webkit-box; overflow: hidden; text-overflow: ellipsis; -webkit-line-clamp: 2; -webkit-box-orient: vertical; word-wrap: break-word; margin: 0;">
 													${map.LastReview.get(status.index).content}	
 												<c:if test="${LastReview.review.content.length()>60 }">
 													<a href="#" style="white-space: nowrap;color: #0073bb; cursor: pointer;">read more</a>
@@ -362,8 +362,6 @@
 		      
 		</div><!-- 리스트 -->
 
-
-
 				<div class="column-beta" style="width:330px;height:323px;float:left;padding:0px 15px;">
 				<div class="wrap">
 					<div id="map" style="width: 330px; height:300px;"></div>
@@ -376,9 +374,11 @@
 					addrDetail=[];
 					roadAddrPart2=[];
 					hp=[];
-					rest_filename=[]
+					rest_filename=[];
+					infoWindows=[];
 					for(var i=0;i<markers.length;i++){
 						markers[i].setMap(null);
+						
 					}
 				}
 				function refreshMarker(item,i){
@@ -478,7 +478,7 @@
 
 
 		for (var i = 0; i < roadAddrPart1.length; i++) {
-			naver.maps.Service.geocode({address : roadAddrPart1[i]},function(status, response) {
+			naver.maps.Service.geocode({address : roadAddrPart1[j]},function(status, response) {
 				var result = response.result;
 				var myaddr = new naver.maps.Point(result.items[0].point.x,result.items[0].point.y);
 				map.setCenter(myaddr); // 검색된 좌표로 지도 이동
@@ -544,12 +544,9 @@
 							<div class="feedback-biz-suggest">
 								<div class="text-container">
 									<h3 style="display: block;word-wrap: break-word !important;word-break: break-word !important;overflow-wrap: break-word !important;font-weight: bold;margin-bottom: 6px;font-size: 16px;line-height: 1.3125em;color: #d32323;margin: 0 0 6px;">Not here? Tell us what we're missing.</h3>
-									<p style="margin-bottom: 12px; display: block;">If the business you're looking for isn't here, add it!</p>
+									<p style="margin-bottom: 12px; display: block;">만약 찾으시는 가게가 없다면 등록해주세요!</p>
 								</div>
 								<a href="restaurant_insert" class="ybtn ybtn--primary ybtn--small js-show-add-biz-modal">레스토랑 등록</a>
-							</div>
-							<div class="feedback-contact">
-            					Got search feedback? <a href="#" class="search-feedback" data-component-bound="true" style="">Help us improve.</a>
 							</div>
 						</div>
 					</div>

@@ -319,6 +319,7 @@
 							                                					 	<label class="star-selector_label" for="rating-1">1 (Eek! Methinks not.)</label>
 							                                					 	<span class="tooltip-wrapper">
 							                                					 		<span class="tooltip">
+							                                					 			Eek! Methinks not.
 							                                					 		</span>
 							                                					 	</span>
 							                             					</li>
@@ -354,7 +355,7 @@
 							                                					 		</span>
 							                                					 	</span>
 							                              					</li>
-							                           					</ul>
+							                           					</ul> 
 							                                 			<input type="hidden" name="rnum" value="${getRest.rnum}">   
 							                                 			<input type="hidden" name="star" id="star">
 							                                 			<input type="hidden" name="mode" value="write">
@@ -745,8 +746,8 @@
 												<strong class="u-space-r-half" style="margin-right: 3px !important;font-weight: bold;">
 													<span class="today"></span><br>
 												</strong>
-												<span class="nowrap extra closed">
-													Closed now
+												<span class="closed">
+													영업 마감
 												</span>
 											</dd>
 										</dl>
@@ -872,11 +873,11 @@
 								</tbody>
 							</table>
 						</div>
-						<div class="restContent-menu-preview" style="margin-bottom: 24px;height:204px;">
-							<h3 class="restContent-menu-preview-heading">
-								<a href="#" style="color: #d32323; cursor: pointer;">메뉴</a>
-							</h3>
-						</div>
+<!-- 						<div class="restContent-menu-preview" style="margin-bottom: 24px;height:204px;"> -->
+<!-- 							<h3 class="restContent-menu-preview-heading"> -->
+<!-- 								<a href="#" style="color: #d32323; cursor: pointer;">메뉴</a> -->
+<!-- 							</h3> -->
+<!-- 						</div> -->
 						<div class="restContent-business-info" style="height:1000px;margin-bottom: 24px;">
 							<h3>
 								가게 정보
@@ -1141,6 +1142,7 @@
        
        if(star == 0){
           $(this).parent().addClass('i-selector-stars--extra-large-0');
+          $('#check_li_1').dis
        }else if(star == 1){
           $(this).parent().addClass('i-selector-stars--extra-large-1');
        }else if(star == 2){
@@ -1197,11 +1199,34 @@
    });
    var week = new Array("sun","mon","tue","wed","thu","fri","sat")
    var d = new Date();
-   var day = d.getDate()-1;
+   var day = d.getDay();
    
-
+   
    $(".today").text($('.'+week[day]+'').text());
    
+   var today=$('.today').text()
+   var today_res = today.split("-");
+   var hours =  d.getHours(), minutes = d.getMinutes();
+   var current_time = (hours > 12) ? ("오후 "+hours-12 + ':' + minutes) : ("오전 "+hours + ':' + minutes);
+   var current=current_time.substring(3,current_time.length);
+   var current_split=current.split(":");
+  
+   var start=today_res[0].substring(3,today_res[0].length);//hh:dd 시작
+   var start_split=start.split(":");
+   
+   var end=today_res[1].substring(3,today_res[1].length);//hh:dd 끝
+   var end_split=end.split(":");
+   
+   
+   if(parseInt(current_split[0])>parseInt(start_split[0]) && parseInt(current_split[0])<parseInt(end_split[0])){
+	   $('.closed').removeClass('closed').addClass('open')
+	   $('#24x24_clock').parent().css("fill","#41a700")
+	   $('.open').text("영업중")
+	   
+   }else{
+	   
+   }
+	   
 </script>
 
 

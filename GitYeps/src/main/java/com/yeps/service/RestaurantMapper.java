@@ -21,8 +21,6 @@ public class RestaurantMapper {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
-//		map.put("sql", sql);
-//		map.put("pricesSql", pricesSql);
 		if(prices.get(0)==0 && mode.equals("mode")) {// 가격 선택 X ,필터 선택 X
 			System.out.println("가격 선택 X ,필터 선택 X");
 			return sqlSession.selectList("listRestaurant", map);
@@ -42,7 +40,9 @@ public class RestaurantMapper {
 				return sqlSession.selectList("listRestaurant_delivery", map);
 			} else if (mode.equals("reserv")) {
 				return sqlSession.selectList("listRestaurant_reserv", map);
-			} else {
+			} else if(mode.equals("open")){
+				return sqlSession.selectList("listRestaurant_open_now", map);
+			}	else {
 				return sqlSession.selectList("listRestaurant_takeout", map);
 			}	
 			

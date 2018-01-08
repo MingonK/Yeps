@@ -7,7 +7,7 @@
    <title>Write a Review</title>
    <link rel="shortcut icon" type="image⁄x-icon" href="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/favicon.ico">
    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css?ver=4"/>"/>
-   <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css?ver=6"/>"/>
+   <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css?ver=7"/>"/>
    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/member.css?ver=6"/>"/>
    <script src="//code.jquery.com/jquery.min.js"></script>  
 </head>
@@ -87,8 +87,8 @@
             </div>
          </div>
       </div>
-   </div>
-   <div class="resIMG_div_42" align="center">
+      
+      <div class="resIMG_div_42" align="center">
       <p class="resIMG_p_2">
          Your review for
          <a class="bbb" href="restaurant_content?rnum=${myReview.rnum}">${rname}</a>
@@ -126,11 +126,13 @@
                                  </li>
                                  <li class="resIMG_li_4">
                                     <b class="resIMG_b_2">
-                                       ${myReview.memberDTO.address}
+										<c:forTokens items="${myReview.memberDTO.address}" delims="," var="sel">
+											${sel}<br>
+										</c:forTokens>
                                     </b>
                                  </li>
                               </ul>
-                              <ul class="resIMG_ul_4">
+                              <ul class="resIMG_ul_4 resIMG_ul_4-1">
                                  <li class="resIMG_li_5">
                                     <span class="resIMG_span_11">
                                        <svg class="resIMG_svg_5">
@@ -174,7 +176,7 @@
                         <p class="resIMG_p_3">
                            ${myReview.content}
                         </p>
-                     </div>
+                     </div> 
                      <div class="resIMG_div_60">
                         <a class="resIMG_a_5" href="review_write?rnum=${myReview.rnum}&mode=update&rvnum=${myReview.rvnum}&star=${myReview.gradepoint}">
                            <span class="resIMG_span_14">
@@ -196,6 +198,8 @@
                   
       			</div>
    			</div>
+   </div>
+   
    
    
    

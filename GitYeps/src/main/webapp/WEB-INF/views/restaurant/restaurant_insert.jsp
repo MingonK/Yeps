@@ -245,7 +245,7 @@ function busy_remove(obj) {
 function food_remove(obj){
 	var parent = document.getElementById("food-display");
 	var child = document.getElementById(obj);
-	parent.removeChild(child);
+	child.remove(child);
 }
 
 
@@ -385,8 +385,6 @@ function test() {
 		}
 	}
 	document.getElementById("alcohol").value =alcohol.join(',')
-	
-	alert("실행")
 	return true;
 }
 </script>
@@ -418,7 +416,7 @@ function test() {
 									 <label for="attr_BusinessName" class="restInsert-label-bold">사진 선택</label>
 						               <div class="filebox bs3-primary preview-image" style="margin: 6px 0 18px; width: 100%; height: 30px; display: block; text-align:left;">
 						                  <label for="input_file" id="input_file_label"style="width: 80px; color: black; display: inline-block; padding: .5em .75em; font-size: 14px; vertical-align: middle; text-align: center; cursor: pointer; border: 1px solid #999; border-radius: 3px;">사진 올리기</label>
-						                  <input type="file" id="input_file" class="upload-hidden" name="filename" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0;" >
+						                  <input type="file" id="input_file" class="upload-hidden" name="rest_filename" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0;" >
 						               </div> 
 									</li>
 									<li class="restInsert-list">
@@ -440,6 +438,7 @@ function test() {
 									<li class="restInsert-list">
 										<label for="raddress" class="restInsert-label-bold">전화번호</label><br>
 											<select class="restInsert-hp" name="raddress">
+												<option value="010">010</option>
 												<option value="02">02</option>
 												<option value="031">031</option>
 												<option value="032">032</option>
@@ -480,14 +479,15 @@ function test() {
 										<label for="foodstyle" class="restInsert-label-bold">음식 종류</label>
 										<ul style="width:460px;heigth:55px; margin: -3px;display: block;font-size: 0;line-height: 1;text-align: left;    list-style: none;">
 												<li class="restInsert-li">
-													<select class="restInsert-day" id="foodstyle" name="foodstyle" style="width:390px;">
+													<select class="restInsert-day" id="foodstyle" style="width:390px;">
 														<option value="한식">한식</option>
 														<option value="일식">일식</option>
 														<option value="중식">중식</option>
+														<option value="양식">양식</option>
 													</select>
 												</li>
 												<li class="restInsert-li">
-													<button type="button" value="submit" class="restInsert-button " style="padding: 5px 8px;font-size: 12px;line-height: 1.5em;border:1px solid #ccc;display:absolute;" onclick="food_add()">
+													<button type="button" value="submit" class="restInsert-button" style="padding: 5px 8px;font-size: 12px;line-height: 1.5em;border:1px solid #ccc;" onclick="food_add()">
 														<span>Add</span>
 													</button>
 												</li>
@@ -961,7 +961,7 @@ file.onchange = function () {
     var fileList = file.files ;
     // 읽기
     var reader = new FileReader();
-    reader.readAsDataURL(fileList [0]);
+    reader.readAsDataURL(fileList[0]);
 
     //로드 한 후
     reader.onload = function  () {

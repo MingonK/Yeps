@@ -16,6 +16,10 @@
    border-bottom: 1px solid #e6e6e6;
 }
 
+.restInsert-main a:hover {
+	text-decoration: underline;
+}
+
 .wrap {
    width: 330px;
    height: 300px;
@@ -64,6 +68,7 @@
 .restInsert-list {
    display: list-item;
    text-align: -webkit-match-parent;
+   margin-bottom: 12px;
 }
 
 .restInsert-li {
@@ -129,7 +134,6 @@
 
 .restInsert-submit {
    color: white;
-   border-color: #8d0005;
    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
    background-color: #d90007;
    background: linear-gradient(#d90007, #c91400);
@@ -137,7 +141,7 @@
    vertical-align: middle;
    margin: 0;
    cursor: pointer;
-   border: 1px solid;
+   border: 1px solid #8d0005;
    font-weight: bold;
    text-align: center;
    user-select: none;
@@ -145,6 +149,10 @@
    line-height: 1.28571em;
    padding: 8px 19px 9px;
    border-radius: 3px;
+}
+
+.restInsert-submit:hover {
+	background: red;
 }
 
 .restInsert-button {
@@ -1151,6 +1159,10 @@ overflow: hidden; width: 132px; height: 24px; background-position: 0 -216px;
 	color: white; border-color: #8d0005; background-color: #d90007; 
 }
 
+.restInsert-button:hover {
+	background: red;
+}
+
 .restContent-icon {
 	width: 18px; height: 18px; margin: -9px 0; fill: #fff; 
 	display: inline-block; vertical-align: middle; position: relative; overflow: hidden; top: -.1em;
@@ -1350,7 +1362,7 @@ overflow: hidden; width: 132px; height: 24px; background-position: 0 -216px;
 
 .restContent-table-hours th, .restContent-table-hours td {
 	height: 0;
-	padding: 0 18px 6px 0 !important;
+	padding: 0 13px 6px 0 !important;
 }
 
 .restContent-menu-preview-heading {
@@ -1616,6 +1628,7 @@ overflow: hidden; width: 132px; height: 24px; background-position: 0 -216px;
 }
 a.ybtn--twitter:hover, a.ybtn--twitter:visited, a.ybtn--facebook:hover, a.ybtn--facebook:visited, a.ybtn--google-plus:hover, a.ybtn--google-plus:visited, a.ybtn--line:hover, a.ybtn--line:visited, a.ybtn--github:hover, a.ybtn--github:visited, a.ybtn--rss:hover, a.ybtn--rss:visited, a.ybtn-primary:hover, a.ybtn-primary:visited, a.ybtn--primary:hover, a.ybtn--primary:visited, a.ybtn-deal:hover, a.ybtn-deal:visited, a.ybtn-platform:hover, a.ybtn-platform:visited, a.ybtn-cta:hover, a.ybtn-cta:visited, a.ybtn--cta:hover, a.ybtn--cta:visited, a.ybtn--green:hover, a.ybtn--green:visited {
     color: white;
+    background: red;
 }
 .ybtn-small:not(.ybtn--social), .ybtn--small:not(.ybtn--social) {
     padding: 5px 8px;

@@ -38,9 +38,18 @@ public class MenuController {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("rnum",rnum);
 		mav.setViewName("restaurant/restaurant_insertMenuForm");
-		System.out.println(rnum);
 		return mav;
-		
+	}
+	
+	@RequestMapping(value="/restaurant_updateMenuForm",method = RequestMethod.GET)
+	public ModelAndView updateMenuForm(HttpServletRequest req) {
+		String rnum=req.getParameter("rnum");
+		if(rnum==null||rnum.trim().equals("")) {
+			return new ModelAndView("redirect:restaurant_list");
+		}
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("rnum",rnum);
+		return mav;
 	}
 	
 	@RequestMapping(value = "/restaurant_insertMenu")
