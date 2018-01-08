@@ -161,7 +161,8 @@ public class RestaurantController {
 	public ModelAndView listRest(@RequestParam(defaultValue = "1") int curPage) {
 		List<Integer>price=new ArrayList<Integer>();
 		price.add(0);
-		int count = restaurantMapper.getCount();
+		String location = "서울특별시";
+		int count = restaurantMapper.getCountBySeoul(location);
 		int pageScale = 10;
 		int blockScale = 10;
 		// 페이지 나누기 관련 처리
@@ -169,7 +170,7 @@ public class RestaurantController {
 		int start = YepsPager.getPageBegin();
 		int end = YepsPager.getPageEnd();
 		
-		String location = "서울특별시";
+		
 		List<RestaurantDTO> list = restaurantMapper.listRest(start, end, "mode",price, location);
 		
 		List<Integer> reviewCount = new ArrayList<Integer>();

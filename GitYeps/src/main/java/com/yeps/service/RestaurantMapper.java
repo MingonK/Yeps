@@ -74,7 +74,11 @@ public class RestaurantMapper {
 	}
 
 	public int getCount() {
-		return sqlSession.selectOne("getCount");
+		return sqlSession.selectOne("getCountBySeoul");
+	}
+	
+	public int getCountBySeoul(String location) {
+		return sqlSession.selectOne("getCountBySeoul", location);
 	}
 
 	public int getImageCount(int rnum) {
