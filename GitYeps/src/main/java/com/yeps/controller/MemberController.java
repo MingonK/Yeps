@@ -756,7 +756,7 @@ public class MemberController {
 		qnaMapper.deleteQnAByMemberNumber(dto.getMnum());
 		reviewMapper.deleteReviewByMemberNumber(dto.getMnum());
 		restaurantMapper.deleteRestaurantByMemberNumber(dto.getMnum());
-
+ 
 		if (res > 0) {
 			msg = "회원 탈퇴 성공!";
 			session.invalidate();

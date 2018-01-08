@@ -344,7 +344,7 @@ public class QnAController {
 				msg = "답변 작성 및 수정 실패";
 				url = "qna_content?qnum=" + dto.getQnum();
 			}
-		} else {
+		} else { 
 			msg = "Q&A 답변 권한이 없습니다.";
 			url = "qna_list?mode=qna";
 		}
