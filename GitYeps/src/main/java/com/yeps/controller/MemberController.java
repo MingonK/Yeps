@@ -166,6 +166,7 @@ public class MemberController {
 			map.put("search", search);
 			map.put("searchString", searchString);
 			mav.addObject("count", count); // 레코드의 갯수
+			mav.addObject("curPage", curPage); 
 			mav.addObject("yepsPager", yepsPager);
 			mav.addObject("map", map);
 			mav.setViewName("member/memberManager");

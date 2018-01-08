@@ -222,7 +222,7 @@
 		                                             </li>
 		                                             <c:if test="${memberinfo.ismaster eq 'y' || memberinfo.ismanager eq 'y'}">
 		                                             <li class="drop-down-menu-link">
-		                                                <a class="js-analytics-click arrange arrange--middle arrange--6" href="member_manager" data-analytics-label="dropdown_rewards-inactive">
+		                                                <a class="js-analytics-click arrange arrange--middle arrange--6" href="manager_managerPage" data-analytics-label="dropdown_rewards-inactive">
 		                                                   <strong class="arrange_unit">
 		                                                      <span aria-hidden="true" style="width: 24px; height: 24px;" class="icon icon--24-cash-back icon--size-24 u-space-r1">
 		                                                         <svg class="icon_svg">

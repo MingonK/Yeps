@@ -21,7 +21,7 @@
 						<div class="column column-beta column--responsive">
 							<div class="sc-top-shelf-search-block">
 								<div class="sc-search-form-container">
-									<form name="member_manger_f" action="member_manager" class="member_manager_form arrange arrange--6 arrange--stack-small sc-search-form" method="post">
+									<form name="event_review_manager_f" action="eventReview_list" class="event_review_manager_form arrange arrange--6 arrange--stack-small sc-search-form" method="post">
 										<div class="arrange_unit arrange_unit--fill sc-search-field">
 											<select name="search" class="search" style="width:100px; align:center;" >
 												<option value="eventname">이벤트이름</option>
@@ -51,7 +51,7 @@
 	    <table style="width:100%;">
 			<tr>
 				<th align="center" width="6%">번호</th>
-				<th align="center" style="color: navy; width: 14%;">이벤트 이름</th>
+				<th align="center"  width: 14%;">이벤트 이름</th>
 				<th align="center" width="17%">작성자</th>
 				<th align="center" width="37%">내용</th>
 				<th align="center" width="14%">작성일자</th>
@@ -66,7 +66,7 @@
 		<c:forEach var="dto" items="${eventReviewList}">
 			<tr>
 				<td id="eventReview" align="center">${dto.eventReview_num}</td>
-				<td id="eventReview" align="center"><%-- ${dto.eventname} --%></td>
+				<td id="eventReview" align="center">${dto.eventDTO.eventname}</td>
 				<td id="eventReview" align="center">${dto.eventReview_writer}</td>
 				<td id="eventReview" align="center">${dto.eventReview_content}</td>
 				<td id="eventReview" align="center">${dto.eventReview_writedate}</td>

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yeps.model.LargeMenuDTO;
@@ -28,19 +29,31 @@ public class MenuController {
 	@Autowired
 	private RestaurantMapper restaurantMapper;
 	
-	@RequestMapping(value="/restaurant_insertMenuForm")
+	@RequestMapping(value="/restaurant_insertMenuForm",method = RequestMethod.GET)
 	public ModelAndView insertMenuForm(HttpServletRequest req) {
 		String rnum = req.getParameter("rnum");
 		if (rnum == null || rnum.trim().equals("")) {
 			return new ModelAndView("redirect:restaurant_list");
 		}
-		return new ModelAndView("restaurant_insertMenuForm");
-		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("rnum",rnum);
+		mav.setViewName("restaurant/restaurant_insertMenuForm");
+		return mav;
+	}
+	
+	@RequestMapping(value="/restaurant_updateMenuForm",method = RequestMethod.GET)
+	public ModelAndView updateMenuForm(HttpServletRequest req) {
+		String rnum=req.getParameter("rnum");
+		if(rnum==null||rnum.trim().equals("")) {
+			return new ModelAndView("redirect:restaurant_list");
+		}
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("rnum",rnum);
+		return mav;
 	}
 	
 	@RequestMapping(value = "/restaurant_insertMenu")
-	public ModelAndView insertMenu(HttpServletRequest req, @ModelAttribute LargeMenuDTO large_dto,
-			@ModelAttribute SmallMenuDTO small_dto) {
+	public ModelAndView insertMenu(HttpServletRequest req, @ModelAttribute LargeMenuDTO large_dto,@ModelAttribute SmallMenuDTO small_dto) {
 		String rnum = req.getParameter("rnum");
 		if(rnum==null||rnum.trim().equals("")) {
 			return new ModelAndView("redirect:restaurant_list");
@@ -58,7 +71,6 @@ public class MenuController {
 			large_dto.setRnum(Integer.parseInt(rnum));
 			largeMenuMapper.insertLargeMenu(large_dto);
 			int large_menunum = largeMenuMapper.getLastLargeMenu();
-			System.out.println(large_menunum);
 			for (int j = 0; j < small_length[i]; j++) {
 				small_dto.setLarge_menunum(large_menunum);
 				small_dto.setSmall_name(small_dto.getSmallMenuList().get(count).getSmall_name());
@@ -68,7 +80,6 @@ public class MenuController {
 				count++;
 			}
 		}
-
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("restaurant/restaurant_listMenu");
 		return mav;

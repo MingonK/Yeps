@@ -4,6 +4,7 @@
 <html>
 <head>
 	<title>Add a Event Photo - Yeps</title>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/message.css?ver=1"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/member.css?ver=7"/>"/>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/qna.css?ver=1"/>"/>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_list.css?ver=1"/>"/>
@@ -68,10 +69,11 @@
 		<c:forEach var="dto" items="${eventList}">
 			<tr>
 				<td id="event" align="center">${dto.evnum}</td>
-				<td id="event" style="color: navy;" align="center"><a href="#">${dto.eventname}</a> </td>
+				<td id="event" align="center"><a id="event_photo_manage" href="event_update_photo?evnum=${dto.evnum}&mode=manager" style="color: navy;">${dto.eventname}</a> </td>
 				<td id="event" align="center">${dto.event_register_date}</td>
 				<td id="event" align="center"><a style="color: red; " href="event_delete?evnum=${dto.evnum}">삭제</a></td>
 				<td id="event" align="center"><a style="color: red; " href="event_edit?evnum=${dto.evnum}">수정</a></td>
+				<input type="hidden" id="evnum_manager" value="${dto.evnum}">
 			</tr>
 		</c:forEach>
 	</table>
@@ -149,17 +151,17 @@
 								<a class="event_list_next_block_action" href="javascript:list('${yepsPager.totPage}')">
 									<span>End</span>
 								</a>
-							</div>
-						</c:if>
-						</div>
-					</div>
-					</c:if>
-				</div>
-			</div>
-		</div>
-	</div>
+							 </div>
+						 </c:if>
+						 </div>
+					 </div>
+					 </c:if>
+				  </div>
+			   </div>
+		   </div>
+	   </div>
    
-			<div id="photo_drop_super_container" style="margin: 0 15px;">
+		<%-- 	<div id="photo_drop_super_container" style="margin: 0 15px;">
 				<div id="photo_drop_container">
 					<div id="sucess_file_upload_header">
 								<h2>Photos</h2>
@@ -194,14 +196,14 @@
 																${registMemberList.get(status.index).nickname}
 															</c:if>
 
-<%-- 															<c:forEach var="memberDTO" items="${registMemberList}"> --%>
-<%-- 																<c:if test="${memberDTO.mnum == fileDTO.mnum && empty memberDTO.nickname}"> --%>
-<%-- 																	${memberDTO.email} --%>
-<%-- 																</c:if> --%>
-<%-- 																<c:if test="${memberDTO.mnum == fileDTO.mnum && !empty memberDTO.nickname}"> --%>
-<%-- 																	${memberDTO.nickname} --%>
-<%-- 																</c:if> --%>
-<%-- 															</c:forEach> --%>
+															<c:forEach var="memberDTO" items="${registMemberList}">
+																<c:if test="${memberDTO.mnum == fileDTO.mnum && empty memberDTO.nickname}">
+																	${memberDTO.email}
+																</c:if>
+																<c:if test="${memberDTO.mnum == fileDTO.mnum && !empty memberDTO.nickname}">
+																	${memberDTO.nickname}
+																</c:if>
+															</c:forEach>
 														</c:when>
 														<c:otherwise>
 															<c:if test="${memberinfo.mnum == fileDTO.mnum && empty memberinfo.nickname}">
@@ -235,12 +237,12 @@
 									</div>
 									
 <!-- 									<form id="photo_description" method="post" style="margin-bottom: 18px; display: block;" enctype="multipart/form-data"> -->
-<%-- 										<input type="hidden" name="evnum" id="evnum" value="${eventDTO.evnum}"> --%>
-<%-- 										<input type="hidden" name="mnum" id="mnum" value="${sessionScope.mnum}"> --%>
-<%-- 										<input type="hidden" name="filenum" id="filenum" value="${fileDTO.filenum}"> --%>
+										<input type="hidden" name="evnum" id="evnum" value="${eventDTO.evnum}">
+										<input type="hidden" name="mnum" id="mnum" value="${sessionScope.mnum}">
+										<input type="hidden" name="filenum" id="filenum" value="${fileDTO.filenum}">
 <!-- 										<label>Description</label> -->
 <!-- 										<div id="description_container"> -->
-<%-- 											<textarea rows="4" name="file_content">${fileDTO.file_content}</textarea> --%>
+											<textarea rows="4" name="file_content">${fileDTO.file_content}</textarea>
 <!-- 										</div> -->
 <!-- 										<button type="submit" id="Save_button"> -->
 <!-- 											<span>Save</span> -->
@@ -333,7 +335,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> --%>
 	
 	
 	<div class="loading_wapper">
@@ -342,6 +344,10 @@
 	</div>
 	
 	<script type="text/javascript">
+	
+	 function list(page){
+	        location.href="event_photo_manage?curPage=" + page;
+	    }
  	
 		$(document).ready(function() {
 			var mode = '${mode}';
@@ -363,6 +369,7 @@
 				$('#file_browser_input').click();				
 			})
 		});
+	
 		
 // 		$(document).on('click', '#Save_button', function(e) {
 // 			$('#photo_description').attr('action', 'event_updatePro_photo');
