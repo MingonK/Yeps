@@ -293,8 +293,8 @@
 							<p class="subheading">New to YEPS? 
 							<a class="signup-link u-pseudo-link">Sign up</a>
 							<p class="legal-copy">By logging in, you agree to YEPS 
-							<a class="legal-link" href="https://www.yelp.com/static?p=tos">Terms of Service</a>
-								and <a class="legal-link" href="/tos/privacy_en_us_20160131">Privacy Policy</a>.
+							<a class="legal-link" href="#">Terms of Service</a>
+								and <a class="legal-link" href="#">Privacy Policy</a>.
 							</p>
 						</div>
 
