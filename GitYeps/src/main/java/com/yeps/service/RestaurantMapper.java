@@ -72,13 +72,13 @@ public class RestaurantMapper {
 		return sqlSession.selectList("restaurantList", map);
 	}
 	
-	 public List<RestaurantDTO> findRestaurant(int startRow, int endRow, String search, String searchString) {
+	 public List<RestaurantDTO> findRestaurant_Manage(int startRow, int endRow, String search, String searchString) {
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("startRow", startRow);
 			map.put("endRow", endRow);
 			map.put("search", search);
 			map.put("searchString", searchString);
-			return sqlSession.selectList("findEventReview", map);
+			return sqlSession.selectList("findRestaurant_Manage", map);
 		}
 	
 	public int deleteRestaurant(int rnum) {

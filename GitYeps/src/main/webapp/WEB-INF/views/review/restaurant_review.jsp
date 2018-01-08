@@ -21,14 +21,14 @@
 						<div class="column column-beta column--responsive">
 							<div class="sc-top-shelf-search-block">
 								<div class="sc-search-form-container">
-									<form name="member_manger_f" action="member_manager" class="member_manager_form arrange arrange--6 arrange--stack-small sc-search-form" method="post">
+									<form name="member_manger_f" action="restReview_list" class="member_manager_form arrange arrange--6 arrange--stack-small sc-search-form" method="post">
 										<div class="arrange_unit arrange_unit--fill sc-search-field">
-											<select name="search" class="search" style="width:100px; align:center;" >
+											<select name="search" class="search" style="width:110px; align:center;" >
 												<option value="rname">레스토랑이름</option>
 												<option value="name">작성자</option>
 												
 											</select>
-											<input name="searchString" class="searchString" placeholder="What can we help you with?" type="text" value="" autocomplete=off style="width: 60%;">
+											<input name="searchString" class="searchString" placeholder="What can we help you with?" type="text" value="" autocomplete=off style="width: 55%;">
 											<button class="member_managerbtn member_managerbtn-primary" type="submit" value="submit">
 												<span>
 													<span class="i-wrap ig-wrap-common_sprite i-search-common_sprite-wrap">

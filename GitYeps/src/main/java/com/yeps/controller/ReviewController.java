@@ -51,7 +51,8 @@ public class ReviewController {
 		} else {
 			count = restaurantMapper.getSearchRestaurantCount(search, searchString);
 		}
-
+		System.out.println(search);
+		System.out.println(searchString);
 		int curPage = req.getParameter("curPage") != null ? Integer.parseInt(req.getParameter("curPage")) : 1;
 
 		System.out.println(count);
@@ -66,7 +67,7 @@ public class ReviewController {
 		if (searchString == null || searchString.trim().equals("") || search == null || search.trim().equals("")) {
 			restaurant = restaurantMapper.restaurantList(start,end);
 		} else {
-			restaurant = restaurantMapper.findRestaurant(start, end, search, searchString);
+			restaurant = restaurantMapper.findRestaurant_Manage(start, end, search, searchString);
 		}
 
 		Map<String, Object> map = new HashMap<String, Object>();
