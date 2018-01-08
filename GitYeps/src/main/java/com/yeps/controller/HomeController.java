@@ -210,7 +210,7 @@ public class HomeController {
 		int randomPhoto_reivewCount = reviewMapper.getRestaurantReviewCount(randomPhoto.getRnum());
 		int randomPhoto_starAvg = reviewMapper.getStarAvg(randomPhoto.getRnum());
 		
-		//랜덤 사진
+		//랜덤 사진 
 		mav.addObject("randomPhoto", randomPhoto);
 		mav.addObject("randomPhoto_reivewCount", randomPhoto_reivewCount);
 		mav.addObject("randomPhoto_starAvg", randomPhoto_starAvg);

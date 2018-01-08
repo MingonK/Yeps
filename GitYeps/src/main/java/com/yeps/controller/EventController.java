@@ -147,7 +147,7 @@ public class EventController {
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("locationList", locationList);
-		mav.addObject("search", search); 
+		mav.addObject("search", search);  
 		mav.addObject("mode", mode);
 		mav.addObject("set", "events");
 		mav.addObject("fileList", fileList);

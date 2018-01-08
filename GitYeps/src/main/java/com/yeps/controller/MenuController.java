@@ -22,7 +22,7 @@ import com.yeps.service.SmallMenuMapper;
 @Controller
 public class MenuController {
 
-	@Autowired
+	@Autowired 
 	private LargeMenuMapper largeMenuMapper;
 	@Autowired
 	private SmallMenuMapper smallMenuMapper;

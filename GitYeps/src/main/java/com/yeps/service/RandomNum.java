@@ -8,9 +8,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class RandomNum {
 
-	@Autowired
-	RandomNum randomNum;
-
 	private boolean lowerCheck;
 	private int size;
 
