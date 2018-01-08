@@ -51,15 +51,15 @@
 	    <table style="width:100%;">
 			<tr>
 				<th align="center" width="10%">번호</th>
-				<th align="center" width= "30%">레스토랑 이름</th>
-				<th align="center" width="20%">푸드스타일</th>
-				<th align="center" width="22%">작성일자</th>
+				<th align="center" width= "35%">레스토랑 이름</th>
+				<th align="center" width="17%">푸드스타일</th>
+				<th align="center" width="20%">작성일자</th>
 				<th align="center" width="9%">삭제</th>
 				<th align="center" width="9%">수정</th>
 			</tr>
 		<c:if test="${empty restaurant}">
 			<tr>
-				<td colspan="6" align="center">등록된 카테고리가 없습니다.</td>
+				<td colspan="6" align="center">등록된 레스토랑이 없습니다.</td>
 			</tr>
 		</c:if>
 		<c:forEach var="dto" items="${restaurant}">

@@ -50,7 +50,7 @@
    <div id="manager_header" style="width: 70%; height: 50px; margin: 0 100px;" >
 	  <h2>Management Page</h2>
    </div>
-   <div id="manager_management_list" style="width: 60%; height: 300px; margin: 0 200px; margin-bottom: 70px;">
+   <div id="manager_management_list" style="  width: 40%; height: 300px; margin: 0 200px; margin-bottom: 70px;">
 	  <table>
 	  <tr>
 	  <td>
@@ -69,6 +69,16 @@
 		 <tr><td>
 		 <a class="btn" href="main">메인 페이지</a>&emsp;&emsp;&emsp;</td></tr>
 	 </table>
+	 
    </div>
+   <!--  <div id="search_result_field" style="float: left; width: 60%;">
+       <div id="search_result_block">
+           <table>
+               <tr>
+               <td>검색 결과 내용 보여주기</td></tr>
+           </table>
+       </div>
+   </div> -->
+  
 </div>
  <%@ include file="../bottom.jsp"%> 

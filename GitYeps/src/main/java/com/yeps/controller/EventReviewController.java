@@ -58,21 +58,36 @@ public class EventReviewController {
 	@RequestMapping(value = "/eventReview_list")
 	public ModelAndView eventReview_list(HttpServletRequest req, @RequestParam(defaultValue = "1") int curPage) {
 		ModelAndView mav = new ModelAndView();
-		int count = eventReviewMapper.eventReviewCount();
+		String search = req.getParameter("search");
+		String searchString = req.getParameter("searchString");
+		int count = 0;
+		if (searchString == null || searchString.trim().equals("") || search == null || search.trim().equals("")) {
+			count = eventReviewMapper.eventReviewCount();
+		} else {
+			count = eventReviewMapper.getSearchEventReviewCount(search, searchString);
+		}
+
 		int pageScale = 10;
 		int blockScale = 10;
 		YepsPager YepsPager = new YepsPager(count, curPage, pageScale, blockScale);
 		int start = YepsPager.getPageBegin();
 		int end = YepsPager.getPageEnd();
+		List<EventReviewDTO> eventReview = null;
+		if (searchString == null || searchString.trim().equals("") || search == null || search.trim().equals("")) {
+			eventReview = eventReviewMapper.eventReviewList(start,end);
+		} else {
+			eventReview = eventReviewMapper.findEventReview(start, end, search, searchString);
+		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<EventReviewDTO> list = eventReviewMapper.eventReviewList(start,end);
-		
+	
+		map.put("search", search);
+		map.put("searchString", searchString);
 		mav.addObject("count", count); 
 		mav.addObject("curPage", curPage); 
 		mav.addObject("yepsPager", YepsPager);
 		mav.addObject("map", map);
-		mav.addObject("eventReviewList", list);
+		mav.addObject("eventReviewList", eventReview);
 		mav.setViewName("manager/eventReview");
 		return mav;
 	}

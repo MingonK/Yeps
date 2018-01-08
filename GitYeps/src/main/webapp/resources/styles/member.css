@@ -777,7 +777,14 @@ small {
     float: left;
 }
 
-.member_manager_form [type="text"], .member_manager_form [type="password"], .member_manager_form [type="email"], .member_manager_form [type="url"], .member_manager_form [type="tel"], .member_manager_form textarea, .member_manager_form select, .member_manager_form .pseudo-input {
+.event_review_manager_form .sc-search-field input, .ie .event_review_manager_form .sc-search-field input {
+	width: 65%;
+    padding: 8px 12px 7px;
+    float: left;
+}
+
+.member_manager_form [type="text"], .member_manager_form [type="password"], .member_manager_form [type="email"], .member_manager_form [type="url"], .member_manager_form [type="tel"], .member_manager_form textarea, .member_manager_form select, .member_manager_form .pseudo-input,
+.event_review_manager_form [type="text"], .event_review_manager_form [type="password"], .event_review_manager_form [type="email"], .event_review_manager_form [type="url"], .event_review_manager_form [type="tel"], .event_review_manager_form textarea, .event_review_manager_form select, .event_review_manager_form .pseudo-input {
     display: block;
     box-sizing: border-box;
     width: 10%;

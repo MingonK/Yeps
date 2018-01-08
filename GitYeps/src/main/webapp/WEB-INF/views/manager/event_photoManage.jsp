@@ -161,7 +161,7 @@
 		   </div>
 	   </div>
    
-			<div id="photo_drop_super_container" style="margin: 0 15px;">
+		<%-- 	<div id="photo_drop_super_container" style="margin: 0 15px;">
 				<div id="photo_drop_container">
 					<div id="sucess_file_upload_header">
 								<h2>Photos</h2>
@@ -196,14 +196,14 @@
 																${registMemberList.get(status.index).nickname}
 															</c:if>
 
-<%-- 															<c:forEach var="memberDTO" items="${registMemberList}"> --%>
-<%-- 																<c:if test="${memberDTO.mnum == fileDTO.mnum && empty memberDTO.nickname}"> --%>
-<%-- 																	${memberDTO.email} --%>
-<%-- 																</c:if> --%>
-<%-- 																<c:if test="${memberDTO.mnum == fileDTO.mnum && !empty memberDTO.nickname}"> --%>
-<%-- 																	${memberDTO.nickname} --%>
-<%-- 																</c:if> --%>
-<%-- 															</c:forEach> --%>
+															<c:forEach var="memberDTO" items="${registMemberList}">
+																<c:if test="${memberDTO.mnum == fileDTO.mnum && empty memberDTO.nickname}">
+																	${memberDTO.email}
+																</c:if>
+																<c:if test="${memberDTO.mnum == fileDTO.mnum && !empty memberDTO.nickname}">
+																	${memberDTO.nickname}
+																</c:if>
+															</c:forEach>
 														</c:when>
 														<c:otherwise>
 															<c:if test="${memberinfo.mnum == fileDTO.mnum && empty memberinfo.nickname}">
@@ -237,12 +237,12 @@
 									</div>
 									
 <!-- 									<form id="photo_description" method="post" style="margin-bottom: 18px; display: block;" enctype="multipart/form-data"> -->
-<%-- 										<input type="hidden" name="evnum" id="evnum" value="${eventDTO.evnum}"> --%>
-<%-- 										<input type="hidden" name="mnum" id="mnum" value="${sessionScope.mnum}"> --%>
-<%-- 										<input type="hidden" name="filenum" id="filenum" value="${fileDTO.filenum}"> --%>
+										<input type="hidden" name="evnum" id="evnum" value="${eventDTO.evnum}">
+										<input type="hidden" name="mnum" id="mnum" value="${sessionScope.mnum}">
+										<input type="hidden" name="filenum" id="filenum" value="${fileDTO.filenum}">
 <!-- 										<label>Description</label> -->
 <!-- 										<div id="description_container"> -->
-<%-- 											<textarea rows="4" name="file_content">${fileDTO.file_content}</textarea> --%>
+											<textarea rows="4" name="file_content">${fileDTO.file_content}</textarea>
 <!-- 										</div> -->
 <!-- 										<button type="submit" id="Save_button"> -->
 <!-- 											<span>Save</span> -->
@@ -335,7 +335,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> --%>
 	
 	
 	<div class="loading_wapper">
@@ -369,180 +369,7 @@
 				$('#file_browser_input').click();				
 			})
 		});
-		
-	/* 	$('#event_photo_manage').click(function(){
-			var evnum = $('#evnum_manager').val();
-		
-			 $.ajax({
-	             type : 'post',
-	             url : 'event_photo_manage_ajax?evnum='+ evnum, 
-	             data : evnum,
-	             dataType : 'json',
-	             success : function(responseData){
-	            	var registMemberList = responseData.registMemberList;
-	                var uploadFileList = responseData.uploadFileList;
-	                var eventDTO = responseData.eventDTO;
-	                
-	       	 $('.photo_drop_super_container').empty(); 
-		 $.each(responseData.memberReview,function(i,item){
-			 $(".photo_drop_super_container").append(
-					 
-					 '<div id="photo_drop_container">'+
-						'<div id="sucess_file_upload_header">'+
-									'<h2>Photos</h2>'+
-								'</div>'+
-							'<c:if test="${!empty '+ uploadFileList + '}">'+
-								'<div id="user_photo_edit_container">'+
-								'<c:forEach var="fileDTO" items="' + uploadFileList + '}" varStatus="status">'+
-									'<div id="user_photo_edit">'+
-										'<div id="user_photo_edit_top">'+
-											'<div id="user_photo_area">'+
-												'<div id="user_photo_box" style="position: relative;">'+
-													'<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${fileDTO.filename}" alt="event_photo" id="photo_box_img" width="168px" height="168px">'+
-													'<c:if test="${fileDTO.ismainphoto == 'y'}">'+
-													'<div class="photo-box-overlay">'+
-														'<div class="photo-box-overlay_caption">메인사진</div>'+
-													'</div>'+
-													'</c:if>'+
-												'</div>'+
-											'</div>'+
-											'<div id="user_photo_write_info">'+
-												'<p>'+
-													'From'+ 
-													'<a href="member_details" style="font-weight: bold;">'+
-													<!-- 이름 출력 다시 생각해봐 -->
-														
-														'<c:choose>'+
-															'<c:when test="${sessionScope.memberinfo.ismanager eq 'y' ||  sessionScope.memberinfo.ismaster eq 'y' || ' + eventDTO.mnum + ' == memberinfo.mnum}">'+
-																'<c:if test="${empty'+ registMemberList.get(status.index).nickname + '}">'+
-																	'registMemberList.get(status.index).email'+
-																'</c:if>'+
-																'<c:if test="${!empty' + registMemberList.get(status.index).nickname +'}">'+
-																	'registMemberList.get(status.index).nickname'+
-																'</c:if>'+
-
 	
-															'</c:when>'+
-															'<c:otherwise>'+
-																'<c:if test="${memberinfo.mnum == fileDTO.mnum && empty memberinfo.nickname}">'+
-																	'${memberinfo.email}'+
-																'</c:if>'+
-																'<c:if test="${memberinfo.mnum == fileDTO.mnum && !empty memberinfo.nickname}">'+
-																	'${memberinfo.nickname}'+
-																'</c:if>'+
-															'</c:otherwise>'+
-														'</c:choose>'+	
-													'</a>'+
-												'</p>'+ 
-												
-												'<c:if test="${memberinfo.ismaster eq 'y' || memberinfo.ismanager eq 'y' || ' + eventDTO.mnum +' == memberinfo.mnum || fileDTO.mnum == memberinfo.mnum}">'+
-												'<form name="event_photo_delete_form" id="info_photo" action="event_delete_photo" method="post">'+
-													'<input type="hidden" name="filename" value="${fileDTO.filename}">'+
-													'<input type="hidden" name="evnum" value="' + eventDTO.evnum + '">' +
-													'<input type="hidden" name="ismainphoto" value="${fileDTO.ismainphoto}">'+
-													'<button id="delete_button">삭제</button>'+ 
-												'</form>'+ 
-												'</c:if>'+
-												'<c:if test="${(memberinfo.ismaster eq 'y' || memberinfo.ismanager eq 'y' ||'+ eventDTO.mnum + '== memberinfo.mnum) && fileDTO.ismainphoto eq 'n'}">'+
-												'<form name="event_mainphoto_form" id="info_photo" action="event_main_photo" method="post" style="margin-top: 10px;">'+
-													'<input type="hidden" name="filenum" value="${fileDTO.filenum}">'+
-													'<input type="hidden" name="evnum" value="' + eventDTO.evnum +'">'+
-													'<input type="hidden" name="mnum" value="' + eventDTO.mnum + '">'+
-													'<button id="mainphoto_button">대표사진 변경</button>'+ 
-												'</form>'+
-												'</c:if>'+
-											'</div>'+
-										'</div>'+
-									'</div>'+
-								'</c:forEach>'+	
-								'</div>'+
-							'</c:if>'+
-						'</div>'+
-		)}); */
-		
-// 		 $('.event_list_paging_section').empty();
-//          var pagingHtml = "";
-//          pagingHtml = '<div class="event_list_pagination_block">' + 
-//          				'<div class="event_list_pagination_wrap">' + 
-//          				'<div class="event_list_page_of_pages">';
-//          if(responseData.YepsPager.blockEnd == 0) {
-//       	   pagingHtml += 'Page ' + responseData.photoPager.curPage + ' of 1';
-//          } else {
-//       	   pagingHtml += 'Page ' + responseData.photoPager.curPage + ' of ' + responseData.photoPager.blockEnd;
-//          }
-//          pagingHtml += '</div>';
-//          if(responseData.photoPager.blockEnd != 1) {
-//       	   pagingHtml += '<div class="event_list_page_link_wrapper">';
-//       	   pagingHtml += '<div class="event_list_page_link_wrap">';
-//       	   if(responseData.photoPager.curBlock > 1) {
-//       		   pagingHtml += '<div class="event_list_next_block">';
-//       		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+ 1 +')">';
-//       		   pagingHtml += '<span>Start</span>';
-//       		   pagingHtml += '</a>';
-//       		   pagingHtml += '</div>';
-//       	   }
-      	   
-//       	   if(responseData.photoPager.curBlock > 1) {
-//       		   pagingHtml += '<div class="event_list_next_block">';
-//       		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+responseData.photoPager.prevPage+')">';
-//       		   pagingHtml += '<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">';
-//       		   pagingHtml += '<svg class="icon_svg">';
-//       		   pagingHtml += '<path d="M14.475 18.364l1.414-1.414L10.94 12l4.95-4.95-1.415-1.414L8.11 12l6.365 6.364z"></path>';
-//       		   pagingHtml += '</svg>';
-//       		   pagingHtml += '</span>';
-//       		   pagingHtml += '<span>Previous</span>';
-//       		   pagingHtml += '</a>';
-//       		   pagingHtml += '</div>';
-//       	   }
-      	   
-//       	   for(var num = responseData.photoPager.blockBegin; num <= responseData.photoPager.blockEnd; num++) {
-//       		   pagingHtml += '<div class="event_list_page_link_option">';
-//       		   if(num == responseData.photoPager.curPage) {
-//       			   pagingHtml += '<span class="event_list_page_option_action">';
-//       			   pagingHtml += num;
-//       			   pagingHtml += '</span>';
-//       		   } else {
-//       			   pagingHtml += '<a href="javascript:list('+ num +')" class="event_list_page_option_link_action">';
-//       			   pagingHtml += num;
-//       			   pagingHtml += '</a>';
-//       		   }
-//       		   pagingHtml += '</div>';
-//       	   }
-      	   
-//       	   if(responseData.photoPager.curBlock <= responseData.photoPager.totBlock) {
-//       		   pagingHtml += '<div class="event_list_next_block">';
-//       		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+responseData.photoPager.nextPage+')">';
-//       		   pagingHtml += '<span>Next</span>';
-//       		   pagingHtml += '<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">';
-//       		   pagingHtml += '<svg class="icon_svg">';
-//       		   pagingHtml += '<path d="M9.525 5.636L8.11 7.05 13.06 12l-4.95 4.95 1.415 1.414L15.89 12 9.524 5.636z"></path>';
-//       		   pagingHtml += '</svg>';
-//       		   pagingHtml += '</span>';
-//       		   pagingHtml += '</a>';
-//       		   pagingHtml += '</div>';
-//       	   }
-//       	   if(responseData.photoPager.curBlock <= responseData.photoPager.totBlock) {
-//       		   pagingHtml += '<div class="event_list_next_block">';
-//       		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+responseData.photoPager.totPage+')">';
-//       		   pagingHtml += '<span>End</span>';
-//       		   pagingHtml += '</a>';
-//       		   pagingHtml += '</div>';
-//       	   }
-//       	   pagingHtml += '</div>';
-//       	   pagingHtml += '</div>';
-//          }
-//          pagingHtml += '</div>';
-//          pagingHtml += '</div>';
-//          pagingHtml += '</div>';
-
-//          $('.event_list_paging_section').append(pagingHtml);
-//  	     },
-// 	     error : function(request, status, error) {
-// 	           alert("불러오기 실패");
-// 	        },
-// 	   });
-			 
-// 	}); 
 		
 // 		$(document).on('click', '#Save_button', function(e) {
 // 			$('#photo_description').attr('action', 'event_updatePro_photo');

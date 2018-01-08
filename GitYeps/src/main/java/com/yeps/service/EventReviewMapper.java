@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yeps.model.EventReviewDTO;
+import com.yeps.model.MemberDTO;
 
 @Service
 public class EventReviewMapper {
@@ -50,4 +51,24 @@ public class EventReviewMapper {
     public List<EventReviewDTO> getEventReview(int evrvnum){
     	return sqlSession.selectList("getEventReview",evrvnum);
     }
+    
+    public int getSearchEventReviewCount(String search, String searchString) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("search", search);
+		map.put("searchString", searchString);
+		try {
+			return sqlSession.selectOne("getSearchEventReviewCount", map);
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+    
+    public List<EventReviewDTO> findEventReview(int startRow, int endRow, String search, String searchString) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		map.put("search", search);
+		map.put("searchString", searchString);
+		return sqlSession.selectList("findEventReview", map);
+	}
 }

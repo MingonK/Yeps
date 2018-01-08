@@ -21,7 +21,7 @@
 						<div class="column column-beta column--responsive">
 							<div class="sc-top-shelf-search-block">
 								<div class="sc-search-form-container">
-									<form name="member_manger_f" action="member_manager" class="member_manager_form arrange arrange--6 arrange--stack-small sc-search-form" method="post">
+									<form name="event_review_manager_f" action="eventReview_list" class="event_review_manager_form arrange arrange--6 arrange--stack-small sc-search-form" method="post">
 										<div class="arrange_unit arrange_unit--fill sc-search-field">
 											<select name="search" class="search" style="width:100px; align:center;" >
 												<option value="eventname">이벤트이름</option>
@@ -66,7 +66,7 @@
 		<c:forEach var="dto" items="${eventReviewList}">
 			<tr>
 				<td id="eventReview" align="center">${dto.eventReview_num}</td>
-				<td id="eventReview" align="center"> 이벤트이름<%-- ${dto.eventname} --%></td>
+				<td id="eventReview" align="center">${dto.eventDTO.eventname}</td>
 				<td id="eventReview" align="center">${dto.eventReview_writer}</td>
 				<td id="eventReview" align="center">${dto.eventReview_content}</td>
 				<td id="eventReview" align="center">${dto.eventReview_writedate}</td>
