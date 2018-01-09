@@ -48,15 +48,15 @@
    </div>
 <div id="event_review_header" style="margin: 30px;">
 	<h2 style="height: 40px; margin-top: 20px;">Event Review List</h2>
-	    <table style="width:100%;">
+	    <table style="width: 100%;">
 			<tr>
-				<th align="center" width="6%">번호</th>
-				<th align="center"  width: 14%;">이벤트 이름</th>
-				<th align="center" width="17%">작성자</th>
-				<th align="center" width="37%">내용</th>
-				<th align="center" width="14%">작성일자</th>
-				<th align="center" width="6%">삭제</th>
-				<th align="center" width="6%">수정</th>
+				<th align="center" width="5%">번호</th>
+				<th align="center"  width="25%">이벤트 이름</th>
+				<th align="center" width="15%">작성자</th>
+				<th align="center" width="35%">내용</th>
+				<th align="center" width="10%">작성일자</th>
+				<th align="center" width="5%">삭제</th>
+				<th align="center" width="5%">수정</th>
 			</tr>
 		<c:if test="${empty eventReviewList}">
 			<tr>
@@ -76,7 +76,7 @@
 		</c:forEach>
 	</table>
 	</div>
-		<div class="event_list_paging_section" style="font-size: 14px;">
+		<div class="event_list_paging_section" style="font-size: 14px; width: 100%;  margin: 0 30px;">
 			<div class="event_list_pagination_block">
 				<div class="event_list_pagination_wrap">
 					<div class="event_list_page_of_pages">

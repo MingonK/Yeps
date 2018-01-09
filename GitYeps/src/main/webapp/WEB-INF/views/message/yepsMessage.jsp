@@ -105,13 +105,13 @@
     			<h4 style="display: table-cell; padding: 0px 7px; font-size: 100%; font: inherit;" onclick="readCheck('${map.lMode}');">×</h4>
     		</div>
     		<h2>
-    	    	메세지 보내기
+    	    	메세지 받기
     	    </h2>
     	</div>
     	
     	<div id="flag_popup_description" style="padding: 12px 8px 0;">
     		<div>
-    			<form name="sendIssueform" method="post">
+    			
     				<div>
 						<h4 align="left" style="color: #d32323;">Message From</h4>
     	    			<input type="text" id="from" readOnly style="width: 95%; height: 20px;">
@@ -120,7 +120,7 @@
 	        			<h4 align="left" style="color: #d32323;">Content is</h4>
 	            		<textarea rows="4" id="message" readOnly style="width: 95%;"></textarea>
     	    		</div>
-    			</form>
+    		
     		</div>
     	</div>
     	
@@ -273,7 +273,7 @@
 									    </c:when>
 								    </c:choose></td>
 							    <td><a class="btn" data-popup-open="writeMessage" id="sender" name="sender" onclick="messageForm('${dto.sender}')">${dto.sender}</a>
-							    <td><a class="btn" data-popup-open="popup-1" onclick="getMessage('${dto.sender}','${dto.title}','${dto.content }','${dto.msgNum}','${map.lMode}');">${dto.title}</a></td>
+							    <td><a class="btn" data-popup-open="popup-1"  onclick="getMessage('${dto.sender}','${dto.title}','${dto.content }','${dto.msgNum}','${map.lMode}');">${dto.title}</a></td>
 						        <td><label>${dto.reg_date}</label></td>
 						     </tr>
 					         </c:forEach>
@@ -358,6 +358,13 @@
   </div>
 </div>
 	<script>
+	
+	$("#replyMessage").click(function(){
+		 var receiver = ('#from').val();
+		 alert(receiver);
+		 $("#sendformTo").val(receiver);
+	}); 
+	
  	$('#message_popup_Issue_submit_button').click(function(){
  	    var issue = $('#issueValue').val();
  	    document.sendIssueform.action = "message_send?issue=" + issue;

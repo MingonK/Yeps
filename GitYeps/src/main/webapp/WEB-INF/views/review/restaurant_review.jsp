@@ -47,7 +47,7 @@
 		</div>
    </div>
 <div id="event_review_header" style="margin: 30px;">
-	<h2 style="height: 40px; margin-top: 20px;">Event Review List</h2>
+	<h2 style="height: 40px; margin-top: 20px;">Restaurant Review List</h2>
 	    <table style="width:100%;">
 			<tr>
 				<th align="center" width="10%">번호</th>
