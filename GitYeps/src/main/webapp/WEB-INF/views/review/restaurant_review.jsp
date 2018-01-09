@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_list.css?ver=1"/>"/>
 </head>
 <%@ include file="../top.jsp"%>
-<div class="event_review_container" style="margin: 0 70px;">
+<div class="event_review_container">
  <div class="main-content-wrap--full">
     	<div class="top-shelf top-shelf-grey sat-top-shelf">
 			<div class="content-container">
@@ -46,36 +46,39 @@
 			</div>
 		</div>
    </div>
-<div id="event_review_header" style="margin: 30px;">
+<div id="event_review_header" style="margin: 30px">
 	<h2 style="height: 40px; margin-top: 20px;">Restaurant Review List</h2>
 	    <table style="width:100%;">
 			<tr>
-				<th align="center" width="10%">번호</th>
-				<th align="center" width= "35%">레스토랑 이름</th>
-				<th align="center" width="17%">푸드스타일</th>
-				<th align="center" width="20%">작성일자</th>
-				<th align="center" width="9%">삭제</th>
-				<th align="center" width="9%">수정</th>
+				<th align="center">번호</th>
+				<th align="center">레스토랑 이름</th>
+				<th align="center">댓글내용</th>
+				<th align="center">작성일</th>
+				<th align="center" width="20%">작성자</th>
+				<th align="center" >별점</th>
+				<th align="center" >삭제</th>
+				<th align="center" ">수정</th>
 			</tr>
-		<c:if test="${empty restaurant}">
+		<c:if test="${empty AllReviewlist}">
 			<tr>
 				<td colspan="6" align="center">등록된 레스토랑이 없습니다.</td>
 			</tr>
 		</c:if>
-		<c:forEach var="dto" items="${restaurant}">
+		<c:forEach var="dto" items="${AllReviewlist}">
 			<tr>
-				<td id="restReview" align="center">${dto.rnum}</td>
-				
-				<td id="restReview" align="center">${dto.rname}</td>
-				<td id="restReview" align="center">${dto.foodstyle}</td>
-				<td id="restReview" align="center">${dto.rest_regdate}</td>
-				<td id="restReview" align="center"><a style="color: red; " href="restReview_delete?restReview_num=${dto.rnum}">삭제</a></td>
-				<td id="restReview" align="center"><a style="color: red; " href="restReview_edit?restReview_num=${dto.rnum}">수정</a></td>
+				<td id="restReview" align="center">${dto.rvnum}</td>
+				<td id="restReview" align="center">${dto.restaurantDTO.rname}</td>
+				<td id="restReview" align="center">${dto.content}</td>
+				<td id="restReview" align="center">${dto.reg_date}</td>
+				<td id="restReview" align="center">${dto.memberDTO.email}</td>
+				<td id="restReview" align="center">${dto.gradepoint}</td>
+				<td id="restReview" align="center"><a style="color: red; " href="review_delete?rvnum=${dto.rvnum}&mnum=${dto.mnum}">삭제</a></td>
+				<td id="restReview" align="center"><a style="color: red; " href="review_edit?rvnum=${dto.rvnum}">수정</a></td>
 			</tr>
 		</c:forEach>
 	</table>
 	</div>
-		<div class="event_list_paging_section" style="font-size: 14px; ">
+		<div class="event_list_paging_section" style="font-size: 14px; padding: 0 30px;">
 			<div class="event_list_pagination_block">
 				<div class="event_list_pagination_wrap">
 					<div class="event_list_page_of_pages">

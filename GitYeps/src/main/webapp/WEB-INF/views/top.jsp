@@ -388,7 +388,7 @@
 																<path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 6.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path>
 															</svg>
                                                          </span>
-                                                         <b>${sessionScope.memberinfo.imagecount}</b> <!-- 리뷰 수 -->
+                                                         <b>${sessionScope.memberinfo.imagecount}</b>
                                                       </li>
                                                    </ul>
                                                 </div>

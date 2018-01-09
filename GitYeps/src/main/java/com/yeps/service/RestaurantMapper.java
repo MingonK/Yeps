@@ -8,7 +8,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.yeps.model.EventReviewDTO;
 import com.yeps.model.RestaurantDTO;
 
 @Service
@@ -282,6 +281,5 @@ public class RestaurantMapper {
 	public int deleteRestaurantByMemberNumber(int mnum) {
 		return sqlSession.delete("deleteRestaurantByMemberNumber", mnum);
 	}
-
 
 }

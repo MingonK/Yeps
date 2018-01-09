@@ -632,6 +632,16 @@ public class EventController {
 	@RequestMapping(value = "/event_photo_manage")
 	public ModelAndView event_photo_manage(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
+		HttpSession session = req.getSession();
+		MemberDTO loginMember = (MemberDTO) session.getAttribute("memberinfo");
+		if(loginMember == null || !loginMember.getIsmanager().equals("y") || !loginMember.getIsmaster().equals("y")) {
+			mav.addObject("msg", "권한이 없습니다.");
+			mav.addObject("url", "main");
+			mav.setViewName("message");
+			return mav;
+		}
+		
+		
 		int curPage = req.getParameter("curPage") != null ? Integer.parseInt(req.getParameter("curPage")) : 1;
 		int count = eventMapper.eventCount();
 		YepsPager yepsPager = null;

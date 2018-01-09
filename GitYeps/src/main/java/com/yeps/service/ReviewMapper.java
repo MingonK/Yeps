@@ -178,4 +178,15 @@ public class ReviewMapper {
    public int getMyReviewCount(int mnum) {
 	   return sqlSession.selectOne("getMyReviewCount", mnum);
    }
+   
+   public int getAllReviewCount() {
+	   return sqlSession.selectOne("getAllReviewCount");
+   }
+   
+   public List<ReviewDTO> getAllReviews(int start, int end) {
+	   HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("start", start);
+		map.put("end", end);
+	   return sqlSession.selectList("getAllReviews", map);
+   }
 }

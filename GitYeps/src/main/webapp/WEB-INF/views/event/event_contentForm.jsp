@@ -333,6 +333,14 @@
 															</span>
 															<b>${event_reviewDTO.memberDTO.reviewcount}</b> reviews
 														</li>
+														<li id="event_reply_user_review_count">
+															<span>
+																<svg>
+																	<path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 6.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path>
+																</svg>
+															</span>
+															<b>${event_reviewDTO.memberDTO.imagecount}</b> photos
+														</li>
 													</ul>
 												</div>
 											</div>
@@ -919,7 +927,10 @@
     	    <div id="flag_popup_description" style="padding: 0 12px;">
     	    	<div>
     	    		<p style="margin: 12px 0;">이 댓글을 신고하는 이유를 선택하고 상세하게 설명해주세요.</p>
-    	    		<form name="reply_flag_popup_form" id="reply_flag_popup_form" action="message_send?report=reply&mnum=${sessionScope.memberinfo.mnum }&where=event" method="post" onsubmit="return reply_report_check()" style="margin-bottoom: 0;">
+    	    		<form name="reply_flag_popup_form" id="reply_flag_popup_form" action="message_send" method="post" onsubmit="return reply_report_check()" style="margin-bottoom: 0;">
+    	    			<input type="hidden" name="report" value="reply">
+    	    			<input type="hidden" name="where" value="event">
+    	    			<input type="hidden" name="mnum" value="${sessionScope.memberinfo.mnum}">
     	    			<input type="hidden" name="evnum" value="${eventDTO.evnum}">
     	    			<input type="hidden" name="email" value="${sessionScope.memberinfo.email}">
     	    			<div>

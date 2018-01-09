@@ -112,6 +112,7 @@ public class MemberController {
 		if (mnum != null) {
 			try {
 				memberProfile = memberMapper.getMemberProfile(Integer.parseInt(mnum));
+				memberMainPhoto = memberPhotoMapper.getMemberMainPhoto(Integer.parseInt(mnum));
 			} catch (Exception e) {
 				memberProfile = null;
 			}

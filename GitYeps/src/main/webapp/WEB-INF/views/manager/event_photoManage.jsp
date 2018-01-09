@@ -53,7 +53,7 @@
    
    <div id="event_manager_list_header" style="margin:0 100px;">
 	<h2 style="height: 40px; margin-top: 20px;">Event List</h2>
-	    <table style="width:90%;">
+	    <table style="width:100%;">
 			<tr>
 				<th align="center" width="15%">번호</th>
 				<th align="center" style=" width: 50%;">이벤트 이름</th>
@@ -73,13 +73,13 @@
 				<td id="event" align="center">${dto.event_register_date}</td>
 				<td id="event" align="center"><a style="color: red; " href="event_delete?evnum=${dto.evnum}">삭제</a></td>
 				<td id="event" align="center"><a style="color: red; " href="event_edit?evnum=${dto.evnum}">수정</a></td>
-				<input type="hidden" id="evnum_manager" value="${dto.evnum}">
+				<input type="hidden" id="evnum_manager" name="evnum_manager" value="${dto.evnum}">
 			</tr>
 		</c:forEach>
 	</table>
 	
-		<div class="event_list_paging_section" style="font-size: 14px;">
-			<div class="event_list_pagination_block">
+		<div class="event_list_paging_section" style="font-size: 14px; padding-top: 15px;">
+			<div class="event_list_pagination_block" style="width: 1060px;">
 				<div class="event_list_pagination_wrap">
 					<div class="event_list_page_of_pages">
 						<c:if test="${yepsPager.blockEnd == 0}">

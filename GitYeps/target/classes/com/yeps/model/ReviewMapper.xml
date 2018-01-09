@@ -186,7 +186,7 @@
   	
   	
   	<!-- 지원이 한테서 가져옴 -->
-  	<select id="listRestaurantReview" parameterType="ReviewDTO" resultType="ReviewDTO"> 
+  	<select id="listRestaurantReview" parameterType="java.util.HashMap" resultType="ReviewDTO"> 
 		select * from (select rownum rn, A.* from (select * from yeps_review order by rvnum desc)A) where rn between #{start} and #{end} 
 	</select>
   	
@@ -521,5 +521,48 @@
   	
   	<select id="getMyReviewCount" parameterType="int" resultType="int">
   		select count(*) from yeps_review where mnum = #{mnum}
+  	</select>
+  	
+  	<select id="getAllReviewCount" resultType="int">
+  		select count(*) from yeps_review
+  	</select>
+  	
+  	
+  	
+  	
+  	
+  	
+  	<resultMap type="reviewDTO" id="getAllReviewMap">
+  		<id column="rvnum" property="rvnum"/>
+      	<result column="rnum" property="rnum"></result>
+      	<result column="rvnum" property="rvnum"></result>
+      	<result column="content" property="content"></result>
+      	<result column="reg_date" property="reg_date"></result>
+      	<result column="gradepoint" property="gradepoint"></result>
+      
+      	<association javaType="MemberDTO" property="memberDTO">
+			<id column="mnum" property="mnum"></id>
+			<result column="mnum" property="mnum"></result>
+         	<result column="email" property="email"></result>
+      	</association>
+      	
+      	<association javaType="RestaurantDTO" property="restaurantDTO">
+      		<id column="rnum" property="rnum"></id>
+         	<result column="rname" property="rname"></result>
+      	</association>
+  	</resultMap>
+  	
+  	<select id="getAllReviews" parameterType="java.util.HashMap" resultMap="getAllReviewMap">
+  		select * from (select rownum rn, A.* from 
+  							(select R.rnum
+  									,R.content
+   									, R.reg_date
+   									, R.gradepoint						
+  									, R.rvnum
+  									, RT.rname
+  									, M.email 
+  									, M.mnum
+  					from yeps_review R, yeps_restaurant RT, yeps_member M 
+  					where R.rnum = RT.rnum and R.mnum = M.mnum order by R.rvnum desc)A) where rn between #{start} and #{end}
   	</select>
 </mapper>		

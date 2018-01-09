@@ -334,11 +334,9 @@ public class MessageController {
 					res = messageMapper.writeMessage(dto);
 				}
 			}
-
 		}
-	
-		mav.setViewName("historyBack");// historyback.jsp를 이용하여 이전 페이지로 이동
 		mav.addObject("msg", msg);
+		mav.setViewName("historyBack");// historyback.jsp를 이용하여 이전 페이지로 이동
 		return mav;
 	}
 

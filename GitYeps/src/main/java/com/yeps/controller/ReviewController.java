@@ -38,16 +38,20 @@ public class ReviewController {
 
 	@RequestMapping(value = "/restReview_list")
 	public ModelAndView review_list(HttpServletRequest req) {
-
 		ModelAndView mav = new ModelAndView();
 		String search = req.getParameter("search");
 		String searchString = req.getParameter("searchString");
-		int count = 0;
-		if (searchString == null || searchString.trim().equals("") || search == null || search.trim().equals("")) {
-			count = restaurantMapper.getCount();
-		} else {
-			count = restaurantMapper.getSearchRestaurantCount(search, searchString);
+		int count = reviewMapper.getAllReviewCount();
+		
+		HttpSession session = req.getSession();
+		MemberDTO loginMember = (MemberDTO) session.getAttribute("memberinfo");
+		if(loginMember == null || !loginMember.getIsmanager().equals("y") || !loginMember.getIsmaster().equals("y")) {
+			mav.addObject("msg", "권한이 없습니다.");
+			mav.addObject("url", "main");
+			mav.setViewName("message");
+			return mav;
 		}
+		
 		System.out.println(search);
 		System.out.println(searchString);
 		int curPage = req.getParameter("curPage") != null ? Integer.parseInt(req.getParameter("curPage")) : 1;
@@ -60,19 +64,14 @@ public class ReviewController {
 		int start = YepsPager.getPageBegin();
 		int end = YepsPager.getPageEnd();
 		List<RestaurantDTO> restaurant = null;
-
-		if (searchString == null || searchString.trim().equals("") || search == null || search.trim().equals("")) {
-			restaurant = restaurantMapper.restaurantList(start, end);
-		} else {
-			restaurant = restaurantMapper.findRestaurant_Manage(start, end, search, searchString);
-		}
-
+		List<ReviewDTO> AllReviewlist = reviewMapper.getAllReviews(start, end);
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		map.put("search", search);
 		map.put("searchString", searchString);
 		mav.addObject("map", map);
 		mav.addObject("set", "review");
+		mav.addObject("AllReviewlist", AllReviewlist);
 		mav.addObject("count", count);
 		mav.addObject("curPage", curPage);
 		mav.addObject("yepsPager", YepsPager);
@@ -96,8 +95,10 @@ public class ReviewController {
 			int beforeReviewcount = memberMapper.getMemberReviewCount(mnum);
 			int nowReviewcount = beforeReviewcount - 1;
 			memberMapper.updateReviewCount(mnum, nowReviewcount);
-			MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo");
-			mdto.setReviewcount(nowReviewcount);
+			if(session != null) {
+				MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo");
+				mdto.setReviewcount(nowReviewcount);
+			}
 			// System.out.println(nowReviewcount);
 			if (mode.equals("restaurantReviewDelete")) {
 				mav.addObject("msg", "댓글을 삭제하였습니다.");

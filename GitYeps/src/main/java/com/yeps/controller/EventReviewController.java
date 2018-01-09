@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yeps.model.EventReviewDTO;
+import com.yeps.model.MemberDTO;
 import com.yeps.service.EventReviewMapper;
 import com.yeps.service.YepsPager;
 
@@ -51,6 +53,15 @@ public class EventReviewController {
 	@RequestMapping(value = "/eventReview_list")
 	public ModelAndView eventReview_list(HttpServletRequest req, @RequestParam(defaultValue = "1") int curPage) {
 		ModelAndView mav = new ModelAndView();
+		HttpSession session = req.getSession();
+		MemberDTO loginMember = (MemberDTO) session.getAttribute("memberinfo");
+		if(loginMember == null || !loginMember.getIsmanager().equals("y") || !loginMember.getIsmaster().equals("y")) {
+			mav.addObject("msg", "권한이 없습니다.");
+			mav.addObject("url", "main");
+			mav.setViewName("message");
+			return mav;
+		}
+		
 		String search = req.getParameter("search");
 		String searchString = req.getParameter("searchString");
 		int count = 0;

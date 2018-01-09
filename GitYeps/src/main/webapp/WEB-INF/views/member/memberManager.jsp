@@ -157,29 +157,16 @@
 												<a class="js-analytics-click" data-analytics-label="user-photo" href="member_photolist?mnum=${memberProfile.mnum}">
 													<c:choose>
 														<c:when test="${empty memberMainPhoto}">
-															<img class="photo-box-img" src="https://s3-media4.fl.yelpcdn.com/photo/mlb90wwPDh8ood7isjXg3w/m.jpg">
+															<img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/user_medium_square.png">
 														</c:when>
 														<c:otherwise>
-
-															<img class="photo-box-img" src="getImage/${memberMainPhoto.member_filename}" alt="member_main_photo" id="photo_box_img" width="100px" height="100px">
-
 															<img class="photo-box-img" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${memberMainPhoto.member_filename}" alt="member_main_photo" id="photo_box_img" width="100px" height="100px">
-
 														</c:otherwise>
 													</c:choose>	
 													
 												</a>
 											</div>
 											<ul class="user-passport-stats">
-												<li class="friend-count">
-													<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-friends icon--size-18">
-														<svg class="icon_svg">
-															<path d="M7.904 9.43l-2.098 4.697a.9.9 0 0 1-1.612 0L2.096 9.43a.902.902 0 0 1 .806-1.305h4.196c.67 0 1.105.705.806 1.305zM5 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path>
-															<path d="M15.904 9.43l-2.098 4.697a.89.89 0 0 1-.806.498.89.89 0 0 1-.806-.498L10.096 9.43a.902.902 0 0 1 .806-1.305h4.195c.67 0 1.106.705.807 1.305zM13 7.375a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" opacity=".502"></path>
-														</svg>
-													</span>
-													<b>0</b> friends	<!-- 친구 수 -->
-												</li>
 												<li class="review-count">
 													<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-review icon--size-18">
 														<svg class="icon_svg">
@@ -187,6 +174,14 @@
 														</svg>
 													</span>
 													<b>${memberProfile.reviewcount}</b> reviews <!-- 리뷰 수 -->
+												</li>
+												<li class="image-count">
+													<span aria-hidden="true" style="fill: #f15c00; width: 18px; height: 18px;" class="icon icon--18-review icon--size-18">
+														<svg class="icon_svg">
+															<path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 6.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path>
+														</svg>
+													</span>
+													<b>${memberProfile.imagecount}</b> photos <!-- 리뷰 수 -->
 												</li>
 											</ul>
 										</div>
@@ -233,7 +228,7 @@
 				</div>
 			</div>	
 		</div>			
-		<div class="event_list_paging_section" style="font-size: 14px;">
+		<div class="event_list_paging_section" style="font-size: 14px;margin: 0 auto; padding: 15px 15px; width: 960px;">
 			<div class="event_list_pagination_block">
 				<div class="event_list_pagination_wrap">
 					<div class="event_list_page_of_pages">
