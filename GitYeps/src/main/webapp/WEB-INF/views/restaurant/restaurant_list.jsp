@@ -549,7 +549,7 @@
 						<div class="search-feedback-box island island--light">
 							<div class="feedback-biz-suggest">
 								<div class="text-container">
-									<h3 style="display: block;word-wrap: break-word !important;word-break: break-word !important;overflow-wrap: break-word !important;font-weight: bold;margin-bottom: 6px;font-size: 16px;line-height: 1.3125em;color: #d32323;margin: 0 0 6px;">Not here? Tell us what we're missing.</h3>
+									<h3 style="display: block;word-wrap: break-word !important;word-break: break-word !important;overflow-wrap: break-word !important;font-weight: bold;margin-bottom: 6px;font-size: 16px;line-height: 1.3125em;color: #d32323;margin: 0 0 6px;">찾으려는 매장이 없습니까?</h3>
 									<p style="margin-bottom: 12px; display: block;">만약 찾으시는 가게가 없다면 등록해주세요!</p>
 								</div>
 								<a href="restaurant_insert" class="ybtn ybtn--primary ybtn--small js-show-add-biz-modal">레스토랑 등록</a>

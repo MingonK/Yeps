@@ -6,6 +6,7 @@
 	<title>Write a Review - Yeps</title>
 	<link rel="shortcut icon" type="image⁄x-icon" href="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css?ver=4"/>"/>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/restStyle.css?ver=4"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css?ver=6"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/message.css?ver=4"/>"/>
 	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=jD9qGVpvZh7Zobclojwp&submodules=geocoder"></script>
@@ -414,27 +415,17 @@
 					
 							
                 		</div>
-   						<div class="resFind_div20">
-   							<div class="resFind_div21">
-   								<div class="resFind_div22">
-   									<h3 class="resFind_h3_2">
-   										Not here? Tell us what we're missing.
-   									</h3>
-   									<p class="resFind_p_1">
-   										If the business you're looking for isn't here, add it!
-   									</p>
-   								</div>
-   								<a class="resFind_a_3" href="#">
-   									Add A Business
-   								</a>
-   							</div>
-   							<div class="resFind_div23">
-   									Got search feedback?
-   								<a class="resFind_a_4" href="#" data-component-bound="true">
-   									Help us improve.	 
-   								</a>
-   							</div>
-   						</div>
+   						<div class="column column-beta js-search-feedback-container">
+							<div class="search-feedback-box island island--light">
+								<div class="feedback-biz-suggest">
+									<div class="text-container">
+										<h3 style="display: block;word-wrap: break-word !important;word-break: break-word !important;overflow-wrap: break-word !important;font-weight: bold;margin-bottom: 6px;font-size: 16px;line-height: 1.3125em;color: #d32323;margin: 0 0 6px;">찾으려는 매장이 없습니까?</h3>
+										<p style="margin-bottom: 12px; display: block;">만약 찾으시는 가게가 없다면 등록해주세요!</p>
+									</div>
+									<a href="restaurant_insert" class="ybtn ybtn--primary ybtn--small js-show-add-biz-modal">레스토랑 등록</a>
+								</div>
+							</div>
+						</div>
    					 </div>
    			     </div>	
    			</div>

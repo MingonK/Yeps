@@ -729,6 +729,10 @@
    	overflow: hidden;
 }
 
+#flag_content_popup_close > h4 {
+	font-size: 100%;
+}
+
 .photo_popup-inner {
 	max-width: 1300px;
     min-width: 1000px;
