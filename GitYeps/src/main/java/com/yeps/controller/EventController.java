@@ -111,19 +111,6 @@ public class EventController {
 		}
 
 		List<EventDTO> thisWeek_random_eventList = eventMapper.getRandom_EventList();
-		List<FileDTO> thisWeek_random_fileList = new ArrayList<FileDTO>();
-		for (int i = 0; i < thisWeek_random_eventList.size(); i++) {
-			FileDTO dto = fileMapper.getFYIEventFile(thisWeek_random_eventList.get(i).getEvnum());
-			if (dto == null) {
-				FileDTO dtoForNull = new FileDTO();
-				dtoForNull.setFilename("nothing");
-				dtoForNull.setEvnum(thisWeek_random_eventList.get(i).getEvnum());
-				thisWeek_random_fileList.add(dtoForNull);
-			} else {
-				thisWeek_random_fileList.add(dto);
-			}
-		}
-		
 		Cookie[] cookies = req.getCookies();
 		List<String> locationList = new ArrayList<String>();
 		if(cookies!=null) {
@@ -153,7 +140,6 @@ public class EventController {
 		mav.addObject("fileList", fileList);
 		mav.addObject("eventList", eventList);
 		mav.addObject("thisWeek_random_eventList", thisWeek_random_eventList);
-		mav.addObject("thisWeek_random_fileList", thisWeek_random_fileList);
 		mav.addObject("curPage", curPage);
 		mav.addObject("count", count);
 		mav.addObject("yepsPager", yepsPager);

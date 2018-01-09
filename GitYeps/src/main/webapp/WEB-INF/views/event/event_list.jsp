@@ -594,16 +594,12 @@
 								<div class="list_item_photo_box_wrapper">
 									<div class="list_item_photo_box">
 										<a href="event_content?evnum=${thisWeek_random_eventDTO.evnum}">
-										<c:forEach var="thisWeek_random_fileDTO" items="${thisWeek_random_fileList}">
-											<c:if test="${thisWeek_random_eventDTO.evnum == thisWeek_random_fileDTO.evnum}">
-												<c:if test="${thisWeek_random_fileDTO.filename == 'nothing'}">
-													<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png" width="60px" height="60px">
-												</c:if>
-												<c:if test="${thisWeek_random_fileDTO.filename != 'nothing'}">
-													<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${thisWeek_random_fileDTO.filename}" width="60px" height="60px">
-												</c:if>
+											<c:if test="${thisWeek_random_eventDTO.fileDTO.filename == 'nothing'}">
+												<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png" width="60px" height="60px">
 											</c:if>
-										</c:forEach>
+											<c:if test="${thisWeek_random_eventDTO.fileDTO.filename != 'nothing'}">
+												<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${thisWeek_random_eventDTO.fileDTO.filename}" width="60px" height="60px">
+											</c:if>
 										</a>
 									</div>
 								</div>

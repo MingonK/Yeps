@@ -223,6 +223,9 @@
                <result column="roadAddrPart2" property="roadAddrPart2"></result>
                <result column="addrDetail" property="addrDetail"></result>
                <result column="foodstyle" property="foodstyle"></result>
+               <result column="raddress" property="raddress"></result>
+               <result column="hp2" property="hp2"></result>
+               <result column="hp3" property="hp3"></result>
                <association javaType="FileDTO" property="fileDTO">
                		<id column="filenum" property="filenum"></id>
                		<result column="filename" property="filename"></result>
@@ -243,6 +246,9 @@
 		              ,RT.addrDetail
 		              ,RT.foodstyle
                       ,RT.price
+                      ,RT.raddress
+                      ,RT.hp2
+                      ,RT.hp3
             		  ,F.filename
         from yeps_review R, yeps_member M, yeps_restaurant RT, yeps_files F where R.mnum = M.mnum and R.rnum = RT.rnum and RT.rnum = F.rnum and F.ismainphoto = 'y' and M.mnum = #{mnum} order by R.rvnum desc)A)
         where rn between #{start} and #{end}
