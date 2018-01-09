@@ -361,16 +361,14 @@
                                                       </li>
                                                       <li class="user-location responsive-hidden-small">
                                                          <b>
-                                                            <c:choose>
-                                                               <c:when test="${!empty sessionScope.memberinfo.address}">
-                                                                  <c:forTokens items="${sessionScope.memberinfo.address}" delims=" " begin="1" end="2" var="addr">
-                                                                     ${addr}
-                                                                  </c:forTokens>
-                                                               </c:when>
-                                                               <c:otherwise>
-                                                                  	서울특별시
-                                                               </c:otherwise>
-                                                            </c:choose>
+                                                         	<c:if test="${!empty sessionScope.memberinfo.address}">
+                                                         		<c:forTokens items="${sessionScope.memberinfo.address}" delims=" " begin="1" end="2" var="addr">
+                                                                    ${addr}
+                                                                 </c:forTokens>
+                                                         	</c:if>
+                                                         	<c:if test="${empty sessionScope.memberinfo.address}">
+                                                         		주소를 등록해주세요.
+                                                         	</c:if>
                                                          </b>
                                                       </li>
                                                    </ul>
@@ -582,7 +580,7 @@
 						</div>
 						<c:if test="${empty sessionScope.memberinfo}">
 								<div id="footer_list_login_box">
-									<a href="member_login?mode=login" id="footer_list_li_unit" style="color: white; font-weight: bold; min-width: 80px;">Log In</a>
+									<a href="member_login?mode=login" id="footer_list_li_unit" style="color: white; font-weight: bold; min-width: 80px; padding: 3px 10px;">Log In</a>
 								</div>
 						</c:if>
 					</div>

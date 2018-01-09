@@ -1622,7 +1622,6 @@ overflow: hidden; width: 132px; height: 24px; background-position: 0 -216px;
     border-radius: 4px;
 }
 .search-feedback-box .feedback-biz-suggest {
-    border-bottom: 1px solid #ccc;
     padding-bottom: 11px;
     margin-bottom: 12px;
 }

@@ -139,7 +139,7 @@ h2, h3 {
 }
 
 #content_container_arrange {
-	margin-left: -18px; margin-right: -18px; width: 1100px;
+	margin-left: -18px; margin-right: -18px; width: 1110px;
     border-collapse: separate; border-spacing: 18px 0;
     display: table; min-width: 100%; table-layout: auto;
 }
@@ -270,7 +270,7 @@ h2, h3 {
 
 #footer_container_arrange {
 	white-space: nowrap !important;
-	margin-left: -12px;
+	margin-left: 10px;
 }
 
 #footer_container_list {

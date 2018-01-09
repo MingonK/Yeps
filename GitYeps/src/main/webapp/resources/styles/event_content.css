@@ -582,7 +582,7 @@
 #flag_popup_descripte_field, #reply_flag_popup_descripte_field {
 	height: 78px; resize: vertical; display: block; box-sizing: border-box; width: 100%; margin: 0 0 18px; 
 	padding: 5px 9px; text-align: start; font-weight: normal; cursor: text; max-height: 150px; background: #fff; 
-	border: 1px solid #999; border-radius: 3px; font-size: 14px;
+	border: 1px solid #999; border-radius: 3px; font-size: 14px; overflow-x: hidden;
 }
 
 #flag_popup_footer {

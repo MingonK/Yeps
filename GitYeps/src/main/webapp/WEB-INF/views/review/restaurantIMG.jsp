@@ -126,7 +126,9 @@
                                  </li>
                                  <li class="resIMG_li_4">
                                     <b class="resIMG_b_2">
-										${myReview.memberDTO.address}
+                                    <c:forTokens items="${sessionScope.memberinfo.address}" delims=" " begin="1" end="2" var="addr">
+										${addr}
+									</c:forTokens>
                                     </b>
                                  </li>
                               </ul>

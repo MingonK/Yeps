@@ -12,6 +12,7 @@
 <head>
 	<title>${eventDTO.eventname}</title>
 	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=HXle5j7nJaMnyv_Zey_M&submodules=geocoder"></script>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css?ver=2"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/event_content.css?ver=2"/>"/>
 	<script src="//code.jquery.com/jquery.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
