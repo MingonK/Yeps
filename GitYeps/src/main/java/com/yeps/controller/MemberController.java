@@ -28,7 +28,6 @@ import com.yeps.model.MemberDTO;
 import com.yeps.model.MemberPhotoDTO;
 import com.yeps.service.EventMapper;
 import com.yeps.service.EventReviewMapper;
-import com.yeps.service.LargeMenuMapper;
 import com.yeps.service.MemberMapper;
 import com.yeps.service.MemberPhotoMapper;
 import com.yeps.service.MessageMapper;
@@ -39,7 +38,6 @@ import com.yeps.service.ReviewMapper;
 import com.yeps.service.S3Connection;
 import com.yeps.service.SHA256Util;
 import com.yeps.service.SendEmail;
-import com.yeps.service.SmallMenuMapper;
 import com.yeps.service.YepsPager;
 
 @Controller
@@ -59,10 +57,6 @@ public class MemberController {
 	private EventMapper eventMapper;
 	@Autowired
 	private EventReviewMapper eventReviewMapper;
-	@Autowired
-	private LargeMenuMapper largeMenuMapper;
-	@Autowired
-	private SmallMenuMapper smallMenuMapper;
 	@Autowired
 	private QnAMapper qnaMapper;
 	@Autowired
@@ -803,7 +797,7 @@ public class MemberController {
 			if (getLoginMemberDTO.getIsmaster().equals("y")) {
 				session.setAttribute("memberinfo", getLoginMemberDTO);
 			} else if (getLoginMemberDTO.getIsmanager().equals("y")) {
-				session.setAttribute("memberinfo", getLoginMemberDTO);
+				session.setAttribute("memberinfo", getLoginMemberDTO);	
 			} else {
 				session.setAttribute("memberinfo", getLoginMemberDTO);
 			}

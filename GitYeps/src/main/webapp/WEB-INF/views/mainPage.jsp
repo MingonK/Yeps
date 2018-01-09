@@ -1308,11 +1308,16 @@
 			e.stopPropagation();
 		    e.preventDefault();
 		})
-	
-		$(document).on('mouseleave', function(e) {
-			if($(e.target).hasClass('.hover_card') || $(e.target).hasClass('.mainpage_header_recommend_name')) {
+		
+		$(document).on('mouseleave', '.mainpage_header_recommend_name', function(e) {
+			$(document).on('mouseenter', '.hover_card', function() {
+				$('.hover_card').css('display', 'block');
+			})
+			$('.hover_card').css('display', 'none');
+		})
+		
+		$(document).on('mouseleave', '.hover_card', function() {
 				$('.hover_card').css('display', 'none');
-			}
 		})
 		
 		$(document).on('mouseover', '.suggestions-location-list-item', function() {

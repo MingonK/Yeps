@@ -253,15 +253,9 @@ public class ReviewController {
 				mav.addObject("url", "restaurant_list");
 				mav.setViewName("message");
 			}
-
 			return mav;
 		} else {
-			if(loginMember == null) {
-				return new ModelAndView("redirect: main");
-			}
-
 			ReviewDTO existMyReview = reviewMapper.findMyReview(dto.getRnum(), loginMember.getMnum());
-
 			if(existMyReview != null) {
 				String url = null, msg = null;
 				url = "restaurant_list";

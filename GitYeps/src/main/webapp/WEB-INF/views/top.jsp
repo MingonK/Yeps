@@ -469,7 +469,7 @@
 			<div id="footer_content_container">
 				<div id="footer_container_arrange">
 					<div id="footer_container_list">
-						<div id="footer_list" style="width: 854px; display: inline-block; margin-right: 12px;">
+						<div id="footer_list" style="display: table-cell;">
 							<ul style="display: inline-block;">
 								<li id="footer_list_li">
 									<div>
@@ -582,7 +582,7 @@
 						</div>
 						<c:if test="${empty sessionScope.memberinfo}">
 								<div id="footer_list_login_box">
-									<a href="member_login?mode=login" id="footer_list_li_unit" style="color: white; font-weight: bold;">Log In</a>
+									<a href="member_login?mode=login" id="footer_list_li_unit" style="color: white; font-weight: bold; min-width: 80px;">Log In</a>
 								</div>
 						</c:if>
 					</div>

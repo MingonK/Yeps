@@ -309,7 +309,10 @@
 		})
 		
 		$('.review_write_Button').click(function() {
-			$('#review_writeF').submit();
+			var login = '${memberinfo}';
+			if(login) {
+				$('#review_writeF').submit();
+			}
 		})
       
 		$('.selector').hover(function(e) {
@@ -732,11 +735,6 @@ $(function() {
          });
     }
            
-    $(document).ready(function() {
-       
-       
-       
-    });
            
     //------------------------------------이메일 찾기
     function findEmailCheck(){

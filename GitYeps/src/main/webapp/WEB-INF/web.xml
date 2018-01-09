@@ -42,10 +42,10 @@
 	    <error-code>404</error-code>
 	    <location>/WEB-INF/views/404Page.jsp</location>
 	</error-page>
-	<error-page>
-	    <exception-type>java.lang.NullPointerException</exception-type>
-	    <location>/WEB-INF/views/404Page.jsp</location>
-	</error-page>
+<!-- 	<error-page> -->
+<!-- 	    <exception-type>java.lang.NullPointerException</exception-type> -->
+<!-- 	    <location>/WEB-INF/views/404Page.jsp</location> -->
+<!-- 	</error-page> -->
 	<error-page>
 	     <exception-type>java.lang.Throwable</exception-type>
 	     <location>/WEB-INF/views/404Page.jsp</location>
