@@ -36,7 +36,7 @@ public class EventReviewController {
 		String mnum = req.getParameter("mnum");
 		String eventReview_content = req.getParameter("eventReview_content");
 		String ip = req.getRemoteAddr();
-
+ 
 		ModelAndView mav = new ModelAndView();
 		if (eventReview_content == null || eventReview_content.trim().equals("")) {
 			mav.setViewName("redirect: event_content?evnum=" + evnum + "&mode=empty_content");

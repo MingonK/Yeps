@@ -76,7 +76,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             OR RT.price=#{item.value}
         </foreach>
 		</if>)</if>
-		order by RT.rnum desc)A) where rn between #{start} and #{end}
+		order by RT.price desc)A) where rn between #{start} and #{end}
 	</select>
 
 	<insert id="insertRestaurant" parameterType="RestaurantDTO">
@@ -152,9 +152,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="review_write_getrname" parameterType="int" resultType="String"> 
 		select rname from yeps_restaurant where rnum= #{rnum} 
 	</select>
-	
-	
-	
 	
 	<resultMap type="restaurantDTO" id="listRestaurant_deliveryMap">
      	<id column="rnum" property="rnum"/>
@@ -322,7 +319,6 @@ FROM
 	<select id="getNewRestaurant" resultType="RestaurantDTO" > 
 		select * from yeps_restaurant where rownum=1 order by rnum desc 
 	</select>
-	
 	
 	
 	<!-- =========================================================== -->

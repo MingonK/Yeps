@@ -16,7 +16,7 @@ import com.yeps.service.CategoryMapper;
 @Controller
 public class CategoryController {
 
-	@Autowired
+	@Autowired 
 	private CategoryMapper categoryMapper;
 
 	@RequestMapping(value = "/category_list")

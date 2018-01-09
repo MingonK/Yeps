@@ -15,7 +15,7 @@
 <div class="restInsert-main" style="width: auto;padding: 0;margin: 0;">
 		<div class="restInsert-content-container" style="padding:15px 15px 36px 15px; width: 960px;height:100%;margin: 0 auto; display: table;">
 			<div class="restInsert-container" style="width:960px;height:100%;display:block;">
-						<h2 style="word-wrap: break-word !important;word-break: break-word !important;overflow-wrap: break-word !important; font-weight: bold;margin-bottom: 6px;font-size: 26px;line-height: 1.28571em;color: #d32323;">메뉴 등록</h2>
+						<h2 style="word-wrap: break-word !important;word-break: break-word !important;overflow-wrap: break-word !important; font-weight: bold;margin-bottom: 6px;font-size: 26px;line-height: 1.28571em;color: #d32323;">메뉴 수정</h2>
 					<div class="" style="position: relative;box-sizing: border-box;vertical-align: baseline;display: block;">
 					
 						
