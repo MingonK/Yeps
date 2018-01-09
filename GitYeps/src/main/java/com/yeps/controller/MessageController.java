@@ -245,6 +245,12 @@ public class MessageController {
 			receiver = dto.getReceiver().trim();
 			dto.setReceiver(receiver);
 			dto.setIsIssue(0);
+			System.out.println(dto.getContent());
+			System.out.println(dto.getReceiver());
+			System.out.println(dto.getSender());
+			System.out.println(dto.getTitle());
+			System.out.println(dto.getMsgNum());
+			
 			for (int i = 0; i < memberList.size(); i++) {
 				String who = memberList.get(i).getEmail();
 				if (who.equals(receiver.trim())) {
