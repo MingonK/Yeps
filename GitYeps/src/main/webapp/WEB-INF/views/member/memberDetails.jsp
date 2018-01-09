@@ -667,6 +667,7 @@ $(function() {
 	 		})
  	    	
  	     	var mnum = '${memberDTO.mnum}';
+ 	     	var login_mnum = '${memberinfo.mnum}';
 	        $.ajax({
              type : 'post',
              url : 'review_member_ajax?mnum='+ mnum, 
@@ -691,7 +692,6 @@ $(function() {
 	 			price = '￦￦￦￦';
 	 		}
 		 $(".memberDetails-review-list ul").append(
-			
 				 '<li class="review-draft">'+
  					'<div class="arrange">'+
  						'<div class="arrange_unit arrange_unit--fill">'+
@@ -703,58 +703,62 @@ $(function() {
 				          			    '</a>'+
 				    		        '</div>'+
 				         	    '</div>'+
-				            '<div class="media-story">'+
-				                '<div class="media-title clearfix">'+
-				                    '<a class="biz-name js-analytics-click" data-analytics-label="biz-name" href="restaurant_content?rnum='+ item.rnum +'" data-hovercard-id="K8YqsGXicOLOUcQXTzRrnw"><span>'+ item.restaurantDTO.rname + '   </span></a>'+
-				                '</div>'+
-				                '<div class="price-category" style="float: none;">'+
-				                	'<span class="bullet-after">' +
-				                		'<span class="price-range">' +
-				                			price + 
+				            	'<div class="media-story">'+
+				                	'<div class="media-title clearfix">'+
+				                    	'<a class="biz-name js-analytics-click" data-analytics-label="biz-name" href="restaurant_content?rnum='+ item.rnum +'" data-hovercard-id="K8YqsGXicOLOUcQXTzRrnw"><span>'+ item.restaurantDTO.rname + '   </span></a>'+
+				                	'</div>'+
+				                	'<div class="price-category" style="float: none;">'+
+				                		'<span class="bullet-after">' +
+				                			'<span class="price-range">' +
+				                				price + 
+				                			'</span>' + 
 				                		'</span>' + 
-				                	'</span>' + 
-				                    '<span class="category-str-list">'+
-				                    	'<a href="#">' + item.restaurantDTO.foodstyle + '</a>'+
-				    				'</span>'+
-				    			 '</div>'+
-				                 '<address>'+
-				                	item.restaurantDTO.roadAddrPart1 + '<br>' + item.restaurantDTO.roadAddrPart2 + item.restaurantDTO.addrDetail +
-				                 '</address>'+
-				             '</div>'+
-        		        '</div>'+
-				        '<div class="review_arrange_unit">'+
-			                '<p class="time-stamp nowrap review-draft_date-created text-right">'+
-			                    'Started on  '+  item.reg_date + 
-			                '</p>'+
-			                '<div class="restList-star-rating-'+ item.gradepoint +'">'+
-		             		'<img class="star_member_img" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png">'+
-		            	'</div>'+
-			             '</div>'+
-			             '<p class="member_ptag1" lang="ko" style="margin-bottom: 12px; width: 100%; float: right; display: block;">'+
-						 item.content +
-					    '</p><br><br>'+
-			            '<div class="clearfix"  style="margin-bottom: 50px;">'+
-			               '<a  style="float: left;" href="review_write?rvnum=' + item.rvnum + '&mode=update&star='+item.gradepoint+'&rnum='+item.rnum+'" class="yepsbyn ybtn--small js-war-widget_finish-draft pull-left">리뷰수정</a>'+
-			                  '<form action="review_delete?rvnum='+ item.rvnum + '&mnum=' + mnum + '&mode=restaurantReviewDelete&rnum='+item.rnum+'" class="pull-right js-delete-review-draft-form" method="post" name="delete_draft">'+
-			               
-			                      '<input type="hidden" value="'+ item.rvnum + '" name="rvnum">'+
-			                      '<button type="submit" style="float: right;"class="chiclet-link u-cursor-pointer show-tooltip js-delete-review-draft">'+
-			                         '<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-trash icon--size-18 icon--currentColor">'+
-			                             '<svg class="icon_svg">'+
-									         '<path d="M3 5V3h4V2h4v1h4v2H3zm11 9c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V6h10v8zM8 8.5a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5zm3 0a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5z"></path>'+
-								
-			                             '</svg>'+
-			                         '</span>'+
-			                         '<span class="tooltip-wrapper">'+
-			                         '<span class="tooltip">Delete draft</span>'+
-			                      '</span>'+
-			                   '</button>'+
-			                '</form>'+
-			             '</div>'+
-		              '</div>'+
-				   '</div>'+
-				'</li>'
-				      );
+				                    	'<span class="category-str-list">'+
+				                    		'<a href="#">' + item.restaurantDTO.foodstyle + '</a>'+
+				    					'</span>'+
+				    			 	'</div>'+
+				                 	'<address>'+
+				                		item.restaurantDTO.roadAddrPart1 + '<br>' + item.restaurantDTO.roadAddrPart2 + item.restaurantDTO.addrDetail +
+				                 	'</address>'+
+				             	'</div>'+
+        		        	'</div>'+
+				        	'<div class="review_arrange_unit">'+
+			                	'<p class="time-stamp nowrap review-draft_date-created text-right">'+
+			                    	'Started on  '+  item.reg_date + 
+			                	'</p>'+
+			                	'<div class="restList-star-rating-'+ item.gradepoint +'">'+
+		             				'<img class="star_member_img" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png">'+
+		            			'</div>'+
+			             	'</div>'+
+			             	'<p class="member_ptag1" lang="ko" style="margin-bottom: 12px; width: 100%; float: right; display: block;">'+
+						 		item.content +
+					    	'</p><br><br>'+
+			            	'<div class="clearfix" id="buttom_group" style="margin-bottom: 50px;">'+
+			            		'<c:if test="${memberDTO.mnum eq memberinfo.mnum}">' +
+			            		'<a style="float: left;" href="review_write?rvnum=' + item.rvnum + '&mode=update&star='+item.gradepoint+'&rnum='+item.rnum+'" class="yepsbyn ybtn--small js-war-widget_finish-draft pull-left">리뷰수정</a>'+
+					               '<form action="review_delete" class="pull-right js-delete-review-draft-form" method="post" name="delete_draft">'+
+					                   '<input type="hidden" value="'+ item.rvnum + '" name="rvnum">'+
+					                  '<input type="hidden" value="'+ mnum + '" name="mnum">'+
+					                   '<input type="hidden" value="restaurantReviewDelete" name="mode">'+
+					                   '<input type="hidden" value="'+ item.rnum +'" name="rnum">'+
+					                   '<button type="submit" style="float: right;"class="chiclet-link u-cursor-pointer show-tooltip js-delete-review-draft">'+
+					                      '<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-trash icon--size-18 icon--currentColor">'+
+					                          '<svg class="icon_svg">'+
+										       '<path d="M3 5V3h4V2h4v1h4v2H3zm11 9c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V6h10v8zM8 8.5a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5zm3 0a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5z"></path>'+
+					                          '</svg>'+
+					                      '</span>'+
+					                      '<span class="tooltip-wrapper">'+
+					                      	'<span class="tooltip">Delete draft</span>'+
+					                     '</span>'+
+					                   '</button>'+
+					               '</form>' +
+			               		'</c:if>' + 
+			             	'</div>'+
+		              	'</div>'+
+				   	'</div>'+
+					'</li>'
+				);
+		 
 	             });
 	 
 				 $('.event_list_paging_section').empty();
@@ -857,6 +861,7 @@ $(function() {
 		})
 		
 		var mnum = '${memberDTO.mnum}';
+		var login_mnum = '${memberinfo.mnum}';
 	    $.ajax({
 	        type : 'post',
 	        url : 'review_member_ajax?curPage=' + page + '&mnum=' + mnum,
@@ -923,28 +928,32 @@ $(function() {
 					             '<p class="member_ptag1" lang="ko" style="margin-bottom: 12px; width: 100%; float: right; display: block;">'+
 								 item.content +
 							    '</p><br><br>'+
-					            '<div class="clearfix"  style="margin-bottom: 50px;">'+
-					               '<a  style="float: left;" href="review_write?rvnum=' + item.rvnum + '&mode=update&star='+item.gradepoint+'&rnum='+item.rnum+'" class="yepsbyn ybtn--small js-war-widget_finish-draft pull-left">리뷰수정</a>'+
-					                  '<form action="review_delete?rvnum='+ item.rvnum + '&mnum=' + mnum + '&mode=restaurantReviewDelete&rnum='+item.rnum+'" class="pull-right js-delete-review-draft-form" method="post" name="delete_draft">'+
-					               
-					                      '<input type="hidden" value="'+ item.rvnum + '" name="rvnum">'+
-					                      '<button type="submit" style="float: right;"class="chiclet-link u-cursor-pointer show-tooltip js-delete-review-draft">'+
-					                         '<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-trash icon--size-18 icon--currentColor">'+
-					                             '<svg class="icon_svg">'+
-											         '<path d="M3 5V3h4V2h4v1h4v2H3zm11 9c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V6h10v8zM8 8.5a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5zm3 0a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5z"></path>'+
-										
-					                             '</svg>'+
-					                         '</span>'+
-					                         '<span class="tooltip-wrapper">'+
-					                         '<span class="tooltip">Delete draft</span>'+
+					            '<div class="clearfix" id="buttom_group" style="margin-bottom: 50px;">'+
+					            '<c:if test="${memberDTO.mnum eq memberinfo.mnum}">' +
+			            		'<a style="float: left;" href="review_write?rvnum=' + item.rvnum + '&mode=update&star='+item.gradepoint+'&rnum='+item.rnum+'" class="yepsbyn ybtn--small js-war-widget_finish-draft pull-left">리뷰수정</a>'+
+					               '<form action="review_delete" class="pull-right js-delete-review-draft-form" method="post" name="delete_draft">'+
+					                   '<input type="hidden" value="'+ item.rvnum + '" name="rvnum">'+
+					                  '<input type="hidden" value="'+ mnum + '" name="mnum">'+
+					                   '<input type="hidden" value="restaurantReviewDelete" name="mode">'+
+					                   '<input type="hidden" value="'+ item.rnum +'" name="rnum">'+
+					                   '<button type="submit" style="float: right;"class="chiclet-link u-cursor-pointer show-tooltip js-delete-review-draft">'+
+					                      '<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-trash icon--size-18 icon--currentColor">'+
+					                          '<svg class="icon_svg">'+
+										       '<path d="M3 5V3h4V2h4v1h4v2H3zm11 9c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V6h10v8zM8 8.5a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5zm3 0a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5z"></path>'+
+					                          '</svg>'+
 					                      '</span>'+
+					                      '<span class="tooltip-wrapper">'+
+					                      	'<span class="tooltip">Delete draft</span>'+
+					                     '</span>'+
 					                   '</button>'+
-					                '</form>'+
+					               '</form>' +
+			               		'</c:if>' + 
 					             '</div>'+
 				              '</div>'+
 						   '</div>'+
 						'</li>'
 						      );
+				 	 
 			             });
 				 
 				 $('.event_list_paging_section').empty();
