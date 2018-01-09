@@ -23,7 +23,7 @@ public class MasterController {
 	public String master_index() {
 		return "master/index";
 	}
-
+ 
 	@RequestMapping(value = "master_setAuthorization")
 	public ModelAndView master_setAuthorization
 	// (HttpServletRequest req, @ModelAttribute List<String> select, @RequestParam

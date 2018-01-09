@@ -155,10 +155,13 @@ public class HomeController {
 		Set<RestaurantDTO> hotAndNewSet = new LinkedHashSet<RestaurantDTO>();
 		for (int i = 0; i < 3; i++) {
 				RestaurantDTO dto = restaurantMapper.getHotAndNewRestaurant(gethotAndNewReview.get(i));
+				System.out.println("dto(핫앤유레스토랑):" + dto);
 			if(dto != null) {
 				hotAndNewSet.add(dto);
+				System.out.println("핫앤유1:" + hotAndNewSet.size());
 			} else {
 				hotAndNewSet.add(dto);
+				System.out.println("핫앤유2:" + hotAndNewSet.size());
 			}
 		}
 
@@ -210,7 +213,7 @@ public class HomeController {
 		int randomPhoto_reivewCount = reviewMapper.getRestaurantReviewCount(randomPhoto.getRnum());
 		int randomPhoto_starAvg = reviewMapper.getStarAvg(randomPhoto.getRnum());
 		
-		//랜덤 사진
+		//랜덤 사진 
 		mav.addObject("randomPhoto", randomPhoto);
 		mav.addObject("randomPhoto_reivewCount", randomPhoto_reivewCount);
 		mav.addObject("randomPhoto_starAvg", randomPhoto_starAvg);

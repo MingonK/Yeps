@@ -223,8 +223,9 @@
 											<div class="midea-story" style="-webkit-box-flex: 1; flex: 1;min-width: 0;min-height: 0;">
 													<h3 style="font-weight: normal;margin-bottom: 6px; word-wrap: break-word !important;word-break: break-word !important;overflow-wrap: break-word !important;    font-size: 16px;line-height: 1.3125em;color: #d32323; display: block;">
 														<span class="indexed-biz-name" style="color: #333; display: block;">
+															${status.count}.
 															<a href="restaurant_content?rnum=${dto.rnum}" style="font-size: 16px; line-height: 1.3125em; display: inline; padding: 3px 0; color: #0073bb; cursor: pointer;">
-																<span>${dto.rname}</span>
+																<span> ${dto.rname}</span>
 															</a>
 														</span>
 													</h3>
@@ -369,87 +370,87 @@
 				<div class="wrap">
 					<div id="map" style="width: 330px; height:300px;"></div>
 				<script>
-				function refreshMap(){
-					rname=[];
-					rnum=[];
-					foodstyle=[];
-					roadAddrPart1=[];
-					addrDetail=[];
-					roadAddrPart2=[];
-					hp=[];
-					rest_filename=[];
-					infoWindows=[];
-					for(var i=0;i<markers.length;i++){
-						markers[i].setMap(null);
+// 				function refreshMap(){
+// 					rname=[];
+// 					rnum=[];
+// 					foodstyle=[];
+// 					roadAddrPart1=[];
+// 					addrDetail=[];
+// 					roadAddrPart2=[];
+// 					hp=[];
+// 					rest_filename=[];
+// 					infoWindows=[];
+// 					for(var i=0;i<markers.length;i++){
+// 						markers[i].setMap(null);
 						
-					}
-				}
-				function refreshMarker(item,i){
-					rname.push(item.rname);
-					rnum.push(item.rnum);
-					foodstyle.push(item.foodstyle);
-					roadAddrPart1.push(item.roadAddrPart1);
-					addrDetail.push(item.addrDetail);
-					roadAddrPart2.push(item.roadAddrPart2);
-					hp.push(item.raddress+ "-" + item.hp2 + "-" + item.hp3);
-					rest_filename.push(item.fileDTO.filename);
+// 					}
+// 				}
+// 				function refreshMarker(item,i){
+// 					rname.push(item.rname);
+// 					rnum.push(item.rnum);
+// 					foodstyle.push(item.foodstyle);
+// 					roadAddrPart1.push(item.roadAddrPart1);
+// 					addrDetail.push(item.addrDetail);
+// 					roadAddrPart2.push(item.roadAddrPart2);
+// 					hp.push(item.raddress+ "-" + item.hp2 + "-" + item.hp3);
+// 					rest_filename.push(item.fileDTO.filename);
 					
-						naver.maps.Service.geocode({address : roadAddrPart1[i]},function(status, response) {
-							var result = response.result;
-							var myaddr = new naver.maps.Point(result.items[0].point.x,result.items[0].point.y);
-							map.setCenter(myaddr); // 검색된 좌표로 지도 이동
-							// 마커 표시
-							var marker = new naver.maps.Marker({
-								position : myaddr,
-								map : map,
-								icon : {
-									url : 'https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/pin_s_'+ (i + 1)+'.png',
-									size : new naver.maps.Size(22, 30),
-									anchor : new naver.maps.Point(11, 30)
-								}
-							}); 
-
-							iwContent = [
-								'<div class="scrollFix" style="width:300px;height:140px;padding:12px;">',
-									'<div class="left" style="width:200px;height:140px;display:inline-block;float:left">',
-										'<div class="rname" style="width:210px;height:20px">',
-											'<span><a href="restaurant_content?rnum='+rnum[i]+'">'+rname[i]+'</a></span>',
-										'</div>',
-										'<div class="rating" style="width:">',
-											'<span class="review">리뷰</span>',
-										'</div>',
-										'<div class="price-range">',
-											'<span>￦￦￦</span><span>●</span><span class="foodstyle">'+foodstyle[i]+'</span>',
-										'</div>',
-										'<div class="address">',
-										'<span>'+roadAddrPart1[i]+'</span><br>',
-										'<span>'+addrDetail[i]+'</span><br>',
-										'<span>'+roadAddrPart2[i]+'</span>',
-										'</div>',
-								'</div>',
-								'<div class="right"style="width:100px;height:140px;float:left">',
-									'<img width="90px" height="90px"src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/'+rest_filename[i]+'">',
-								'</div>'
-								].join('')
-							var infowindow = new naver.maps.InfoWindow({
-								content : iwContent,
-							});
-							markers.push(marker)
-							infoWindows.push(infowindow);
-				
-// 							function getClickHandler(seq) {
-// 								return function(e) {
-// 									var marker = markers[seq], infoWindow = infoWindows[seq];
-// 									if (infoWindow.getMap()) {
-// 										infoWindow.close();
-// 									} else {
-// 										infoWindow.open(map, marker);
-// 									}
+// 						naver.maps.Service.geocode({address : roadAddrPart1[i]},function(status, response) {
+// 							var result = response.result;
+// 							var myaddr = new naver.maps.Point(result.items[0].point.x,result.items[0].point.y);
+// 							map.setCenter(myaddr); // 검색된 좌표로 지도 이동
+// 							// 마커 표시
+// 							var marker = new naver.maps.Marker({
+// 								position : myaddr,
+// 								map : map,
+// 								icon : {
+// 									url : 'https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/pin_s_'+ (i + 1)+'.png',
+// 									size : new naver.maps.Size(22, 30),
+// 									anchor : new naver.maps.Point(11, 30)
 // 								}
-// 							}
-							naver.maps.Event.addListener(markers[i],'click', getClickHandler(i));
-						});
-				};
+// 							}); 
+
+// 							iwContent = [
+// 								'<div class="scrollFix" style="width:300px;height:140px;padding:12px;">',
+// 									'<div class="left" style="width:200px;height:140px;display:inline-block;float:left">',
+// 										'<div class="rname" style="width:210px;height:20px">',
+// 											'<span><a href="restaurant_content?rnum='+rnum[i]+'">'+rname[i]+'</a></span>',
+// 										'</div>',
+// 										'<div class="rating" style="width:">',
+// 											'<span class="review">리뷰</span>',
+// 										'</div>',
+// 										'<div class="price-range">',
+// 											'<span>￦￦￦</span><span>●</span><span class="foodstyle">'+foodstyle[i]+'</span>',
+// 										'</div>',
+// 										'<div class="address">',
+// 										'<span>'+roadAddrPart1[i]+'</span><br>',
+// 										'<span>'+addrDetail[i]+'</span><br>',
+// 										'<span>'+roadAddrPart2[i]+'</span>',
+// 										'</div>',
+// 								'</div>',
+// 								'<div class="right"style="width:100px;height:140px;float:left">',
+// 									'<img width="90px" height="90px"src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/'+rest_filename[i]+'">',
+// 								'</div>'
+// 								].join('')
+// 							var infowindow = new naver.maps.InfoWindow({
+// 								content : iwContent,
+// 							});
+// 							markers.push(marker)
+// 							infoWindows.push(infowindow);
+				
+// // 							function getClickHandler(seq) {
+// // 								return function(e) {
+// // 									var marker = markers[seq], infoWindow = infoWindows[seq];
+// // 									if (infoWindow.getMap()) {
+// // 										infoWindow.close();
+// // 									} else {
+// // 										infoWindow.open(map, marker);
+// // 									}
+// // 								}
+// // 							}
+// // 							naver.maps.Event.addListener(markers[i],'click', getClickHandler(i));
+// 						});
+// 				};
 					
 					
 	  var map = new naver.maps.Map('map',{
@@ -481,7 +482,10 @@
 
 
 		for (var i = 0; i < roadAddrPart1.length; i++) {
-			naver.maps.Service.geocode({address : roadAddrPart1[j]},function(status, response) {
+			naver.maps.Service.geocode({address : roadAddrPart1[i]},function(status, response) {
+		          if (status !== naver.maps.Service.Status.OK) {
+		              return alert(myaddress + '의 검색 결과가 없거나 기타 네트워크 에러');
+		          }
 				var result = response.result;
 				var myaddr = new naver.maps.Point(result.items[0].point.x,result.items[0].point.y);
 				map.setCenter(myaddr); // 검색된 좌표로 지도 이동
@@ -495,7 +499,6 @@
 						anchor : new naver.maps.Point(11, 30)
 					}
 				}); 
-
 				iwContent = [
 // 					<div class="hovercard biz-hovercard biz top-aligned right-aligned" style="display: none;">
 						
