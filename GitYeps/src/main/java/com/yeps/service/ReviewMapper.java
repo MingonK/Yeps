@@ -150,7 +150,7 @@ public class ReviewMapper {
 		map.put("mnum", mnum);
 		map.put("start", start);
 		map.put("end", end);
-		return sqlSession.selectList("getMemberReview",map);
+		return sqlSession.selectList("getMemberReview", map);
 	}
    
    // 2018. 1. 5일 민곤 추가

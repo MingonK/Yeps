@@ -331,8 +331,6 @@ public class MessageController {
 					receiver = memberList.get(i).getEmail();
 					dto.setReceiver(receiver);
 					dto.setIsIssue(1);
-					System.out.println("@=" + dto.getMnum());
-					System.out.println("@@=" + dto.getTitle());
 					res = messageMapper.writeMessage(dto);
 				}
 			}

@@ -729,20 +729,16 @@
 									<div id="this_week_popular_events">
 										<div id="this_week_popular_events_photo_wrap">
 											<div id="this_week_popular_events_photo">
-												<c:forEach var="this_week_fileDTO" items="${thisWeek_EventFileList}">
-													<c:if test="${this_week_eventDTO.evnum == this_week_fileDTO.evnum}">
-														<c:if test="${this_week_fileDTO.filename == 'nothing'}">
-															<a href="event_content?evnum=${this_week_eventDTO.evnum}" style="margin: 0; padding: 0; border: 0; cursor: pointer;">
-																<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png" style="outline: none; border-radius: 4px; vertical-align: middle; margin: 0; padding: 0; border: 0; height: 60px; width: 60px;">
-															</a>
-														</c:if>
-														<c:if test="${this_week_fileDTO.filename != 'nothing'}">
-															<a href="event_content?evnum=${this_week_eventDTO.evnum}" style="margin: 0; padding: 0; border: 0; cursor: pointer;">
-																<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${this_week_fileDTO.filename}" style="outline: none; border-radius: 4px; vertical-align: middle; margin: 0; padding: 0; border: 0; height: 60px; width: 60px;">
-															</a>
-														</c:if>
-													</c:if>
-												</c:forEach>
+												<c:if test="${empty this_week_eventDTO.fileDTO.filename}">
+													<a href="event_content?evnum=${this_week_eventDTO.evnum}" style="margin: 0; padding: 0; border: 0; cursor: pointer;">
+														<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png" style="outline: none; border-radius: 4px; vertical-align: middle; margin: 0; padding: 0; border: 0; height: 60px; width: 60px;">
+													</a>
+												</c:if>
+												<c:if test="${!empty this_week_eventDTO.fileDTO.filename}">
+													<a href="event_content?evnum=${this_week_eventDTO.evnum}" style="margin: 0; padding: 0; border: 0; cursor: pointer;">
+														<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${this_week_eventDTO.fileDTO.filename}" style="outline: none; border-radius: 4px; vertical-align: middle; margin: 0; padding: 0; border: 0; height: 60px; width: 60px;">
+													</a>
+												</c:if>												
 											</div>
 										</div>
 										
@@ -867,7 +863,9 @@
     	    <div id="flag_popup_description">
     	    	<div>
     	    		<p>지금 보고계신 콘텐츠의 수정이 필요한 부분과 실제 이벤트에서 어떠한 사항을 위반하고 있는지 알려 주시기 바랍니다.</p>
-    	    		<form name="flag_popup_form" id="flag_popup_form" action="message_send?report=event&where=event" method="post" onsubmit="return check()" style="margin-bottoom: 0;">
+    	    		<form name="flag_popup_form" id="flag_popup_form" action="message_send" method="post" onsubmit="return check()" style="margin-bottoom: 0;">
+    	    			<input type="hidden" name="where" value="event">
+    	    			<input type="hidden" name="report" value="event">
     	    			<input type="hidden" name="evnum" value="${eventDTO.evnum}">
     	    			<input type="hidden" name="email" value="${sessionScope.memberinfo.email}">
     	    			<div id="flag_popup_descripte_container">
@@ -999,11 +997,11 @@
 						'<div style="display: inline-block;">'+
 							'<div id="map_inner_eventphoto" style="float: left;">'+
 								'<a href="event_content?evnum=${eventDTO.evnum}">'+
-								'<c:if test="${empty photoInMap.filename}">'+
+								'<c:if test="${empty eventDTO.fileDTO.filename}">'+
 									'<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/event_square.png" style="outline: none; width: 100px; height: 100px; border-radius: 4px;">'+
 								'</c:if>'+
-								'<c:if test="${!empty photoInMap.filename}">'+
-									'<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${photoInMap.filename}" style="outline: none; width: 100px; height: 100px; border-radius: 4px;">'+
+								'<c:if test="${!empty eventDTO.fileDTO.filename}">'+
+									'<img src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/${eventDTO.fileDTO.filename}" style="outline: none; width: 100px; height: 100px; border-radius: 4px;">'+
 								'</c:if>'+
 								'</a>'+
 							'</div>'+

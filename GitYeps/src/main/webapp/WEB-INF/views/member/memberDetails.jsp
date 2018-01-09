@@ -544,8 +544,7 @@
       	<div class="loading_img" style="left: 40%; top: 40%;"></div>
    	</div>
 	
-<script type="text/javascript">
-
+<script>
 $(function() {
 	$(document).on('click', '[data-popup-open]', function(e)  {
 		var memberinfo ='${sessionScope.memberinfo}';
@@ -639,6 +638,17 @@ $(function() {
  	    	$(".details-column-beta_events").hide();
  	    	$(".details-column-beta_tips").hide();
  	    	$('.event_list_paging_section').show();
+ 	    	
+ 	    	$(document).ajaxStart(function() {
+	 			$('body').css('overflow', 'hidden');
+	 			$('html').scrollTop(0);
+	 			$('.loading_wapper').fadeIn(500);
+	 		})
+ 							
+	 		$(document).ajaxStop(function() {
+	 			$('body').css('overflow', 'auto');
+	 			$('.loading_wapper').fadeOut(500);
+	 		})
  	    	
  	     	var mnum = '${memberDTO.mnum}';
 	        $.ajax({
@@ -799,181 +809,184 @@ $(function() {
 	             },
 	         }); 
 	    });
-	    
-	function list(page){
+	});
+	</script>
 	
-		$(document).ajaxStart(function() {
-			$('body').css('overflow', 'hidden');
-			$('html').scrollTop(0);
-			$('.loading_wapper').fadeIn(500);
-		})
+	<script type="text/javascript">
+	function list(page){
+		alert("1");
+// 		$(document).ajaxStart(function() {
+// 			$('body').css('overflow', 'hidden');
+// 			$('html').scrollTop(0);
+// 			$('.loading_wapper').fadeIn(500);
+// 		})
 						
-		$(document).ajaxStop(function() {
-			$('body').css('overflow', 'auto');
-			$('.loading_wapper').fadeOut(500);
-		})
+// 		$(document).ajaxStop(function() {
+// 			$('body').css('overflow', 'auto');
+// 			$('.loading_wapper').fadeOut(500);
+// 		})
 		
-		var mnum = '${memberDTO.mnum}';
-	    $.ajax({
-	        type : 'post',
-	        url : 'review_member_ajax?curPage=' + page + '&mnum=' + mnum,
-	        dataType : 'json',
-	        success : function(responseData){
-	        	if(responseData.msg) {
-	        		alert(responseData.msg);
-	        		window.location.href = responseData.url;
-	        	}
-		       	 $('.memberDetails-review-list ul li').remove(); 
-				 $.each(responseData.memberReview,function(i,item){
-			    	var num = responseData.num;
-			        var mnum = responseData.mnum;
+// 		var mnum = '${memberDTO.mnum}';
+// 	    $.ajax({
+// 	        type : 'post',
+// 	        url : 'review_member_ajax?curPage=' + page + '&mnum=' + mnum,
+// 	        dataType : 'json',
+// 	        success : function(responseData){
+// 	        	if(responseData.msg) {
+// 	        		alert(responseData.msg);
+// 	        		window.location.href = responseData.url;
+// 	        	}
+// 		       	 $('.memberDetails-review-list ul').empty(); 
+// 				 $.each(responseData.memberReview,function(i,item){
+// 			    	var num = responseData.num;
+// 			        var mnum = responseData.mnum;
 				   
 	           
-		 $('.memberDetails-review-list ul').append(
+// 		 $('.memberDetails-review-list ul').append(
 			
-				 '<li class="review-draft" style=" padding: 18px 0;  padding-bottom: 17px; display: list-item; text-align: -webkit-match-parent;">'+
- 					'<div class="arrange" style="width: 100%; overflow: hidden; height: auto;">'+
- 						'<div class="restContent-user" style="float: left; padding: 0 15px; min-height: 1px; width: 66.66667% ">'+
-						    '<div class="media-block media-block--12 biz-listing-medium">'+
-				                '<div class="media-avatar">'+
-				                    '<div class="photo-box pb-60s">'+
-				                        '<a href="restaurant_content?rnum='+ item.rnum +'" class="js-analytics-click" data-analytics-label="biz-photo">'+
-				                            '<img class="photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/' + item.restaurantDTO.fileDTO.filename + '"  width="60">'+
-				          			    '</a>'+
-				    		        '</div>'+
-				         	    '</div>'+
-				            '<div class="media-story">'+
-				                '<div class="media-title clearfix">'+
-				                    '<a class="biz-name js-analytics-click" data-analytics-label="biz-name" href="/biz/liholiho-yacht-club-san-francisco-2" data-hovercard-id="K8YqsGXicOLOUcQXTzRrnw"><span>'+ item.restaurantDTO.rname + '    Liholiho Yacht Club</span></a>'+
-				                '</div>'+
-				                '<div class="price-category">'+
-				                    '<span class="category-str-list">'+
-				                        '<a href="#">' + item.restaurantDTO.foodstyle + '  Bars</a>,'+
-				                        '<a href="yeps_main_saerch?location='+ item.restaurantDTO.roadAddrPart1 +'">' + 
-				                        item.restaurantDTO.roadAddrPart1 + item.restaurantDTO.roadAddrPart2 + item.restaurantDTO.addrDetail + '    American (New)</a>,'+
-				                        '<a href="/search?cflt=seafood&amp;find_loc=San+Francisco%2C+CA">Seafood</a>'+
-				    				'</span>'+
-				    			 '</div>'+
-				                 '<address>'+
-				                      item.restaurantDTO.raddress + item.restaurantDTO.hp2 + item.restaurantDTO.hp3 +
-				                 '</address>'+
-				             '</div>'+
-        		        '</div>'+
-				        '<div class="arrange_unit" align="right" style="margin-bottom: 10px;">'+
-			                '<p class="time-stamp nowrap review-draft_date-created text-right">'+
-			                    'Started on  '+  item.restaurantDTO.rest_regdate + 
-			                '</p>'+
-			                '<p lang="ko" style="margin-bottom: 12px; width: 100%; float: right; display: block;">'+
-							 item.content +
-						    '</p><br><br>'+
-			             '</div>'+			       
-			            '<div class="clearfix"  style="margin-bottom: 50px;">'+
-			               '<a  style="float: left;" href="member_details?mnum=' + mnum + '" class="yepsbyn ybtn--small js-war-widget_finish-draft pull-left">리뷰수정</a>'+
-			                  '<form action="review_delete?rvnum='+ item.rvnum + '&mnum=' + mnum + '" class="pull-right js-delete-review-draft-form" method="post" name="delete_draft">'+
+// 				 '<li class="review-draft" style=" padding: 18px 0;  padding-bottom: 17px; display: list-item; text-align: -webkit-match-parent;">'+
+//  					'<div class="arrange" style="width: 100%; overflow: hidden; height: auto;">'+
+//  						'<div class="restContent-user" style="float: left; padding: 0 15px; min-height: 1px; width: 66.66667% ">'+
+// 						    '<div class="media-block media-block--12 biz-listing-medium">'+
+// 				                '<div class="media-avatar">'+
+// 				                    '<div class="photo-box pb-60s">'+
+// 				                        '<a href="restaurant_content?rnum='+ item.rnum +'" class="js-analytics-click" data-analytics-label="biz-photo">'+
+// 				                            '<img class="photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/' + item.restaurantDTO.fileDTO.filename + '"  width="60">'+
+// 				          			    '</a>'+
+// 				    		        '</div>'+
+// 				         	    '</div>'+
+// 				            '<div class="media-story">'+
+// 				                '<div class="media-title clearfix">'+
+// 				                    '<a class="biz-name js-analytics-click" data-analytics-label="biz-name" href="/biz/liholiho-yacht-club-san-francisco-2" data-hovercard-id="K8YqsGXicOLOUcQXTzRrnw"><span>'+ item.restaurantDTO.rname + '    Liholiho Yacht Club</span></a>'+
+// 				                '</div>'+
+// 				                '<div class="price-category">'+
+// 				                    '<span class="category-str-list">'+
+// 				                        '<a href="#">' + item.restaurantDTO.foodstyle + '  Bars</a>,'+
+// 				                        '<a href="yeps_main_saerch?location='+ item.restaurantDTO.roadAddrPart1 +'">' + 
+// 				                        item.restaurantDTO.roadAddrPart1 + item.restaurantDTO.roadAddrPart2 + item.restaurantDTO.addrDetail + '    American (New)</a>,'+
+// 				                        '<a href="/search?cflt=seafood&amp;find_loc=San+Francisco%2C+CA">Seafood</a>'+
+// 				    				'</span>'+
+// 				    			 '</div>'+
+// 				                 '<address>'+
+// 				                      item.restaurantDTO.raddress + item.restaurantDTO.hp2 + item.restaurantDTO.hp3 +
+// 				                 '</address>'+
+// 				             '</div>'+
+//         		        '</div>'+
+// 				        '<div class="arrange_unit" align="right" style="margin-bottom: 10px;">'+
+// 			                '<p class="time-stamp nowrap review-draft_date-created text-right">'+
+// 			                    'Started on  '+  item.restaurantDTO.rest_regdate + 
+// 			                '</p>'+
+// 			                '<p lang="ko" style="margin-bottom: 12px; width: 100%; float: right; display: block;">'+
+// 							 item.content +
+// 						    '</p><br><br>'+
+// 			             '</div>'+			       
+// 			            '<div class="clearfix"  style="margin-bottom: 50px;">'+
+// 			               '<a  style="float: left;" href="member_details?mnum=' + mnum + '" class="yepsbyn ybtn--small js-war-widget_finish-draft pull-left">리뷰수정</a>'+
+// 			                  '<form action="review_delete?rvnum='+ item.rvnum + '&mnum=' + mnum + '" class="pull-right js-delete-review-draft-form" method="post" name="delete_draft">'+
 			               
-			                      '<input type="hidden" value="'+ item.rvnum + '" name="rvnum">'+
-			                      '<button type="submit" style="float: right;"class="chiclet-link u-cursor-pointer show-tooltip js-delete-review-draft">'+
-			                         '<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-trash icon--size-18 icon--currentColor">'+
-			                             '<svg class="icon_svg">'+
-									         '<path d="M3 5V3h4V2h4v1h4v2H3zm11 9c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V6h10v8zM8 8.5a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5zm3 0a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5z"></path>'+
+// 			                      '<input type="hidden" value="'+ item.rvnum + '" name="rvnum">'+
+// 			                      '<button type="submit" style="float: right;"class="chiclet-link u-cursor-pointer show-tooltip js-delete-review-draft">'+
+// 			                         '<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-trash icon--size-18 icon--currentColor">'+
+// 			                             '<svg class="icon_svg">'+
+// 									         '<path d="M3 5V3h4V2h4v1h4v2H3zm11 9c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V6h10v8zM8 8.5a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5zm3 0a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5z"></path>'+
 								
-			                             '</svg>'+
-			                         '</span>'+
-			                         '<span class="tooltip-wrapper">'+
-			                         '<span class="tooltip">Delete draft</span>'+
-			                      '</span>'+
-			                   '</button>'+
-			                '</form>'+
-			             '</div>'+
-		              '</div>'+
-				   '</div>'+
-				'</li>'
-				      );
-				 });
+// 			                             '</svg>'+
+// 			                         '</span>'+
+// 			                         '<span class="tooltip-wrapper">'+
+// 			                         '<span class="tooltip">Delete draft</span>'+
+// 			                      '</span>'+
+// 			                   '</button>'+
+// 			                '</form>'+
+// 			             '</div>'+
+// 		              '</div>'+
+// 				   '</div>'+
+// 				'</li>'
+// 				      );
+// 				 });
 				 
-				 $('.event_list_paging_section').empty();
-			     var pagingHtml = "";
-			     pagingHtml = '<div class="event_list_pagination_block">' + 
-			     			  '<div class="event_list_pagination_wrap" >' + 
-			     			  '<div class="event_list_page_of_pages">';
-			     if(responseData.YepsPager.blockEnd == 0) {
-			  	   pagingHtml += 'Page ' + responseData.YepsPager.curPage + ' of 1';
-			     } else {
-			  	   pagingHtml += 'Page ' + responseData.YepsPager.curPage + ' of ' + responseData.YepsPager.blockEnd;
-			     }
-			     pagingHtml += '</div>';
-			     if(responseData.YepsPager.blockEnd != 1) {
-			  	   pagingHtml += '<div class="event_list_page_link_wrapper">';
-			  	   pagingHtml += '<div class="event_list_page_link_wrap" >';
-			  	   if(responseData.YepsPager.curBlock > 1) {
-			  		   pagingHtml += '<div class="event_list_next_block">';
-			  		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+ 1 +')">';
-			  		   pagingHtml += '<span>Start</span>';
-			  		   pagingHtml += '</a>';
-			  		   pagingHtml += '</div>';
-			  	   }
+// 				 $('.event_list_paging_section').empty();
+// 			     var pagingHtml = "";
+// 			     pagingHtml = '<div class="event_list_pagination_block">' + 
+// 			     			  '<div class="event_list_pagination_wrap" >' + 
+// 			     			  '<div class="event_list_page_of_pages">';
+// 			     if(responseData.YepsPager.blockEnd == 0) {
+// 			  	   pagingHtml += 'Page ' + responseData.YepsPager.curPage + ' of 1';
+// 			     } else {
+// 			  	   pagingHtml += 'Page ' + responseData.YepsPager.curPage + ' of ' + responseData.YepsPager.blockEnd;
+// 			     }
+// 			     pagingHtml += '</div>';
+// 			     if(responseData.YepsPager.blockEnd != 1) {
+// 			  	   pagingHtml += '<div class="event_list_page_link_wrapper">';
+// 			  	   pagingHtml += '<div class="event_list_page_link_wrap" >';
+// 			  	   if(responseData.YepsPager.curBlock > 1) {
+// 			  		   pagingHtml += '<div class="event_list_next_block">';
+// 			  		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+ 1 +')">';
+// 			  		   pagingHtml += '<span>Start</span>';
+// 			  		   pagingHtml += '</a>';
+// 			  		   pagingHtml += '</div>';
+// 			  	   }
 			  	   
-			  	   if(responseData.YepsPager.curBlock > 1) {
-			  		   pagingHtml += '<div class="event_list_next_block">';
-			  		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+responseData.YepsPager.prevPage+')">';
-			  		   pagingHtml += '<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">';
-			  		   pagingHtml += '<svg class="icon_svg">';
-			  		   pagingHtml += '<path d="M14.475 18.364l1.414-1.414L10.94 12l4.95-4.95-1.415-1.414L8.11 12l6.365 6.364z"></path>';
-			  		   pagingHtml += '</svg>';
-			  		   pagingHtml += '</span>';
-			  		   pagingHtml += '<span>Previous</span>';
-			  		   pagingHtml += '</a>';
-			  		   pagingHtml += '</div>';
-			  	   }
+// 			  	   if(responseData.YepsPager.curBlock > 1) {
+// 			  		   pagingHtml += '<div class="event_list_next_block">';
+// 			  		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+responseData.YepsPager.prevPage+')">';
+// 			  		   pagingHtml += '<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">';
+// 			  		   pagingHtml += '<svg class="icon_svg">';
+// 			  		   pagingHtml += '<path d="M14.475 18.364l1.414-1.414L10.94 12l4.95-4.95-1.415-1.414L8.11 12l6.365 6.364z"></path>';
+// 			  		   pagingHtml += '</svg>';
+// 			  		   pagingHtml += '</span>';
+// 			  		   pagingHtml += '<span>Previous</span>';
+// 			  		   pagingHtml += '</a>';
+// 			  		   pagingHtml += '</div>';
+// 			  	   }
 			  	   
-			  	   for(var num = responseData.YepsPager.blockBegin; num <= responseData.YepsPager.blockEnd; num++) {
-			  		   pagingHtml += '<div class="event_list_page_link_option">';
-			  		   if(num == responseData.YepsPager.curPage) {
-			  			   pagingHtml += '<span class="event_list_page_option_action">';
-			  			   pagingHtml += num;
-			  			   pagingHtml += '</span>';
-			  		   } else {
-			  			   pagingHtml += '<a href="javascript:list('+ num +')" class="event_list_page_option_link_action">';
-			  			   pagingHtml += num;
-			  			   pagingHtml += '</a>';
-			  		   }
-			  		   pagingHtml += '</div>';
-			  	   }
+// 			  	   for(var num = responseData.YepsPager.blockBegin; num <= responseData.YepsPager.blockEnd; num++) {
+// 			  		   pagingHtml += '<div class="event_list_page_link_option">';
+// 			  		   if(num == responseData.YepsPager.curPage) {
+// 			  			   pagingHtml += '<span class="event_list_page_option_action">';
+// 			  			   pagingHtml += num;
+// 			  			   pagingHtml += '</span>';
+// 			  		   } else {
+// 			  			   pagingHtml += '<a href="javascript:list('+ num +')" class="event_list_page_option_link_action">';
+// 			  			   pagingHtml += num;
+// 			  			   pagingHtml += '</a>';
+// 			  		   }
+// 			  		   pagingHtml += '</div>';
+// 			  	   }
 			  	   
-			  	   if(responseData.YepsPager.curBlock <= responseData.YepsPager.totBlock) {
-			  		   pagingHtml += '<div class="event_list_next_block">';
-			  		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+responseData.YepsPager.nextPage+')">';
-			  		   pagingHtml += '<span>Next</span>';
-			  		   pagingHtml += '<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">';
-			  		   pagingHtml += '<svg class="icon_svg">';
-			  		   pagingHtml += '<path d="M9.525 5.636L8.11 7.05 13.06 12l-4.95 4.95 1.415 1.414L15.89 12 9.524 5.636z"></path>';
-			  		   pagingHtml += '</svg>';
-			  		   pagingHtml += '</span>';
-			  		   pagingHtml += '</a>';
-			  		   pagingHtml += '</div>';
-			  	   }
-			  	   if(responseData.YepsPager.curBlock <= responseData.YepsPager.totBlock) {
-			  		   pagingHtml += '<div class="event_list_next_block">';
-			  		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+responseData.YepsPager.totPage+')">';
-			  		   pagingHtml += '<span>End</span>';
-			  		   pagingHtml += '</a>';
-			  		   pagingHtml += '</div>';
-			  	   }
-			  	   pagingHtml += '</div>';
-			  	   pagingHtml += '</div>';
-			     }
-			     pagingHtml += '</div>';
-			     pagingHtml += '</div>';
-			     pagingHtml += '</div>';
+// 			  	   if(responseData.YepsPager.curBlock <= responseData.YepsPager.totBlock) {
+// 			  		   pagingHtml += '<div class="event_list_next_block">';
+// 			  		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+responseData.YepsPager.nextPage+')">';
+// 			  		   pagingHtml += '<span>Next</span>';
+// 			  		   pagingHtml += '<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">';
+// 			  		   pagingHtml += '<svg class="icon_svg">';
+// 			  		   pagingHtml += '<path d="M9.525 5.636L8.11 7.05 13.06 12l-4.95 4.95 1.415 1.414L15.89 12 9.524 5.636z"></path>';
+// 			  		   pagingHtml += '</svg>';
+// 			  		   pagingHtml += '</span>';
+// 			  		   pagingHtml += '</a>';
+// 			  		   pagingHtml += '</div>';
+// 			  	   }
+// 			  	   if(responseData.YepsPager.curBlock <= responseData.YepsPager.totBlock) {
+// 			  		   pagingHtml += '<div class="event_list_next_block">';
+// 			  		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+responseData.YepsPager.totPage+')">';
+// 			  		   pagingHtml += '<span>End</span>';
+// 			  		   pagingHtml += '</a>';
+// 			  		   pagingHtml += '</div>';
+// 			  	   }
+// 			  	   pagingHtml += '</div>';
+// 			  	   pagingHtml += '</div>';
+// 			     }
+// 			     pagingHtml += '</div>';
+// 			     pagingHtml += '</div>';
+// 			     pagingHtml += '</div>';
 			
-			     $('.event_list_paging_section').append(pagingHtml);      
+// 			     $('.event_list_paging_section').append(pagingHtml);      
 			   
 	           
-	         },
-	         error : function(request, status, error) {
-	             alert("실패 :" + "code:"+request.status+"\n\n"+"message:"+request.responseText+"\n\n"+"error:"+error); 
-	         },
-	     });
+// 	         },
+// 	         error : function(request, status, error) {
+// 	             alert("실패 :" + "code:"+request.status+"\n\n"+"message:"+request.responseText+"\n\n"+"error:"+error); 
+// 	         },
+// 	     });
 	 } 
 	
 	

@@ -36,8 +36,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 #{filenum, jdbcType=INTEGER}, #{zipNo}, #{roadAddrPart1}, #{roadAddrPart2, jdbcType=VARCHAR}, #{addrDetail}, sysdate, #{mnum})
 	</insert>
 	
-	<select id="getEventContent" parameterType="int" resultType="EventDTO">
-		select * from yeps_event where evnum = #{evnum}
+	
+	<resultMap type="eventDTO" id="getEventContentMap">
+		<id column="evnum" property="evnum"/>
+		<result column="evnum" property="evnum"></result>
+		<result column="eventname" property="eventname"></result>
+		<result column="start_date" property="start_date"></result>
+		<result column="start_time" property="start_time"></result>
+		<result column="end_date" property="end_date"></result>
+		<result column="end_time" property="end_time"></result>
+		<result column="store_address" property="store_address"></result>
+		<result column="event_content" property="event_content"></result>
+		<result column="discount" property="discount"></result>
+		<result column="event_category" property="event_category"></result>
+		<result column="zipNo" property="zipNo"></result>
+		<result column="roadAddrPart1" property="roadAddrPart1"></result>
+		<result column="roadAddrPart2" property="roadAddrPart2"></result>
+		<result column="addrDetail" property="addrDetail"></result>
+		<result column="event_register_date" property="event_register_date"></result>
+				
+		<association javaType="FileDTO" property="fileDTO">
+			<id column="filenum" property="filenum"></id>
+			<result column="filename" property="filename"></result>			
+		</association>
+	</resultMap>
+	
+	<select id="getEventContent" parameterType="int" resultMap="getEventContentMap">
+		select  E.evnum
+				, E.eventname
+				, E.start_date
+				, E.start_time
+				, E.end_date
+				, E.end_time
+				, E.store_address
+				, E.event_content
+				, E.event_category
+				, E.zipNo
+				, E.roadAddrPart1
+				, E.roadAddrPart2
+				, E.addrDetail
+				, E.event_register_date				
+				, F.filename 
+		from yeps_event E, yeps_files F where E.evnum = F.evnum and F.ismainphoto = 'y' and E.evnum = #{evnum}
 	</select>
 	
 	<select id="getEvnum" parameterType="java.util.HashMap" resultType="int">
@@ -52,12 +92,45 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update yeps_event set filenum = #{filenum} where evnum = #{evnum}
 	</update>
 	
-	<select id="getThisWeek_EventList" resultType="EventDTO">
-		select * from yeps_event where to_char(sysdate+7, 'yyyymmdd') >= end_date or to_char(sysdate-7, 'yyyymmdd') >= start_date and 5 >= rownum order by event_register_date asc
+	
+	<resultMap type="eventDTO" id="getThisWeek_EventListMap">
+		<id column="evnum" property="evnum"/>
+		<result column="evnum" property="evnum"></result>
+		<result column="eventname" property="eventname"></result>
+		<result column="start_date" property="start_date"></result>
+		<result column="start_time" property="start_time"></result>
+		<result column="end_date" property="end_date"></result>
+		<result column="end_time" property="end_time"></result>
+		
+		<association javaType="FileDTO" property="fileDTO">
+			<id column="filenum" property="filenum"></id>
+			<result column="filename" property="filename"></result>			
+		</association>
+	</resultMap>
+	<select id="getThisWeek_EventList" resultMap="getThisWeek_EventListMap">
+		select  E.evnum
+				, E.eventname
+				, E.start_date
+				, E.start_time
+				, E.end_date
+				, E.end_time
+				, F.filename 
+		from 	yeps_event E, yeps_files F 
+		where 	E.evnum = F.evnum and F.ismainphoto = 'y' and (to_char(sysdate+7, 'yyyymmdd') >= E.end_date or to_char(sysdate-7, 'yyyymmdd') >= E.start_date) and rownum between 1 and 5
+		order 	by E.event_register_date asc
  	</select>
  	
- 	<select id="getRandom_EventList" resultType="EventDTO">
- 		select * from yeps_event where to_char(sysdate+7, 'yyyymmdd') >= end_date or to_char(sysdate-7, 'yyyymmdd') >= start_date and 3 >= rownum order by dbms_random.value
+ 	<select id="getRandom_EventList" resultMap="getThisWeek_EventListMap">
+ 		select  E.evnum
+				, E.eventname
+				, E.start_date
+				, E.start_time
+				, E.end_date
+				, E.end_time
+				, F.filename 
+		from 	yeps_event E, yeps_files F 
+		where 	E.evnum = F.evnum and F.ismainphoto = 'y' and (to_char(sysdate+7, 'yyyymmdd') >= E.end_date or to_char(sysdate-7, 'yyyymmdd') >= E.start_date) and rownum between 1 and 3
+ 		order by dbms_random.value
  	</select>
  	
  	<delete id="deleteEvent" parameterType="int">

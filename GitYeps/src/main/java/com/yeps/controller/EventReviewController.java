@@ -13,11 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.yeps.model.EventDTO;
 import com.yeps.model.EventReviewDTO;
-import com.yeps.model.RestaurantDTO;
-import com.yeps.model.ReviewDTO;
-import com.yeps.service.EventMapper;
 import com.yeps.service.EventReviewMapper;
 import com.yeps.service.YepsPager;
 
@@ -26,9 +22,6 @@ public class EventReviewController {
 
 	@Autowired
 	private EventReviewMapper eventReviewMapper;
-	
-	@Autowired
-	private EventMapper eventMapper;
 
 	@RequestMapping(value = "/eventReview_insert")
 	public ModelAndView insertEventReviewForm(HttpServletRequest req) {
