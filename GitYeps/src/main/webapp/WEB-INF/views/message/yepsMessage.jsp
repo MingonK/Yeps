@@ -105,22 +105,20 @@
     			<h4 style="display: table-cell; padding: 0px 7px; font-size: 100%; font: inherit;" onclick="readCheck('${map.lMode}');">×</h4>
     		</div>
     		<h2>
-    	    	메세지 받기
+    	    	메세지 보기
     	    </h2>
     	</div>
     	
     	<div id="flag_popup_description" style="padding: 12px 8px 0;">
     		<div>
-    			
-    				<div>
-						<h4 align="left" style="color: #d32323;">Message From</h4>
-    	    			<input type="text" id="from" readOnly style="width: 95%; height: 20px;">
-    	    			<h4 align="left" style="color: #d32323;">Subject is</h4>
-	            		<input type="text" id="subject" readOnly style="width: 95%; height: 20px;">
-	        			<h4 align="left" style="color: #d32323;">Content is</h4>
-	            		<textarea rows="4" id="message" readOnly style="width: 95%;"></textarea>
-    	    		</div>
-    		
+    			<div>
+					<h4 align="left" style="color: #d32323;">Message From</h4>
+    	    		<input type="text" id="from" readOnly style="width: 95%; height: 20px;">
+    	    		<h4 align="left" style="color: #d32323;">Subject is</h4>
+	          		<input type="text" id="subject" readOnly style="width: 95%; height: 20px;">
+	        		<h4 align="left" style="color: #d32323;">Content is</h4>
+	           		<textarea rows="4" id="message" readOnly style="width: 95%;"></textarea>
+    	    	</div>
     		</div>
     	</div>
     	
