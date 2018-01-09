@@ -1,7 +1,6 @@
 package com.yeps.controller;
 
 import java.util.ArrayList;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -15,13 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yeps.model.MemberDTO;
-import com.yeps.model.MemberPhotoDTO;
 import com.yeps.model.RestaurantDTO;
 import com.yeps.model.ReviewDTO;
 import com.yeps.service.MemberMapper;
@@ -103,8 +100,8 @@ public class ReviewController {
 			mdto.setReviewcount(nowReviewcount);
 			// System.out.println(nowReviewcount);
 			if (mode.equals("restaurantReviewDelete")) {
-				mav.addObject("rnum", rnum);
-				mav.setViewName("restaurant_content");
+				mav.addObject("msg", "댓글을 삭제하였습니다.");
+				mav.setViewName("historyBack");
 			} else {
 				msg = "리뷰 삭제성공!!";
 				url = "restaurant_content?rnum=" + rnum;
@@ -114,7 +111,7 @@ public class ReviewController {
 			}
 		} else {
 			msg = "리뷰 삭제실패!!";
-			url = "member_detalis";
+			url = "member_detalis?mnum"+mnum;
 			mav.addObject("msg", msg);
 			mav.addObject("url", url);
 			mav.setViewName("message");
@@ -311,13 +308,12 @@ public class ReviewController {
 	public HashMap<String, Object> review_member(HttpServletRequest req, HttpSession session) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		String smnum = req.getParameter("mnum");
-		System.out.println(smnum);
 		int mnum = 0;
 		if (smnum == null) {
 			MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo");
-
 			if (mdto == null) {
 				map.put("msg", "로그인 먼저 해주세요.");
+				map.put("url", "member_login");
 				return map;
 			}
 			mnum = mdto.getMnum();

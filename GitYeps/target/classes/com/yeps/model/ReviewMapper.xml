@@ -528,4 +528,8 @@
   	<delete id="deleteReviewByMemberNumber" parameterType="int">
   		delete yeps_review where mnum = #{mnum}
   	</delete>
+  	
+  	<select id="getMyReviewCount" parameterType="int" resultType="int">
+  		select count(*) from yeps_review where mnum = #{mnum}
+  	</select>
 </mapper>		

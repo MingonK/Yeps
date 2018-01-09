@@ -323,13 +323,13 @@
 				<div class="details-column-beta_reviews">
 				   <div>
 					  <div class="memberDetails-review-list" style="position: relative;">
-					     <ul class="review-drafts"">
+					     <ul class="review-drafts">
 					    <!----------------------------------------------- 아작스 통해 붙여넣는 부분 -------------------------------------------------- -->
 				    
 					     </ul>
 					  </div>
 					  <!-- -----페이징 처리 시작 ------ -->					
-			   <div class="event_list_paging_section" style="font-size: 14px;">
+			   			<div class="event_list_paging_section" style="font-size: 14px;">
 	                       <div class="event_list_pagination_block">
 	                          <div class="event_list_pagination_wrap"  >
 	                              <div class="event_list_page_of_pages" >
@@ -603,7 +603,6 @@ $(function() {
 	
 	for(var i = 0; i < list.length; i++) {
 		var img = document.createElement('img');
-// 		img.src = 'getImage/' + list[i];
 		img.src = 'https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/' + list[i];
 		img.style.cursor = 'pointer';
 		img.style.width = '100%';
@@ -652,7 +651,7 @@ $(function() {
                 var mnum = responseData.mnum;
               
        	 $('.memberDetails-review-list ul li').remove(); 
-	 $.each(responseData.memberReview,function(i,item){
+	 	$.each(responseData.memberReview,function(i,item){
 		 $(".memberDetails-review-list ul").append(
 			
 				 '<li class="review-draft">'+
@@ -673,13 +672,12 @@ $(function() {
 				                '<div class="price-category">'+
 				                    '<span class="category-str-list">'+
 				                        '<a href="#">' + item.restaurantDTO.foodstyle + '  </a>,'+
-				                        '<a href="yeps_main_saerch?location='+ item.rnum +'">' + 
+				                        '<a href="yeps_main_saerch?location='+ item.restaurantDTO.roadAddrPart1 +'">' + 
 				                        item.restaurantDTO.roadAddrPart1 + item.restaurantDTO.roadAddrPart2 + item.restaurantDTO.addrDetail + '   </a>'+
 				    				'</span>'+
 				    			 '</div>'+
 				                 '<address> <br>'+
 				                      item.restaurantDTO.raddress + item.restaurantDTO.hp2 + item.restaurantDTO.hp3 +
-// 				                     '871 Sutter St<br>San Francisco, CA 94109'+
 				                 '</address>'+
 				             '</div>'+
         		        '</div>'+
@@ -694,15 +692,6 @@ $(function() {
 			             '<p class="member_ptag1" lang="ko" style="margin-bottom: 12px; width: 100%; float: right; display: block;">'+
 						 item.content +
 					    '</p><br><br>'+
-			             /* '<div>'+
-							'<div class="restList-star-rating-'+item.gradepoint+'" >'+
-								'<img class="offscreen" '+
-									'src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/stars.png" '+
-									'width="84" height="303" alt="4.0 star rating" '+
-									'style="clip: rect(0, 0, 0, 0); position: absolute; left: -9999px; top: auto; overflow: hidden; width: 1px; height: 1px; vertical-align: middle;">'+
-							'</div>'+
-						'</div>'+ */
-			       
 			            '<div class="clearfix"  style="margin-bottom: 50px;">'+
 			               '<a  style="float: left;" href="review_write?rvnum=' + item.rvnum + '&mode=update&star='+item.gradepoint+'&rnum='+item.rnum+'" class="yepsbyn ybtn--small js-war-widget_finish-draft pull-left">리뷰수정</a>'+
 			                  '<form action="review_delete?rvnum='+ item.rvnum + '&mnum=' + mnum + '&mode=restaurantReviewDelete&rnum='+item.rnum+'" class="pull-right js-delete-review-draft-form" method="post" name="delete_draft">'+
@@ -830,6 +819,10 @@ $(function() {
 	        url : 'review_member_ajax?curPage=' + page + '&mnum=' + mnum,
 	        dataType : 'json',
 	        success : function(responseData){
+	        	if(responseData.msg) {
+	        		alert(responseData.msg);
+	        		window.location.href = responseData.url;
+	        	}
 		       	 $('.memberDetails-review-list ul li').remove(); 
 				 $.each(responseData.memberReview,function(i,item){
 			    	var num = responseData.num;
@@ -844,7 +837,7 @@ $(function() {
 						    '<div class="media-block media-block--12 biz-listing-medium">'+
 				                '<div class="media-avatar">'+
 				                    '<div class="photo-box pb-60s">'+
-				                        '<a href="/biz/liholiho-yacht-club-san-francisco-2" class="js-analytics-click" data-analytics-label="biz-photo">'+
+				                        '<a href="restaurant_content?rnum='+ item.rnum +'" class="js-analytics-click" data-analytics-label="biz-photo">'+
 				                            '<img class="photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/' + item.restaurantDTO.fileDTO.filename + '"  width="60">'+
 				          			    '</a>'+
 				    		        '</div>'+
@@ -855,15 +848,14 @@ $(function() {
 				                '</div>'+
 				                '<div class="price-category">'+
 				                    '<span class="category-str-list">'+
-				                        '<a href="/search?cflt=bars&amp;find_loc=San+Francisco%2C+CA">' + item.restaurantDTO.foodstyle + '  Bars</a>,'+
-				                        '<a href="/search?cflt=newamerican&amp;find_loc=San+Francisco%2C+CA">' + 
+				                        '<a href="#">' + item.restaurantDTO.foodstyle + '  Bars</a>,'+
+				                        '<a href="yeps_main_saerch?location='+ item.restaurantDTO.roadAddrPart1 +'">' + 
 				                        item.restaurantDTO.roadAddrPart1 + item.restaurantDTO.roadAddrPart2 + item.restaurantDTO.addrDetail + '    American (New)</a>,'+
 				                        '<a href="/search?cflt=seafood&amp;find_loc=San+Francisco%2C+CA">Seafood</a>'+
 				    				'</span>'+
 				    			 '</div>'+
 				                 '<address>'+
 				                      item.restaurantDTO.raddress + item.restaurantDTO.hp2 + item.restaurantDTO.hp3 +
-// 				                     '871 Sutter St<br>San Francisco, CA 94109'+
 				                 '</address>'+
 				             '</div>'+
         		        '</div>'+
@@ -874,17 +866,7 @@ $(function() {
 			                '<p lang="ko" style="margin-bottom: 12px; width: 100%; float: right; display: block;">'+
 							 item.content +
 						    '</p><br><br>'+
-			             '</div>'+
-			             
-			             /* '<div>'+
-							'<div class="restList-star-rating-'+item.gradepoint+'" >'+
-								'<img class="offscreen" '+
-									'src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/stars.png" '+
-									'width="84" height="303" alt="4.0 star rating" '+
-									'style="clip: rect(0, 0, 0, 0); position: absolute; left: -9999px; top: auto; overflow: hidden; width: 1px; height: 1px; vertical-align: middle;">'+
-							'</div>'+
-						'</div>'+ */
-			       
+			             '</div>'+			       
 			            '<div class="clearfix"  style="margin-bottom: 50px;">'+
 			               '<a  style="float: left;" href="member_details?mnum=' + mnum + '" class="yepsbyn ybtn--small js-war-widget_finish-draft pull-left">리뷰수정</a>'+
 			                  '<form action="review_delete?rvnum='+ item.rvnum + '&mnum=' + mnum + '" class="pull-right js-delete-review-draft-form" method="post" name="delete_draft">'+

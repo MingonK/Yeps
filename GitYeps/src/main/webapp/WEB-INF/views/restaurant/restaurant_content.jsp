@@ -17,7 +17,7 @@
 	<script src="http://malsup.github.io/jquery.cycle2.carousel.js"></script>
 </head>
 <%@include file="../top.jsp" %>
-	<div class="main" style="background: white;">
+<div class="main" style="background: white;">
 	<div class="top-shelf">
 		<div class="content-container js-biz-details">
 			<div class="biz-page-header clearfix" >
@@ -984,7 +984,7 @@
 			</div>
 		</div>
 	</div>
-	
+</div>
 	
 	<div class="flag_content_popup" data-popup="popup-2">
     	<div class="popup-inner" style="width: 465px; z-index: 1; height: auto !important; max-height: none;">

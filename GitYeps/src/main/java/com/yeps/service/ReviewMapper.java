@@ -175,4 +175,7 @@ public class ReviewMapper {
 	   return sqlSession.delete("deleteReviewByMemberNumber", mnum);
    }
    
+   public int getMyReviewCount(int mnum) {
+	   return sqlSession.selectOne("getMyReviewCount", mnum);
+   }
 }
