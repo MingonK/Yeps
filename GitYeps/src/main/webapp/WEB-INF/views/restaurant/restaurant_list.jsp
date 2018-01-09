@@ -18,7 +18,6 @@
 					<div class="column column-alpha" style="float: left;padding: 0 15px;min-height: 1px;box-sizing: border-box;width: 100%; height: 60%;">
 						<div class="search-header clearfix" style="width:1100px;height:80px;padding-top: 12px;padding-bottom: 7px;">
 							<div class="search-header-title-container" style="width:100%;height:40px;">
-								<h1 style="font-size:21px;padding-top: 6px;">베스트 10 레스토랑 <span class="location">서울</span></h1>
 								<h1 style="font-size:21px;padding-top: 6px;">베스트 10 레스토랑<span>   ${map.location}</span></h1>
 							</div>
 						<div class="breadcrumbs-hierarchy" style="width:100%;height:18px;margin-bottom:6px;">

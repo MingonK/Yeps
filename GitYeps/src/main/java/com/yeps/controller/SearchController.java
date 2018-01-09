@@ -46,7 +46,7 @@ public class SearchController {
 
 	@Autowired
 	private Jaso jaso;
-
+ 
 	@Autowired
 	private RandomNum randomNum;
 

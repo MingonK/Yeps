@@ -29,11 +29,6 @@ public class QnAController {
 	@Autowired
 	private QnAMapper qnaMapper;
 
-	@RequestMapping(value = "/qna_index")
-	public ModelAndView indexQnA() {
-		return new ModelAndView("qna/index");
-	}
-
 	@RequestMapping(value = "/qna_list")
 	public ModelAndView listQnA(HttpServletRequest req, @RequestParam(defaultValue = "1") int curPage) {
 		List<QnADTO> list = null;
@@ -349,7 +344,7 @@ public class QnAController {
 				msg = "답변 작성 및 수정 실패";
 				url = "qna_content?qnum=" + dto.getQnum();
 			}
-		} else {
+		} else { 
 			msg = "Q&A 답변 권한이 없습니다.";
 			url = "qna_list?mode=qna";
 		}

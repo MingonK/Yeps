@@ -30,7 +30,7 @@ public class MessageController {
 	@Autowired
 	private MessageMapper messageMapper;
 
-	@Autowired
+	@Autowired 
 	private RestaurantMapper restaurantMapper;
 
 	@Autowired
