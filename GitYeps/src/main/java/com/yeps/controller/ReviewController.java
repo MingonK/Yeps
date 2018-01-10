@@ -90,9 +90,14 @@ public class ReviewController {
 		ModelAndView mav = new ModelAndView();
 		String msg;
 		String url;
+		
+		System.out.println(rvnum);
+		System.out.println(mnum);
+		System.out.println(rnum);
+		System.out.println(mode);
 
 		if (res > 0) {
-			int beforeReviewcount = memberMapper.getMemberReviewCount(mnum);
+		    int beforeReviewcount = reviewMapper.getMyReviewCount(mnum);
 			int nowReviewcount = beforeReviewcount - 1;
 			memberMapper.updateReviewCount(mnum, nowReviewcount);
 			if(session != null) {
@@ -112,7 +117,7 @@ public class ReviewController {
 			}
 		} else {
 			msg = "리뷰 삭제실패!!";
-			url = "member_detalis?mnum"+mnum;
+			url = "member_details?mnum=" + mnum;
 			mav.addObject("msg", msg);
 			mav.addObject("url", url);
 			mav.setViewName("message");
@@ -335,6 +340,7 @@ public class ReviewController {
 
 		/* int photocount = memberMapper. */
 		List<ReviewDTO> memberReview = reviewMapper.getMemberReview(mnum, start, end);
+		
 		map.put("mnum", mnum);
 		map.put("num", num);
 		map.put("count", reviewcount);

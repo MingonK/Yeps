@@ -211,6 +211,7 @@
    <resultMap type="reviewDTO" id="MemberReviewMap">
        <id column="rnum" property="rnum"/>
        <result column="rnum" property="rnum"></result>
+       <result column="rvnum" property="rvnum"></result>
        <result column="reg_date" property="reg_date"></result>
        <result column="content" property="content"></result>
        <result column="gradepoint" property="gradepoint"></result>

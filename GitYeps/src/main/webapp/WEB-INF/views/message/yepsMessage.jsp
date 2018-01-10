@@ -113,7 +113,7 @@
     		<div>
     			<div>
 					<h4 align="left" style="color: #d32323;">Message From</h4>
-    	    		<input type="text" id="from" readOnly>
+    	    		<input type="text" id="view_from" readOnly>
     	    		<h4 align="left" style="color: #d32323;">Subject is</h4>
 	          		<input type="text" id="subject" readOnly>
 	        		<h4 align="left" style="color: #d32323;">Content is</h4>
@@ -130,7 +130,7 @@
 			    <button class="popup-delete" id="deleteMessage" type="button" data-popup-close="popup-1" style="cursor:pointer;" onclick="deleteMsg('${map.lMode}');">
 			    	<span>삭제</span>
 			    </button>&nbsp;
-    			<input type="hidden" id="readCheck"> 
+    			<input type="hidden" id="view_msgnum"> 
     			<input type="hidden" id="pageMode">
      			<a href="#" data-popup-close="popup-1" onclick="readCheck('${map.lMode}');">
     				Close
@@ -357,9 +357,19 @@
 </div>
 	<script>
 	
+	
+	
 	$("#replyMessage").click(function(){
-		 var receiver = ('#from').val();
+		
+		 var receiver = $('#view_from').val();
+		 var msgnum = $('#view_msgnum').val();
+		 var lMode = $('#pageMode').val();
+			
 		 $("#sendformTo").val(receiver);
+		 
+		 var url = "message_read?msgnum=" + msgnum + "&lMode=" + lMode ;
+	     window.location = url;
+		
 	}); 
 	
  	$('#message_popup_Issue_submit_button').click(function(){
@@ -385,8 +395,8 @@
     	 var message = message;
     	 var lmode = lmode;
     	 $('#pageMode').val(lmode)
-    	 $('#readCheck').val(msgnum) 
-    	 $('#from').val(sender);
+    	 $('#view_msgnum').val(msgnum) 
+    	 $('#view_from').val(sender);
          $('#subject').val(subject);
          $('#message').val(message);
     }   
