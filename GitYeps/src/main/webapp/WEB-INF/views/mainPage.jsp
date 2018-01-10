@@ -1363,7 +1363,7 @@
 		});
 		   
 		$(document).on('click', function(e) {
-			if(!$(e.target).hasClass('drop-menu-link')) {
+			if(!$(e.target).hasClass("drop-menu-has-arrow") && !$(e.target).hasClass('drop-menu-group')) {
 				$('#topbar-account-wrap').hide();
 			}
 			if(!$(e.target).hasClass("page_header_searchDate_inputs")){
@@ -1409,7 +1409,7 @@
 		}
 		if(!$(e.target).hasClass("page_header_location_inputs")) {
 			$('#main_location_suggestion_container').hide();
-		} 
+		}
 	});
 	
 	$(document).on('click', '#show_more_activity', function() {

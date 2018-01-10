@@ -8,7 +8,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.yeps.model.EventReviewDTO;
 import com.yeps.model.RestaurantDTO;
 
 @Service
@@ -18,48 +17,47 @@ public class RestaurantMapper {
 
 	public List<RestaurantDTO> listRest(int start, int end, String mode, List<Integer> prices, String location) {
 		String sql=null;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("location", location);
+		map.put("mode", mode);
 		
 		if(prices.get(0)==0 && mode.equals("mode")) {// 가격 선택 X ,필터 선택 X
 			System.out.println("가격 선택 X ,필터 선택 X");
 //			return sqlSession.selectList("listRestaurant", map);
 		}else if(prices.get(0)!=0 && mode.equals("mode")){ //가격 선택 O,필터 선택 X
 					sql=String.valueOf(prices.get(0));
-//			map.put("sql", sql);
-//			map.put("pricesSql", prices);
+					map.put("sql", sql);
+					map.put("pricesSql", prices);
 			System.out.println("가격 선택 O,필터 선택 X");
 //			return sqlSession.selectList("listRestaurant", map);
 		}
 		else if(prices.get(0)==0 && !mode.equals("mode")) {//가격 선택 X,필터 선택 O
 			System.out.println("가격 선택 X,필터 선택 O");
-			
-//			map.put("mode", mode);
-//			if (mode.equals("delivery")) {
-//				return sqlSession.selectList("listRestaurant_delivery", map);
-//			} 
-//			else if (mode.equals("reserv")) {
-//				return sqlSession.selectList("listRestaurant_reserv", map);
-//			} else if(mode.equals("open")){
-//				return sqlSession.selectList("listRestaurant_open_now", map);
-//			}	else {
-//				return sqlSession.selectList("listRestaurant_takeout", map);
-//			}	
+			if (mode.equals("delivery")) {
+				return sqlSession.selectList("listRestaurant_delivery", map);
+			} 
+			else if (mode.equals("reserv")) {
+				return sqlSession.selectList("listRestaurant_reserv", map);
+			} else if(mode.equals("open")){
+				return sqlSession.selectList("listRestaurant_open_now", map);
+			}	else {
+				return sqlSession.selectList("listRestaurant_takeout", map);
+			}	
 		}
 		else { //가격 선택 O,필터 선택 O
 			System.out.println("가격 선택 O,필터 선택 O");
-//			sql=String.valueOf(prices.get(0));
-//			return sqlSession.selectList("listRestaurant", map);
+			sql=String.valueOf(prices.get(0));
+			map.put("sql", sql);
+			map.put("pricesSql", prices);
+			return sqlSession.selectList("listRestaurant", map);
 		}
 		
 		System.out.println("SQL="+sql);
 		System.out.println("PriceSQL="+prices);
 		System.out.println("Mode="+mode);
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("start", start);
-		map.put("end", end);
-		map.put("location", location);
-		map.put("sql", sql);
-		map.put("pricesSql", prices);
-		map.put("mode", mode);
+
 		return sqlSession.selectList("listRestaurant", map);
 	}
 
@@ -281,6 +279,5 @@ public class RestaurantMapper {
 	public int deleteRestaurantByMemberNumber(int mnum) {
 		return sqlSession.delete("deleteRestaurantByMemberNumber", mnum);
 	}
-
 
 }

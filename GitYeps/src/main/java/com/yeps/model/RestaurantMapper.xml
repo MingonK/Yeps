@@ -5,7 +5,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.web.model">
-
         
     <delete id="deleteRestaurant" parameterType="int">
          delete from yeps_restaurant where rnum=#{rnum}
@@ -66,8 +65,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 													RT.raddress, RT.hp2, RT.hp3, RT.reststyle, RT.category, F.filename
 		from yeps_restaurant RT, yeps_files F where 
 		RT.rnum = F.rnum and F.ismainphoto = 'y' and replace(upper(RT.roadAddrPart1),' ','') like '%'||replace(upper(#{location}),' ','')||'%' 
-		<if test="!'mode'.equals(mode)">AND #{mode}='가능'</if>
-<!-- 		<if test='mode !="mode" '></if> -->
+		<if test='sql !=null '>AND (RT.price=#{sql} <if test="pricesSql != null">
+		<foreach collection="pricesSql" item="item" index="index">
+            OR RT.price=#{item.value}
+        </foreach>
+		</if>)</if>
 		order by RT.price desc)A) where rn between #{start} and #{end}
 	</select>
 

@@ -79,15 +79,6 @@
 															<c:if test="${!empty registMemberList.get(status.index).nickname}">
 																${registMemberList.get(status.index).nickname}
 															</c:if>
-
-<%-- 															<c:forEach var="memberDTO" items="${registMemberList}"> --%>
-<%-- 																<c:if test="${memberDTO.mnum == fileDTO.mnum && empty memberDTO.nickname}"> --%>
-<%-- 																	${memberDTO.email} --%>
-<%-- 																</c:if> --%>
-<%-- 																<c:if test="${memberDTO.mnum == fileDTO.mnum && !empty memberDTO.nickname}"> --%>
-<%-- 																	${memberDTO.nickname} --%>
-<%-- 																</c:if> --%>
-<%-- 															</c:forEach> --%>
 														</c:when>
 														<c:otherwise>
 															<c:if test="${memberinfo.mnum == fileDTO.mnum && empty memberinfo.nickname}">
@@ -119,19 +110,6 @@
 											</c:if>
 										</div>
 									</div>
-									
-<!-- 									<form id="photo_description" method="post" style="margin-bottom: 18px; display: block;" enctype="multipart/form-data"> -->
-<%-- 										<input type="hidden" name="evnum" id="evnum" value="${eventDTO.evnum}"> --%>
-<%-- 										<input type="hidden" name="mnum" id="mnum" value="${sessionScope.mnum}"> --%>
-<%-- 										<input type="hidden" name="filenum" id="filenum" value="${fileDTO.filenum}"> --%>
-<!-- 										<label>Description</label> -->
-<!-- 										<div id="description_container"> -->
-<%-- 											<textarea rows="4" name="file_content">${fileDTO.file_content}</textarea> --%>
-<!-- 										</div> -->
-<!-- 										<button type="submit" id="Save_button"> -->
-<!-- 											<span>Save</span> -->
-<!-- 										</button> -->
-<!-- 									</form> -->
 								</div>
 							</c:forEach>	
 							</div>
@@ -203,7 +181,9 @@
  					} else if (responseData.upload_failed) {
  						alert(responseData.upload_failed)
  						return false;
- 					} else if (responseData.update) {
+ 					} else if(responseData.url) {
+						window.location.href = responseData.url; 
+					} else if (responseData.update) {
  						alert(responseData.update);
  						$('#result_photo_status_text').text('사진을 등록했습니다.');
 						$('#result_photo_status_text').show();

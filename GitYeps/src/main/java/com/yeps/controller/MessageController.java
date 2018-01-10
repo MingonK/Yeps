@@ -245,11 +245,6 @@ public class MessageController {
 			receiver = dto.getReceiver().trim();
 			dto.setReceiver(receiver);
 			dto.setIsIssue(0);
-			System.out.println(dto.getContent());
-			System.out.println(dto.getReceiver());
-			System.out.println(dto.getSender());
-			System.out.println(dto.getTitle());
-			System.out.println(dto.getMsgNum());
 			
 			for (int i = 0; i < memberList.size(); i++) {
 				String who = memberList.get(i).getEmail();
@@ -259,7 +254,7 @@ public class MessageController {
 			}
 			res = messageMapper.writeMessage(dto);
 			if (res > 0) {
-				msg = "쪽지를 보냈습니다.쪽지함으로 이동합니다.";
+				msg = "메세지를 전송하였습니다.";
 				lMode = "msgBoxList";
 				mav = pagingMessageList(req, lMode, email);
 
@@ -336,16 +331,12 @@ public class MessageController {
 					receiver = memberList.get(i).getEmail();
 					dto.setReceiver(receiver);
 					dto.setIsIssue(1);
-					System.out.println("@=" + dto.getMnum());
-					System.out.println("@@=" + dto.getTitle());
 					res = messageMapper.writeMessage(dto);
 				}
 			}
-
 		}
-	
-		mav.setViewName("historyBack");// historyback.jsp를 이용하여 이전 페이지로 이동
 		mav.addObject("msg", msg);
+		mav.setViewName("historyBack");// historyback.jsp를 이용하여 이전 페이지로 이동
 		return mav;
 	}
 

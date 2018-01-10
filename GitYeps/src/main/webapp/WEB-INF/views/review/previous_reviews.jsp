@@ -9,14 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/style.css?ver=2"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/review.css?ver=3"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/message.css?ver=7"/>"/>
-	<script src="//code.jquery.com/jquery.min.js">
-	</script>
-	
-	<script type="text/javascript">
-   		function list(page){
-      		  location.href="previous_reviews?curPage=" + page;
-   	    }
-    </script>
+	<script src="//code.jquery.com/jquery.min.js"></script>
     
 </head>
 <body>
@@ -100,9 +93,10 @@
 					   					    		</ul>
 					   					    	 </div>
 					   					    </div>
+					   					    <c:if test="${memberinfo.email != dto.memberDTO.email}">
 					   					    <ul class="pre_ul_small">
 					   					    	<li class="pre_li_small-2-1">
-					   					    		<a class="pre_a_3" rel="Shirley C." data-component-bound="true" href="yeps_message">
+					   					    		<a class="pre_a_3" rel="Shirley C." data-component-bound="true" data-popup-open="writeMessage" alt="${dto.memberDTO.email}">
 					   					    			<div class="pre_div_10">
 					   					    				<span class="pre_span">
 					   					    					<svg class="pre_svg_33">
@@ -116,6 +110,7 @@
 					   					    		</a>
 					   					    	</li>
 					   					    </ul>
+					   					    </c:if>
 			   					    	</div>
 			   					    </div>
 									<div class="pre_div222">
@@ -237,8 +232,108 @@
 			</div>
 		</div>
 	
-</body>
-</html>
+<div class="popup" align="left" id="writeMessage" data-popup="writeMessage"  style="z-index: 1;">
+	<div class="popup-inner" style="width: 465px; z-index: 1; height: auto !important; max-height: 400px;">
+    	<div id="flag_content_popup_title">
+    	    <div id="flag_content_popup_close" data-popup-close="writeMessage">
+    			<h4 style="display: table-cell; padding: 0px 7px;">×</h4>
+    		</div>
+    		<h2>
+    	    	메세지 보내기
+    	    </h2>
+    	</div>
+    	
+    	<div id="flag_popup_description" style="padding: 12px 8px 0;">
+    		<div>
+    			<form name="sendform"  action = "message_send" method="post">
+    				<div>
+						<h4 align="left" style="color: #d32323;">Send Message To</h4>
+    	    			<input type="text" id="sendformTo" name="receiver">
+    	    			<h4 align="left" style="color: #d32323;">Subject is</h4>
+	            		<input type="text" name="title" id="sendformSubject">
+	        			<h4 align="left" style="color: #d32323;">Content is</h4>
+	            		<textarea rows="4" name="content" id="sendformMessage"  style="width: 95%;" placeholder="여기에 메시지를 입력하세요."></textarea>
+    	    		</div>
+    			</form>
+    		</div>
+    	</div>
+    	
+    	   	
+		<div id="flag_popup_footer">
+     		<div id="flag_popup_buttons">
+     			<button id="reply_message_popup_submit_button" type="submit" value="submit" data-popup-send="SendMessage" >
+     				<span>메세지 보내기</span>
+     			</button>
+     			<a href="#" data-popup-close="writeMessage">
+    				Close
+    			</a>
+     		</div>
+     	</div>
+	</div>		
+</div>
+
+<script type="text/javascript">
+   	function list(page){
+      	location.href="previous_reviews?curPage=" + page;
+   	}
+</script>
+
+<script>
+	$(function() {
+		$(document).on('click', '[data-popup-open]', function(e)  {
+			var memberinfo ='${sessionScope.memberinfo}';
+    		if(!memberinfo.length) {
+     			$(location).attr("href", "event_report");
+     			return;
+    		}
+			var targeted_popup_class = jQuery(this).attr('data-popup-open');
+			$('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+    	
+    		if(targeted_popup_class == 'writeMessage') {
+    			var email = $(this).attr('alt');
+    			$('#sendformTo').val(email);
+    		}
+		
+			$('body').css('overflow','hidden');
+    		$('#reply_flag_content_popup_error_message').css('display', 'none');
+    		$('#reply_flag_popup_descripte_alert').css('color', 'black');
+    		$('#reply_flag_popup_form_label').css('color', 'black');
+    		$("#reason_field").val("default").prop("selected", true);
+			e.stopPropagation();
+    		e.preventDefault();
+		});
+    
+	//----- CLOSE
+		$(document).on('click', '[data-popup-close]', function(e)  {
+			var targeted_popup_class = jQuery(this).attr('data-popup-close');
+			$('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+			$('body').css('overflow','auto');
+			e.stopPropagation();
+    		e.preventDefault();
+		});
+	});  
+	
+	
+	$(document).on('click', '#reply_message_popup_submit_button', function(){
+		if($('#sendformTo').val()==''){
+		alert("받는 사람을 입력해주세요");
+		$('#sendformTo').focus()
+		return false;
+		
+		}else if($('#sendformSubject').val()==''){
+			alert("제목를 입력해주세요");
+			$('#sendformSubject').focus()
+		return false;
+		
+		}else if($('#sendformMessage').val()==''){
+			alert("내용을 입력해주세요");
+			$('#sendformMessage').focus()
+		return false;
+		}
+	    document.sendform.submit(); 
+	});
+</script>
+
 <%@ include file="../bottom.jsp" %>
 
 

@@ -284,16 +284,16 @@
 							</c:forEach>
 						</ul>
 						<div class="event_list_paging_section" style="font-size: 14px;">
-		         <div class="event_list_pagination_block">
-		            <div class="event_list_pagination_wrap">
-		               <div class="event_list_page_of_pages">
-		                  <c:if test="${map.YepsPager.blockEnd == 0}">
-		                     Page ${map.YepsPager.curPage} of 1
-		                  </c:if>
-		                  <c:if test="${map.YepsPager.blockEnd != 0}">
-		                     Page ${map.YepsPager.curPage} of ${map.YepsPager.blockEnd}
-		                  </c:if>
-		               </div>
+				         <div class="event_list_pagination_block">
+				            <div class="event_list_pagination_wrap">
+				               <div class="event_list_page_of_pages">
+				                  <c:if test="${map.YepsPager.blockEnd == 0}">
+				                     Page ${map.YepsPager.curPage} of 1
+				                  </c:if>
+				                  <c:if test="${map.YepsPager.blockEnd != 0}">
+				                     Page ${map.YepsPager.curPage} of ${map.YepsPager.blockEnd}
+				                  </c:if>
+				               </div>
 		<!--                페이징 처리!! 현재페이지는 span이 되고 나머지는 a로 -->
 		               <c:if test="${map.YepsPager.blockEnd != 1}">
 		               <div class="event_list_page_link_wrapper">
@@ -370,6 +370,7 @@
 				<div class="wrap">
 					<div id="map" style="width: 330px; height:300px;"></div>
 				<script>
+				var infoWindows2=[];
 				function refreshMap(){
 					rname=[];
 					rnum=[];
@@ -379,7 +380,7 @@
 					roadAddrPart2=[];
 					hp=[];
 					rest_filename=[];
-					infoWindows=[];
+					infoWindows2=[];
 					for(var i=0;i<markers.length;i++){
 						markers[i].setMap(null);
 					}
@@ -393,6 +394,7 @@
 					roadAddrPart2.push(item.roadAddrPart2);
 					hp.push(item.raddress+ "-" + item.hp2 + "-" + item.hp3);
 					rest_filename.push(item.fileDTO.filename);
+					
 					
 						naver.maps.Service.geocode({address : roadAddrPart1[i]},function(status, response) {
 							var result = response.result;
@@ -435,25 +437,24 @@
 								content : iwContent,
 							});
 							markers.push(marker)
-							infoWindows.push(infowindow);
-				
-// 							function getClickHandler(seq) {
-// 								return function(e) {
-// 									var marker = markers[seq], infoWindow = infoWindows[seq];
-// 									if (infoWindow.getMap()) {
-// 										infoWindow.close();
-// 									} else {
-// 										infoWindow.open(map, marker);
-// 									}
-// 								}
-// 							}
-							naver.maps.Event.addListener(markers[i],'click', getClickHandler(i));
+							infoWindows2.push(infowindow);
+							function getClickHandler2(seq) {
+								return function(e) {
+									var marker = markers[seq], infoWindow = infoWindows2[seq];
+									if (infoWindow.getMap()) {
+										infoWindow.close();
+									} else {
+										infoWindow.open(map, marker);
+									}
+								}
+							}
+							naver.maps.Event.addListener(markers[i],'click', getClickHandler2(i));
 						});
 				};
 					
 					
 	  var map = new naver.maps.Map('map',{
-  	  zoom:8
+  	  zoom:6
     });
 	  
 	  var markers = [],infoWindows = [];
@@ -548,7 +549,7 @@
 						<div class="search-feedback-box island island--light">
 							<div class="feedback-biz-suggest">
 								<div class="text-container">
-									<h3 style="display: block;word-wrap: break-word !important;word-break: break-word !important;overflow-wrap: break-word !important;font-weight: bold;margin-bottom: 6px;font-size: 16px;line-height: 1.3125em;color: #d32323;margin: 0 0 6px;">Not here? Tell us what we're missing.</h3>
+									<h3 style="display: block;word-wrap: break-word !important;word-break: break-word !important;overflow-wrap: break-word !important;font-weight: bold;margin-bottom: 6px;font-size: 16px;line-height: 1.3125em;color: #d32323;margin: 0 0 6px;">찾으려는 매장이 없습니까?</h3>
 									<p style="margin-bottom: 12px; display: block;">만약 찾으시는 가게가 없다면 등록해주세요!</p>
 								</div>
 								<a href="restaurant_insert" class="ybtn ybtn--primary ybtn--small js-show-add-biz-modal">레스토랑 등록</a>
@@ -626,6 +627,7 @@ $(document).ready(function(){
 					 data : allData,
 					 success : function(data){
 						 $('.column-alpha2 ul li').remove();
+						 $('.event_list_paging_section').empty();
 						 refreshMap();
 						 $.each(data.list,function(i,item){
 							 refreshMarker(item,i);
@@ -711,6 +713,80 @@ $(document).ready(function(){
 										'</li>'
 										 );
 								 });
+						 var pagingHtml = "";
+				           pagingHtml = '<div class="event_list_pagination_block">' + 
+				           				'<div class="event_list_pagination_wrap">' + 
+				           				'<div class="event_list_page_of_pages">';
+				           if(data.YepsPager.blockEnd == 0) {
+				        	   pagingHtml += 'Page ' + data.YepsPager.curPage + ' of 1';
+				           } else {
+				        	   pagingHtml += 'Page ' + data.YepsPager.curPage + ' of ' + data.YepsPager.blockEnd;
+				           }
+				           pagingHtml += '</div>';
+				           if(data.YepsPager.blockEnd != 1) {
+				        	   pagingHtml += '<div class="event_list_page_link_wrapper">';
+				        	   pagingHtml += '<div class="event_list_page_link_wrap">';
+				        	   if(data.YepsPager.curBlock > 1) {
+				        		   pagingHtml += '<div class="event_list_next_block">';
+				        		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+ 1 +')">';
+				        		   pagingHtml += '<span>Start</span>';
+				        		   pagingHtml += '</a>';
+				        		   pagingHtml += '</div>';
+				        	   }
+				        	   
+				        	   if(data.YepsPager.curBlock > 1) {
+				        		   pagingHtml += '<div class="event_list_next_block">';
+				        		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+data.YepsPager.prevPage+')">';
+				        		   pagingHtml += '<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">';
+				        		   pagingHtml += '<svg class="icon_svg">';
+				        		   pagingHtml += '<path d="M14.475 18.364l1.414-1.414L10.94 12l4.95-4.95-1.415-1.414L8.11 12l6.365 6.364z"></path>';
+				        		   pagingHtml += '</svg>';
+				        		   pagingHtml += '</span>';
+				        		   pagingHtml += '<span>Previous</span>';
+				        		   pagingHtml += '</a>';
+				        		   pagingHtml += '</div>';
+				        	   }
+				        	   
+				        	   for(var num = data.YepsPager.blockBegin; num <= data.YepsPager.blockEnd; num++) {
+				        		   pagingHtml += '<div class="event_list_page_link_option">';
+				        		   if(num == data.YepsPager.curPage) {
+				        			   pagingHtml += '<span class="event_list_page_option_action">';
+				        			   pagingHtml += num;
+				        			   pagingHtml += '</span>';
+				        		   } else {
+				        			   pagingHtml += '<a href="javascript:list('+ num +')" class="event_list_page_option_link_action">';
+				        			   pagingHtml += num;
+				        			   pagingHtml += '</a>';
+				        		   }
+				        		   pagingHtml += '</div>';
+				        	   }
+				        	   
+				        	   if(data.YepsPager.curBlock <= data.YepsPager.totBlock) {
+				        		   pagingHtml += '<div class="event_list_next_block">';
+				        		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+data.YepsPager.nextPage+')">';
+				        		   pagingHtml += '<span>Next</span>';
+				        		   pagingHtml += '<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">';
+				        		   pagingHtml += '<svg class="icon_svg">';
+				        		   pagingHtml += '<path d="M9.525 5.636L8.11 7.05 13.06 12l-4.95 4.95 1.415 1.414L15.89 12 9.524 5.636z"></path>';
+				        		   pagingHtml += '</svg>';
+				        		   pagingHtml += '</span>';
+				        		   pagingHtml += '</a>';
+				        		   pagingHtml += '</div>';
+				        	   }
+				        	   if(data.YepsPager.curBlock <= data.YepsPager.totBlock) {
+				        		   pagingHtml += '<div class="event_list_next_block">';
+				        		   pagingHtml += '<a class="event_list_next_block_action" href="javascript:list('+data.YepsPager.totPage+')">';
+				        		   pagingHtml += '<span>End</span>';
+				        		   pagingHtml += '</a>';
+				        		   pagingHtml += '</div>';
+				        	   }
+				        	   pagingHtml += '</div>';
+				        	   pagingHtml += '</div>';
+				           }
+				           pagingHtml += '</div>';
+				           pagingHtml += '</div>';
+				           pagingHtml += '</div>';
+				           $('.event_list_paging_section').append(pagingHtml);
 				        },
 				error:function(request,status,error){
 				alert("code:"+request.status+"\n"+"error:"+error);

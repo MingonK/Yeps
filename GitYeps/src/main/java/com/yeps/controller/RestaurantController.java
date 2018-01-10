@@ -218,7 +218,8 @@ public class RestaurantController {
 		YepsPager YepsPager = new YepsPager(count, curPage, pageScale, blockScale);
 		int start = YepsPager.getPageBegin();
 		int end = YepsPager.getPageEnd();
-
+	
+		
 		List<RestaurantDTO> list = restaurantMapper.listRest(start, end, mode,price, location);
 
 		List<Integer> reviewCount = new ArrayList<Integer>();

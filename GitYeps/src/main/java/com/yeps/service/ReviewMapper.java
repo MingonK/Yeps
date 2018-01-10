@@ -150,7 +150,7 @@ public class ReviewMapper {
 		map.put("mnum", mnum);
 		map.put("start", start);
 		map.put("end", end);
-		return sqlSession.selectList("getMemberReview",map);
+		return sqlSession.selectList("getMemberReview", map);
 	}
    
    // 2018. 1. 5일 민곤 추가
@@ -175,4 +175,18 @@ public class ReviewMapper {
 	   return sqlSession.delete("deleteReviewByMemberNumber", mnum);
    }
    
+   public int getMyReviewCount(int mnum) {
+	   return sqlSession.selectOne("getMyReviewCount", mnum);
+   }
+   
+   public int getAllReviewCount() {
+	   return sqlSession.selectOne("getAllReviewCount");
+   }
+   
+   public List<ReviewDTO> getAllReviews(int start, int end) {
+	   HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("start", start);
+		map.put("end", end);
+	   return sqlSession.selectList("getAllReviews", map);
+   }
 }

@@ -1,7 +1,6 @@
 package com.yeps.controller;
 
 import java.util.ArrayList;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -15,13 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yeps.model.MemberDTO;
-import com.yeps.model.MemberPhotoDTO;
 import com.yeps.model.RestaurantDTO;
 import com.yeps.model.ReviewDTO;
 import com.yeps.service.MemberMapper;
@@ -41,16 +38,20 @@ public class ReviewController {
 
 	@RequestMapping(value = "/restReview_list")
 	public ModelAndView review_list(HttpServletRequest req) {
-
 		ModelAndView mav = new ModelAndView();
 		String search = req.getParameter("search");
 		String searchString = req.getParameter("searchString");
-		int count = 0;
-		if (searchString == null || searchString.trim().equals("") || search == null || search.trim().equals("")) {
-			count = restaurantMapper.getCount();
-		} else {
-			count = restaurantMapper.getSearchRestaurantCount(search, searchString);
+		int count = reviewMapper.getAllReviewCount();
+		
+		HttpSession session = req.getSession();
+		MemberDTO loginMember = (MemberDTO) session.getAttribute("memberinfo");
+		if(loginMember == null || !loginMember.getIsmanager().equals("y") || !loginMember.getIsmaster().equals("y")) {
+			mav.addObject("msg", "권한이 없습니다.");
+			mav.addObject("url", "main");
+			mav.setViewName("message");
+			return mav;
 		}
+		
 		System.out.println(search);
 		System.out.println(searchString);
 		int curPage = req.getParameter("curPage") != null ? Integer.parseInt(req.getParameter("curPage")) : 1;
@@ -63,19 +64,14 @@ public class ReviewController {
 		int start = YepsPager.getPageBegin();
 		int end = YepsPager.getPageEnd();
 		List<RestaurantDTO> restaurant = null;
-
-		if (searchString == null || searchString.trim().equals("") || search == null || search.trim().equals("")) {
-			restaurant = restaurantMapper.restaurantList(start, end);
-		} else {
-			restaurant = restaurantMapper.findRestaurant_Manage(start, end, search, searchString);
-		}
-
+		List<ReviewDTO> AllReviewlist = reviewMapper.getAllReviews(start, end);
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		map.put("search", search);
 		map.put("searchString", searchString);
 		mav.addObject("map", map);
 		mav.addObject("set", "review");
+		mav.addObject("AllReviewlist", AllReviewlist);
 		mav.addObject("count", count);
 		mav.addObject("curPage", curPage);
 		mav.addObject("yepsPager", YepsPager);
@@ -99,12 +95,14 @@ public class ReviewController {
 			int beforeReviewcount = memberMapper.getMemberReviewCount(mnum);
 			int nowReviewcount = beforeReviewcount - 1;
 			memberMapper.updateReviewCount(mnum, nowReviewcount);
-			MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo");
-			mdto.setReviewcount(nowReviewcount);
+			if(session != null) {
+				MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo");
+				mdto.setReviewcount(nowReviewcount);
+			}
 			// System.out.println(nowReviewcount);
 			if (mode.equals("restaurantReviewDelete")) {
-				mav.addObject("rnum", rnum);
-				mav.setViewName("restaurant_content");
+				mav.addObject("msg", "댓글을 삭제하였습니다.");
+				mav.setViewName("historyBack");
 			} else {
 				msg = "리뷰 삭제성공!!";
 				url = "restaurant_content?rnum=" + rnum;
@@ -114,7 +112,7 @@ public class ReviewController {
 			}
 		} else {
 			msg = "리뷰 삭제실패!!";
-			url = "member_detalis";
+			url = "member_detalis?mnum"+mnum;
 			mav.addObject("msg", msg);
 			mav.addObject("url", url);
 			mav.setViewName("message");
@@ -311,13 +309,12 @@ public class ReviewController {
 	public HashMap<String, Object> review_member(HttpServletRequest req, HttpSession session) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		String smnum = req.getParameter("mnum");
-		System.out.println(smnum);
 		int mnum = 0;
 		if (smnum == null) {
 			MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo");
-
 			if (mdto == null) {
 				map.put("msg", "로그인 먼저 해주세요.");
+				map.put("url", "member_login");
 				return map;
 			}
 			mnum = mdto.getMnum();
@@ -326,8 +323,9 @@ public class ReviewController {
 			mnum = Integer.parseInt(smnum);
 		}
 		int curPage = req.getParameter("curPage") != null ? Integer.parseInt(req.getParameter("curPage")) : 1;
-		int reviewcount = memberMapper.getMemberReviewCount(mnum);
-		int pageScale = 10;
+		
+		int reviewcount = reviewMapper.getMyReviewCount(mnum);
+		int pageScale = 5;
 		int blockScale = 5;
 		YepsPager YepsPager = new YepsPager(reviewcount, curPage, pageScale, blockScale);
 		int start = YepsPager.getPageBegin();

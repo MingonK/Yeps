@@ -20,6 +20,7 @@ public class EventDTO {
 	private String event_register_date;
 	private int event_review_num;
 	private int mnum;
+	private FileDTO fileDTO;
 	
 	public int getEvnum() {
 		return evnum;
@@ -134,5 +135,11 @@ public class EventDTO {
 	}
 	public void setMnum(int mnum) {
 		this.mnum = mnum;
+	}
+	public FileDTO getFileDTO() {
+		return fileDTO;
+	}
+	public void setFileDTO(FileDTO fileDTO) {
+		this.fileDTO = fileDTO;
 	}
 }

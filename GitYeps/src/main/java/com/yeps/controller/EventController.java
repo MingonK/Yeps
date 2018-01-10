@@ -111,19 +111,6 @@ public class EventController {
 		}
 
 		List<EventDTO> thisWeek_random_eventList = eventMapper.getRandom_EventList();
-		List<FileDTO> thisWeek_random_fileList = new ArrayList<FileDTO>();
-		for (int i = 0; i < thisWeek_random_eventList.size(); i++) {
-			FileDTO dto = fileMapper.getFYIEventFile(thisWeek_random_eventList.get(i).getEvnum());
-			if (dto == null) {
-				FileDTO dtoForNull = new FileDTO();
-				dtoForNull.setFilename("nothing");
-				dtoForNull.setEvnum(thisWeek_random_eventList.get(i).getEvnum());
-				thisWeek_random_fileList.add(dtoForNull);
-			} else {
-				thisWeek_random_fileList.add(dto);
-			}
-		}
-		
 		Cookie[] cookies = req.getCookies();
 		List<String> locationList = new ArrayList<String>();
 		if(cookies!=null) {
@@ -153,7 +140,6 @@ public class EventController {
 		mav.addObject("fileList", fileList);
 		mav.addObject("eventList", eventList);
 		mav.addObject("thisWeek_random_eventList", thisWeek_random_eventList);
-		mav.addObject("thisWeek_random_fileList", thisWeek_random_fileList);
 		mav.addObject("curPage", curPage);
 		mav.addObject("count", count);
 		mav.addObject("yepsPager", yepsPager);
@@ -163,10 +149,7 @@ public class EventController {
 
 	@RequestMapping(value = "/event_write")
 	public ModelAndView writeEvent(HttpServletRequest req) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("set", "events");
-		mav.setViewName("event/event_writeForm");
-		return mav;
+		return new ModelAndView("event/event_writeForm", "set", "events");
 	}
 
 	@RequestMapping(value = "/event_jusoPopup")
@@ -194,7 +177,6 @@ public class EventController {
 		ModelAndView mav = new ModelAndView();
 		boolean check = eventMapper.RedundancyCheck(dto.getEventname());
 		if (check) {
-
 			int res = eventMapper.insertEvent(dto);
 			if (res > 0) {
 				int evnum = eventMapper.getEvnum(dto.getEventname(), dto.getStore_address());
@@ -407,19 +389,19 @@ public class EventController {
 	@RequestMapping(value = "/event_fileUpLoad")
 	@ResponseBody
 	public HashMap<String, Object> fileUpLoad_event(HttpServletRequest req) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		String evnum = req.getParameter("evnum");
 		if (evnum == null || evnum.trim().equals("")) {
-			// 404페이지 띄워야함.. jsp페이지에서 처리해주자
+			map.put("url", "404Page");
 			return null;
 		}
 
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest) req;
 		HttpSession session = req.getSession();
-		return uploadFileLoop(mr, session, Integer.parseInt(evnum));
+		return uploadFileLoop(mr, session, Integer.parseInt(evnum), map);
 	}
 
-	public HashMap<String, Object> uploadFileLoop(MultipartHttpServletRequest mr, HttpSession session, int evnum) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
+	public HashMap<String, Object> uploadFileLoop(MultipartHttpServletRequest mr, HttpSession session, int evnum, HashMap<String, Object> map) {
 		Iterator<String> it = mr.getFileNames();
 		String origin_fileName = null;
 		int fileSize = 0;
@@ -544,7 +526,6 @@ public class EventController {
 		ModelAndView mav = new ModelAndView();
 		EventDTO eventDTO = eventMapper.getEventContent(Integer.parseInt(evnum));
 		List<FileDTO> fileList = fileMapper.getAllEventFiles(Integer.parseInt(evnum));
-		FileDTO photoInMap = fileMapper.getFYIEventFile(Integer.parseInt(evnum));
 		RestaurantDTO restaurantDTO = restaurantMapper.findRestaurant(eventDTO.getZipNo(), eventDTO.getRoadAddrPart1(),
 				eventDTO.getRoadAddrPart2(), eventDTO.getAddrDetail());
 
@@ -556,30 +537,13 @@ public class EventController {
 		}
 
 		List<EventDTO> thisWeek_EventList = eventMapper.getThisWeek_EventList();
-		List<FileDTO> thisWeek_EventFileList = new ArrayList<FileDTO>();
-		if (thisWeek_EventList != null) {
-			for (int i = 0; i < thisWeek_EventList.size(); i++) {
-				FileDTO dto = fileMapper.getFYIEventFile(thisWeek_EventList.get(i).getEvnum());
-				if (dto == null) {
-					FileDTO dtoForNull = new FileDTO();
-					dtoForNull.setFilename("nothing");
-					dtoForNull.setEvnum(thisWeek_EventList.get(i).getEvnum());
-					thisWeek_EventFileList.add(dtoForNull);
-				} else {
-					thisWeek_EventFileList.add(dto);
-				}
-			}
-		}
-
 		List<EventReviewDTO> eventReview_list = eventReviewMapper.listEventReview(Integer.parseInt(evnum));
 
 		mav.addObject("restaurantDTO", restaurantDTO);
 		mav.addObject("eventReview_list", eventReview_list);
-		mav.addObject("photoInMap", photoInMap);
 		mav.addObject("fileList", fileList);
 		mav.addObject("eventDTO", eventDTO);
 		mav.addObject("thisWeek_EventList", thisWeek_EventList);
-		mav.addObject("thisWeek_EventFileList", thisWeek_EventFileList);
 		mav.addObject("set", "events");
 		mav.setViewName("event/event_contentForm");
 		return mav;
@@ -668,6 +632,16 @@ public class EventController {
 	@RequestMapping(value = "/event_photo_manage")
 	public ModelAndView event_photo_manage(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
+		HttpSession session = req.getSession();
+		MemberDTO loginMember = (MemberDTO) session.getAttribute("memberinfo");
+		if(loginMember == null || !loginMember.getIsmanager().equals("y") || !loginMember.getIsmaster().equals("y")) {
+			mav.addObject("msg", "권한이 없습니다.");
+			mav.addObject("url", "main");
+			mav.setViewName("message");
+			return mav;
+		}
+		
+		
 		int curPage = req.getParameter("curPage") != null ? Integer.parseInt(req.getParameter("curPage")) : 1;
 		int count = eventMapper.eventCount();
 		YepsPager yepsPager = null;

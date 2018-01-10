@@ -200,8 +200,15 @@ td, th {
 	font-weight: bold;
 	font-size: 20px;
 	z-index: 1;
+}
+
+.popup-inner input[type=text] {
+	width: 95%;
+    height: 30px;
+}
+
+#flag_content_popup_close > h4 {
 	font-size: 100%;
-    font: inherit;
 }
 
 .popup #sendIssue,#locker_sendIssue {

@@ -17,7 +17,7 @@
 	<script src="http://malsup.github.io/jquery.cycle2.carousel.js"></script>
 </head>
 <%@include file="../top.jsp" %>
-	<div class="main" style="background: white;">
+<div class="main" style="background: white;">
 	<div class="top-shelf">
 		<div class="content-container js-biz-details">
 			<div class="biz-page-header clearfix" >
@@ -984,7 +984,7 @@
 			</div>
 		</div>
 	</div>
-	
+</div>
 	
 	<div class="flag_content_popup" data-popup="popup-2">
     	<div class="popup-inner" style="width: 465px; z-index: 1; height: auto !important; max-height: none;">
@@ -1053,7 +1053,7 @@
 	<div class="popup-inner" style="width: 465px; z-index: 1; height: auto !important; max-height: 400px;">
     	<div id="flag_content_popup_title">
     	    <div id="flag_content_popup_close" data-popup-close="writeMessage">
-    			<h4 style="display: table-cell; padding: 0px 7px; font-size: 100%; font: inherit;">×</h4>
+    			<h4 style="display: table-cell; padding: 0px 7px;">×</h4>
     		</div>
     		<h2>
     	    	메세지 보내기
@@ -1065,9 +1065,9 @@
     			<form name="sendform"  action = "message_send" method="post">
     				<div>
 						<h4 align="left" style="color: #d32323;">Send Message To</h4>
-    	    			<input type="text" id="sendformTo" name="receiver" style="width: 95%; height: 20px;">
+    	    			<input type="text" id="sendformTo" name="receiver">
     	    			<h4 align="left" style="color: #d32323;">Subject is</h4>
-	            		<input type="text" name="title" id="sendformSubject" style="width: 95%; height: 20px;">
+	            		<input type="text" name="title" id="sendformSubject">
 	        			<h4 align="left" style="color: #d32323;">Content is</h4>
 	            		<textarea rows="4" name="content" id="sendformMessage"  style="width: 95%;" placeholder="여기에 메시지를 입력하세요."></textarea>
     	    		</div>
@@ -1406,7 +1406,7 @@ function list(page){
 									'</div>'+
 									'<ul class="restContent-list-link">'+									
 										'<li>'+
-											'<a class="restContent-share-review" data-popup-open="writeMessage" href="#">'+
+											'<a class="restContent-share-review" data-popup-open="writeMessage" href="#" alt="'+ item.memberDTO.email +'">'+
 												'<div class="action-link_icon arrange_unit">'+
 													'<span style="fill: currentColor; width: 18px; height: 18px;" class="icon">'+
 													    '<svg class="icon_svg">'+
@@ -1663,7 +1663,7 @@ function check() {
 									'</div>'+
 									'<ul class="restContent-list-link">'+									
 										'<li>'+
-											'<a class="restContent-share-review" data-popup-open="writeMessage" href="#">'+
+											'<a class="restContent-share-review" data-popup-open="writeMessage" href="#" alt="'+item.member.email+'">'+
 												'<div class="action-link_icon arrange_unit">'+
 													'<span style="fill: currentColor; width: 18px; height: 18px;" class="icon">'+
 													    '<svg class="icon_svg">'+
