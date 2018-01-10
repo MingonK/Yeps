@@ -132,7 +132,7 @@
 		update yeps_member set reviewcount=#{reviewcount} where mnum=#{mnum}
 	</update>
   	
-	<select id="getMemberReviewCount"  resultType="int">
+	<select id="getMemberReviewCount" parameterType="int" resultType="int">
 		select reviewcount from yeps_member where mnum=#{mnum}
 	</select>
    

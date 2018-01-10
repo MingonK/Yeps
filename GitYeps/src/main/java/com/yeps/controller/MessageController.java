@@ -245,11 +245,6 @@ public class MessageController {
 			receiver = dto.getReceiver().trim();
 			dto.setReceiver(receiver);
 			dto.setIsIssue(0);
-			System.out.println(dto.getContent());
-			System.out.println(dto.getReceiver());
-			System.out.println(dto.getSender());
-			System.out.println(dto.getTitle());
-			System.out.println(dto.getMsgNum());
 			
 			for (int i = 0; i < memberList.size(); i++) {
 				String who = memberList.get(i).getEmail();
@@ -268,7 +263,7 @@ public class MessageController {
 				mav = pagingMessageList(req, lMode, email);
 			}
 			mav.addObject("msg", msg);
-
+            return mav;
 			// 쪽지함에서 신고쪽지 보낼때 받는 부분
 		} else if (report.equals("reply") || report.equals("event")) {
 			
@@ -336,16 +331,16 @@ public class MessageController {
 					receiver = memberList.get(i).getEmail();
 					dto.setReceiver(receiver);
 					dto.setIsIssue(1);
-					System.out.println("@=" + dto.getMnum());
-					System.out.println("@@=" + dto.getTitle());
 					res = messageMapper.writeMessage(dto);
 				}
 			}
-
+			if(where.equals("rest")) {
+				mav.setViewName("restaurant/restaurant_content");
+			}else if(where.equals("event")) {
+				mav.setViewName("event/event_contentForm");
+			}
+			
 		}
-	
-		mav.setViewName("historyBack");// historyback.jsp를 이용하여 이전 페이지로 이동
-		mav.addObject("msg", msg);
 		return mav;
 	}
 

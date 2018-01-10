@@ -334,7 +334,7 @@ public class ReviewController {
 		}
 		int curPage = req.getParameter("curPage") != null ? Integer.parseInt(req.getParameter("curPage")) : 1;
 		int reviewcount = memberMapper.getMemberReviewCount(mnum);
-		int pageScale = 10;
+		int pageScale = 5;
 		int blockScale = 5;
 		YepsPager YepsPager = new YepsPager(reviewcount, curPage, pageScale, blockScale);
 		int start = YepsPager.getPageBegin();
