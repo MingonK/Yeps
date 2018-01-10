@@ -435,7 +435,7 @@
 
     function readCheck(){
     	var lMode = $('#pageMode').val();
-    	var msgnum = $('#readCheck').val();
+    	var msgnum = $('#view_msgnum').val();
     	var url = "message_read?msgnum=" + msgnum + "&lMode=" + lMode ;
         window.location = url;
     }
