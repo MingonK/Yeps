@@ -746,8 +746,8 @@
 												<strong class="u-space-r-half" style="margin-right: 3px !important;font-weight: bold;">
 													<span class="today"></span><br>
 												</strong>
-												<span class="closed">
-													영업 마감
+												<span class="open">
+													영업 중
 												</span>
 											</dd>
 										</dl>
@@ -1218,14 +1218,14 @@
    var end_split=end.split(":");
    
    
-   if(parseInt(current_split[0])>parseInt(start_split[0]) && parseInt(current_split[0])<parseInt(end_split[0])){
-	   $('.closed').removeClass('closed').addClass('open')
+//    if(parseInt(current_split[0])>parseInt(start_split[0]) && parseInt(current_split[0])<parseInt(end_split[0])){
+// 	   $('.closed').removeClass('closed').addClass('open')
 	   $('#24x24_clock').parent().css("fill","#41a700")
-	   $('.open').text("영업중")
+// 	   $('.open').text("영업중")
 	   
-   }else{
+//    }else{
 	   
-   }
+//    }
 	   
 </script>
 

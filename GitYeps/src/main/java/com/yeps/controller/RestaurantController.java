@@ -92,8 +92,10 @@ public class RestaurantController {
 		}
 
 		int imageCount = 0;
+		System.out.println("파일 등록전");
 		if (mf.getSize() != 0) {
 			try {
+				System.out.println("파일 등록중");
 				mf.transferTo(file);
 				S3Connection.getInstance().putObjectAsync("yepsbucket", "images/" + saveFileName, file,
 						"image/" + contentType);
@@ -139,7 +141,7 @@ public class RestaurantController {
 			mav.setViewName("message");
 			return mav;
 		}
-
+		System.out.println("파일 등록완료");
 		memberDTO.setImagecount(memberDTO.getImagecount() + imageCount);
 		memberMapper.updateImageCount(memberDTO.getMnum(), memberDTO.getMnum());
 		session.setAttribute("memberinfo", memberDTO);
@@ -162,6 +164,7 @@ public class RestaurantController {
 		List<Integer>price=new ArrayList<Integer>();
 		price.add(0);
 		String location = "서울특별시";
+		String mode="mode";
 		int count = restaurantMapper.getCountBySeoul(location);
 		int pageScale = 10;
 		int blockScale = 10;
@@ -170,10 +173,8 @@ public class RestaurantController {
 		int start = YepsPager.getPageBegin();
 		int end = YepsPager.getPageEnd();
 
-//		List<RestaurantDTO> list = restaurantMapper.listRest(start, end, "mode",price);
 		
-		
-		List<RestaurantDTO> list = restaurantMapper.listRest(start, end, "mode",price, location);
+		List<RestaurantDTO> list = restaurantMapper.listRest(start, end, mode, price, location);
 		
 		List<Integer> reviewCount = new ArrayList<Integer>();
 		List<Integer> StarAvg = new ArrayList<Integer>();
@@ -207,10 +208,10 @@ public class RestaurantController {
 	@ResponseBody
 	public HashMap<String, Object> listRestRefresh(@RequestParam(value = "mode") String mode,@RequestParam(value = "price[]") List<Integer> price,@RequestParam(defaultValue = "1") int curPage) {
 		
-		
-		System.out.println("필터="+mode);
-		System.out.println("가격 갯수="+price.size());
-		int count = restaurantMapper.getCount();
+
+		String location = "서울특별시";
+//		int count = restaurantMapper.getCount();
+		int count = restaurantMapper.getCountBySeoul(location);
 		int pageScale = 10;
 		int blockScale = 10;
 		// 페이지 나누기 관련 처리
@@ -218,7 +219,6 @@ public class RestaurantController {
 		int start = YepsPager.getPageBegin();
 		int end = YepsPager.getPageEnd();
 
-		String location = "서울특별시";
 		List<RestaurantDTO> list = restaurantMapper.listRest(start, end, mode,price, location);
 
 		List<Integer> reviewCount = new ArrayList<Integer>();
@@ -232,12 +232,16 @@ public class RestaurantController {
 		}
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("location", "서울특별시");
 		map.put("list", list); // list
 		map.put("count", count); // 레코드의 갯수
 		map.put("YepsPager", YepsPager);
 		map.put("LastReview", LastReview);
 		map.put("reviewCount", reviewCount);
 		map.put("StarAvg", StarAvg);
+		map.put("mode", mode);
+		
+		System.out.println(mode+" 레스토랑 갯수="+list.size());
 		return map;
 	}
 
