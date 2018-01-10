@@ -359,7 +359,6 @@
 	
 	$("#replyMessage").click(function(){
 		 var receiver = ('#from').val();
-		 alert(receiver);
 		 $("#sendformTo").val(receiver);
 	}); 
 	
