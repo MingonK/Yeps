@@ -83,6 +83,11 @@ public class ReviewController {
 	@RequestMapping(value = "/review_delete")
 	public ModelAndView review_delete(HttpServletRequest req, HttpSession session) {
 		String rvnum = req.getParameter("rvnum");
+		
+		if(rvnum == null || rvnum.trim().equals("")) {
+			return new ModelAndView("historyBack");
+		}
+		
 		int mnum = Integer.parseInt(req.getParameter("mnum"));
 		String mode = req.getParameter("mode");
 		int rnum = Integer.parseInt(req.getParameter("rnum"));
@@ -112,7 +117,7 @@ public class ReviewController {
 			}
 		} else {
 			msg = "리뷰 삭제실패!!";
-			url = "member_detalis?mnum"+mnum;
+			url = "member_details?mnum="+mnum;
 			mav.addObject("msg", msg);
 			mav.addObject("url", url);
 			mav.setViewName("message");

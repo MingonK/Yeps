@@ -29,7 +29,7 @@
 					 
 					 
 					<div> 
-						<form name="review_writeF" id="review_writeF" action="review_insert" method="post" onsubmit="return ContentAndGradepointCheck()">
+						<form name="review_writeF" id="review_writeF" method="post">
            						<input type="hidden" name="gradepoint" id="gradepoint">
            						<input type="hidden" name="rname" id="rname" value="${rname}">
            						<input type="hidden" name="rnum" id="rnum" value="${rnum}">
@@ -85,7 +85,7 @@
 							<div class="writereview_footer">
 								<div class="footer_buttons_wrapper">
 									<div class="post_review_button">
-										<input class="review_write_Button" type="button" data-popup-open="popup-1" value="Post Review">
+										<input class="review_write_Button" type="button"  onclick="ContentAndGradepointCheck()" data-popup-open="popup-1" value="Post Review">
 									</div>
 								</div>
 							</div>
@@ -307,12 +307,12 @@
 			$('.review_write_Button').css("background-color", "#ff0008");
 		})
 		
-		$('.review_write_Button').click(function() {
-			var login = '${memberinfo}';
-			if(login) {
-				$('#review_writeF').submit();
-			}
-		})
+// 		$('.review_write_Button').click(function() {
+// 			var login = '${memberinfo}';
+// 			if(login) {
+// 				$('#review_writeF').submit();
+// 			}
+// 		})
       
 		$('.selector').hover(function(e) {
 			var star = $(e.target).val();
@@ -726,10 +726,13 @@ $(function() {
                  var targeted_popup_class = $('.popup-close').attr('data-popup-close');
                  $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
                  memberinfo = responseData.memberinfo;
-                 location.reload();
+                 $('#review_writeF').attr('action', 'review_insert'); 
+                 $('#review_writeF').submit();
               },
               error : function(request, status, error) {
+            	 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                  alert("로그인 실패");
+                 $('.loading_wapper').fadeOut(500);
               },
          });
     }
