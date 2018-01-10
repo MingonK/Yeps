@@ -373,8 +373,8 @@
 	}); 
 	
  	$('#message_popup_Issue_submit_button').click(function(){
- 	    var issue = $('#issueValue').val();
- 	    document.sendIssueform.action = "message_send?issue=" + issue;
+ 	    var report = $('#issueValue').val();
+ 	    document.sendIssueform.action = "message_send?report=" + report + "&where=msgbox";
  	    document.sendIssueform.submit();
 	});
 	

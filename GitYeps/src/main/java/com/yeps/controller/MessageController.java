@@ -30,7 +30,7 @@ public class MessageController {
 	@Autowired
 	private MessageMapper messageMapper;
 
-	@Autowired 
+	@Autowired
 	private RestaurantMapper restaurantMapper;
 
 	@Autowired
@@ -238,14 +238,14 @@ public class MessageController {
 		dto.setMnum(mnum);
 		email = member.getEmail();// 로그인시 로그인한 회원의 정보로 보내는 사람을 구한다.*/
 		dto.setSender(email);
-
+		System.out.println("1=" + dto.getSender());
 		List<MemberDTO> memberList = memberMapper.listMemberForMessage();
 
 		if (report == null && dto.getReceiver() != null) {
 			receiver = dto.getReceiver().trim();
 			dto.setReceiver(receiver);
 			dto.setIsIssue(0);
-			
+
 			for (int i = 0; i < memberList.size(); i++) {
 				String who = memberList.get(i).getEmail();
 				if (who.equals(receiver.trim())) {
@@ -263,14 +263,14 @@ public class MessageController {
 				mav = pagingMessageList(req, lMode, email);
 			}
 			mav.addObject("msg", msg);
-            return mav;
+			return mav;
 			// 쪽지함에서 신고쪽지 보낼때 받는 부분
-		} else if (report.equals("reply") || report.equals("event")) {
-			
+		} else if (report.equals("reply") || report.equals("event") || report.equals("issue")) {
+
 			// 이벤트에서 신고보낼때 받는 부분(쪽지함 신고 부분에 포함)
 			String where = req.getParameter("where");
 			String rnum = req.getParameter("rnum");
-			
+
 			if (where.equals("rest")) {
 				String reason = req.getParameter("reason_field");
 
@@ -317,10 +317,25 @@ public class MessageController {
 				}
 				dto.setEvnum(evnum);
 				mav.addObject("evnum", evnum);
+
+			} else if (where.equals("msgbox")) {
+				System.out.println("2=" + dto.getSender());
+				String title = req.getParameter("title");
+				String newTitle = "report : " + title;
+				dto.setTitle(newTitle);
 			}
 
-			String reportContent = req.getParameter("flag_popup_descripte_field");
-			dto.setContent(reportContent);
+			if (where.equals("rest") || where.equals("event")) {
+
+				String reportContent = req.getParameter("flag_popup_descripte_field");
+				dto.setContent(reportContent);
+
+			} else if (where.equals("msgbox")) {
+
+				String content = req.getParameter("content");
+				dto.setContent(content);
+
+			}
 
 			// 여기까지 이벤트 신고 부분. 아래부터는 쪽지함 신고와 동일
 			// 등록된 회원중 매니져를 찾아 매니져에게만 이슈가 되는 내용을 보낸다.
@@ -335,17 +350,17 @@ public class MessageController {
 				}
 			}
 
-			if(where.equals("rest")) {
+			if (where.equals("rest")) {
 				mav.setViewName("restaurant/restaurant_content");
-			}else if(where.equals("event")) {
+
+			} else if (where.equals("event")) {
 				mav.setViewName("event/event_contentForm");
 			}
-			
 
 		}
 
 		mav.addObject("msg", msg);
-		mav.setViewName("historyBack");// historyback.jsp를 이용하여 이전 페이지로 이동
+		mav.setViewName("redirect:yeps_message");// historyback.jsp를 이용하여 이전 페이지로 이동
 
 		return mav;
 	}

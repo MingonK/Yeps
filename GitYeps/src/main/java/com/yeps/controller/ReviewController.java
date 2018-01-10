@@ -95,11 +95,6 @@ public class ReviewController {
 		ModelAndView mav = new ModelAndView();
 		String msg;
 		String url;
-		
-		System.out.println(rvnum);
-		System.out.println(mnum);
-		System.out.println(rnum);
-		System.out.println(mode);
 
 		if (res > 0) {
 		    int beforeReviewcount = reviewMapper.getMyReviewCount(mnum);
@@ -111,21 +106,22 @@ public class ReviewController {
 			}
 			// System.out.println(nowReviewcount);
 			if (mode.equals("restaurantReviewDelete")) {
+				
 				mav.addObject("msg", "댓글을 삭제하였습니다.");
 				mav.setViewName("historyBack");
+				
 			} else {
+				
 				msg = "리뷰 삭제성공!!";
 				url = "restaurant_content?rnum=" + rnum;
 				mav.addObject("msg", msg);
 				mav.addObject("url", url);
 				mav.setViewName("message");
 			}
+			
 		} else {
 			msg = "리뷰 삭제실패!!";
-
 			url = "member_details?mnum=" + mnum;
-
-			url = "member_details?mnum="+mnum;
 
 			mav.addObject("msg", msg);
 			mav.addObject("url", url);
