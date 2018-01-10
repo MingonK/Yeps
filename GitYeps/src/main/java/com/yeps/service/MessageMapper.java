@@ -56,7 +56,7 @@ public class MessageMapper {
 		} else if (lMode.equals("readMsg")) {
 			// 읽은 쪽지중 쪽지함에 있는 쪽지
 			sql = "select * from (select rownum rn, A.* from (select * from yeps_message where receiver='" + email
-					+ "' and readNum=1 isIssue=0 and islocker=0 order by msgNum desc)A)" + " where rn between " + start
+					+ "' and readNum=1 and isIssue=0 and islocker=0 order by msgNum desc)A)" + " where rn between " + start
 					+ " and " + end;
 		} else if (lMode.equals("readLocker")) {
 			// 읽은 쪽지중 보관함에 있는 쪽지

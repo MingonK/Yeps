@@ -361,16 +361,14 @@
                                                       </li>
                                                       <li class="user-location responsive-hidden-small">
                                                          <b>
-                                                            <c:choose>
-                                                               <c:when test="${!empty sessionScope.memberinfo.address}">
-                                                                  <c:forTokens items="${sessionScope.memberinfo.address}" delims=" " begin="1" end="2" var="addr">
-                                                                     ${addr}
-                                                                  </c:forTokens>
-                                                               </c:when>
-                                                               <c:otherwise>
-                                                                  	서울특별시
-                                                               </c:otherwise>
-                                                            </c:choose>
+                                                         	<c:if test="${!empty sessionScope.memberinfo.address}">
+                                                         		<c:forTokens items="${sessionScope.memberinfo.address}" delims=" " begin="1" end="2" var="addr">
+                                                                    ${addr}
+                                                                 </c:forTokens>
+                                                         	</c:if>
+                                                         	<c:if test="${empty sessionScope.memberinfo.address}">
+                                                         		주소를 등록해주세요.
+                                                         	</c:if>
                                                          </b>
                                                       </li>
                                                    </ul>
@@ -390,7 +388,7 @@
 																<path d="M15 15H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2zM9 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 6.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path>
 															</svg>
                                                          </span>
-                                                         <b>${sessionScope.memberinfo.imagecount}</b> <!-- 리뷰 수 -->
+                                                         <b>${sessionScope.memberinfo.imagecount}</b>
                                                       </li>
                                                    </ul>
                                                 </div>
@@ -469,7 +467,7 @@
 			<div id="footer_content_container">
 				<div id="footer_container_arrange">
 					<div id="footer_container_list">
-						<div id="footer_list" style="width: 854px; display: inline-block; margin-right: 12px;">
+						<div id="footer_list" style="display: table-cell;">
 							<ul style="display: inline-block;">
 								<li id="footer_list_li">
 									<div>
@@ -582,7 +580,7 @@
 						</div>
 						<c:if test="${empty sessionScope.memberinfo}">
 								<div id="footer_list_login_box">
-									<a href="member_login?mode=login" id="footer_list_li_unit" style="color: white; font-weight: bold;">Log In</a>
+									<a href="member_login?mode=login" id="footer_list_li_unit" style="color: white; font-weight: bold; min-width: 80px; padding: 3px 10px;">Log In</a>
 								</div>
 						</c:if>
 					</div>

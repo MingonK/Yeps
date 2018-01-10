@@ -254,7 +254,7 @@ public class MessageController {
 			}
 			res = messageMapper.writeMessage(dto);
 			if (res > 0) {
-				msg = "쪽지를 보냈습니다.쪽지함으로 이동합니다.";
+				msg = "메세지를 전송하였습니다.";
 				lMode = "msgBoxList";
 				mav = pagingMessageList(req, lMode, email);
 
@@ -334,13 +334,19 @@ public class MessageController {
 					res = messageMapper.writeMessage(dto);
 				}
 			}
+
 			if(where.equals("rest")) {
 				mav.setViewName("restaurant/restaurant_content");
 			}else if(where.equals("event")) {
 				mav.setViewName("event/event_contentForm");
 			}
 			
+
 		}
+
+		mav.addObject("msg", msg);
+		mav.setViewName("historyBack");// historyback.jsp를 이용하여 이전 페이지로 이동
+
 		return mav;
 	}
 

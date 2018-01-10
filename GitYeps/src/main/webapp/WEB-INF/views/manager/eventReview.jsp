@@ -76,7 +76,7 @@
 		</c:forEach>
 	</table>
 	</div>
-		<div class="event_list_paging_section" style="font-size: 14px; width: 100%;  margin: 0 30px;">
+		<div class="event_list_paging_section" style="font-size: 14px; padding: 15px 15px; width: 1200px; margin: 0 auto;">
 			<div class="event_list_pagination_block">
 				<div class="event_list_pagination_wrap">
 					<div class="event_list_page_of_pages">

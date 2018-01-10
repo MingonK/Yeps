@@ -61,7 +61,6 @@
             <!--  -->
             
             <!-- 리뷰 관련 -->
-            <mapping path="/review_insert" />
             <mapping path="/review_update" />
             <mapping path="/review_delete" />
             <!--  -->

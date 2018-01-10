@@ -186,7 +186,7 @@
   	
   	
   	<!-- 지원이 한테서 가져옴 -->
-  	<select id="listRestaurantReview" parameterType="ReviewDTO" resultType="ReviewDTO"> 
+  	<select id="listRestaurantReview" parameterType="java.util.HashMap" resultType="ReviewDTO"> 
 		select * from (select rownum rn, A.* from (select * from yeps_review order by rvnum desc)A) where rn between #{start} and #{end} 
 	</select>
   	
@@ -209,29 +209,21 @@
    
   
    <resultMap type="reviewDTO" id="MemberReviewMap">
-       <id column="rvnum" property="rvnum"/>
        <id column="rnum" property="rnum"/>
-       <id column="mnum" property="mnum"/>
        <result column="rnum" property="rnum"></result>
+       <result column="reg_date" property="reg_date"></result>
        <result column="content" property="content"></result>
        <result column="gradepoint" property="gradepoint"></result>
-       
-       <association javaType="MemberDTO" property="memberDTO">
-           <id column="mnum" property="mnum"></id>
-           <result column="name" property="name"></result>
-           <result column="reviewcount" property="reviewcount"></result>
-          
-       </association>
+
        <association javaType="RestaurantDTO" property="restaurantDTO">
                <id column="rnum" property="rnum"></id>
-               <result column="rnum" property="rnum"></result>
-               <result column="rname" property="rname"></result> 
-               <result column="rest_regdate" property="rest_regdate"></result>
+               <result column="rname" property="rname"></result>
+               <result column="price" property="price"></result>  
                <result column="roadAddrPart1" property="roadAddrPart1"></result>
                <result column="roadAddrPart2" property="roadAddrPart2"></result>
                <result column="addrDetail" property="addrDetail"></result>
-               <result column="raddress" property="raddress"></result>
                <result column="foodstyle" property="foodstyle"></result>
+               <result column="raddress" property="raddress"></result>
                <result column="hp2" property="hp2"></result>
                <result column="hp3" property="hp3"></result>
                <association javaType="FileDTO" property="fileDTO">
@@ -242,25 +234,23 @@
    </resultMap>
    
    <select id="getMemberReview"  parameterType="java.util.HashMap" resultMap="MemberReviewMap">
-      select * from (select rownum rn, A. * from(select
+     select * from (select rownum rn, A.* from(select
 		               R.content
 		              ,R.gradepoint
 		              ,R.rnum
 		              ,R.rvnum
-		              ,RT.rest_regdate
+		              ,R.reg_date
 		              ,RT.rname
 		              ,RT.roadAddrPart1
 		              ,RT.roadAddrPart2
 		              ,RT.addrDetail
 		              ,RT.foodstyle
-		              ,RT.hp2
-		              ,RT.hp3
-		              ,RT.raddress
-		              ,M.mnum
-		              ,M.name
-		              ,M.reviewcount
+                      ,RT.price
+                      ,RT.raddress
+                      ,RT.hp2
+                      ,RT.hp3
             		  ,F.filename
-        from yeps_review R, yeps_member M, yeps_restaurant RT, yeps_files F where R.mnum = M.mnum and R.rnum = RT.rnum and RT.rnum = F.rnum and M.mnum = #{mnum} order by rvnum desc)A)
+        from yeps_review R, yeps_member M, yeps_restaurant RT, yeps_files F where R.mnum = M.mnum and R.rnum = RT.rnum and RT.rnum = F.rnum and F.ismainphoto = 'y' and M.mnum = #{mnum} order by R.rvnum desc)A)
         where rn between #{start} and #{end}
     </select>
     
@@ -528,4 +518,51 @@
   	<delete id="deleteReviewByMemberNumber" parameterType="int">
   		delete yeps_review where mnum = #{mnum}
   	</delete>
+  	
+  	<select id="getMyReviewCount" parameterType="int" resultType="int">
+  		select count(*) from yeps_review where mnum = #{mnum}
+  	</select>
+  	
+  	<select id="getAllReviewCount" resultType="int">
+  		select count(*) from yeps_review
+  	</select>
+  	
+  	
+  	
+  	
+  	
+  	
+  	<resultMap type="reviewDTO" id="getAllReviewMap">
+  		<id column="rvnum" property="rvnum"/>
+      	<result column="rnum" property="rnum"></result>
+      	<result column="rvnum" property="rvnum"></result>
+      	<result column="content" property="content"></result>
+      	<result column="reg_date" property="reg_date"></result>
+      	<result column="gradepoint" property="gradepoint"></result>
+      
+      	<association javaType="MemberDTO" property="memberDTO">
+			<id column="mnum" property="mnum"></id>
+			<result column="mnum" property="mnum"></result>
+         	<result column="email" property="email"></result>
+      	</association>
+      	
+      	<association javaType="RestaurantDTO" property="restaurantDTO">
+      		<id column="rnum" property="rnum"></id>
+         	<result column="rname" property="rname"></result>
+      	</association>
+  	</resultMap>
+  	
+  	<select id="getAllReviews" parameterType="java.util.HashMap" resultMap="getAllReviewMap">
+  		select * from (select rownum rn, A.* from 
+  							(select R.rnum
+  									,R.content
+   									, R.reg_date
+   									, R.gradepoint						
+  									, R.rvnum
+  									, RT.rname
+  									, M.email 
+  									, M.mnum
+  					from yeps_review R, yeps_restaurant RT, yeps_member M 
+  					where R.rnum = RT.rnum and R.mnum = M.mnum order by R.rvnum desc)A) where rn between #{start} and #{end}
+  	</select>
 </mapper>		

@@ -8,7 +8,7 @@ public class ReviewDTO {
 	private String content;
 	private String reg_date;
 	private int gradepoint;
-	private int filenum;	
+	private int filenum;
 	private String ip;
 	private String recentreview;
 	private MemberDTO memberDTO;

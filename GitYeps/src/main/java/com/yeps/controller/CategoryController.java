@@ -75,7 +75,6 @@ public class CategoryController {
 	public ModelAndView updateFormCate(HttpServletRequest req) {
 		String cnum = req.getParameter("cnum");
 		ModelAndView mav = new ModelAndView();
-		
 		if (cnum == null || cnum.trim().equals("")) {
 			mav.setViewName("redirect:category_list");
 			return mav;
@@ -97,14 +96,12 @@ public class CategoryController {
 		}
 
 		int result = categoryMapper.updateCategory(Integer.parseInt(cnum), cname);
-		
 		ModelAndView mav = new ModelAndView();
 		if (result > 0) {
 			mav.addObject("msg", "카테고리를 수정하였습니다.");
 			mav.addObject("url", "category_list");
 			mav.setViewName("message");
 			return mav;
-			
 		} else {
 			mav.addObject("msg", "카테고리 수정 실패. 관리자에게 문의하세요.");
 			mav.addObject("url", "category_list");

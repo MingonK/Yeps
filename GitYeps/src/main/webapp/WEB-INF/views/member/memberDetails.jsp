@@ -323,13 +323,13 @@
 				<div class="details-column-beta_reviews">
 				   <div>
 					  <div class="memberDetails-review-list" style="position: relative;">
-					     <ul class="review-drafts"">
+					     <ul class="review-drafts">
 					    <!----------------------------------------------- 아작스 통해 붙여넣는 부분 -------------------------------------------------- -->
 				    
 					     </ul>
 					  </div>
 					  <!-- -----페이징 처리 시작 ------ -->					
-			   <div class="event_list_paging_section" style="font-size: 14px;">
+			   			<div class="event_list_paging_section" style="font-size: 14px;">
 	                       <div class="event_list_pagination_block">
 	                          <div class="event_list_pagination_wrap"  >
 	                              <div class="event_list_page_of_pages" >
@@ -544,8 +544,7 @@
       	<div class="loading_img" style="left: 40%; top: 40%;"></div>
    	</div>
 	
-<script type="text/javascript">
-
+<script>
 $(function() {
 	$(document).on('click', '[data-popup-open]', function(e)  {
 		var memberinfo ='${sessionScope.memberinfo}';
@@ -603,7 +602,6 @@ $(function() {
 	
 	for(var i = 0; i < list.length; i++) {
 		var img = document.createElement('img');
-// 		img.src = 'getImage/' + list[i];
 		img.src = 'https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/' + list[i];
 		img.style.cursor = 'pointer';
 		img.style.width = '100%';
@@ -625,6 +623,22 @@ $(function() {
 	       $(this).addClass('is-active');
 	    })
 	    
+	    $('#profile_events').click(function(e){
+	    	$(".details-column-beta_overview").hide();
+ 	    	$(".details-column-beta_reviews").hide();
+ 	    	$(".details-column-beta_events").show();
+ 	    	$(".details-column-beta_tips").hide();
+ 	    	$(".event_list_paging_section").hide();
+	    })
+	    
+	    $('#profile_tips').click(function(e){
+	    	$(".details-column-beta_overview").hide();
+ 	    	$(".details-column-beta_reviews").hide();
+ 	    	$(".details-column-beta_events").hide();
+ 	    	$(".details-column-beta_tips").show();
+ 	    	$(".event_list_paging_section").hide();
+	    })
+	    
 	    $('#profile_overview').click(function(e){
 	    	$(".details-column-beta_overview").show();
  	    	$(".details-column-beta_reviews").hide();
@@ -641,7 +655,19 @@ $(function() {
  	    	$(".details-column-beta_tips").hide();
  	    	$('.event_list_paging_section').show();
  	    	
+ 	    	$(document).ajaxStart(function() {
+	 			$('body').css('overflow', 'hidden');
+	 			$('html').scrollTop(0);
+	 			$('.loading_wapper').fadeIn(500);
+	 		})
+ 							
+	 		$(document).ajaxStop(function() {
+	 			$('body').css('overflow', 'auto');
+	 			$('.loading_wapper').fadeOut(500);
+	 		})
+ 	    	
  	     	var mnum = '${memberDTO.mnum}';
+ 	     	var login_mnum = '${memberinfo.mnum}';
 	        $.ajax({
              type : 'post',
              url : 'review_member_ajax?mnum='+ mnum, 
@@ -652,9 +678,20 @@ $(function() {
                 var mnum = responseData.mnum;
               
        	 $('.memberDetails-review-list ul li').remove(); 
-	 $.each(responseData.memberReview,function(i,item){
+	 	$.each(responseData.memberReview,function(i,item){
+	 		var num = responseData.num;
+	        var mnum = responseData.mnum;
+	 		var price;
+	 		if(item.restaurantDTO.price == 1) {
+	 			price = '￦';
+	 		} else if(item.restaurantDTO.price == 2) {
+	 			price = '￦￦';
+	 		} else if(item.restaurantDTO.price == 3) {
+	 			price = '￦￦￦';
+	 		} else if(item.restaurantDTO.price == 4) { 
+	 			price = '￦￦￦￦';
+	 		}
 		 $(".memberDetails-review-list ul").append(
-			
 				 '<li class="review-draft">'+
  					'<div class="arrange">'+
  						'<div class="arrange_unit arrange_unit--fill">'+
@@ -666,65 +703,62 @@ $(function() {
 				          			    '</a>'+
 				    		        '</div>'+
 				         	    '</div>'+
-				            '<div class="media-story">'+
-				                '<div class="media-title clearfix">'+
-				                    '<a class="biz-name js-analytics-click" data-analytics-label="biz-name" href="restaurant_content?rnum='+ item.rnum +'" data-hovercard-id="K8YqsGXicOLOUcQXTzRrnw"><span>'+ item.restaurantDTO.rname + '   </span></a>'+
-				                '</div>'+
-				                '<div class="price-category">'+
-				                    '<span class="category-str-list">'+
-				                        '<a href="#">' + item.restaurantDTO.foodstyle + '  </a>,'+
-				                        '<a href="yeps_main_saerch?location='+ item.rnum +'">' + 
-				                        item.restaurantDTO.roadAddrPart1 + item.restaurantDTO.roadAddrPart2 + item.restaurantDTO.addrDetail + '   </a>'+
-				    				'</span>'+
-				    			 '</div>'+
-				                 '<address> <br>'+
-				                      item.restaurantDTO.raddress + item.restaurantDTO.hp2 + item.restaurantDTO.hp3 +
-// 				                     '871 Sutter St<br>San Francisco, CA 94109'+
-				                 '</address>'+
-				             '</div>'+
-        		        '</div>'+
-				        '<div class="review_arrange_unit">'+
-			                '<p class="time-stamp nowrap review-draft_date-created text-right">'+
-			                    'Started on  '+  item.restaurantDTO.rest_regdate + 
-			                '</p>'+
-			                '<div class="restList-star-rating-'+ item.gradepoint +'">'+
-		             		'<img class="star_member_img" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png">'+
-		            	'</div>'+
-			             '</div>'+
-			             '<p class="member_ptag1" lang="ko" style="margin-bottom: 12px; width: 100%; float: right; display: block;">'+
-						 item.content +
-					    '</p><br><br>'+
-			             /* '<div>'+
-							'<div class="restList-star-rating-'+item.gradepoint+'" >'+
-								'<img class="offscreen" '+
-									'src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/stars.png" '+
-									'width="84" height="303" alt="4.0 star rating" '+
-									'style="clip: rect(0, 0, 0, 0); position: absolute; left: -9999px; top: auto; overflow: hidden; width: 1px; height: 1px; vertical-align: middle;">'+
-							'</div>'+
-						'</div>'+ */
-			       
-			            '<div class="clearfix"  style="margin-bottom: 50px;">'+
-			               '<a  style="float: left;" href="review_write?rvnum=' + item.rvnum + '&mode=update&star='+item.gradepoint+'&rnum='+item.rnum+'" class="yepsbyn ybtn--small js-war-widget_finish-draft pull-left">리뷰수정</a>'+
-			                  '<form action="review_delete?rvnum='+ item.rvnum + '&mnum=' + mnum + '&mode=restaurantReviewDelete&rnum='+item.rnum+'" class="pull-right js-delete-review-draft-form" method="post" name="delete_draft">'+
-			               
-			                      '<input type="hidden" value="'+ item.rvnum + '" name="rvnum">'+
-			                      '<button type="submit" style="float: right;"class="chiclet-link u-cursor-pointer show-tooltip js-delete-review-draft">'+
-			                         '<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-trash icon--size-18 icon--currentColor">'+
-			                             '<svg class="icon_svg">'+
-									         '<path d="M3 5V3h4V2h4v1h4v2H3zm11 9c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V6h10v8zM8 8.5a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5zm3 0a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5z"></path>'+
-								
-			                             '</svg>'+
-			                         '</span>'+
-			                         '<span class="tooltip-wrapper">'+
-			                         '<span class="tooltip">Delete draft</span>'+
-			                      '</span>'+
-			                   '</button>'+
-			                '</form>'+
-			             '</div>'+
-		              '</div>'+
-				   '</div>'+
-				'</li>'
-				      );
+				            	'<div class="media-story">'+
+				                	'<div class="media-title clearfix">'+
+				                    	'<a class="biz-name js-analytics-click" data-analytics-label="biz-name" href="restaurant_content?rnum='+ item.rnum +'" data-hovercard-id="K8YqsGXicOLOUcQXTzRrnw"><span>'+ item.restaurantDTO.rname + '   </span></a>'+
+				                	'</div>'+
+				                	'<div class="price-category" style="float: none;">'+
+				                		'<span class="bullet-after">' +
+				                			'<span class="price-range">' +
+				                				price + 
+				                			'</span>' + 
+				                		'</span>' + 
+				                    	'<span class="category-str-list">'+
+				                    		'<a href="#">' + item.restaurantDTO.foodstyle + '</a>'+
+				    					'</span>'+
+				    			 	'</div>'+
+				                 	'<address>'+
+				                		item.restaurantDTO.roadAddrPart1 + '<br>' + item.restaurantDTO.roadAddrPart2 + item.restaurantDTO.addrDetail +
+				                 	'</address>'+
+				             	'</div>'+
+        		        	'</div>'+
+				        	'<div class="review_arrange_unit">'+
+			                	'<p class="time-stamp nowrap review-draft_date-created text-right">'+
+			                    	'Started on  '+  item.reg_date + 
+			                	'</p>'+
+			                	'<div class="restList-star-rating-'+ item.gradepoint +'">'+
+		             				'<img class="star_member_img" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png">'+
+		            			'</div>'+
+			             	'</div>'+
+			             	'<p class="member_ptag1" lang="ko" style="margin-bottom: 12px; width: 100%; float: right; display: block;">'+
+						 		item.content +
+					    	'</p><br><br>'+
+			            	'<div class="clearfix" id="buttom_group" style="margin-bottom: 50px;">'+
+			            		'<c:if test="${memberDTO.mnum eq memberinfo.mnum}">' +
+			            		'<a style="float: left;" href="review_write?rvnum=' + item.rvnum + '&mode=update&star='+item.gradepoint+'&rnum='+item.rnum+'" class="yepsbyn ybtn--small js-war-widget_finish-draft pull-left">리뷰수정</a>'+
+					               '<form action="review_delete" class="pull-right js-delete-review-draft-form" method="post" name="delete_draft">'+
+					                   '<input type="hidden" value="'+ item.rvnum + '" name="rvnum">'+
+					                  '<input type="hidden" value="'+ mnum + '" name="mnum">'+
+					                   '<input type="hidden" value="restaurantReviewDelete" name="mode">'+
+					                   '<input type="hidden" value="'+ item.rnum +'" name="rnum">'+
+					                   '<button type="submit" style="float: right;"class="chiclet-link u-cursor-pointer show-tooltip js-delete-review-draft">'+
+					                      '<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-trash icon--size-18 icon--currentColor">'+
+					                          '<svg class="icon_svg">'+
+										       '<path d="M3 5V3h4V2h4v1h4v2H3zm11 9c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V6h10v8zM8 8.5a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5zm3 0a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5z"></path>'+
+					                          '</svg>'+
+					                      '</span>'+
+					                      '<span class="tooltip-wrapper">'+
+					                      	'<span class="tooltip">Delete draft</span>'+
+					                     '</span>'+
+					                   '</button>'+
+					               '</form>' +
+			               		'</c:if>' + 
+			             	'</div>'+
+		              	'</div>'+
+				   	'</div>'+
+					'</li>'
+				);
+		 
 	             });
 	 
 				 $('.event_list_paging_section').empty();
@@ -810,9 +844,11 @@ $(function() {
 	             },
 	         }); 
 	    });
-	    
-	function list(page){
+	});
+	</script>
 	
+	<script type="text/javascript">
+	function list(page){
 		$(document).ajaxStart(function() {
 			$('body').css('overflow', 'hidden');
 			$('html').scrollTop(0);
@@ -825,89 +861,100 @@ $(function() {
 		})
 		
 		var mnum = '${memberDTO.mnum}';
+		var login_mnum = '${memberinfo.mnum}';
 	    $.ajax({
 	        type : 'post',
 	        url : 'review_member_ajax?curPage=' + page + '&mnum=' + mnum,
 	        dataType : 'json',
 	        success : function(responseData){
-		       	 $('.memberDetails-review-list ul li').remove(); 
-				 $.each(responseData.memberReview,function(i,item){
-			    	var num = responseData.num;
+	        	if(responseData.msg) {
+	        		alert(responseData.msg);
+	        		window.location.href = responseData.url;
+	        	}
+		       	 $('.memberDetails-review-list ul').empty(); 
+		       	$.each(responseData.memberReview,function(i,item){
+			 		var num = responseData.num;
 			        var mnum = responseData.mnum;
-				   
-	           
-		 $('.memberDetails-review-list ul').append(
-			
-				 '<li class="review-draft" style=" padding: 18px 0;  padding-bottom: 17px; display: list-item; text-align: -webkit-match-parent;">'+
- 					'<div class="arrange" style="width: 100%; overflow: hidden; height: auto;">'+
- 						'<div class="restContent-user" style="float: left; padding: 0 15px; min-height: 1px; width: 66.66667% ">'+
-						    '<div class="media-block media-block--12 biz-listing-medium">'+
-				                '<div class="media-avatar">'+
-				                    '<div class="photo-box pb-60s">'+
-				                        '<a href="/biz/liholiho-yacht-club-san-francisco-2" class="js-analytics-click" data-analytics-label="biz-photo">'+
-				                            '<img class="photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/' + item.restaurantDTO.fileDTO.filename + '"  width="60">'+
-				          			    '</a>'+
-				    		        '</div>'+
-				         	    '</div>'+
-				            '<div class="media-story">'+
-				                '<div class="media-title clearfix">'+
-				                    '<a class="biz-name js-analytics-click" data-analytics-label="biz-name" href="/biz/liholiho-yacht-club-san-francisco-2" data-hovercard-id="K8YqsGXicOLOUcQXTzRrnw"><span>'+ item.restaurantDTO.rname + '    Liholiho Yacht Club</span></a>'+
-				                '</div>'+
-				                '<div class="price-category">'+
-				                    '<span class="category-str-list">'+
-				                        '<a href="/search?cflt=bars&amp;find_loc=San+Francisco%2C+CA">' + item.restaurantDTO.foodstyle + '  Bars</a>,'+
-				                        '<a href="/search?cflt=newamerican&amp;find_loc=San+Francisco%2C+CA">' + 
-				                        item.restaurantDTO.roadAddrPart1 + item.restaurantDTO.roadAddrPart2 + item.restaurantDTO.addrDetail + '    American (New)</a>,'+
-				                        '<a href="/search?cflt=seafood&amp;find_loc=San+Francisco%2C+CA">Seafood</a>'+
-				    				'</span>'+
-				    			 '</div>'+
-				                 '<address>'+
-				                      item.restaurantDTO.raddress + item.restaurantDTO.hp2 + item.restaurantDTO.hp3 +
-// 				                     '871 Sutter St<br>San Francisco, CA 94109'+
-				                 '</address>'+
-				             '</div>'+
-        		        '</div>'+
-				        '<div class="arrange_unit" align="right" style="margin-bottom: 10px;">'+
-			                '<p class="time-stamp nowrap review-draft_date-created text-right">'+
-			                    'Started on  '+  item.restaurantDTO.rest_regdate + 
-			                '</p>'+
-			                '<p lang="ko" style="margin-bottom: 12px; width: 100%; float: right; display: block;">'+
-							 item.content +
-						    '</p><br><br>'+
-			             '</div>'+
-			             
-			             /* '<div>'+
-							'<div class="restList-star-rating-'+item.gradepoint+'" >'+
-								'<img class="offscreen" '+
-									'src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/basic/stars.png" '+
-									'width="84" height="303" alt="4.0 star rating" '+
-									'style="clip: rect(0, 0, 0, 0); position: absolute; left: -9999px; top: auto; overflow: hidden; width: 1px; height: 1px; vertical-align: middle;">'+
-							'</div>'+
-						'</div>'+ */
-			       
-			            '<div class="clearfix"  style="margin-bottom: 50px;">'+
-			               '<a  style="float: left;" href="member_details?mnum=' + mnum + '" class="yepsbyn ybtn--small js-war-widget_finish-draft pull-left">리뷰수정</a>'+
-			                  '<form action="review_delete?rvnum='+ item.rvnum + '&mnum=' + mnum + '" class="pull-right js-delete-review-draft-form" method="post" name="delete_draft">'+
-			               
-			                      '<input type="hidden" value="'+ item.rvnum + '" name="rvnum">'+
-			                      '<button type="submit" style="float: right;"class="chiclet-link u-cursor-pointer show-tooltip js-delete-review-draft">'+
-			                         '<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-trash icon--size-18 icon--currentColor">'+
-			                             '<svg class="icon_svg">'+
-									         '<path d="M3 5V3h4V2h4v1h4v2H3zm11 9c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V6h10v8zM8 8.5a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5zm3 0a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5z"></path>'+
-								
-			                             '</svg>'+
-			                         '</span>'+
-			                         '<span class="tooltip-wrapper">'+
-			                         '<span class="tooltip">Delete draft</span>'+
-			                      '</span>'+
-			                   '</button>'+
-			                '</form>'+
-			             '</div>'+
-		              '</div>'+
-				   '</div>'+
-				'</li>'
-				      );
-				 });
+			 		var price;
+			 		if(item.restaurantDTO.price == 1) {
+			 			price = '￦';
+			 		} else if(item.restaurantDTO.price == 2) {
+			 			price = '￦￦';
+			 		} else if(item.restaurantDTO.price == 3) {
+			 			price = '￦￦￦';
+			 		} else if(item.restaurantDTO.price == 4) { 
+			 			price = '￦￦￦￦';
+			 		}
+				 $(".memberDetails-review-list ul").append(
+					
+						 '<li class="review-draft">'+
+		 					'<div class="arrange">'+
+		 						'<div class="arrange_unit arrange_unit--fill">'+
+								    '<div class="media-block media-block--12 biz-listing-medium">'+
+						                '<div class="media-avatar">'+
+						                    '<div class="photo-box pb-60s">'+
+						                        '<a href="restaurant_content?rnum='+ item.rnum +'" class="js-analytics-click" data-analytics-label="biz-photo">'+
+						                            '<img alt="Liholiho Yacht Club" class="photo-box-img" height="60" src="https://s3.ap-northeast-2.amazonaws.com/yepsbucket/images/'+item.restaurantDTO.fileDTO.filename+'" width="60">'+
+						          			    '</a>'+
+						    		        '</div>'+
+						         	    '</div>'+
+						            '<div class="media-story">'+
+						                '<div class="media-title clearfix">'+
+						                    '<a class="biz-name js-analytics-click" data-analytics-label="biz-name" href="restaurant_content?rnum='+ item.rnum +'" data-hovercard-id="K8YqsGXicOLOUcQXTzRrnw"><span>'+ item.restaurantDTO.rname + '   </span></a>'+
+						                '</div>'+
+						                '<div class="price-category" style="float: none;">'+
+						                	'<span class="bullet-after">' +
+						                		'<span class="price-range">' +
+						                			price + 
+						                		'</span>' + 
+						                	'</span>' + 
+						                    '<span class="category-str-list">'+
+						                    	'<a href="#">' + item.restaurantDTO.foodstyle + '</a>'+
+						    				'</span>'+
+						    			 '</div>'+
+						                 '<address>'+
+						                	item.restaurantDTO.roadAddrPart1 + '<br>' + item.restaurantDTO.roadAddrPart2 + item.restaurantDTO.addrDetail +
+						                 '</address>'+
+						             '</div>'+
+		        		        '</div>'+
+						        '<div class="review_arrange_unit">'+
+					                '<p class="time-stamp nowrap review-draft_date-created text-right">'+
+					                    'Started on  '+  item.reg_date + 
+					                '</p>'+
+					                '<div class="restList-star-rating-'+ item.gradepoint +'">'+
+				             		'<img class="star_member_img" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png">'+
+				            	'</div>'+
+					             '</div>'+
+					             '<p class="member_ptag1" lang="ko" style="margin-bottom: 12px; width: 100%; float: right; display: block;">'+
+								 item.content +
+							    '</p><br><br>'+
+					            '<div class="clearfix" id="buttom_group" style="margin-bottom: 50px;">'+
+					            '<c:if test="${memberDTO.mnum eq memberinfo.mnum}">' +
+			            		'<a style="float: left;" href="review_write?rvnum=' + item.rvnum + '&mode=update&star='+item.gradepoint+'&rnum='+item.rnum+'" class="yepsbyn ybtn--small js-war-widget_finish-draft pull-left">리뷰수정</a>'+
+					               '<form action="review_delete" class="pull-right js-delete-review-draft-form" method="post" name="delete_draft">'+
+					                   '<input type="hidden" value="'+ item.rvnum + '" name="rvnum">'+
+					                  '<input type="hidden" value="'+ mnum + '" name="mnum">'+
+					                   '<input type="hidden" value="restaurantReviewDelete" name="mode">'+
+					                   '<input type="hidden" value="'+ item.rnum +'" name="rnum">'+
+					                   '<button type="submit" style="float: right;"class="chiclet-link u-cursor-pointer show-tooltip js-delete-review-draft">'+
+					                      '<span aria-hidden="true" style="width: 18px; height: 18px;" class="icon icon--18-trash icon--size-18 icon--currentColor">'+
+					                          '<svg class="icon_svg">'+
+										       '<path d="M3 5V3h4V2h4v1h4v2H3zm11 9c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V6h10v8zM8 8.5a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5zm3 0a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-5z"></path>'+
+					                          '</svg>'+
+					                      '</span>'+
+					                      '<span class="tooltip-wrapper">'+
+					                      	'<span class="tooltip">Delete draft</span>'+
+					                     '</span>'+
+					                   '</button>'+
+					               '</form>' +
+			               		'</c:if>' + 
+					             '</div>'+
+				              '</div>'+
+						   '</div>'+
+						'</li>'
+						      );
+				 	 
+			             });
 				 
 				 $('.event_list_paging_section').empty();
 			     var pagingHtml = "";
@@ -995,22 +1042,7 @@ $(function() {
 	 } 
 	
 	
-	    $('#profile_events').click(function(e){
-	    	$(".details-column-beta_overview").hide();
- 	    	$(".details-column-beta_reviews").hide();
- 	    	$(".details-column-beta_events").show();
- 	    	$(".details-column-beta_tips").hide();
- 	    	$(".event_list_paging_section").hide();
-	    })
-	    
-	    $('#profile_tips').click(function(e){
-	    	$(".details-column-beta_overview").hide();
- 	    	$(".details-column-beta_reviews").hide();
- 	    	$(".details-column-beta_events").hide();
- 	    	$(".details-column-beta_tips").show();
- 	    	$(".event_list_paging_section").hide();
-	    })
-	 });
+
 </script>
 
 <%@ include file="../bottom.jsp"%>

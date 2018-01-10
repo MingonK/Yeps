@@ -401,7 +401,7 @@
 				event_register.store_address.focus()
 				return false
 			}
-			if(event_register.content.value=="") {
+			if(event_register.event_content.value=="") {
 				alert("이벤트 내용을 상세하게 작성해주세요.")
 				event_register.event_content.focus()
 				return false

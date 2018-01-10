@@ -202,6 +202,15 @@ td, th {
 	z-index: 1;
 }
 
+.popup-inner input[type=text] {
+	width: 95%;
+    height: 30px;
+}
+
+#flag_content_popup_close > h4 {
+	font-size: 100%;
+}
+
 .popup #sendIssue,#locker_sendIssue {
 	cursor: pointer;
 	width: 120;

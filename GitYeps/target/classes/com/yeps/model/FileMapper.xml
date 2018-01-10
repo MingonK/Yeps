@@ -55,7 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       ${sql}
    </update>
    
-   <select id="isExistMainPhoto" parameterType="int" resultType="int">
+   <select id="isExistMainPhoto" parameterType="java.util.HashMap" resultType="int">
       ${sql}
    </select>
    

@@ -36,7 +36,6 @@
            						<input type="hidden" name="mnum" id="mnum" value="${memberinfo.mnum}">
            						<input type="hidden" name="mode" id="mode" value="${mode}">
            						<input type="hidden" name="rvnum" id="rvnum" value="${rvnum}">
-           						<input type="hidden" name="where" id="where" value="${where}">
 							<div> 
 								<div class="review_input">
 									<div class="review_text_star_wrap">
@@ -127,7 +126,7 @@
                </div>
    
                <div id="member_body">
-                  <form id="loginf" name="loginf" class="memberf" method="POST">
+                  <form id="loginf" name="loginf" class="memberf" method="POST" onsubmit="return loginCheck()">
                      <input id="email" name="email" placeholder="Email" required="required" type="email" autocomplete=off value=""> 
                      <input id="passwd" name="passwd" placeholder="Password" required="required" type="password" autocomplete=off value="">
                      <div id="forgot-email">
@@ -136,7 +135,7 @@
                      <div id="forgot-passwd">
                         <small><a class="forgot-passwd-link">Forgot password?</a></small>
                      </div>
-                     <button type="button" onclick="loginCheck()" value="submit" class="ybtn ybtn-primary ybtn-big ybtn-full">
+                     <button type="submit" value="submit" class="ybtn ybtn-primary ybtn-big ybtn-full">
                         <span>Log In</span>
                      </button>
                      <div class="sub-text-box">
@@ -309,7 +308,10 @@
 		})
 		
 		$('.review_write_Button').click(function() {
-			$('#review_writeF').submit();
+			var login = '${memberinfo}';
+			if(login) {
+				$('#review_writeF').submit();
+			}
 		})
       
 		$('.selector').hover(function(e) {
@@ -732,11 +734,6 @@ $(function() {
          });
     }
            
-    $(document).ready(function() {
-       
-       
-       
-    });
            
     //------------------------------------이메일 찾기
     function findEmailCheck(){
