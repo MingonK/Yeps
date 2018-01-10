@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<title>The Best 10 Restaurants in ${map.location}</title>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/restStyle.css?ver=1"/>"/>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js" ></script>
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=jD9qGVpvZh7Zobclojwp&submodules=geocoder"></script>

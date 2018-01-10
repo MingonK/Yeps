@@ -71,6 +71,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				, E.store_address
 				, E.event_content
 				, E.event_category
+				, E.discount
 				, E.zipNo
 				, E.roadAddrPart1
 				, E.roadAddrPart2

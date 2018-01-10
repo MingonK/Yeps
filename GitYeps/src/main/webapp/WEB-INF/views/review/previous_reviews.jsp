@@ -232,8 +232,8 @@
 			</div>
 		</div>
 	
-<div class="popup" align="left" id="writeMessage" data-popup="writeMessage"  style="z-index: 1;">
-	<div class="popup-inner" style="width: 465px; z-index: 1; height: auto !important; max-height: 400px;">
+<div class="popup" align="left" id="writeMessage" data-popup="writeMessage"  style="z-index: 9000;">
+	<div class="popup-inner" style="width: 465px; height: auto !important; max-height: 400px;">
     	<div id="flag_content_popup_title">
     	    <div id="flag_content_popup_close" data-popup-close="writeMessage">
     			<h4 style="display: table-cell; padding: 0px 7px;">×</h4>

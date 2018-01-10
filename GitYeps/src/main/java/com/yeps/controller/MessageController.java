@@ -265,7 +265,7 @@ public class MessageController {
 			mav.addObject("msg", msg);
             return mav;
 			// 쪽지함에서 신고쪽지 보낼때 받는 부분
-		} else if (report.equals("reply") || report.equals("event")) {
+			} else if (report.equals("reply") || report.equals("event")) {
 			
 			// 이벤트에서 신고보낼때 받는 부분(쪽지함 신고 부분에 포함)
 			String where = req.getParameter("where");
