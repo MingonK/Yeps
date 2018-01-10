@@ -307,12 +307,13 @@
 			$('.review_write_Button').css("background-color", "#ff0008");
 		})
 		
-// 		$('.review_write_Button').click(function() {
-// 			var login = '${memberinfo}';
-// 			if(login) {
-// 				$('#review_writeF').submit();
-// 			}
-// 		})
+		$('.review_write_Button').click(function() {
+			var login = '${memberinfo}';
+			if(login) {
+				$('#review_writeF').attr('action', 'review_insert');
+				$('#review_writeF').submit();
+			}
+		})
       
 		$('.selector').hover(function(e) {
 			var star = $(e.target).val();
