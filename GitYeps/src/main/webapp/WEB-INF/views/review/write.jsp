@@ -85,7 +85,7 @@
 							<div class="writereview_footer">
 								<div class="footer_buttons_wrapper">
 									<div class="post_review_button">
-										<input class="review_write_Button" type="button"  onclick="ContentAndGradepointCheck()" data-popup-open="popup-1" value="Post Review">
+										<button class="review_write_Button" type="button" onclick="ContentAndGradepointCheck()" data-popup-open="popup-1" value="Post Review"><span>Post Review</span></button>
 									</div>
 								</div>
 							</div>
@@ -434,9 +434,9 @@ var memberinfo = '${sessionScope.memberinfo}';
 $(function() {
         //----- OPEN
       $('[data-popup-open]').on('click', function(e)  {
-         if(memberinfo){ // 로그인 되어있으면 여기 실행
-            ContentAndGradepointCheck()
-         }else{
+         if(memberinfo) {
+        	 ContentAndGradepointCheck();
+         } else if (document.review_writeF.content.value != "" && document.review_writeF.gradepoint.value != ""){
             var targeted_popup_class = jQuery(this).attr('data-popup-open');
              $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
              e.preventDefault();
@@ -727,8 +727,6 @@ $(function() {
                  var targeted_popup_class = $('.popup-close').attr('data-popup-close');
                  $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
                  memberinfo = responseData.memberinfo;
-                 $('#review_writeF').attr('action', 'review_insert'); 
-                 $('#review_writeF').submit();
               },
               error : function(request, status, error) {
             	 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);

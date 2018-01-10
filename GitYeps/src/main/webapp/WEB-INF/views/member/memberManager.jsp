@@ -145,6 +145,99 @@
 									</c:otherwise>
 								</c:choose>
 							</div>
+							
+							
+							
+							
+							<div class="event_list_paging_section" style="font-size: 14px;margin: 0 auto; padding: 15px 15px; width: 960px;">
+			<div class="event_list_pagination_block">
+				<div class="event_list_pagination_wrap">
+					<div class="event_list_page_of_pages">
+						<c:if test="${yepsPager.blockEnd == 0}">
+							Page ${curPage} of 1
+						</c:if>
+						<c:if test="${yepsPager.blockEnd != 0}">
+							Page ${curPage} of ${yepsPager.blockEnd}
+						</c:if>
+					</div>
+<!-- 					페이징 처리!! 현재페이지는 span이 되고 나머지는 a로 -->
+					<c:if test="${yepsPager.blockEnd != 1}">
+					<div class="event_list_page_link_wrapper">
+						<div class="event_list_page_link_wrap">
+						
+						<c:if test="${yepsPager.curBlock > 1}">
+							<div class="event_list_next_block">
+								<a class="event_list_next_block_action" href="javascript:list('1')">
+									<span>Start</span>
+								</a>
+							</div>
+						</c:if>
+
+						<c:if test="${yepsPager.curBlock > 1}">
+							<div class="event_list_next_block">
+								<a class="event_list_next_block_action" href="javascript:list('${yepsPager.prevPage}')">
+									<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">
+										<svg class="icon_svg">
+											<path d="M14.475 18.364l1.414-1.414L10.94 12l4.95-4.95-1.415-1.414L8.11 12l6.365 6.364z"></path>
+										</svg>
+									</span>
+									<span>Previous</span>
+								</a>
+							</div>
+						</c:if>
+						
+						
+						<c:forEach var="num" begin="${yepsPager.blockBegin}" end="${yepsPager.blockEnd}">
+							<div class="event_list_page_link_option">
+							<c:choose>
+								<c:when test="${num == yepsPager.curPage}">
+									<span class="event_list_page_option_action">
+										${num}
+									</span>
+								</c:when>
+								<c:otherwise>
+									<a href="javascript:list('${num}')" class="event_list_page_option_link_action">
+										${num}
+									</a>
+								</c:otherwise>
+							</c:choose>
+							</div>
+						</c:forEach>
+						
+						<c:if test="${yepsPager.curBlock <= yepsPager.totBlock}">
+							<div class="event_list_next_block">
+								<a class="event_list_next_block_action" href="javascript:list('${yepsPager.nextPage}')">
+									<span>Next</span>
+									<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">
+										<svg class="icon_svg">
+											<path d="M9.525 5.636L8.11 7.05 13.06 12l-4.95 4.95 1.415 1.414L15.89 12 9.524 5.636z"></path>
+										</svg>
+									</span>
+								</a>
+							</div>
+						</c:if>
+						
+						<c:if test="${yepsPager.curPage <= yepsPager.totPage}">
+							<div class="event_list_next_block">
+								<a class="event_list_next_block_action" href="javascript:list('${yepsPager.totPage}')">
+									<span>End</span>
+								</a>
+							</div>
+						</c:if>
+						</div>
+					</div>
+					</c:if>
+				</div>
+			</div>
+		</div>
+							
+							
+							
+							
+							
+							
+							
+							
 						</c:when>
 						<c:otherwise>
 							<h3 class="subscribe-list_title">Member Profile</h3>
@@ -228,87 +321,7 @@
 				</div>
 			</div>	
 		</div>			
-		<div class="event_list_paging_section" style="font-size: 14px;margin: 0 auto; padding: 15px 15px; width: 960px;">
-			<div class="event_list_pagination_block">
-				<div class="event_list_pagination_wrap">
-					<div class="event_list_page_of_pages">
-						<c:if test="${yepsPager.blockEnd == 0}">
-							Page ${curPage} of 1
-						</c:if>
-						<c:if test="${yepsPager.blockEnd != 0}">
-							Page ${curPage} of ${yepsPager.blockEnd}
-						</c:if>
-					</div>
-<!-- 					페이징 처리!! 현재페이지는 span이 되고 나머지는 a로 -->
-					<c:if test="${yepsPager.blockEnd != 1}">
-					<div class="event_list_page_link_wrapper">
-						<div class="event_list_page_link_wrap">
-						
-						<c:if test="${yepsPager.curBlock > 1}">
-							<div class="event_list_next_block">
-								<a class="event_list_next_block_action" href="javascript:list('1')">
-									<span>Start</span>
-								</a>
-							</div>
-						</c:if>
-
-						<c:if test="${yepsPager.curBlock > 1}">
-							<div class="event_list_next_block">
-								<a class="event_list_next_block_action" href="javascript:list('${yepsPager.prevPage}')">
-									<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">
-										<svg class="icon_svg">
-											<path d="M14.475 18.364l1.414-1.414L10.94 12l4.95-4.95-1.415-1.414L8.11 12l6.365 6.364z"></path>
-										</svg>
-									</span>
-									<span>Previous</span>
-								</a>
-							</div>
-						</c:if>
-						
-						
-						<c:forEach var="num" begin="${yepsPager.blockBegin}" end="${yepsPager.blockEnd}">
-							<div class="event_list_page_link_option">
-							<c:choose>
-								<c:when test="${num == yepsPager.curPage}">
-									<span class="event_list_page_option_action">
-										${num}
-									</span>
-								</c:when>
-								<c:otherwise>
-									<a href="javascript:list('${num}')" class="event_list_page_option_link_action">
-										${num}
-									</a>
-								</c:otherwise>
-							</c:choose>
-							</div>
-						</c:forEach>
-						
-						<c:if test="${yepsPager.curBlock <= yepsPager.totBlock}">
-							<div class="event_list_next_block">
-								<a class="event_list_next_block_action" href="javascript:list('${yepsPager.nextPage}')">
-									<span>Next</span>
-									<span style="width: 24px; height: 24px; fill: currentColor;" class="icon">
-										<svg class="icon_svg">
-											<path d="M9.525 5.636L8.11 7.05 13.06 12l-4.95 4.95 1.415 1.414L15.89 12 9.524 5.636z"></path>
-										</svg>
-									</span>
-								</a>
-							</div>
-						</c:if>
-						
-						<c:if test="${yepsPager.curPage <= yepsPager.totPage}">
-							<div class="event_list_next_block">
-								<a class="event_list_next_block_action" href="javascript:list('${yepsPager.totPage}')">
-									<span>End</span>
-								</a>
-							</div>
-						</c:if>
-						</div>
-					</div>
-					</c:if>
-				</div>
-			</div>
-		</div>
+		
 		
 	</div>
 	
