@@ -22,13 +22,15 @@
 							</div>
 						<div class="breadcrumbs-hierarchy" style="width:100%;height:18px;margin-bottom:6px;">
 							<span style="width:100px;height:30px">
+							<c:if test="${empty map.category}">
 								<a href="#" class="location">서울</a>
+							</c:if>
+							<c:if test="${!empty map.category}">
 								<a href="yeps_main_saerch?location=${map.location}">${map.location}</a>
-								<c:if test="${!empty map.category}">	
 									<span aria-hidden="true" style="width: 14px; height: 14px;" class="icon icon--14-chevron-right icon--size-14 u-space-r-half">
-									        	<svg id="14x14_chevron_right" height="100%" viewBox="0 0 14 14" width="100%">
-									        		<path d="M4.793 12a1 1 0 0 1-.707-1.707L7.38 7 4.085 3.707A1 1 0 1 1 5.5 2.293L10.207 7 5.5 11.707a.997.997 0 0 1-.707.293z"></path>
-									        	</svg>
+										<svg id="14x14_chevron_right" height="100%" viewBox="0 0 14 14" width="100%">
+									    	<path d="M4.793 12a1 1 0 0 1-.707-1.707L7.38 7 4.085 3.707A1 1 0 1 1 5.5 2.293L10.207 7 5.5 11.707a.997.997 0 0 1-.707.293z"></path>
+									    </svg>
 									</span>
 									<a href="yeps_main_saerch?category=${map.category}&location=${map.location}">${map.category}</a>
 								</c:if>

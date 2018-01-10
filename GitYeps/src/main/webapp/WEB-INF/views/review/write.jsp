@@ -126,7 +126,7 @@
                </div>
    
                <div id="member_body">
-                  <form id="loginf" name="loginf" class="memberf" method="POST" onsubmit="return loginCheck()">
+                  <form id="loginf" name="loginf" class="memberf" method="POST">
                      <input id="email" name="email" placeholder="Email" required="required" type="email" autocomplete=off value=""> 
                      <input id="passwd" name="passwd" placeholder="Password" required="required" type="password" autocomplete=off value="">
                      <div id="forgot-email">
@@ -135,7 +135,7 @@
                      <div id="forgot-passwd">
                         <small><a class="forgot-passwd-link">Forgot password?</a></small>
                      </div>
-                     <button type="submit" value="submit" class="ybtn ybtn-primary ybtn-big ybtn-full">
+                     <button type="button" value="submit" onclick="loginCheck()" class="ybtn ybtn-primary ybtn-big ybtn-full">
                         <span>Log In</span>
                      </button>
                      <div class="sub-text-box">
@@ -452,12 +452,13 @@ $(function() {
   });
    
    function ContentAndGradepointCheck() {
-    if (document.review_writeF.gradepoint.value == ""
-          || document.review_writeF.content.value == "") {
-       alert("평점과 내용을 제대로 기입하세요!!")
-       return false;
-    }
-       return true;
+    	if (document.review_writeF.gradepoint.value == ""
+        	  || document.review_writeF.content.value == "") {
+      		 alert("평점과 내용을 제대로 기입하세요!!")
+      	 	return false;
+   		 } else if (memberinfo != null) {
+    		return true;
+    	 }
     }
 
    function openwindow() {
@@ -712,6 +713,7 @@ $(function() {
 			
 		$(document).ajaxStop(function() {
 			$('.loading_wapper').fadeOut(500);
+			location.reload();
 		})
 
        var queryString = $("form[name=loginf]").serialize();
@@ -727,11 +729,11 @@ $(function() {
                  var targeted_popup_class = $('.popup-close').attr('data-popup-close');
                  $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
                  memberinfo = responseData.memberinfo;
+                 $('.memberf').submit();
               },
               error : function(request, status, error) {
-            	 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-                 alert("로그인 실패");
-                 $('.loading_wapper').fadeOut(500);
+//                  $('.loading_wapper').fadeOut(500);
+//                  location.reload();
               },
          });
     }

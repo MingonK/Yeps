@@ -277,7 +277,7 @@
 							<label id="find_label" class="mainpage_search">
 								<span id="label_span">Find</span>
 								<span id="label_input_span">
-									<input type="text" maxlength="64" name="category" id="page_header_inputs" class="page_header_inputs" autocomplete="off" placeholder="분야별 검색" aria-autocomplete="list" tabindex="1" data-component-bound="true" readonly>		
+									<input type="text" maxlength="64" name="category" id="page_header_inputs" class="page_header_inputs" autocomplete="off" placeholder="분야별 검색" aria-autocomplete="list" tabindex="1" data-component-bound="true">		
 								</span>
 							</label>
 							
@@ -735,9 +735,9 @@
 						</c:forEach>					
 					</div>
 				
-					<div style="margin-top: 12px!important; text-align: center!important;">
-						<a href="#">더 많은 최신 식당 보기</a>
-					</div>
+<!-- 					<div style="margin-top: 12px!important; text-align: center!important;"> -->
+<!-- 						<a href="#">더 많은 최신 식당 보기</a> -->
+<!-- 					</div> -->
 				</div>
 			</div>
 		</div>

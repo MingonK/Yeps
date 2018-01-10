@@ -28,7 +28,7 @@
 								<label id="find_label">
 									<span id="label_span">Find</span>
 									<span id="label_input_span">
-										<input type="text" maxlength="64" name="category" id="page_header_inputs" class="page_header_inputs" autocomplete="off" placeholder="분야별 검색" aria-autocomplete="list" tabindex="1" data-component-bound="true" readonly>		
+										<input type="text" maxlength="64" name="category" id="page_header_inputs" class="page_header_inputs" autocomplete="off" placeholder="분야별 검색" aria-autocomplete="list" tabindex="1" data-component-bound="true">		
 									</span>
 								</label>
 								
