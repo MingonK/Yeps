@@ -167,7 +167,7 @@ public class EventController {
 		HttpSession session = req.getSession();
 		MemberDTO loginMember = (MemberDTO) session.getAttribute("memberinfo");
 		dto.setMnum(loginMember.getMnum());
-
+		
 		if (dto.getEventname() == null || dto.getEventname().trim().equals("") || dto.getEvent_content() == null
 				|| dto.getEvent_content().trim().equals("") || dto.getDiscount() == null
 				|| dto.getDiscount().trim().equals("")) {
@@ -357,7 +357,7 @@ public class EventController {
 			return new ModelAndView("redirect: member_login");
 		}
 
-		EventDTO eventDTO = eventMapper.getEventContent(Integer.parseInt(evnum));
+		EventDTO eventDTO = eventMapper.getEventContentNoPhoto(Integer.parseInt(evnum));
 		ModelAndView mav = new ModelAndView();
 
 		if (eventDTO == null) {

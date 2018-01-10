@@ -80,6 +80,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from yeps_event E, yeps_files F where E.evnum = F.evnum and F.ismainphoto = 'y' and E.evnum = #{evnum}
 	</select>
 	
+	<select id="getEventContentNoPhoto" parameterType="int" resultType="EventDTO">
+		select * from yeps_event where evnum = #{evnum}
+	</select>
+	
 	<select id="getEvnum" parameterType="java.util.HashMap" resultType="int">
 		select evnum from yeps_event where eventname = #{eventname} and store_address = #{store_address}
 	</select>

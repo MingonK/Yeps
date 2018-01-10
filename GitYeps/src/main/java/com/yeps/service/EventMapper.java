@@ -118,4 +118,8 @@ public class EventMapper {
 	public int deleteEventByMemberNumber(int mnum) {
 		return sqlSession.delete("deleteEventByMemberNumber", mnum);
 	}
+	
+	public EventDTO getEventContentNoPhoto(int evnum) {
+		return sqlSession.selectOne("getEventContentNoPhoto", evnum);
+	}
 }
