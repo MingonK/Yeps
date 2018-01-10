@@ -2867,7 +2867,6 @@
 }
 
 .pre_div_page {
-	border-bottom: 1px solid #e6e6e6;
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -2876,13 +2875,10 @@
 	vertical-align: baseline;
 	display: block;
 	color: #333;
+	margin-bottom: 30px;
 }
 
 .pre_div_page-1 {
-	margin-left: 19px;
-	margin-right: -6px;
-	border-collapse: separate;
-	border-spacing: 6px 0;
 	display: table;
 	min-width: 100%;
 	table-layout: auto;
@@ -2892,6 +2888,8 @@
 	font: inherit;
 	vertical-align: baseline;
 	color: #333;
+	border-top: 1px solid #e6e6e6;
+	border-bottom: 1px solid #e6e6e6;
 }
 
 .pre_div_page-1-1 {

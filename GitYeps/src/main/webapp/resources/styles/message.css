@@ -177,6 +177,7 @@ td, th {
 	position: fixed;
 	top: 0px;
 	left: 0px;
+	z-index: 9000;
 	background: rgba(0, 0, 0, 0.75);
 }
 

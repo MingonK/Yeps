@@ -83,6 +83,11 @@ public class ReviewController {
 	@RequestMapping(value = "/review_delete")
 	public ModelAndView review_delete(HttpServletRequest req, HttpSession session) {
 		String rvnum = req.getParameter("rvnum");
+		
+		if(rvnum == null || rvnum.trim().equals("")) {
+			return new ModelAndView("historyBack");
+		}
+		
 		int mnum = Integer.parseInt(req.getParameter("mnum"));
 		String mode = req.getParameter("mode");
 		int rnum = Integer.parseInt(req.getParameter("rnum"));
@@ -90,9 +95,14 @@ public class ReviewController {
 		ModelAndView mav = new ModelAndView();
 		String msg;
 		String url;
+		
+		System.out.println(rvnum);
+		System.out.println(mnum);
+		System.out.println(rnum);
+		System.out.println(mode);
 
 		if (res > 0) {
-			int beforeReviewcount = memberMapper.getMemberReviewCount(mnum);
+		    int beforeReviewcount = reviewMapper.getMyReviewCount(mnum);
 			int nowReviewcount = beforeReviewcount - 1;
 			memberMapper.updateReviewCount(mnum, nowReviewcount);
 			if(session != null) {
@@ -112,7 +122,11 @@ public class ReviewController {
 			}
 		} else {
 			msg = "리뷰 삭제실패!!";
-			url = "member_detalis?mnum"+mnum;
+
+			url = "member_details?mnum=" + mnum;
+
+			url = "member_details?mnum="+mnum;
+
 			mav.addObject("msg", msg);
 			mav.addObject("url", url);
 			mav.setViewName("message");
@@ -322,9 +336,10 @@ public class ReviewController {
 		} else {
 			mnum = Integer.parseInt(smnum);
 		}
+
 		int curPage = req.getParameter("curPage") != null ? Integer.parseInt(req.getParameter("curPage")) : 1;
-		
 		int reviewcount = reviewMapper.getMyReviewCount(mnum);
+
 		int pageScale = 5;
 		int blockScale = 5;
 		YepsPager YepsPager = new YepsPager(reviewcount, curPage, pageScale, blockScale);
@@ -334,6 +349,7 @@ public class ReviewController {
 
 		/* int photocount = memberMapper. */
 		List<ReviewDTO> memberReview = reviewMapper.getMemberReview(mnum, start, end);
+		
 		map.put("mnum", mnum);
 		map.put("num", num);
 		map.put("count", reviewcount);

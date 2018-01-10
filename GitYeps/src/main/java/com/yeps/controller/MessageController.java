@@ -263,7 +263,7 @@ public class MessageController {
 				mav = pagingMessageList(req, lMode, email);
 			}
 			mav.addObject("msg", msg);
-
+            return mav;
 			// 쪽지함에서 신고쪽지 보낼때 받는 부분
 		} else if (report.equals("reply") || report.equals("event")) {
 			
@@ -334,9 +334,19 @@ public class MessageController {
 					res = messageMapper.writeMessage(dto);
 				}
 			}
+
+			if(where.equals("rest")) {
+				mav.setViewName("restaurant/restaurant_content");
+			}else if(where.equals("event")) {
+				mav.setViewName("event/event_contentForm");
+			}
+			
+
 		}
+
 		mav.addObject("msg", msg);
 		mav.setViewName("historyBack");// historyback.jsp를 이용하여 이전 페이지로 이동
+
 		return mav;
 	}
 

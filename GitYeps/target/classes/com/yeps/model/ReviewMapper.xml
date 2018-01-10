@@ -33,6 +33,7 @@
   	
   	<resultMap type="reviewDTO" id="getSelectedRestaurant_ReviewMap">
 		<id column="rvnum" property="rvnum"/>
+		<result column="rvnum" property="rvnum"/>
 		<result column="rnum" property="rnum"></result>
 		<result column="mnum" property="mnum"></result>
 		<result column="content" property="content"></result>
@@ -128,6 +129,7 @@
   	
   	<resultMap type="reviewDTO" id="FindReviewMap">
 		<id column="rvnum" property="rvnum"/>
+		<result column="rvnum" property="rvnum"/>
 		<result column="rnum" property="rnum"></result>
 		<result column="mnum" property="mnum"></result>
 		<result column="content" property="content"></result>
@@ -211,6 +213,7 @@
    <resultMap type="reviewDTO" id="MemberReviewMap">
        <id column="rnum" property="rnum"/>
        <result column="rnum" property="rnum"></result>
+       <result column="rvnum" property="rvnum"></result>
        <result column="reg_date" property="reg_date"></result>
        <result column="content" property="content"></result>
        <result column="gradepoint" property="gradepoint"></result>
@@ -321,6 +324,7 @@
 		<id column="rvnum" property="rvnum"/>
 		<id column="mnum" property="mnum"></id>
 		<id column="rnum" property="rnum"></id>
+		<result column="rvnum" property="rvnum"/>
 		<result column="content" property="content"></result>
 		<result column="reg_date" property="reg_date"></result>
 		<result column="gradepoint" property="gradepoint"></result>
@@ -364,6 +368,7 @@
   	
   	<resultMap type="ReviewDTO" id="recentReviewMap">
   		<id column="rvnum" property="rvnum"/>
+  		<result column="rvnum" property="rvnum"/>
   		<result column="mnum" property="mnum"/>
 		<result column="rnum" property="rnum"></result>
 		<result column="content" property="content"></result>
@@ -425,6 +430,7 @@
    
    <resultMap type="reviewDTO" id="previousReviewMap">
   		<id column="rvnum" property="rvnum"/>
+  		<result column="rvnum" property="rvnum"></result>
       	<result column="rnum" property="rnum"></result>
       	<result column="content" property="content"></result>
       	<result column="reg_date" property="reg_date"></result>

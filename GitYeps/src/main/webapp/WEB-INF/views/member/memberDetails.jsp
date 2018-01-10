@@ -500,8 +500,8 @@
 		</div>
 	</div>
 	
-	<div class="popup" align="left" id="writeMessage" data-popup="writeMessage"  style="z-index: 1;">
-	<div class="popup-inner" style="width: 465px; z-index: 1; height: auto !important; max-height: 400px;">
+	<div class="popup" align="left" id="writeMessage" data-popup="writeMessage">
+	<div class="popup-inner" style="width: 465px; height: auto !important; max-height: 400px;">
     	<div id="flag_content_popup_title">
     	    <div id="flag_content_popup_close" data-popup-close="writeMessage">
     			<h4 style="display: table-cell; padding: 0px 7px; font-size: 100%; font: inherit;">×</h4>
@@ -516,9 +516,9 @@
     			<form name="sendform" method="post">
     				<div>
 						<h4 align="left" style="color: #d32323;">Send Message To</h4>
-    	    			<input type="text" id="sendformTo" name="receiver" style="width: 95%; height: 20px;">
+    	    			<input type="text" id="sendformTo" name="receiver">
     	    			<h4 align="left" style="color: #d32323;">Subject is</h4>
-	            		<input type="text" name="title" id="sendformSubject" style="width: 95%; height: 20px;">
+	            		<input type="text" name="title" id="sendformSubject">
 	        			<h4 align="left" style="color: #d32323;">Content is</h4>
 	            		<textarea rows="4" name="content" id="sendformMessage"  style="width: 95%;" placeholder="여기에 메시지를 입력하세요."></textarea>
     	    		</div>
@@ -526,7 +526,6 @@
     		</div>
     	</div>
     	
-    	   	
 		<div id="flag_popup_footer">
      		<div id="flag_popup_buttons">
      			<button id="reply_flag_popup_submit_button" type="submit" value="submit" data-popup-send="SendMessage" onclick="sendMessage()">
@@ -574,7 +573,7 @@ $(function() {
 		});
 	});   
 
-		$('#sendMessage').click(function(){
+		$('#reply_flag_popup_submit_button').click(function(){
 			if($('#sendformTo').val()==''){
 			alert("받는 사람을 입력해주세요");
 			$('#sendformTo').focus()
@@ -933,7 +932,7 @@ $(function() {
 			            		'<a style="float: left;" href="review_write?rvnum=' + item.rvnum + '&mode=update&star='+item.gradepoint+'&rnum='+item.rnum+'" class="yepsbyn ybtn--small js-war-widget_finish-draft pull-left">리뷰수정</a>'+
 					               '<form action="review_delete" class="pull-right js-delete-review-draft-form" method="post" name="delete_draft">'+
 					                   '<input type="hidden" value="'+ item.rvnum + '" name="rvnum">'+
-					                  '<input type="hidden" value="'+ mnum + '" name="mnum">'+
+					                   '<input type="hidden" value="'+ mnum + '" name="mnum">'+
 					                   '<input type="hidden" value="restaurantReviewDelete" name="mode">'+
 					                   '<input type="hidden" value="'+ item.rnum +'" name="rnum">'+
 					                   '<button type="submit" style="float: right;"class="chiclet-link u-cursor-pointer show-tooltip js-delete-review-draft">'+
