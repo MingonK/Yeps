@@ -224,7 +224,7 @@ td, th {
 	font-size: 17px;
 }
 
-.popup #replyMessage, #deleteMessage, #alert_replyMessage, #alert_deleteMassage, #sendMessage, #alert_sendMessage, #sendIssue {
+.popup #replyMessage, #deleteMessage, #alert_replyMessage, #alert_deleteMassage, #sendMessage, #alert_sendMessage, #sendIssue, #message_popup_Issue_submit_button {
 	cursor: pointer;
 	color: #ffffff;
 	background: #d32323;
@@ -241,7 +241,7 @@ td, th {
 }
 
 .popup #replyMessage:hover, #deleteMessage:hover, #alert_replyMessage:hover, #alert_deleteMassage:hover,
-#sendMessage:hover, #alert_sendMessage:hover, #sendIssue:hover {
+#sendMessage:hover, #alert_sendMessage:hover, #sendIssue:hover, #message_popup_Issue_submit_button:hover {
 	background: red;
 }
 
