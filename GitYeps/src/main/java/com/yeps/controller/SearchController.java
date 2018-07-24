@@ -174,7 +174,7 @@ public class SearchController {
 			}
 			if(location != null && !location.equals("Current Location")) {
 				String authNum = ""; // RandomNum함수 호출해서 리턴값 저장
-				authNum = randomNum.getKey(7, false);
+				authNum = randomNum.getKey(7, false); // 랜덤한 숫자 7자리 발생
 				try {
 					Cookie cookie = new Cookie("location"+authNum, URLEncoder.encode(location, "UTF-8"));
 					cookie.setMaxAge(60*60*24*30);	// 쿠키 유지 기간 - 30일

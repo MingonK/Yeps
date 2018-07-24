@@ -20,18 +20,14 @@ public class Jaso {
 			0x314a, 0x314b, 0x314c, 0x314d, 0x314e };
 
 	public String getInitial(String jaso) {
-
 		String word = jaso; // 분리할 단어
 		String result = ""; // 결과 저장할 변수
 
 		for (int i = 0; i < word.length(); i++) {
-
 			/* 한글자씩 읽어들인다. */
 			char chars = (char) (word.charAt(i) - 0xAC00);
-
 			if (chars >= 0 && chars <= 11172) {
 				/* A. 자음과 모음이 합쳐진 글자인경우 */
-
 				/* A-1. 초/중/종성 분리 */
 				int chosung = chars / (21 * 28);
 				int jungsung = chars % (21 * 28) / 28;
@@ -39,21 +35,17 @@ public class Jaso {
 
 				/* A-2. result에 담기 */
 				result = result + arrChoSung[chosung] + arrJungSung[jungsung];
-
 				/* 자음분리 */
 				if (jongsung != 0x0000) {
 					/* A-3. 종성이 존재할경우 result에 담는다 */
 					result = result + arrJongSung[jongsung];
 				}
-
 			} else {
 				/* B. 한글이 아니거나 자음만 있을경우 */
 
 				/* 자음분리 */
 				result = result + ((char) (chars + 0xAC00));
-
 			} // if
-
 		} // for
 		return result;
 	}

@@ -730,11 +730,7 @@ $(function() {
                  $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
                  memberinfo = responseData.memberinfo;
                  $('.memberf').submit();
-              },
-              error : function(request, status, error) {
-//                  $('.loading_wapper').fadeOut(500);
-//                  location.reload();
-              },
+              }
          });
     }
            

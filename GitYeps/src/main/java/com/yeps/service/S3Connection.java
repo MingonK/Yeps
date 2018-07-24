@@ -37,7 +37,7 @@ public class S3Connection {
 		return This;
 	}
 
-	private final String accessKey = "AKIAJNZIUGXXPSLVYE6A", secretKey = "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";
+	private final String accessKey = "액세스키 입력", secretKey = "시크릿 키 입력";
 	private AmazonS3Client s3Client;
 
 	public void connect() {

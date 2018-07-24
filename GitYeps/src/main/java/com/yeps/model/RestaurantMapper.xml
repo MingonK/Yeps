@@ -58,13 +58,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      		<id column="filenum" property="filenum"></id>
      		<result column="filename" property="filename"></result>
      	</association>
-     </resultMap> 
+    </resultMap> 
+    
 	<select id="listRestaurant" parameterType="java.util.HashMap" resultMap="listRestaurantMap" >
 		select * from (select rownum rn, A.* from (select 
 													RT.rnum, RT.rname, RT.price, RT.foodstyle, RT.roadAddrPart1, RT.addrDetail, RT.roadAddrPart2,
 													RT.raddress, RT.hp2, RT.hp3, RT.reststyle, RT.category, F.filename
-		from yeps_restaurant RT, yeps_files F where 
-		RT.rnum = F.rnum and F.ismainphoto = 'y' and replace(upper(RT.roadAddrPart1),' ','') like '%'||replace(upper(#{location}),' ','')||'%' 
+		from yeps_restaurant RT, yeps_files F 
+		where RT.rnum = F.rnum and F.ismainphoto = 'y' and replace(upper(RT.roadAddrPart1),' ','') like '%'||replace(upper(#{location}),' ','')||'%' 
 		<if test='sql !=null '>AND (RT.price=#{sql} <if test="pricesSql != null">
 		<foreach collection="pricesSql" item="item" index="index">
             OR RT.price=#{item.value}
@@ -509,11 +510,15 @@ FROM
 	</select>
 	
 	<select id="listRestByCLS" parameterType="java.util.HashMap" resultMap="listRestaurantMap" > 
-		select * from (select rownum rn, A.* from (select 
-													RT.rnum, RT.rname, RT.price, RT.foodstyle, RT.roadAddrPart1, RT.addrDetail, RT.roadAddrPart2,
-													RT.raddress, RT.hp2, RT.hp3, RT.reststyle, RT.category, F.filename
-		from yeps_restaurant RT, yeps_files F where 
-		RT.rnum = F.rnum and F.ismainphoto = 'y' and RT.category=#{category} and replace(upper(RT.roadAddrPart1),' ','') like '%'||replace(upper(#{location}),' ','')||'%' and replace(upper(RT.rname),' ','') like '%'||replace(upper(#{searchword}),' ','')||'%' order by RT.rnum desc)A) where rn between #{start} and #{end} 
+		select * from (select rownum rn, A.* 
+						from (select RT.rnum, RT.rname, RT.price, RT.foodstyle, RT.roadAddrPart1, RT.addrDetail, RT.roadAddrPart2,
+									 RT.raddress, RT.hp2, RT.hp3, RT.reststyle, RT.category, F.filename
+							  from 	 yeps_restaurant RT, yeps_files F 
+							  where  RT.rnum = F.rnum and F.ismainphoto = 'y' and RT.category=#{category} 
+									 and replace(upper(RT.roadAddrPart1),' ','') like '%'||replace(upper(#{location}),' ','')||'%' 
+									 and replace(upper(RT.rname),' ','') like '%'||replace(upper(#{searchword}),' ','')||'%' 
+							  order by RT.rnum desc)A) 
+						where rn between #{start} and #{end} 
 	</select>
 	<select id="listRestByCL" parameterType="java.util.HashMap" resultMap="listRestaurantMap" > 
 		select * from (select rownum rn, A.* from (select 

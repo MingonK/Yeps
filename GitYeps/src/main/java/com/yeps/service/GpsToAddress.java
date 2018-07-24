@@ -2,13 +2,12 @@ package com.yeps.service;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.net.*;
+import java.net.URL;
+import java.net.URLConnection;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
-import org.springframework.stereotype.Service;
-
 
 public class GpsToAddress {
 	double latitude;
@@ -22,8 +21,8 @@ public class GpsToAddress {
 	}
 
 	private String getApiAddress() {
-		String apiURL = "http://maps.googleapis.com/maps/api/geocode/json?latlng="
-				+ latitude + "," + longitude + "&language=ko";
+		String apiURL = "http://maps.googleapis.com/maps/api/geocode/json?latlng=" + latitude + "," + longitude
+				+ "&language=ko";
 		return apiURL;
 	}
 
@@ -32,8 +31,7 @@ public class GpsToAddress {
 		String buf;
 		URL url = new URL(apiURL);
 		URLConnection conn = url.openConnection();
-		BufferedReader br = new BufferedReader(new InputStreamReader(
-				conn.getInputStream(), "UTF-8"));
+		BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
 		while ((buf = br.readLine()) != null) {
 			jsonString += buf;
 		}
@@ -50,6 +48,5 @@ public class GpsToAddress {
 	public String getAddress() {
 		return regionAddress;
 	}
-	
-	
+
 }

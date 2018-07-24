@@ -253,16 +253,15 @@ public class MemberController {
 				MemberPhotoDTO mainPhoto = memberPhotoMapper.getMemberMainPhoto(getLoginMemberDTO.getMnum());
 				session.setAttribute("mainPhoto", mainPhoto);
 
-				String old_url = req.getParameter("old_url");
-				if (getLoginMemberDTO.getIsmaster().equals("y")) {
-					session.setAttribute("memberinfo", getLoginMemberDTO);
-				} else if (getLoginMemberDTO.getIsmanager().equals("y")) {
+				if (getLoginMemberDTO.getIsmaster().equals("y") || getLoginMemberDTO.getIsmanager().equals("y")) {
 					session.setAttribute("memberinfo", getLoginMemberDTO);
 				} else {
 					session.setAttribute("memberinfo", getLoginMemberDTO);
 				}
-				String[] urls = old_url.split("/");
+				
+				String old_url = req.getParameter("old_url");
 				if (old_url != null && !old_url.trim().equals("")) {
+					String[] urls = old_url.split("/");
 					old_url = null;
 					for (int i = 4; i < urls.length; i++) {
 						if (i == 4) {

@@ -481,7 +481,7 @@
 						<div id="yeps_search_arrange" style="width: 32%; float: left;">
 							<label id="yeps_search_arrange_label" class="mainpage_search">
 								<span id="search_input_span">
-									<input type="text" maxlength="80" id="page_header_searchDate_inputs" class="page_header_searchDate_inputs" name="searchword" autocomplete="off" placeholder="검색어를 입력하세요."">
+									<input type="text" maxlength="80" id="page_header_searchDate_inputs" class="page_header_searchDate_inputs" name="searchword" autocomplete="off" placeholder="검색어를 입력하세요.">
 									<input type="hidden" maxlength="80" name="search_loc" value>
 								</span>
 							</label>

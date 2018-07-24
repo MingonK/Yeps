@@ -301,7 +301,6 @@ public class RestaurantController {
 	@ResponseBody
 	public HashMap<String, Object> listContentRefresh(HttpServletRequest req) {
 		String rnum = req.getParameter("rnum");
-		System.out.println("rnum(레스토랑 컨텐트 아작스):" + rnum);
 		String SearchKeyword = req.getParameter("SearchKeyword");
 		int curPage = req.getParameter("curPage") != null ? Integer.parseInt(req.getParameter("curPage")) : 1;
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -362,9 +361,9 @@ public class RestaurantController {
 
 		YepsPager YepsPager = null;
 //			count = reviewMapper.review_keywordCount(SearchKeyword);
-			YepsPager = new YepsPager(count, curPage, pageScale, blockScale);
-			start = YepsPager.getPageBegin();
-			end = YepsPager.getPageEnd();
+		YepsPager = new YepsPager(count, curPage, pageScale, blockScale);
+		start = YepsPager.getPageBegin();
+		end = YepsPager.getPageEnd();
 //			targetRestaurant_reviews = reviewMapper.review_keyword(SearchKeyword, Integer.parseInt(rnum), start, end);
 //			map.put("SearchKeyword", SearchKeyword);
 
